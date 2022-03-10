@@ -1,14 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:holedo/screens/profile-pages/home-pages/home.dart';
-import 'package:holedo/screens/profile-pages/profile-overview/profile-overview.dart';
-import 'package:holedo/screens/profile-pages/references/references.dart';
-import 'package:holedo/screens/profile-pages/timeline/timeline.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 void main() {
   runApp(
     MaterialApp(
+      builder: (context, widget) => ResponsiveWrapper.builder(
+        BouncingScrollWrapper.builder(context, widget!),
+
+        maxWidth: 2460,
+        minWidth: 450,
+        defaultScale: true,
+        breakpoints: [
+          const ResponsiveBreakpoint.resize(450, name: MOBILE),
+          const ResponsiveBreakpoint.resize(800, name: TABLET),
+          const ResponsiveBreakpoint.resize(1000, name: TABLET),
+          const ResponsiveBreakpoint.resize(1200, name: DESKTOP),
+          const ResponsiveBreakpoint.resize(2460, name: '4K'),
+        ],
+        // background: Container(color: Colors.white)
+      ),
+
+
+
       initialRoute: '/',
-      routes: {
+      routes: const {
         // 'timeline': (context) => const Timeline(),
         // 'references': (context) => const References(),
       },

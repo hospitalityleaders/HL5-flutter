@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:holedo/screens/profile-pages/profile-edit/profile-edit.dart';
 import 'package:holedo/screens/profile-pages/home-pages/header.dart';
 import 'package:holedo/screens/profile-pages/profile-overview/profile-overview.dart';
 import 'package:holedo/screens/profile-pages/references/references.dart';
+import 'package:holedo/screens/profile-pages/timeline/timeline.dart';
 import 'header-card.dart';
 
 class Home extends StatefulWidget {
@@ -12,7 +14,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  bool isEditable = false;
+
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +26,11 @@ class _HomeState extends State<Home> {
         color: const Color(0xFFdddfe3),
         child: ListView(
           children: [
-            const Header(),
-            HeaderCard(data: isEditable),
+             Header(),
+             HeaderCard(),
+
+
+            // Sliver app bar
             SizedBox(
               width: _width,
               height: _height,
@@ -40,13 +45,14 @@ class _HomeState extends State<Home> {
                         actions: [
                           ElevatedButton(
                             onPressed: () {
-                             setState(() {
-                               isEditable = !isEditable;
-                             });
-
+                              setState(() {
+                                ProfileEdit.isEditable = !ProfileEdit.isEditable;
+                                print(ProfileEdit.isEditable);
+                              });
                             },
                             child: const Text('Edit Profile'),
                           ),
+
                         ],
                         backgroundColor: Colors.white,
                         bottom: const TabBar(
@@ -108,21 +114,18 @@ class _HomeState extends State<Home> {
                       ),
                     ];
                   },
-                  body: TabBarView(
+                  body:    TabBarView(
                     children: [
-
-                      ProfileOverview(data: isEditable),
-                      ProfileOverview(data: isEditable),
-                      ProfileOverview(data: isEditable),
-                      ProfileOverview(data: isEditable),
-                      References(data:isEditable)
-
+                      ProfileOverview(),
+                      Timeline(),
+                      ProfileOverview(),
+                      ProfileOverview(),
+                      References()
                     ],
                   ),
                 ),
               ),
             ),
-            // const ProfileOverview()
           ],
         ),
       ),

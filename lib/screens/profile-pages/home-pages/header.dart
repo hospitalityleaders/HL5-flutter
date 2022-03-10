@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 //header
 class Header extends StatefulWidget {
   const Header({Key? key}) : super(key: key);
@@ -16,9 +17,11 @@ String dropdownValue = 'Peoples';
 Widget buildMenuBtn(String menuBtn) {
   return TextButton(
     onPressed: () {},
-    child: Text(
+    child: AutoSizeText(
       menuBtn,
-      style: const TextStyle(color: Colors.white),
+      maxLines: 1,
+      minFontSize: 10,
+      style: const TextStyle(color: Colors.white,fontSize: 16,),
     ),
   );
 }
@@ -26,57 +29,61 @@ Widget buildMenuBtn(String menuBtn) {
 class _HeaderState extends State<Header> {
   @override
   Widget build(BuildContext context) {
+    var _height = MediaQuery.of(context).size.height;
+    var _width = MediaQuery.of(context).size.width;
     return Container(
-      height: 50,
-      width: double.infinity,
-      color: const Color(0xFF2b375e),
+      // height: 50,
+      width:_width ,
+      color: const Color(0xFF384677),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Image(
-            image: NetworkImage(
-                'https://media.istockphoto.com/photos/yellow-black-outlined-font-letter-h-3d-picture-id1340359277?s=612x612'),
-            fit: BoxFit.cover,
+          const SizedBox(height: 36,
+            child: Image(
+              image: NetworkImage(
+                  'https://media.istockphoto.com/photos/yellow-black-outlined-font-letter-h-3d-picture-id1340359277?s=612x612'),
+              fit: BoxFit.cover,
+            ),
           ),
           const SizedBox(
             width: 5,
           ),
-          SizedBox(
-            width: 250,
-            child: Card(
-              color: const Color(0xFF1d2645),
-              child: Row(
-                children: [
-                  const Expanded(
-                      flex: 1,
-                      child: Icon(
-                        Icons.search_outlined,
-                        color: Colors.grey,
-                      )),
-                  const Expanded(
-                    flex: 2,
-                    child: TextField(
-                      decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Search',
-                          hintStyle: TextStyle(color: Colors.grey)),
-                    ),
-                  ),
-                  DropdownButton(
-                    items: items,
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        dropdownValue = newValue!;
-                      });
-                    },
-                    value: dropdownValue,
-                    style: const TextStyle(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(5),
-                  )
-                ],
-              ),
-            ),
-          ),
+          // SizedBox(
+          //   width: 250,
+          //   child: Card(
+          //     color: const Color(0xFF1d2645),
+          //     child: Row(
+          //       children: [
+          //         const Expanded(
+          //             flex: 1,
+          //             child: Icon(
+          //               Icons.search_outlined,
+          //               color: Colors.grey,
+          //             )),
+          //         const Expanded(
+          //           flex: 2,
+          //           child: TextField(
+          //             decoration: InputDecoration(
+          //                 border: InputBorder.none,
+          //                 hintText: 'Search',
+          //                 hintStyle: TextStyle(color: Colors.grey)),
+          //           ),
+          //         ),
+          //         DropdownButton(
+          //           items: items,
+          //           onChanged: (String? newValue) {
+          //             setState(() {
+          //               dropdownValue = newValue!;
+          //             });
+          //           },
+          //           value: dropdownValue,
+          //           style: const TextStyle(color: Colors.grey),
+          //           borderRadius: BorderRadius.circular(5),
+          //         )
+          //       ],
+          //     ),
+          //   ),
+          // ),
           buildMenuBtn('Home'),
           buildMenuBtn('Profile'),
           buildMenuBtn('News'),
