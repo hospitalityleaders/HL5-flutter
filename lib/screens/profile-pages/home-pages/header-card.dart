@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-
 import '../profile-edit/profile-edit.dart';
-
 
 //Header card
 
@@ -44,67 +42,167 @@ class _HeaderCardState extends State<HeaderCard> {
   String? valueChoose;
   List listItem = ['item1 ', 'item2'];
 
-  Future openDialog(BuildContext context) => showDialog(
+  Future openDialog(BuildContext context) async {
+    return showDialog(
         context: context,
-        builder: (context) => Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                height: 415,
-                width: double.infinity,
-                color: Colors.white,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
+        builder: (context) => Expanded(
+              child: AlertDialog(
+                title: Text('Welcome'),
+                content: Column(
                   children: [
-                    SizedBox(
-                      height: 60,
-                      width: double.infinity,
-                      child: Row(
-                        // mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                height: 60,
-                                width: 60,
-                                decoration: const BoxDecoration(
-                                    image: DecorationImage(
-                                        image: NetworkImage(
-                                            'https://images.pexels.com/photos/937481/pexels-photo-937481.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
-                                        fit: BoxFit.cover)),
-                              ),
-                            ],
-                          ),
-                          const Card(
-                            elevation: 0.0,
-                            child: Text(
-                              'General Manager, Four Seasons',
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.black),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: OutlinedButton.icon(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                              const Color(0xFFe5f4fb),
                             ),
                           ),
-                          Card(
-                            elevation: 0.0,
-                            child: IconButton(
-                              icon: const Icon(Icons.cancel),
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
+                          onPressed: () {},
+                          icon: Icon(Icons.mail),
+                          label: const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 20.0),
+                            child: Text('noberto@gmail.com'),
+                          )),
+                    ),
+                    MaterialButton(onPressed: () {  },)
+
                   ],
                 ),
+                actions: [],
               ),
-            ],
-          ),
+            ));
+  }
+
+
+
+
+
+buildProfileCard(){
+    return  showDialog(
+      context: context,
+      builder: (BuildContext context) => SingleChildScrollView(
+          child: Center(
+            child: Container(
+              color: Color(0xffb5bdc2),
+              width: 600,
+              child: Column(
+                children: [
+                  Container(
+                    color: Colors.white,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text("Profile card"),
+                        ),
+                        Material(child: IconButton(icon: Icon(Icons.cancel),onPressed: (){}),)
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Container(
+                      color: Color(0xffb5bdc2),
+                      child: Column(
+                        children: [
+                          buildProfilePictureCard(),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          )),
+    );
+}
+
+  buildProfilePictureCard() {
+    return Form(
+      child: Container(
+        color: Colors.white,
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: 50,
+                    width: 50,
+                    color: const Color(0xFF0d9bdc),
+                    child: const Center(
+                      child: Icon(
+                        Icons.camera_alt,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    Text(
+                      'Profile picture',
+                      style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
+                    ),
+                    Text(
+                        'Your profile picture will be used on your profile and throughout the site.',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 12,
+                            color: Color(0xffbdb5c2)))
+                  ],
+                )
+              ],
+            ),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Divider(
+                height: 1,
+                color: Colors.grey,
+              ),
+            ),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          height: 150,
+                          width: 150,
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                                image: NetworkImage(
+                                    'https://cdn.pixabay.com/photo/2019/10/20/20/02/nature-4564618_960_720.jpg'),
+                                fit: BoxFit.cover),
+                          ),
+                        ),
+                        TextButton.icon(
+                          onPressed: () {Navigator.of(context).pop();},
+                          icon: Icon(Icons.delete),
+                          label: Text('Delete photo'),
+                        )
+                      ]),
+                ),
+                Column(children: []),
+              ],
+            )
+          ],
         ),
-      );
+      ),
+    );
+  }
+
+
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -364,7 +462,7 @@ class _HeaderCardState extends State<HeaderCard> {
                     top: _height * .16,
                     bottom: _height * .16,
                   ),
-                  child: ProfileEdit.buildProfileEdit(550, 383),
+                  child: ProfileEdit.buildProfileEdit(width:550, height:383,popUp:() {   buildProfileCard();}),
                 )
               : Container(),
         ],

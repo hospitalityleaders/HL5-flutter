@@ -4,11 +4,11 @@ import 'package:responsive_framework/responsive_framework.dart';
 
 void main() {
   runApp(
-    MaterialApp(
+    MaterialApp(debugShowCheckedModeBanner: false,
       builder: (context, widget) => ResponsiveWrapper.builder(
         BouncingScrollWrapper.builder(context, widget!),
 
-        maxWidth: 2460,
+        maxWidth: double.infinity,
         minWidth: 450,
         defaultScale: true,
         breakpoints: [
@@ -20,9 +20,6 @@ void main() {
         ],
         // background: Container(color: Colors.white)
       ),
-
-
-
       initialRoute: '/',
       routes: const {
         // 'timeline': (context) => const Timeline(),

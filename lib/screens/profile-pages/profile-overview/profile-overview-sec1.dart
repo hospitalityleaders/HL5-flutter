@@ -143,7 +143,93 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
   }
 
 
+  Future<String?> buildProfileCard(){
+    return  showDialog<String>(
+      context: context,
+      builder: (BuildContext context) {return Dialog(child: Container(child: ListView(
+        children: [buildProfilePictureCard()],
+      ),),);}
+    );
+  }
 
+  buildProfilePictureCard() {
+    return Form(
+      child: Container(
+        color: Colors.white,
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: 50,
+                    width: 50,
+                    color: const Color(0xFF0d9bdc),
+                    child: const Center(
+                      child: Icon(
+                        Icons.camera_alt,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    Text(
+                      'Profile picture',
+                      style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
+                    ),
+                    Text(
+                        'Your profile picture will be used on your profile and throughout the site.',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 12,
+                            color: Color(0xffbdb5c2)))
+                  ],
+                )
+              ],
+            ),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Divider(
+                height: 1,
+                color: Colors.grey,
+              ),
+            ),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          height: 150,
+                          width: 150,
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                                image: NetworkImage(
+                                    'https://cdn.pixabay.com/photo/2019/10/20/20/02/nature-4564618_960_720.jpg'),
+                                fit: BoxFit.cover),
+                          ),
+                        ),
+                        TextButton.icon(
+                          onPressed: () {Navigator.of(context).pop();},
+                          icon: Icon(Icons.delete),
+                          label: Text('Delete photo'),
+                        )
+                      ]),
+                ),
+                Column(children: []),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -155,6 +241,7 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Profile Summary
             Stack(
               children: [
                 Padding(
@@ -201,12 +288,12 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                     ),
                   ),
                 ),
-                ProfileEdit.isEditable ? ProfileEdit.buildProfileEdit(_width, 551 ) : Container(),
+                ProfileEdit.isEditable ? ProfileEdit.buildProfileEdit(width:_width, height:551,popUp:() {   buildProfileCard();}) : Container(),
               ],
             ),
 
             const SizedBox(height: 8,),
-
+            // Areas of expertise
             Stack(
               children: [
                 Padding(
@@ -274,7 +361,7 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                     ],
                   ),
                 ),
-                ProfileEdit.isEditable? ProfileEdit.buildProfileEdit(_width, 260) : Container(),
+                ProfileEdit.isEditable? ProfileEdit.buildProfileEdit(width:_width, height:260,popUp:() {   buildProfileCard();}) : Container(),
               ],
             ),
 
@@ -327,7 +414,7 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                   ),
                 ),
 
-                ProfileEdit.isEditable? ProfileEdit.buildProfileEdit(_width, 490)
+                ProfileEdit.isEditable? ProfileEdit.buildProfileEdit(width:_width, height:490,popUp:() {   buildProfileCard();})
                     : Container()
               ],
             ),

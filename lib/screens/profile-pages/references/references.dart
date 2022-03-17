@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:holedo/screens/profile-pages/profile-overview/profile-overview-sec3.dart';
 
 class ReferencesCard {
   Widget buildReferencesCard(
@@ -139,26 +141,151 @@ class References extends StatefulWidget {
 }
 
 class _ReferencesState extends State<References> {
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.only(right: 20, left: 20, top: 25),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+  Widget buildReferencesCard(
+      String img, String title, String subTitle, String description) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        width: 364,
+        padding: const EdgeInsets.all(6),
+        color: Colors.white,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-                child: Wrap(
-              spacing: 5,
-              runSpacing: 3,
-            )),
-            Expanded(
-                child: Column(
-              children: [],
-            ))
+            ListTile(
+              leading: Image(
+                width: 45,
+                height: 45,
+                image: NetworkImage(img),
+                fit: BoxFit.cover,
+              ),
+              title: Text(
+                title,
+                textAlign: TextAlign.start,
+                style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                    color: Color(0xff272E41)),
+              ),
+              subtitle: Padding(
+                padding: const EdgeInsets.only(right: 30.0),
+                child: Text(
+                  subTitle,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    color: Color(0xff7C8990),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: RichText(
+                text: TextSpan(
+                  style: const TextStyle(color: Colors.black, fontSize: 30),
+                  children: [
+                    WidgetSpan(
+                      child: SizedBox(
+                        height: 50,
+                        width: 50,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 2.0, vertical: 2),
+                          child: Card(
+                            color: Colors.blue,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(1.0)),
+                            child: const Icon(
+                              Icons.format_quote_rounded,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    TextSpan(
+                      text: description,
+                      style: const TextStyle(
+                          height: 1.2,
+                          fontSize: 14,
+                          color: Color(0xff7C8990),
+                          fontWeight: FontWeight.w400),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
           ],
         ),
       ),
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+        padding: const EdgeInsets.only(right: 20, left: 20, top: 25),
+        child: SingleChildScrollView(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                flex: 2,
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: StaggeredGrid.count(
+                    crossAxisCount: 2,
+                    children: [
+                      buildReferencesCard(
+                        'https://images.pexels.com/photos/712521/pexels-photo-712521.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+                        'Sarah Lee MHL',
+                        'General Manager, One & Only Hotel',
+                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                      ),
+                      buildReferencesCard(
+                        'https://images.pexels.com/photos/712521/pexels-photo-712521.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+                        'Sarah Lee MHL',
+                        'General Manager, One & Only Hotel',
+                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                      ),
+                      buildReferencesCard(
+                          'https://images.pexels.com/photos/712521/pexels-photo-712521.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+                          'Sarah Lee MHL',
+                          'General Manager, One & Only Hotel',
+                          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'),
+                      buildReferencesCard(
+                        'https://images.pexels.com/photos/712521/pexels-photo-712521.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+                        'Sarah Lee MHL',
+                        'General Manager, One & Only Hotel',
+                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                      ),
+                      buildReferencesCard(
+                        'https://images.pexels.com/photos/712521/pexels-photo-712521.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+                        'Sarah Lee MHL',
+                        'General Manager, One & Only Hotel',
+                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                      ),
+                      buildReferencesCard(
+                        'https://images.pexels.com/photos/712521/pexels-photo-712521.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+                        'Sarah Lee MHL',
+                        'General Manager, One & Only Hotel',
+                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                      ),
+                      buildReferencesCard(
+                        'https://images.pexels.com/photos/712521/pexels-photo-712521.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+                        'Sarah Lee MHL',
+                        'General Manager, One & Only Hotel',
+                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Expanded(child: ProfileOverviewSec3()),
+            ],
+          ),
+        ));
   }
 }

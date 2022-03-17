@@ -142,8 +142,128 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
             ),
           ),
         ),
-        ProfileEdit.isEditable? ProfileEdit.buildProfileEdit(_width, 180) : Container()
+        ProfileEdit.isEditable? ProfileEdit.buildProfileEdit(width:_width, height:180,popUp:() {   buildProfileCard();}) : Container()
       ],
+    );
+  }
+
+  Future<String?> buildProfileCard(){
+    return  showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => SingleChildScrollView(
+          child: Center(
+            child: Container(
+              color: Color(0xffb5bdc2),
+              width: 600,
+              child: Column(
+                children: [
+                  Container(
+                    color: Colors.white,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text("Profile card"),
+                        ),
+                        Material(child: IconButton(icon: Icon(Icons.cancel),onPressed: (){}),)
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Container(
+                      color: Color(0xffb5bdc2),
+                      child: Column(
+                        children: [
+                          buildProfilePictureCard(),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          )),
+    );
+  }
+
+  buildProfilePictureCard() {
+    return Form(
+      child: Container(
+        color: Colors.white,
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: 50,
+                    width: 50,
+                    color: const Color(0xFF0d9bdc),
+                    child: const Center(
+                      child: Icon(
+                        Icons.camera_alt,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    Text(
+                      'Profile picture',
+                      style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
+                    ),
+                    Text(
+                        'Your profile picture will be used on your profile and throughout the site.',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 12,
+                            color: Color(0xffbdb5c2)))
+                  ],
+                )
+              ],
+            ),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Divider(
+                height: 1,
+                color: Colors.grey,
+              ),
+            ),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          height: 150,
+                          width: 150,
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                                image: NetworkImage(
+                                    'https://cdn.pixabay.com/photo/2019/10/20/20/02/nature-4564618_960_720.jpg'),
+                                fit: BoxFit.cover),
+                          ),
+                        ),
+                        TextButton.icon(
+                          onPressed: () {Navigator.of(context).pop();},
+                          icon: Icon(Icons.delete),
+                          label: Text('Delete photo'),
+                        )
+                      ]),
+                ),
+                Column(children: []),
+              ],
+            )
+          ],
+        ),
+      ),
     );
   }
 
@@ -340,7 +460,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                   ),
                 ),
                 ProfileEdit.isEditable
-                    ? ProfileEdit.buildProfileEdit(_width, 212)
+                    ? ProfileEdit.buildProfileEdit(width:_width, height:212,popUp:() {   buildProfileCard();})
                     : Container(),
               ],
             ),

@@ -28,8 +28,6 @@ class _HomeState extends State<Home> {
           children: [
              Header(),
              HeaderCard(),
-
-
             // Sliver app bar
             SizedBox(
               width: _width,
