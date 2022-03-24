@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:holedo/screens/profile-pages/profile-overview/profile-overview-sec3.dart';
 
+import '../profile-edit/profile-edit.dart';
+
 class ReferencesCard {
   Widget buildReferencesCard(
       _width,
@@ -216,7 +218,102 @@ class _ReferencesState extends State<References> {
                 ),
               ),
             ),
+          ],
+        ),
+      ),
+    );
+  }
 
+  Future<String?> buildProfileCard() {
+    return showDialog<String>(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            child: Container(
+              child: ListView(
+                children: [buildProfilePictureCard()],
+              ),
+            ),
+          );
+        });
+  }
+
+  buildProfilePictureCard() {
+    return Form(
+      child: Container(
+        color: Colors.white,
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: 50,
+                    width: 50,
+                    color: const Color(0xFF0d9bdc),
+                    child: const Center(
+                      child: Icon(
+                        Icons.camera_alt,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    Text(
+                      'Profile picture',
+                      style:
+                          TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
+                    ),
+                    Text(
+                        'Your profile picture will be used on your profile and throughout the site.',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 12,
+                            color: Color(0xffbdb5c2)))
+                  ],
+                )
+              ],
+            ),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Divider(
+                height: 1,
+                color: Colors.grey,
+              ),
+            ),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          height: 150,
+                          width: 150,
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                                image: NetworkImage(
+                                    'https://cdn.pixabay.com/photo/2019/10/20/20/02/nature-4564618_960_720.jpg'),
+                                fit: BoxFit.cover),
+                          ),
+                        ),
+                        TextButton.icon(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          icon: Icon(Icons.delete),
+                          label: Text('Delete photo'),
+                        )
+                      ]),
+                ),
+                Column(children: []),
+              ],
+            )
           ],
         ),
       ),
@@ -225,8 +322,10 @@ class _ReferencesState extends State<References> {
 
   @override
   Widget build(BuildContext context) {
+    var _width = MediaQuery.of(context).size.width;
+    var _height = MediaQuery.of(context).size.height;
     return Padding(
-        padding: const EdgeInsets.only(right: 20, left: 20, top: 25),
+        padding: const EdgeInsets.symmetric(horizontal: 30,vertical: 10),
         child: SingleChildScrollView(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -238,52 +337,18 @@ class _ReferencesState extends State<References> {
                   child: StaggeredGrid.count(
                     crossAxisCount: 2,
                     children: [
-                      buildReferencesCard(
-                        'https://images.pexels.com/photos/712521/pexels-photo-712521.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-                        'Sarah Lee MHL',
-                        'General Manager, One & Only Hotel',
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                      ),
-                      buildReferencesCard(
-                        'https://images.pexels.com/photos/712521/pexels-photo-712521.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-                        'Sarah Lee MHL',
-                        'General Manager, One & Only Hotel',
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                      ),
-                      buildReferencesCard(
+                      for (var i = 0; i < 10; i++)
+                        buildReferencesCard(
                           'https://images.pexels.com/photos/712521/pexels-photo-712521.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
                           'Sarah Lee MHL',
                           'General Manager, One & Only Hotel',
-                          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'),
-                      buildReferencesCard(
-                        'https://images.pexels.com/photos/712521/pexels-photo-712521.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-                        'Sarah Lee MHL',
-                        'General Manager, One & Only Hotel',
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                      ),
-                      buildReferencesCard(
-                        'https://images.pexels.com/photos/712521/pexels-photo-712521.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-                        'Sarah Lee MHL',
-                        'General Manager, One & Only Hotel',
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                      ),
-                      buildReferencesCard(
-                        'https://images.pexels.com/photos/712521/pexels-photo-712521.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-                        'Sarah Lee MHL',
-                        'General Manager, One & Only Hotel',
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                      ),
-                      buildReferencesCard(
-                        'https://images.pexels.com/photos/712521/pexels-photo-712521.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-                        'Sarah Lee MHL',
-                        'General Manager, One & Only Hotel',
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                      ),
+                          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                        ),
                     ],
                   ),
                 ),
               ),
-              Expanded(child: ProfileOverviewSec3()),
+              Expanded(flex:1,child: ProfileOverviewSec3()),
             ],
           ),
         ));

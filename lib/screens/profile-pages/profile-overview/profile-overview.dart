@@ -5,8 +5,6 @@ import 'package:holedo/screens/profile-pages/profile-overview/profile-overview-s
 import 'package:holedo/screens/profile-pages/profile-overview/profile-overview-sec3.dart';
 
 class ProfileOverview extends StatefulWidget {
-
-
   const ProfileOverview({Key? key}) : super(key: key);
 
   @override
@@ -24,12 +22,12 @@ class _ProfileOverviewState extends State<ProfileOverview> {
         padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
         // Profile Overview Rows
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.start,
-          children:  [
+
+          children: [
             ProfileOverviewSec1(),
             ProfileOverviewSec2(),
-            ProfileOverviewSec3(),
+            Expanded(child: ProfileOverviewSec3()),
           ],
         ),
       ),

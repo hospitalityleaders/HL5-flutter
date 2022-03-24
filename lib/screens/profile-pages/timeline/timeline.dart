@@ -115,9 +115,10 @@ class _TimelineState extends State<Timeline> {
         child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
+            Expanded(child: Container()),
+            Expanded(flex: 3,
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(12.0),
                 child: Column(children: [
                   buildTimelineWithCard('2013'),
                   buildTimelineWithCard('2012'),
@@ -127,7 +128,7 @@ class _TimelineState extends State<Timeline> {
                 ]),
               ),
             ),
-            ProfileOverviewSec3()
+            Expanded  (flex: 2,child: ProfileOverviewSec3())
           ],
         ),
       ),

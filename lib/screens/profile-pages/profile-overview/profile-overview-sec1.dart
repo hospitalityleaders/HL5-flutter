@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import '../profile-edit/profile-edit.dart';
 
 class ProfileOverviewSec1 extends StatefulWidget {
-
-
   const ProfileOverviewSec1({Key? key}) : super(key: key);
 
   @override
@@ -45,7 +43,6 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
       ),
     );
   }
-
 
   Widget buildReferencesCard(
       String img, String title, String subTitle, String description) {
@@ -142,14 +139,18 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
     );
   }
 
-
-  Future<String?> buildProfileCard(){
-    return  showDialog<String>(
-      context: context,
-      builder: (BuildContext context) {return Dialog(child: Container(child: ListView(
-        children: [buildProfilePictureCard()],
-      ),),);}
-    );
+  Future<String?> buildProfileCard() {
+    return showDialog<String>(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            child: Container(
+              child: ListView(
+                children: [buildProfilePictureCard()],
+              ),
+            ),
+          );
+        });
   }
 
   buildProfilePictureCard() {
@@ -179,7 +180,8 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                   children: const [
                     Text(
                       'Profile picture',
-                      style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
+                      style:
+                          TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
                     ),
                     Text(
                         'Your profile picture will be used on your profile and throughout the site.',
@@ -216,7 +218,9 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                           ),
                         ),
                         TextButton.icon(
-                          onPressed: () {Navigator.of(context).pop();},
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
                           icon: Icon(Icons.delete),
                           label: Text('Delete photo'),
                         )
@@ -252,8 +256,8 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Padding(
-                          padding: EdgeInsets.only(
-                              right: 20, left: 20, top: 13),
+                          padding:
+                              EdgeInsets.only(right: 20, left: 20, top: 13),
                           child: AutoSizeText(
                             'Profile summary',
                             minFontSize: 14,
@@ -283,16 +287,27 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                                 height: 1.5),
                           ),
                         ),
-                        const SizedBox(height: 13,)
+                        const SizedBox(
+                          height: 13,
+                        )
                       ],
                     ),
                   ),
                 ),
-                ProfileEdit.isEditable ? ProfileEdit.buildProfileEdit(width:_width, height:551,popUp:() {   buildProfileCard();}) : Container(),
+                ProfileEdit.isEditable
+                    ? ProfileEdit.buildProfileEdit(
+                        width: _width,
+                        height: 551,
+                        popUp: () {
+                          buildProfileCard();
+                        })
+                    : Container(),
               ],
             ),
 
-            const SizedBox(height: 8,),
+            const SizedBox(
+              height: 8,
+            ),
             // Areas of expertise
             Stack(
               children: [
@@ -301,10 +316,12 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(width: _width,
+                      Container(
+                        width: _width,
                         color: Colors.white,
                         child: const Padding(
-                          padding: EdgeInsets.only(right: 20, left: 20, bottom: 13, top: 13),
+                          padding: EdgeInsets.only(
+                              right: 20, left: 20, bottom: 13, top: 13),
                           child: AutoSizeText(
                             'Areas of expertise',
                             style: TextStyle(
@@ -314,7 +331,9 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                           ),
                         ),
                       ),
-                      SizedBox(height: 3,),
+                      SizedBox(
+                        height: 3,
+                      ),
                       Wrap(
                         spacing: 5,
                         runSpacing: 3,
@@ -361,7 +380,14 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                     ],
                   ),
                 ),
-                ProfileEdit.isEditable? ProfileEdit.buildProfileEdit(width:_width, height:260,popUp:() {   buildProfileCard();}) : Container(),
+                ProfileEdit.isEditable
+                    ? ProfileEdit.buildProfileEdit(
+                        width: _width,
+                        height: 260,
+                        popUp: () {
+                          buildProfileCard();
+                        })
+                    : Container(),
               ],
             ),
 
@@ -413,8 +439,13 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                     ),
                   ),
                 ),
-
-                ProfileEdit.isEditable? ProfileEdit.buildProfileEdit(width:_width, height:490,popUp:() {   buildProfileCard();})
+                ProfileEdit.isEditable
+                    ? ProfileEdit.buildProfileEdit(
+                        width: _width,
+                        height: 490,
+                        popUp: () {
+                          buildProfileCard();
+                        })
                     : Container()
               ],
             ),
