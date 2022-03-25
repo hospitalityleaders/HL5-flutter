@@ -129,14 +129,13 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
     var _height = MediaQuery.of(context).size.height;
     var _width = MediaQuery.of(context).size.width;
     return Padding(
-      padding: const EdgeInsets.all(12.0),
+      padding: EdgeInsets.all(12.0),
       child: Column(
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
               color: const Color(0xff2b375e),
               child: Column(
                 children: [
@@ -172,22 +171,25 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                       Icons.add_box_outlined, 'Add your qualifications'),
                   profileListTile(
                       Icons.add_box_outlined, 'Add your specialities'),
-                  profileListTile(
-                      Icons.add_box_outlined, 'Add your languages'),
+                  profileListTile(Icons.add_box_outlined, 'Add your languages'),
                   const SizedBox(height: 10),
                   ElevatedButton(
                     onPressed: () {
-                      setState(() {
-                        ProfileEdit.isEditable = !ProfileEdit.isEditable;
-
-                      });
+                      ProfileEdit.isEditable
+                          ? setState(() {
+                              ProfileEdit.isEditable = false;
+                            })
+                          : setState(() {
+                              ProfileEdit.isEditable = true;
+                            });
                     },
-                    child: const Padding(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 14, horizontal: 85),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          vertical: _height * .014, horizontal: _width * .085),
                       child: AutoSizeText(
                         'Edit my profile',
                         maxLines: 1,
+                        minFontSize: 10,
                         style: TextStyle(
                             fontSize: 14,
                             color: Colors.white,
@@ -274,8 +276,7 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                     ),
                   ),
                   const Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 5),
                     child: Text(
                       'View mutual connections',
                       style: TextStyle(
@@ -288,32 +289,38 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                   Divider(height: 1, color: Colors.grey.shade400),
                   Padding(
                     padding: const EdgeInsets.all(12.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          height: 35,
-                          width: _width * .25,
-                          child: OutlinedButton.icon(
-                            style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all(
-                                const Color(0xFFCCE8FE),
-                              ),
-                            ),
-                            onPressed: () {},
-                            label: const Text(
-                              'Grow your network',
-                              style: TextStyle(
-                                color: Color(0xFF32A3FD),
-                              ),
-                            ),
-                            icon: const Icon(
+                    child: OutlinedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(
+                          const Color(0xFFCCE8FE),
+                        ),
+                      ),
+                      onPressed: () {},
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          vertical: _height * 0.010,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
                               Icons.thumb_up_alt_outlined,
                               color: Color(0xFF32A3FD),
+                              size: 12,
                             ),
-                          ),
+                            SizedBox(
+                              width: _width * .01,
+                            ),
+                            AutoSizeText(
+                              'Grow your network',
+                              style: TextStyle(
+                                  color: Color(0xFF32A3FD),
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
                 ],

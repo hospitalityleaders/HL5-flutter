@@ -36,7 +36,7 @@ class _HomeState extends State<Home> {
                         height: 46,
                         color: Colors.white,
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 50.0),
+                          padding:  EdgeInsets.symmetric(horizontal: _width*.050),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -76,17 +76,14 @@ class _HomeState extends State<Home> {
                                   TabBar(
                                     isScrollable: true,
                                     automaticIndicatorColorAdjustment: true,
+
                                     tabs: [
-                                      Padding(
-                                        padding:
-                                            EdgeInsets.symmetric(vertical: 15),
-                                        child: Text(
-                                          'Profile overview',
-                                          style: TextStyle(
-                                              color: Color(0xFF879399),
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 14),
-                                        ),
+                                      Text(
+                                        'Profile overview',
+                                        style: TextStyle(
+                                            color: Color(0xFF879399),
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 14),
                                       ),
                                       Text(
                                         'Timeline',
@@ -124,16 +121,13 @@ class _HomeState extends State<Home> {
                                 height: 36,
                                 child: ElevatedButton.icon(
                                   onPressed: () {
-                                    ProfileEdit.isEditable? setState(() {
-                                      ProfileEdit.isEditable =false;
-
-                                    }):
-
-                                    setState(() {
-                                      ProfileEdit.isEditable =true;
-
-                                    });
-
+                                    ProfileEdit.isEditable
+                                        ? setState(() {
+                                            ProfileEdit.isEditable = false;
+                                          })
+                                        : setState(() {
+                                            ProfileEdit.isEditable = true;
+                                          });
                                   },
                                   icon: ProfileEdit.isEditable
                                       ? Icon(

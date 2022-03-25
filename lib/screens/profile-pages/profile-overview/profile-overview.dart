@@ -19,7 +19,7 @@ class _ProfileOverviewState extends State<ProfileOverview> {
 
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+        padding:  EdgeInsets.symmetric(horizontal: _width*0.03, vertical: _height*.01),
         // Profile Overview Rows
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,

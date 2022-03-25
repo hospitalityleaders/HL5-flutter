@@ -142,7 +142,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
             ),
           ),
         ),
-        ProfileEdit.isEditable? ProfileEdit.buildProfileEdit(width:_width, height:180,popUp:() {   buildProfileCard();}) : Container()
+        ProfileEdit.isEditable? ProfileEdit.buildProfileEdit(width:_width, height:_height*.28,popUp:() {   buildProfileCard();}) : Container()
       ],
     );
   }
@@ -278,6 +278,9 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
         padding: const EdgeInsets.all(12.0),
         child: Column(
           children: [
+
+
+
             buildProfileCards(
                 _width,
                 _height,

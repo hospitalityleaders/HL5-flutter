@@ -56,7 +56,7 @@ class _HeaderState extends State<Header> {
       width: _width,
       color: const Color(0xFF384677),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 50.0),
+        padding:  EdgeInsets.symmetric(horizontal: _width*.050),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [

@@ -325,7 +325,7 @@ class _ReferencesState extends State<References> {
     var _width = MediaQuery.of(context).size.width;
     var _height = MediaQuery.of(context).size.height;
     return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30,vertical: 10),
+        padding: EdgeInsets.symmetric(horizontal: _width*0.03, vertical: _height*.01),
         child: SingleChildScrollView(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
