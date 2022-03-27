@@ -1,6 +1,6 @@
-# news
+# holedo
 
-A new Flutter project.
+A new Flutter application.
 
 ## Getting Started
 

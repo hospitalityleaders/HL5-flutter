@@ -1,8 +1,19 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
-import 'package:news/screens/update_news_screen.dart';
+import 'package:holedo/screen/NewsSingle/jobs_no_jobs.dart';
 
 void main() {
   runApp(const MyApp());
+}
+
+class MyCustomScrollBehavior extends MaterialScrollBehavior {
+  // Override behavior methods and getters like dragDevices
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+      };
 }
 
 class MyApp extends StatelessWidget {
@@ -12,7 +23,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: UpdatedNewsScreen(),
+      scrollBehavior: MyCustomScrollBehavior(),
+      title: 'Holedo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: NewsSingleJobs(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
