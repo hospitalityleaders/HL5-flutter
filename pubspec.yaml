@@ -53,8 +53,9 @@ flutter:
     - family: ProximaNova-Regular
       fonts:
         - asset: assets/fonts/ProximaNovaFont.otf
-        - asset: assets/fonts/ProximaNovaFont.otf
-
+    - family: SourceSansPro
+      fonts:
+        - asset: assets/fonts/SourceSansPro.ttf
 
   #
   # For details regarding fonts from package dependencies,

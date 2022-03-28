@@ -204,7 +204,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
               preferredSize: Size.fromHeight(46),
               child: Container(
                   height: 46,
-                  color: Color(0xff384677),
+                  color: ColorPicker.kPrimaryLight1,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -222,28 +222,28 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                           style: FontTextStyle.kWhitePurePR,
                           decoration: InputDecoration(
                             hintStyle: TextStyle(
-                              color: Color(0xFF7A85A6),
+                              color: ColorPicker.kPrimaryLightBlue,
                             ),
                             filled: true,
-                            fillColor: Color(0xff2B375E),
+                            fillColor: ColorPicker.kPrimaryLight,
                             hintText: "Search",
                             prefixIcon: Icon(
                               Icons.search,
-                              color: Color(0xFF7A85A6),
+                              color: ColorPicker.kPrimaryLightBlue,
                             ),
                             suffixIcon: Container(
                               margin: EdgeInsets.only(right: 5),
                               height: 40,
                               width: Get.width * 0.045,
                               decoration: BoxDecoration(
-                                color: Color(0xff384677),
+                                color: ColorPicker.kPrimaryLight1,
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               child: Center(
                                 child: Text(
                                   'People',
                                   style: TextStyle(
-                                    color: Color(0xFF7A85A6),
+                                    color: ColorPicker.kPrimaryLightBlue,
                                   ),
                                 ),
                               ),
@@ -281,8 +281,8 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                         width: Get.width * 0.05,
                         decoration: BoxDecoration(
                             border: Border.symmetric(
-                          vertical:
-                              BorderSide(color: Color(0xff2B375E), width: 3),
+                          vertical: BorderSide(
+                              color: ColorPicker.kPrimaryLight, width: 3),
                         )),
                         child: Center(
                             child: Stack(
@@ -290,7 +290,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                           children: [
                             Icon(
                               Icons.email,
-                              color: Color(0xFF7A85A6),
+                              color: ColorPicker.kPrimaryLightBlue,
                             ),
                             Positioned(
                               right: -5,
@@ -299,7 +299,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                 height: 16,
                                 width: 16,
                                 decoration: BoxDecoration(
-                                  color: Color(0xffFD3732),
+                                  color: ColorPicker.kRed1,
                                   borderRadius: BorderRadius.circular(3),
                                 ),
                                 child: Center(
@@ -317,8 +317,8 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                         width: Get.width * 0.05,
                         decoration: BoxDecoration(
                             border: Border.symmetric(
-                          vertical:
-                              BorderSide(color: Color(0xff2B375E), width: 3),
+                          vertical: BorderSide(
+                              color: ColorPicker.kPrimaryLight, width: 3),
                         )),
                         child: Center(
                             child: Stack(
@@ -326,7 +326,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                           children: [
                             Icon(
                               Icons.flag,
-                              color: Color(0xFF7A85A6),
+                              color: ColorPicker.kPrimaryLightBlue,
                             ),
                             Positioned(
                               right: -5,
@@ -335,7 +335,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                 height: 16,
                                 width: 16,
                                 decoration: BoxDecoration(
-                                  color: Color(0xffFD3732),
+                                  color: ColorPicker.kRed1,
                                   borderRadius: BorderRadius.circular(3),
                                 ),
                                 child: Center(
@@ -353,8 +353,8 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                         width: 90,
                         decoration: BoxDecoration(
                             border: Border.symmetric(
-                          vertical:
-                              BorderSide(color: Color(0xff2B375E), width: 3),
+                          vertical: BorderSide(
+                              color: ColorPicker.kPrimaryLight, width: 3),
                         )),
                         child: Center(
                             child: Row(
@@ -362,7 +362,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                           children: [
                             Icon(
                               Icons.person_add,
-                              color: Color(0xFF7A85A6),
+                              color: ColorPicker.kPrimaryLightBlue,
                             ),
                             SizedBox(
                               width: 5,
@@ -376,7 +376,8 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                               ),
                               child: Center(
                                 child: Text('352',
-                                    style: FontTextStyle.kPrimaryLight10W700PR),
+                                    style:
+                                        FontTextStyle.kPrimaryLight10W700SSP),
                               ),
                             ),
                           ],
@@ -386,8 +387,8 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                         width: Get.width * 0.05,
                         decoration: BoxDecoration(
                             border: Border.symmetric(
-                          vertical:
-                              BorderSide(color: Color(0xff2B375E), width: 3),
+                          vertical: BorderSide(
+                              color: ColorPicker.kPrimaryLight, width: 3),
                         )),
                         child: Center(
                           child: Container(
@@ -610,7 +611,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                             ),
                             Container(
                               height: 850, // height: Get.height,
-                              color: Color(0xFF2B375E),
+                              color: ColorPicker.kPrimaryLight,
                               child: Stack(
                                 children: [
                                   Positioned(
@@ -1045,7 +1046,8 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                 Flexible(
                                     child: Divider(
                                   endIndent: 10,
-                                  color: Color(0xFF7C8990).withOpacity(0.2),
+                                  color:
+                                      ColorPicker.kGreyLight5.withOpacity(0.2),
                                 )),
                                 Text(
                                   'SUGGESTED NEWS',
@@ -1054,7 +1056,8 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                 Flexible(
                                     child: Divider(
                                   indent: 10,
-                                  color: Color(0xFF7C8990).withOpacity(0.2),
+                                  color:
+                                      ColorPicker.kGreyLight5.withOpacity(0.2),
                                 )),
                               ],
                             ),
@@ -1462,7 +1465,89 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
             ),
           )
         : Scaffold(
-            appBar: AppBar(),
+            appBar: PreferredSize(
+              preferredSize: Size.fromHeight(46),
+              child: Container(
+                  height: 46,
+                  width: Get.width,
+                  color: ColorPicker.kPrimaryLight1,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Image(
+                          image: AssetImage('assets/icons/logo1.png'),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                        child: Container(
+                          margin: EdgeInsets.all(4),
+                          decoration: BoxDecoration(
+                              color: ColorPicker.kPrimaryLight1,
+                              borderRadius: BorderRadius.circular(8)),
+                          child: TextFormField(
+                            cursorColor: Colors.white,
+                            style: FontTextStyle.kWhitePurePR,
+                            decoration: InputDecoration(
+                              hintStyle: TextStyle(
+                                color: ColorPicker.kPrimaryLightBlue,
+                              ),
+                              filled: true,
+                              fillColor: ColorPicker.kPrimaryLight,
+                              hintText: "Search",
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide:
+                                    BorderSide(color: Colors.transparent),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide:
+                                    BorderSide(color: Colors.transparent),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide:
+                                    BorderSide(color: Colors.transparent),
+                              ),
+                              prefixIcon: Icon(
+                                Icons.search,
+                                color: ColorPicker.kPrimaryLightBlue,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: Get.width * 0.01,
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'assets/icons/menu.png',
+                            height: 18,
+                            width: 25,
+                            fit: BoxFit.cover,
+                            color: ColorPicker.kPrimaryLightBlue,
+                          ),
+                          SizedBox(height: 5),
+                          Text('MENU',
+                              style: TextStyle(
+                                  fontSize: 9,
+                                  color: ColorPicker.kPrimaryLightBlue)),
+                        ],
+                      ),
+                      SizedBox(
+                        width: Get.width * 0.01,
+                      ),
+                    ],
+                  )),
+            ),
             backgroundColor: ColorPicker.kBg1,
             body: SingleChildScrollView(
               physics: BouncingScrollPhysics(),
@@ -1557,25 +1642,26 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                     ),
                   ),
                   Container(
-                      margin: EdgeInsets.symmetric(vertical: 10),
-                      padding: EdgeInsets.symmetric(vertical: 1),
-                      alignment: Alignment.center,
-                      height: 15,
-                      width: Get.width,
-                      // color: Colors.red,
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 3,
-                        itemBuilder: (context, index) {
-                          return CircleAvatar(
-                            // foregroundColor: Colors.red,
-                            backgroundColor: index == 1
-                                ? Color(0xFF33A3FE)
-                                : Color(0xFFB5BDC2),
-                          );
-                        },
-                      )),
+                    margin: EdgeInsets.symmetric(vertical: 10),
+                    padding: EdgeInsets.symmetric(vertical: 1),
+                    alignment: Alignment.center,
+                    height: 15,
+                    width: Get.width,
+                    // color: Colors.red,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 3,
+                      itemBuilder: (context, index) {
+                        return CircleAvatar(
+                          // foregroundColor: Colors.red,
+                          backgroundColor: index == 1
+                              ? Color(0xFF33A3FE)
+                              : Color(0xFFB5BDC2),
+                        );
+                      },
+                    ),
+                  ),
                   ExpansionTile(
                     title: Text(
                       'Categories',
@@ -1720,7 +1806,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                   Container(
                     // height: Get.height,
                     width: Get.width,
-                    color: Color(0xFF2B375E),
+                    color: ColorPicker.kPrimaryLight,
                     child: Stack(
                       children: [
                         Positioned(
@@ -2121,7 +2207,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                     style: TextStyle(
                                       fontSize: 14,
                                       fontWeight: FontWeight.w600,
-                                      color: Color(0xFF7C8990),
+                                      color: ColorPicker.kGreyLight5,
                                     ),
                                   ),
                                   data[index]['text2'].toString().isEmpty

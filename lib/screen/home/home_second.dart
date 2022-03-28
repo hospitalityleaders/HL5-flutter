@@ -652,7 +652,7 @@ class _HomeSecondState extends State<HomeSecond> {
                               boxShadow: [
                                 BoxShadow(
                                     color:
-                                        ColorPicker.kGreyLight.withOpacity(0.5),
+                                        ColorPicker.kGreyDark.withOpacity(0.5),
                                     spreadRadius: 1,
                                     blurRadius: 20)
                               ],
@@ -704,7 +704,7 @@ class _HomeSecondState extends State<HomeSecond> {
                                                 'assets/images/public.png')),
                                         boxShadow: [
                                           BoxShadow(
-                                              color: ColorPicker.kGreyLight
+                                              color: ColorPicker.kGreyDark
                                                   .withOpacity(0.5),
                                               spreadRadius: 1,
                                               blurRadius: 20)
@@ -757,7 +757,7 @@ class _HomeSecondState extends State<HomeSecond> {
                                                 'assets/images/public.png')),
                                         boxShadow: [
                                           BoxShadow(
-                                              color: ColorPicker.kGreyLight
+                                              color: ColorPicker.kGreyDark
                                                   .withOpacity(0.5),
                                               spreadRadius: 1,
                                               blurRadius: 20)
@@ -1390,7 +1390,7 @@ class _HomeSecondState extends State<HomeSecond> {
                               boxShadow: [
                                 BoxShadow(
                                     color:
-                                        ColorPicker.kGreyLight.withOpacity(0.5),
+                                        ColorPicker.kGreyDark.withOpacity(0.5),
                                     spreadRadius: 1,
                                     blurRadius: 20)
                               ],
@@ -1484,7 +1484,7 @@ class _HomeSecondState extends State<HomeSecond> {
                                                 'assets/images/public.png')),
                                         boxShadow: [
                                           BoxShadow(
-                                              color: ColorPicker.kGreyLight
+                                              color: ColorPicker.kGreyDark
                                                   .withOpacity(0.5),
                                               spreadRadius: 1,
                                               blurRadius: 20)
@@ -1537,7 +1537,7 @@ class _HomeSecondState extends State<HomeSecond> {
                                                 'assets/images/public.png')),
                                         boxShadow: [
                                           BoxShadow(
-                                              color: ColorPicker.kGreyLight
+                                              color: ColorPicker.kGreyDark
                                                   .withOpacity(0.5),
                                               spreadRadius: 1,
                                               blurRadius: 20)
@@ -1611,7 +1611,7 @@ class _HomeSecondState extends State<HomeSecond> {
                               boxShadow: [
                                 BoxShadow(
                                     color:
-                                        ColorPicker.kGreyLight.withOpacity(0.5),
+                                        ColorPicker.kGreyDark.withOpacity(0.5),
                                     spreadRadius: 1,
                                     blurRadius: 20)
                               ],
@@ -1691,7 +1691,7 @@ class _HomeSecondState extends State<HomeSecond> {
                                                 'assets/images/public.png')),
                                         boxShadow: [
                                           BoxShadow(
-                                              color: ColorPicker.kGreyLight
+                                              color: ColorPicker.kGreyDark
                                                   .withOpacity(0.5),
                                               spreadRadius: 1,
                                               blurRadius: 20)
@@ -1744,7 +1744,7 @@ class _HomeSecondState extends State<HomeSecond> {
                                                 'assets/images/public.png')),
                                         boxShadow: [
                                           BoxShadow(
-                                              color: ColorPicker.kGreyLight
+                                              color: ColorPicker.kGreyDark
                                                   .withOpacity(0.5),
                                               spreadRadius: 1,
                                               blurRadius: 20)
@@ -2726,7 +2726,7 @@ class _HomeSecondState extends State<HomeSecond> {
       width: Get.width,
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
       decoration: BoxDecoration(
-        color: Color(0xFF2B375E),
+        color: ColorPicker.kPrimaryLight,
         borderRadius: BorderRadius.circular(4),
       ),
       child: Column(

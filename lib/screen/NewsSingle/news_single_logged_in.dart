@@ -205,7 +205,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
               preferredSize: Size.fromHeight(46),
               child: Container(
                   height: 46,
-                  color: Color(0xff384677),
+                  color: ColorPicker.kPrimaryLight1,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -223,28 +223,28 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                           style: FontTextStyle.kWhitePurePR,
                           decoration: InputDecoration(
                             hintStyle: TextStyle(
-                              color: Color(0xFF7A85A6),
+                              color: ColorPicker.kPrimaryLightBlue,
                             ),
                             filled: true,
-                            fillColor: Color(0xff2B375E),
+                            fillColor: ColorPicker.kPrimaryLight,
                             hintText: "Search",
                             prefixIcon: Icon(
                               Icons.search,
-                              color: Color(0xFF7A85A6),
+                              color: ColorPicker.kPrimaryLightBlue,
                             ),
                             suffixIcon: Container(
                               margin: EdgeInsets.only(right: 5),
                               height: 40,
                               width: Get.width * 0.045,
                               decoration: BoxDecoration(
-                                color: Color(0xff384677),
+                                color: ColorPicker.kPrimaryLight1,
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               child: Center(
                                 child: Text(
                                   'People',
                                   style: TextStyle(
-                                    color: Color(0xFF7A85A6),
+                                    color: ColorPicker.kPrimaryLightBlue,
                                   ),
                                 ),
                               ),
@@ -282,8 +282,8 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                         width: Get.width * 0.05,
                         decoration: BoxDecoration(
                             border: Border.symmetric(
-                          vertical:
-                              BorderSide(color: Color(0xff2B375E), width: 3),
+                          vertical: BorderSide(
+                              color: ColorPicker.kPrimaryLight, width: 3),
                         )),
                         child: Center(
                             child: Stack(
@@ -291,7 +291,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                           children: [
                             Icon(
                               Icons.email,
-                              color: Color(0xFF7A85A6),
+                              color: ColorPicker.kPrimaryLightBlue,
                             ),
                             Positioned(
                               right: -5,
@@ -300,7 +300,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                 height: 16,
                                 width: 16,
                                 decoration: BoxDecoration(
-                                  color: Color(0xffFD3732),
+                                  color: ColorPicker.kRed1,
                                   borderRadius: BorderRadius.circular(3),
                                 ),
                                 child: Center(
@@ -318,8 +318,8 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                         width: Get.width * 0.05,
                         decoration: BoxDecoration(
                             border: Border.symmetric(
-                          vertical:
-                              BorderSide(color: Color(0xff2B375E), width: 3),
+                          vertical: BorderSide(
+                              color: ColorPicker.kPrimaryLight, width: 3),
                         )),
                         child: Center(
                             child: Stack(
@@ -327,7 +327,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                           children: [
                             Icon(
                               Icons.flag,
-                              color: Color(0xFF7A85A6),
+                              color: ColorPicker.kPrimaryLightBlue,
                             ),
                             Positioned(
                               right: -5,
@@ -336,7 +336,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                 height: 16,
                                 width: 16,
                                 decoration: BoxDecoration(
-                                  color: Color(0xffFD3732),
+                                  color: ColorPicker.kRed1,
                                   borderRadius: BorderRadius.circular(3),
                                 ),
                                 child: Center(
@@ -354,8 +354,8 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                         width: 90,
                         decoration: BoxDecoration(
                             border: Border.symmetric(
-                          vertical:
-                              BorderSide(color: Color(0xff2B375E), width: 3),
+                          vertical: BorderSide(
+                              color: ColorPicker.kPrimaryLight, width: 3),
                         )),
                         child: Center(
                             child: Row(
@@ -363,7 +363,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                           children: [
                             Icon(
                               Icons.person_add,
-                              color: Color(0xFF7A85A6),
+                              color: ColorPicker.kPrimaryLightBlue,
                             ),
                             SizedBox(
                               width: 5,
@@ -377,7 +377,8 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                               ),
                               child: Center(
                                 child: Text('352',
-                                    style: FontTextStyle.kPrimaryLight10W700PR),
+                                    style:
+                                        FontTextStyle.kPrimaryLight10W700SSP),
                               ),
                             ),
                           ],
@@ -387,8 +388,8 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                         width: Get.width * 0.05,
                         decoration: BoxDecoration(
                             border: Border.symmetric(
-                          vertical:
-                              BorderSide(color: Color(0xff2B375E), width: 3),
+                          vertical: BorderSide(
+                              color: ColorPicker.kPrimaryLight, width: 3),
                         )),
                         child: Center(
                           child: Container(
@@ -757,7 +758,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                               height: Get.height * 0.01,
                             ),
                             Divider(
-                              color: Color(0xFF7C8990),
+                              color: ColorPicker.kGreyLight5,
                               thickness: 2,
                             ),
                             SizedBox(
@@ -1370,7 +1371,8 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                 Flexible(
                                     child: Divider(
                                   endIndent: 10,
-                                  color: Color(0xFF7C8990).withOpacity(0.2),
+                                  color:
+                                      ColorPicker.kGreyLight5.withOpacity(0.2),
                                 )),
                                 Text(
                                   'SUGGESTED NEWS',
@@ -1379,7 +1381,8 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                 Flexible(
                                     child: Divider(
                                   indent: 10,
-                                  color: Color(0xFF7C8990).withOpacity(0.2),
+                                  color:
+                                      ColorPicker.kGreyLight5.withOpacity(0.2),
                                 )),
                               ],
                             ),
@@ -1801,7 +1804,89 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
             ),
           )
         : Scaffold(
-            appBar: AppBar(),
+            appBar: PreferredSize(
+              preferredSize: Size.fromHeight(46),
+              child: Container(
+                  height: 46,
+                  width: Get.width,
+                  color: ColorPicker.kPrimaryLight1,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Image(
+                          image: AssetImage('assets/icons/logo1.png'),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                        child: Container(
+                          margin: EdgeInsets.all(4),
+                          decoration: BoxDecoration(
+                              color: ColorPicker.kPrimaryLight1,
+                              borderRadius: BorderRadius.circular(8)),
+                          child: TextFormField(
+                            cursorColor: Colors.white,
+                            style: FontTextStyle.kWhitePurePR,
+                            decoration: InputDecoration(
+                              hintStyle: TextStyle(
+                                color: ColorPicker.kPrimaryLightBlue,
+                              ),
+                              filled: true,
+                              fillColor: ColorPicker.kPrimaryLight,
+                              hintText: "Search",
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide:
+                                    BorderSide(color: Colors.transparent),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide:
+                                    BorderSide(color: Colors.transparent),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide:
+                                    BorderSide(color: Colors.transparent),
+                              ),
+                              prefixIcon: Icon(
+                                Icons.search,
+                                color: ColorPicker.kPrimaryLightBlue,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: Get.width * 0.01,
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'assets/icons/menu.png',
+                            height: 18,
+                            width: 25,
+                            fit: BoxFit.cover,
+                            color: ColorPicker.kPrimaryLightBlue,
+                          ),
+                          SizedBox(height: 5),
+                          Text('MENU',
+                              style: TextStyle(
+                                  fontSize: 9,
+                                  color: ColorPicker.kPrimaryLightBlue)),
+                        ],
+                      ),
+                      SizedBox(
+                        width: Get.width * 0.01,
+                      ),
+                    ],
+                  )),
+            ),
             backgroundColor: ColorPicker.kBg1,
             body: SingleChildScrollView(
               child: Padding(
@@ -1835,7 +1920,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                     Text(
                                       'RESOURCES',
                                       style: TextStyle(
-                                          color: Color(0xff7C8990),
+                                          color: ColorPicker.kGreyLight5,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     SizedBox(
@@ -1874,14 +1959,15 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                                     'By',
                                                     style: TextStyle(
                                                       fontSize: 17,
-                                                      color: Color(0xff7C8990),
+                                                      color: ColorPicker
+                                                          .kGreyLight5,
                                                     ),
                                                   ),
                                                   Text(
                                                     ': Pam Carrol',
                                                     style: TextStyle(
-                                                        color:
-                                                            Color(0xff7C8990),
+                                                        color: ColorPicker
+                                                            .kGreyLight5,
                                                         fontSize: 17,
                                                         fontWeight:
                                                             FontWeight.w500),
@@ -1895,7 +1981,8 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                                 '26 August 2015 • 10:40',
                                                 style: TextStyle(
                                                   fontSize: 17,
-                                                  color: Color(0xff7C8990),
+                                                  color:
+                                                      ColorPicker.kGreyLight5,
                                                 ),
                                               ),
                                             ],
@@ -1904,7 +1991,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                       ],
                                     ),
                                     Divider(
-                                      color: Color(0xff7C8990),
+                                      color: ColorPicker.kGreyLight5,
                                     )
                                   ],
                                 ),
@@ -1941,7 +2028,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                   Text(
                                       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
                                       style: TextStyle(
-                                        color: Color(0xff7C8990),
+                                        color: ColorPicker.kGreyLight5,
                                         fontSize: 17,
                                       )),
                                   SizedBox(
@@ -1950,7 +2037,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                   Text(
                                       'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
                                       style: TextStyle(
-                                          color: Color(0xff7C8990),
+                                          color: ColorPicker.kGreyLight5,
                                           fontSize: 17)),
                                   SizedBox(
                                     height: Get.height * 0.03,
@@ -1958,7 +2045,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                   Text(
                                       'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.',
                                       style: TextStyle(
-                                          color: Color(0xff7C8990),
+                                          color: ColorPicker.kGreyLight5,
                                           fontSize: 17)),
                                   SizedBox(
                                     height: Get.height * 0.03,
@@ -2055,7 +2142,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                   Text(
                                       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
                                       style: TextStyle(
-                                          color: Color(0xff7C8990),
+                                          color: ColorPicker.kGreyLight5,
                                           fontSize: 17)),
                                   SizedBox(
                                     height: Get.height * 0.03,
@@ -2063,7 +2150,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                   Text(
                                       'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
                                       style: TextStyle(
-                                          color: Color(0xff7C8990),
+                                          color: ColorPicker.kGreyLight5,
                                           fontSize: 17)),
                                   SizedBox(
                                     height: Get.height * 0.03,
@@ -2083,7 +2170,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                         padding: EdgeInsets.only(bottom: 60),
                                         child: Text('1.',
                                             style: TextStyle(
-                                                color: Color(0xff7C8990),
+                                                color: ColorPicker.kGreyLight5,
                                                 fontSize: 17)),
                                       ),
                                       SizedBox(
@@ -2094,7 +2181,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                         child: Text(
                                             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut	labore et dolore magna aliqua.',
                                             style: TextStyle(
-                                                color: Color(0xff7C8990),
+                                                color: ColorPicker.kGreyLight5,
                                                 fontSize: 17)),
                                       )
                                     ],
@@ -2109,7 +2196,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                         padding: EdgeInsets.only(bottom: 60),
                                         child: Text('2.',
                                             style: TextStyle(
-                                                color: Color(0xff7C8990),
+                                                color: ColorPicker.kGreyLight5,
                                                 fontSize: 17)),
                                       ),
                                       SizedBox(
@@ -2120,7 +2207,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                         child: Text(
                                             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut	labore et dolore magna aliqua.',
                                             style: TextStyle(
-                                                color: Color(0xff7C8990),
+                                                color: ColorPicker.kGreyLight5,
                                                 fontSize: 17)),
                                       )
                                     ],
@@ -2135,7 +2222,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                         padding: EdgeInsets.only(bottom: 60),
                                         child: Text('3.',
                                             style: TextStyle(
-                                                color: Color(0xff7C8990),
+                                                color: ColorPicker.kGreyLight5,
                                                 fontSize: 17)),
                                       ),
                                       SizedBox(
@@ -2146,7 +2233,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                         child: Text(
                                             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut	labore et dolore magna aliqua.',
                                             style: TextStyle(
-                                                color: Color(0xff7C8990),
+                                                color: ColorPicker.kGreyLight5,
                                                 fontSize: 17)),
                                       )
                                     ],
@@ -2169,7 +2256,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                         padding: EdgeInsets.only(bottom: 60),
                                         child: Text('•',
                                             style: TextStyle(
-                                                color: Color(0xff7C8990),
+                                                color: ColorPicker.kGreyLight5,
                                                 fontSize: 30)),
                                       ),
                                       SizedBox(
@@ -2180,7 +2267,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                         child: Text(
                                             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut	labore et dolore magna aliqua.',
                                             style: TextStyle(
-                                                color: Color(0xff7C8990),
+                                                color: ColorPicker.kGreyLight5,
                                                 fontSize: 17)),
                                       )
                                     ],
@@ -2195,7 +2282,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                         padding: EdgeInsets.only(bottom: 60),
                                         child: Text('•',
                                             style: TextStyle(
-                                                color: Color(0xff7C8990),
+                                                color: ColorPicker.kGreyLight5,
                                                 fontSize: 30)),
                                       ),
                                       SizedBox(
@@ -2206,7 +2293,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                         child: Text(
                                             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut	labore et dolore magna aliqua.',
                                             style: TextStyle(
-                                                color: Color(0xff7C8990),
+                                                color: ColorPicker.kGreyLight5,
                                                 fontSize: 17)),
                                       )
                                     ],
@@ -2221,7 +2308,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                         padding: EdgeInsets.only(bottom: 60),
                                         child: Text('•',
                                             style: TextStyle(
-                                                color: Color(0xff7C8990),
+                                                color: ColorPicker.kGreyLight5,
                                                 fontSize: 30)),
                                       ),
                                       SizedBox(
@@ -2232,7 +2319,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                         child: Text(
                                             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut	labore et dolore magna aliqua.',
                                             style: TextStyle(
-                                                color: Color(0xff7C8990),
+                                                color: ColorPicker.kGreyLight5,
                                                 fontSize: 17)),
                                       )
                                     ],
@@ -2270,7 +2357,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                   Text(
                                       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
                                       style: TextStyle(
-                                          color: Color(0xff7C8990),
+                                          color: ColorPicker.kGreyLight5,
                                           fontSize: 18)),
                                   SizedBox(
                                     height: Get.height * 0.02,
@@ -2717,7 +2804,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                         Flexible(
                             child: Divider(
                           endIndent: 10,
-                          color: Color(0xFF7C8990).withOpacity(0.2),
+                          color: ColorPicker.kGreyLight5.withOpacity(0.2),
                         )),
                         Text(
                           'SUGGESTED NEWS',
@@ -2726,7 +2813,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                         Flexible(
                             child: Divider(
                           indent: 10,
-                          color: Color(0xFF7C8990).withOpacity(0.2),
+                          color: ColorPicker.kGreyLight5.withOpacity(0.2),
                         )),
                       ],
                     ),

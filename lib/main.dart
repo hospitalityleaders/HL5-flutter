@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:holedo/screen/NewsSingle/jobs_no_jobs.dart';
+import 'package:holedo/screen/categories/news_signal.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,10 +25,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       scrollBehavior: MyCustomScrollBehavior(),
       title: 'Holedo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: NewsSingleJobs(),
+      home: NewsSingleScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

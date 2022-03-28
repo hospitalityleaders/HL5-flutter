@@ -441,7 +441,7 @@ class _HomeScreenState extends State<HomeScreen>
                 width: Get.width * 0.9,
                 decoration: BoxDecoration(boxShadow: [
                   BoxShadow(
-                      color: ColorPicker.kGreyLight.withOpacity(0.5),
+                      color: ColorPicker.kGreyDark.withOpacity(0.5),
                       spreadRadius: 1,
                       blurRadius: 20)
                 ], color: Colors.white, borderRadius: BorderRadius.circular(5)),
@@ -549,7 +549,7 @@ class _HomeScreenState extends State<HomeScreen>
                 width: Get.width * 0.9,
                 decoration: BoxDecoration(boxShadow: [
                   BoxShadow(
-                      color: ColorPicker.kGreyLight.withOpacity(0.5),
+                      color: ColorPicker.kGreyDark.withOpacity(0.5),
                       spreadRadius: 1,
                       blurRadius: 20)
                 ], color: Colors.white, borderRadius: BorderRadius.circular(5)),
@@ -723,7 +723,7 @@ class _HomeScreenState extends State<HomeScreen>
                         image: AssetImage('assets/images/public.png')),
                     boxShadow: [
                       BoxShadow(
-                          color: ColorPicker.kGreyLight.withOpacity(0.5),
+                          color: ColorPicker.kGreyDark.withOpacity(0.5),
                           spreadRadius: 1,
                           blurRadius: 20)
                     ],
@@ -776,7 +776,7 @@ class _HomeScreenState extends State<HomeScreen>
                               boxShadow: [
                                 BoxShadow(
                                     color:
-                                        ColorPicker.kGreyLight.withOpacity(0.5),
+                                        ColorPicker.kGreyDark.withOpacity(0.5),
                                     spreadRadius: 1,
                                     blurRadius: 20)
                               ],
@@ -827,7 +827,7 @@ class _HomeScreenState extends State<HomeScreen>
                               boxShadow: [
                                 BoxShadow(
                                     color:
-                                        ColorPicker.kGreyLight.withOpacity(0.5),
+                                        ColorPicker.kGreyDark.withOpacity(0.5),
                                     spreadRadius: 1,
                                     blurRadius: 20)
                               ],
@@ -1431,7 +1431,7 @@ class _HomeScreenState extends State<HomeScreen>
                         image: AssetImage('assets/images/public.png')),
                     boxShadow: [
                       BoxShadow(
-                          color: ColorPicker.kGreyLight.withOpacity(0.5),
+                          color: ColorPicker.kGreyDark.withOpacity(0.5),
                           spreadRadius: 1,
                           blurRadius: 20)
                     ],
@@ -1526,7 +1526,7 @@ class _HomeScreenState extends State<HomeScreen>
                               boxShadow: [
                                 BoxShadow(
                                     color:
-                                        ColorPicker.kGreyLight.withOpacity(0.5),
+                                        ColorPicker.kGreyDark.withOpacity(0.5),
                                     spreadRadius: 1,
                                     blurRadius: 20)
                               ],
@@ -1577,7 +1577,7 @@ class _HomeScreenState extends State<HomeScreen>
                               boxShadow: [
                                 BoxShadow(
                                     color:
-                                        ColorPicker.kGreyLight.withOpacity(0.5),
+                                        ColorPicker.kGreyDark.withOpacity(0.5),
                                     spreadRadius: 1,
                                     blurRadius: 20)
                               ],
@@ -1644,7 +1644,7 @@ class _HomeScreenState extends State<HomeScreen>
                     image: AssetImage('assets/images/alone_girl.png')),
                 boxShadow: [
                   BoxShadow(
-                      color: ColorPicker.kGreyLight.withOpacity(0.5),
+                      color: ColorPicker.kGreyDark.withOpacity(0.5),
                       spreadRadius: 1,
                       blurRadius: 20)
                 ],
@@ -1722,7 +1722,7 @@ class _HomeScreenState extends State<HomeScreen>
                               image: AssetImage('assets/images/public.png')),
                           boxShadow: [
                             BoxShadow(
-                                color: ColorPicker.kGreyLight.withOpacity(0.5),
+                                color: ColorPicker.kGreyDark.withOpacity(0.5),
                                 spreadRadius: 1,
                                 blurRadius: 20)
                           ],
@@ -1771,7 +1771,7 @@ class _HomeScreenState extends State<HomeScreen>
                               image: AssetImage('assets/images/public.png')),
                           boxShadow: [
                             BoxShadow(
-                                color: ColorPicker.kGreyLight.withOpacity(0.5),
+                                color: ColorPicker.kGreyDark.withOpacity(0.5),
                                 spreadRadius: 1,
                                 blurRadius: 20)
                           ],
@@ -2726,7 +2726,7 @@ class _HomeScreenState extends State<HomeScreen>
       width: Get.width,
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
       decoration: BoxDecoration(
-        color: Color(0xFF2B375E),
+        color: ColorPicker.kPrimaryLight,
         borderRadius: BorderRadius.circular(4),
       ),
       child: Column(

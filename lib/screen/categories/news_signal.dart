@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
+import '../../constant/colorPicker/color_picker.dart';
+import '../../constant/fontStyle/font_style.dart';
 import '../../responsive/responsive.dart';
 
 class NewsSingleScreen extends StatefulWidget {
@@ -86,9 +88,217 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
     return DefaultTabController(
       length: 4,
       initialIndex: 0,
-      child: Scaffold(
-        body: Responsive.isDesktop(context)
-            ? NestedScrollView(
+      child: Responsive.isDesktop(context)
+          ? Scaffold(
+              appBar: PreferredSize(
+                preferredSize: Size.fromHeight(46),
+                child: Container(
+                    height: 46,
+                    color: ColorPicker.kPrimaryLight1,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image(
+                          image: AssetImage('assets/icons/logo.png'),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Container(
+                          width: 270,
+                          color: Colors.white,
+                          child: TextFormField(
+                            cursorColor: Colors.white,
+                            style: FontTextStyle.kWhitePurePR,
+                            decoration: InputDecoration(
+                              hintStyle: TextStyle(
+                                color: ColorPicker.kPrimaryLightBlue,
+                              ),
+                              filled: true,
+                              fillColor: ColorPicker.kPrimaryLight,
+                              hintText: "Search",
+                              prefixIcon: Icon(
+                                Icons.search,
+                                color: ColorPicker.kPrimaryLightBlue,
+                              ),
+                              suffixIcon: Container(
+                                margin: EdgeInsets.only(right: 5),
+                                height: 40,
+                                width: Get.width * 0.045,
+                                decoration: BoxDecoration(
+                                  color: ColorPicker.kPrimaryLight1,
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    'People',
+                                    style: TextStyle(
+                                      color: ColorPicker.kPrimaryLightBlue,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: Get.width * 0.02,
+                        ),
+                        Container(
+                          width: 380,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text('Home',
+                                  style: FontTextStyle.kWhitePure16W400PR),
+                              Text('Profile',
+                                  style:
+                                      FontTextStyle.kPrimaryLightBlue16W400PR),
+                              Text('News',
+                                  style:
+                                      FontTextStyle.kPrimaryLightBlue16W400PR),
+                              Text('Jobs',
+                                  style:
+                                      FontTextStyle.kPrimaryLightBlue16W400PR),
+                              Text('Recruitment',
+                                  style:
+                                      FontTextStyle.kPrimaryLightBlue16W400PR),
+                              Text('Help',
+                                  style:
+                                      FontTextStyle.kPrimaryLightBlue16W400PR),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          width: Get.width * 0.02,
+                        ),
+                        Container(
+                          width: Get.width * 0.05,
+                          decoration: BoxDecoration(
+                              border: Border.symmetric(
+                            vertical: BorderSide(
+                                color: ColorPicker.kPrimaryLight, width: 3),
+                          )),
+                          child: Center(
+                              child: Stack(
+                            overflow: Overflow.visible,
+                            children: [
+                              Icon(
+                                Icons.email,
+                                color: ColorPicker.kPrimaryLightBlue,
+                              ),
+                              Positioned(
+                                right: -5,
+                                top: -5,
+                                child: Container(
+                                  height: 16,
+                                  width: 16,
+                                  decoration: BoxDecoration(
+                                    color: ColorPicker.kRed1,
+                                    borderRadius: BorderRadius.circular(3),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      '2',
+                                      style: FontTextStyle.kWhitePure12W700PR,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )),
+                        ),
+                        Container(
+                          width: Get.width * 0.05,
+                          decoration: BoxDecoration(
+                              border: Border.symmetric(
+                            vertical: BorderSide(
+                                color: ColorPicker.kPrimaryLight, width: 3),
+                          )),
+                          child: Center(
+                              child: Stack(
+                            overflow: Overflow.visible,
+                            children: [
+                              Icon(
+                                Icons.flag,
+                                color: ColorPicker.kPrimaryLightBlue,
+                              ),
+                              Positioned(
+                                right: -5,
+                                top: -5,
+                                child: Container(
+                                  height: 16,
+                                  width: 16,
+                                  decoration: BoxDecoration(
+                                    color: ColorPicker.kRed1,
+                                    borderRadius: BorderRadius.circular(3),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      '2',
+                                      style: FontTextStyle.kWhitePure12W700PR,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )),
+                        ),
+                        Container(
+                          width: 90,
+                          decoration: BoxDecoration(
+                              border: Border.symmetric(
+                            vertical: BorderSide(
+                                color: ColorPicker.kPrimaryLight, width: 3),
+                          )),
+                          child: Center(
+                              child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.person_add,
+                                color: ColorPicker.kPrimaryLightBlue,
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Container(
+                                height: 20,
+                                width: 30,
+                                decoration: BoxDecoration(
+                                  color: Color(0xff546088),
+                                  borderRadius: BorderRadius.circular(3),
+                                ),
+                                child: Center(
+                                  child: Text('352',
+                                      style:
+                                          FontTextStyle.kPrimaryLight10W700SSP),
+                                ),
+                              ),
+                            ],
+                          )),
+                        ),
+                        Container(
+                          width: Get.width * 0.05,
+                          decoration: BoxDecoration(
+                              border: Border.symmetric(
+                            vertical: BorderSide(
+                                color: ColorPicker.kPrimaryLight, width: 3),
+                          )),
+                          child: Center(
+                            child: Container(
+                              height: 26,
+                              width: 26,
+                              child: Image(
+                                image: AssetImage('assets/images/avatar.png'),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )),
+              ),
+              body: NestedScrollView(
                 headerSliverBuilder: (context, innerBoxIsScrolled) {
                   return [
                     SliverToBoxAdapter(
@@ -137,7 +347,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                               child: Container(
                                 height: 50,
                                 width: 50,
-                                color: Color(0xFF272E41).withOpacity(0.4),
+                                color: ColorPicker.kBlueDark1.withOpacity(0.4),
                                 child: Center(
                                   child: IconButton(
                                     onPressed: () {
@@ -184,33 +394,21 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                   children: [
                                     Text(
                                       'RESOURCES',
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w700,
-                                      ),
+                                      style: FontTextStyle.kWhite12W700SSP,
                                     ),
                                     SizedBox(
                                       height: 5,
                                     ),
                                     Text(
                                       '5 Steps for Travel Brands to Build a Brand\nAmbassador Program',
-                                      style: TextStyle(
-                                        fontSize: 36,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w400,
-                                      ),
+                                      style: FontTextStyle.kWhite36W400SSP,
                                     ),
                                     SizedBox(
                                       height: 5,
                                     ),
                                     Text(
                                       'By: Pam Carrol • 26 August 2015 • 10:40',
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w600,
-                                      ),
+                                      style: FontTextStyle.kWhite14W400SSP,
                                     ),
                                   ],
                                 )),
@@ -231,10 +429,11 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                         child: TabBar(
                           padding:
                               EdgeInsets.symmetric(horizontal: Get.width * 0.3),
-                          unselectedLabelColor: Colors.black,
-                          labelColor: Colors.blue,
+                          unselectedLabelColor: ColorPicker.kGreyLight7,
+                          labelColor: ColorPicker.kBlueLight1,
                           controller: _tabController,
                           physics: NeverScrollableScrollPhysics(),
+                          labelStyle: FontTextStyle.kBlueLight114W600SSP,
                           tabs: [
                             Tab(
                               text: "Resources",
@@ -307,19 +506,13 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                         ),
                                         Text(
                                           'RESOURCES',
-                                          style: TextStyle(
-                                            color: Color(0xFF7C8990),
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w700,
-                                          ),
+                                          style: FontTextStyle
+                                              .kGreyLight712W700SSP,
                                         ),
                                         Text(
                                           'Moxy Hotels Makes Some Movies, Well Youtube Ones',
-                                          style: TextStyle(
-                                            color: Color(0xFF272E41),
-                                            fontSize: 36,
-                                            fontWeight: FontWeight.w400,
-                                          ),
+                                          style:
+                                              FontTextStyle.kBlueDark136W400SSP,
                                         ),
                                         SizedBox(
                                           height: 10,
@@ -331,7 +524,8 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                 text: TextSpan(
                                                   text: "by",
                                                   style: TextStyle(
-                                                    color: Color(0xff7C8990)
+                                                    color: ColorPicker
+                                                        .kGreyLight5
                                                         .withOpacity(0.8),
                                                     fontSize: 14,
                                                     fontWeight: FontWeight.w400,
@@ -339,32 +533,17 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                   children: [
                                                     TextSpan(
                                                         text: "  Pam Carrol •",
-                                                        style: TextStyle(
-                                                          color:
-                                                              Color(0xff7C8990),
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                        )),
+                                                        style: FontTextStyle
+                                                            .kGreyLight5146W400SSP),
                                                     TextSpan(
                                                         text:
                                                             "  26 August 2015 •",
-                                                        style: TextStyle(
-                                                          color:
-                                                              Color(0xff7C8990),
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                        )),
+                                                        style: FontTextStyle
+                                                            .kGreyLight5146W400SSP),
                                                     TextSpan(
                                                         text: "  10:40",
-                                                        style: TextStyle(
-                                                          color:
-                                                              Color(0xff7C8990),
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                        )),
+                                                        style: FontTextStyle
+                                                            .kGreyLight5146W400SSP),
                                                   ],
                                                 ),
                                               ),
@@ -384,25 +563,17 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                         'assets/icons/svg/facebook.svg'),
                                                     Text(
                                                       '  • 112',
-                                                      style: TextStyle(
-                                                        fontSize: 14,
-                                                        color: Color(0xff7C8990)
-                                                            .withOpacity(0.6),
-                                                      ),
+                                                      style: FontTextStyle
+                                                          .kGreyLight5146W400SSP,
                                                     ),
                                                     SizedBox(
                                                       width: Get.width * 0.01,
                                                     ),
                                                     SvgPicture.asset(
                                                         'assets/icons/svg/twitter.svg'),
-                                                    Text(
-                                                      '  • 56',
-                                                      style: TextStyle(
-                                                        fontSize: 14,
-                                                        color: Color(0xff7C8990)
-                                                            .withOpacity(0.6),
-                                                      ),
-                                                    ),
+                                                    Text('  • 56',
+                                                        style: FontTextStyle
+                                                            .kGreyLight5146W400SSP),
                                                     SizedBox(
                                                       width: Get.width * 0.01,
                                                     ),
@@ -410,11 +581,8 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                         'assets/icons/svg/googleplus.svg'),
                                                     Text(
                                                       '  • 321',
-                                                      style: TextStyle(
-                                                        fontSize: 14,
-                                                        color: Color(0xff7C8990)
-                                                            .withOpacity(0.6),
-                                                      ),
+                                                      style: FontTextStyle
+                                                          .kGreyLight5146W400SSP,
                                                     ),
                                                     SizedBox(
                                                       width: Get.width * 0.01,
@@ -424,11 +592,8 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                         height: 20),
                                                     Text(
                                                       '  • 22',
-                                                      style: TextStyle(
-                                                        fontSize: 14,
-                                                        color: Color(0xff7C8990)
-                                                            .withOpacity(0.6),
-                                                      ),
+                                                      style: FontTextStyle
+                                                          .kGreyLight5146W400SSP,
                                                     ),
                                                     SizedBox(
                                                       width: Get.width * 0.01,
@@ -437,11 +602,8 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                         'assets/icons/svg/any.svg'),
                                                     Text(
                                                       '  • 13',
-                                                      style: TextStyle(
-                                                        fontSize: 14,
-                                                        color: Color(0xff7C8990)
-                                                            .withOpacity(0.6),
-                                                      ),
+                                                      style: FontTextStyle
+                                                          .kGreyLight5146W400SSP,
                                                     ),
                                                   ],
                                                 ),
@@ -488,7 +650,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                         Text(
                                           'RESOURCES',
                                           style: TextStyle(
-                                            color: Color(0xFF7C8990),
+                                            color: ColorPicker.kGreyLight5,
                                             fontSize: 12,
                                             fontWeight: FontWeight.w700,
                                           ),
@@ -511,7 +673,8 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                 text: TextSpan(
                                                   text: "by",
                                                   style: TextStyle(
-                                                    color: Color(0xff7C8990)
+                                                    color: ColorPicker
+                                                        .kGreyLight5
                                                         .withOpacity(0.8),
                                                     fontSize: 14,
                                                     fontWeight: FontWeight.w400,
@@ -520,8 +683,8 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                     TextSpan(
                                                         text: "  Pam Carrol •",
                                                         style: TextStyle(
-                                                          color:
-                                                              Color(0xff7C8990),
+                                                          color: ColorPicker
+                                                              .kGreyLight5,
                                                           fontSize: 14,
                                                           fontWeight:
                                                               FontWeight.w400,
@@ -530,8 +693,8 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                         text:
                                                             "  26 August 2015 •",
                                                         style: TextStyle(
-                                                          color:
-                                                              Color(0xff7C8990),
+                                                          color: ColorPicker
+                                                              .kGreyLight5,
                                                           fontSize: 14,
                                                           fontWeight:
                                                               FontWeight.w400,
@@ -539,8 +702,8 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                     TextSpan(
                                                         text: "  10:40",
                                                         style: TextStyle(
-                                                          color:
-                                                              Color(0xff7C8990),
+                                                          color: ColorPicker
+                                                              .kGreyLight5,
                                                           fontSize: 14,
                                                           fontWeight:
                                                               FontWeight.w400,
@@ -566,7 +729,8 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                       '  • 112',
                                                       style: TextStyle(
                                                         fontSize: 14,
-                                                        color: Color(0xff7C8990)
+                                                        color: ColorPicker
+                                                            .kGreyLight5
                                                             .withOpacity(0.6),
                                                       ),
                                                     ),
@@ -579,7 +743,8 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                       '  • 56',
                                                       style: TextStyle(
                                                         fontSize: 14,
-                                                        color: Color(0xff7C8990)
+                                                        color: ColorPicker
+                                                            .kGreyLight5
                                                             .withOpacity(0.6),
                                                       ),
                                                     ),
@@ -592,7 +757,8 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                       '  • 321',
                                                       style: TextStyle(
                                                         fontSize: 14,
-                                                        color: Color(0xff7C8990)
+                                                        color: ColorPicker
+                                                            .kGreyLight5
                                                             .withOpacity(0.6),
                                                       ),
                                                     ),
@@ -606,7 +772,8 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                       '  • 22',
                                                       style: TextStyle(
                                                         fontSize: 14,
-                                                        color: Color(0xff7C8990)
+                                                        color: ColorPicker
+                                                            .kGreyLight5
                                                             .withOpacity(0.6),
                                                       ),
                                                     ),
@@ -619,7 +786,8 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                       '  • 13',
                                                       style: TextStyle(
                                                         fontSize: 14,
-                                                        color: Color(0xff7C8990)
+                                                        color: ColorPicker
+                                                            .kGreyLight5
                                                             .withOpacity(0.6),
                                                       ),
                                                     ),
@@ -694,7 +862,8 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                 text: TextSpan(
                                                   text: "by",
                                                   style: TextStyle(
-                                                    color: Color(0xff7C8990)
+                                                    color: ColorPicker
+                                                        .kGreyLight5
                                                         .withOpacity(0.8),
                                                     fontSize: 14,
                                                     fontWeight: FontWeight.w400,
@@ -703,8 +872,8 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                     TextSpan(
                                                         text: "  Pam Carrol •",
                                                         style: TextStyle(
-                                                          color:
-                                                              Color(0xff7C8990),
+                                                          color: ColorPicker
+                                                              .kGreyLight5,
                                                           fontSize: 14,
                                                           fontWeight:
                                                               FontWeight.w400,
@@ -713,8 +882,8 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                         text:
                                                             "  26 August 2015 •",
                                                         style: TextStyle(
-                                                          color:
-                                                              Color(0xff7C8990),
+                                                          color: ColorPicker
+                                                              .kGreyLight5,
                                                           fontSize: 14,
                                                           fontWeight:
                                                               FontWeight.w400,
@@ -722,8 +891,8 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                     TextSpan(
                                                         text: "  10:40",
                                                         style: TextStyle(
-                                                          color:
-                                                              Color(0xff7C8990),
+                                                          color: ColorPicker
+                                                              .kGreyLight5,
                                                           fontSize: 14,
                                                           fontWeight:
                                                               FontWeight.w400,
@@ -798,7 +967,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                   height: 815, // height: Get.height,
                                   width: 373,
 
-                                  color: Color(0xFF2B375E),
+                                  color: ColorPicker.kPrimaryLight,
                                   child: Stack(
                                     children: [
                                       Positioned(
@@ -1240,8 +1409,92 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                     Container(),
                   ],
                 ),
-              )
-            : SingleChildScrollView(
+              ))
+          : Scaffold(
+              appBar: PreferredSize(
+                preferredSize: Size.fromHeight(46),
+                child: Container(
+                    height: 46,
+                    width: Get.width,
+                    color: ColorPicker.kPrimaryLight1,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Image(
+                            image: AssetImage('assets/icons/logo1.png'),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
+                          child: Container(
+                            margin: EdgeInsets.all(4),
+                            decoration: BoxDecoration(
+                                color: ColorPicker.kPrimaryLight1,
+                                borderRadius: BorderRadius.circular(8)),
+                            child: TextFormField(
+                              cursorColor: Colors.white,
+                              style: FontTextStyle.kWhitePurePR,
+                              decoration: InputDecoration(
+                                hintStyle: TextStyle(
+                                  color: ColorPicker.kPrimaryLightBlue,
+                                ),
+                                filled: true,
+                                fillColor: ColorPicker.kPrimaryLight,
+                                hintText: "Search",
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide:
+                                      BorderSide(color: Colors.transparent),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide:
+                                      BorderSide(color: Colors.transparent),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide:
+                                      BorderSide(color: Colors.transparent),
+                                ),
+                                prefixIcon: Icon(
+                                  Icons.search,
+                                  color: ColorPicker.kPrimaryLightBlue,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: Get.width * 0.01,
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              'assets/icons/menu.png',
+                              height: 18,
+                              width: 25,
+                              fit: BoxFit.cover,
+                              color: ColorPicker.kPrimaryLightBlue,
+                            ),
+                            SizedBox(height: 5),
+                            Text('MENU',
+                                style: TextStyle(
+                                    fontSize: 9,
+                                    color: ColorPicker.kPrimaryLightBlue)),
+                          ],
+                        ),
+                        SizedBox(
+                          width: Get.width * 0.01,
+                        ),
+                      ],
+                    )),
+              ),
+              body: SingleChildScrollView(
                 physics: BouncingScrollPhysics(),
                 child: Column(
                   children: [
@@ -1497,7 +1750,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                     Container(
                       // height: Get.height,
                       width: Get.width,
-                      color: Color(0xFF2B375E),
+                      color: ColorPicker.kPrimaryLight,
                       child: Stack(
                         children: [
                           Positioned(
@@ -1899,7 +2152,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                       style: TextStyle(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w600,
-                                        color: Color(0xFF7C8990),
+                                        color: ColorPicker.kGreyLight5,
                                       ),
                                     ),
                                     data[index]['text2'].toString().isEmpty
@@ -1957,7 +2210,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                   ],
                 ),
               ),
-      ),
+            ),
     );
   }
 }
