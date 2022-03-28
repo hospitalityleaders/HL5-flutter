@@ -4,18 +4,49 @@ import 'package:flutter/material.dart';
 import '../profile-edit/profile-edit.dart';
 
 class ProfileOverviewSec2 extends StatefulWidget {
+  final sec2IsEditable;
+  final profileOverviewSec2WorkExpKey;
+  final profileOverviewSec2WorkExp_H;
+  final profileOverviewSec2WorkExp_W;
+  final profileOverviewSec2EducationKey;
+  final profileOverviewSec2Education_H;
+  final profileOverviewSec2Education_W;
+  final profileOverviewSec2AchievementKey;
+  final profileOverviewSec2Achievement_H;
+  final profileOverviewSec2Achievement_W;
+  final profileOverviewSec2LanguagesKey;
+  final profileOverviewSec2Languages_H;
+  final profileOverviewSec2Languages_W;
 
 
-  const ProfileOverviewSec2({Key? key,}) : super(key: key);
+  const ProfileOverviewSec2({
+    Key? key,
+    required this.sec2IsEditable,
+    this.profileOverviewSec2WorkExpKey,
+    this.profileOverviewSec2WorkExp_H,
+    this.profileOverviewSec2WorkExp_W,
+    this.profileOverviewSec2EducationKey,
+    this.profileOverviewSec2Education_H,
+    this.profileOverviewSec2Education_W,
+    this.profileOverviewSec2AchievementKey,
+    this.profileOverviewSec2Achievement_H,
+    this.profileOverviewSec2Achievement_W,
+    this.profileOverviewSec2LanguagesKey,
+    this.profileOverviewSec2Languages_H,
+    this.profileOverviewSec2Languages_W,
+
+  }) : super(key: key);
 
   @override
   State<ProfileOverviewSec2> createState() => _ProfileOverviewSec2State();
 }
 
 class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
-
-
   Widget buildProfileCards(
+
+      sec2Key,
+      sec2_H,
+      sec2_W,
       _width,
       _height,
       String cardName,
@@ -30,6 +61,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
+            key: sec2Key,
             color: Colors.white,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -142,49 +174,59 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
             ),
           ),
         ),
-        ProfileEdit.isEditable? ProfileEdit.buildProfileEdit(width:_width, height:_height*.28,popUp:() {   buildProfileCard();}) : Container()
+        widget.sec2IsEditable
+            ? ProfileEdit.buildProfileEdit(
+                width: sec2_W,
+                height: sec2_H,
+                popUp: () {
+                  buildProfileCard();
+                })
+            : Container()
       ],
     );
   }
 
-  Future<String?> buildProfileCard(){
-    return  showDialog<String>(
+  Future<String?> buildProfileCard() {
+    return showDialog<String>(
       context: context,
       builder: (BuildContext context) => SingleChildScrollView(
           child: Center(
-            child: Container(
-              color: Color(0xffb5bdc2),
-              width: 600,
-              child: Column(
-                children: [
-                  Container(
-                    color: Colors.white,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text("Profile card"),
-                        ),
-                        Material(child: IconButton(icon: Icon(Icons.cancel),onPressed: (){}),)
-                      ],
+        child: Container(
+          color: Color(0xffb5bdc2),
+          width: 600,
+          child: Column(
+            children: [
+              Container(
+                color: Colors.white,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text("Profile card"),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Container(
-                      color: Color(0xffb5bdc2),
-                      child: Column(
-                        children: [
-                          buildProfilePictureCard(),
-                        ],
-                      ),
-                    ),
-                  )
-                ],
+                    Material(
+                      child: IconButton(
+                          icon: Icon(Icons.cancel), onPressed: () {}),
+                    )
+                  ],
+                ),
               ),
-            ),
-          )),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Container(
+                  color: Color(0xffb5bdc2),
+                  child: Column(
+                    children: [
+                      buildProfilePictureCard(),
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      )),
     );
   }
 
@@ -215,7 +257,8 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                   children: const [
                     Text(
                       'Profile picture',
-                      style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
+                      style:
+                          TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
                     ),
                     Text(
                         'Your profile picture will be used on your profile and throughout the site.',
@@ -252,7 +295,9 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                           ),
                         ),
                         TextButton.icon(
-                          onPressed: () {Navigator.of(context).pop();},
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
                           icon: Icon(Icons.delete),
                           label: Text('Delete photo'),
                         )
@@ -267,21 +312,21 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
     );
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     var _height = MediaQuery.of(context).size.height;
     var _width = MediaQuery.of(context).size.width;
+
+
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(
           children: [
-
-
-
             buildProfileCards(
+                widget.profileOverviewSec2WorkExpKey,
+                widget.profileOverviewSec2WorkExp_H,
+                widget.profileOverviewSec2WorkExp_W,
                 _width,
                 _height,
                 'Work experience',
@@ -292,6 +337,9 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                 'Card-Details',
                 Icons.apartment_rounded),
             buildProfileCards(
+                widget.profileOverviewSec2EducationKey,
+                widget.profileOverviewSec2Education_H,
+                widget.profileOverviewSec2Education_W,
                 _width,
                 _height,
                 'Education',
@@ -302,6 +350,9 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                 'Card-Details',
                 Icons.school_outlined),
             buildProfileCards(
+                widget.profileOverviewSec2AchievementKey,
+                widget.profileOverviewSec2Achievement_H,
+                widget.profileOverviewSec2Achievement_W,
                 _width,
                 _height,
                 'Achievement',
@@ -316,6 +367,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
+                    key: widget.profileOverviewSec2LanguagesKey,
                     color: Colors.white,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -396,7 +448,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                             ),
                             Divider(
                               height: 1,
-                              color:ProfileEdit.isEditable
+                              color: ProfileEdit.isEditable
                                   ? const Color.fromRGBO(88, 203, 255, 0.8)
                                   : Colors.grey.shade400,
                             ),
@@ -462,8 +514,13 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                     ),
                   ),
                 ),
-                ProfileEdit.isEditable
-                    ? ProfileEdit.buildProfileEdit(width:_width, height:212,popUp:() {   buildProfileCard();})
+                widget.sec2IsEditable
+                    ? ProfileEdit.buildProfileEdit(
+                        width: widget.profileOverviewSec2Languages_W,
+                        height: widget.profileOverviewSec2Languages_H,
+                        popUp: () {
+                          buildProfileCard();
+                        })
                     : Container(),
               ],
             ),

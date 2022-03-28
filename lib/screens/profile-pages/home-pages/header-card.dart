@@ -6,13 +6,25 @@ import '../profile-edit/profile-edit.dart';
 //Header card
 
 class HeaderCard extends StatefulWidget {
-  const HeaderCard({Key? key}) : super(key: key);
+  final isEditable;
+  final headerCardKey;
+  final headerCard_H;
+  final headerCard_W;
+
+  const HeaderCard({
+    Key? key,
+    required this.isEditable,
+    required this.headerCardKey,
+    this.headerCard_H,
+    this.headerCard_W,
+  }) : super(key: key);
 
   @override
   _HeaderCardState createState() => _HeaderCardState();
 }
 
 class _HeaderCardState extends State<HeaderCard> {
+
   Widget cardDataLoad(String no, String name) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -228,6 +240,7 @@ class _HeaderCardState extends State<HeaderCard> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
+                  key: widget.headerCardKey,
                   width: 550,
                   // height: _height,
                   color: Colors.white,
@@ -454,15 +467,15 @@ class _HeaderCardState extends State<HeaderCard> {
               ),
             ),
           ),
-          ProfileEdit.isEditable
+          widget.isEditable
               ? Padding(
                   padding: EdgeInsets.only(
                     top: _height * .18,
                     bottom: _height * .16,
                   ),
                   child: ProfileEdit.buildProfileEdit(
-                      width: 550,
-                      height: 383,
+                      width: widget.headerCard_W,
+                      height: widget.headerCard_H,
                       popUp: () {
                         buildProfileCard();
                       }),

@@ -4,7 +4,9 @@ import 'package:auto_size_text/auto_size_text.dart';
 
 //header
 class Header extends StatefulWidget {
-  const Header({Key? key}) : super(key: key);
+  const Header({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _HeaderState createState() => _HeaderState();
@@ -56,7 +58,7 @@ class _HeaderState extends State<Header> {
       width: _width,
       color: const Color(0xFF384677),
       child: Padding(
-        padding:  EdgeInsets.symmetric(horizontal: _width*.050),
+        padding: EdgeInsets.symmetric(horizontal: _width * .050),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [

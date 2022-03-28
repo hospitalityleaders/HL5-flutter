@@ -3,7 +3,30 @@ import 'package:flutter/material.dart';
 import '../profile-edit/profile-edit.dart';
 
 class ProfileOverviewSec1 extends StatefulWidget {
-  const ProfileOverviewSec1({Key? key}) : super(key: key);
+  final sec1IsEditable;
+  final profileOverviewSec1ProSummKey;
+  final profileOverviewSec1ProSumm_H;
+  final profileOverviewSec1ProSumm_W;
+  final profileOverviewSec1AreaOfExpKey;
+  final profileOverviewSec1AreaOfExp_H;
+  final profileOverviewSec1AreaOfExp_W;
+  final profileOverviewSec1ReferencesKey;
+  final profileOverviewSec1References_H;
+  final profileOverviewSec1References_W;
+
+  const ProfileOverviewSec1({
+    Key? key,
+    required this.sec1IsEditable,
+    this.profileOverviewSec1ProSummKey,
+    this.profileOverviewSec1ProSumm_H,
+    this.profileOverviewSec1ProSumm_W,
+    this.profileOverviewSec1AreaOfExpKey,
+    this.profileOverviewSec1AreaOfExp_H,
+    this.profileOverviewSec1AreaOfExp_W,
+    this.profileOverviewSec1ReferencesKey,
+    this.profileOverviewSec1References_H,
+    this.profileOverviewSec1References_W,
+  }) : super(key: key);
 
   @override
   State<ProfileOverviewSec1> createState() => _ProfileOverviewSec1State();
@@ -246,11 +269,13 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Profile Summary
+
             Stack(
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
+                    key: widget.profileOverviewSec1ProSummKey,
                     color: Colors.white,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -294,10 +319,10 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                     ),
                   ),
                 ),
-                ProfileEdit.isEditable
+                widget.sec1IsEditable
                     ? ProfileEdit.buildProfileEdit(
-                        width: _width,
-                        height: 551,
+                        width: widget.profileOverviewSec1ProSumm_W,
+                        height: widget.profileOverviewSec1ProSumm_H,
                         popUp: () {
                           buildProfileCard();
                         })
@@ -313,77 +338,80 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        width: _width,
-                        color: Colors.white,
-                        child: const Padding(
-                          padding: EdgeInsets.only(
-                              right: 20, left: 20, bottom: 13, top: 13),
-                          child: AutoSizeText(
-                            'Areas of expertise',
-                            style: TextStyle(
-                                color: Color(0xFF171f39),
-                                fontSize: 20,
-                                fontWeight: FontWeight.w400),
+                  child: Container(
+                    key: widget.profileOverviewSec1AreaOfExpKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: _width,
+                          color: Colors.white,
+                          child: const Padding(
+                            padding: EdgeInsets.only(
+                                right: 20, left: 20, bottom: 13, top: 13),
+                            child: AutoSizeText(
+                              'Areas of expertise',
+                              style: TextStyle(
+                                  color: Color(0xFF171f39),
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w400),
+                            ),
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 3,
-                      ),
-                      Wrap(
-                        spacing: 5,
-                        runSpacing: 3,
-                        children: [
-                          buildAreaOfExpertiseButton('Business management'),
-                          buildAreaOfExpertiseButton('Training'),
-                          buildAreaOfExpertiseButton('Leadership'),
-                          buildAreaOfExpertiseButton('Growth hacking'),
-                          buildAreaOfExpertiseButton('Finance'),
-                          buildAreaOfExpertiseButton('Acquisitions'),
-                          buildAreaOfExpertiseButton('Recruitment'),
-                          buildAreaOfExpertiseButton(' Hotel groups'),
-                          buildAreaOfExpertiseButton('Consulting'),
-                          buildAreaOfExpertiseButton('Public speaking'),
-                          ElevatedButton.icon(
-                            style: ElevatedButton.styleFrom(
-                              primary: const Color(0xFFe5f4fb),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(1),
+                        SizedBox(
+                          height: 3,
+                        ),
+                        Wrap(
+                          spacing: 5,
+                          runSpacing: 3,
+                          children: [
+                            buildAreaOfExpertiseButton('Business management'),
+                            buildAreaOfExpertiseButton('Training'),
+                            buildAreaOfExpertiseButton('Leadership'),
+                            buildAreaOfExpertiseButton('Growth hacking'),
+                            buildAreaOfExpertiseButton('Finance'),
+                            buildAreaOfExpertiseButton('Acquisitions'),
+                            buildAreaOfExpertiseButton('Recruitment'),
+                            buildAreaOfExpertiseButton(' Hotel groups'),
+                            buildAreaOfExpertiseButton('Consulting'),
+                            buildAreaOfExpertiseButton('Public speaking'),
+                            ElevatedButton.icon(
+                              style: ElevatedButton.styleFrom(
+                                primary: const Color(0xFFe5f4fb),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(1),
+                                ),
+                              ),
+                              onPressed: () {},
+                              icon: const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 12.0),
+                                child: Icon(
+                                  Icons.add,
+                                  color: Color(0xFF0D9BDC),
+                                  size: 16,
+                                ),
+                              ),
+                              label: const Padding(
+                                padding: EdgeInsets.all(1.0),
+                                child: Text(
+                                  'Show all',
+                                  style: TextStyle(
+                                      color: Color(0xFF0D9BDC),
+                                      fontWeight: FontWeight.w300,
+                                      fontSize: 14),
+                                ),
                               ),
                             ),
-                            onPressed: () {},
-                            icon: const Padding(
-                              padding: EdgeInsets.symmetric(vertical: 12.0),
-                              child: Icon(
-                                Icons.add,
-                                color: Color(0xFF0D9BDC),
-                                size: 16,
-                              ),
-                            ),
-                            label: const Padding(
-                              padding: EdgeInsets.all(1.0),
-                              child: Text(
-                                'Show all',
-                                style: TextStyle(
-                                    color: Color(0xFF0D9BDC),
-                                    fontWeight: FontWeight.w300,
-                                    fontSize: 14),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-                ProfileEdit.isEditable
+                widget.sec1IsEditable
                     ? ProfileEdit.buildProfileEdit(
-                        width: _width,
-                        height: 260,
+                        width: widget.profileOverviewSec1AreaOfExp_W,
+                        height: widget.profileOverviewSec1AreaOfExp_H,
                         popUp: () {
                           buildProfileCard();
                         })
@@ -399,6 +427,7 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
+                    key: widget.profileOverviewSec1ReferencesKey,
                     color: Colors.white,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -439,14 +468,14 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                     ),
                   ),
                 ),
-                ProfileEdit.isEditable
+                widget.sec1IsEditable
                     ? ProfileEdit.buildProfileEdit(
-                        width: _width,
-                        height: 490,
+                        width: widget.profileOverviewSec1References_W,
+                        height: widget.profileOverviewSec1References_H,
                         popUp: () {
                           buildProfileCard();
                         })
-                    : Container()
+                    : Container(),
               ],
             ),
             const SizedBox(height: 50)
