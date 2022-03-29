@@ -1,6 +1,10 @@
+import 'dart:js';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:holedo/screens/profile-pages/home-pages/home.dart';
+
+import '../../update_news_screen.dart';
 
 //header
 class Header extends StatefulWidget {
@@ -18,9 +22,11 @@ List<DropdownMenuItem<String>> items = <String>['Peoples', 'Jobs', 'News']
 }).toList();
 String dropdownValue = 'Peoples';
 
-Widget buildMenuBtn(String menuBtn) {
+Widget buildMenuBtn(String menuBtn,BuildContext context,route) {
   return TextButton(
-    onPressed: () {},
+    onPressed: () {
+      Navigator.push(context, MaterialPageRoute(builder: (context){return route;}));
+    },
     child: AutoSizeText(
       menuBtn,
       maxLines: 1,
@@ -109,12 +115,12 @@ class _HeaderState extends State<Header> {
                 ),
               ),
             ),
-            buildMenuBtn('Home'),
-            buildMenuBtn('Profile'),
-            buildMenuBtn('News'),
-            buildMenuBtn('Jobs'),
-            buildMenuBtn('Recruitment'),
-            buildMenuBtn('Help'),
+            buildMenuBtn('Home',context,Home()),
+            buildMenuBtn('Profile',context,Home()),
+            buildMenuBtn('News',context,UpdatedNewsScreen()),
+            buildMenuBtn('Jobs',context,Home()),
+            buildMenuBtn('Recruitment',context,Home()),
+            buildMenuBtn('Help',context,Home()),
             PopUpIcon(
               icon: Icons.mail_outline_outlined,
             ),
