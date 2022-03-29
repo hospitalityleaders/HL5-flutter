@@ -12,9 +12,10 @@ class Timeline extends StatefulWidget {
 }
 
 class _TimelineState extends State<Timeline> {
-  bool isEditable = false;
+  bool isVisible = false;
 
-  buildTimelineCard(IconData icon, String title, String subtitle, String date) {
+  buildTimelineCard(IconData icon, String title, String subtitle, String date,
+      String description, var _height, var _width) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -69,9 +70,13 @@ class _TimelineState extends State<Timeline> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   TextButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          isVisible = !isVisible;
+                        });
+                      },
                       icon: Icon(Icons.add),
-                      label: Text('Show more')),
+                      label: isVisible ? Text('Close') : Text('Show more')),
                 ],
               ),
             )
@@ -81,11 +86,11 @@ class _TimelineState extends State<Timeline> {
     );
   }
 
-  buildTimelineWithCard(String year) {
+  buildTimelineWithCard(String year, var _height, var _width) {
     return TimelineTile(
         hasIndicator: true,
         indicatorStyle: IndicatorStyle(
-          // width: 30,
+            // width: 30,
             iconStyle: IconStyle(
                 iconData: Icons.circle_outlined,
                 color: const Color(0xFFBDC4C7))),
@@ -107,36 +112,35 @@ class _TimelineState extends State<Timeline> {
             Icons.apartment,
             'Food and Beverage Manager',
             'Marriott Hotels · Cape Town',
-            'February 2013 – present (1 year 6 months)'));
+            'February 2013 – present (1 year 6 months)',
+            '''Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum''',
+            _height,
+            _width));
   }
 
   @override
   Widget build(BuildContext context) {
-    var _height = MediaQuery
-        .of(context)
-        .size
-        .height;
-    var _width = MediaQuery
-        .of(context)
-        .size
-        .width;
+    var _height = MediaQuery.of(context).size.height;
+    var _width = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.symmetric(
             horizontal: _width * 0.03, vertical: _height * .01),
-        child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(child: Container()),
-            Expanded(flex: 3,
+            Expanded(
+              flex: 3,
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Column(children: [
-                  buildTimelineWithCard('2013'),
-                  buildTimelineWithCard('2012'),
-                  buildTimelineWithCard('2012'),
-                  buildTimelineWithCard('2010'),
-                  buildTimelineWithCard('2010'),
+                  buildTimelineWithCard('2013', _height, _width),
+                  buildTimelineWithCard('2012', _height, _width),
+                  buildTimelineWithCard('2012', _height, _width),
+                  buildTimelineWithCard('2010', _height, _width),
+                  buildTimelineWithCard('2010', _height, _width),
                 ]),
               ),
             ),
