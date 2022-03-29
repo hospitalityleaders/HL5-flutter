@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:holedo/screens/profile-pages/profile-overview/profile-overview-sec3.dart';
 
-import '../profile-edit/profile-edit.dart';
+
 
 class ReferencesCard {
   Widget buildReferencesCard(
@@ -348,9 +348,13 @@ class _ReferencesState extends State<References> {
                   ),
                 ),
               ),
-              Expanded(flex:1,child: ProfileOverviewSec3()),
+              // Expanded(flex:1,child: ProfileOverviewSec3()),
+              Expanded(child:  ProfileOverviewSec3())
+
             ],
           ),
         ));
   }
 }
+
+

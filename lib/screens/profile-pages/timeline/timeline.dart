@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:holedo/screens/profile-pages/profile-overview/profile-overview-sec3.dart';
+
 import 'package:timeline_tile/timeline_tile.dart';
+
+import '../profile-overview/profile-overview-sec3.dart';
 
 class Timeline extends StatefulWidget {
   const Timeline({Key? key}) : super(key: key);
@@ -83,9 +85,10 @@ class _TimelineState extends State<Timeline> {
     return TimelineTile(
         hasIndicator: true,
         indicatorStyle: IndicatorStyle(
-            // width: 30,
+          // width: 30,
             iconStyle: IconStyle(
-                iconData: Icons.circle_outlined, color: const Color(0xFFBDC4C7))),
+                iconData: Icons.circle_outlined,
+                color: const Color(0xFFBDC4C7))),
         beforeLineStyle: const LineStyle(color: Color(0xFFBDC4C7)),
         afterLineStyle: const LineStyle(color: Color(0xFFBDC4C7)),
         alignment: TimelineAlign.manual,
@@ -109,11 +112,18 @@ class _TimelineState extends State<Timeline> {
 
   @override
   Widget build(BuildContext context) {
-    var _height = MediaQuery.of(context).size.height;
-    var _width = MediaQuery.of(context).size.width;
+    var _height = MediaQuery
+        .of(context)
+        .size
+        .height;
+    var _width = MediaQuery
+        .of(context)
+        .size
+        .width;
     return SingleChildScrollView(
       child: Padding(
-        padding:  EdgeInsets.symmetric(horizontal: _width*0.03, vertical: _height*.01),
+        padding: EdgeInsets.symmetric(
+            horizontal: _width * 0.03, vertical: _height * .01),
         child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -130,7 +140,7 @@ class _TimelineState extends State<Timeline> {
                 ]),
               ),
             ),
-            Expanded  (flex: 2,child: ProfileOverviewSec3())
+            Expanded(flex: 2, child: ProfileOverviewSec3())
           ],
         ),
       ),
