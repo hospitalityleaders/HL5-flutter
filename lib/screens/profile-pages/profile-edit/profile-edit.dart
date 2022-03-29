@@ -69,26 +69,46 @@ class EditButton extends StatefulWidget {
 class _EditButtonState extends State<EditButton> {
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-        onPressed: () {
-          widget.onChanged(widget.isEditable);
+    return ElevatedButton.icon(
+      onPressed: () {
+        widget.onChanged(widget.isEditable);
 
-          widget.callBackHeader(
-            widget.headerCardKey.currentContext.size,
-          );
+        widget.callBackHeader(
+          widget.headerCardKey.currentContext.size,
+        );
 
-          widget.callBackButtonSec1(
-            widget.profileOverviewSec1ProSummKey.currentContext.size,
-            widget.profileOverviewSec1AreaOfExpKey.currentContext.size,
-            widget.profileOverviewSec1ReferencesKey.currentContext.size,
-          );
-          widget.callBackButtonSec2(
-            widget.profileOverviewSec2WorkExpKey.currentContext.size,
-            widget.profileOverviewSec2EducationKey.currentContext.size,
-            widget.profileOverviewSec2AchievementKey.currentContext.size,
-            widget.profileOverviewSec2LanguagesKey.currentContext.size,
-          );
-        },
-        child: Text('Edit Profile'));
+        widget.callBackButtonSec1(
+          widget.profileOverviewSec1ProSummKey.currentContext.size,
+          widget.profileOverviewSec1AreaOfExpKey.currentContext.size,
+          widget.profileOverviewSec1ReferencesKey.currentContext.size,
+        );
+        widget.callBackButtonSec2(
+          widget.profileOverviewSec2WorkExpKey.currentContext.size,
+          widget.profileOverviewSec2EducationKey.currentContext.size,
+          widget.profileOverviewSec2AchievementKey.currentContext.size,
+          widget.profileOverviewSec2LanguagesKey.currentContext.size,
+        );
+      },
+      label: widget.isEditable
+          ? Text(
+              'Done editing',
+              style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
+            )
+          : Text(
+              'Edit Profile',
+              style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
+            ),
+      icon: widget.isEditable
+          ? Icon(
+              Icons.done,
+              size: 9,
+            )
+          : Icon(
+              Icons.edit,
+              size: 9,
+            ),
+      style: ElevatedButton.styleFrom(
+          primary: widget.isEditable ? Color(0xFF7DC81B) : Color(0xFF32A3FD)),
+    );
   }
 }

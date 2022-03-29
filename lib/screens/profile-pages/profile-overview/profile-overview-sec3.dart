@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import '../profile-edit/profile-edit.dart';
 
 class ProfileOverviewSec3 extends StatefulWidget {
-  const ProfileOverviewSec3({Key? key}) : super(key: key);
+
+
+  ProfileOverviewSec3({Key? key, }) : super(key: key);
 
   @override
   State<ProfileOverviewSec3> createState() => _ProfileOverviewSec3State();
@@ -173,15 +175,12 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                       Icons.add_box_outlined, 'Add your specialities'),
                   profileListTile(Icons.add_box_outlined, 'Add your languages'),
                   const SizedBox(height: 10),
+
+
+
                   ElevatedButton(
                     onPressed: () {
-                      ProfileEdit.isEditable
-                          ? setState(() {
-                              ProfileEdit.isEditable = false;
-                            })
-                          : setState(() {
-                              ProfileEdit.isEditable = true;
-                            });
+                      setState(() {});
                     },
                     child: Padding(
                       padding: EdgeInsets.symmetric(
