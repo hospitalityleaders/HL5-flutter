@@ -4,6 +4,7 @@ import 'package:holedo/screens/profile-pages/profile-overview/profile-overview.d
 import 'package:holedo/screens/profile-pages/references/references.dart';
 import 'package:holedo/screens/profile-pages/timeline/timeline.dart';
 import 'header-card.dart';
+import 'package:get/get.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -12,8 +13,17 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
+  TabController? _tabController;
+  int _current = 0;
+  int tabBar = 0;
+  int indexCircle = 0;
   bool isEditable = false;
+
+  void initState() {
+    _tabController = TabController(length: 5, vsync: this);
+    super.initState();
+  }
 
   //header card edit functionality
   final headerCardKey = GlobalKey();
@@ -100,150 +110,152 @@ class _HomeState extends State<Home> {
       body: Container(
         color: const Color(0xFFdddfe3),
         child: DefaultTabController(
-          animationDuration: const Duration(milliseconds: 2),
+          animationDuration: const Duration(milliseconds: 1),
+          initialIndex: 0,
           length: 5,
           child: NestedScrollView(
             scrollDirection: Axis.vertical,
             headerSliverBuilder: (context, innerBoxIsScrolled) {
               return [
                 SliverToBoxAdapter(
-                  child: Column(
-                    children: [
-                      HeaderCard(
-                        isEditable: isEditable,
-                        headerCardKey: headerCardKey,
-                        headerCard_H: headerCard_H,
-                        headerCard_W: headerCard_W,
-                      ),
-                      Container(
-                        height: 46,
+                  child: HeaderCard(
+                    isEditable: isEditable,
+                    headerCardKey: headerCardKey,
+                    headerCard_H: headerCard_H,
+                    headerCard_W: headerCard_W,
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: Container(
+                    height: Get.height * 0.06,
+                    width: Get.width,
+                    decoration: const BoxDecoration(
                         color: Colors.white,
-                        child: Padding(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: _width * .050),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        border: Border(
+                            bottom: BorderSide(
+                                color: Color(0xFFBDC4C7), width: 2))),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: _width * .050),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
                             children: [
-                              Row(
-                                children: [
-                                  Container(
-                                    height: 26,
-                                    width: 26,
-                                    decoration: const BoxDecoration(
-                                        image: DecorationImage(
-                                            image: NetworkImage(
-                                                'https://images.pexels.com/photos/937481/pexels-photo-937481.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'))),
-                                  ),
-                                  const Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 8.0),
-                                    child: Text(
-                                      'Noberto Holden',
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w700,
-                                          color: Color(0xFF272E41)),
-                                    ),
-                                  ),
-                                  const Text(
-                                    'MHL',
-                                    style: TextStyle(
-                                      fontSize: 12,
+                              Container(
+                                height: 26,
+                                width: 26,
+                                decoration: const BoxDecoration(
+                                    image: DecorationImage(
+                                        image: NetworkImage(
+                                            'https://images.pexels.com/photos/937481/pexels-photo-937481.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'))),
+                              ),
+                              const Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                                child: Text(
+                                  'Noberto Holden',
+                                  style: TextStyle(
+                                      fontSize: 16,
                                       fontWeight: FontWeight.w700,
-                                      color: Color(0xFF272E41),
-                                    ),
-                                  ),
-                                ],
+                                      color: Color(0xFF272E41)),
+                                ),
                               ),
-                              Row(
-                                children: const [
-                                  TabBar(
-                                    isScrollable: true,
-                                    automaticIndicatorColorAdjustment: true,
-                                    tabs: [
-                                      Text(
-                                        'Profile overview',
-                                        style: TextStyle(
-                                            color: Color(0xFF879399),
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 14),
-                                      ),
-                                      Text(
-                                        'Timeline',
-                                        style: TextStyle(
-                                            color: Color(0xFF879399),
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 14),
-                                      ),
-                                      Text(
-                                        'Articles',
-                                        style: TextStyle(
-                                            color: Color(0xFF879399),
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 14),
-                                      ),
-                                      Text(
-                                        'Activity',
-                                        style: TextStyle(
-                                            color: Color(0xFF879399),
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 14),
-                                      ),
-                                      Text(
-                                        'References',
-                                        style: TextStyle(
-                                            color: Color(0xFF879399),
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 14),
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                              const Text(
+                                'MHL',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color(0xFF272E41),
+                                ),
                               ),
-
-                              EditButton(
-                                onChanged: (value) {
-                                  setState(() {
-                                    isEditable = !value;
-                                  });
-                                },
-                                isEditable: isEditable,
-                                //header card edit functionality
-
-                                callBackHeader: callBackHeader,
-                                headerCardKey: headerCardKey,
-
-                                //section1 edit functionality
-                                callBackButtonSec1: callBackButtonSec1,
-                                profileOverviewSec1ProSummKey:
-                                    profileOverviewSec1ProSummKey,
-                                profileOverviewSec1AreaOfExpKey:
-                                    profileOverviewSec1AreaOfExpKey,
-                                profileOverviewSec1ReferencesKey:
-                                    profileOverviewSec1ReferencesKey,
-                                //section2 edit functionality
-                                callBackButtonSec2: callBackButtonSec2,
-                                profileOverviewSec2WorkExpKey:
-                                    profileOverviewSec2WorkExpKey,
-                                profileOverviewSec2EducationKey:
-                                    profileOverviewSec2EducationKey,
-                                profileOverviewSec2AchievementKey:
-                                    profileOverviewSec2AchievementKey,
-                                profileOverviewSec2LanguagesKey:
-                                    profileOverviewSec2LanguagesKey,
-                              ),
-
-
                             ],
                           ),
-                        ),
-                      )
-                    ],
+                          Row(
+                            children: [
+                              TabBar(
+                                controller: _tabController,
+                                physics: NeverScrollableScrollPhysics(),
+                                isScrollable: true,
+                                automaticIndicatorColorAdjustment: true,
+                                tabs: const [
+                                  Text(
+                                    'Profile overview',
+                                    style: TextStyle(
+                                        color: Color(0xFF879399),
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 14),
+                                  ),
+                                  Text(
+                                    'Timeline',
+                                    style: TextStyle(
+                                        color: Color(0xFF879399),
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 14),
+                                  ),
+                                  Text(
+                                    'Articles',
+                                    style: TextStyle(
+                                        color: Color(0xFF879399),
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 14),
+                                  ),
+                                  Text(
+                                    'Activity',
+                                    style: TextStyle(
+                                        color: Color(0xFF879399),
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 14),
+                                  ),
+                                  Text(
+                                    'References',
+                                    style: TextStyle(
+                                        color: Color(0xFF879399),
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 14),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          EditButton(
+                            onChanged: (value) {
+                              setState(() {
+                                isEditable = !value;
+                              });
+                            },
+                            isEditable: isEditable,
+                            //header card edit functionality
+
+                            callBackHeader: callBackHeader,
+                            headerCardKey: headerCardKey,
+
+                            //section1 edit functionality
+                            callBackButtonSec1: callBackButtonSec1,
+                            profileOverviewSec1ProSummKey:
+                                profileOverviewSec1ProSummKey,
+                            profileOverviewSec1AreaOfExpKey:
+                                profileOverviewSec1AreaOfExpKey,
+                            profileOverviewSec1ReferencesKey:
+                                profileOverviewSec1ReferencesKey,
+                            //section2 edit functionality
+                            callBackButtonSec2: callBackButtonSec2,
+                            profileOverviewSec2WorkExpKey:
+                                profileOverviewSec2WorkExpKey,
+                            profileOverviewSec2EducationKey:
+                                profileOverviewSec2EducationKey,
+                            profileOverviewSec2AchievementKey:
+                                profileOverviewSec2AchievementKey,
+                            profileOverviewSec2LanguagesKey:
+                                profileOverviewSec2LanguagesKey,
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               ];
             },
             body: TabBarView(
+              controller: _tabController,
               children: [
                 ProfileOverview(
                   isEditable: isEditable,

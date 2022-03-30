@@ -4,7 +4,7 @@ class ProfileEdit {
   static bool isEditable = false;
 
   static Padding buildProfileEdit(
-      {required double width, required double height, required popUp}) {
+      {required double width, required double height, required popUp,}) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
