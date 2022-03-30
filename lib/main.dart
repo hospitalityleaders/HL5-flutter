@@ -7,7 +7,6 @@ void main() {
     MaterialApp(debugShowCheckedModeBanner: false,
       builder: (context, widget) => ResponsiveWrapper.builder(
         BouncingScrollWrapper.builder(context, widget!),
-
         maxWidth: double.infinity,
         minWidth: 450,
         defaultScale: true,
