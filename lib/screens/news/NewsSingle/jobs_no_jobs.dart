@@ -4,8 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 
-import '../../constant/fontStyle/font_style.dart';
-import '../../responsive/responsive.dart';
+import '../../../constant/fontStyle/font_style.dart';
+import '../../../responsive/responsive.dart';
 
 class NewsSingleJobs extends StatefulWidget {
   @override
@@ -41,23 +41,19 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
   ];
   List data1 = [
     {
-      'txt':
-          "The Internet of Things: The Impact on the Travel and Hotel Industry",
+      'txt': "The Internet of Things: The Impact on the Travel and Hotel Industry",
       'img': "assets/images/p1.png",
     },
     {
-      'txt':
-          "On Social Media? Maestro PMS Gives Operators, Guests Direct Social Media Booking",
+      'txt': "On Social Media? Maestro PMS Gives Operators, Guests Direct Social Media Booking",
       'img': "assets/images/p2.png",
     },
     {
-      'txt':
-          "Hotel Equities to Operate Two Premium-branded Hotels in Northeast",
+      'txt': "Hotel Equities to Operate Two Premium-branded Hotels in Northeast",
       'img': "assets/images/p3.png",
     },
     {
-      'txt':
-          "The Internet of Things: The Impact on the Travel and Hotel Industry",
+      'txt': "The Internet of Things: The Impact on the Travel and Hotel Industry",
       'img': "assets/images/p4.png",
     },
     {
@@ -101,15 +97,13 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
     },
     {
       'img': 'assets/images/t2.png',
-      'text1':
-          'Mantra Group Reports Total Revenue Increase of 9.7% for Year Ending June 2015',
+      'text1': 'Mantra Group Reports Total Revenue Increase of 9.7% for Year Ending June 2015',
       'text2': '',
       'text3': 'By: Pam Carrol • 26 August 2015 • 10:40',
     },
     {
       'img': 'assets/images/t3.png',
-      'text1':
-          'How Technology Can Deliver a Seamless Travel Experience - Information Age',
+      'text1': 'How Technology Can Deliver a Seamless Travel Experience - Information Age',
       'text2': 'MEMBERS ONLY',
       'text3': 'By: Pam Carrol • 26 August 2015 • 10:40',
     },
@@ -127,22 +121,19 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
     },
     {
       'img': 'assets/images/t6.png',
-      'text1':
-          'Welk Resorts Reports Increased Revenue and Plans for Two New Properties',
+      'text1': 'Welk Resorts Reports Increased Revenue and Plans for Two New Properties',
       'text2': '',
       'text3': 'By: Pam Carrol • 26 August 2015 • 10:40',
     },
     {
       'img': 'assets/images/t7.png',
-      'text1':
-          'Welk Resorts Reports Increased Revenue and Plans for Two New Properties',
+      'text1': 'Welk Resorts Reports Increased Revenue and Plans for Two New Properties',
       'text2': '',
       'text3': 'By: Pam Carrol • 26 August 2015 • 10:40',
     },
     {
       'img': 'assets/images/t8.png',
-      'text1':
-          'Hotel Price Index Reveals Midwest, Southwest and Western Cities Are Surging Domestically',
+      'text1': 'Hotel Price Index Reveals Midwest, Southwest and Western Cities Are Surging Domestically',
       'text2': '',
       'text3': 'By: Pam Carrol • 26 August 2015 • 10:40',
     },
@@ -219,7 +210,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                         color: Colors.white,
                         child: TextFormField(
                           cursorColor: Colors.white,
-                          style: FontTextStyle.kWhitePurePR,
+                          style: FontTextStyle.kWhitePR,
                           decoration: InputDecoration(
                             hintStyle: TextStyle(
                               color: ColorPicker.kPrimaryLightBlue,
@@ -259,18 +250,12 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('Home',
-                                style: FontTextStyle.kWhitePure16W400PR),
-                            Text('Profile',
-                                style: FontTextStyle.kPrimaryLightBlue16W400PR),
-                            Text('News',
-                                style: FontTextStyle.kPrimaryLightBlue16W400PR),
-                            Text('Jobs',
-                                style: FontTextStyle.kPrimaryLightBlue16W400PR),
-                            Text('Recruitment',
-                                style: FontTextStyle.kPrimaryLightBlue16W400PR),
-                            Text('Help',
-                                style: FontTextStyle.kPrimaryLightBlue16W400PR),
+                            Text('Home', style: FontTextStyle.kWhite16W400PR),
+                            Text('Profile', style: FontTextStyle.kPrimaryLightBlue16W400PR),
+                            Text('News', style: FontTextStyle.kPrimaryLightBlue16W400PR),
+                            Text('Jobs', style: FontTextStyle.kPrimaryLightBlue16W400PR),
+                            Text('Recruitment', style: FontTextStyle.kPrimaryLightBlue16W400PR),
+                            Text('Help', style: FontTextStyle.kPrimaryLightBlue16W400PR),
                           ],
                         ),
                       ),
@@ -281,8 +266,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                         width: Get.width * 0.05,
                         decoration: BoxDecoration(
                             border: Border.symmetric(
-                          vertical: BorderSide(
-                              color: ColorPicker.kPrimaryLight, width: 3),
+                          vertical: BorderSide(color: ColorPicker.kPrimaryLight, width: 3),
                         )),
                         child: Center(
                             child: Stack(
@@ -299,13 +283,13 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                 height: 16,
                                 width: 16,
                                 decoration: BoxDecoration(
-                                  color: ColorPicker.kRed1,
+                                  color: ColorPicker.kRed,
                                   borderRadius: BorderRadius.circular(3),
                                 ),
                                 child: Center(
                                   child: Text(
                                     '2',
-                                    style: FontTextStyle.kWhitePure12W700PR,
+                                    style: FontTextStyle.kWhite12W700SSP,
                                   ),
                                 ),
                               ),
@@ -317,8 +301,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                         width: Get.width * 0.05,
                         decoration: BoxDecoration(
                             border: Border.symmetric(
-                          vertical: BorderSide(
-                              color: ColorPicker.kPrimaryLight, width: 3),
+                          vertical: BorderSide(color: ColorPicker.kPrimaryLight, width: 3),
                         )),
                         child: Center(
                             child: Stack(
@@ -335,13 +318,13 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                 height: 16,
                                 width: 16,
                                 decoration: BoxDecoration(
-                                  color: ColorPicker.kRed1,
+                                  color: ColorPicker.kRed,
                                   borderRadius: BorderRadius.circular(3),
                                 ),
                                 child: Center(
                                   child: Text(
                                     '2',
-                                    style: FontTextStyle.kWhitePure12W700PR,
+                                    style: FontTextStyle.kWhite12W700SSP,
                                   ),
                                 ),
                               ),
@@ -353,8 +336,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                         width: 90,
                         decoration: BoxDecoration(
                             border: Border.symmetric(
-                          vertical: BorderSide(
-                              color: ColorPicker.kPrimaryLight, width: 3),
+                          vertical: BorderSide(color: ColorPicker.kPrimaryLight, width: 3),
                         )),
                         child: Center(
                             child: Row(
@@ -375,9 +357,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                 borderRadius: BorderRadius.circular(3),
                               ),
                               child: Center(
-                                child: Text('352',
-                                    style:
-                                        FontTextStyle.kPrimaryLight10W700SSP),
+                                child: Text('352', style: FontTextStyle.kPrimaryLight10W700SSP),
                               ),
                             ),
                           ],
@@ -387,8 +367,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                         width: Get.width * 0.05,
                         decoration: BoxDecoration(
                             border: Border.symmetric(
-                          vertical: BorderSide(
-                              color: ColorPicker.kPrimaryLight, width: 3),
+                          vertical: BorderSide(color: ColorPicker.kPrimaryLight, width: 3),
                         )),
                         child: Center(
                           child: Container(
@@ -421,11 +400,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                             children: [
                               Container(
                                 height: 350,
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image: AssetImage(
-                                            'assets/images/slider1.png'))),
+                                decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/images/slider1.png'))),
                               ),
                               Container(
                                 height: Get.width < 1480 ? 250 : 201,
@@ -438,8 +413,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                       children: [
                                         Text(
                                           "RESOURCES",
-                                          style:
-                                              FontTextStyle.kGreyLight516W700PR,
+                                          style: FontTextStyle.kGreyLight516W700PR,
                                         ),
                                         SizedBox(
                                           width: 10,
@@ -471,33 +445,25 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                         Container(
                                           height: 50,
                                           width: 50,
-                                          decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                                  image: AssetImage(
-                                                      "assets/images/avatar.png"),
-                                                  fit: BoxFit.cover)),
+                                          decoration: BoxDecoration(image: DecorationImage(image: AssetImage("assets/images/avatar.png"), fit: BoxFit.cover)),
                                         ),
                                         SizedBox(
                                           width: Get.width * 0.009,
                                         ),
                                         Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Text(
                                               "By: Pam Carrol",
-                                              style: FontTextStyle
-                                                  .kGreyLight515W600PR,
+                                              style: FontTextStyle.kGreyLight515W600PR,
                                             ),
                                             SizedBox(
                                               height: Get.height * 0.005,
                                             ),
                                             Text(
                                               "26 August 2015   •   10:40",
-                                              style: FontTextStyle
-                                                  .kGreyLight515W600PR,
+                                              style: FontTextStyle.kGreyLight515W600PR,
                                             )
                                           ],
                                         ),
@@ -528,8 +494,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                                 '112',
                                                 style: TextStyle(
                                                   fontSize: 14,
-                                                  color: ColorPicker.kGreyLight5
-                                                      .withOpacity(0.6),
+                                                  color: ColorPicker.kGreyLight5.withOpacity(0.6),
                                                 ),
                                               ),
                                               SizedBox(width: Get.width * 0.01),
@@ -538,8 +503,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                                 width: Get.width * 0.016,
                                                 color: ColorPicker.kBg3,
                                                 child: Center(
-                                                  child: SvgPicture.asset(
-                                                      'assets/icons/svg/twitter.svg'),
+                                                  child: SvgPicture.asset('assets/icons/svg/twitter.svg'),
                                                 ),
                                               ),
                                               SizedBox(width: Get.width * 0.01),
@@ -547,8 +511,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                                 '56',
                                                 style: TextStyle(
                                                   fontSize: 14,
-                                                  color: ColorPicker.kGreyLight5
-                                                      .withOpacity(0.6),
+                                                  color: ColorPicker.kGreyLight5.withOpacity(0.6),
                                                 ),
                                               ),
                                               SizedBox(
@@ -559,8 +522,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                                 width: Get.width * 0.016,
                                                 color: ColorPicker.kBg3,
                                                 child: Center(
-                                                  child: SvgPicture.asset(
-                                                      'assets/icons/svg/googleplus.svg'),
+                                                  child: SvgPicture.asset('assets/icons/svg/googleplus.svg'),
                                                 ),
                                               ),
                                               SizedBox(width: Get.width * 0.01),
@@ -568,8 +530,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                                 '321',
                                                 style: TextStyle(
                                                   fontSize: 14,
-                                                  color: ColorPicker.kGreyLight5
-                                                      .withOpacity(0.6),
+                                                  color: ColorPicker.kGreyLight5.withOpacity(0.6),
                                                 ),
                                               ),
                                               SizedBox(
@@ -580,9 +541,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                                 width: Get.width * 0.016,
                                                 color: ColorPicker.kBg3,
                                                 child: Center(
-                                                  child: Image.asset(
-                                                      'assets/icons/svg/linkdin.png',
-                                                      height: 20),
+                                                  child: Image.asset('assets/icons/svg/linkdin.png', height: 20),
                                                 ),
                                               ),
                                               SizedBox(width: Get.width * 0.01),
@@ -590,8 +549,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                                 '22',
                                                 style: TextStyle(
                                                   fontSize: 14,
-                                                  color: ColorPicker.kGreyLight5
-                                                      .withOpacity(0.6),
+                                                  color: ColorPicker.kGreyLight5.withOpacity(0.6),
                                                 ),
                                               ),
                                               SizedBox(
@@ -619,8 +577,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                                 '13',
                                                 style: TextStyle(
                                                   fontSize: 14,
-                                                  color: ColorPicker.kGreyLight5
-                                                      .withOpacity(0.6),
+                                                  color: ColorPicker.kGreyLight5.withOpacity(0.6),
                                                 ),
                                               ),
                                             ],
@@ -684,21 +641,15 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                       child: Container(
                                         // height: Get.height * 0.3,
                                         width: 100,
-                                        child: Image(
-                                            image: AssetImage(
-                                                'assets/images/round.png'),
-                                            fit: BoxFit.fitWidth),
+                                        child: Image(image: AssetImage('assets/images/round.png'), fit: BoxFit.fitWidth),
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 20,
-                                          vertical: Get.width * 0.025),
+                                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: Get.width * 0.025),
                                       child: Column(
                                         children: [
                                           Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               IntrinsicWidth(
                                                 child: Column(
@@ -719,15 +670,13 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                               ),
                                               SizedBox(width: 20),
                                               Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
                                                   // SizedBox(height: 30),
                                                   Text(
                                                     'THIS ARTICLE IS FOR MEMBERS ONLY. SIGN UP TO JOIN',
                                                     style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w700,
+                                                      fontWeight: FontWeight.w700,
                                                       fontSize: 12,
                                                       color: Colors.white,
                                                     ),
@@ -740,8 +689,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                                     child: Text(
                                                       'You get access to members only exclusive content',
                                                       style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w400,
+                                                        fontWeight: FontWeight.w400,
                                                         fontSize: 40,
                                                         color: Colors.white,
                                                       ),
@@ -752,8 +700,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                             ],
                                           ),
                                           Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Column(
                                                 // mainAxisAlignment:
@@ -772,14 +719,12 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                               ),
                                               SizedBox(width: 20),
                                               Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
                                                     'Latest news',
                                                     style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w700,
+                                                      fontWeight: FontWeight.w700,
                                                       fontSize: 16,
                                                       color: Colors.white,
                                                     ),
@@ -789,8 +734,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                                     child: Text(
                                                       'Members stay current with the leading hospitality industry news site.',
                                                       style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w400,
+                                                        fontWeight: FontWeight.w400,
                                                         fontSize: 16,
                                                         color: Colors.white,
                                                       ),
@@ -802,8 +746,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                           ),
                                           SizedBox(height: 10),
                                           Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Column(
                                                 // mainAxisAlignment:
@@ -822,14 +765,12 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                               ),
                                               SizedBox(width: 20),
                                               Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
                                                     'Exclusive content',
                                                     style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w700,
+                                                      fontWeight: FontWeight.w700,
                                                       fontSize: 16,
                                                       color: Colors.white,
                                                     ),
@@ -839,8 +780,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                                     child: Text(
                                                       'Get exclusive access to breaking, current and accurate industry news from around the world.',
                                                       style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w400,
+                                                        fontWeight: FontWeight.w400,
                                                         fontSize: 16,
                                                         color: Colors.white,
                                                       ),
@@ -852,8 +792,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                           ),
                                           SizedBox(height: 10),
                                           Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Column(
                                                 // mainAxisAlignment:
@@ -872,14 +811,12 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                               ),
                                               SizedBox(width: 20),
                                               Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
                                                     'News that matter',
                                                     style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w700,
+                                                      fontWeight: FontWeight.w700,
                                                       fontSize: 16,
                                                       color: Colors.white,
                                                     ),
@@ -889,8 +826,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                                     child: Text(
                                                       'Our news is selected and edited by professional journalists with decades of experience in reporting the news that matters, keeping you  informed and up-to-date about what is happening in our industry around the world.',
                                                       style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w400,
+                                                        fontWeight: FontWeight.w400,
                                                         fontSize: 16,
                                                         color: Colors.white,
                                                       ),
@@ -901,8 +837,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                             ],
                                           ),
                                           Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Column(
                                                 // mainAxisAlignment:
@@ -922,26 +857,19 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                                   width: 248,
                                                   decoration: BoxDecoration(
                                                     color: Colors.white,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            2),
+                                                    borderRadius: BorderRadius.circular(2),
                                                   ),
                                                   child: Center(
                                                     child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
+                                                      mainAxisAlignment: MainAxisAlignment.center,
                                                       children: [
-                                                        Icon(Icons.person_add,
-                                                            size: 15),
+                                                        Icon(Icons.person_add, size: 15),
                                                         Text(
                                                           'Sign up now. It’s free',
                                                           style: TextStyle(
-                                                            color: Color(
-                                                                0xFF272E41),
+                                                            color: Color(0xFF272E41),
                                                             fontSize: 14,
-                                                            fontWeight:
-                                                                FontWeight.w600,
+                                                            fontWeight: FontWeight.w600,
                                                           ),
                                                         ),
                                                       ],
@@ -951,8 +879,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                           ),
                                           SizedBox(height: 10),
                                           Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Column(
                                                 // mainAxisAlignment:
@@ -966,16 +893,14 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                               ),
                                               SizedBox(width: 20),
                                               Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
                                                   SizedBox(
                                                     width: Get.width * 0.15,
                                                     child: Text(
                                                       'OR IMPORT YOUR DETAILS FROM',
                                                       style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w700,
+                                                        fontWeight: FontWeight.w700,
                                                         fontSize: 16,
                                                         color: Colors.white,
                                                       ),
@@ -987,8 +912,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                           ),
                                           SizedBox(height: 10),
                                           Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Column(
                                                 // mainAxisAlignment:
@@ -1011,18 +935,13 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                                       child: Container(
                                                         height: 36,
                                                         width: 82,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color:
-                                                              Color(0xFF344F8D),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(2),
+                                                        decoration: BoxDecoration(
+                                                          color: Color(0xFF344F8D),
+                                                          borderRadius: BorderRadius.circular(2),
                                                         ),
                                                         child: Center(
                                                           child: Image(
-                                                            image: AssetImage(
-                                                                'assets/icons/fb.png'),
+                                                            image: AssetImage('assets/icons/fb.png'),
                                                           ),
                                                         ),
                                                       ),
@@ -1032,18 +951,13 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                                       child: Container(
                                                         height: 36,
                                                         width: 82,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color:
-                                                              Color(0xFFD63B30),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(2),
+                                                        decoration: BoxDecoration(
+                                                          color: Color(0xFFD63B30),
+                                                          borderRadius: BorderRadius.circular(2),
                                                         ),
                                                         child: Center(
                                                           child: Image(
-                                                            image: AssetImage(
-                                                                'assets/icons/gp.png'),
+                                                            image: AssetImage('assets/icons/gp.png'),
                                                           ),
                                                         ),
                                                       ),
@@ -1053,18 +967,13 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                                       child: Container(
                                                         height: 36,
                                                         width: 82,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color:
-                                                              Color(0xFF04595B),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(2),
+                                                        decoration: BoxDecoration(
+                                                          color: Color(0xFF04595B),
+                                                          borderRadius: BorderRadius.circular(2),
                                                         ),
                                                         child: Center(
                                                           child: Image(
-                                                            image: AssetImage(
-                                                                'assets/icons/x.png'),
+                                                            image: AssetImage('assets/icons/x.png'),
                                                           ),
                                                         ),
                                                       ),
@@ -1099,16 +1008,13 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                       padding: const EdgeInsets.all(8.0),
                                       child: Container(
                                         height: 26,
-                                        decoration: BoxDecoration(
-                                            color: Color(0xffF6F7F8)),
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 12),
+                                        decoration: BoxDecoration(color: Color(0xffF6F7F8)),
+                                        padding: EdgeInsets.symmetric(horizontal: 12),
                                         child: Align(
                                           alignment: Alignment.center,
                                           child: Text(
                                             '#Hospitality',
-                                            style: FontTextStyle
-                                                .kGreyLight614W400PR,
+                                            style: FontTextStyle.kGreyLight614W400PR,
                                           ),
                                         ),
                                       ),
@@ -1121,8 +1027,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                   Flexible(
                                       child: Divider(
                                     endIndent: 10,
-                                    color: ColorPicker.kGreyLight5
-                                        .withOpacity(0.2),
+                                    color: ColorPicker.kGreyLight5.withOpacity(0.2),
                                   )),
                                   Text(
                                     'SUGGESTED NEWS',
@@ -1131,8 +1036,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                   Flexible(
                                       child: Divider(
                                     indent: 10,
-                                    color: ColorPicker.kGreyLight5
-                                        .withOpacity(0.2),
+                                    color: ColorPicker.kGreyLight5.withOpacity(0.2),
                                   )),
                                 ],
                               ),
@@ -1155,12 +1059,10 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                       width: 400,
                                       color: Colors.white,
                                       child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Image(
-                                            image: AssetImage(
-                                                '${suggestNewsData[index]['img']}'),
+                                            image: AssetImage('${suggestNewsData[index]['img']}'),
                                             height: 200,
                                             width: 400,
                                             fit: BoxFit.cover,
@@ -1168,40 +1070,28 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                           Flexible(
                                             child: Container(
                                                 child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                                               children: [
                                                 Text(
                                                   '${suggestNewsData[index]['text1']}',
-                                                  style: FontTextStyle
-                                                      .kBlackPure18W700PR,
+                                                  style: FontTextStyle.kBlackPure18W700PR,
                                                 ),
                                                 Text(
                                                   '${suggestNewsData[index]['text3']}',
-                                                  style: FontTextStyle
-                                                      .kGreyLight514W600PR,
+                                                  style: FontTextStyle.kGreyLight514W600PR,
                                                 ),
-                                                suggestNewsData[index]['text2']
-                                                        .toString()
-                                                        .isEmpty
+                                                suggestNewsData[index]['text2'].toString().isEmpty
                                                     ? SizedBox()
                                                     : Container(
-                                                        padding:
-                                                            EdgeInsets.all(5),
+                                                        padding: EdgeInsets.all(5),
                                                         child: Text(
                                                           'MEMBERS ONLY',
-                                                          style: FontTextStyle
-                                                              .kRed10W400PR,
+                                                          style: FontTextStyle.kRed10W400PR,
                                                         ),
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color:
-                                                              Color(0xFFFECDCC),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(2),
+                                                        decoration: BoxDecoration(
+                                                          color: Color(0xFFFECDCC),
+                                                          borderRadius: BorderRadius.circular(2),
                                                         ),
                                                       ),
                                               ],
@@ -1235,10 +1125,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                       child: Container(
                                         // height: Get.height * 0.3,
                                         width: 100,
-                                        child: Image(
-                                            image: AssetImage(
-                                                'assets/images/round2.png'),
-                                            fit: BoxFit.fitWidth),
+                                        child: Image(image: AssetImage('assets/images/round2.png'), fit: BoxFit.fitWidth),
                                       ),
                                     ),
                                     Padding(
@@ -1249,8 +1136,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                       child: Column(
                                         children: [
                                           Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               IntrinsicWidth(
                                                 child: Column(
@@ -1271,25 +1157,18 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                               ),
                                               SizedBox(width: 20),
                                               Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
                                                     'ALL ACCESS',
-                                                    style: FontTextStyle
-                                                        .kWhitePure12W700PR,
+                                                    style: FontTextStyle.kWhite12W700SSP,
                                                   ),
                                                   SizedBox(height: 20),
                                                   SizedBox(
                                                     width: Get.width * 0.18,
                                                     child: Text(
                                                       'Get full access to the hospitality industry news',
-                                                      style: FontTextStyle
-                                                          .kWhitePure36W400PR
-                                                          .copyWith(
-                                                              fontSize:
-                                                                  Get.width *
-                                                                      0.02),
+                                                      style: FontTextStyle.kWhite36W400PR.copyWith(fontSize: Get.width * 0.02),
                                                     ),
                                                   ),
                                                   SizedBox(height: 20),
@@ -1298,30 +1177,20 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                                       width: Get.width * 0.16,
                                                       decoration: BoxDecoration(
                                                         color: Colors.white,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(2),
+                                                        borderRadius: BorderRadius.circular(2),
                                                       ),
                                                       child: Center(
                                                         child: Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
+                                                          mainAxisAlignment: MainAxisAlignment.center,
                                                           children: [
-                                                            Icon(
-                                                                Icons
-                                                                    .person_add,
-                                                                size: 15),
+                                                            Icon(Icons.person_add, size: 15),
                                                             SizedBox(width: 10),
                                                             Text(
                                                               'Sign up now. It’s free',
                                                               style: TextStyle(
-                                                                color: Color(
-                                                                    0xFF272E41),
+                                                                color: Color(0xFF272E41),
                                                                 fontSize: 14,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
+                                                                fontWeight: FontWeight.w600,
                                                               ),
                                                             ),
                                                           ],
@@ -1332,8 +1201,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                             ],
                                           ),
                                           Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               IntrinsicWidth(
                                                 child: Column(
@@ -1358,14 +1226,12 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                               ),
                                               SizedBox(width: 20),
                                               Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
                                                   SizedBox(height: 15),
                                                   Text(
                                                     'OR IMPORT YOUR\nDETAILS FROM',
-                                                    style: FontTextStyle
-                                                        .kWhitePure12W700PR,
+                                                    style: FontTextStyle.kWhite12W700SSP,
                                                   ),
                                                   SizedBox(height: 30),
                                                   SizedBox(
@@ -1376,19 +1242,13 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                                           child: Container(
                                                             height: 36,
                                                             width: 82,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color: Color(
-                                                                  0xFF344F8D),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          2),
+                                                            decoration: BoxDecoration(
+                                                              color: Color(0xFF344F8D),
+                                                              borderRadius: BorderRadius.circular(2),
                                                             ),
                                                             child: Center(
                                                               child: Image(
-                                                                image: AssetImage(
-                                                                    'assets/icons/fb.png'),
+                                                                image: AssetImage('assets/icons/fb.png'),
                                                               ),
                                                             ),
                                                           ),
@@ -1398,19 +1258,13 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                                           child: Container(
                                                             height: 36,
                                                             width: 82,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color: Color(
-                                                                  0xFFD63B30),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          2),
+                                                            decoration: BoxDecoration(
+                                                              color: Color(0xFFD63B30),
+                                                              borderRadius: BorderRadius.circular(2),
                                                             ),
                                                             child: Center(
                                                               child: Image(
-                                                                image: AssetImage(
-                                                                    'assets/icons/gp.png'),
+                                                                image: AssetImage('assets/icons/gp.png'),
                                                               ),
                                                             ),
                                                           ),
@@ -1420,19 +1274,13 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                                           child: Container(
                                                             height: 36,
                                                             width: 82,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color: Color(
-                                                                  0xFF04595B),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          2),
+                                                            decoration: BoxDecoration(
+                                                              color: Color(0xFF04595B),
+                                                              borderRadius: BorderRadius.circular(2),
                                                             ),
                                                             child: Center(
                                                               child: Image(
-                                                                image: AssetImage(
-                                                                    'assets/icons/x.png'),
+                                                                image: AssetImage('assets/icons/x.png'),
                                                               ),
                                                             ),
                                                           ),
@@ -1459,11 +1307,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                 color: Colors.white,
                                 padding: EdgeInsets.all(15),
                                 child: Container(
-                                  decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image: AssetImage(
-                                              'assets/images/Bannerimage.png'))),
+                                  decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/images/Bannerimage.png'))),
                                 ),
                               ),
                               SizedBox(
@@ -1476,10 +1320,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Container(
-                                      padding: EdgeInsets.only(
-                                          top: Get.width * 0.01,
-                                          right: Get.width * 0.01,
-                                          left: Get.width * 0.01),
+                                      padding: EdgeInsets.only(top: Get.width * 0.01, right: Get.width * 0.01, left: Get.width * 0.01),
                                       child: Text(
                                         'Categories',
                                         style: FontTextStyle.kBlackPure20W400PR,
@@ -1489,20 +1330,14 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                       shrinkWrap: true,
                                       itemCount: 8,
                                       itemBuilder: (context, index) => Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Divider(),
                                           Container(
-                                            padding: EdgeInsets.only(
-                                                top: Get.width * 0.01,
-                                                right: Get.width * 0.01,
-                                                bottom: Get.width * 0.01,
-                                                left: Get.width * 0.01),
+                                            padding: EdgeInsets.only(top: Get.width * 0.01, right: Get.width * 0.01, bottom: Get.width * 0.01, left: Get.width * 0.01),
                                             child: Text(
                                               '${categories[index]['text']}',
-                                              style: FontTextStyle
-                                                  .kBlueLight114W600PR,
+                                              style: FontTextStyle.kBlueLight114W600PR,
                                             ),
                                           )
                                         ],
@@ -1522,8 +1357,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                           ),
                                           Text(
                                             'Show more',
-                                            style: FontTextStyle
-                                                .kBlueLight114W600PR,
+                                            style: FontTextStyle.kBlueLight114W600PR,
                                           ),
                                         ],
                                       ),
@@ -1563,12 +1397,10 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                       Expanded(
                         child: Container(
                           margin: EdgeInsets.all(4),
-                          decoration: BoxDecoration(
-                              color: ColorPicker.kPrimaryLight1,
-                              borderRadius: BorderRadius.circular(8)),
+                          decoration: BoxDecoration(color: ColorPicker.kPrimaryLight1, borderRadius: BorderRadius.circular(8)),
                           child: TextFormField(
                             cursorColor: Colors.white,
-                            style: FontTextStyle.kWhitePurePR,
+                            style: FontTextStyle.kWhitePR,
                             decoration: InputDecoration(
                               hintStyle: TextStyle(
                                 color: ColorPicker.kPrimaryLightBlue,
@@ -1578,18 +1410,15 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                               hintText: "Search",
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
-                                borderSide:
-                                    BorderSide(color: Colors.transparent),
+                                borderSide: BorderSide(color: Colors.transparent),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
-                                borderSide:
-                                    BorderSide(color: Colors.transparent),
+                                borderSide: BorderSide(color: Colors.transparent),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
-                                borderSide:
-                                    BorderSide(color: Colors.transparent),
+                                borderSide: BorderSide(color: Colors.transparent),
                               ),
                               prefixIcon: Icon(
                                 Icons.search,
@@ -1613,10 +1442,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                             color: ColorPicker.kPrimaryLightBlue,
                           ),
                           SizedBox(height: 5),
-                          Text('MENU',
-                              style: TextStyle(
-                                  fontSize: 9,
-                                  color: ColorPicker.kPrimaryLightBlue)),
+                          Text('MENU', style: TextStyle(fontSize: 9, color: ColorPicker.kPrimaryLightBlue)),
                         ],
                       ),
                       SizedBox(
@@ -1729,9 +1555,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                         itemBuilder: (context, index) {
                           return CircleAvatar(
                             // foregroundColor: Colors.red,
-                            backgroundColor: index == 0
-                                ? Color(0xFF33A3FE)
-                                : Color(0xFFB5BDC2),
+                            backgroundColor: index == 0 ? Color(0xFF33A3FE) : Color(0xFFB5BDC2),
                           );
                         },
                       )),
@@ -1749,8 +1573,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                     children: [
                       Container(
                         alignment: Alignment.centerLeft,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 15),
                         width: 200,
                         child: Text(
                           'Hotels and resorts',
@@ -1763,8 +1586,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                       ),
                       Container(
                         alignment: Alignment.centerLeft,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 15),
                         width: 200,
                         child: Text(
                           'Food and beverage',
@@ -1777,8 +1599,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                       ),
                       Container(
                         alignment: Alignment.centerLeft,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 15),
                         width: 200,
                         child: Text(
                           'Spa',
@@ -1791,8 +1612,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                       ),
                       Container(
                         alignment: Alignment.centerLeft,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 15),
                         width: 200,
                         child: Text(
                           'Tourism',
@@ -1805,8 +1625,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                       ),
                       Container(
                         alignment: Alignment.centerLeft,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 15),
                         width: 200,
                         child: Text(
                           'Apartments',
@@ -1819,8 +1638,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                       ),
                       Container(
                         alignment: Alignment.centerLeft,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 15),
                         width: 200,
                         child: Text(
                           'Tours',
@@ -1833,8 +1651,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                       ),
                       Container(
                         alignment: Alignment.centerLeft,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 15),
                         width: 200,
                         child: Text(
                           'Leisure',
@@ -1847,8 +1664,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                       ),
                       Container(
                         alignment: Alignment.centerLeft,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 15),
                         width: 200,
                         child: Text(
                           'Boutique Hotels',
@@ -1861,8 +1677,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                       ),
                       Container(
                         alignment: Alignment.centerLeft,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 15),
                         width: 200,
                         child: Text(
                           '+ Show more',
@@ -1888,15 +1703,11 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                           child: Container(
                             // height: Get.height * 0.3,
                             width: Get.width * 0.3,
-                            child: Image(
-                                image: AssetImage('assets/images/round.png'),
-                                fit: BoxFit.fitWidth),
+                            child: Image(image: AssetImage('assets/images/round.png'), fit: BoxFit.fitWidth),
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: Get.width * 0.08,
-                              vertical: Get.width * 0.15),
+                          padding: EdgeInsets.symmetric(horizontal: Get.width * 0.08, vertical: Get.width * 0.15),
                           child: Column(
                             children: [
                               Row(
@@ -1921,8 +1732,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                   ),
                                   SizedBox(width: Get.width * 0.03),
                                   Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'SIGN UP TO JOIN',
@@ -1968,8 +1778,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                   ),
                                   SizedBox(width: Get.width * 0.03),
                                   Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'All the latest news',
@@ -2015,8 +1824,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                   ),
                                   SizedBox(width: Get.width * 0.03),
                                   Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'Credible sources',
@@ -2062,8 +1870,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                   ),
                                   SizedBox(width: Get.width * 0.03),
                                   Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'Wide scope of research',
@@ -2113,14 +1920,13 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                       ),
                                       child: Center(
                                         child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
                                             Icon(Icons.person_add, size: 15),
                                             Text(
                                               'Sign up now. It’s free',
                                               style: TextStyle(
-                                                color: Color(0xFF272E41),
+                                                color: ColorPicker.kGreyLight5,
                                                 fontSize: 14,
                                                 fontWeight: FontWeight.w600,
                                               ),
@@ -2146,8 +1952,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                   ),
                                   SizedBox(width: Get.width * 0.03),
                                   Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       SizedBox(
                                         width: Get.width * 0.7,
@@ -2190,12 +1995,10 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                             height: Get.height * 0.05,
                                             decoration: BoxDecoration(
                                               color: Color(0xFF344F8D),
-                                              borderRadius:
-                                                  BorderRadius.circular(2),
+                                              borderRadius: BorderRadius.circular(2),
                                             ),
                                             child: Center(
-                                              child: Image.asset(
-                                                  'assets/icons/fb.png'),
+                                              child: Image.asset('assets/icons/fb.png'),
                                             ),
                                           ),
                                         ),
@@ -2205,12 +2008,10 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                             height: Get.height * 0.05,
                                             decoration: BoxDecoration(
                                               color: Color(0xFFD63B30),
-                                              borderRadius:
-                                                  BorderRadius.circular(2),
+                                              borderRadius: BorderRadius.circular(2),
                                             ),
                                             child: Center(
-                                              child: Image.asset(
-                                                  'assets/icons/gp.png'),
+                                              child: Image.asset('assets/icons/gp.png'),
                                             ),
                                           ),
                                         ),
@@ -2220,12 +2021,10 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                             height: Get.height * 0.05,
                                             decoration: BoxDecoration(
                                               color: Color(0xFF04595B),
-                                              borderRadius:
-                                                  BorderRadius.circular(2),
+                                              borderRadius: BorderRadius.circular(2),
                                             ),
                                             child: Center(
-                                              child: Image.asset(
-                                                  'assets/icons/x.png'),
+                                              child: Image.asset('assets/icons/x.png'),
                                             ),
                                           ),
                                         ),
@@ -2265,8 +2064,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                               child: Container(
                                   child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: [
                                   Text(
                                     '${data[index]['text1']}',
@@ -2287,15 +2085,10 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                       ? SizedBox()
                                       : Container(
                                           padding: EdgeInsets.all(5),
-                                          child: Text('MEMBERS ONLY',
-                                              style: TextStyle(
-                                                  fontSize: 10,
-                                                  fontWeight: FontWeight.w400,
-                                                  color: Colors.red)),
+                                          child: Text('MEMBERS ONLY', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w400, color: Colors.red)),
                                           decoration: BoxDecoration(
                                             color: Color(0xFFFECDCC),
-                                            borderRadius:
-                                                BorderRadius.circular(2),
+                                            borderRadius: BorderRadius.circular(2),
                                           ),
                                         ),
                                 ],
@@ -2319,9 +2112,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                         color: Colors.white,
                       ),
                     )),
-                    decoration: BoxDecoration(
-                        color: Color(0xFF32A3FD),
-                        borderRadius: BorderRadius.circular(2)),
+                    decoration: BoxDecoration(color: Color(0xFF32A3FD), borderRadius: BorderRadius.circular(2)),
                   ),
                   SizedBox(height: 20),
                   Container(
@@ -2418,8 +2209,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
           ),
           width: width,
           height: height,
-          decoration: BoxDecoration(
-              color: Color(0xffF6F7F8), borderRadius: BorderRadius.circular(3)),
+          decoration: BoxDecoration(color: Color(0xffF6F7F8), borderRadius: BorderRadius.circular(3)),
         ));
   }
 }

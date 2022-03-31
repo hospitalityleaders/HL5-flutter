@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 
-import '../../constant/fontStyle/font_style.dart';
-import '../../responsive/responsive.dart';
+import '../../../constant/fontStyle/font_style.dart';
+import '../../../responsive/responsive.dart';
+
+
 
 class NewsSingleLoggedOutScreen extends StatefulWidget {
   @override
-  _NewsSingleLoggedOutScreenState createState() =>
-      _NewsSingleLoggedOutScreenState();
+  _NewsSingleLoggedOutScreenState createState() => _NewsSingleLoggedOutScreenState();
 }
 
 class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
@@ -41,23 +42,19 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
   ];
   List data1 = [
     {
-      'txt':
-          "The Internet of Things: The Impact on the Travel and Hotel Industry",
+      'txt': "The Internet of Things: The Impact on the Travel and Hotel Industry",
       'img': "assets/images/p1.png",
     },
     {
-      'txt':
-          "On Social Media? Maestro PMS Gives Operators, Guests Direct Social Media Booking",
+      'txt': "On Social Media? Maestro PMS Gives Operators, Guests Direct Social Media Booking",
       'img': "assets/images/p2.png",
     },
     {
-      'txt':
-          "Hotel Equities to Operate Two Premium-branded Hotels in Northeast",
+      'txt': "Hotel Equities to Operate Two Premium-branded Hotels in Northeast",
       'img': "assets/images/p3.png",
     },
     {
-      'txt':
-          "The Internet of Things: The Impact on the Travel and Hotel Industry",
+      'txt': "The Internet of Things: The Impact on the Travel and Hotel Industry",
       'img': "assets/images/p4.png",
     },
     {
@@ -101,15 +98,13 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
     },
     {
       'img': 'assets/images/t2.png',
-      'text1':
-          'Mantra Group Reports Total Revenue Increase of 9.7% for Year Ending June 2015',
+      'text1': 'Mantra Group Reports Total Revenue Increase of 9.7% for Year Ending June 2015',
       'text2': '',
       'text3': 'By: Pam Carrol • 26 August 2015 • 10:40',
     },
     {
       'img': 'assets/images/t3.png',
-      'text1':
-          'How Technology Can Deliver a Seamless Travel Experience - Information Age',
+      'text1': 'How Technology Can Deliver a Seamless Travel Experience - Information Age',
       'text2': 'MEMBERS ONLY',
       'text3': 'By: Pam Carrol • 26 August 2015 • 10:40',
     },
@@ -127,22 +122,19 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
     },
     {
       'img': 'assets/images/t6.png',
-      'text1':
-          'Welk Resorts Reports Increased Revenue and Plans for Two New Properties',
+      'text1': 'Welk Resorts Reports Increased Revenue and Plans for Two New Properties',
       'text2': '',
       'text3': 'By: Pam Carrol • 26 August 2015 • 10:40',
     },
     {
       'img': 'assets/images/t7.png',
-      'text1':
-          'Welk Resorts Reports Increased Revenue and Plans for Two New Properties',
+      'text1': 'Welk Resorts Reports Increased Revenue and Plans for Two New Properties',
       'text2': '',
       'text3': 'By: Pam Carrol • 26 August 2015 • 10:40',
     },
     {
       'img': 'assets/images/t8.png',
-      'text1':
-          'Hotel Price Index Reveals Midwest, Southwest and Western Cities Are Surging Domestically',
+      'text1': 'Hotel Price Index Reveals Midwest, Southwest and Western Cities Are Surging Domestically',
       'text2': '',
       'text3': 'By: Pam Carrol • 26 August 2015 • 10:40',
     },
@@ -219,7 +211,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                         color: Colors.white,
                         child: TextFormField(
                           cursorColor: Colors.white,
-                          style: FontTextStyle.kWhitePurePR,
+                          style: FontTextStyle.kWhitePR,
                           decoration: InputDecoration(
                             hintStyle: TextStyle(
                               color: ColorPicker.kPrimaryLightBlue,
@@ -259,18 +251,12 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('Home',
-                                style: FontTextStyle.kWhitePure16W400PR),
-                            Text('Profile',
-                                style: FontTextStyle.kPrimaryLightBlue16W400PR),
-                            Text('News',
-                                style: FontTextStyle.kPrimaryLightBlue16W400PR),
-                            Text('Jobs',
-                                style: FontTextStyle.kPrimaryLightBlue16W400PR),
-                            Text('Recruitment',
-                                style: FontTextStyle.kPrimaryLightBlue16W400PR),
-                            Text('Help',
-                                style: FontTextStyle.kPrimaryLightBlue16W400PR),
+                            Text('Home', style: FontTextStyle.kWhite16W400PR),
+                            Text('Profile', style: FontTextStyle.kPrimaryLightBlue16W400PR),
+                            Text('News', style: FontTextStyle.kPrimaryLightBlue16W400PR),
+                            Text('Jobs', style: FontTextStyle.kPrimaryLightBlue16W400PR),
+                            Text('Recruitment', style: FontTextStyle.kPrimaryLightBlue16W400PR),
+                            Text('Help', style: FontTextStyle.kPrimaryLightBlue16W400PR),
                           ],
                         ),
                       ),
@@ -281,8 +267,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                         width: Get.width * 0.05,
                         decoration: BoxDecoration(
                             border: Border.symmetric(
-                          vertical: BorderSide(
-                              color: ColorPicker.kPrimaryLight, width: 3),
+                          vertical: BorderSide(color: ColorPicker.kPrimaryLight, width: 3),
                         )),
                         child: Center(
                             child: Stack(
@@ -299,13 +284,13 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                 height: 16,
                                 width: 16,
                                 decoration: BoxDecoration(
-                                  color: ColorPicker.kRed1,
+                                  color: ColorPicker.kRed,
                                   borderRadius: BorderRadius.circular(3),
                                 ),
                                 child: Center(
                                   child: Text(
                                     '2',
-                                    style: FontTextStyle.kWhitePure12W700PR,
+                                    style: FontTextStyle.kWhite12W700SSP,
                                   ),
                                 ),
                               ),
@@ -317,8 +302,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                         width: Get.width * 0.05,
                         decoration: BoxDecoration(
                             border: Border.symmetric(
-                          vertical: BorderSide(
-                              color: ColorPicker.kPrimaryLight, width: 3),
+                          vertical: BorderSide(color: ColorPicker.kPrimaryLight, width: 3),
                         )),
                         child: Center(
                             child: Stack(
@@ -335,13 +319,13 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                 height: 16,
                                 width: 16,
                                 decoration: BoxDecoration(
-                                  color: ColorPicker.kRed1,
+                                  color: ColorPicker.kRed,
                                   borderRadius: BorderRadius.circular(3),
                                 ),
                                 child: Center(
                                   child: Text(
                                     '2',
-                                    style: FontTextStyle.kWhitePure12W700PR,
+                                    style: FontTextStyle.kWhite12W700SSP,
                                   ),
                                 ),
                               ),
@@ -353,8 +337,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                         width: 90,
                         decoration: BoxDecoration(
                             border: Border.symmetric(
-                          vertical: BorderSide(
-                              color: ColorPicker.kPrimaryLight, width: 3),
+                          vertical: BorderSide(color: ColorPicker.kPrimaryLight, width: 3),
                         )),
                         child: Center(
                             child: Row(
@@ -375,9 +358,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                 borderRadius: BorderRadius.circular(3),
                               ),
                               child: Center(
-                                child: Text('352',
-                                    style:
-                                        FontTextStyle.kPrimaryLight10W700SSP),
+                                child: Text('352', style: FontTextStyle.kPrimaryLight10W700SSP),
                               ),
                             ),
                           ],
@@ -387,8 +368,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                         width: Get.width * 0.05,
                         decoration: BoxDecoration(
                             border: Border.symmetric(
-                          vertical: BorderSide(
-                              color: ColorPicker.kPrimaryLight, width: 3),
+                          vertical: BorderSide(color: ColorPicker.kPrimaryLight, width: 3),
                         )),
                         child: Center(
                           child: Container(
@@ -434,9 +414,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                         Container(
                           height: Get.height * 0.032,
                           width: Get.width * 0.08,
-                          decoration: BoxDecoration(
-                              color: Color(0xff32A3FD),
-                              borderRadius: BorderRadius.circular(2)),
+                          decoration: BoxDecoration(color: Color(0xff32A3FD), borderRadius: BorderRadius.circular(2)),
                           child: Center(
                               child: Text(
                             "Join now. It’s free",
@@ -457,21 +435,17 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                         height: Get.height * 0.5,
                         width: Get.width,
                         // color: Colors.green,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage("assets/images/slider1.png"),
-                                fit: BoxFit.cover)),
+                        decoration: BoxDecoration(image: DecorationImage(image: AssetImage("assets/images/slider1.png"), fit: BoxFit.cover)),
                         child: Column(
                           children: [
                             Container(
                               height: Get.height * 0.03,
                               width: Get.width,
-                              color: Color(0xff272E41).withOpacity(0.1),
+                              color: ColorPicker.kGreyLight5.withOpacity(0.1),
                               child: Align(
                                 alignment: Alignment.topLeft,
                                 child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 120.0, top: 7),
+                                  padding: const EdgeInsets.only(left: 120.0, top: 7),
                                   child: Text(
                                     "Send news to: editor@hospitality.pro ",
                                     style: FontTextStyle.kWhite12W400PR,
@@ -488,12 +462,9 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                         child: Container(
                           height: Get.height * 0.18,
                           width: Get.width * 0.6,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              border: Border(bottom: BorderSide(width: 0.1))),
+                          decoration: BoxDecoration(color: Colors.white, border: Border(bottom: BorderSide(width: 0.1))),
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 10),
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -516,33 +487,25 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                     Container(
                                       height: Get.height * 0.05,
                                       width: Get.width * 0.023,
-                                      decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                              image: AssetImage(
-                                                  "assets/images/avatar.png"),
-                                              fit: BoxFit.cover)),
+                                      decoration: BoxDecoration(image: DecorationImage(image: AssetImage("assets/images/avatar.png"), fit: BoxFit.cover)),
                                     ),
                                     SizedBox(
                                       width: Get.width * 0.009,
                                     ),
                                     Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           "By: Pam Carrol",
-                                          style:
-                                              FontTextStyle.kGreyLight515W600PR,
+                                          style: FontTextStyle.kGreyLight515W600PR,
                                         ),
                                         SizedBox(
                                           height: Get.height * 0.005,
                                         ),
                                         Text(
                                           "26 August 2015   •   10:40",
-                                          style:
-                                              FontTextStyle.kGreyLight515W600PR,
+                                          style: FontTextStyle.kGreyLight515W600PR,
                                         )
                                       ],
                                     ),
@@ -620,21 +583,15 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                     child: Container(
                                       // height: Get.height * 0.3,
                                       width: 100,
-                                      child: Image(
-                                          image: AssetImage(
-                                              'assets/images/round.png'),
-                                          fit: BoxFit.fitWidth),
+                                      child: Image(image: AssetImage('assets/images/round.png'), fit: BoxFit.fitWidth),
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 20,
-                                        vertical: Get.width * 0.025),
+                                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: Get.width * 0.025),
                                     child: Column(
                                       children: [
                                         Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             IntrinsicWidth(
                                               child: Column(
@@ -655,8 +612,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                             ),
                                             SizedBox(width: 20),
                                             Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 // SizedBox(height: 30),
                                                 Text(
@@ -675,8 +631,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                                   child: Text(
                                                     'You get access to members only exclusive content',
                                                     style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w400,
+                                                      fontWeight: FontWeight.w400,
                                                       fontSize: 40,
                                                       color: Colors.white,
                                                     ),
@@ -687,8 +642,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                           ],
                                         ),
                                         Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Column(
                                               // mainAxisAlignment:
@@ -707,8 +661,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                             ),
                                             SizedBox(width: 20),
                                             Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 Text(
                                                   'Latest news',
@@ -723,8 +676,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                                   child: Text(
                                                     'Members stay current with the leading hospitality industry news site.',
                                                     style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w400,
+                                                      fontWeight: FontWeight.w400,
                                                       fontSize: 16,
                                                       color: Colors.white,
                                                     ),
@@ -736,8 +688,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                         ),
                                         SizedBox(height: 10),
                                         Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Column(
                                               // mainAxisAlignment:
@@ -756,8 +707,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                             ),
                                             SizedBox(width: 20),
                                             Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 Text(
                                                   'Exclusive content',
@@ -772,8 +722,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                                   child: Text(
                                                     'Get exclusive access to breaking, current and accurate industry news from around the world.',
                                                     style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w400,
+                                                      fontWeight: FontWeight.w400,
                                                       fontSize: 16,
                                                       color: Colors.white,
                                                     ),
@@ -785,8 +734,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                         ),
                                         SizedBox(height: 10),
                                         Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Column(
                                               // mainAxisAlignment:
@@ -805,8 +753,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                             ),
                                             SizedBox(width: 20),
                                             Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 Text(
                                                   'News that matter',
@@ -821,8 +768,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                                   child: Text(
                                                     'Our news is selected and edited by professional journalists with decades of experience in reporting the news that matters, keeping you  informed and up-to-date about what is happening in our industry around the world.',
                                                     style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w400,
+                                                      fontWeight: FontWeight.w400,
                                                       fontSize: 16,
                                                       color: Colors.white,
                                                     ),
@@ -833,8 +779,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                           ],
                                         ),
                                         Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Column(
                                               // mainAxisAlignment:
@@ -854,25 +799,19 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                                 width: 248,
                                                 decoration: BoxDecoration(
                                                   color: Colors.white,
-                                                  borderRadius:
-                                                      BorderRadius.circular(2),
+                                                  borderRadius: BorderRadius.circular(2),
                                                 ),
                                                 child: Center(
                                                   child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
+                                                    mainAxisAlignment: MainAxisAlignment.center,
                                                     children: [
-                                                      Icon(Icons.person_add,
-                                                          size: 15),
+                                                      Icon(Icons.person_add, size: 15),
                                                       Text(
                                                         'Sign up now. It’s free',
                                                         style: TextStyle(
-                                                          color:
-                                                              Color(0xFF272E41),
+                                                          color: ColorPicker.kGreyLight5,
                                                           fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.w600,
+                                                          fontWeight: FontWeight.w600,
                                                         ),
                                                       ),
                                                     ],
@@ -882,8 +821,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                         ),
                                         SizedBox(height: 10),
                                         Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Column(
                                               // mainAxisAlignment:
@@ -897,16 +835,14 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                             ),
                                             SizedBox(width: 20),
                                             Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 SizedBox(
                                                   width: Get.width * 0.15,
                                                   child: Text(
                                                     'OR IMPORT YOUR DETAILS FROM',
                                                     style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w700,
+                                                      fontWeight: FontWeight.w700,
                                                       fontSize: 16,
                                                       color: Colors.white,
                                                     ),
@@ -918,8 +854,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                         ),
                                         SizedBox(height: 10),
                                         Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Column(
                                               // mainAxisAlignment:
@@ -943,16 +878,12 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                                       height: 36,
                                                       width: 82,
                                                       decoration: BoxDecoration(
-                                                        color:
-                                                            Color(0xFF344F8D),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(2),
+                                                        color: Color(0xFF344F8D),
+                                                        borderRadius: BorderRadius.circular(2),
                                                       ),
                                                       child: Center(
                                                         child: Image(
-                                                          image: AssetImage(
-                                                              'assets/icons/fb.png'),
+                                                          image: AssetImage('assets/icons/fb.png'),
                                                         ),
                                                       ),
                                                     ),
@@ -963,16 +894,12 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                                       height: 36,
                                                       width: 82,
                                                       decoration: BoxDecoration(
-                                                        color:
-                                                            Color(0xFFD63B30),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(2),
+                                                        color: Color(0xFFD63B30),
+                                                        borderRadius: BorderRadius.circular(2),
                                                       ),
                                                       child: Center(
                                                         child: Image(
-                                                          image: AssetImage(
-                                                              'assets/icons/gp.png'),
+                                                          image: AssetImage('assets/icons/gp.png'),
                                                         ),
                                                       ),
                                                     ),
@@ -983,16 +910,12 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                                       height: 36,
                                                       width: 82,
                                                       decoration: BoxDecoration(
-                                                        color:
-                                                            Color(0xFF04595B),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(2),
+                                                        color: Color(0xFF04595B),
+                                                        borderRadius: BorderRadius.circular(2),
                                                       ),
                                                       child: Center(
                                                         child: Image(
-                                                          image: AssetImage(
-                                                              'assets/icons/x.png'),
+                                                          image: AssetImage('assets/icons/x.png'),
                                                         ),
                                                       ),
                                                     ),
@@ -1024,16 +947,13 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                     padding: const EdgeInsets.all(8.0),
                                     child: Container(
                                       height: 26,
-                                      decoration: BoxDecoration(
-                                          color: Color(0xffF6F7F8)),
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 12),
+                                      decoration: BoxDecoration(color: Color(0xffF6F7F8)),
+                                      padding: EdgeInsets.symmetric(horizontal: 12),
                                       child: Align(
                                         alignment: Alignment.center,
                                         child: Text(
                                           '#Hospitality',
-                                          style:
-                                              FontTextStyle.kGreyLight614W400PR,
+                                          style: FontTextStyle.kGreyLight614W400PR,
                                         ),
                                       ),
                                     ),
@@ -1046,8 +966,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                 Flexible(
                                     child: Divider(
                                   endIndent: 10,
-                                  color:
-                                      ColorPicker.kGreyLight5.withOpacity(0.2),
+                                  color: ColorPicker.kGreyLight5.withOpacity(0.2),
                                 )),
                                 Text(
                                   'SUGGESTED NEWS',
@@ -1056,8 +975,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                 Flexible(
                                     child: Divider(
                                   indent: 10,
-                                  color:
-                                      ColorPicker.kGreyLight5.withOpacity(0.2),
+                                  color: ColorPicker.kGreyLight5.withOpacity(0.2),
                                 )),
                               ],
                             ),
@@ -1080,12 +998,10 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                     width: 400,
                                     color: Colors.white,
                                     child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Image(
-                                          image: AssetImage(
-                                              '${suggestNewsData[index]['img']}'),
+                                          image: AssetImage('${suggestNewsData[index]['img']}'),
                                           height: 200,
                                           width: 400,
                                           fit: BoxFit.cover,
@@ -1093,39 +1009,28 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                         Flexible(
                                           child: Container(
                                               child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                                             children: [
                                               Text(
                                                 '${suggestNewsData[index]['text1']}',
-                                                style: FontTextStyle
-                                                    .kBlackPure18W700PR,
+                                                style: FontTextStyle.kBlackPure18W700PR,
                                               ),
                                               Text(
                                                 '${suggestNewsData[index]['text3']}',
-                                                style: FontTextStyle
-                                                    .kGreyLight514W600PR,
+                                                style: FontTextStyle.kGreyLight514W600PR,
                                               ),
-                                              suggestNewsData[index]['text2']
-                                                      .toString()
-                                                      .isEmpty
+                                              suggestNewsData[index]['text2'].toString().isEmpty
                                                   ? SizedBox()
                                                   : Container(
-                                                      padding:
-                                                          EdgeInsets.all(5),
+                                                      padding: EdgeInsets.all(5),
                                                       child: Text(
                                                         'MEMBERS ONLY',
-                                                        style: FontTextStyle
-                                                            .kRed10W400PR,
+                                                        style: FontTextStyle.kRed10W400PR,
                                                       ),
                                                       decoration: BoxDecoration(
-                                                        color:
-                                                            Color(0xFFFECDCC),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(2),
+                                                        color: Color(0xFFFECDCC),
+                                                        borderRadius: BorderRadius.circular(2),
                                                       ),
                                                     ),
                                             ],
@@ -1143,8 +1048,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                       Container(
                         width: Get.width * 0.4,
                         // color: Colors.red,
-                        padding: const EdgeInsets.only(
-                            left: 100, bottom: 420, right: 70),
+                        padding: const EdgeInsets.only(left: 100, bottom: 420, right: 70),
                         child: Column(
                           children: [
                             SizedBox(
@@ -1162,10 +1066,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                     child: Container(
                                       // height: Get.height * 0.3,
                                       width: 100,
-                                      child: Image(
-                                          image: AssetImage(
-                                              'assets/images/round2.png'),
-                                          fit: BoxFit.fitWidth),
+                                      child: Image(image: AssetImage('assets/images/round2.png'), fit: BoxFit.fitWidth),
                                     ),
                                   ),
                                   Padding(
@@ -1176,8 +1077,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                     child: Column(
                                       children: [
                                         Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             IntrinsicWidth(
                                               child: Column(
@@ -1198,25 +1098,18 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                             ),
                                             SizedBox(width: 20),
                                             Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 Text(
                                                   'ALL ACCESS',
-                                                  style: FontTextStyle
-                                                      .kWhitePure12W700PR,
+                                                  style: FontTextStyle.kWhite12W700SSP,
                                                 ),
                                                 SizedBox(height: 20),
                                                 SizedBox(
                                                   width: Get.width * 0.18,
                                                   child: Text(
                                                     'Get full access to the hospitality industry news',
-                                                    style: FontTextStyle
-                                                        .kWhitePure36W400PR
-                                                        .copyWith(
-                                                            fontSize:
-                                                                Get.width *
-                                                                    0.02),
+                                                    style: FontTextStyle.kWhite36W400PR.copyWith(fontSize: Get.width * 0.02),
                                                   ),
                                                 ),
                                                 SizedBox(height: 20),
@@ -1225,28 +1118,20 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                                     width: Get.width * 0.16,
                                                     decoration: BoxDecoration(
                                                       color: Colors.white,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              2),
+                                                      borderRadius: BorderRadius.circular(2),
                                                     ),
                                                     child: Center(
                                                       child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
+                                                        mainAxisAlignment: MainAxisAlignment.center,
                                                         children: [
-                                                          Icon(Icons.person_add,
-                                                              size: 15),
+                                                          Icon(Icons.person_add, size: 15),
                                                           SizedBox(width: 10),
                                                           Text(
                                                             'Sign up now. It’s free',
                                                             style: TextStyle(
-                                                              color: Color(
-                                                                  0xFF272E41),
+                                                              color: Color(0xFF272E41),
                                                               fontSize: 14,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
+                                                              fontWeight: FontWeight.w600,
                                                             ),
                                                           ),
                                                         ],
@@ -1257,8 +1142,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                           ],
                                         ),
                                         Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             IntrinsicWidth(
                                               child: Column(
@@ -1283,14 +1167,12 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                             ),
                                             SizedBox(width: 20),
                                             Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 SizedBox(height: 15),
                                                 Text(
                                                   'OR IMPORT YOUR\nDETAILS FROM',
-                                                  style: FontTextStyle
-                                                      .kWhitePure12W700PR,
+                                                  style: FontTextStyle.kWhite12W700SSP,
                                                 ),
                                                 SizedBox(height: 30),
                                                 SizedBox(
@@ -1301,19 +1183,13 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                                         child: Container(
                                                           height: 36,
                                                           width: 82,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color: Color(
-                                                                0xFF344F8D),
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        2),
+                                                          decoration: BoxDecoration(
+                                                            color: Color(0xFF344F8D),
+                                                            borderRadius: BorderRadius.circular(2),
                                                           ),
                                                           child: Center(
                                                             child: Image(
-                                                              image: AssetImage(
-                                                                  'assets/icons/fb.png'),
+                                                              image: AssetImage('assets/icons/fb.png'),
                                                             ),
                                                           ),
                                                         ),
@@ -1323,19 +1199,13 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                                         child: Container(
                                                           height: 36,
                                                           width: 82,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color: Color(
-                                                                0xFFD63B30),
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        2),
+                                                          decoration: BoxDecoration(
+                                                            color: Color(0xFFD63B30),
+                                                            borderRadius: BorderRadius.circular(2),
                                                           ),
                                                           child: Center(
                                                             child: Image(
-                                                              image: AssetImage(
-                                                                  'assets/icons/gp.png'),
+                                                              image: AssetImage('assets/icons/gp.png'),
                                                             ),
                                                           ),
                                                         ),
@@ -1345,19 +1215,13 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                                         child: Container(
                                                           height: 36,
                                                           width: 82,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color: Color(
-                                                                0xFF04595B),
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        2),
+                                                          decoration: BoxDecoration(
+                                                            color: Color(0xFF04595B),
+                                                            borderRadius: BorderRadius.circular(2),
                                                           ),
                                                           child: Center(
                                                             child: Image(
-                                                              image: AssetImage(
-                                                                  'assets/icons/x.png'),
+                                                              image: AssetImage('assets/icons/x.png'),
                                                             ),
                                                           ),
                                                         ),
@@ -1383,8 +1247,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                               width: Get.width,
                               child: Image(
                                 fit: BoxFit.cover,
-                                image:
-                                    AssetImage('assets/images/Bannerimage.png'),
+                                image: AssetImage('assets/images/Bannerimage.png'),
                               ),
                             ),
                             SizedBox(
@@ -1397,10 +1260,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Container(
-                                    padding: EdgeInsets.only(
-                                        top: Get.width * 0.01,
-                                        right: Get.width * 0.01,
-                                        left: Get.width * 0.01),
+                                    padding: EdgeInsets.only(top: Get.width * 0.01, right: Get.width * 0.01, left: Get.width * 0.01),
                                     child: Text(
                                       'Categories',
                                       style: FontTextStyle.kBlackPure20W400PR,
@@ -1410,20 +1270,14 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                     shrinkWrap: true,
                                     itemCount: 8,
                                     itemBuilder: (context, index) => Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Divider(),
                                         Container(
-                                          padding: EdgeInsets.only(
-                                              top: Get.width * 0.01,
-                                              right: Get.width * 0.01,
-                                              bottom: Get.width * 0.01,
-                                              left: Get.width * 0.01),
+                                          padding: EdgeInsets.only(top: Get.width * 0.01, right: Get.width * 0.01, bottom: Get.width * 0.01, left: Get.width * 0.01),
                                           child: Text(
                                             '${categories[index]['text']}',
-                                            style: FontTextStyle
-                                                .kBlueLight114W600PR,
+                                            style: FontTextStyle.kBlueLight114W600PR,
                                           ),
                                         )
                                       ],
@@ -1443,8 +1297,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                         ),
                                         Text(
                                           'Show more',
-                                          style:
-                                              FontTextStyle.kBlueLight114W600PR,
+                                          style: FontTextStyle.kBlueLight114W600PR,
                                         ),
                                       ],
                                     ),
@@ -1486,12 +1339,10 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                       Expanded(
                         child: Container(
                           margin: EdgeInsets.all(4),
-                          decoration: BoxDecoration(
-                              color: ColorPicker.kPrimaryLight1,
-                              borderRadius: BorderRadius.circular(8)),
+                          decoration: BoxDecoration(color: ColorPicker.kPrimaryLight1, borderRadius: BorderRadius.circular(8)),
                           child: TextFormField(
                             cursorColor: Colors.white,
-                            style: FontTextStyle.kWhitePurePR,
+                            style: FontTextStyle.kWhitePR,
                             decoration: InputDecoration(
                               hintStyle: TextStyle(
                                 color: ColorPicker.kPrimaryLightBlue,
@@ -1501,18 +1352,15 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                               hintText: "Search",
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
-                                borderSide:
-                                    BorderSide(color: Colors.transparent),
+                                borderSide: BorderSide(color: Colors.transparent),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
-                                borderSide:
-                                    BorderSide(color: Colors.transparent),
+                                borderSide: BorderSide(color: Colors.transparent),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
-                                borderSide:
-                                    BorderSide(color: Colors.transparent),
+                                borderSide: BorderSide(color: Colors.transparent),
                               ),
                               prefixIcon: Icon(
                                 Icons.search,
@@ -1536,10 +1384,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                             color: ColorPicker.kPrimaryLightBlue,
                           ),
                           SizedBox(height: 5),
-                          Text('MENU',
-                              style: TextStyle(
-                                  fontSize: 9,
-                                  color: ColorPicker.kPrimaryLightBlue)),
+                          Text('MENU', style: TextStyle(fontSize: 9, color: ColorPicker.kPrimaryLightBlue)),
                         ],
                       ),
                       SizedBox(
@@ -1655,9 +1500,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                       itemBuilder: (context, index) {
                         return CircleAvatar(
                           // foregroundColor: Colors.red,
-                          backgroundColor: index == 1
-                              ? Color(0xFF33A3FE)
-                              : Color(0xFFB5BDC2),
+                          backgroundColor: index == 1 ? Color(0xFF33A3FE) : Color(0xFFB5BDC2),
                         );
                       },
                     ),
@@ -1676,8 +1519,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                     children: [
                       Container(
                         alignment: Alignment.centerLeft,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 15),
                         width: 200,
                         child: Text(
                           'Hotels and resorts',
@@ -1690,8 +1532,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                       ),
                       Container(
                         alignment: Alignment.centerLeft,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 15),
                         width: 200,
                         child: Text(
                           'Food and beverage',
@@ -1704,8 +1545,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                       ),
                       Container(
                         alignment: Alignment.centerLeft,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 15),
                         width: 200,
                         child: Text(
                           'Spa',
@@ -1718,8 +1558,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                       ),
                       Container(
                         alignment: Alignment.centerLeft,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 15),
                         width: 200,
                         child: Text(
                           'Tourism',
@@ -1732,8 +1571,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                       ),
                       Container(
                         alignment: Alignment.centerLeft,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 15),
                         width: 200,
                         child: Text(
                           'Apartments',
@@ -1746,8 +1584,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                       ),
                       Container(
                         alignment: Alignment.centerLeft,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 15),
                         width: 200,
                         child: Text(
                           'Tours',
@@ -1760,8 +1597,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                       ),
                       Container(
                         alignment: Alignment.centerLeft,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 15),
                         width: 200,
                         child: Text(
                           'Leisure',
@@ -1774,8 +1610,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                       ),
                       Container(
                         alignment: Alignment.centerLeft,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 15),
                         width: 200,
                         child: Text(
                           'Boutique Hotels',
@@ -1788,8 +1623,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                       ),
                       Container(
                         alignment: Alignment.centerLeft,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 15),
                         width: 200,
                         child: Text(
                           '+ Show more',
@@ -1815,15 +1649,11 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                           child: Container(
                             // height: Get.height * 0.3,
                             width: Get.width * 0.3,
-                            child: Image(
-                                image: AssetImage('assets/images/round.png'),
-                                fit: BoxFit.fitWidth),
+                            child: Image(image: AssetImage('assets/images/round.png'), fit: BoxFit.fitWidth),
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: Get.width * 0.08,
-                              vertical: Get.width * 0.15),
+                          padding: EdgeInsets.symmetric(horizontal: Get.width * 0.08, vertical: Get.width * 0.15),
                           child: Column(
                             children: [
                               Row(
@@ -1848,8 +1678,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                   ),
                                   SizedBox(width: Get.width * 0.03),
                                   Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'SIGN UP TO JOIN',
@@ -1895,8 +1724,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                   ),
                                   SizedBox(width: Get.width * 0.03),
                                   Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'All the latest news',
@@ -1942,8 +1770,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                   ),
                                   SizedBox(width: Get.width * 0.03),
                                   Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'Credible sources',
@@ -1989,8 +1816,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                   ),
                                   SizedBox(width: Get.width * 0.03),
                                   Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'Wide scope of research',
@@ -2040,14 +1866,13 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                       ),
                                       child: Center(
                                         child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
                                             Icon(Icons.person_add, size: 15),
                                             Text(
                                               'Sign up now. It’s free',
                                               style: TextStyle(
-                                                color: Color(0xFF272E41),
+                                                color: ColorPicker.kGreyLight5,
                                                 fontSize: 14,
                                                 fontWeight: FontWeight.w600,
                                               ),
@@ -2073,8 +1898,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                   ),
                                   SizedBox(width: Get.width * 0.03),
                                   Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       SizedBox(
                                         width: Get.width * 0.7,
@@ -2117,12 +1941,10 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                             height: Get.height * 0.05,
                                             decoration: BoxDecoration(
                                               color: Color(0xFF344F8D),
-                                              borderRadius:
-                                                  BorderRadius.circular(2),
+                                              borderRadius: BorderRadius.circular(2),
                                             ),
                                             child: Center(
-                                              child: Image.asset(
-                                                  'assets/icons/fb.png'),
+                                              child: Image.asset('assets/icons/fb.png'),
                                             ),
                                           ),
                                         ),
@@ -2132,12 +1954,10 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                             height: Get.height * 0.05,
                                             decoration: BoxDecoration(
                                               color: Color(0xFFD63B30),
-                                              borderRadius:
-                                                  BorderRadius.circular(2),
+                                              borderRadius: BorderRadius.circular(2),
                                             ),
                                             child: Center(
-                                              child: Image.asset(
-                                                  'assets/icons/gp.png'),
+                                              child: Image.asset('assets/icons/gp.png'),
                                             ),
                                           ),
                                         ),
@@ -2147,12 +1967,10 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                             height: Get.height * 0.05,
                                             decoration: BoxDecoration(
                                               color: Color(0xFF04595B),
-                                              borderRadius:
-                                                  BorderRadius.circular(2),
+                                              borderRadius: BorderRadius.circular(2),
                                             ),
                                             child: Center(
-                                              child: Image.asset(
-                                                  'assets/icons/x.png'),
+                                              child: Image.asset('assets/icons/x.png'),
                                             ),
                                           ),
                                         ),
@@ -2192,8 +2010,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                               child: Container(
                                   child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: [
                                   Text(
                                     '${data[index]['text1']}',
@@ -2214,15 +2031,10 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                       ? SizedBox()
                                       : Container(
                                           padding: EdgeInsets.all(5),
-                                          child: Text('MEMBERS ONLY',
-                                              style: TextStyle(
-                                                  fontSize: 10,
-                                                  fontWeight: FontWeight.w400,
-                                                  color: Colors.red)),
+                                          child: Text('MEMBERS ONLY', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w400, color: Colors.red)),
                                           decoration: BoxDecoration(
                                             color: Color(0xFFFECDCC),
-                                            borderRadius:
-                                                BorderRadius.circular(2),
+                                            borderRadius: BorderRadius.circular(2),
                                           ),
                                         ),
                                 ],
@@ -2246,9 +2058,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                         color: Colors.white,
                       ),
                     )),
-                    decoration: BoxDecoration(
-                        color: Color(0xFF32A3FD),
-                        borderRadius: BorderRadius.circular(2)),
+                    decoration: BoxDecoration(color: Color(0xFF32A3FD), borderRadius: BorderRadius.circular(2)),
                   ),
                   SizedBox(height: 20),
                   Container(
@@ -2345,8 +2155,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
           ),
           width: width,
           height: height,
-          decoration: BoxDecoration(
-              color: Color(0xffF6F7F8), borderRadius: BorderRadius.circular(3)),
+          decoration: BoxDecoration(color: Color(0xffF6F7F8), borderRadius: BorderRadius.circular(3)),
         ));
   }
 }

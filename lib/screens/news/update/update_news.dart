@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:holedo/screen/home/widget/home_widget.dart';
+import 'package:holedo/screens/news/update/widget/update_news_widget.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
-import '../../common/common_widget.dart';
-import '../../constant/colorPicker/color_picker.dart';
-import '../../constant/fontStyle/font_style.dart';
-import '../../constant/sizedbox.dart';
-import '../../data/data.dart';
-import '../../responsive/responsive.dart';
+import '../../../common/common_widget.dart';
+import '../../../constant/colorPicker/color_picker.dart';
+import '../../../constant/fontStyle/font_style.dart';
+import '../../../constant/sizedbox.dart';
+import '../../../data/data.dart';
+import '../../../responsive/responsive.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class UpdateNews extends StatefulWidget {
+  const UpdateNews({Key? key}) : super(key: key);
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _UpdateNewsState createState() => _UpdateNewsState();
 }
 
-class _HomeScreenState extends State<HomeScreen>
-    with SingleTickerProviderStateMixin {
+class _UpdateNewsState extends State<UpdateNews> with SingleTickerProviderStateMixin {
   final bodyGlobalKey = GlobalKey();
 
   TabController? _tabController;
@@ -66,8 +65,7 @@ class _HomeScreenState extends State<HomeScreen>
       ));
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:
-          Responsive.isDesktop(context) ? ColorPicker.kBG : Colors.white,
+      backgroundColor: Responsive.isDesktop(context) ? ColorPicker.kBG : Colors.white,
       appBar: Responsive.isDesktop(context)
           ? CommonWidget.descktopAppBar()
           : Responsive.isTablet(context)
@@ -87,15 +85,13 @@ class _HomeScreenState extends State<HomeScreen>
                           Expanded(
                             child: Container(
                               color: ColorPicker.kPrimary,
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: Get.height * 0.07),
+                              padding: EdgeInsets.symmetric(horizontal: Get.height * 0.07),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       Image.asset(
@@ -116,8 +112,7 @@ class _HomeScreenState extends State<HomeScreen>
                                   ),
                                   Text(
                                     'MY GRADE',
-                                    style: FontTextStyle.kWhite16W600PR
-                                        .copyWith(letterSpacing: 2.5),
+                                    style: FontTextStyle.kWhite16W600PR.copyWith(letterSpacing: 2.5),
                                   )
                                 ],
                               ),
@@ -130,15 +125,13 @@ class _HomeScreenState extends State<HomeScreen>
                           Expanded(
                             child: Container(
                               color: ColorPicker.kPrimary,
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: Get.height * 0.07),
+                              padding: EdgeInsets.symmetric(horizontal: Get.height * 0.07),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
@@ -159,8 +152,7 @@ class _HomeScreenState extends State<HomeScreen>
                                   ),
                                   Text(
                                     'TO NEXT GRADE',
-                                    style: FontTextStyle.kGreyDark16W600PR
-                                        .copyWith(letterSpacing: 2.5),
+                                    style: FontTextStyle.kGreyDark16W600PR.copyWith(letterSpacing: 2.5),
                                   )
                                 ],
                               ),
@@ -173,15 +165,13 @@ class _HomeScreenState extends State<HomeScreen>
                           Expanded(
                             child: Container(
                               color: ColorPicker.kPrimary,
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: Get.height * 0.07),
+                              padding: EdgeInsets.symmetric(horizontal: Get.height * 0.07),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Image.asset(
@@ -202,8 +192,7 @@ class _HomeScreenState extends State<HomeScreen>
                                   ),
                                   Text(
                                     'NEXT GRADE',
-                                    style: FontTextStyle.kGreyDark16W600PR
-                                        .copyWith(letterSpacing: 2.5),
+                                    style: FontTextStyle.kGreyDark16W600PR.copyWith(letterSpacing: 2.5),
                                   )
                                 ],
                               ),
@@ -225,10 +214,8 @@ class _HomeScreenState extends State<HomeScreen>
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         Image.asset(
                                           'assets/icons/rightShield.png',
@@ -248,8 +235,7 @@ class _HomeScreenState extends State<HomeScreen>
                                     ),
                                     Text(
                                       'MY GRADE',
-                                      style: FontTextStyle.kWhite10W600PR
-                                          .copyWith(letterSpacing: 2.5),
+                                      style: FontTextStyle.kWhite10W600PR.copyWith(letterSpacing: 2.5),
                                     )
                                   ],
                                 ),
@@ -268,15 +254,12 @@ class _HomeScreenState extends State<HomeScreen>
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         Text(
                                           '33%',
-                                          style:
-                                              FontTextStyle.kBlueLight20W600PR,
+                                          style: FontTextStyle.kBlueLight20W600PR,
                                         ),
                                         SizedBox(
                                           width: 10,
@@ -292,8 +275,7 @@ class _HomeScreenState extends State<HomeScreen>
                                     ),
                                     Text(
                                       'TO NEXT GRADE',
-                                      style: FontTextStyle.kGreyLight10W600PR
-                                          .copyWith(letterSpacing: 2.5),
+                                      style: FontTextStyle.kGreyLight10W600PR.copyWith(letterSpacing: 2.5),
                                     )
                                   ],
                                 ),
@@ -312,8 +294,7 @@ class _HomeScreenState extends State<HomeScreen>
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Image.asset(
@@ -377,9 +358,7 @@ class _HomeScreenState extends State<HomeScreen>
                         Container(
                           width: 600,
                           color: Colors.white,
-                          margin: EdgeInsets.symmetric(
-                              horizontal: Get.width * 0.05,
-                              vertical: Get.height * 0.02),
+                          margin: EdgeInsets.symmetric(horizontal: Get.width * 0.05, vertical: Get.height * 0.02),
                           child: TabBar(
                             isScrollable: true,
                             controller: _tabController,
@@ -409,9 +388,7 @@ class _HomeScreenState extends State<HomeScreen>
                 scrollDirection: Axis.vertical,
                 child: Column(
                   children: [
-                    Responsive.isDesktop(context)
-                        ? SizedBox(height: Get.height * 0.05)
-                        : SizedBox(),
+                    Responsive.isDesktop(context) ? SizedBox(height: Get.height * 0.05) : SizedBox(),
                     Responsive.isDesktop(context) ? webView() : mobileView(),
                   ],
                 ),
@@ -439,12 +416,7 @@ class _HomeScreenState extends State<HomeScreen>
               Container(
                 height: Get.width * 0.5,
                 width: Get.width * 0.9,
-                decoration: BoxDecoration(boxShadow: [
-                  BoxShadow(
-                      color: ColorPicker.kGreyDark.withOpacity(0.5),
-                      spreadRadius: 1,
-                      blurRadius: 20)
-                ], color: Colors.white, borderRadius: BorderRadius.circular(5)),
+                decoration: BoxDecoration(boxShadow: [BoxShadow(color: ColorPicker.kGreyDark.withOpacity(0.5), spreadRadius: 1, blurRadius: 20)], color: Colors.white, borderRadius: BorderRadius.circular(5)),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -461,16 +433,14 @@ class _HomeScreenState extends State<HomeScreen>
                           children: [
                             Text(
                               'Hello Noberto',
-                              style: FontTextStyle.kPrimary16W600PR
-                                  .copyWith(fontSize: Get.width * 0.05),
+                              style: FontTextStyle.kPrimary16W600PR.copyWith(fontSize: Get.width * 0.05),
                             ),
                             SizedBox(height: Get.width * 0.02),
                             SizedBox(
                               width: Get.width * 0.5,
                               child: Text(
                                 'What’s news today? Share an update, link or news article with your connections. Get out there!',
-                                style: FontTextStyle.kGreyLight12W600PR
-                                    .copyWith(fontSize: Get.width * 0.03),
+                                style: FontTextStyle.kGreyLight12W600PR.copyWith(fontSize: Get.width * 0.03),
                               ),
                             ),
                           ],
@@ -483,31 +453,16 @@ class _HomeScreenState extends State<HomeScreen>
                         Container(
                           height: Get.width * 0.12,
                           width: Get.width * 0.12,
-                          margin: EdgeInsets.symmetric(
-                              horizontal: Get.width * 0.04),
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image:
-                                      AssetImage('assets/images/profile.png')),
-                              borderRadius: BorderRadius.circular(5)),
+                          margin: EdgeInsets.symmetric(horizontal: Get.width * 0.04),
+                          decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/images/profile.png')), borderRadius: BorderRadius.circular(5)),
                         ),
                         Expanded(
                           child: Container(
                             height: Get.width * 0.12,
                             margin: EdgeInsets.only(right: 15),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                border: Border.all(
-                                    color: ColorPicker.kBorder, width: 1),
-                                color: ColorPicker.kGreyLight2),
+                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(5), border: Border.all(color: ColorPicker.kBorder, width: 1), color: ColorPicker.kGreyLight2),
                             child: TextField(
-                              decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintStyle: FontTextStyle.kGreyLight16W600PR,
-                                  contentPadding: EdgeInsets.only(
-                                      top: Get.width * 0.01, left: 10),
-                                  hintText: 'Share an update or link.....'),
+                              decoration: InputDecoration(border: InputBorder.none, hintStyle: FontTextStyle.kGreyLight16W600PR, contentPadding: EdgeInsets.only(top: Get.width * 0.01, left: 10), hintText: 'Share an update or link.....'),
                               style: FontTextStyle.kGreyLight318W600PR,
                             ),
                           ),
@@ -521,8 +476,7 @@ class _HomeScreenState extends State<HomeScreen>
                         Container(
                           margin: EdgeInsets.only(right: 15),
                           height: Get.width * 0.05,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: Get.width * 0.04),
+                          padding: EdgeInsets.symmetric(horizontal: Get.width * 0.04),
                           decoration: BoxDecoration(
                             color: ColorPicker.kBlueLight,
                             borderRadius: BorderRadius.circular(5),
@@ -547,12 +501,7 @@ class _HomeScreenState extends State<HomeScreen>
               Container(
                 height: Get.width * 0.5,
                 width: Get.width * 0.9,
-                decoration: BoxDecoration(boxShadow: [
-                  BoxShadow(
-                      color: ColorPicker.kGreyDark.withOpacity(0.5),
-                      spreadRadius: 1,
-                      blurRadius: 20)
-                ], color: Colors.white, borderRadius: BorderRadius.circular(5)),
+                decoration: BoxDecoration(boxShadow: [BoxShadow(color: ColorPicker.kGreyDark.withOpacity(0.5), spreadRadius: 1, blurRadius: 20)], color: Colors.white, borderRadius: BorderRadius.circular(5)),
                 child: Row(
                   children: [
                     Expanded(
@@ -564,8 +513,7 @@ class _HomeScreenState extends State<HomeScreen>
                           children: [
                             Text(
                               '25%',
-                              style: FontTextStyle.kWhite22W600PR
-                                  .copyWith(fontSize: Get.width * 0.05),
+                              style: FontTextStyle.kWhite22W600PR.copyWith(fontSize: Get.width * 0.05),
                             ),
                             SizedBox(
                               height: 20,
@@ -596,23 +544,20 @@ class _HomeScreenState extends State<HomeScreen>
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                            margin: EdgeInsets.symmetric(
-                                horizontal: Get.width * 0.08),
+                            margin: EdgeInsets.symmetric(horizontal: Get.width * 0.08),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   'Where did you work before your current job?',
-                                  style: FontTextStyle.kBlueDark20W600PR
-                                      .copyWith(fontSize: Get.width * 0.03),
+                                  style: FontTextStyle.kBlueDark20W600PR.copyWith(fontSize: Get.width * 0.03),
                                 ),
                                 SizedBox(
                                   height: 25,
                                 ),
                                 Text(
                                   'your work history shows your career path and experience in the industry.',
-                                  style: FontTextStyle.kBlueDark20W600PR
-                                      .copyWith(fontSize: Get.width * 0.03),
+                                  style: FontTextStyle.kBlueDark20W600PR.copyWith(fontSize: Get.width * 0.03),
                                 ),
                                 SizedBox(
                                   height: 10,
@@ -620,8 +565,7 @@ class _HomeScreenState extends State<HomeScreen>
                                 Container(
                                   margin: EdgeInsets.only(right: 25),
                                   height: 35,
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: Get.width * 0.01),
+                                  padding: EdgeInsets.symmetric(horizontal: Get.width * 0.01),
                                   decoration: BoxDecoration(
                                     color: ColorPicker.kBlueLight,
                                     borderRadius: BorderRadius.circular(10),
@@ -641,11 +585,9 @@ class _HomeScreenState extends State<HomeScreen>
                           ),
                           SizedBox(
                             child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: Get.width * 0.02),
+                              padding: EdgeInsets.symmetric(horizontal: Get.width * 0.02),
                               child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Row(
@@ -654,10 +596,7 @@ class _HomeScreenState extends State<HomeScreen>
                                       (index) => Padding(
                                         padding: const EdgeInsets.all(4.0),
                                         child: CircleAvatar(
-                                          backgroundColor: index == 0
-                                              ? ColorPicker.kBlueLight
-                                              : ColorPicker.kBlueLight
-                                                  .withOpacity(0.3),
+                                          backgroundColor: index == 0 ? ColorPicker.kBlueLight : ColorPicker.kBlueLight.withOpacity(0.3),
                                           radius: 5,
                                         ),
                                       ),
@@ -665,10 +604,7 @@ class _HomeScreenState extends State<HomeScreen>
                                   ),
                                   Row(
                                     children: [
-                                      Icon(Icons.arrow_back_ios,
-                                          size: 20,
-                                          color: ColorPicker.kBlueLight
-                                              .withOpacity(0.5)),
+                                      Icon(Icons.arrow_back_ios, size: 20, color: ColorPicker.kBlueLight.withOpacity(0.5)),
                                       SizedBox(
                                         width: 10,
                                       ),
@@ -717,31 +653,17 @@ class _HomeScreenState extends State<HomeScreen>
               ),
               Container(
                 height: 220,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage('assets/images/public.png')),
-                    boxShadow: [
-                      BoxShadow(
-                          color: ColorPicker.kGreyDark.withOpacity(0.5),
-                          spreadRadius: 1,
-                          blurRadius: 20)
-                    ],
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10)),
+                decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/images/public.png')), boxShadow: [BoxShadow(color: ColorPicker.kGreyDark.withOpacity(0.5), spreadRadius: 1, blurRadius: 20)], color: Colors.white, borderRadius: BorderRadius.circular(10)),
               ),
               SizedBox(
                 height: 20,
               ),
               RichText(
                 text: TextSpan(
-                  text: "'We must stay at home': ",
+                  text: "'We must stay at update': ",
                   style: FontTextStyle.kRed20W600PR,
                   children: <TextSpan>[
-                    TextSpan(
-                        text:
-                            'Hong Kong expected to confirm 614 coronavirus cases',
-                        style: FontTextStyle.kPrimaryLight20W600PR),
+                    TextSpan(text: 'Hong Kong expected to confirm 614 coronavirus cases', style: FontTextStyle.kPrimaryLight20W600PR),
                   ],
                 ),
               ),
@@ -768,20 +690,7 @@ class _HomeScreenState extends State<HomeScreen>
                       children: [
                         Container(
                           height: 150,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image:
-                                      AssetImage('assets/images/public.png')),
-                              boxShadow: [
-                                BoxShadow(
-                                    color:
-                                        ColorPicker.kGreyDark.withOpacity(0.5),
-                                    spreadRadius: 1,
-                                    blurRadius: 20)
-                              ],
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10)),
+                          decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/images/public.png')), boxShadow: [BoxShadow(color: ColorPicker.kGreyDark.withOpacity(0.5), spreadRadius: 1, blurRadius: 20)], color: Colors.white, borderRadius: BorderRadius.circular(10)),
                         ),
                         SizedBox(
                           height: 20,
@@ -791,10 +700,7 @@ class _HomeScreenState extends State<HomeScreen>
                             text: "Winter Olympics/ ",
                             style: FontTextStyle.kRed20W600PR,
                             children: <TextSpan>[
-                              TextSpan(
-                                  text:
-                                      'snowboarder Su Yiming claims silver in slopestyle final',
-                                  style: FontTextStyle.kPrimaryLight20W600PR),
+                              TextSpan(text: 'snowboarder Su Yiming claims silver in slopestyle final', style: FontTextStyle.kPrimaryLight20W600PR),
                             ],
                           ),
                         ),
@@ -819,20 +725,7 @@ class _HomeScreenState extends State<HomeScreen>
                       children: [
                         Container(
                           height: 150,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image:
-                                      AssetImage('assets/images/public.png')),
-                              boxShadow: [
-                                BoxShadow(
-                                    color:
-                                        ColorPicker.kGreyDark.withOpacity(0.5),
-                                    spreadRadius: 1,
-                                    blurRadius: 20)
-                              ],
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10)),
+                          decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/images/public.png')), boxShadow: [BoxShadow(color: ColorPicker.kGreyDark.withOpacity(0.5), spreadRadius: 1, blurRadius: 20)], color: Colors.white, borderRadius: BorderRadius.circular(10)),
                         ),
                         SizedBox(
                           height: 20,
@@ -842,10 +735,7 @@ class _HomeScreenState extends State<HomeScreen>
                             text: "Winter Olympics/ ",
                             style: FontTextStyle.kRed20W600PR,
                             children: <TextSpan>[
-                              TextSpan(
-                                  text:
-                                      'snowboarder Su Yiming claims silver in slopestyle final',
-                                  style: FontTextStyle.kPrimaryLight20W600PR),
+                              TextSpan(text: 'snowboarder Su Yiming claims silver in slopestyle final', style: FontTextStyle.kPrimaryLight20W600PR),
                             ],
                           ),
                         ),
@@ -876,11 +766,7 @@ class _HomeScreenState extends State<HomeScreen>
                   text: "Winter Olympics/ ",
                   style: FontTextStyle.kRed20W600PR.copyWith(height: 1.4),
                   children: <TextSpan>[
-                    TextSpan(
-                        text:
-                            'snowboarder Su Yiming claims silver in slopestyle final',
-                        style: FontTextStyle.kPrimaryLight20W600PR
-                            .copyWith(height: 1.4)),
+                    TextSpan(text: 'snowboarder Su Yiming claims silver in slopestyle final', style: FontTextStyle.kPrimaryLight20W600PR.copyWith(height: 1.4)),
                   ],
                 ),
               ),
@@ -900,8 +786,7 @@ class _HomeScreenState extends State<HomeScreen>
 
         /// /// hamburg,DE
         Container(
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Container(
               width: Get.width,
               margin: EdgeInsets.all(Get.width * 0.02),
@@ -995,8 +880,7 @@ class _HomeScreenState extends State<HomeScreen>
                           itemBuilder: (context, index) => Column(
                             children: [
                               Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Container(
                                     height: 18,
@@ -1016,16 +900,13 @@ class _HomeScreenState extends State<HomeScreen>
                                   Expanded(
                                     child: Text(
                                       "Add your work experience",
-                                      style: TextStyle(
-                                          color: Color(0xff33A3FE),
-                                          fontSize: Get.height * 0.018),
+                                      style: TextStyle(color: Color(0xff33A3FE), fontSize: Get.height * 0.018),
                                     ),
                                   ),
                                   Container(
                                     color: Colors.black.withOpacity(0.2),
                                     height: 25,
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: Get.width * 0.006),
+                                    padding: EdgeInsets.symmetric(horizontal: Get.width * 0.006),
                                     child: Center(
                                         child: Text(
                                       '+20%',
@@ -1050,16 +931,11 @@ class _HomeScreenState extends State<HomeScreen>
                         ),
                         Container(
                           height: Get.height * 0.06,
-                          decoration: BoxDecoration(
-                              color: Color(0xFF33A3FE),
-                              borderRadius:
-                                  BorderRadius.circular(Get.height * 0.01)),
+                          decoration: BoxDecoration(color: Color(0xFF33A3FE), borderRadius: BorderRadius.circular(Get.height * 0.01)),
                           child: Center(
                             child: Text(
                               "Edit my profile",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: Get.height * 0.02),
+                              style: TextStyle(color: Colors.white, fontSize: Get.height * 0.02),
                             ),
                           ),
                         ),
@@ -1084,8 +960,7 @@ class _HomeScreenState extends State<HomeScreen>
 
         /// Videos
         Container(
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(
               'Video',
               style: TextStyle(
@@ -1120,9 +995,7 @@ class _HomeScreenState extends State<HomeScreen>
                             padding: EdgeInsets.all(Get.width * 0.025),
                             height: Get.width * 0.08,
                             width: Get.width * 0.08,
-                            decoration: BoxDecoration(
-                                color: Colors.blue,
-                                borderRadius: BorderRadius.circular(1)),
+                            decoration: BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(1)),
                             // child: Icon(Icons.play_arrow_rounded,
                             //     color: Colors.white, size: 50),
                             child: SvgPicture.asset(
@@ -1169,8 +1042,7 @@ class _HomeScreenState extends State<HomeScreen>
                           ),
                         ),
                         TextSpan(
-                          text:
-                              'snowboarder Su Yiming claims silver in slopestyle final ',
+                          text: 'snowboarder Su Yiming claims silver in slopestyle final ',
                           style: TextStyle(
                             color: Color(0xFF101E4A),
                             fontWeight: FontWeight.w600,
@@ -1213,8 +1085,7 @@ class _HomeScreenState extends State<HomeScreen>
                           ),
                         ),
                         TextSpan(
-                          text:
-                              'snowboarder Su Yiming claims silver in slopestyle final ',
+                          text: 'snowboarder Su Yiming claims silver in slopestyle final ',
                           style: TextStyle(
                             color: Color(0xFF101E4A),
                             fontWeight: FontWeight.w600,
@@ -1257,8 +1128,7 @@ class _HomeScreenState extends State<HomeScreen>
                           ),
                         ),
                         TextSpan(
-                          text:
-                              'snowboarder Su Yiming claims silver in slopestyle final ',
+                          text: 'snowboarder Su Yiming claims silver in slopestyle final ',
                           style: TextStyle(
                             color: Color(0xFF101E4A),
                             fontWeight: FontWeight.w600,
@@ -1303,9 +1173,7 @@ class _HomeScreenState extends State<HomeScreen>
                   height: Get.width * 0.3,
                   alignment: Alignment.center,
                   // width: Get.width,
-                  decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(4)),
+                  decoration: BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(4)),
                   child: Text(
                     'Widget Area',
                     style: TextStyle(
@@ -1345,11 +1213,7 @@ class _HomeScreenState extends State<HomeScreen>
                     height: 281,
                     margin: EdgeInsets.only(right: Get.width * 0.01),
                     width: 251,
-                    decoration: BoxDecoration(
-                        border:
-                            Border.all(width: 2, color: ColorPicker.kBorder1),
-                        borderRadius: BorderRadius.circular(5),
-                        color: Colors.white),
+                    decoration: BoxDecoration(border: Border.all(width: 2, color: ColorPicker.kBorder1), borderRadius: BorderRadius.circular(5), color: Colors.white),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -1359,9 +1223,7 @@ class _HomeScreenState extends State<HomeScreen>
                             height: 30,
                             width: 153,
                             margin: EdgeInsets.only(top: 16, right: 16),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(3),
-                                color: ColorPicker.kGreen),
+                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(3), color: ColorPicker.kGreen),
                             child: Center(
                                 child: Text(
                               'Premium Listing',
@@ -1374,9 +1236,7 @@ class _HomeScreenState extends State<HomeScreen>
                                 height: 32,
                               )
                             : SizedBox(),
-                        index.isOdd
-                            ? Image.asset('assets/images/fairmont_logo.png')
-                            : Image.asset('assets/images/hilton_logo.png'),
+                        index.isOdd ? Image.asset('assets/images/fairmont_logo.png') : Image.asset('assets/images/hilton_logo.png'),
                         SizedBox(
                           height: 35,
                         ),
@@ -1388,8 +1248,7 @@ class _HomeScreenState extends State<HomeScreen>
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: Text('Cluster Sales Manager - Leisure & MICE',
-                              style: FontTextStyle.kBlueDark22W600PR),
+                          child: Text('Cluster Sales Manager - Leisure & MICE', style: FontTextStyle.kBlueDark22W600PR),
                         ),
                         SizedBox(
                           height: 15,
@@ -1398,8 +1257,7 @@ class _HomeScreenState extends State<HomeScreen>
                           alignment: Alignment.centerLeft,
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 16),
-                            child: Text('Hilton, Capetown',
-                                style: FontTextStyle.kGreyDark16W600PR),
+                            child: Text('Hilton, Capetown', style: FontTextStyle.kGreyDark16W600PR),
                           ),
                         ),
                       ],
@@ -1425,31 +1283,17 @@ class _HomeScreenState extends State<HomeScreen>
               SizedBox(height: Get.width * 0.05),
               Container(
                 height: 220,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage('assets/images/public.png')),
-                    boxShadow: [
-                      BoxShadow(
-                          color: ColorPicker.kGreyDark.withOpacity(0.5),
-                          spreadRadius: 1,
-                          blurRadius: 20)
-                    ],
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10)),
+                decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/images/public.png')), boxShadow: [BoxShadow(color: ColorPicker.kGreyDark.withOpacity(0.5), spreadRadius: 1, blurRadius: 20)], color: Colors.white, borderRadius: BorderRadius.circular(10)),
               ),
               SizedBox(
                 height: 20,
               ),
               RichText(
                 text: TextSpan(
-                  text: "'We must stay at home': ",
+                  text: "'We must stay at update': ",
                   style: FontTextStyle.kRed20W600PR,
                   children: <TextSpan>[
-                    TextSpan(
-                        text:
-                            'Hong Kong expected to confirm 614 coronavirus cases',
-                        style: FontTextStyle.kPrimaryLight20W600PR),
+                    TextSpan(text: 'Hong Kong expected to confirm 614 coronavirus cases', style: FontTextStyle.kPrimaryLight20W600PR),
                   ],
                 ),
               ),
@@ -1482,8 +1326,7 @@ class _HomeScreenState extends State<HomeScreen>
                     ),
                   ),
                   TextSpan(
-                    text:
-                        'snowboarder Su Yiming claims silver in slopestyle final ',
+                    text: 'snowboarder Su Yiming claims silver in slopestyle final ',
                     style: TextStyle(
                       color: Color(0xFF101E4A),
                       fontWeight: FontWeight.w600,
@@ -1518,33 +1361,17 @@ class _HomeScreenState extends State<HomeScreen>
                       children: [
                         Container(
                           height: 150,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image:
-                                      AssetImage('assets/images/public.png')),
-                              boxShadow: [
-                                BoxShadow(
-                                    color:
-                                        ColorPicker.kGreyDark.withOpacity(0.5),
-                                    spreadRadius: 1,
-                                    blurRadius: 20)
-                              ],
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10)),
+                          decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/images/public.png')), boxShadow: [BoxShadow(color: ColorPicker.kGreyDark.withOpacity(0.5), spreadRadius: 1, blurRadius: 20)], color: Colors.white, borderRadius: BorderRadius.circular(10)),
                         ),
                         SizedBox(
                           height: 20,
                         ),
                         RichText(
                           text: TextSpan(
-                            text: "'We must stay at home': ",
+                            text: "'We must stay at update': ",
                             style: FontTextStyle.kRed20W600PR,
                             children: <TextSpan>[
-                              TextSpan(
-                                  text:
-                                      'Hong Kong expected to confirm 614 coronavirus cases',
-                                  style: FontTextStyle.kPrimaryLight20W600PR),
+                              TextSpan(text: 'Hong Kong expected to confirm 614 coronavirus cases', style: FontTextStyle.kPrimaryLight20W600PR),
                             ],
                           ),
                         ),
@@ -1569,33 +1396,17 @@ class _HomeScreenState extends State<HomeScreen>
                       children: [
                         Container(
                           height: 150,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image:
-                                      AssetImage('assets/images/public.png')),
-                              boxShadow: [
-                                BoxShadow(
-                                    color:
-                                        ColorPicker.kGreyDark.withOpacity(0.5),
-                                    spreadRadius: 1,
-                                    blurRadius: 20)
-                              ],
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10)),
+                          decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/images/public.png')), boxShadow: [BoxShadow(color: ColorPicker.kGreyDark.withOpacity(0.5), spreadRadius: 1, blurRadius: 20)], color: Colors.white, borderRadius: BorderRadius.circular(10)),
                         ),
                         SizedBox(
                           height: 20,
                         ),
                         RichText(
                           text: TextSpan(
-                            text: "'We must stay at home': ",
+                            text: "'We must stay at update': ",
                             style: FontTextStyle.kRed20W600PR,
                             children: <TextSpan>[
-                              TextSpan(
-                                  text:
-                                      'Hong Kong expected to confirm 614 coronavirus cases',
-                                  style: FontTextStyle.kPrimaryLight20W600PR),
+                              TextSpan(text: 'Hong Kong expected to confirm 614 coronavirus cases', style: FontTextStyle.kPrimaryLight20W600PR),
                             ],
                           ),
                         ),
@@ -1627,8 +1438,7 @@ class _HomeScreenState extends State<HomeScreen>
 
         ///Category Type A
         Container(
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(
             'Category Type A',
             style: FontTextStyle.kBlueDark24W600PR.copyWith(height: 1.2),
@@ -1638,18 +1448,7 @@ class _HomeScreenState extends State<HomeScreen>
           ),
           Container(
             height: 300,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: AssetImage('assets/images/alone_girl.png')),
-                boxShadow: [
-                  BoxShadow(
-                      color: ColorPicker.kGreyDark.withOpacity(0.5),
-                      spreadRadius: 1,
-                      blurRadius: 20)
-                ],
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10)),
+            decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/images/alone_girl.png')), boxShadow: [BoxShadow(color: ColorPicker.kGreyDark.withOpacity(0.5), spreadRadius: 1, blurRadius: 20)], color: Colors.white, borderRadius: BorderRadius.circular(10)),
           ),
           SizedBox(
             height: 20,
@@ -1716,31 +1515,17 @@ class _HomeScreenState extends State<HomeScreen>
                   children: [
                     Container(
                       height: 150,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage('assets/images/public.png')),
-                          boxShadow: [
-                            BoxShadow(
-                                color: ColorPicker.kGreyDark.withOpacity(0.5),
-                                spreadRadius: 1,
-                                blurRadius: 20)
-                          ],
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10)),
+                      decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/images/public.png')), boxShadow: [BoxShadow(color: ColorPicker.kGreyDark.withOpacity(0.5), spreadRadius: 1, blurRadius: 20)], color: Colors.white, borderRadius: BorderRadius.circular(10)),
                     ),
                     SizedBox(
                       height: 20,
                     ),
                     RichText(
                       text: TextSpan(
-                        text: "'We must stay at home': ",
+                        text: "'We must stay at update': ",
                         style: FontTextStyle.kRed20W600PR,
                         children: <TextSpan>[
-                          TextSpan(
-                              text:
-                                  'Hong Kong expected to confirm 614 coronavirus cases',
-                              style: FontTextStyle.kPrimaryLight20W600PR),
+                          TextSpan(text: 'Hong Kong expected to confirm 614 coronavirus cases', style: FontTextStyle.kPrimaryLight20W600PR),
                         ],
                       ),
                     ),
@@ -1765,31 +1550,17 @@ class _HomeScreenState extends State<HomeScreen>
                   children: [
                     Container(
                       height: 150,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage('assets/images/public.png')),
-                          boxShadow: [
-                            BoxShadow(
-                                color: ColorPicker.kGreyDark.withOpacity(0.5),
-                                spreadRadius: 1,
-                                blurRadius: 20)
-                          ],
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10)),
+                      decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/images/public.png')), boxShadow: [BoxShadow(color: ColorPicker.kGreyDark.withOpacity(0.5), spreadRadius: 1, blurRadius: 20)], color: Colors.white, borderRadius: BorderRadius.circular(10)),
                     ),
                     SizedBox(
                       height: 20,
                     ),
                     RichText(
                       text: TextSpan(
-                        text: "'We must stay at home': ",
+                        text: "'We must stay at update': ",
                         style: FontTextStyle.kRed20W600PR,
                         children: <TextSpan>[
-                          TextSpan(
-                              text:
-                                  'Hong Kong expected to confirm 614 coronavirus cases',
-                              style: FontTextStyle.kPrimaryLight20W600PR),
+                          TextSpan(text: 'Hong Kong expected to confirm 614 coronavirus cases', style: FontTextStyle.kPrimaryLight20W600PR),
                         ],
                       ),
                     ),
@@ -1826,8 +1597,7 @@ class _HomeScreenState extends State<HomeScreen>
                 ),
               ),
               TextSpan(
-                text:
-                    'snowboarder Su Yiming claims silver in slopestyle final ',
+                text: 'snowboarder Su Yiming claims silver in slopestyle final ',
                 style: TextStyle(
                   color: Color(0xFF101E4A),
                   fontWeight: FontWeight.w600,
@@ -1850,8 +1620,7 @@ class _HomeScreenState extends State<HomeScreen>
               margin: EdgeInsets.symmetric(vertical: Get.width * 0.01),
               alignment: Alignment.center,
               height: 268,
-              decoration: BoxDecoration(
-                  color: Colors.blue, borderRadius: BorderRadius.circular(4)),
+              decoration: BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(4)),
               child: Text(
                 'Widget Area',
                 style: TextStyle(
@@ -1883,25 +1652,19 @@ class _HomeScreenState extends State<HomeScreen>
                     height: 325,
                     margin: EdgeInsets.only(right: Get.width * 0.02),
                     width: 187,
-                    decoration: BoxDecoration(
-                        border: Border.all(width: 2, color: Color(0XFFCACACA)),
-                        borderRadius: BorderRadius.circular(5),
-                        color: Colors.white),
+                    decoration: BoxDecoration(border: Border.all(width: 2, color: Color(0XFFCACACA)), borderRadius: BorderRadius.circular(5), color: Colors.white),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
                           child: ClipRRect(
-                            borderRadius:
-                                BorderRadius.vertical(top: Radius.circular(5)),
+                            borderRadius: BorderRadius.vertical(top: Radius.circular(5)),
                             child: Image(
                               height: 150,
                               width: Get.width,
                               fit: BoxFit.fill,
-                              image: index.isEven
-                                  ? AssetImage('assets/images/nasa.png')
-                                  : AssetImage('assets/images/winter.png'),
+                              image: index.isEven ? AssetImage('assets/images/nasa.png') : AssetImage('assets/images/winter.png'),
                             ),
                           ),
                         ),
@@ -1931,8 +1694,7 @@ class _HomeScreenState extends State<HomeScreen>
                                       ),
                                     ),
                               index.isEven
-                                  ? Text(
-                                      'Nasa has expressed concern about SpaceX’s proposed second-generation',
+                                  ? Text('Nasa has expressed concern about SpaceX’s proposed second-generation',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         fontWeight: FontWeight.w600,
@@ -1954,11 +1716,9 @@ class _HomeScreenState extends State<HomeScreen>
                               Container(
                                 height: 31,
                                 width: Get.width * 0.25,
-                                decoration: BoxDecoration(
-                                    color: ColorPicker.kBlueLight),
+                                decoration: BoxDecoration(color: ColorPicker.kBlueLight),
                                 child: Center(
-                                  child: Text('Connect',
-                                      style: FontTextStyle.kWhite14W600PR),
+                                  child: Text('Connect', style: FontTextStyle.kWhite14W600PR),
                                 ),
                               ),
                             ],
@@ -1976,8 +1736,7 @@ class _HomeScreenState extends State<HomeScreen>
 
         /// Widget block type D
         Container(
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(
               'Widget block type D',
               style: TextStyle(
@@ -1990,17 +1749,13 @@ class _HomeScreenState extends State<HomeScreen>
             Container(
                 height: 270,
                 decoration: BoxDecoration(
-                  image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: AssetImage('assets/images/news.png')),
+                  image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/images/news.png')),
                 )),
             SB.SH20(),
             Container(
                 height: 560,
                 decoration: BoxDecoration(
-                  image: DecorationImage(
-                      fit: BoxFit.fill,
-                      image: AssetImage('assets/images/twitter.png')),
+                  image: DecorationImage(fit: BoxFit.fill, image: AssetImage('assets/images/twitter.png')),
                 )),
             SB.SH20(),
             Container(
@@ -2023,8 +1778,7 @@ class _HomeScreenState extends State<HomeScreen>
                           ),
                         ),
                         TextSpan(
-                          text:
-                              'snowboarder Su Yiming claims silver in slopestyle final ',
+                          text: 'snowboarder Su Yiming claims silver in slopestyle final ',
                           style: TextStyle(
                             color: Color(0xFF101E4A),
                             fontWeight: FontWeight.w600,
@@ -2068,8 +1822,7 @@ class _HomeScreenState extends State<HomeScreen>
                           ),
                         ),
                         TextSpan(
-                          text:
-                              'snowboarder Su Yiming claims silver in slopestyle final ',
+                          text: 'snowboarder Su Yiming claims silver in slopestyle final ',
                           style: TextStyle(
                             color: Color(0xFF101E4A),
                             fontWeight: FontWeight.w600,
@@ -2113,8 +1866,7 @@ class _HomeScreenState extends State<HomeScreen>
                           ),
                         ),
                         TextSpan(
-                          text:
-                              'snowboarder Su Yiming claims silver in slopestyle final ',
+                          text: 'snowboarder Su Yiming claims silver in slopestyle final ',
                           style: TextStyle(
                             color: Color(0xFF101E4A),
                             fontWeight: FontWeight.w600,
@@ -2144,8 +1896,7 @@ class _HomeScreenState extends State<HomeScreen>
 
         ///Latest Topics
         Container(
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(
               'Latest Topics',
               style: TextStyle(
@@ -2165,25 +1916,19 @@ class _HomeScreenState extends State<HomeScreen>
                   height: 299,
                   margin: EdgeInsets.only(right: Get.width * 0.02),
                   width: 187,
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 2, color: Color(0XFFCACACA)),
-                      borderRadius: BorderRadius.circular(5),
-                      color: Colors.white),
+                  decoration: BoxDecoration(border: Border.all(width: 2, color: Color(0XFFCACACA)), borderRadius: BorderRadius.circular(5), color: Colors.white),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
                         child: ClipRRect(
-                          borderRadius:
-                              BorderRadius.vertical(top: Radius.circular(5)),
+                          borderRadius: BorderRadius.vertical(top: Radius.circular(5)),
                           child: Image(
                             height: 150,
                             width: Get.width,
                             fit: BoxFit.fill,
-                            image: index.isEven
-                                ? AssetImage('assets/images/nasa.png')
-                                : AssetImage('assets/images/winter.png'),
+                            image: index.isEven ? AssetImage('assets/images/nasa.png') : AssetImage('assets/images/winter.png'),
                           ),
                         ),
                       ),
@@ -2213,8 +1958,7 @@ class _HomeScreenState extends State<HomeScreen>
                                     ),
                                   ),
                             index.isEven
-                                ? Text(
-                                    'Nasa has expressed concern about SpaceX’s proposed second-generation',
+                                ? Text('Nasa has expressed concern about SpaceX’s proposed second-generation',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontWeight: FontWeight.w600,
@@ -2254,9 +1998,7 @@ class _HomeScreenState extends State<HomeScreen>
                   itemBuilder: (context, index) {
                     return CircleAvatar(
                       // foregroundColor: Colors.red,
-                      backgroundColor: index == 0
-                          ? Color(0xFF33A3FE)
-                          : Color(0xFF33A3FE).withOpacity(0.19),
+                      backgroundColor: index == 0 ? Color(0xFF33A3FE) : Color(0xFF33A3FE).withOpacity(0.19),
                     );
                   },
                 )),
@@ -2266,8 +2008,7 @@ class _HomeScreenState extends State<HomeScreen>
 
         ///Widget block type E
         Container(
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(
               'Widget block type E',
               style: TextStyle(
@@ -2306,11 +2047,7 @@ class _HomeScreenState extends State<HomeScreen>
               ),
             ),
             SB.SH20(),
-            Divider(
-                color: Color(0xFFDADADA),
-                indent: 10,
-                endIndent: 10,
-                thickness: 1),
+            Divider(color: Color(0xFFDADADA), indent: 10, endIndent: 10, thickness: 1),
             Container(
               // color: Colors.blue,
               child: Padding(
@@ -2331,8 +2068,7 @@ class _HomeScreenState extends State<HomeScreen>
                           ),
                         ),
                         TextSpan(
-                          text:
-                              'snowboarder Su Yiming claims silver in slopestyle final ',
+                          text: 'snowboarder Su Yiming claims silver in slopestyle final ',
                           style: TextStyle(
                             color: Color(0xFF101E4A),
                             fontWeight: FontWeight.w600,
@@ -2375,8 +2111,7 @@ class _HomeScreenState extends State<HomeScreen>
                           ),
                         ),
                         TextSpan(
-                          text:
-                              'snowboarder Su Yiming claims silver in slopestyle final ',
+                          text: 'snowboarder Su Yiming claims silver in slopestyle final ',
                           style: TextStyle(
                             color: Color(0xFF101E4A),
                             fontWeight: FontWeight.w600,
@@ -2419,8 +2154,7 @@ class _HomeScreenState extends State<HomeScreen>
                           ),
                         ),
                         TextSpan(
-                          text:
-                              'snowboarder Su Yiming claims silver in slopestyle final ',
+                          text: 'snowboarder Su Yiming claims silver in slopestyle final ',
                           style: TextStyle(
                             color: Color(0xFF101E4A),
                             fontWeight: FontWeight.w600,
@@ -2446,8 +2180,7 @@ class _HomeScreenState extends State<HomeScreen>
             Container(
                 width: Get.width,
                 height: Get.width * 0.9,
-                decoration: BoxDecoration(
-                    color: Colors.blue, borderRadius: BorderRadius.circular(4)),
+                decoration: BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(4)),
                 child: Center(
                   child: Text(
                     'Widget Area',
@@ -2464,8 +2197,7 @@ class _HomeScreenState extends State<HomeScreen>
 
         ///Category
         Container(
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(
             'Category',
             style: TextStyle(
@@ -2498,7 +2230,7 @@ class _HomeScreenState extends State<HomeScreen>
                     textAlign: TextAlign.start,
                     text: TextSpan(children: [
                       TextSpan(
-                        text: '‘We must stay at home’: ',
+                        text: '‘We must stay at update’: ',
                         style: TextStyle(
                           color: Color(0xFFEF3534),
                           fontWeight: FontWeight.w600,
@@ -2506,8 +2238,7 @@ class _HomeScreenState extends State<HomeScreen>
                         ),
                       ),
                       TextSpan(
-                        text:
-                            'Hong Kong expected to confirm 614 coronavirus cases',
+                        text: 'Hong Kong expected to confirm 614 coronavirus cases',
                         style: TextStyle(
                           color: Color(0xFF101E4A),
                           fontWeight: FontWeight.w600,
@@ -2551,7 +2282,7 @@ class _HomeScreenState extends State<HomeScreen>
                     textAlign: TextAlign.start,
                     text: TextSpan(children: [
                       TextSpan(
-                        text: '‘We must stay at home’: ',
+                        text: '‘We must stay at update’: ',
                         style: TextStyle(
                           color: Color(0xFFEF3534),
                           fontWeight: FontWeight.w600,
@@ -2559,8 +2290,7 @@ class _HomeScreenState extends State<HomeScreen>
                         ),
                       ),
                       TextSpan(
-                        text:
-                            'Hong Kong expected to confirm 614 coronavirus cases',
+                        text: 'Hong Kong expected to confirm 614 coronavirus cases',
                         style: TextStyle(
                           color: Color(0xFF101E4A),
                           fontWeight: FontWeight.w600,
@@ -2604,8 +2334,7 @@ class _HomeScreenState extends State<HomeScreen>
                         ),
                       ),
                       TextSpan(
-                        text:
-                            'snowboarder Su Yiming claims silver in slopestyle final ',
+                        text: 'snowboarder Su Yiming claims silver in slopestyle final ',
                         style: TextStyle(
                           color: Color(0xFF101E4A),
                           fontWeight: FontWeight.w600,
@@ -2648,8 +2377,7 @@ class _HomeScreenState extends State<HomeScreen>
                         ),
                       ),
                       TextSpan(
-                        text:
-                            'snowboarder Su Yiming claims silver in slopestyle final ',
+                        text: 'snowboarder Su Yiming claims silver in slopestyle final ',
                         style: TextStyle(
                           color: Color(0xFF101E4A),
                           fontWeight: FontWeight.w600,
@@ -2692,8 +2420,7 @@ class _HomeScreenState extends State<HomeScreen>
                         ),
                       ),
                       TextSpan(
-                        text:
-                            'snowboarder Su Yiming claims silver in slopestyle final ',
+                        text: 'snowboarder Su Yiming claims silver in slopestyle final ',
                         style: TextStyle(
                           color: Color(0xFF101E4A),
                           fontWeight: FontWeight.w600,
@@ -2734,16 +2461,14 @@ class _HomeScreenState extends State<HomeScreen>
         children: [
           Text(
             "Hamburg, DE",
-            style: TextStyle(
-                color: Colors.white, fontSize: 32, fontWeight: FontWeight.w600),
+            style: TextStyle(color: Colors.white, fontSize: 32, fontWeight: FontWeight.w600),
           ),
           SizedBox(
             height: Get.height * 0.02,
           ),
           Text(
             "3 February 2022 15:13",
-            style: TextStyle(
-                color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
+            style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
           ),
           SizedBox(
             height: Get.height * 0.02,
@@ -2767,8 +2492,7 @@ class _HomeScreenState extends State<HomeScreen>
           ),
           Text(
             "Bedecket",
-            style: TextStyle(
-                color: Colors.white, fontSize: 22, fontWeight: FontWeight.w600),
+            style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w600),
           ),
           SizedBox(
             height: Get.height * 0.015,
@@ -2808,9 +2532,7 @@ class _HomeScreenState extends State<HomeScreen>
               Expanded(
                 child: Container(
                   height: 413,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(5)),
+                  decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(5)),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -2847,30 +2569,15 @@ class _HomeScreenState extends State<HomeScreen>
                             height: 70,
                             width: 70,
                             margin: EdgeInsets.symmetric(horizontal: 30),
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: AssetImage(
-                                        'assets/images/profile.png')),
-                                borderRadius: BorderRadius.circular(5)),
+                            decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/images/profile.png')), borderRadius: BorderRadius.circular(5)),
                           ),
                           Expanded(
                             child: Container(
                               height: 70,
                               margin: EdgeInsets.only(right: 45),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  border: Border.all(
-                                      color: ColorPicker.kBorder, width: 1),
-                                  color: ColorPicker.kGreyLight2),
+                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(5), border: Border.all(color: ColorPicker.kBorder, width: 1), color: ColorPicker.kGreyLight2),
                               child: TextField(
-                                decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintStyle:
-                                        FontTextStyle.kGreyLight318W600PR,
-                                    contentPadding:
-                                        EdgeInsets.only(top: 18, left: 10),
-                                    hintText: 'Share an update or link.....'),
+                                decoration: InputDecoration(border: InputBorder.none, hintStyle: FontTextStyle.kGreyLight318W600PR, contentPadding: EdgeInsets.only(top: 18, left: 10), hintText: 'Share an update or link.....'),
                                 style: FontTextStyle.kGreyLight318W600PR,
                               ),
                             ),
@@ -2890,8 +2597,7 @@ class _HomeScreenState extends State<HomeScreen>
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Center(
-                              child: Text('Post Update',
-                                  style: FontTextStyle.kWhite16W600PR),
+                              child: Text('Post Update', style: FontTextStyle.kWhite16W600PR),
                             ),
                           )
                         ],
@@ -2921,8 +2627,7 @@ class _HomeScreenState extends State<HomeScreen>
                             children: [
                               Text(
                                 '25%',
-                                style: FontTextStyle.kWhite83W600PR
-                                    .copyWith(fontSize: Get.width * 0.05),
+                                style: FontTextStyle.kWhite83W600PR.copyWith(fontSize: Get.width * 0.05),
                               ),
                               SizedBox(
                                 height: 20,
@@ -2953,8 +2658,7 @@ class _HomeScreenState extends State<HomeScreen>
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                              margin: EdgeInsets.symmetric(
-                                  horizontal: Get.width * 0.02),
+                              margin: EdgeInsets.symmetric(horizontal: Get.width * 0.02),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -2981,8 +2685,7 @@ class _HomeScreenState extends State<HomeScreen>
                                   Container(
                                     margin: EdgeInsets.only(right: 45),
                                     height: 47,
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: Get.width * 0.01),
+                                    padding: EdgeInsets.symmetric(horizontal: Get.width * 0.01),
                                     decoration: BoxDecoration(
                                       color: ColorPicker.kBlueLight,
                                       borderRadius: BorderRadius.circular(10),
@@ -3003,11 +2706,9 @@ class _HomeScreenState extends State<HomeScreen>
                             SizedBox(
                               width: Get.width * 0.25,
                               child: Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: Get.width * 0.02),
+                                padding: EdgeInsets.symmetric(horizontal: Get.width * 0.02),
                                 child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Row(
@@ -3016,10 +2717,7 @@ class _HomeScreenState extends State<HomeScreen>
                                         (index) => Padding(
                                           padding: const EdgeInsets.all(4.0),
                                           child: CircleAvatar(
-                                            backgroundColor: index == 0
-                                                ? ColorPicker.kBlueLight
-                                                : ColorPicker.kBlueLight
-                                                    .withOpacity(0.3),
+                                            backgroundColor: index == 0 ? ColorPicker.kBlueLight : ColorPicker.kBlueLight.withOpacity(0.3),
                                             radius: 8,
                                           ),
                                         ),
@@ -3027,10 +2725,7 @@ class _HomeScreenState extends State<HomeScreen>
                                     ),
                                     Row(
                                       children: [
-                                        Icon(Icons.arrow_back_ios,
-                                            size: 35,
-                                            color: ColorPicker.kBlueLight
-                                                .withOpacity(0.5)),
+                                        Icon(Icons.arrow_back_ios, size: 35, color: ColorPicker.kBlueLight.withOpacity(0.5)),
                                         SizedBox(
                                           width: 10,
                                         ),

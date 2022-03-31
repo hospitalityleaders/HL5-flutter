@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/sizedbox.dart';
-
-import '../../constant/fontStyle/font_style.dart';
-import '../../responsive/responsive.dart';
+import '../../../constant/fontStyle/font_style.dart';
+import '../../../responsive/responsive.dart';
 
 class NewsSingleLoggedInScreen extends StatefulWidget {
   @override
@@ -98,72 +97,83 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
       'img': 'assets/images/t1.png',
       'text1': 'Airbnb value set to soar to US\$25.5 billion',
       'text2': '',
-      'text3': 'By: Pam Carrol • 26 August 2015 • 10:40',
+      'text3': 'Pam Carrol',
+      'text4': '26 August 2015 • 10:40',
     },
     {
       'img': 'assets/images/t2.png',
       'text1':
           'Mantra Group Reports Total Revenue Increase of 9.7% for Year Ending June 2015',
       'text2': '',
-      'text3': 'By: Pam Carrol • 26 August 2015 • 10:40',
+      'text3': 'Pam Carrol',
+      'text4': '26 August 2015 • 10:40',
     },
     {
       'img': 'assets/images/t3.png',
       'text1':
           'How Technology Can Deliver a Seamless Travel Experience - Information Age',
       'text2': 'MEMBERS ONLY',
-      'text3': 'By: Pam Carrol • 26 August 2015 • 10:40',
+      'text3': 'Pam Carrol',
+      'text4': '26 August 2015 • 10:40',
     },
     {
       'img': 'assets/images/t4.png',
       'text1': 'Baha Mar Files Chapter 11 Plan of Reorganization',
       'text2': '',
-      'text3': 'By: Pam Carrol • 26 August 2015 • 10:40',
+      'text3': 'Pam Carrol',
+      'text4': '26 August 2015 • 10:40',
     },
     {
       'img': 'assets/images/t5.png',
       'text1': 'The Quincy Hotel in Downtown Washington D.C. Sold to RLHC JV',
       'text2': 'MEMBERS ONLY',
-      'text3': 'By: Pam Carrol • 26 August 2015 • 10:40',
+      'text3': 'Pam Carrol',
+      'text4': '26 August 2015 • 10:40',
     },
     {
       'img': 'assets/images/t6.png',
       'text1':
           'Welk Resorts Reports Increased Revenue and Plans for Two New Properties',
       'text2': '',
-      'text3': 'By: Pam Carrol • 26 August 2015 • 10:40',
+      'text3': 'Pam Carrol',
+      'text4': '26 August 2015 • 10:40',
     },
     {
       'img': 'assets/images/t7.png',
       'text1':
           'Welk Resorts Reports Increased Revenue and Plans for Two New Properties',
       'text2': '',
-      'text3': 'By: Pam Carrol • 26 August 2015 • 10:40',
+      'text3': 'Pam Carrol',
+      'text4': '26 August 2015 • 10:40',
     },
     {
       'img': 'assets/images/t8.png',
       'text1':
           'Hotel Price Index Reveals Midwest, Southwest and Western Cities Are Surging Domestically',
       'text2': '',
-      'text3': 'By: Pam Carrol • 26 August 2015 • 10:40',
+      'text3': 'Pam Carrol',
+      'text4': '26 August 2015 • 10:40',
     },
     {
       'img': 'assets/images/t9.png',
       'text1': 'MainStay Suites Hotel Sydney Opens in Montana',
       'text2': '',
-      'text3': 'By: Pam Carrol • 26 August 2015 • 10:40',
+      'text3': 'Pam Carrol',
+      'text4': '26 August 2015 • 10:40',
     },
     {
       'img': 'assets/images/t10.png',
       'text1': 'California raisin’ prices as deal volume drops',
       'text2': '',
-      'text3': 'By: Pam Carrol • 26 August 2015 • 10:40',
+      'text3': 'Pam Carrol',
+      'text4': '26 August 2015 • 10:40',
     },
     {
       'img': 'assets/images/t2.png',
       'text1': 'Hotel Industry Opposes NLRB Joint-Employer Decision',
       'text2': 'MEMBERS ONLY',
-      'text3': 'By: Pam Carrol • 26 August 2015 • 10:40',
+      'text3': 'Pam Carrol',
+      'text4': '26 August 2015 • 10:40',
     },
   ];
   List buttonData = [
@@ -198,7 +208,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
   Widget build(BuildContext context) {
     // CarouselController buttonCarouselController = CarouselController();
 
-    // print('${Get.width}');
+    print('${Get.width}');
     return Responsive.isDesktop(context)
         ? Scaffold(
             appBar: PreferredSize(
@@ -212,19 +222,18 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                       Image(
                         image: AssetImage('assets/icons/logo.png'),
                       ),
-                      SizedBox(
-                        width: 10,
-                      ),
+                      SB.SW10(),
+                      // SizedBox(
+                      //   width: 10,
+                      // ),
                       Container(
-                        width: 270,
-                        color: Colors.white,
+                        width: Get.width * 0.2,
+                        color: ColorPicker.kWhite,
                         child: TextFormField(
-                          cursorColor: Colors.white,
-                          style: FontTextStyle.kWhitePurePR,
+                          cursorColor: ColorPicker.kWhite,
+                          style: FontTextStyle.kWhite16W400SSP,
                           decoration: InputDecoration(
-                            hintStyle: TextStyle(
-                              color: ColorPicker.kPrimaryLightBlue,
-                            ),
+                            hintStyle: FontTextStyle.kPrimaryLightBlue16W400SSP,
                             filled: true,
                             fillColor: ColorPicker.kPrimaryLight,
                             hintText: "Search",
@@ -243,9 +252,8 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                               child: Center(
                                 child: Text(
                                   'People',
-                                  style: TextStyle(
-                                    color: ColorPicker.kPrimaryLightBlue,
-                                  ),
+                                  style:
+                                      FontTextStyle.kPrimaryLightBlue16W400SSP,
                                 ),
                               ),
                             ),
@@ -260,18 +268,22 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('Home',
-                                style: FontTextStyle.kWhitePure16W400PR),
+                            Text('Home', style: FontTextStyle.kWhite16W400SSP),
                             Text('Profile',
-                                style: FontTextStyle.kPrimaryLightBlue16W400PR),
+                                style:
+                                    FontTextStyle.kPrimaryLightBlue16W400SSP),
                             Text('News',
-                                style: FontTextStyle.kPrimaryLightBlue16W400PR),
+                                style:
+                                    FontTextStyle.kPrimaryLightBlue16W400SSP),
                             Text('Jobs',
-                                style: FontTextStyle.kPrimaryLightBlue16W400PR),
+                                style:
+                                    FontTextStyle.kPrimaryLightBlue16W400SSP),
                             Text('Recruitment',
-                                style: FontTextStyle.kPrimaryLightBlue16W400PR),
+                                style:
+                                    FontTextStyle.kPrimaryLightBlue16W400SSP),
                             Text('Help',
-                                style: FontTextStyle.kPrimaryLightBlue16W400PR),
+                                style:
+                                    FontTextStyle.kPrimaryLightBlue16W400SSP),
                           ],
                         ),
                       ),
@@ -300,13 +312,13 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                 height: 16,
                                 width: 16,
                                 decoration: BoxDecoration(
-                                  color: ColorPicker.kRed1,
+                                  color: ColorPicker.kRed,
                                   borderRadius: BorderRadius.circular(3),
                                 ),
                                 child: Center(
                                   child: Text(
                                     '2',
-                                    style: FontTextStyle.kWhitePure12W700PR,
+                                    style: FontTextStyle.kWhite12W700SSP,
                                   ),
                                 ),
                               ),
@@ -336,13 +348,13 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                 height: 16,
                                 width: 16,
                                 decoration: BoxDecoration(
-                                  color: ColorPicker.kRed1,
+                                  color: ColorPicker.kRed,
                                   borderRadius: BorderRadius.circular(3),
                                 ),
                                 child: Center(
                                   child: Text(
                                     '2',
-                                    style: FontTextStyle.kWhitePure12W700PR,
+                                    style: FontTextStyle.kWhite12W700SSP,
                                   ),
                                 ),
                               ),
@@ -417,15 +429,15 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        SizedBox(
-                          width: Get.width * 0.25,
-                        ),
+                        // SizedBox(
+                        //   width: Get.width * 0.25,
+                        // ),
                         InkWell(
                           onTap: () {},
                           child: Center(
                             child: Text(
                               "New to Hospitality Leaders? Sign up now to join our membership",
-                              style: FontTextStyle.kBlueLight114W400PR,
+                              style: FontTextStyle.kBlueLight116W400SSP,
                             ),
                           ),
                         ),
@@ -433,20 +445,21 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                           width: Get.width * 0.01,
                         ),
                         Container(
+                          padding: EdgeInsets.symmetric(horizontal: 16),
                           height: Get.height * 0.032,
-                          width: Get.width * 0.08,
+                          // width: Get.width * 0.08,
                           decoration: BoxDecoration(
                               color: Color(0xff32A3FD),
                               borderRadius: BorderRadius.circular(2)),
                           child: Center(
                               child: Text(
                             "Join now. It’s free",
-                            style: FontTextStyle.kWhite12W400PR,
+                            style: FontTextStyle.kWhite14W400SSP,
                           )),
                         ),
-                        SizedBox(
-                          width: Get.width * 0.25,
-                        ),
+                        // SizedBox(
+                        //   width: Get.width * 0.25,
+                        // ),
                       ],
                     ),
                   ),
@@ -465,17 +478,16 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                         child: Column(
                           children: [
                             Container(
-                              height: Get.height * 0.03,
+                              height: 30,
                               width: Get.width,
-                              color: Color(0xff272E41).withOpacity(0.1),
+                              color: Color(0xff272E41).withOpacity(0.25),
                               child: Align(
-                                alignment: Alignment.topLeft,
+                                alignment: Alignment.centerLeft,
                                 child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 120.0, top: 7),
+                                  padding: const EdgeInsets.only(left: 90),
                                   child: Text(
                                     "Send news to: editor@hospitality.pro ",
-                                    style: FontTextStyle.kWhite12W400PR,
+                                    style: FontTextStyle.kWhite14W400SSP,
                                   ),
                                 ),
                               ),
@@ -487,27 +499,33 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                         bottom: -50,
                         left: 60,
                         child: Container(
-                          height: Get.height * 0.18,
+                          // height: Get.height * 0.22,
                           width: Get.width * 0.6,
                           decoration: BoxDecoration(
-                              color: Colors.white,
-                              border: Border(bottom: BorderSide(width: 0.1))),
+                            color: ColorPicker.kWhite,
+                            border: Border(
+                              bottom: BorderSide(
+                                width: 1,
+                                color: ColorPicker.kGreyLight8,
+                              ),
+                            ),
+                          ),
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(
+                            padding: EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 10),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   "RESOURCES",
-                                  style: FontTextStyle.kGreyLight510W700PR,
+                                  style: FontTextStyle.kGreyLight512W700SSP,
                                 ),
                                 SizedBox(
                                   height: Get.height * 0.005,
                                 ),
                                 Text(
                                   "5 Steps for Travel Brands to Build a Brand Ambassador Program",
-                                  style: FontTextStyle.kBlackPure30W400PR,
+                                  style: FontTextStyle.kBlueDark136W400SSP,
                                 ),
                                 SizedBox(
                                   height: Get.height * 0.006,
@@ -532,28 +550,108 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          "By: Pam Carrol",
-                                          style:
-                                              FontTextStyle.kGreyLight515W600PR,
+                                        RichText(
+                                          text: TextSpan(
+                                            text: "By: ",
+                                            style: FontTextStyle
+                                                .kGreyLight514W400SSP,
+                                            children: [
+                                              TextSpan(
+                                                text: "Pam Carrol",
+                                                style: FontTextStyle
+                                                    .kGreyLight514W600PR,
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                         SizedBox(
                                           height: Get.height * 0.005,
                                         ),
                                         Text(
-                                          "26 August 2015   •   10:40",
-                                          style:
-                                              FontTextStyle.kGreyLight515W600PR,
+                                          "26 August 2015  •  10:40",
+                                          style: FontTextStyle
+                                              .kGreyLight514W400SSP,
                                         )
                                       ],
                                     ),
                                     SizedBox(
-                                      width: Get.width * 0.03,
+                                      width: Get.width * 0.01,
+                                    ),
+                                    Container(
+                                      height: 20,
+                                      child: VerticalDivider(
+                                        // width: 2,
+                                        thickness: 1,
+                                        color: ColorPicker.kGreyLight6,
+                                      ),
                                     ),
                                     SizedBox(
                                       width: Get.width * 0.02,
                                     ),
+                                    Container(
+                                      width: Get.width * 0.35,
+                                      // color: Colors.grey,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Container(
+                                            height: 13,
+                                            width: 13,
+                                            color: Colors.red,
+                                          ),
+                                          Text(
+                                            '112',
+                                            style: FontTextStyle
+                                                .kGreyLight514W400SSP,
+                                          ),
+                                          Container(
+                                            height: 13,
+                                            width: 13,
+                                            color: Colors.blue,
+                                          ),
+                                          Text(
+                                            '56',
+                                            style: FontTextStyle
+                                                .kGreyLight514W400SSP,
+                                          ),
+                                          Container(
+                                            height: 13,
+                                            width: 13,
+                                            color: Colors.green,
+                                          ),
+                                          Text(
+                                            '321',
+                                            style: FontTextStyle
+                                                .kGreyLight514W400SSP,
+                                          ),
+                                          Container(
+                                            height: 13,
+                                            width: 13,
+                                            color: Colors.yellow,
+                                          ),
+                                          Text(
+                                            '22',
+                                            style: FontTextStyle
+                                                .kGreyLight514W400SSP,
+                                          ),
+                                          Container(
+                                            height: 13,
+                                            width: 13,
+                                            color: Colors.pink,
+                                          ),
+                                          Text(
+                                            '13',
+                                            style: FontTextStyle
+                                                .kGreyLight514W400SSP,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ],
+                                ),
+                                SizedBox(
+                                  height: Get.height * 0.02,
                                 ),
                               ],
                             ),
@@ -572,32 +670,39 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(
-                              height: Get.height * 0.07,
+                              height: Get.height * 0.1,
                             ),
-                            Container(
-                              // height: 72,
-                              // width: 712,
-                              // color: Colors.green,
-                              child: Text(
-                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quisnostrud exercitation ullamco.",
-                                style: FontTextStyle.kBlackPure18W400PR,
-                              ),
+                            Text(
+                              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quisnostrud exercitation ullamco.",
+                              style: FontTextStyle.kBlueDark120W400SSP
+                                  .copyWith(height: 1.5),
                             ),
                             SizedBox(
-                              height: Get.height * 0.01,
+                              height: Get.height * 0.02,
                             ),
-                            Container(
-                              // height: 175,
-                              // width: 712,
-                              // color: Colors.red,
-                              // color: Colors.green,
-                              child: Text(
-                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\n  \nExcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.\n\n n Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.",
-                                style: FontTextStyle.kGreyLight516W400PR,
-                              ),
+                            Text(
+                              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+                              style: FontTextStyle.kGreyLight516W400SSP
+                                  .copyWith(height: 1.5),
                             ),
                             SizedBox(
-                              height: Get.height * 0.01,
+                              height: Get.height * 0.02,
+                            ),
+                            Text(
+                              "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
+                              style: FontTextStyle.kGreyLight516W400SSP
+                                  .copyWith(height: 1.5),
+                            ),
+                            SizedBox(
+                              height: Get.height * 0.02,
+                            ),
+                            Text(
+                              "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.",
+                              style: FontTextStyle.kGreyLight516W400SSP
+                                  .copyWith(height: 1.5),
+                            ),
+                            SizedBox(
+                              height: Get.height * 0.05,
                             ),
                             Container(
                               // height: 434,
@@ -758,7 +863,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                               height: Get.height * 0.01,
                             ),
                             Divider(
-                              color: ColorPicker.kGreyLight5,
+                              color: ColorPicker.kGreyLight8,
                               thickness: 2,
                             ),
                             SizedBox(
@@ -766,50 +871,66 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                             ),
                             Text(
                               'Lorem ipsum dolor sit amet',
-                              style: FontTextStyle.kBlackPure18W700PR,
+                              style: FontTextStyle.kBlueDark118W700SSP
+                                  .copyWith(height: 1.5),
                             ),
                             SizedBox(
                               height: 20,
                             ),
                             Text(
-                              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.',
-                              style: FontTextStyle.kGreyLight516W400PR,
+                              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. '
+                              'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.',
+                              style: FontTextStyle.kGreyLight516W400SSP
+                                  .copyWith(height: 1.5),
                             ),
                             SizedBox(
                               height: 20,
                             ),
                             Text(
                               'Numbered List',
-                              style: FontTextStyle.kBlackPure18W700PR,
+                              style: FontTextStyle.kBlueDark118W700SSP
+                                  .copyWith(height: 1.5),
                             ),
                             SizedBox(
                               height: 20,
                             ),
                             ListTile(
-                              leading: Text('1.',
-                                  textAlign: TextAlign.start,
-                                  style: FontTextStyle.kGreyLight516W400PR),
+                              leading: Text(
+                                '1.',
+                                textAlign: TextAlign.start,
+                                style: FontTextStyle.kGreyLight516W400SSP
+                                    .copyWith(height: 1.5),
+                              ),
                               title: Text(
                                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                                style: FontTextStyle.kGreyLight516W400PR,
+                                style: FontTextStyle.kGreyLight516W400SSP
+                                    .copyWith(height: 1.5),
                               ),
                             ),
                             ListTile(
-                              leading: Text('2.',
-                                  textAlign: TextAlign.start,
-                                  style: FontTextStyle.kGreyLight516W400PR),
+                              leading: Text(
+                                '2.',
+                                textAlign: TextAlign.start,
+                                style: FontTextStyle.kGreyLight516W400SSP
+                                    .copyWith(height: 1.5),
+                              ),
                               title: Text(
                                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                                style: FontTextStyle.kGreyLight516W400PR,
+                                style: FontTextStyle.kGreyLight516W400SSP
+                                    .copyWith(height: 1.5),
                               ),
                             ),
                             ListTile(
-                              leading: Text('3.',
-                                  textAlign: TextAlign.start,
-                                  style: FontTextStyle.kGreyLight516W400PR),
+                              leading: Text(
+                                '3.',
+                                textAlign: TextAlign.start,
+                                style: FontTextStyle.kGreyLight516W400SSP
+                                    .copyWith(height: 1.5),
+                              ),
                               title: Text(
                                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                                style: FontTextStyle.kGreyLight516W400PR,
+                                style: FontTextStyle.kGreyLight516W400SSP
+                                    .copyWith(height: 1.5),
                               ),
                             ),
                             SizedBox(
@@ -817,7 +938,8 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                             ),
                             Text(
                               'Bulleted List',
-                              style: FontTextStyle.kBlackPure18W700PR,
+                              style: FontTextStyle.kBlueDark118W700SSP
+                                  .copyWith(height: 1.5),
                             ),
                             SizedBox(
                               height: 20,
@@ -826,33 +948,39 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                               leading: Text(
                                 '\u2022',
                                 textAlign: TextAlign.start,
-                                style: FontTextStyle.kGreyLight516W400PR,
+                                style: FontTextStyle.kGreyLight516W400SSP
+                                    .copyWith(height: 1.5),
                               ),
                               title: Text(
                                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                                style: FontTextStyle.kGreyLight516W400PR,
+                                style: FontTextStyle.kGreyLight516W400SSP
+                                    .copyWith(height: 1.5),
                               ),
                             ),
                             ListTile(
                               leading: Text(
                                 '\u2022',
                                 textAlign: TextAlign.start,
-                                style: FontTextStyle.kGreyLight516W400PR,
+                                style: FontTextStyle.kGreyLight516W400SSP
+                                    .copyWith(height: 1.5),
                               ),
                               title: Text(
                                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                                style: FontTextStyle.kGreyLight516W400PR,
+                                style: FontTextStyle.kGreyLight516W400SSP
+                                    .copyWith(height: 1.5),
                               ),
                             ),
                             ListTile(
                               leading: Text(
                                 '\u2022',
                                 textAlign: TextAlign.start,
-                                style: FontTextStyle.kGreyLight516W400PR,
+                                style: FontTextStyle.kGreyLight516W400SSP
+                                    .copyWith(height: 1.5),
                               ),
                               title: Text(
                                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                                style: FontTextStyle.kGreyLight516W400PR,
+                                style: FontTextStyle.kGreyLight516W400SSP
+                                    .copyWith(height: 1.5),
                               ),
                             ),
                             SizedBox(
@@ -871,7 +999,8 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                 Flexible(
                                   child: Text(
                                     'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex',
-                                    style: FontTextStyle.kBlackPure20W400PR,
+                                    style: FontTextStyle.kBlueDark120W400SSP
+                                        .copyWith(height: 1.5),
                                   ),
                                 ),
                                 Container(
@@ -888,14 +1017,16 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                             ),
                             Text(
                               'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-                              style: FontTextStyle.kGreyLight516W400PR,
+                              style: FontTextStyle.kGreyLight516W400SSP
+                                  .copyWith(height: 1.5),
                             ),
                             SizedBox(
                               height: 20,
                             ),
                             Text(
                               'TAGS:',
-                              style: FontTextStyle.kGreyLight516W400PR,
+                              style: FontTextStyle.kGreyLight612W700SSP
+                                  .copyWith(height: 1.5),
                             ),
                             SizedBox(
                               height: 20,
@@ -911,7 +1042,8 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                     padding: EdgeInsets.only(right: 8.0),
                                     child: Text(
                                       '#Hospitality',
-                                      style: FontTextStyle.kGreyLight614W400PR,
+                                      style: FontTextStyle.kGreyLight614W400SSP
+                                          .copyWith(height: 1.5),
                                     ),
                                   ),
                                 ),
@@ -922,7 +1054,8 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                             ),
                             Text(
                               'Share This Article:',
-                              style: FontTextStyle.kGreyLight516W400PR,
+                              style: FontTextStyle.kGreyLight612W700SSP
+                                  .copyWith(height: 1.5),
                             ),
                             SizedBox(
                               height: 20,
@@ -933,39 +1066,25 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                 crossAxisAlignment: WrapCrossAlignment.end,
                                 alignment: WrapAlignment.start,
                                 children: List.generate(
-                                    5,
-                                    (index) => Container(
-                                          margin: EdgeInsets.only(right: 10),
-                                          width: 100,
-                                          height: 36,
-                                          child: Image(
-                                              image: AssetImage(
-                                                  '${buttonData[index]['img']}')),
-                                          decoration: BoxDecoration(
-                                            color: buttonData[index]['color'],
-                                            borderRadius:
-                                                BorderRadius.circular(2),
-                                          ),
-                                        )),
-                                // ListView.builder(
-                                //   itemCount: 5,
-                                //   shrinkWrap: true,
-                                //   // scrollDirection: Axis.horizontal,
-                                //   physics: NeverScrollableScrollPhysics(),
-                                //   itemBuilder: (context, index) {
-                                //     return Row(
-                                //       children: [
-                                //         Text('#AAA'),
-                                //         SizedBox(width: 10),
-                                //       ],
-                                //     );
-                                //   },
-                                // )
+                                  5,
+                                  (index) => Container(
+                                    margin: EdgeInsets.only(right: 10),
+                                    width: 100,
+                                    height: 36,
+                                    child: Image(
+                                        image: AssetImage(
+                                            '${buttonData[index]['img']}')),
+                                    decoration: BoxDecoration(
+                                      color: buttonData[index]['color'],
+                                      borderRadius: BorderRadius.circular(2),
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
                             Divider(
                               thickness: 2,
-                              color: Color(0xFFDEE1E3),
+                              color: ColorPicker.kGreyLight8,
                             ),
                             Row(
                               children: [
@@ -979,14 +1098,15 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                     Image(
                                       image:
                                           AssetImage('assets/icons/like.png'),
-                                      height: 15,
-                                      width: 16,
+                                      height: 11,
+                                      width: 10,
                                       fit: BoxFit.cover,
                                     ),
                                     SizedBox(width: 5),
                                     Text(
                                       'Like',
-                                      style: FontTextStyle.kBlueLight114W400PR,
+                                      style: FontTextStyle.kBlueLight114W400SSP
+                                          .copyWith(height: 1.5),
                                     ),
                                     SizedBox(width: 5),
                                     Container(
@@ -998,8 +1118,9 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                       ),
                                       child: Text(
                                         '12',
-                                        style:
-                                            FontTextStyle.kBlueLight112W700PR,
+                                        style: FontTextStyle
+                                            .kBlueLight112W700SSP
+                                            .copyWith(height: 1.5),
                                       ),
                                     )
                                   ]),
@@ -1014,14 +1135,15 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                     Image(
                                       image: AssetImage(
                                           'assets/icons/comment.png'),
-                                      height: 15,
-                                      width: 16,
+                                      height: 11,
+                                      width: 10,
                                       fit: BoxFit.cover,
                                     ),
                                     SizedBox(width: 5),
                                     Text(
                                       'Comment',
-                                      style: FontTextStyle.kBlueLight114W400PR,
+                                      style: FontTextStyle.kBlueLight114W400SSP
+                                          .copyWith(height: 1.5),
                                     ),
                                     SizedBox(width: 5),
                                     Container(
@@ -1033,8 +1155,9 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                       ),
                                       child: Text(
                                         '5',
-                                        style:
-                                            FontTextStyle.kBlueLight112W700PR,
+                                        style: FontTextStyle
+                                            .kBlueLight112W700SSP
+                                            .copyWith(height: 1.5),
                                       ),
                                     )
                                   ]),
@@ -1052,15 +1175,16 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                         Image(
                                           image: AssetImage(
                                               'assets/icons/share.png'),
-                                          height: 15,
-                                          width: 16,
+                                          height: 11,
+                                          width: 10,
                                           fit: BoxFit.cover,
                                         ),
                                         SizedBox(width: 5),
                                         Text(
                                           'Share',
-                                          style:
-                                              FontTextStyle.kBlueLight114W400PR,
+                                          style: FontTextStyle
+                                              .kBlueLight114W400SSP
+                                              .copyWith(height: 1.5),
                                         ),
                                         SizedBox(width: 5),
                                         Container(
@@ -1074,7 +1198,8 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                           child: Text(
                                             '0',
                                             style: FontTextStyle
-                                                .kBlueLight112W700PR,
+                                                .kBlueLight112W700SSP
+                                                .copyWith(height: 1.5),
                                           ),
                                         )
                                       ]),
@@ -1106,7 +1231,8 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                   SizedBox(width: 5),
                                   Text(
                                     'Show previous comments',
-                                    style: FontTextStyle.kBlueLight114W600PR,
+                                    style: FontTextStyle.kBlueLight114W600SSP
+                                        .copyWith(height: 1.5),
                                   ),
                                 ],
                               ),
@@ -1150,29 +1276,31 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                                 text: TextSpan(
                                                   text: "Jad Limacino",
                                                   style: FontTextStyle
-                                                      .kBlackPure16W600PR,
+                                                      .kBlueDark116W700SSP
+                                                      .copyWith(height: 1.5),
                                                   children: <TextSpan>[
                                                     TextSpan(
-                                                      text: 'MHL',
-                                                      style: TextStyle(
-                                                          textBaseline:
-                                                              TextBaseline
-                                                                  .ideographic,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          fontSize: 12),
+                                                      text: ' MHL',
+                                                      style: FontTextStyle
+                                                          .kBlueDark112W700SSP
+                                                          .copyWith(
+                                                        height: 1.5,
+                                                        textBaseline:
+                                                            TextBaseline
+                                                                .ideographic,
+                                                      ),
                                                     ),
                                                     TextSpan(
                                                       text:
                                                           "  Very interesting indeed. I’ll be watching this very closely as they expand further into Asia.",
-                                                      style: TextStyle(
-                                                          textBaseline:
-                                                              TextBaseline
-                                                                  .ideographic,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          color: Colors.grey,
-                                                          fontSize: 16),
+                                                      style: FontTextStyle
+                                                          .kGreyLight516W400SSP
+                                                          .copyWith(
+                                                        height: 1.5,
+                                                        textBaseline:
+                                                            TextBaseline
+                                                                .ideographic,
+                                                      ),
                                                     ),
                                                   ],
                                                 ),
@@ -1187,31 +1315,34 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                               children: [
                                                 Text(
                                                   'like • ',
-                                                  style: TextStyle(
-                                                      color: Colors.blue,
-                                                      fontSize: 14),
+                                                  style: FontTextStyle
+                                                      .kBlueLight114W400SSP
+                                                      .copyWith(height: 1.5),
                                                 ),
                                                 Text(
                                                   'Reply • ',
-                                                  style: TextStyle(
-                                                      color: Colors.blue,
-                                                      fontSize: 14),
+                                                  style: FontTextStyle
+                                                      .kBlueLight114W400SSP
+                                                      .copyWith(height: 1.5),
                                                 ),
-                                                Icon(
-                                                  Icons.thumb_up_alt,
-                                                  color: Colors.blue,
+                                                Image(
+                                                  image: AssetImage(
+                                                      'assets/icons/like.png'),
+                                                  height: 11,
+                                                  width: 10,
+                                                  fit: BoxFit.cover,
                                                 ),
                                                 Text(
                                                   ' 12',
-                                                  style: TextStyle(
-                                                      color: Colors.blue,
-                                                      fontSize: 14),
+                                                  style: FontTextStyle
+                                                      .kBlueLight114W400SSP
+                                                      .copyWith(height: 1.5),
                                                 ),
                                                 Text(
                                                   ' • 5 hours ago',
-                                                  style: TextStyle(
-                                                      color: Colors.grey,
-                                                      fontSize: 14),
+                                                  style: FontTextStyle
+                                                      .kGreyLight614W400SSP
+                                                      .copyWith(height: 1.5),
                                                 ),
                                               ],
                                             ),
@@ -1248,32 +1379,31 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                               child: RichText(
                                                 text: TextSpan(
                                                   text: "Jad Limacino",
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      fontSize: 16),
+                                                  style: FontTextStyle
+                                                      .kBlueDark116W700SSP
+                                                      .copyWith(height: 1.5),
                                                   children: <TextSpan>[
                                                     TextSpan(
                                                       text: ' MHL',
-                                                      style: TextStyle(
-                                                          textBaseline:
-                                                              TextBaseline
-                                                                  .ideographic,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          fontSize: 12),
+                                                      style: FontTextStyle
+                                                          .kBlueDark112W700SSP
+                                                          .copyWith(
+                                                        height: 1.5,
+                                                        textBaseline:
+                                                            TextBaseline
+                                                                .ideographic,
+                                                      ),
                                                     ),
                                                     TextSpan(
-                                                      text:
-                                                          "  Very interesting indeed. I’ll be watching this very closely as they expand further into Asia.",
-                                                      style: TextStyle(
-                                                          textBaseline:
-                                                              TextBaseline
-                                                                  .ideographic,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          color: Colors.grey,
-                                                          fontSize: 16),
+                                                      text: "  Definetely.",
+                                                      style: FontTextStyle
+                                                          .kGreyLight516W400SSP
+                                                          .copyWith(
+                                                        height: 1.5,
+                                                        textBaseline:
+                                                            TextBaseline
+                                                                .ideographic,
+                                                      ),
                                                     ),
                                                   ],
                                                 ),
@@ -1287,38 +1417,45 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                                   MainAxisAlignment.end,
                                               children: [
                                                 Text(
-                                                  'like • ',
-                                                  style: TextStyle(
-                                                      color: Colors.blue,
-                                                      fontSize: 14),
+                                                  'Like',
+                                                  style: FontTextStyle
+                                                      .kBlueLight114W400SSP
+                                                      .copyWith(height: 1.5),
                                                 ),
                                                 Text(
-                                                  'Reply • ',
-                                                  style: TextStyle(
-                                                      color: Colors.blue,
-                                                      fontSize: 14),
-                                                ),
-                                                Icon(
-                                                  Icons.thumb_up_alt,
-                                                  color: Colors.blue,
+                                                  ' • ',
+                                                  style: FontTextStyle
+                                                      .kGreyLight614W400SSP
+                                                      .copyWith(height: 1.5),
                                                 ),
                                                 Text(
-                                                  ' 12',
-                                                  style: TextStyle(
-                                                      color: Colors.blue,
-                                                      fontSize: 14),
+                                                  'Reply',
+                                                  style: FontTextStyle
+                                                      .kBlueLight114W400SSP
+                                                      .copyWith(height: 1.5),
                                                 ),
+                                                // Icon(
+                                                //   Icons.thumb_up_alt,
+                                                //   color: Colors.blue,
+                                                // ),
+                                                // Text(
+                                                //   ' 12',
+                                                //   style: TextStyle(
+                                                //       color: Colors.blue,
+                                                //       fontSize: 14),
+                                                // ),
                                                 Text(
-                                                  ' • 5 hours ago',
-                                                  style: TextStyle(
-                                                      color: Colors.grey,
-                                                      fontSize: 14),
+                                                  '  •  5 hours ago',
+                                                  style: FontTextStyle
+                                                      .kGreyLight614W400SSP
+                                                      .copyWith(height: 1.5),
                                                 ),
                                               ],
                                             ),
-                                            SizedBox(
-                                              height: 20,
-                                            ),
+                                            SB.SH20(),
+                                            // SizedBox(
+                                            //   height: 20,
+                                            // ),
                                           ],
                                         )
                                       ],
@@ -1339,9 +1476,10 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                           image: AssetImage(
                                               'assets/images/avatar.png'))),
                                 ),
-                                SizedBox(
-                                  width: 20,
-                                ),
+                                // SizedBox(
+                                //   width: 20,
+                                // ),
+                                SB.SW20(),
                                 Flexible(
                                   child: Container(
                                       // height: 40,
@@ -1353,19 +1491,23 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                               color: Color(0xFFDEE1E3))),
                                       child: TextField(
                                         decoration: InputDecoration(
+                                            contentPadding:
+                                                EdgeInsets.only(left: 10),
                                             border: InputBorder.none,
+                                            hintStyle: FontTextStyle
+                                                .kGreyLight514W400SSP,
                                             hintText: 'Leave a comment'),
                                       )),
                                 )
                               ],
                             ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Divider(thickness: 2),
-                            SizedBox(
-                              height: 20,
-                            ),
+                            // SizedBox(
+                            //   height: 10,
+                            // ),
+                            SB.SH10(),
+                            Divider(
+                                thickness: 2, color: ColorPicker.kGreyLight10),
+                            SB.SH20(),
                             Row(
                               children: [
                                 Flexible(
@@ -1376,7 +1518,8 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                 )),
                                 Text(
                                   'SUGGESTED NEWS',
-                                  style: FontTextStyle.kGreyLight513W700PR,
+                                  style: FontTextStyle.kGreyLight513W700SSP
+                                      .copyWith(height: 1.5),
                                 ),
                                 Flexible(
                                     child: Divider(
@@ -1386,9 +1529,10 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                 )),
                               ],
                             ),
-                            SizedBox(
-                              height: 20,
-                            ),
+                            SB.SH20(),
+                            // SizedBox(
+                            //   height: 20,
+                            // ),
                             Container(
                               height: 400,
                               // width: 400,
@@ -1403,7 +1547,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                     margin: EdgeInsets.only(bottom: 10),
                                     height: 400,
                                     width: 400,
-                                    color: Colors.white,
+                                    color: ColorPicker.kWhite,
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -1415,47 +1559,91 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                           width: 400,
                                           fit: BoxFit.cover,
                                         ),
+                                        SB.SH10(),
                                         Flexible(
                                           child: Container(
                                               child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
+                                                MainAxisAlignment.start,
                                             children: [
                                               Text(
                                                 '${suggestNewsData[index]['text1']}',
                                                 style: FontTextStyle
-                                                    .kBlackPure18W700PR,
+                                                    .kBlueDark118W700SSP
+                                                    .copyWith(height: 1.5),
                                               ),
-                                              Text(
-                                                '${suggestNewsData[index]['text3']}',
-                                                style: FontTextStyle
-                                                    .kGreyLight514W600PR,
-                                              ),
-                                              suggestNewsData[index]['text2']
-                                                      .toString()
-                                                      .isEmpty
-                                                  ? SizedBox()
-                                                  : Container(
-                                                      padding:
-                                                          EdgeInsets.all(5),
-                                                      child: Text(
-                                                        'MEMBERS ONLY',
-                                                        style: FontTextStyle
-                                                            .kRed10W400PR,
-                                                      ),
-                                                      decoration: BoxDecoration(
-                                                        color:
-                                                            Color(0xFFFECDCC),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(2),
-                                                      ),
+                                              SB.SH10(),
+                                              Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceAround,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  RichText(
+                                                    text: TextSpan(
+                                                      text: "By: ",
+                                                      style: FontTextStyle
+                                                          .kGreyLight514W400SSP
+                                                          .copyWith(
+                                                              height: 1.5),
+                                                      children: [
+                                                        TextSpan(
+                                                          text:
+                                                              '${suggestNewsData[index]['text3']}',
+                                                          style: FontTextStyle
+                                                              .kGreyLight514W600SSP
+                                                              .copyWith(
+                                                                  height: 1.5),
+                                                        ),
+                                                      ],
                                                     ),
+                                                  ),
+                                                  SizedBox(
+                                                    height: Get.height * 0.005,
+                                                  ),
+                                                  Text(
+                                                    "26 August 2015  •  10:40",
+                                                    style: FontTextStyle
+                                                        .kGreyLight514W400SSP
+                                                        .copyWith(height: 1.5),
+                                                  )
+                                                ],
+                                              ),
+
+                                              // Text(
+                                              //   '${suggestNewsData[index]['text3']}',
+                                              //   style: FontTextStyle
+                                              //       .kGreyLight514W600PR,
+                                              // ),
+                                              // suggestNewsData[index]['text2']
+                                              //         .toString()
+                                              //         .isEmpty
+                                              //     ? SizedBox()
+                                              //     : Container(
+                                              //         padding:
+                                              //             EdgeInsets.all(5),
+                                              //         child: Text(
+                                              //           'MEMBERS ONLY',
+                                              //           style: FontTextStyle
+                                              //               .kRed10W400PR,
+                                              //         ),
+                                              //         decoration: BoxDecoration(
+                                              //           color:
+                                              //               Color(0xFFFECDCC),
+                                              //           borderRadius:
+                                              //               BorderRadius
+                                              //                   .circular(2),
+                                              //         ),
+                                              //       ),
                                             ],
                                           )),
                                         ),
+                                        Divider(
+                                            thickness: 2,
+                                            color: ColorPicker.kGreyLight10),
                                       ],
                                     ),
                                   );
@@ -1472,13 +1660,11 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                             left: 100, bottom: 420, right: 70),
                         child: Column(
                           children: [
-                            SizedBox(
-                              height: 20,
-                            ),
+                            SB.SH20(),
                             Container(
                               height: 325,
                               width: Get.width,
-                              color: Color(0xff0D9BDC),
+                              color: ColorPicker.kBlueLight3,
                               child: Stack(
                                 children: [
                                   Positioned(
@@ -1512,12 +1698,13 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                                 children: [
                                                   Icon(
                                                     Icons.apartment_rounded,
-                                                    color: Colors.white,
+                                                    // color: Colors.white,
+                                                    color: ColorPicker.kWhite,
                                                   ),
                                                   Container(
                                                     width: 2,
                                                     height: 150,
-                                                    color: Colors.white,
+                                                    color: ColorPicker.kWhite,
                                                   ),
                                                 ],
                                               ),
@@ -1531,14 +1718,14 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                                 Text(
                                                   'TIMELINE',
                                                   style: FontTextStyle
-                                                      .kWhitePure12W700PR,
+                                                      .kWhite12W700SSP,
                                                 ),
                                                 SizedBox(
                                                   width: Get.width * 0.16,
                                                   child: Text(
                                                     'Become a thought leader on hospitality',
                                                     style: FontTextStyle
-                                                        .kWhitePure36W400PR,
+                                                        .kBlueLight236W400SSP,
                                                   ),
                                                 ),
                                               ],
@@ -1556,7 +1743,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                                 children: [
                                                   Icon(
                                                     Icons.reduce_capacity_sharp,
-                                                    color: Colors.white,
+                                                    color: ColorPicker.kWhite,
                                                   ),
                                                   SizedBox(
                                                     height: 10,
@@ -1564,7 +1751,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                                   Container(
                                                     width: 2,
                                                     height: 20,
-                                                    color: Colors.white,
+                                                    color: ColorPicker.kWhite,
                                                   ),
                                                 ],
                                               ),
@@ -1578,7 +1765,8 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                                 Container(
                                                   height: 36,
                                                   width: 205,
-                                                  color: Color(0xffCCE8FE),
+                                                  color:
+                                                      ColorPicker.kBlueLight2,
                                                   child: Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
@@ -1586,7 +1774,8 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                                     children: [
                                                       Icon(
                                                         Icons.message,
-                                                        color: Colors.blue,
+                                                        color: ColorPicker
+                                                            .kBlueLight1,
                                                         size: 10,
                                                       ),
                                                       SizedBox(
@@ -1595,7 +1784,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                                       Text(
                                                         "Send news to our editor",
                                                         style: FontTextStyle
-                                                            .kBlueLight114W400PR,
+                                                            .kBlueLight114W400SSP,
                                                       ),
                                                     ],
                                                   ),
@@ -1638,7 +1827,8 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                         left: Get.width * 0.01),
                                     child: Text(
                                       'Categories',
-                                      style: FontTextStyle.kBlackPure20W400PR,
+                                      style: FontTextStyle.kBlueDark120W400SSP
+                                          .copyWith(height: 1.5),
                                     ),
                                   ),
                                   ListView.builder(
@@ -1658,7 +1848,8 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                           child: Text(
                                             '${categories[index]['text']}',
                                             style: FontTextStyle
-                                                .kBlueLight114W600PR,
+                                                .kBlueLight114W600SSP
+                                                .copyWith(height: 1.5),
                                           ),
                                         )
                                       ],
@@ -1671,15 +1862,13 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                       children: [
                                         Icon(
                                           Icons.add,
-                                          color: Colors.blue,
+                                          color: ColorPicker.kBlueLight1,
                                         ),
-                                        SizedBox(
-                                          width: 5,
-                                        ),
+                                        SB.SW5(),
                                         Text(
                                           'Show more',
-                                          style:
-                                              FontTextStyle.kBlueLight114W600PR,
+                                          style: FontTextStyle
+                                              .kBlueLight114W600SSP,
                                         ),
                                       ],
                                     ),
@@ -1687,9 +1876,9 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                 ],
                               ),
                             ),
-                            SizedBox(
-                              height: 20,
-                            ),
+                            Divider(
+                                thickness: 2, color: ColorPicker.kGreyLight10),
+                            SB.SH20(),
                             Container(
                               width: Get.width,
                               color: Colors.white,
@@ -1703,7 +1892,8 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                         left: Get.width * 0.01),
                                     child: Text(
                                       'Latest news',
-                                      style: FontTextStyle.kBlackPure20W400PR,
+                                      style: FontTextStyle.kBlackPure20W400SSP
+                                          .copyWith(height: 1.5),
                                     ),
                                   ),
                                   ListView.builder(
@@ -1730,14 +1920,13 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                                       '${data1[index]['img']}'),
                                                 ),
                                               ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
+                                              SB.SW10(),
                                               Flexible(
                                                 child: Text(
                                                   '${data1[index]['txt']}',
                                                   style: FontTextStyle
-                                                      .kBlackPure16W700PR,
+                                                      .kBlueDark116W700SSP
+                                                      .copyWith(height: 1.5),
                                                 ),
                                               ),
                                             ],
@@ -1752,52 +1941,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                           ],
                         ),
                       ),
-
-                      // Padding(
-                      //   padding: const EdgeInsets.only(left: 50, bottom: 420),
-                      //   child: Padding(
-                      //     padding: const EdgeInsets.only(left: 10),
-                      //     child: Column(
-                      //       children: [
-                      //         Container(
-                      //           height: 305,
-                      //           width: 364,
-                      //           color: Color(0xff0D9BDC),
-                      //           child: Row(
-                      //             children: [
-                      //               Column(
-                      //                 children: [
-                      //                   Expanded(
-                      //                     child: ListView.builder(
-                      //                       itemBuilder: (context, index) {
-                      //                         return Column(
-                      //                           children: [
-                      //                             SvgPicture.asset("x"),
-                      //                             VerticalDivider(
-                      //                               width: 1,
-                      //                               color: Colors.white,
-                      //                             )
-                      //                           ],
-                      //                         );
-                      //                       },
-                      //                       itemCount: 3,
-                      //                       shrinkWrap: true,
-                      //                       scrollDirection: Axis.vertical,
-                      //                     ),
-                      //                   )
-                      //                 ],
-                      //               )
-                      //             ],
-                      //           ),
-                      //         ),
-                      //       ],
-                      //     ),
-                      //   ),
-                      // )
                     ],
-                  ),
-                  SizedBox(
-                    height: Get.height * 10,
                   ),
                 ],
               ),
@@ -1829,29 +1973,28 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                               color: ColorPicker.kPrimaryLight1,
                               borderRadius: BorderRadius.circular(8)),
                           child: TextFormField(
-                            cursorColor: Colors.white,
-                            style: FontTextStyle.kWhitePurePR,
+                            cursorColor: ColorPicker.kWhite,
+                            style: FontTextStyle.kWhite16W400SSP,
                             decoration: InputDecoration(
-                              hintStyle: TextStyle(
-                                color: ColorPicker.kPrimaryLightBlue,
-                              ),
+                              hintStyle:
+                                  FontTextStyle.kPrimaryLightBlue16W400SSP,
                               filled: true,
                               fillColor: ColorPicker.kPrimaryLight,
                               hintText: "Search",
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
                                 borderSide:
-                                    BorderSide(color: Colors.transparent),
+                                    BorderSide(color: ColorPicker.kTransparent),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
                                 borderSide:
-                                    BorderSide(color: Colors.transparent),
+                                    BorderSide(color: ColorPicker.kTransparent),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
                                 borderSide:
-                                    BorderSide(color: Colors.transparent),
+                                    BorderSide(color: ColorPicker.kTransparent),
                               ),
                               prefixIcon: Icon(
                                 Icons.search,
@@ -1876,9 +2019,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                           ),
                           SizedBox(height: 5),
                           Text('MENU',
-                              style: TextStyle(
-                                  fontSize: 9,
-                                  color: ColorPicker.kPrimaryLightBlue)),
+                              style: FontTextStyle.kPrimaryLight29W700SSP),
                         ],
                       ),
                       SizedBox(
@@ -1898,7 +2039,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                     Stack(
                       children: [
                         Container(
-                          margin: EdgeInsets.only(bottom: 260),
+                          margin: EdgeInsets.only(bottom: 120),
                           child: SizedBox(
                               width: Get.width,
                               child: Image.asset(
@@ -1907,10 +2048,11 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                               )),
                         ),
                         Positioned(
-                            top: 190,
+                            top: Get.width * 0.28,
                             child: Container(
                               width: Get.width * 0.92,
-                              height: Get.height * 0.5,
+                              height: Get.height * 0.4,
+                              color: Colors.white,
                               child: Padding(
                                 padding: const EdgeInsets.only(
                                     left: 20, top: 20, right: 20),
@@ -1919,16 +2061,14 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                   children: [
                                     Text(
                                       'RESOURCES',
-                                      style: TextStyle(
-                                          color: ColorPicker.kGreyLight5,
-                                          fontWeight: FontWeight.bold),
+                                      style: FontTextStyle.kGreyLight512W700SSP,
                                     ),
                                     SizedBox(
                                       height: Get.height * 0.01,
                                     ),
                                     Text(
                                       '5 Steps for Travel Brands to Build a Brand Ambassador Program',
-                                      style: TextStyle(fontSize: 30),
+                                      style: FontTextStyle.kBlueDark126W400SSP,
                                     ),
                                     SizedBox(
                                       height: Get.height * 0.01,
@@ -1939,8 +2079,8 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         Container(
-                                          height: Get.width * 0.18,
-                                          width: Get.width * 0.18,
+                                          height: 50,
+                                          width: 50,
                                           decoration: BoxDecoration(
                                               image: DecorationImage(
                                                   fit: BoxFit.cover,
@@ -1990,9 +2130,6 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                         ),
                                       ],
                                     ),
-                                    Divider(
-                                      color: ColorPicker.kGreyLight5,
-                                    )
                                   ],
                                 ),
                               ),
@@ -2006,13 +2143,14 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                           Container(
                             color: Colors.white,
                             child: Padding(
-                              padding: const EdgeInsets.all(15),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
                                     padding: EdgeInsets.only(
-                                        right: 7, left: 7, bottom: 20, top: 20),
+                                        right: 7, left: 7, bottom: 20),
                                     child: Divider(
                                       color: Color(0xffDEE1E3),
                                       thickness: 2,
@@ -2050,84 +2188,256 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                   SizedBox(
                                     height: Get.height * 0.03,
                                   ),
+
                                   Container(
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        border: Border.all(
-                                            width: 6, color: Color(0xffF6F7F8)),
-                                        boxShadow: [
-                                          BoxShadow(
-                                              blurRadius: 2,
-                                              color: Color(0xffBDC4C7),
-                                              offset: Offset(0, 4))
-                                        ]),
+                                    height: Get.height * 0.5,
+                                    // width: 712,
+
+                                    color: Color(0xffF6F7F8),
                                     child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
-                                        Image.asset(
-                                            'assets/images/slider2.png'),
-                                        SizedBox(
-                                          height: Get.height * 0.003,
-                                        ),
-                                        Row(
-                                          children: [
-                                            Container(
-                                              height: Get.height * 0.1,
-                                              width: Get.width * 0.23,
-                                              child: Image.asset(
-                                                'assets/images/l1.png',
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width: Get.width * 0.008,
-                                            ),
-                                            Container(
-                                              height: Get.height * 0.1,
-                                              width: Get.width * 0.23,
-                                              child: Image.asset(
-                                                'assets/images/l2.png',
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width: Get.width * 0.008,
-                                            ),
-                                            Container(
-                                              height: Get.height * 0.1,
-                                              width: Get.width * 0.23,
-                                              child: Image.asset(
-                                                'assets/images/l3.png',
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width: Get.width * 0.008,
-                                            ),
-                                            Container(
-                                                height: Get.height * 0.1,
-                                                width: Get.width * 0.14,
-                                                decoration: BoxDecoration(
-                                                    image: DecorationImage(
+                                        Flexible(
+                                          child: Container(
+                                            // color: Colors.red,
+                                            // height: 332,
+                                            width: Get.width,
+                                            child: Stack(
+                                              alignment: Alignment.center,
+                                              children: [
+                                                PageView.builder(
+                                                  controller: _controller,
+                                                  onPageChanged: (value) {
+                                                    print(
+                                                        '-value----${_controller.page}');
+                                                    setState(() {
+                                                      // currentIndex = value;
+                                                    });
+                                                  },
+                                                  itemCount: 3,
+                                                  itemBuilder:
+                                                      (context, index) {
+                                                    return Container(
+                                                      // height: Get.width,
+                                                      width: Get.width,
+                                                      // width: 200,
+
+                                                      decoration: BoxDecoration(
+                                                          image:
+                                                              DecorationImage(
                                                         image: AssetImage(
-                                                          'assets/images/l4.png',
-                                                        ),
-                                                        fit: BoxFit.cover)),
-                                                child: Padding(
-                                                  padding:
-                                                      EdgeInsets.only(left: 28),
-                                                  child: IconButton(
-                                                      onPressed: () {},
-                                                      icon: Icon(
-                                                        Icons.arrow_forward_ios,
-                                                        color: Colors.white,
-                                                        size: 12,
+                                                            'assets/images/slider2.png'),
+                                                        fit: BoxFit.cover,
                                                       )),
-                                                )),
-                                          ],
+
+                                                      // child: Image(
+                                                      //   image: AssetImage('image/25-3/cover_image.png'),
+                                                      //   fit: BoxFit.fitHeight,
+                                                      // ),
+                                                    );
+                                                  },
+                                                ),
+                                                Positioned(
+                                                  left: 0,
+                                                  child: Container(
+                                                    height: 50,
+                                                    width: 50,
+                                                    color: Color(0xFF272E41)
+                                                        .withOpacity(0.4),
+                                                    child: Center(
+                                                      child: IconButton(
+                                                        onPressed: () {
+                                                          _controller
+                                                              .previousPage(
+                                                            duration: Duration(
+                                                                seconds: 1),
+                                                            curve:
+                                                                Curves.easeIn,
+                                                          );
+                                                          // Use the controller to change the current page
+                                                        },
+                                                        icon: Icon(
+                                                          Icons.chevron_left,
+                                                          size: 21,
+                                                          color: Colors.white,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Positioned(
+                                                  right: 0,
+                                                  child: Container(
+                                                    height: 50,
+                                                    width: 50,
+                                                    color: Color(0xFF272E41)
+                                                        .withOpacity(0.4),
+                                                    child: Center(
+                                                      child: Center(
+                                                        child: IconButton(
+                                                          onPressed: () {
+                                                            // Use the controller to change the current page
+                                                            _controller
+                                                                .nextPage(
+                                                              duration:
+                                                                  Duration(
+                                                                      seconds:
+                                                                          1),
+                                                              curve:
+                                                                  Curves.easeIn,
+                                                            );
+                                                          },
+                                                          icon: Icon(
+                                                            Icons.chevron_right,
+                                                            color: Colors.white,
+                                                            size: 21,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 2),
+                                          child: Stack(
+                                            children: [
+                                              Container(
+                                                height: 100,
+                                                width: Get.width,
+                                                // color: Colors.green,
+                                                child: ListView.builder(
+                                                  itemCount: data.length,
+                                                  scrollDirection:
+                                                      Axis.horizontal,
+                                                  itemBuilder:
+                                                      (context, index) {
+                                                    return Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              1.0),
+                                                      child: Container(
+                                                        height: 80,
+                                                        width: 150,
+                                                        decoration: BoxDecoration(
+                                                            color: Colors.red,
+                                                            image: DecorationImage(
+                                                                image: AssetImage(
+                                                                    "${data[index]['img']}"),
+                                                                fit: BoxFit
+                                                                    .cover)),
+                                                      ),
+                                                    );
+                                                  },
+                                                ),
+                                              ),
+                                              Positioned(
+                                                right: 0,
+                                                top: 0,
+                                                bottom: 0,
+                                                child: Container(
+                                                  width: 30,
+                                                  color: Colors.black
+                                                      .withOpacity(0.3),
+                                                  child: Icon(
+                                                    Icons.chevron_right,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ],
                                     ),
                                   ),
+
+                                  ///
+                                  // Container(
+                                  //   decoration: BoxDecoration(
+                                  //       color: Colors.white,
+                                  //       border: Border.all(
+                                  //           width: 6, color: Color(0xffF6F7F8)),
+                                  //       boxShadow: [
+                                  //         BoxShadow(
+                                  //             blurRadius: 2,
+                                  //             color: Color(0xffBDC4C7),
+                                  //             offset: Offset(0, 4))
+                                  //       ]),
+                                  //   child: Column(
+                                  //     children: [
+                                  //       Image.asset(
+                                  //           'assets/images/slider2.png'),
+                                  //       SizedBox(
+                                  //         height: Get.height * 0.003,
+                                  //       ),
+                                  //       Row(
+                                  //         children: [
+                                  //           Container(
+                                  //             height: Get.height * 0.1,
+                                  //             width: Get.width * 0.23,
+                                  //             child: Image.asset(
+                                  //               'assets/images/l1.png',
+                                  //               fit: BoxFit.cover,
+                                  //             ),
+                                  //           ),
+                                  //           SizedBox(
+                                  //             width: Get.width * 0.008,
+                                  //           ),
+                                  //           Container(
+                                  //             height: Get.height * 0.1,
+                                  //             width: Get.width * 0.23,
+                                  //             child: Image.asset(
+                                  //               'assets/images/l2.png',
+                                  //               fit: BoxFit.cover,
+                                  //             ),
+                                  //           ),
+                                  //           SizedBox(
+                                  //             width: Get.width * 0.008,
+                                  //           ),
+                                  //           Container(
+                                  //             height: Get.height * 0.1,
+                                  //             width: Get.width * 0.23,
+                                  //             child: Image.asset(
+                                  //               'assets/images/l3.png',
+                                  //               fit: BoxFit.cover,
+                                  //             ),
+                                  //           ),
+                                  //           SizedBox(
+                                  //             width: Get.width * 0.008,
+                                  //           ),
+                                  //           Container(
+                                  //               height: Get.height * 0.1,
+                                  //               width: Get.width * 0.14,
+                                  //               decoration: BoxDecoration(
+                                  //                   image: DecorationImage(
+                                  //                       image: AssetImage(
+                                  //                         'assets/images/l4.png',
+                                  //                       ),
+                                  //                       fit: BoxFit.cover)),
+                                  //               child: Padding(
+                                  //                 padding:
+                                  //                     EdgeInsets.only(left: 28),
+                                  //                 child: IconButton(
+                                  //                     onPressed: () {},
+                                  //                     icon: Icon(
+                                  //                       Icons.arrow_forward_ios,
+                                  //                       color: Colors.white,
+                                  //                       size: 12,
+                                  //                     )),
+                                  //               )),
+                                  //         ],
+                                  //       ),
+                                  //     ],
+                                  //   ),
+                                  // ),
                                   SizedBox(
                                     height: Get.height * 0.03,
                                   ),
@@ -2476,7 +2786,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                           Text(
                                             likeCommentShare[index]['title'],
                                             style: FontTextStyle
-                                                .kBlueLight114W400PR,
+                                                .kBlueLight116W400SSP,
                                           ),
                                           SizedBox(width: 5),
                                           Container(
@@ -2968,15 +3278,13 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                         // SizedBox(height: 30),
                                         Text(
                                           'GOT NEWS ?',
-                                          style:
-                                              FontTextStyle.kWhitePure12W700PR,
+                                          style: FontTextStyle.kWhite12W700SSP,
                                         ),
                                         SizedBox(
                                           width: Get.width * 0.34,
                                           child: Text(
                                             'Become a thought leader on hospitality',
-                                            style: FontTextStyle
-                                                .kWhitePure24W400PR,
+                                            style: FontTextStyle.kWhite24W400PR,
                                           ),
                                         ),
                                       ],
@@ -3031,7 +3339,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                               Text(
                                                 "Send news to our editor",
                                                 style: FontTextStyle
-                                                    .kBlueLight114W400PR,
+                                                    .kBlueLight116W400SSP,
                                               ),
                                             ],
                                           ),

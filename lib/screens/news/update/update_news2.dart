@@ -1,24 +1,23 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import '../../../common/common_widget.dart';
+import '../../../constant/colorPicker/color_picker.dart';
+import '../../../constant/sizedbox.dart';
+import '../../../data/data.dart';
+import '../../../responsive/responsive.dart';
+import 'widget/update_news_widget.dart';
 
-import '../../common/common_widget.dart';
-import '../../constant/colorPicker/color_picker.dart';
-import '../../data/data.dart';
-import '../../responsive/responsive.dart';
-import 'widget/home_widget.dart';
-
-class HomeSecond extends StatefulWidget {
-  const HomeSecond({Key? key}) : super(key: key);
+class UpdateNewsSecond extends StatefulWidget {
+  const UpdateNewsSecond({Key? key}) : super(key: key);
 
   @override
-  _HomeSecondState createState() => _HomeSecondState();
+  _UpdateNewsSecondState createState() => _UpdateNewsSecondState();
 }
 
-class _HomeSecondState extends State<HomeSecond> {
+class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
   @override
   Widget build(BuildContext context) {
     print('${Get.width * 0.04}');
@@ -27,9 +26,7 @@ class _HomeSecondState extends State<HomeSecond> {
           Responsive.isDesktop(context) ? ColorPicker.kBG : Colors.white,
       appBar: Responsive.isDesktop(context)
           ? CommonWidget.descktopAppBar()
-          : Responsive.isTablet(context)
-              ? CommonWidget.tabletAppBar()
-              : CommonWidget.tabletAppBar(),
+          : CommonWidget.tabletAppBar(),
       body: SingleChildScrollView(
         child: Responsive.isDesktop(context)
             ? Column(
@@ -42,7 +39,7 @@ class _HomeSecondState extends State<HomeSecond> {
                         Expanded(
                           child: Container(
                             height: 872,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               image: DecorationImage(
                                 fit: BoxFit.cover,
                                 image: AssetImage('assets/images/people2.png'),
@@ -65,16 +62,12 @@ class _HomeSecondState extends State<HomeSecond> {
                                     size: Get.width * 0.02,
                                   ),
                                 ),
-                                SizedBox(
-                                  height: 50,
-                                ),
+                                SB.SH50(),
                                 Text(
                                   'Join the leading community for hospitality. Sign-up free today, we’ll curate your career.',
                                   style: FontTextStyle.kBlueDark40W600PR,
                                 ),
-                                SizedBox(
-                                  height: 50,
-                                ),
+                                SB.SH50(),
                                 ListView.builder(
                                   shrinkWrap: true,
                                   itemCount: Data.benifites.length,
@@ -95,7 +88,7 @@ class _HomeSecondState extends State<HomeSecond> {
                                     ]),
                                   ),
                                 ),
-                                SizedBox(height: 50),
+                                SB.SH50(),
                                 Row(
                                   children: [
                                     Container(
@@ -118,9 +111,7 @@ class _HomeSecondState extends State<HomeSecond> {
                                     ),
                                     Image.asset('assets/icons/play_whole.png',
                                         height: Get.width * 0.02),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
+                                    SB.SW10(),
                                     Text(
                                       'Why join?',
                                       style: FontTextStyle.kBlueLight20W600PR,
@@ -134,7 +125,7 @@ class _HomeSecondState extends State<HomeSecond> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 50),
+                  SB.SH50(),
                   Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -169,7 +160,7 @@ class _HomeSecondState extends State<HomeSecond> {
                                                 style: FontTextStyle
                                                     .kPrimary32W600PR,
                                               ),
-                                              SizedBox(height: 25),
+                                              SB.SH25(),
                                               SizedBox(
                                                 width: Get.width * 0.21,
                                                 child: Text(
@@ -182,7 +173,7 @@ class _HomeSecondState extends State<HomeSecond> {
                                           )
                                         ],
                                       ),
-                                      SizedBox(height: 25),
+                                      SB.SH25(),
                                       Row(
                                         children: [
                                           Container(
@@ -229,7 +220,7 @@ class _HomeSecondState extends State<HomeSecond> {
                                           )
                                         ],
                                       ),
-                                      SizedBox(height: 25),
+                                      SB.SH25(),
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.end,
@@ -283,9 +274,7 @@ class _HomeSecondState extends State<HomeSecond> {
                                                         fontSize:
                                                             Get.width * 0.05),
                                               ),
-                                              SizedBox(
-                                                height: 20,
-                                              ),
+                                              SB.SH20(),
                                               LinearPercentIndicator(
                                                 lineHeight: 8.0,
                                                 percent: 0.9,
@@ -293,9 +282,7 @@ class _HomeSecondState extends State<HomeSecond> {
                                                 progressColor: ColorPicker.kRed,
                                                 barRadius: Radius.circular(20),
                                               ),
-                                              SizedBox(
-                                                height: 25,
-                                              ),
+                                              SB.SH25(),
                                               Text(
                                                 'Your Profile is only\n25% complete',
                                                 style: FontTextStyle
@@ -329,9 +316,7 @@ class _HomeSecondState extends State<HomeSecond> {
                                                           .kBlueDark20W600PR,
                                                     ),
                                                   ),
-                                                  SizedBox(
-                                                    height: 25,
-                                                  ),
+                                                  SB.SH25(),
                                                   SizedBox(
                                                     width: Get.width * 0.21,
                                                     child: Text(
@@ -340,9 +325,7 @@ class _HomeSecondState extends State<HomeSecond> {
                                                           .kBlueDark20W600PR,
                                                     ),
                                                   ),
-                                                  SizedBox(
-                                                    height: 25,
-                                                  ),
+                                                  SB.SH25(),
                                                   Container(
                                                     margin: EdgeInsets.only(
                                                         right: 45),
@@ -370,9 +353,7 @@ class _HomeSecondState extends State<HomeSecond> {
                                                 ],
                                               ),
                                             ),
-                                            SizedBox(
-                                              height: 50,
-                                            ),
+                                            SB.SH50(),
                                             SizedBox(
                                               width: Get.width * 0.25,
                                               child: Padding(
@@ -433,9 +414,7 @@ class _HomeSecondState extends State<HomeSecond> {
                                                 ),
                                               ),
                                             ),
-                                            SizedBox(
-                                              height: 25,
-                                            ),
+                                            SB.SH25(),
                                           ],
                                         ),
                                       )
@@ -446,79 +425,73 @@ class _HomeSecondState extends State<HomeSecond> {
                             ],
                           ),
                         ),
-                        SizedBox(height: 50),
+                        SB.SH50(),
 
                         ///Headline
                         HomeWidget().headlineBlock(),
-                        SizedBox(height: 50),
+                        SB.SH50(),
 
                         ///WHITE BIG
                         HomeWidget().videoBlock(),
-                        SizedBox(height: 50),
+                        SB.SH50(),
                         HomeWidget()
                             .blockTitle('Jobs you might be interested in'),
-                        SizedBox(height: 30),
+                        SB.SH30(),
 
                         ///Jobs you might be interested in
                         HomeWidget().jobsBlock(),
-                        SizedBox(height: 50),
+                        SB.SH50(),
                         HomeWidget().widgetIndicator(),
-                        SizedBox(
-                          height: 30,
-                        ),
+                        SB.SH30(),
 
                         ///Category Type B
                         HomeWidget().categoryB(),
-                        SizedBox(height: 50),
+                        SB.SH50(),
 
                         ///Category Type A
                         HomeWidget().categoryA(),
-                        SizedBox(height: 50),
+                        SB.SH50(),
 
                         ///People in your area or industry
                         HomeWidget()
                             .blockTitle('People in your area or industry'),
-                        SizedBox(height: 30),
+                        SB.SH30(),
                         HomeWidget().peopleBlock(),
-                        SizedBox(
-                          height: 50,
-                        ),
+                        SB.SH50(),
                         HomeWidget().widgetIndicator(),
-                        SizedBox(
-                          height: 50,
-                        ),
+                        SB.SH50(),
 
                         ///Category Type C
                         HomeWidget().categoryC(),
 
                         ///Latest News
-                        SizedBox(height: 50),
+                        SB.SH50(),
                         HomeWidget().blockTitle('Latest News'),
-                        SizedBox(height: 50),
+                        SB.SH50(),
                         HomeWidget().latestNewsBlock(),
-                        SizedBox(height: 50),
+                        SB.SH50(),
                         HomeWidget().widgetIndicator(),
-                        SizedBox(height: 50),
+                        SB.SH50(),
 
                         ///Category Type D
                         HomeWidget().categoryD(),
-                        SizedBox(height: 50),
+                        SB.SH50(),
 
                         ///Latest Topic
                         HomeWidget().blockTitle('Latest Topic'),
-                        SizedBox(height: 50),
+                        SB.SH50(),
                         HomeWidget().latestNewsBlock(),
-                        SizedBox(height: 50),
+                        SB.SH50(),
                         HomeWidget().widgetIndicator(),
-                        SizedBox(height: 50),
+                        SB.SH50(),
 
                         ///Category Type E
                         HomeWidget().categoryE(),
-                        SizedBox(height: 50),
+                        SB.SH50(),
 
                         ///Category
                         HomeWidget().category(),
-                        SizedBox(height: 50),
+                        SB.SH50(),
                       ])
                 ],
               )
@@ -608,9 +581,7 @@ class _HomeSecondState extends State<HomeSecond> {
                               ),
                               Image.asset('assets/icons/play_whole.png',
                                   height: Get.width * 0.08),
-                              SizedBox(
-                                width: 10,
-                              ),
+                              SB.SW10(),
                               Text(
                                 'Why join?',
                                 style: FontTextStyle.kBlueLight20W600PR,
@@ -622,13 +593,9 @@ class _HomeSecondState extends State<HomeSecond> {
                       ],
                     ),
                   ),
-                  SizedBox(
-                    width: 20,
-                  ),
+                  SB.SW20(),
                   Divider(),
-                  SizedBox(
-                    height: 20,
-                  ),
+                  SB.SH20(),
 
                   ///Headline
                   Container(
@@ -659,12 +626,10 @@ class _HomeSecondState extends State<HomeSecond> {
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10)),
                         ),
-                        SizedBox(
-                          height: 20,
-                        ),
+                        SB.SH20(),
                         RichText(
                           text: TextSpan(
-                            text: "'We must stay at home': ",
+                            text: "'We must stay at update': ",
                             style: FontTextStyle.kRed20W600PR,
                             children: <TextSpan>[
                               TextSpan(
@@ -685,9 +650,7 @@ class _HomeSecondState extends State<HomeSecond> {
                           color: ColorPicker.kBorder,
                           thickness: 2,
                         ),
-                        SizedBox(
-                          height: 15,
-                        ),
+                        SB.SH15(),
 
                         ///double container
                         Row(
@@ -713,9 +676,7 @@ class _HomeSecondState extends State<HomeSecond> {
                                         borderRadius:
                                             BorderRadius.circular(10)),
                                   ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
+                                  SB.SH20(),
                                   RichText(
                                     text: TextSpan(
                                       text: "Winter Olympics/ ",
@@ -729,16 +690,12 @@ class _HomeSecondState extends State<HomeSecond> {
                                       ],
                                     ),
                                   ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
+                                  SB.SH20(),
                                   Text(
                                     'Chinese and Russian leaders call on west to abandon cold war tactics in talks ahead of Beijing Olympics',
                                     style: FontTextStyle.kGreyLight14W600PR,
                                   ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
+                                  SB.SH20(),
                                 ],
                               ),
                             ),
@@ -766,9 +723,7 @@ class _HomeSecondState extends State<HomeSecond> {
                                         borderRadius:
                                             BorderRadius.circular(10)),
                                   ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
+                                  SB.SH20(),
                                   RichText(
                                     text: TextSpan(
                                       text: "Winter Olympics/ ",
@@ -782,16 +737,12 @@ class _HomeSecondState extends State<HomeSecond> {
                                       ],
                                     ),
                                   ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
+                                  SB.SH20(),
                                   Text(
                                     'Chinese and Russian leaders call on west to abandon cold war tactics in talks ahead of Beijing Olympics',
                                     style: FontTextStyle.kGreyLight14W600PR,
                                   ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
+                                  SB.SH20(),
                                 ],
                               ),
                             ),
@@ -801,9 +752,7 @@ class _HomeSecondState extends State<HomeSecond> {
                           color: ColorPicker.kBorder,
                           thickness: 2,
                         ),
-                        SizedBox(
-                          height: 15,
-                        ),
+                        SB.SH15(),
                         RichText(
                           text: TextSpan(
                             text: "Winter Olympics/ ",
@@ -818,16 +767,12 @@ class _HomeSecondState extends State<HomeSecond> {
                             ],
                           ),
                         ),
-                        SizedBox(
-                          height: 20,
-                        ),
+                        SB.SH20(),
                         Text(
                           'Chinese and Russian leaders call on west to abandon cold war tactics in talks ahead of Beijing Olympics',
                           style: FontTextStyle.kGreyLight14W600PR,
                         ),
-                        SizedBox(
-                          height: 30,
-                        ),
+                        SB.SH20(),
                       ],
                     ),
                   ),
@@ -1012,16 +957,12 @@ class _HomeSecondState extends State<HomeSecond> {
                               ],
                             ),
                           ),
-                          SizedBox(
-                            height: 20,
-                          ),
+                          SB.SH20(),
                           Divider(
                             color: ColorPicker.kBorder,
                             thickness: 2,
                           ),
-                          SizedBox(
-                            height: 15,
-                          ),
+                          SB.SH20(),
                         ]),
                   ),
 
@@ -1402,7 +1343,7 @@ class _HomeSecondState extends State<HomeSecond> {
                         ),
                         RichText(
                           text: TextSpan(
-                            text: "'We must stay at home': ",
+                            text: "'We must stay at update': ",
                             style: FontTextStyle.kRed20W600PR,
                             children: <TextSpan>[
                               TextSpan(
@@ -1498,7 +1439,7 @@ class _HomeSecondState extends State<HomeSecond> {
                                   ),
                                   RichText(
                                     text: TextSpan(
-                                      text: "'We must stay at home': ",
+                                      text: "'We must stay at update': ",
                                       style: FontTextStyle.kRed20W600PR,
                                       children: <TextSpan>[
                                         TextSpan(
@@ -1551,7 +1492,7 @@ class _HomeSecondState extends State<HomeSecond> {
                                   ),
                                   RichText(
                                     text: TextSpan(
-                                      text: "'We must stay at home': ",
+                                      text: "'We must stay at update': ",
                                       style: FontTextStyle.kRed20W600PR,
                                       children: <TextSpan>[
                                         TextSpan(
@@ -1705,7 +1646,7 @@ class _HomeSecondState extends State<HomeSecond> {
                                   ),
                                   RichText(
                                     text: TextSpan(
-                                      text: "'We must stay at home': ",
+                                      text: "'We must stay at update': ",
                                       style: FontTextStyle.kRed20W600PR,
                                       children: <TextSpan>[
                                         TextSpan(
@@ -1758,7 +1699,7 @@ class _HomeSecondState extends State<HomeSecond> {
                                   ),
                                   RichText(
                                     text: TextSpan(
-                                      text: "'We must stay at home': ",
+                                      text: "'We must stay at update': ",
                                       style: FontTextStyle.kRed20W600PR,
                                       children: <TextSpan>[
                                         TextSpan(
@@ -2255,7 +2196,7 @@ class _HomeSecondState extends State<HomeSecond> {
                                   );
                                 },
                               )),
-                          SizedBox(height: 30),
+                          SB.SH30(),
                         ]),
                   ),
 
@@ -2455,7 +2396,7 @@ class _HomeSecondState extends State<HomeSecond> {
                                   ),
                                 ),
                               )),
-                          SizedBox(height: 30),
+                          SB.SH30(),
                         ]),
                   ),
 
@@ -2496,7 +2437,7 @@ class _HomeSecondState extends State<HomeSecond> {
                                   textAlign: TextAlign.start,
                                   text: TextSpan(children: [
                                     TextSpan(
-                                      text: '‘We must stay at home’: ',
+                                      text: '‘We must stay at update’: ',
                                       style: TextStyle(
                                         color: Color(0xFFEF3534),
                                         fontWeight: FontWeight.w600,
@@ -2549,7 +2490,7 @@ class _HomeSecondState extends State<HomeSecond> {
                                   textAlign: TextAlign.start,
                                   text: TextSpan(children: [
                                     TextSpan(
-                                      text: '‘We must stay at home’: ',
+                                      text: '‘We must stay at update’: ',
                                       style: TextStyle(
                                         color: Color(0xFFEF3534),
                                         fontWeight: FontWeight.w600,

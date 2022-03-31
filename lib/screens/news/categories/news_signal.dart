@@ -3,10 +3,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-
-import '../../constant/colorPicker/color_picker.dart';
-import '../../constant/fontStyle/font_style.dart';
-import '../../responsive/responsive.dart';
+import '../../../constant/colorPicker/color_picker.dart';
+import '../../../constant/fontStyle/font_style.dart';
+import '../../../responsive/responsive.dart';
 
 class NewsSingleScreen extends StatefulWidget {
   @override
@@ -98,8 +97,11 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image(
-                          image: AssetImage('assets/icons/logo.png'),
+                        Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: Image(
+                            image: AssetImage('assets/icons/logo1.png'),
+                          ),
                         ),
                         SizedBox(
                           width: 10,
@@ -109,7 +111,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                           color: Colors.white,
                           child: TextFormField(
                             cursorColor: Colors.white,
-                            style: FontTextStyle.kWhitePurePR,
+                            style: FontTextStyle.kWhitePR,
                             decoration: InputDecoration(
                               hintStyle: TextStyle(
                                 color: ColorPicker.kPrimaryLightBlue,
@@ -149,8 +151,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text('Home',
-                                  style: FontTextStyle.kWhitePure16W400PR),
+                              Text('Home', style: FontTextStyle.kWhite16W400PR),
                               Text('Profile',
                                   style:
                                       FontTextStyle.kPrimaryLightBlue16W400PR),
@@ -194,13 +195,13 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                   height: 16,
                                   width: 16,
                                   decoration: BoxDecoration(
-                                    color: ColorPicker.kRed1,
+                                    color: ColorPicker.kRed,
                                     borderRadius: BorderRadius.circular(3),
                                   ),
                                   child: Center(
                                     child: Text(
                                       '2',
-                                      style: FontTextStyle.kWhitePure12W700PR,
+                                      style: FontTextStyle.kWhite12W700SSP,
                                     ),
                                   ),
                                 ),
@@ -230,13 +231,13 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                   height: 16,
                                   width: 16,
                                   decoration: BoxDecoration(
-                                    color: ColorPicker.kRed1,
+                                    color: ColorPicker.kRed,
                                     borderRadius: BorderRadius.circular(3),
                                   ),
                                   child: Center(
                                     child: Text(
                                       '2',
-                                      style: FontTextStyle.kWhitePure12W700PR,
+                                      style: FontTextStyle.kWhite12W700SSP,
                                     ),
                                   ),
                                 ),
@@ -368,7 +369,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                               child: Container(
                                 height: 50,
                                 width: 50,
-                                color: Color(0xFF272E41).withOpacity(0.4),
+                                color: ColorPicker.kGreyLight5.withOpacity(0.4),
                                 child: Center(
                                   child: Center(
                                     child: IconButton(
@@ -463,7 +464,6 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 10),
                       child: SingleChildScrollView(
-                        physics: NeverScrollableScrollPhysics(),
                         scrollDirection: Axis.vertical,
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -523,13 +523,8 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                               RichText(
                                                 text: TextSpan(
                                                   text: "by",
-                                                  style: TextStyle(
-                                                    color: ColorPicker
-                                                        .kGreyLight5
-                                                        .withOpacity(0.8),
-                                                    fontSize: 14,
-                                                    fontWeight: FontWeight.w400,
-                                                  ),
+                                                  style: FontTextStyle
+                                                      .kGreyLight5146W400SSP,
                                                   children: [
                                                     TextSpan(
                                                         text: "  Pam Carrol •",
@@ -649,19 +644,13 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                         ),
                                         Text(
                                           'RESOURCES',
-                                          style: TextStyle(
-                                            color: ColorPicker.kGreyLight5,
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w700,
-                                          ),
+                                          style: FontTextStyle
+                                              .kGreyLight513W700SSP,
                                         ),
                                         Text(
                                           'Hotel on North opens in Pittsfield,\nMassachusetts',
-                                          style: TextStyle(
-                                            color: Color(0xFF272E41),
-                                            fontSize: 36,
-                                            fontWeight: FontWeight.w400,
-                                          ),
+                                          style: FontTextStyle
+                                              .kGreyLight536W400SSP,
                                         ),
                                         SizedBox(
                                           height: 10,
@@ -672,42 +661,22 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                               RichText(
                                                 text: TextSpan(
                                                   text: "by",
-                                                  style: TextStyle(
-                                                    color: ColorPicker
-                                                        .kGreyLight5
-                                                        .withOpacity(0.8),
-                                                    fontSize: 14,
-                                                    fontWeight: FontWeight.w400,
-                                                  ),
+                                                  style: FontTextStyle
+                                                      .kGreyLight5146W400SSP,
                                                   children: [
                                                     TextSpan(
                                                         text: "  Pam Carrol •",
-                                                        style: TextStyle(
-                                                          color: ColorPicker
-                                                              .kGreyLight5,
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                        )),
+                                                        style: FontTextStyle
+                                                            .kGreyLight5146W400SSP),
                                                     TextSpan(
                                                         text:
                                                             "  26 August 2015 •",
-                                                        style: TextStyle(
-                                                          color: ColorPicker
-                                                              .kGreyLight5,
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                        )),
+                                                        style: FontTextStyle
+                                                            .kGreyLight5146W400SSP),
                                                     TextSpan(
                                                         text: "  10:40",
-                                                        style: TextStyle(
-                                                          color: ColorPicker
-                                                              .kGreyLight5,
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                        )),
+                                                        style: FontTextStyle
+                                                            .kGreyLight5146W400SSP),
                                                   ],
                                                 ),
                                               ),
@@ -727,12 +696,8 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                         'assets/icons/svg/facebook.svg'),
                                                     Text(
                                                       '  • 112',
-                                                      style: TextStyle(
-                                                        fontSize: 14,
-                                                        color: ColorPicker
-                                                            .kGreyLight5
-                                                            .withOpacity(0.6),
-                                                      ),
+                                                      style: FontTextStyle
+                                                          .kGreyLight5146W400SSP,
                                                     ),
                                                     SizedBox(
                                                       width: Get.width * 0.01,
@@ -741,12 +706,8 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                         'assets/icons/svg/twitter.svg'),
                                                     Text(
                                                       '  • 56',
-                                                      style: TextStyle(
-                                                        fontSize: 14,
-                                                        color: ColorPicker
-                                                            .kGreyLight5
-                                                            .withOpacity(0.6),
-                                                      ),
+                                                      style: FontTextStyle
+                                                          .kGreyLight5146W400SSP,
                                                     ),
                                                     SizedBox(
                                                       width: Get.width * 0.01,
@@ -755,12 +716,8 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                         'assets/icons/svg/googleplus.svg'),
                                                     Text(
                                                       '  • 321',
-                                                      style: TextStyle(
-                                                        fontSize: 14,
-                                                        color: ColorPicker
-                                                            .kGreyLight5
-                                                            .withOpacity(0.6),
-                                                      ),
+                                                      style: FontTextStyle
+                                                          .kGreyLight5146W400SSP,
                                                     ),
                                                     SizedBox(
                                                       width: Get.width * 0.01,
@@ -770,12 +727,8 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                         height: 20),
                                                     Text(
                                                       '  • 22',
-                                                      style: TextStyle(
-                                                        fontSize: 14,
-                                                        color: ColorPicker
-                                                            .kGreyLight5
-                                                            .withOpacity(0.6),
-                                                      ),
+                                                      style: FontTextStyle
+                                                          .kGreyLight5146W400SSP,
                                                     ),
                                                     SizedBox(
                                                       width: Get.width * 0.01,
@@ -784,12 +737,8 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                         'assets/icons/svg/any.svg'),
                                                     Text(
                                                       '  • 13',
-                                                      style: TextStyle(
-                                                        fontSize: 14,
-                                                        color: ColorPicker
-                                                            .kGreyLight5
-                                                            .withOpacity(0.6),
-                                                      ),
+                                                      style: FontTextStyle
+                                                          .kGreyLight5146W400SSP,
                                                     ),
                                                   ],
                                                 ),
@@ -849,10 +798,8 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                               Flexible(
                                                 child: Text(
                                                   '${data[index]['text1']}',
-                                                  style: TextStyle(
-                                                    fontSize: 18,
-                                                    fontWeight: FontWeight.w700,
-                                                  ),
+                                                  style: FontTextStyle
+                                                      .kBlueDark118W700SSP,
                                                 ),
                                               ),
                                               SizedBox(
@@ -861,42 +808,22 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                               RichText(
                                                 text: TextSpan(
                                                   text: "by",
-                                                  style: TextStyle(
-                                                    color: ColorPicker
-                                                        .kGreyLight5
-                                                        .withOpacity(0.8),
-                                                    fontSize: 14,
-                                                    fontWeight: FontWeight.w400,
-                                                  ),
+                                                  style: FontTextStyle
+                                                      .kGreyLight514W600PR,
                                                   children: [
                                                     TextSpan(
                                                         text: "  Pam Carrol •",
-                                                        style: TextStyle(
-                                                          color: ColorPicker
-                                                              .kGreyLight5,
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                        )),
+                                                        style: FontTextStyle
+                                                            .kGreyLight514W600PR),
                                                     TextSpan(
                                                         text:
                                                             "  26 August 2015 •",
-                                                        style: TextStyle(
-                                                          color: ColorPicker
-                                                              .kGreyLight5,
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                        )),
+                                                        style: FontTextStyle
+                                                            .kGreyLight514W600PR),
                                                     TextSpan(
                                                         text: "  10:40",
-                                                        style: TextStyle(
-                                                          color: ColorPicker
-                                                              .kGreyLight5,
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                        )),
+                                                        style: FontTextStyle
+                                                            .kGreyLight514W600PR),
                                                   ],
                                                 ),
                                               ),
@@ -914,10 +841,8 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                       child: Center(
                                                         child: Text(
                                                           '${data[index]['text2']}',
-                                                          style: TextStyle(
-                                                              color: Color(
-                                                                  0xffFD3732),
-                                                              fontSize: 10),
+                                                          style: FontTextStyle
+                                                              .kRed210W700SSP,
                                                         ),
                                                       ),
                                                     )
@@ -1437,7 +1362,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                 borderRadius: BorderRadius.circular(8)),
                             child: TextFormField(
                               cursorColor: Colors.white,
-                              style: FontTextStyle.kWhitePurePR,
+                              style: FontTextStyle.kWhitePR,
                               decoration: InputDecoration(
                                 hintStyle: TextStyle(
                                   color: ColorPicker.kPrimaryLightBlue,
@@ -1992,7 +1917,8 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                               Text(
                                                 'Sign up now. It’s free',
                                                 style: TextStyle(
-                                                  color: Color(0xFF272E41),
+                                                  color:
+                                                      ColorPicker.kGreyLight5,
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.w600,
                                                 ),
@@ -2179,23 +2105,23 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                       },
                     ),
                     SizedBox(height: 20),
+
+                    ///LOAD MORE
                     Container(
                       height: 52,
                       width: 119,
                       child: Center(
                           child: Text(
                         'LOAD MORE',
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                        ),
+                        style: TextStyle(),
                       )),
                       decoration: BoxDecoration(
                           color: Color(0xFF32A3FD),
                           borderRadius: BorderRadius.circular(2)),
                     ),
                     SizedBox(height: 20),
+
+                    ///Banner Image
                     Container(
                       padding: EdgeInsets.all(10),
                       margin: EdgeInsets.only(bottom: 10),
