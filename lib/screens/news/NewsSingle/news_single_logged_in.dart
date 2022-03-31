@@ -1,12 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/sizedbox.dart';
+import '../../../common/common_widget.dart';
 import '../../../constant/fontStyle/font_style.dart';
 import '../../../responsive/responsive.dart';
 
 class NewsSingleLoggedInScreen extends StatefulWidget {
+  static const String route = '/category_details';
   @override
   _NewsSingleLoggedInScreenState createState() =>
       _NewsSingleLoggedInScreenState();
@@ -219,8 +222,11 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image(
-                        image: AssetImage('assets/icons/logo.png'),
+                      Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Image(
+                          image: AssetImage('assets/icons/logo1.png'),
+                        ),
                       ),
                       SB.SW10(),
                       // SizedBox(
@@ -228,7 +234,10 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                       // ),
                       Container(
                         width: Get.width * 0.2,
-                        color: ColorPicker.kWhite,
+                        decoration: BoxDecoration(
+                            color: ColorPicker.kWhite,
+                            borderRadius: BorderRadius.circular(5)),
+                        margin: EdgeInsets.all(3),
                         child: TextFormField(
                           cursorColor: ColorPicker.kWhite,
                           style: FontTextStyle.kWhite16W400SSP,
@@ -237,12 +246,25 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                             filled: true,
                             fillColor: ColorPicker.kPrimaryLight,
                             hintText: "Search",
+                            border: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: ColorPicker.kPrimary),
+                                borderRadius: BorderRadius.circular(5)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: ColorPicker.kPrimary),
+                                borderRadius: BorderRadius.circular(5)),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: ColorPicker.kPrimary),
+                                borderRadius: BorderRadius.circular(5)),
                             prefixIcon: Icon(
                               Icons.search,
                               color: ColorPicker.kPrimaryLightBlue,
                             ),
                             suffixIcon: Container(
-                              margin: EdgeInsets.only(right: 5),
+                              margin:
+                                  EdgeInsets.only(right: 5, bottom: 5, top: 5),
                               height: 40,
                               width: Get.width * 0.045,
                               decoration: BoxDecoration(
@@ -250,7 +272,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               child: Center(
-                                child: Text(
+                                child: CommonWidget.text(
                                   'People',
                                   style:
                                       FontTextStyle.kPrimaryLightBlue16W400SSP,
@@ -268,20 +290,21 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('Home', style: FontTextStyle.kWhite16W400SSP),
-                            Text('Profile',
+                            CommonWidget.text('Home',
+                                style: FontTextStyle.kWhite16W400SSP),
+                            CommonWidget.text('Profile',
                                 style:
                                     FontTextStyle.kPrimaryLightBlue16W400SSP),
-                            Text('News',
+                            CommonWidget.text('News',
                                 style:
                                     FontTextStyle.kPrimaryLightBlue16W400SSP),
-                            Text('Jobs',
+                            CommonWidget.text('Jobs',
                                 style:
                                     FontTextStyle.kPrimaryLightBlue16W400SSP),
-                            Text('Recruitment',
+                            CommonWidget.text('Recruitment',
                                 style:
                                     FontTextStyle.kPrimaryLightBlue16W400SSP),
-                            Text('Help',
+                            CommonWidget.text('Help',
                                 style:
                                     FontTextStyle.kPrimaryLightBlue16W400SSP),
                           ],
@@ -293,10 +316,12 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                       Container(
                         width: Get.width * 0.05,
                         decoration: BoxDecoration(
-                            border: Border.symmetric(
-                          vertical: BorderSide(
-                              color: ColorPicker.kPrimaryLight, width: 3),
-                        )),
+                            border: Border(
+                                left: BorderSide(
+                                    color: ColorPicker.kPrimaryLight, width: 3),
+                                right: BorderSide(
+                                    color: ColorPicker.kPrimaryLight,
+                                    width: 3))),
                         child: Center(
                             child: Stack(
                           overflow: Overflow.visible,
@@ -316,7 +341,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                   borderRadius: BorderRadius.circular(3),
                                 ),
                                 child: Center(
-                                  child: Text(
+                                  child: CommonWidget.text(
                                     '2',
                                     style: FontTextStyle.kWhite12W700SSP,
                                   ),
@@ -329,10 +354,10 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                       Container(
                         width: Get.width * 0.05,
                         decoration: BoxDecoration(
-                            border: Border.symmetric(
-                          vertical: BorderSide(
-                              color: ColorPicker.kPrimaryLight, width: 3),
-                        )),
+                            border: Border(
+                                right: BorderSide(
+                                    color: ColorPicker.kPrimaryLight,
+                                    width: 3))),
                         child: Center(
                             child: Stack(
                           overflow: Overflow.visible,
@@ -352,7 +377,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                   borderRadius: BorderRadius.circular(3),
                                 ),
                                 child: Center(
-                                  child: Text(
+                                  child: CommonWidget.text(
                                     '2',
                                     style: FontTextStyle.kWhite12W700SSP,
                                   ),
@@ -365,10 +390,10 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                       Container(
                         width: 90,
                         decoration: BoxDecoration(
-                            border: Border.symmetric(
-                          vertical: BorderSide(
-                              color: ColorPicker.kPrimaryLight, width: 3),
-                        )),
+                            border: Border(
+                                right: BorderSide(
+                                    color: ColorPicker.kPrimaryLight,
+                                    width: 3))),
                         child: Center(
                             child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -388,7 +413,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                 borderRadius: BorderRadius.circular(3),
                               ),
                               child: Center(
-                                child: Text('352',
+                                child: CommonWidget.text('352',
                                     style:
                                         FontTextStyle.kPrimaryLight10W700SSP),
                               ),
@@ -399,10 +424,10 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                       Container(
                         width: Get.width * 0.05,
                         decoration: BoxDecoration(
-                            border: Border.symmetric(
-                          vertical: BorderSide(
-                              color: ColorPicker.kPrimaryLight, width: 3),
-                        )),
+                            border: Border(
+                                right: BorderSide(
+                                    color: ColorPicker.kPrimaryLight,
+                                    width: 3))),
                         child: Center(
                           child: Container(
                             height: 26,
@@ -435,7 +460,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                         InkWell(
                           onTap: () {},
                           child: Center(
-                            child: Text(
+                            child: CommonWidget.text(
                               "New to Hospitality Leaders? Sign up now to join our membership",
                               style: FontTextStyle.kBlueLight116W400SSP,
                             ),
@@ -452,7 +477,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                               color: Color(0xff32A3FD),
                               borderRadius: BorderRadius.circular(2)),
                           child: Center(
-                              child: Text(
+                              child: CommonWidget.text(
                             "Join now. It’s free",
                             style: FontTextStyle.kWhite14W400SSP,
                           )),
@@ -485,7 +510,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                 alignment: Alignment.centerLeft,
                                 child: Padding(
                                   padding: const EdgeInsets.only(left: 90),
-                                  child: Text(
+                                  child: CommonWidget.text(
                                     "Send news to: editor@hospitality.pro ",
                                     style: FontTextStyle.kWhite14W400SSP,
                                   ),
@@ -516,14 +541,14 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
+                                CommonWidget.text(
                                   "RESOURCES",
                                   style: FontTextStyle.kGreyLight512W700SSP,
                                 ),
                                 SizedBox(
                                   height: Get.height * 0.005,
                                 ),
-                                Text(
+                                CommonWidget.text(
                                   "5 Steps for Travel Brands to Build a Brand Ambassador Program",
                                   style: FontTextStyle.kBlueDark136W400SSP,
                                 ),
@@ -567,7 +592,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                         SizedBox(
                                           height: Get.height * 0.005,
                                         ),
-                                        Text(
+                                        CommonWidget.text(
                                           "26 August 2015  •  10:40",
                                           style: FontTextStyle
                                               .kGreyLight514W400SSP,
@@ -596,51 +621,101 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Container(
-                                            height: 13,
-                                            width: 13,
-                                            color: Colors.red,
+                                            height: 36,
+                                            width: 36,
+                                            decoration: BoxDecoration(
+                                                color: ColorPicker.kBg3,
+                                                borderRadius:
+                                                    BorderRadius.circular(5)),
+                                            child: Center(
+                                              child: SvgPicture.asset(
+                                                  'assets/icons/svg/facebook.svg',
+                                                  height: 13,
+                                                  width: 13,
+                                                  fit: BoxFit.cover),
+                                            ),
                                           ),
-                                          Text(
+                                          CommonWidget.text(
                                             '112',
                                             style: FontTextStyle
                                                 .kGreyLight514W400SSP,
                                           ),
                                           Container(
-                                            height: 13,
-                                            width: 13,
-                                            color: Colors.blue,
+                                            height: 36,
+                                            width: 36,
+                                            decoration: BoxDecoration(
+                                                color: ColorPicker.kBg3,
+                                                borderRadius:
+                                                    BorderRadius.circular(5)),
+                                            child: Center(
+                                              child: SvgPicture.asset(
+                                                  'assets/icons/svg/twitter.svg',
+                                                  height: 13,
+                                                  width: 13,
+                                                  fit: BoxFit.cover),
+                                            ),
                                           ),
-                                          Text(
+                                          CommonWidget.text(
                                             '56',
                                             style: FontTextStyle
                                                 .kGreyLight514W400SSP,
                                           ),
                                           Container(
-                                            height: 13,
-                                            width: 13,
-                                            color: Colors.green,
+                                            height: 36,
+                                            width: 36,
+                                            decoration: BoxDecoration(
+                                                color: ColorPicker.kBg3,
+                                                borderRadius:
+                                                    BorderRadius.circular(5)),
+                                            child: Center(
+                                              child: SvgPicture.asset(
+                                                  'assets/icons/svg/googleplus.svg',
+                                                  height: 13,
+                                                  width: 13,
+                                                  fit: BoxFit.cover),
+                                            ),
                                           ),
-                                          Text(
+                                          CommonWidget.text(
                                             '321',
                                             style: FontTextStyle
                                                 .kGreyLight514W400SSP,
                                           ),
                                           Container(
-                                            height: 13,
-                                            width: 13,
-                                            color: Colors.yellow,
+                                            height: 36,
+                                            width: 36,
+                                            decoration: BoxDecoration(
+                                                color: ColorPicker.kBg3,
+                                                borderRadius:
+                                                    BorderRadius.circular(5)),
+                                            child: Center(
+                                              child: SvgPicture.asset(
+                                                  'assets/icons/svg/linkdin.svg',
+                                                  height: 13,
+                                                  width: 13,
+                                                  fit: BoxFit.cover),
+                                            ),
                                           ),
-                                          Text(
+                                          CommonWidget.text(
                                             '22',
                                             style: FontTextStyle
                                                 .kGreyLight514W400SSP,
                                           ),
                                           Container(
-                                            height: 13,
-                                            width: 13,
-                                            color: Colors.pink,
+                                            height: 36,
+                                            width: 36,
+                                            decoration: BoxDecoration(
+                                                color: ColorPicker.kBg3,
+                                                borderRadius:
+                                                    BorderRadius.circular(5)),
+                                            child: Center(
+                                              child: SvgPicture.asset(
+                                                  'assets/icons/svg/any.svg',
+                                                  height: 13,
+                                                  width: 13,
+                                                  fit: BoxFit.cover),
+                                            ),
                                           ),
-                                          Text(
+                                          CommonWidget.text(
                                             '13',
                                             style: FontTextStyle
                                                 .kGreyLight514W400SSP,
@@ -672,7 +747,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                             SizedBox(
                               height: Get.height * 0.1,
                             ),
-                            Text(
+                            CommonWidget.text(
                               "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quisnostrud exercitation ullamco.",
                               style: FontTextStyle.kBlueDark120W400SSP
                                   .copyWith(height: 1.5),
@@ -680,7 +755,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                             SizedBox(
                               height: Get.height * 0.02,
                             ),
-                            Text(
+                            CommonWidget.text(
                               "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
                               style: FontTextStyle.kGreyLight516W400SSP
                                   .copyWith(height: 1.5),
@@ -688,7 +763,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                             SizedBox(
                               height: Get.height * 0.02,
                             ),
-                            Text(
+                            CommonWidget.text(
                               "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
                               style: FontTextStyle.kGreyLight516W400SSP
                                   .copyWith(height: 1.5),
@@ -696,7 +771,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                             SizedBox(
                               height: Get.height * 0.02,
                             ),
-                            Text(
+                            CommonWidget.text(
                               "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.",
                               style: FontTextStyle.kGreyLight516W400SSP
                                   .copyWith(height: 1.5),
@@ -869,7 +944,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                             SizedBox(
                               height: 20,
                             ),
-                            Text(
+                            CommonWidget.text(
                               'Lorem ipsum dolor sit amet',
                               style: FontTextStyle.kBlueDark118W700SSP
                                   .copyWith(height: 1.5),
@@ -877,7 +952,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                             SizedBox(
                               height: 20,
                             ),
-                            Text(
+                            CommonWidget.text(
                               'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. '
                               'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.',
                               style: FontTextStyle.kGreyLight516W400SSP
@@ -886,7 +961,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                             SizedBox(
                               height: 20,
                             ),
-                            Text(
+                            CommonWidget.text(
                               'Numbered List',
                               style: FontTextStyle.kBlueDark118W700SSP
                                   .copyWith(height: 1.5),
@@ -895,39 +970,39 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                               height: 20,
                             ),
                             ListTile(
-                              leading: Text(
+                              leading: CommonWidget.text(
                                 '1.',
                                 textAlign: TextAlign.start,
                                 style: FontTextStyle.kGreyLight516W400SSP
                                     .copyWith(height: 1.5),
                               ),
-                              title: Text(
+                              title: CommonWidget.text(
                                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
                                 style: FontTextStyle.kGreyLight516W400SSP
                                     .copyWith(height: 1.5),
                               ),
                             ),
                             ListTile(
-                              leading: Text(
+                              leading: CommonWidget.text(
                                 '2.',
                                 textAlign: TextAlign.start,
                                 style: FontTextStyle.kGreyLight516W400SSP
                                     .copyWith(height: 1.5),
                               ),
-                              title: Text(
+                              title: CommonWidget.text(
                                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
                                 style: FontTextStyle.kGreyLight516W400SSP
                                     .copyWith(height: 1.5),
                               ),
                             ),
                             ListTile(
-                              leading: Text(
+                              leading: CommonWidget.text(
                                 '3.',
                                 textAlign: TextAlign.start,
                                 style: FontTextStyle.kGreyLight516W400SSP
                                     .copyWith(height: 1.5),
                               ),
-                              title: Text(
+                              title: CommonWidget.text(
                                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
                                 style: FontTextStyle.kGreyLight516W400SSP
                                     .copyWith(height: 1.5),
@@ -936,7 +1011,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                             SizedBox(
                               height: 20,
                             ),
-                            Text(
+                            CommonWidget.text(
                               'Bulleted List',
                               style: FontTextStyle.kBlueDark118W700SSP
                                   .copyWith(height: 1.5),
@@ -945,39 +1020,39 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                               height: 20,
                             ),
                             ListTile(
-                              leading: Text(
+                              leading: CommonWidget.text(
                                 '\u2022',
                                 textAlign: TextAlign.start,
                                 style: FontTextStyle.kGreyLight516W400SSP
                                     .copyWith(height: 1.5),
                               ),
-                              title: Text(
+                              title: CommonWidget.text(
                                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
                                 style: FontTextStyle.kGreyLight516W400SSP
                                     .copyWith(height: 1.5),
                               ),
                             ),
                             ListTile(
-                              leading: Text(
+                              leading: CommonWidget.text(
                                 '\u2022',
                                 textAlign: TextAlign.start,
                                 style: FontTextStyle.kGreyLight516W400SSP
                                     .copyWith(height: 1.5),
                               ),
-                              title: Text(
+                              title: CommonWidget.text(
                                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
                                 style: FontTextStyle.kGreyLight516W400SSP
                                     .copyWith(height: 1.5),
                               ),
                             ),
                             ListTile(
-                              leading: Text(
+                              leading: CommonWidget.text(
                                 '\u2022',
                                 textAlign: TextAlign.start,
                                 style: FontTextStyle.kGreyLight516W400SSP
                                     .copyWith(height: 1.5),
                               ),
-                              title: Text(
+                              title: CommonWidget.text(
                                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
                                 style: FontTextStyle.kGreyLight516W400SSP
                                     .copyWith(height: 1.5),
@@ -991,13 +1066,13 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                               children: [
                                 Container(
                                   width: 30,
-                                  child: Text(
+                                  child: CommonWidget.text(
                                     '"',
                                     style: FontTextStyle.kBlueLight150BOLDPR,
                                   ),
                                 ),
                                 Flexible(
-                                  child: Text(
+                                  child: CommonWidget.text(
                                     'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex',
                                     style: FontTextStyle.kBlueDark120W400SSP
                                         .copyWith(height: 1.5),
@@ -1005,7 +1080,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                 ),
                                 Container(
                                   width: 10,
-                                  child: Text(
+                                  child: CommonWidget.text(
                                     '"',
                                     style: FontTextStyle.kBlueLight150BOLDPR,
                                   ),
@@ -1015,7 +1090,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                             SizedBox(
                               height: 20,
                             ),
-                            Text(
+                            CommonWidget.text(
                               'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
                               style: FontTextStyle.kGreyLight516W400SSP
                                   .copyWith(height: 1.5),
@@ -1023,7 +1098,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                             SizedBox(
                               height: 20,
                             ),
-                            Text(
+                            CommonWidget.text(
                               'TAGS:',
                               style: FontTextStyle.kGreyLight612W700SSP
                                   .copyWith(height: 1.5),
@@ -1040,7 +1115,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                   5,
                                   (index) => Padding(
                                     padding: EdgeInsets.only(right: 8.0),
-                                    child: Text(
+                                    child: CommonWidget.text(
                                       '#Hospitality',
                                       style: FontTextStyle.kGreyLight614W400SSP
                                           .copyWith(height: 1.5),
@@ -1052,7 +1127,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                             SizedBox(
                               height: 20,
                             ),
-                            Text(
+                            CommonWidget.text(
                               'Share This Article:',
                               style: FontTextStyle.kGreyLight612W700SSP
                                   .copyWith(height: 1.5),
@@ -1103,7 +1178,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                       fit: BoxFit.cover,
                                     ),
                                     SizedBox(width: 5),
-                                    Text(
+                                    CommonWidget.text(
                                       'Like',
                                       style: FontTextStyle.kBlueLight114W400SSP
                                           .copyWith(height: 1.5),
@@ -1116,7 +1191,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                         color: Color(0xFFCCE8FE),
                                         borderRadius: BorderRadius.circular(2),
                                       ),
-                                      child: Text(
+                                      child: CommonWidget.text(
                                         '12',
                                         style: FontTextStyle
                                             .kBlueLight112W700SSP
@@ -1140,7 +1215,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                       fit: BoxFit.cover,
                                     ),
                                     SizedBox(width: 5),
-                                    Text(
+                                    CommonWidget.text(
                                       'Comment',
                                       style: FontTextStyle.kBlueLight114W400SSP
                                           .copyWith(height: 1.5),
@@ -1153,7 +1228,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                         color: Color(0xFFCCE8FE),
                                         borderRadius: BorderRadius.circular(2),
                                       ),
-                                      child: Text(
+                                      child: CommonWidget.text(
                                         '5',
                                         style: FontTextStyle
                                             .kBlueLight112W700SSP
@@ -1180,7 +1255,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                           fit: BoxFit.cover,
                                         ),
                                         SizedBox(width: 5),
-                                        Text(
+                                        CommonWidget.text(
                                           'Share',
                                           style: FontTextStyle
                                               .kBlueLight114W400SSP
@@ -1195,7 +1270,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                             borderRadius:
                                                 BorderRadius.circular(2),
                                           ),
-                                          child: Text(
+                                          child: CommonWidget.text(
                                             '0',
                                             style: FontTextStyle
                                                 .kBlueLight112W700SSP
@@ -1229,7 +1304,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                     fit: BoxFit.cover,
                                   ),
                                   SizedBox(width: 5),
-                                  Text(
+                                  CommonWidget.text(
                                     'Show previous comments',
                                     style: FontTextStyle.kBlueLight114W600SSP
                                         .copyWith(height: 1.5),
@@ -1313,13 +1388,13 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.end,
                                               children: [
-                                                Text(
+                                                CommonWidget.text(
                                                   'like • ',
                                                   style: FontTextStyle
                                                       .kBlueLight114W400SSP
                                                       .copyWith(height: 1.5),
                                                 ),
-                                                Text(
+                                                CommonWidget.text(
                                                   'Reply • ',
                                                   style: FontTextStyle
                                                       .kBlueLight114W400SSP
@@ -1332,13 +1407,13 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                                   width: 10,
                                                   fit: BoxFit.cover,
                                                 ),
-                                                Text(
+                                                CommonWidget.text(
                                                   ' 12',
                                                   style: FontTextStyle
                                                       .kBlueLight114W400SSP
                                                       .copyWith(height: 1.5),
                                                 ),
-                                                Text(
+                                                CommonWidget.text(
                                                   ' • 5 hours ago',
                                                   style: FontTextStyle
                                                       .kGreyLight614W400SSP
@@ -1416,19 +1491,19 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.end,
                                               children: [
-                                                Text(
+                                                CommonWidget.text(
                                                   'Like',
                                                   style: FontTextStyle
                                                       .kBlueLight114W400SSP
                                                       .copyWith(height: 1.5),
                                                 ),
-                                                Text(
+                                                CommonWidget.text(
                                                   ' • ',
                                                   style: FontTextStyle
                                                       .kGreyLight614W400SSP
                                                       .copyWith(height: 1.5),
                                                 ),
-                                                Text(
+                                                CommonWidget.text(
                                                   'Reply',
                                                   style: FontTextStyle
                                                       .kBlueLight114W400SSP
@@ -1438,13 +1513,13 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                                 //   Icons.thumb_up_alt,
                                                 //   color: Colors.blue,
                                                 // ),
-                                                // Text(
+                                                // CommonWidget.text(
                                                 //   ' 12',
                                                 //   style: TextStyle(
                                                 //       color: Colors.blue,
                                                 //       fontSize: 14),
                                                 // ),
-                                                Text(
+                                                CommonWidget.text(
                                                   '  •  5 hours ago',
                                                   style: FontTextStyle
                                                       .kGreyLight614W400SSP
@@ -1516,7 +1591,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                   color:
                                       ColorPicker.kGreyLight5.withOpacity(0.2),
                                 )),
-                                Text(
+                                CommonWidget.text(
                                   'SUGGESTED NEWS',
                                   style: FontTextStyle.kGreyLight513W700SSP
                                       .copyWith(height: 1.5),
@@ -1568,7 +1643,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
                                             children: [
-                                              Text(
+                                              CommonWidget.text(
                                                 '${suggestNewsData[index]['text1']}',
                                                 style: FontTextStyle
                                                     .kBlueDark118W700SSP
@@ -1604,7 +1679,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                                   SizedBox(
                                                     height: Get.height * 0.005,
                                                   ),
-                                                  Text(
+                                                  CommonWidget.text(
                                                     "26 August 2015  •  10:40",
                                                     style: FontTextStyle
                                                         .kGreyLight514W400SSP
@@ -1613,7 +1688,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                                 ],
                                               ),
 
-                                              // Text(
+                                              // CommonWidget.text(
                                               //   '${suggestNewsData[index]['text3']}',
                                               //   style: FontTextStyle
                                               //       .kGreyLight514W600PR,
@@ -1625,7 +1700,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                               //     : Container(
                                               //         padding:
                                               //             EdgeInsets.all(5),
-                                              //         child: Text(
+                                              //         child: CommonWidget.text(
                                               //           'MEMBERS ONLY',
                                               //           style: FontTextStyle
                                               //               .kRed10W400PR,
@@ -1715,14 +1790,14 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 // SizedBox(height: 30),
-                                                Text(
+                                                CommonWidget.text(
                                                   'TIMELINE',
                                                   style: FontTextStyle
                                                       .kWhite12W700SSP,
                                                 ),
                                                 SizedBox(
                                                   width: Get.width * 0.16,
-                                                  child: Text(
+                                                  child: CommonWidget.text(
                                                     'Become a thought leader on hospitality',
                                                     style: FontTextStyle
                                                         .kBlueLight236W400SSP,
@@ -1781,7 +1856,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                                       SizedBox(
                                                         width: 8,
                                                       ),
-                                                      Text(
+                                                      CommonWidget.text(
                                                         "Send news to our editor",
                                                         style: FontTextStyle
                                                             .kBlueLight114W400SSP,
@@ -1825,7 +1900,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                         top: Get.width * 0.01,
                                         right: Get.width * 0.01,
                                         left: Get.width * 0.01),
-                                    child: Text(
+                                    child: CommonWidget.text(
                                       'Categories',
                                       style: FontTextStyle.kBlueDark120W400SSP
                                           .copyWith(height: 1.5),
@@ -1845,7 +1920,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                               right: Get.width * 0.01,
                                               bottom: Get.width * 0.01,
                                               left: Get.width * 0.01),
-                                          child: Text(
+                                          child: CommonWidget.text(
                                             '${categories[index]['text']}',
                                             style: FontTextStyle
                                                 .kBlueLight114W600SSP
@@ -1865,7 +1940,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                           color: ColorPicker.kBlueLight1,
                                         ),
                                         SB.SW5(),
-                                        Text(
+                                        CommonWidget.text(
                                           'Show more',
                                           style: FontTextStyle
                                               .kBlueLight114W600SSP,
@@ -1890,7 +1965,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                         top: Get.width * 0.01,
                                         right: Get.width * 0.01,
                                         left: Get.width * 0.01),
-                                    child: Text(
+                                    child: CommonWidget.text(
                                       'Latest news',
                                       style: FontTextStyle.kBlackPure20W400SSP
                                           .copyWith(height: 1.5),
@@ -1922,7 +1997,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                               ),
                                               SB.SW10(),
                                               Flexible(
-                                                child: Text(
+                                                child: CommonWidget.text(
                                                   '${data1[index]['txt']}',
                                                   style: FontTextStyle
                                                       .kBlueDark116W700SSP
@@ -2018,7 +2093,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                             color: ColorPicker.kPrimaryLightBlue,
                           ),
                           SizedBox(height: 5),
-                          Text('MENU',
+                          CommonWidget.text('MENU',
                               style: FontTextStyle.kPrimaryLight29W700SSP),
                         ],
                       ),
@@ -2059,14 +2134,14 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
+                                    CommonWidget.text(
                                       'RESOURCES',
                                       style: FontTextStyle.kGreyLight512W700SSP,
                                     ),
                                     SizedBox(
                                       height: Get.height * 0.01,
                                     ),
-                                    Text(
+                                    CommonWidget.text(
                                       '5 Steps for Travel Brands to Build a Brand Ambassador Program',
                                       style: FontTextStyle.kBlueDark126W400SSP,
                                     ),
@@ -2095,7 +2170,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                             children: [
                                               Row(
                                                 children: [
-                                                  Text(
+                                                  CommonWidget.text(
                                                     'By',
                                                     style: TextStyle(
                                                       fontSize: 17,
@@ -2103,7 +2178,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                                           .kGreyLight5,
                                                     ),
                                                   ),
-                                                  Text(
+                                                  CommonWidget.text(
                                                     ': Pam Carrol',
                                                     style: TextStyle(
                                                         color: ColorPicker
@@ -2117,7 +2192,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                               SizedBox(
                                                 height: Get.height * 0.005,
                                               ),
-                                              Text(
+                                              CommonWidget.text(
                                                 '26 August 2015 • 10:40',
                                                 style: TextStyle(
                                                   fontSize: 17,
@@ -2156,14 +2231,14 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                       thickness: 2,
                                     ),
                                   ),
-                                  Text(
+                                  CommonWidget.text(
                                       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
                                       style: TextStyle(
                                           color: Colors.black, fontSize: 22)),
                                   SizedBox(
                                     height: Get.height * 0.03,
                                   ),
-                                  Text(
+                                  CommonWidget.text(
                                       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
                                       style: TextStyle(
                                         color: ColorPicker.kGreyLight5,
@@ -2172,7 +2247,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                   SizedBox(
                                     height: Get.height * 0.03,
                                   ),
-                                  Text(
+                                  CommonWidget.text(
                                       'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
                                       style: TextStyle(
                                           color: ColorPicker.kGreyLight5,
@@ -2180,7 +2255,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                   SizedBox(
                                     height: Get.height * 0.03,
                                   ),
-                                  Text(
+                                  CommonWidget.text(
                                       'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.',
                                       style: TextStyle(
                                           color: ColorPicker.kGreyLight5,
@@ -2441,7 +2516,8 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                   SizedBox(
                                     height: Get.height * 0.03,
                                   ),
-                                  Text('Lorem ipsum dolor sit amet',
+                                  CommonWidget.text(
+                                      'Lorem ipsum dolor sit amet',
                                       style: TextStyle(
                                           color: Colors.black,
                                           fontSize: 25,
@@ -2449,7 +2525,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                   SizedBox(
                                     height: Get.height * 0.03,
                                   ),
-                                  Text(
+                                  CommonWidget.text(
                                       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
                                       style: TextStyle(
                                           color: ColorPicker.kGreyLight5,
@@ -2457,7 +2533,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                   SizedBox(
                                     height: Get.height * 0.03,
                                   ),
-                                  Text(
+                                  CommonWidget.text(
                                       'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
                                       style: TextStyle(
                                           color: ColorPicker.kGreyLight5,
@@ -2465,7 +2541,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                   SizedBox(
                                     height: Get.height * 0.03,
                                   ),
-                                  Text('Numbered List',
+                                  CommonWidget.text('Numbered List',
                                       style: TextStyle(
                                           color: Colors.black,
                                           fontSize: 25,
@@ -2478,7 +2554,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                     children: [
                                       Padding(
                                         padding: EdgeInsets.only(bottom: 60),
-                                        child: Text('1.',
+                                        child: CommonWidget.text('1.',
                                             style: TextStyle(
                                                 color: ColorPicker.kGreyLight5,
                                                 fontSize: 17)),
@@ -2488,7 +2564,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                       ),
                                       Container(
                                         width: Get.height * 0.37,
-                                        child: Text(
+                                        child: CommonWidget.text(
                                             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut	labore et dolore magna aliqua.',
                                             style: TextStyle(
                                                 color: ColorPicker.kGreyLight5,
@@ -2504,7 +2580,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                     children: [
                                       Padding(
                                         padding: EdgeInsets.only(bottom: 60),
-                                        child: Text('2.',
+                                        child: CommonWidget.text('2.',
                                             style: TextStyle(
                                                 color: ColorPicker.kGreyLight5,
                                                 fontSize: 17)),
@@ -2514,7 +2590,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                       ),
                                       Container(
                                         width: Get.height * 0.37,
-                                        child: Text(
+                                        child: CommonWidget.text(
                                             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut	labore et dolore magna aliqua.',
                                             style: TextStyle(
                                                 color: ColorPicker.kGreyLight5,
@@ -2530,7 +2606,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                     children: [
                                       Padding(
                                         padding: EdgeInsets.only(bottom: 60),
-                                        child: Text('3.',
+                                        child: CommonWidget.text('3.',
                                             style: TextStyle(
                                                 color: ColorPicker.kGreyLight5,
                                                 fontSize: 17)),
@@ -2540,7 +2616,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                       ),
                                       Container(
                                         width: Get.height * 0.37,
-                                        child: Text(
+                                        child: CommonWidget.text(
                                             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut	labore et dolore magna aliqua.',
                                             style: TextStyle(
                                                 color: ColorPicker.kGreyLight5,
@@ -2551,7 +2627,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                   SizedBox(
                                     height: Get.height * 0.02,
                                   ),
-                                  Text('Bulleted List',
+                                  CommonWidget.text('Bulleted List',
                                       style: TextStyle(
                                           color: Colors.black,
                                           fontSize: 25,
@@ -2564,7 +2640,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                     children: [
                                       Padding(
                                         padding: EdgeInsets.only(bottom: 60),
-                                        child: Text('•',
+                                        child: CommonWidget.text('•',
                                             style: TextStyle(
                                                 color: ColorPicker.kGreyLight5,
                                                 fontSize: 30)),
@@ -2574,7 +2650,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                       ),
                                       Container(
                                         width: Get.height * 0.37,
-                                        child: Text(
+                                        child: CommonWidget.text(
                                             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut	labore et dolore magna aliqua.',
                                             style: TextStyle(
                                                 color: ColorPicker.kGreyLight5,
@@ -2590,7 +2666,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                     children: [
                                       Padding(
                                         padding: EdgeInsets.only(bottom: 60),
-                                        child: Text('•',
+                                        child: CommonWidget.text('•',
                                             style: TextStyle(
                                                 color: ColorPicker.kGreyLight5,
                                                 fontSize: 30)),
@@ -2600,7 +2676,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                       ),
                                       Container(
                                         width: Get.height * 0.37,
-                                        child: Text(
+                                        child: CommonWidget.text(
                                             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut	labore et dolore magna aliqua.',
                                             style: TextStyle(
                                                 color: ColorPicker.kGreyLight5,
@@ -2616,7 +2692,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                     children: [
                                       Padding(
                                         padding: EdgeInsets.only(bottom: 60),
-                                        child: Text('•',
+                                        child: CommonWidget.text('•',
                                             style: TextStyle(
                                                 color: ColorPicker.kGreyLight5,
                                                 fontSize: 30)),
@@ -2626,7 +2702,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                       ),
                                       Container(
                                         width: Get.height * 0.37,
-                                        child: Text(
+                                        child: CommonWidget.text(
                                             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut	labore et dolore magna aliqua.',
                                             style: TextStyle(
                                                 color: ColorPicker.kGreyLight5,
@@ -2648,7 +2724,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                           padding: EdgeInsets.all(10),
                                           child: Container(
                                             width: Get.height * 0.36,
-                                            child: Text(
+                                            child: CommonWidget.text(
                                                 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex',
                                                 style: TextStyle(
                                                     color: Colors.black,
@@ -2664,7 +2740,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                   SizedBox(
                                     height: Get.height * 0.02,
                                   ),
-                                  Text(
+                                  CommonWidget.text(
                                       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
                                       style: TextStyle(
                                           color: ColorPicker.kGreyLight5,
@@ -2672,7 +2748,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                   SizedBox(
                                     height: Get.height * 0.02,
                                   ),
-                                  Text('TAGS:',
+                                  CommonWidget.text('TAGS:',
                                       style: TextStyle(
                                           color: Color(0xffB5BDC2),
                                           fontSize: 17,
@@ -2719,7 +2795,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                           ),
                                         ],
                                       )),
-                                  Text('SHARE THIS ARTICLE:',
+                                  CommonWidget.text('SHARE THIS ARTICLE:',
                                       style: TextStyle(
                                           color: Color(0xffB5BDC2),
                                           fontSize: 17,
@@ -2783,7 +2859,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                             fit: BoxFit.cover,
                                           ),
                                           SizedBox(width: 5),
-                                          Text(
+                                          CommonWidget.text(
                                             likeCommentShare[index]['title'],
                                             style: FontTextStyle
                                                 .kBlueLight116W400SSP,
@@ -2798,7 +2874,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                                   BorderRadius.circular(2),
                                             ),
                                             child: Center(
-                                              child: Text(
+                                              child: CommonWidget.text(
                                                 likeCommentShare[index]
                                                     ['total'],
                                                 style: FontTextStyle
@@ -2829,7 +2905,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                   fit: BoxFit.cover,
                                 ),
                                 SizedBox(width: 5),
-                                Text(
+                                CommonWidget.text(
                                   'Show previous comments',
                                   style: FontTextStyle.kBlueLight114W600PR,
                                 ),
@@ -2914,13 +2990,13 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.end,
                                                   children: [
-                                                    Text(
+                                                    CommonWidget.text(
                                                       'like • ',
                                                       style: TextStyle(
                                                           color: Colors.blue,
                                                           fontSize: 14),
                                                     ),
-                                                    Text(
+                                                    CommonWidget.text(
                                                       'Reply • ',
                                                       style: TextStyle(
                                                           color: Colors.blue,
@@ -2930,13 +3006,13 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                                       Icons.thumb_up_alt,
                                                       color: Colors.blue,
                                                     ),
-                                                    Text(
+                                                    CommonWidget.text(
                                                       ' 12',
                                                       style: TextStyle(
                                                           color: Colors.blue,
                                                           fontSize: 14),
                                                     ),
-                                                    Text(
+                                                    CommonWidget.text(
                                                       ' • 5 hours ago',
                                                       style: TextStyle(
                                                           color: Colors.grey,
@@ -3018,13 +3094,13 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.end,
                                                   children: [
-                                                    Text(
+                                                    CommonWidget.text(
                                                       'like • ',
                                                       style: TextStyle(
                                                           color: Colors.blue,
                                                           fontSize: 14),
                                                     ),
-                                                    Text(
+                                                    CommonWidget.text(
                                                       'Reply • ',
                                                       style: TextStyle(
                                                           color: Colors.blue,
@@ -3034,13 +3110,13 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                                       Icons.thumb_up_alt,
                                                       color: Colors.blue,
                                                     ),
-                                                    Text(
+                                                    CommonWidget.text(
                                                       ' 12',
                                                       style: TextStyle(
                                                           color: Colors.blue,
                                                           fontSize: 14),
                                                     ),
-                                                    Text(
+                                                    CommonWidget.text(
                                                       ' • 5 hours ago',
                                                       style: TextStyle(
                                                           color: Colors.grey,
@@ -3116,7 +3192,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                           endIndent: 10,
                           color: ColorPicker.kGreyLight5.withOpacity(0.2),
                         )),
-                        Text(
+                        CommonWidget.text(
                           'SUGGESTED NEWS',
                           style: FontTextStyle.kGreyLight513W700PR,
                         ),
@@ -3162,11 +3238,11 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
                                     children: [
-                                      Text(
+                                      CommonWidget.text(
                                         '${suggestNewsData[index]['text1']}',
                                         style: FontTextStyle.kBlackPure18W700PR,
                                       ),
-                                      Text(
+                                      CommonWidget.text(
                                         '${suggestNewsData[index]['text3']}',
                                         style:
                                             FontTextStyle.kGreyLight514W600PR,
@@ -3177,7 +3253,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                           ? SizedBox()
                                           : Container(
                                               padding: EdgeInsets.all(5),
-                                              child: Text(
+                                              child: CommonWidget.text(
                                                 'MEMBERS ONLY',
                                                 style:
                                                     FontTextStyle.kRed10W400PR,
@@ -3276,13 +3352,13 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         // SizedBox(height: 30),
-                                        Text(
+                                        CommonWidget.text(
                                           'GOT NEWS ?',
                                           style: FontTextStyle.kWhite12W700SSP,
                                         ),
                                         SizedBox(
                                           width: Get.width * 0.34,
-                                          child: Text(
+                                          child: CommonWidget.text(
                                             'Become a thought leader on hospitality',
                                             style: FontTextStyle.kWhite24W400PR,
                                           ),
@@ -3336,7 +3412,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                               SizedBox(
                                                 width: 8,
                                               ),
-                                              Text(
+                                              CommonWidget.text(
                                                 "Send news to our editor",
                                                 style: FontTextStyle
                                                     .kBlueLight116W400SSP,
@@ -3368,7 +3444,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
+                          CommonWidget.text(
                             'Categories',
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.w400),
@@ -3378,7 +3454,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                             children: [
                               Image.asset('assets/icons/menu.png'),
                               SizedBox(height: 3),
-                              Text(
+                              CommonWidget.text(
                                 'menu',
                                 style: TextStyle(
                                   fontSize: 9,
@@ -3405,7 +3481,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
+                                CommonWidget.text(
                                   'Latest news',
                                   style: TextStyle(
                                       fontSize: 20,
@@ -3440,7 +3516,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                           width: 10,
                                         ),
                                         Flexible(
-                                          child: Text(
+                                          child: CommonWidget.text(
                                             '${data1[index]['txt']}',
                                             style: FontTextStyle
                                                 .kBlackPure16W700PR,
@@ -3481,20 +3557,20 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
               child: ListView(
                 padding: EdgeInsets.zero,
                 children: [
-                  const DrawerHeader(
+                  DrawerHeader(
                     decoration: BoxDecoration(
                       color: Colors.blue,
                     ),
-                    child: Text('Drawer Header'),
+                    child: CommonWidget.text('Drawer Header'),
                   ),
                   ListTile(
-                    title: const Text('Item 1'),
+                    title: CommonWidget.text('Item 1'),
                     onTap: () {
                       Navigator.pop(context);
                     },
                   ),
                   ListTile(
-                    title: const Text('Item 2'),
+                    title: CommonWidget.text('Item 2'),
                     onTap: () {
                       Navigator.pop(context);
                     },
@@ -3532,7 +3608,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
         Image.asset(image!),
         Padding(
           padding: EdgeInsets.only(left: 4, top: 7),
-          child: Text(title!,
+          child: CommonWidget.text(title!,
               style: TextStyle(
                 color: Color(0xff32A3FD),
                 fontSize: 15,
@@ -3550,7 +3626,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
         padding: EdgeInsets.all(5),
         child: Container(
           child: Center(
-            child: Text(title,
+            child: CommonWidget.text(title,
                 style: TextStyle(
                   color: Color(0xffB5BDC2),
                 )),

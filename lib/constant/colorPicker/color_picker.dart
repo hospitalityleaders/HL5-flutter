@@ -17,6 +17,7 @@ class ColorPicker {
   static const Color kBlueDark1 = Color(0xff272E41);
   static const Color kPrimaryLight = Color(0xff2B375E);
   static const Color kPrimaryLight1 = Color(0xff384677);
+  static const Color kPrimaryLight3 = Color(0xff546088);
   static const Color kPrimaryLight2 = Color(0xff6C779E);
   static const Color kPrimaryLightBlue = Color(0xff7A85A6);
 

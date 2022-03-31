@@ -5,6 +5,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:holedo/screens/profile-pages/home-pages/home.dart';
 
 import '../../news/categories/news_signal.dart';
+import '../../news/update/update_news.dart';
 import '../../news/update/update_news2.dart';
 import '../../update_news_screen.dart';
 
@@ -18,7 +19,8 @@ class Header extends StatefulWidget {
   _HeaderState createState() => _HeaderState();
 }
 
-List<DropdownMenuItem<String>> items = <String>['Peoples', 'Jobs', 'News'].map<DropdownMenuItem<String>>((String value) {
+List<DropdownMenuItem<String>> items = <String>['Peoples', 'Jobs', 'News']
+    .map<DropdownMenuItem<String>>((String value) {
   return DropdownMenuItem<String>(value: value, child: Text(value));
 }).toList();
 String dropdownValue = 'Peoples';
@@ -74,7 +76,8 @@ class _HeaderState extends State<Header> {
             SizedBox(
               height: 36,
               child: Image(
-                image: NetworkImage('https://media.istockphoto.com/photos/yellow-black-outlined-font-letter-h-3d-picture-id1340359277?s=612x612'),
+                image: NetworkImage(
+                    'https://media.istockphoto.com/photos/yellow-black-outlined-font-letter-h-3d-picture-id1340359277?s=612x612'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -96,7 +99,10 @@ class _HeaderState extends State<Header> {
                     const Expanded(
                       flex: 2,
                       child: TextField(
-                        decoration: InputDecoration(border: InputBorder.none, hintText: 'Search', hintStyle: TextStyle(color: Colors.grey)),
+                        decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'Search',
+                            hintStyle: TextStyle(color: Colors.grey)),
                       ),
                     ),
                     DropdownButton(
@@ -116,7 +122,7 @@ class _HeaderState extends State<Header> {
             ),
             buildMenuBtn('Home', context, Home()),
             buildMenuBtn('Profile', context, Home()),
-            buildMenuBtn('News', context, NewsSingleScreen()),
+            buildMenuBtn('News', context, UpdateNews()),
             buildMenuBtn('Jobs', context, Home()),
             buildMenuBtn('Recruitment', context, Home()),
             buildMenuBtn('Help', context, Home()),
@@ -179,7 +185,10 @@ class _PopUpIconState extends State<PopUpIcon> {
                     Positioned(
                       top: 50,
                       child: Column(
-                        children: [InboxPopUpProfile(Icons.circle, 'title', 'subtitle', 'date')],
+                        children: [
+                          InboxPopUpProfile(
+                              Icons.circle, 'title', 'subtitle', 'date')
+                        ],
                       ),
                     ),
                   ],
@@ -254,7 +263,8 @@ InboxPopUpProfile(IconData icon, String title, String subtitle, String date) {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
-                margin: const EdgeInsets.only(top: 23, bottom: 23, right: 14, left: 20),
+                margin: const EdgeInsets.only(
+                    top: 23, bottom: 23, right: 14, left: 20),
                 height: 50,
                 width: 50,
                 color: Color(0xFF7a85a6),
@@ -268,15 +278,24 @@ InboxPopUpProfile(IconData icon, String title, String subtitle, String date) {
                 children: [
                   Text(
                     title,
-                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xff272E41)),
+                    style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        color: Color(0xff272E41)),
                   ),
                   Text(
                     subtitle,
-                    style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xFF7a85a6)),
+                    style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        color: Color(0xFF7a85a6)),
                   ),
                   Text(
                     date,
-                    style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xff7C8990)),
+                    style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        color: Color(0xff7C8990)),
                   ),
                 ],
               )

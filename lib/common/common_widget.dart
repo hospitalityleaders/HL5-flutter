@@ -1,6 +1,8 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:seo_renderer/renderers/text_renderer/text_renderer_vm.dart';
 import '../constant/colorPicker/color_picker.dart';
 import '../constant/fontStyle/font_style.dart';
 import '../data/data.dart';
@@ -108,6 +110,41 @@ class CommonWidget {
         ),
       ),
       preferredSize: const Size.fromHeight(100),
+    );
+  }
+
+  static Widget text(
+    String text, {
+    TextStyle? style,
+    TextAlign? textAlign,
+    int? maxLines,
+    TextOverflow? overflow,
+  }) {
+    return TextRenderer(
+        child: Text(
+      text,
+      style: style,
+      maxLines: maxLines,
+      overflow: overflow,
+      textAlign: textAlign,
+    ));
+  }
+
+  static Widget seoRenderAutoText(
+    String text, {
+    TextStyle? style,
+    TextAlign? textAlign,
+    double? minFontSize,
+    int? maxLines,
+  }) {
+    return TextRenderer(
+      child: AutoSizeText(
+        text,
+        style: style,
+        minFontSize: minFontSize!,
+        textAlign: textAlign,
+        maxLines: maxLines,
+      ),
     );
   }
 }
