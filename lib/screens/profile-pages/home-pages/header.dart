@@ -356,14 +356,25 @@ class _HeaderState extends State<Header> {
               width: 10,
             ),
             Padding(
-              padding: const EdgeInsets.all(4.0),
+              padding: const EdgeInsets.all(6.0),
               child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                ),
                 width: 270,
-                // color: Colors.white,
                 child: TextFormField(
                   cursorColor: Colors.white,
                   style: FontTextStyle.kWhitePR,
                   decoration: InputDecoration(
+                    disabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(4),
+                    ),
                     hintStyle: TextStyle(
                       color: ColorPicker.kPrimaryLightBlue,
                     ),
@@ -382,7 +393,7 @@ class _HeaderState extends State<Header> {
                         width: Get.width * 0.045,
                         decoration: BoxDecoration(
                           color: ColorPicker.kPrimaryLight1,
-                          borderRadius: BorderRadius.circular(5),
+                          borderRadius: BorderRadius.circular(4),
                         ),
                         child: Center(
                           child: Text(
@@ -425,14 +436,14 @@ class _HeaderState extends State<Header> {
               ),
             ),
             SizedBox(
-              width: Get.width * 0.02,
+              width: Get.width * 0.03,
             ),
             Container(
               width: Get.width * 0.05,
               decoration: BoxDecoration(
                   border: Border.symmetric(
                 vertical:
-                    BorderSide(color: ColorPicker.kPrimaryLight, width: 3),
+                    BorderSide(color: ColorPicker.kPrimaryLight, width: 1),
               )),
               child: Center(
                   child: Stack(
@@ -468,7 +479,7 @@ class _HeaderState extends State<Header> {
               decoration: BoxDecoration(
                   border: Border.symmetric(
                 vertical:
-                    BorderSide(color: ColorPicker.kPrimaryLight, width: 3),
+                    BorderSide(color: ColorPicker.kPrimaryLight, width: 1),
               )),
               child: Center(
                   child: Stack(
@@ -504,7 +515,7 @@ class _HeaderState extends State<Header> {
               decoration: BoxDecoration(
                   border: Border.symmetric(
                 vertical:
-                    BorderSide(color: ColorPicker.kPrimaryLight, width: 3),
+                    BorderSide(color: ColorPicker.kPrimaryLight, width: 1),
               )),
               child: Center(
                   child: Row(
@@ -532,12 +543,13 @@ class _HeaderState extends State<Header> {
                 ],
               )),
             ),
+
             Container(
               width: Get.width * 0.05,
               decoration: BoxDecoration(
                   border: Border.symmetric(
                 vertical:
-                    BorderSide(color: ColorPicker.kPrimaryLight, width: 3),
+                    BorderSide(color: ColorPicker.kPrimaryLight, width: 1),
               )),
               child: Center(
                 child: Container(

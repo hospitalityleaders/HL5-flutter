@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:holedo/screens/news/categories/news_signal.dart';
 
-
 void main() {
   runApp(
     MaterialApp(
@@ -17,7 +16,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       body: NewsSingleScreen(),
     );
   }
