@@ -117,6 +117,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
             scrollDirection: Axis.vertical,
             headerSliverBuilder: (context, innerBoxIsScrolled) {
               return [
+
                 SliverToBoxAdapter(
                   child: HeaderCard(
                     isEditable: isEditable,
@@ -135,7 +136,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
                             bottom: BorderSide(
                                 color: Color(0xFFBDC4C7), width: 2))),
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: _width * .050),
+                      padding: EdgeInsets.symmetric(horizontal: _width * .080),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -177,40 +178,55 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
                                 isScrollable: true,
                                 automaticIndicatorColorAdjustment: true,
                                 tabs: const [
-                                  Text(
-                                    'Profile overview',
-                                    style: TextStyle(
-                                        color: Color(0xFF879399),
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 14),
+                                  Padding(
+                                    padding: EdgeInsets.all(10.0),
+                                    child: Text(
+                                      'Profile overview',
+                                      style: TextStyle(
+                                          color: Color(0xFF879399),
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 14),
+                                    ),
                                   ),
-                                  Text(
-                                    'Timeline',
-                                    style: TextStyle(
-                                        color: Color(0xFF879399),
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 14),
+                                  Padding(
+                                    padding: EdgeInsets.all(10.0),
+                                    child: Text(
+                                      'Timeline',
+                                      style: TextStyle(
+                                          color: Color(0xFF879399),
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 14),
+                                    ),
                                   ),
-                                  Text(
-                                    'Articles',
-                                    style: TextStyle(
-                                        color: Color(0xFF879399),
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 14),
+                                  Padding(
+                                    padding: EdgeInsets.all(10.0),
+                                    child: Text(
+                                      'Articles',
+                                      style: TextStyle(
+                                          color: Color(0xFF879399),
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 14),
+                                    ),
                                   ),
-                                  Text(
-                                    'Activity',
-                                    style: TextStyle(
-                                        color: Color(0xFF879399),
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 14),
+                                  Padding(
+                                    padding: EdgeInsets.all(10.0),
+                                    child: Text(
+                                      'Activity',
+                                      style: TextStyle(
+                                          color: Color(0xFF879399),
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 14),
+                                    ),
                                   ),
-                                  Text(
-                                    'References',
-                                    style: TextStyle(
-                                        color: Color(0xFF879399),
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 14),
+                                  Padding(
+                                    padding: EdgeInsets.all(10.0),
+                                    child: Text(
+                                      'References',
+                                      style: TextStyle(
+                                          color: Color(0xFF879399),
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 14),
+                                    ),
                                   ),
                                 ],
                               ),

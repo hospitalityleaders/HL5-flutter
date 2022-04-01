@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ProfileEdit {
-  static bool isEditable = false;
+  // static bool isEditable = false;
 
   static Padding buildProfileEdit(
       {required double width, required double height, required popUp,}) {
