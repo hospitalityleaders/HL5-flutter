@@ -63,7 +63,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                   ),
                                 ),
                                 SB.SH50(),
-                                Text(
+                                CommonWidget.text(
                                   'Join the leading community for hospitality. Sign-up free today, we’ll curate your career.',
                                   style: FontTextStyle.kBlueDark40W600PR,
                                 ),
@@ -80,7 +80,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                         height: Get.width * 0.01,
                                         width: Get.width * 0.02,
                                       ),
-                                      Text(
+                                      CommonWidget.text(
                                         Data.benifites[index],
                                         style:
                                             FontTextStyle.kGreyLight420W600PR,
@@ -99,7 +99,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                               BorderRadius.circular(3),
                                           color: ColorPicker.kGreenNeon),
                                       child: Center(
-                                        child: Text(
+                                        child: CommonWidget.text(
                                           'Sign Up Free',
                                           textAlign: TextAlign.center,
                                           style: FontTextStyle.kWhite18W600PR,
@@ -112,7 +112,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                     Image.asset('assets/icons/play_whole.png',
                                         height: Get.width * 0.02),
                                     SB.SW10(),
-                                    Text(
+                                    CommonWidget.text(
                                       'Why join?',
                                       style: FontTextStyle.kBlueLight20W600PR,
                                     ),
@@ -155,7 +155,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Text(
+                                              CommonWidget.text(
                                                 'Hello Noberto',
                                                 style: FontTextStyle
                                                     .kPrimary32W600PR,
@@ -163,7 +163,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                               SB.SH25(),
                                               SizedBox(
                                                 width: Get.width * 0.21,
-                                                child: Text(
+                                                child: CommonWidget.text(
                                                   'What’s news today? Share an update, link or news article with your connections. Get out there!',
                                                   style: FontTextStyle
                                                       .kGreyLight18W600PR,
@@ -235,7 +235,8 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                                   BorderRadius.circular(10),
                                             ),
                                             child: Center(
-                                              child: Text('Post Update',
+                                              child: CommonWidget.text(
+                                                  'Post Update',
                                                   style: FontTextStyle
                                                       .kWhite16W600PR),
                                             ),
@@ -246,9 +247,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                   ),
                                 ),
                               ),
-                              const SizedBox(
-                                width: 57,
-                              ),
+                              SB.SH50(),
                               Expanded(
                                 child: Container(
                                   height: 413,
@@ -266,7 +265,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
-                                              Text(
+                                              CommonWidget.text(
                                                 '25%',
                                                 style: FontTextStyle
                                                     .kWhite83W600PR
@@ -283,7 +282,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                                 barRadius: Radius.circular(20),
                                               ),
                                               SB.SH25(),
-                                              Text(
+                                              CommonWidget.text(
                                                 'Your Profile is only\n25% complete',
                                                 style: FontTextStyle
                                                     .kWhite18W600PR,
@@ -310,7 +309,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                                 children: [
                                                   SizedBox(
                                                     width: Get.width * 0.21,
-                                                    child: Text(
+                                                    child: CommonWidget.text(
                                                       'Where did you work before your current job?',
                                                       style: FontTextStyle
                                                           .kBlueDark20W600PR,
@@ -319,7 +318,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                                   SB.SH25(),
                                                   SizedBox(
                                                     width: Get.width * 0.21,
-                                                    child: Text(
+                                                    child: CommonWidget.text(
                                                       'your work history shows your career path and experience in the industry.',
                                                       style: FontTextStyle
                                                           .kBlueDark20W600PR,
@@ -343,7 +342,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                                               10),
                                                     ),
                                                     child: Center(
-                                                      child: Text(
+                                                      child: CommonWidget.text(
                                                         'Add work experience',
                                                         style: FontTextStyle
                                                             .kWhite16W600PR,
@@ -517,7 +516,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                         Padding(
                           padding: EdgeInsets.symmetric(
                               horizontal: Get.width * 0.04),
-                          child: Text(
+                          child: CommonWidget.text(
                               'Join the leading community for hospitality. Sign-up free today, we’ll curate your career.',
                               textAlign: TextAlign.start,
                               style: FontTextStyle.kBlueDark24W600PR),
@@ -544,9 +543,8 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                 ),
                                 SizedBox(
                                   width: Get.width * 0.7,
-                                  child: Text(
+                                  child: CommonWidget.text(
                                     Data.benifites[index],
-                                    maxLines: 2,
                                     style: FontTextStyle.kGreyLight416W600PR,
                                   ),
                                 )
@@ -569,7 +567,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                     borderRadius: BorderRadius.circular(3),
                                     color: ColorPicker.kGreenNeon),
                                 child: Center(
-                                  child: Text(
+                                  child: CommonWidget.text(
                                     'Sign Up Free',
                                     textAlign: TextAlign.center,
                                     style: FontTextStyle.kWhite18W600PR,
@@ -582,7 +580,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                               Image.asset('assets/icons/play_whole.png',
                                   height: Get.width * 0.08),
                               SB.SW10(),
-                              Text(
+                              CommonWidget.text(
                                 'Why join?',
                                 style: FontTextStyle.kBlueLight20W600PR,
                               ),
@@ -604,7 +602,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 25),
-                          child: Text(
+                          child: CommonWidget.text(
                             'Headline',
                             style: FontTextStyle.kBlueDark24W600PR,
                           ),
@@ -641,7 +639,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 20),
-                          child: Text(
+                          child: CommonWidget.text(
                             'The expected number of new cases is nearly twice the amount recorded on Sunday, with one expert warning the daily count could hit 1,000 soon.',
                             style: FontTextStyle.kGreyLight14W600PR,
                           ),
@@ -691,7 +689,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                     ),
                                   ),
                                   SB.SH20(),
-                                  Text(
+                                  CommonWidget.text(
                                     'Chinese and Russian leaders call on west to abandon cold war tactics in talks ahead of Beijing Olympics',
                                     style: FontTextStyle.kGreyLight14W600PR,
                                   ),
@@ -738,7 +736,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                     ),
                                   ),
                                   SB.SH20(),
-                                  Text(
+                                  CommonWidget.text(
                                     'Chinese and Russian leaders call on west to abandon cold war tactics in talks ahead of Beijing Olympics',
                                     style: FontTextStyle.kGreyLight14W600PR,
                                   ),
@@ -768,7 +766,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                           ),
                         ),
                         SB.SH20(),
-                        Text(
+                        CommonWidget.text(
                           'Chinese and Russian leaders call on west to abandon cold war tactics in talks ahead of Beijing Olympics',
                           style: FontTextStyle.kGreyLight14W600PR,
                         ),
@@ -788,7 +786,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Text(
+                                CommonWidget.text(
                                   "Hamburg, DE",
                                   style: FontTextStyle.kPrimaryLight32W600PR,
                                 ),
@@ -806,7 +804,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Image.asset('assets/icons/cloud.png'),
-                                    Text(
+                                    CommonWidget.text(
                                       '7° C',
                                       style:
                                           FontTextStyle.kPrimaryLight40W600PR,
@@ -816,7 +814,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                 SizedBox(
                                   height: Get.height * 0.015,
                                 ),
-                                Text(
+                                CommonWidget.text(
                                   "Bedecket",
                                   style: FontTextStyle.kPrimaryLight22W600PR,
                                 ),
@@ -833,7 +831,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                     ),
                                   ),
                                   child: Center(
-                                    child: Text(
+                                    child: CommonWidget.text(
                                       'Wheather from OpenWeatherMap',
                                       style: FontTextStyle.kWhite16W600PR,
                                     ),
@@ -854,7 +852,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(
+                                      CommonWidget.text(
                                         '25%',
                                         style: FontTextStyle.kWhite83W600PR,
                                       ),
@@ -867,7 +865,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                         progressColor: ColorPicker.kRed,
                                         barRadius: Radius.circular(20),
                                       ),
-                                      Text(
+                                      CommonWidget.text(
                                         "Your Profile is only 25% complete. Improve it now. Here's how",
                                         style: FontTextStyle.kWhite18W600PR,
                                         textAlign: TextAlign.center,
@@ -898,7 +896,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                                   width: 15,
                                                 ),
                                                 Expanded(
-                                                  child: Text(
+                                                  child: CommonWidget.text(
                                                     "Add your work experience",
                                                     style: TextStyle(
                                                         color:
@@ -915,7 +913,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                                       horizontal:
                                                           Get.width * 0.006),
                                                   child: Center(
-                                                      child: Text(
+                                                      child: CommonWidget.text(
                                                     '+20%',
                                                     style: TextStyle(
                                                       color: Color(0xff33A3FE),
@@ -943,7 +941,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                             borderRadius: BorderRadius.circular(
                                                 Get.height * 0.01)),
                                         child: Center(
-                                          child: Text(
+                                          child: CommonWidget.text(
                                             "Edit my profile",
                                             style: TextStyle(
                                                 color: Colors.white,
@@ -971,7 +969,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          CommonWidget.text(
                             'Video',
                             style: TextStyle(
                               fontSize: 24,
@@ -1020,7 +1018,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                           ),
                                         ),
                                         SizedBox(width: Get.width * 0.01),
-                                        Text(
+                                        CommonWidget.text(
                                           'Couple fight boy’s brain cancer with\nnatural remedies',
                                           style: TextStyle(
                                             color: Colors.white,
@@ -1069,7 +1067,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                     ]),
                                   ),
                                   SizedBox(height: 20),
-                                  Text(
+                                  CommonWidget.text(
                                     'Chinese and Russian leaders call on west to abandon cold war tactics in talks ahead of Beijing Olympics',
                                     style: TextStyle(
                                       color: Color(0xFFA1A1A1),
@@ -1113,7 +1111,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                     ]),
                                   ),
                                   SizedBox(height: 20),
-                                  Text(
+                                  CommonWidget.text(
                                     'Chinese and Russian leaders call on west to abandon cold war tactics in talks ahead of Beijing Olympics',
                                     style: TextStyle(
                                       color: Color(0xFFA1A1A1),
@@ -1157,7 +1155,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                     ]),
                                   ),
                                   SizedBox(height: 20),
-                                  Text(
+                                  CommonWidget.text(
                                     'Chinese and Russian leaders call on west to abandon cold war tactics in talks ahead of Beijing Olympics',
                                     style: TextStyle(
                                       color: Color(0xFFA1A1A1),
@@ -1178,7 +1176,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        CommonWidget.text(
                           'Widget block type X',
                           style: TextStyle(
                             fontSize: 24,
@@ -1195,7 +1193,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                             decoration: BoxDecoration(
                                 color: Colors.blue,
                                 borderRadius: BorderRadius.circular(4)),
-                            child: Text(
+                            child: CommonWidget.text(
                               'Widget Area',
                               style: TextStyle(
                                 color: Colors.white,
@@ -1217,7 +1215,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                         SizedBox(
                           height: 20,
                         ),
-                        Text(
+                        CommonWidget.text(
                           'Jobs you might be\ninterested in',
                           style: FontTextStyle.kBlueDark24W600PR
                               .copyWith(height: 1.2),
@@ -1255,7 +1253,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                               BorderRadius.circular(3),
                                           color: ColorPicker.kGreen),
                                       child: Center(
-                                          child: Text(
+                                          child: CommonWidget.text(
                                         'Premium Listing',
                                         style: FontTextStyle.kWhite116W600PR,
                                       )),
@@ -1283,7 +1281,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 16),
-                                    child: Text(
+                                    child: CommonWidget.text(
                                         'Cluster Sales Manager - Leisure & MICE',
                                         style: FontTextStyle.kBlueDark22W600PR),
                                   ),
@@ -1295,7 +1293,8 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 16),
-                                      child: Text('Hilton, Capetown',
+                                      child: CommonWidget.text(
+                                          'Hilton, Capetown',
                                           style:
                                               FontTextStyle.kGreyDark16W600PR),
                                     ),
@@ -1316,7 +1315,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(height: Get.width * 0.05),
-                        Text(
+                        CommonWidget.text(
                           'Category Type B',
                           style: FontTextStyle.kBlueDark24W600PR,
                         ),
@@ -1356,7 +1355,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                         SizedBox(
                           height: 20,
                         ),
-                        Text(
+                        CommonWidget.text(
                           'The expected number of new cases is nearly twice the amount recorded on Sunday, with one expert warning the daily count could hit 1,000 soon.',
                           style: FontTextStyle.kGreyLight14W600PR,
                         ),
@@ -1393,7 +1392,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                           ]),
                         ),
                         SizedBox(height: 20),
-                        Text(
+                        CommonWidget.text(
                           'Chinese and Russian leaders call on west to abandon cold war tactics in talks ahead of Beijing Olympics',
                           style: TextStyle(
                             color: Color(0xFFA1A1A1),
@@ -1453,7 +1452,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  Text(
+                                  CommonWidget.text(
                                     'The expected number of new cases is nearly twice the amount recorded on Sunday, with one expert warning the daily count could hit 1,000 soon.',
                                     style: FontTextStyle.kGreyLight14W600PR,
                                   ),
@@ -1506,7 +1505,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  Text(
+                                  CommonWidget.text(
                                     'The expected number of new cases is nearly twice the amount recorded on Sunday, with one expert warning the daily count could hit 1,000 soon.',
                                     style: FontTextStyle.kGreyLight14W600PR,
                                   ),
@@ -1534,7 +1533,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                        Text(
+                        CommonWidget.text(
                           'Category Type A',
                           style: FontTextStyle.kBlueDark24W600PR
                               .copyWith(height: 1.2),
@@ -1591,7 +1590,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                         ),
                         Align(
                           alignment: Alignment.center,
-                          child: Text(
+                          child: CommonWidget.text(
                             'How buddhism has changed\nthe west for better',
                             textAlign: TextAlign.center,
                             style: FontTextStyle.kBlueDark20W600PR,
@@ -1602,7 +1601,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                         ),
                         Align(
                           alignment: Alignment.center,
-                          child: Text(
+                          child: CommonWidget.text(
                             'Rebecca Sonlit',
                             textAlign: TextAlign.center,
                             style: FontTextStyle.kRed20W600PR,
@@ -1660,7 +1659,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  Text(
+                                  CommonWidget.text(
                                     'The expected number of new cases is nearly twice the amount recorded on Sunday, with one expert warning the daily count could hit 1,000 soon.',
                                     style: FontTextStyle.kGreyLight14W600PR,
                                   ),
@@ -1713,7 +1712,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  Text(
+                                  CommonWidget.text(
                                     'The expected number of new cases is nearly twice the amount recorded on Sunday, with one expert warning the daily count could hit 1,000 soon.',
                                     style: FontTextStyle.kGreyLight14W600PR,
                                   ),
@@ -1754,7 +1753,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                           ]),
                         ),
                         SizedBox(height: 20),
-                        Text(
+                        CommonWidget.text(
                           'Chinese and Russian leaders call on west to abandon cold war tactics in talks ahead of Beijing Olympics',
                           style: TextStyle(
                             color: Color(0xFFA1A1A1),
@@ -1787,7 +1786,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        CommonWidget.text(
                           'People in your area or industry',
                           style: FontTextStyle.kBlueDark24W600PR
                               .copyWith(height: 1.2),
@@ -1837,7 +1836,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                           MainAxisAlignment.spaceEvenly,
                                       children: [
                                         index.isEven
-                                            ? Text(
+                                            ? CommonWidget.text(
                                                 'Nasa concerned',
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
@@ -1846,7 +1845,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                                   color: Color(0xFF101E4A),
                                                 ),
                                               )
-                                            : Text(
+                                            : CommonWidget.text(
                                                 'Winter Olympics',
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
@@ -1856,7 +1855,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                                 ),
                                               ),
                                         index.isEven
-                                            ? Text(
+                                            ? CommonWidget.text(
                                                 'Nasa has expressed concern about SpaceX’s proposed second-generation',
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
@@ -1865,7 +1864,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                                   wordSpacing: 2,
                                                   color: Color(0xFFA1A1A1),
                                                 ))
-                                            : Text(
+                                            : CommonWidget.text(
                                                 'Fans of Chinese teen snowboard sensation Su Yiming expressed feelings',
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
@@ -1882,7 +1881,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                           decoration: BoxDecoration(
                                               color: ColorPicker.kBlueLight),
                                           child: Center(
-                                            child: Text('Connect',
+                                            child: CommonWidget.text('Connect',
                                                 style: FontTextStyle
                                                     .kWhite14W600PR),
                                           ),
@@ -1905,7 +1904,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          CommonWidget.text(
                             'Widget block type D',
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
@@ -1963,7 +1962,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                     ]),
                                   ),
                                   SizedBox(height: 20),
-                                  Text(
+                                  CommonWidget.text(
                                     'Chinese and Russian leaders call on west to abandon cold war tactics in talks ahead of Beijing Olympics',
                                     style: TextStyle(
                                       color: Color(0xFFA1A1A1),
@@ -2008,7 +2007,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                     ]),
                                   ),
                                   SizedBox(height: 20),
-                                  Text(
+                                  CommonWidget.text(
                                     'Chinese and Russian leaders call on west to abandon cold war tactics in talks ahead of Beijing Olympics',
                                     style: TextStyle(
                                       color: Color(0xFFA1A1A1),
@@ -2053,7 +2052,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                     ]),
                                   ),
                                   SizedBox(height: 20),
-                                  Text(
+                                  CommonWidget.text(
                                     'Chinese and Russian leaders call on west to abandon cold war tactics in talks ahead of Beijing Olympics',
                                     style: TextStyle(
                                       color: Color(0xFFA1A1A1),
@@ -2076,7 +2075,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          CommonWidget.text(
                             'Latest Topics',
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
@@ -2130,7 +2129,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                             MainAxisAlignment.spaceEvenly,
                                         children: [
                                           index.isEven
-                                              ? Text(
+                                              ? CommonWidget.text(
                                                   'Nasa concerned',
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
@@ -2139,7 +2138,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                                     color: Color(0xFF101E4A),
                                                   ),
                                                 )
-                                              : Text(
+                                              : CommonWidget.text(
                                                   'Winter Olympics',
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
@@ -2149,7 +2148,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                                   ),
                                                 ),
                                           index.isEven
-                                              ? Text(
+                                              ? CommonWidget.text(
                                                   'Nasa has expressed concern about SpaceX’s proposed second-generation',
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
@@ -2158,7 +2157,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                                     wordSpacing: 2,
                                                     color: Color(0xFFA1A1A1),
                                                   ))
-                                              : Text(
+                                              : CommonWidget.text(
                                                   'Fans of Chinese teen snowboard sensation Su Yiming expressed feelings',
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
@@ -2205,7 +2204,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          CommonWidget.text(
                             'Widget block type E',
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
@@ -2279,7 +2278,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                     ]),
                                   ),
                                   SizedBox(height: 20),
-                                  Text(
+                                  CommonWidget.text(
                                     'Chinese and Russian leaders call on west to abandon cold war tactics in talks ahead of Beijing Olympics',
                                     style: TextStyle(
                                       color: Color(0xFFA1A1A1),
@@ -2323,7 +2322,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                     ]),
                                   ),
                                   SizedBox(height: 20),
-                                  Text(
+                                  CommonWidget.text(
                                     'Chinese and Russian leaders call on west to abandon cold war tactics in talks ahead of Beijing Olympics',
                                     style: TextStyle(
                                       color: Color(0xFFA1A1A1),
@@ -2367,7 +2366,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                     ]),
                                   ),
                                   SizedBox(height: 20),
-                                  Text(
+                                  CommonWidget.text(
                                     'Chinese and Russian leaders call on west to abandon cold war tactics in talks ahead of Beijing Olympics',
                                     style: TextStyle(
                                       color: Color(0xFFA1A1A1),
@@ -2387,7 +2386,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                   color: Colors.blue,
                                   borderRadius: BorderRadius.circular(4)),
                               child: Center(
-                                child: Text(
+                                child: CommonWidget.text(
                                   'Widget Area',
                                   style: TextStyle(
                                     fontSize: 32,
@@ -2405,7 +2404,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                        Text(
+                        CommonWidget.text(
                           'Category',
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
@@ -2456,7 +2455,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                   ]),
                                 ),
                                 SizedBox(height: 20),
-                                Text(
+                                CommonWidget.text(
                                   'The expected number of new cases is nearly twice the amount recorded on Sunday, with one expert warning the daily count could hit 1,000 soon.',
                                   style: TextStyle(
                                     color: Color(0xFFA1A1A1),
@@ -2509,7 +2508,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                   ]),
                                 ),
                                 SizedBox(height: 20),
-                                Text(
+                                CommonWidget.text(
                                   'The expected number of new cases is nearly twice the amount recorded on Sunday, with one expert warning the daily count could hit 1,000 soon.',
                                   style: TextStyle(
                                     color: Color(0xFFA1A1A1),
@@ -2554,7 +2553,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                   ]),
                                 ),
                                 SizedBox(height: 20),
-                                Text(
+                                CommonWidget.text(
                                   'Chinese and Russian leaders call on west to abandon cold war tactics in talks ahead of Beijing Olympics',
                                   style: TextStyle(
                                     color: Color(0xFFA1A1A1),
@@ -2598,7 +2597,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                   ]),
                                 ),
                                 SizedBox(height: 20),
-                                Text(
+                                CommonWidget.text(
                                   'Chinese and Russian leaders call on west to abandon cold war tactics in talks ahead of Beijing Olympics',
                                   style: TextStyle(
                                     color: Color(0xFFA1A1A1),
@@ -2642,7 +2641,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                   ]),
                                 ),
                                 SizedBox(height: 20),
-                                Text(
+                                CommonWidget.text(
                                   'Chinese and Russian leaders call on west to abandon cold war tactics in talks ahead of Beijing Olympics',
                                   style: TextStyle(
                                     color: Color(0xFFA1A1A1),
@@ -2673,7 +2672,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Text(
+          CommonWidget.text(
             "Hamburg, DE",
             style: TextStyle(
                 color: Colors.white, fontSize: 32, fontWeight: FontWeight.w600),
@@ -2681,7 +2680,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
           SizedBox(
             height: Get.height * 0.02,
           ),
-          Text(
+          CommonWidget.text(
             "3 February 2022 15:13",
             style: TextStyle(
                 color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
@@ -2693,7 +2692,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset('assets/icons/cloud.png', height: 30),
-              Text(
+              CommonWidget.text(
                 '7° C',
                 style: TextStyle(
                   color: Colors.white,
@@ -2706,7 +2705,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
           SizedBox(
             height: Get.height * 0.015,
           ),
-          Text(
+          CommonWidget.text(
             "Bedecket",
             style: TextStyle(
                 color: Colors.white, fontSize: 22, fontWeight: FontWeight.w600),
@@ -2724,7 +2723,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
               ),
             ),
             child: Center(
-              child: Text(
+              child: CommonWidget.text(
                 'Wheather from OpenWeatherMap',
                 style: TextStyle(
                   color: Colors.white,
