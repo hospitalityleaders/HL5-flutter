@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ColorPicker {
-  static const Color kBG = Color(0xffE5E5E5);
   static const Color kWhite = Colors.white;
+  static const Color kBG = Color(0xffE5E5E5);
   static const Color kWhite1 = Color(0xffF5F5F5);
   static const Color kBg1 = Color(0xffF9F9F9);
   static const Color kBg2 = Color(0xffF7F7F9);
@@ -17,6 +17,8 @@ class ColorPicker {
   static const Color kBlueDark1 = Color(0xff272E41);
   static const Color kPrimaryLight = Color(0xff2B375E);
   static const Color kPrimaryLight1 = Color(0xff384677);
+  static const Color kSocial = Color(0xff344F8D);
+  static const Color kPrimaryLight3 = Color(0xff546088);
   static const Color kPrimaryLight2 = Color(0xff6C779E);
   static const Color kPrimaryLightBlue = Color(0xff7A85A6);
 
@@ -41,9 +43,12 @@ class ColorPicker {
 
   static const Color kRed = Color(0xffEF3534);
   static const Color kRed2 = Color(0xffFD3732);
+  static const Color kRedGoogle = Color(0xffD63B30);
   static const Color kRedlight = Color(0xffFECDCC);
   static const Color kYellowLight = Color(0xffFFFDF2);
 
   static const Color kGreen = Color(0xff83C65D);
   static const Color kGreenNeon = Color(0xff7EC81B);
+
+  static const Color kGreenX = Color(0xff04595B);
 }

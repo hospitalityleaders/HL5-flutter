@@ -311,12 +311,13 @@
 //     ),
 //   );
 // }
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../common/common_widget.dart';
 import '../../../constant/colorPicker/color_picker.dart';
 import '../../../constant/fontStyle/font_style.dart';
+import '../../../constant/sizedbox.dart';
 import '../../news/update/update_news.dart';
 import 'home.dart';
 
@@ -332,9 +333,7 @@ class _HeaderState extends State<Header> {
       String menuName, _fontStyle, BuildContext context, routeName) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (BuildContext) {
-          return routeName;
-        }));
+        Navigator.pushNamed(context, routeName);
       },
       child: Text(menuName, style: _fontStyle),
     );
@@ -349,60 +348,52 @@ class _HeaderState extends State<Header> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image(
-              image: AssetImage('assets/icons/logo.png'),
-            ),
-            SizedBox(
-              width: 10,
-            ),
             Padding(
-              padding: const EdgeInsets.all(6.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                width: 270,
-                child: TextFormField(
-                  cursorColor: Colors.white,
-                  style: FontTextStyle.kWhitePR,
-                  decoration: InputDecoration(
-                    disabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(4),
+              padding: const EdgeInsets.all(4.0),
+              child: Image(
+                image: AssetImage('assets/icons/logo1.png'),
+              ),
+            ),
+            SB.SW10(),
+            Container(
+              width: Get.width * 0.2,
+              decoration: BoxDecoration(
+                  color: ColorPicker.kWhite,
+                  borderRadius: BorderRadius.circular(5)),
+              margin: EdgeInsets.all(3),
+              child: TextFormField(
+                cursorColor: ColorPicker.kWhite,
+                style: FontTextStyle.kWhite16W400SSP,
+                decoration: InputDecoration(
+                  hintStyle: FontTextStyle.kPrimaryLightBlue16W400SSP,
+                  filled: true,
+                  fillColor: ColorPicker.kPrimaryLight,
+                  hintText: "Search",
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: ColorPicker.kPrimary),
+                      borderRadius: BorderRadius.circular(5)),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: ColorPicker.kPrimary),
+                      borderRadius: BorderRadius.circular(5)),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: ColorPicker.kPrimary),
+                      borderRadius: BorderRadius.circular(5)),
+                  prefixIcon: Icon(
+                    Icons.search,
+                    color: ColorPicker.kPrimaryLightBlue,
+                  ),
+                  suffixIcon: Container(
+                    margin: EdgeInsets.only(right: 5, bottom: 5, top: 5),
+                    height: 40,
+                    width: Get.width * 0.045,
+                    decoration: BoxDecoration(
+                      color: ColorPicker.kPrimaryLight1,
+                      borderRadius: BorderRadius.circular(5),
                     ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    hintStyle: TextStyle(
-                      color: ColorPicker.kPrimaryLightBlue,
-                    ),
-                    filled: true,
-                    fillColor: ColorPicker.kPrimaryLight,
-                    hintText: "Search",
-                    prefixIcon: Icon(
-                      Icons.search,
-                      color: ColorPicker.kPrimaryLightBlue,
-                    ),
-                    suffixIcon: Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Container(
-                        margin: EdgeInsets.only(right: 5),
-                        height: 40,
-                        width: Get.width * 0.045,
-                        decoration: BoxDecoration(
-                          color: ColorPicker.kPrimaryLight1,
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                        child: Center(
-                          child: Text(
-                            'People',
-                            style: TextStyle(
-                              color: ColorPicker.kPrimaryLightBlue,
-                            ),
-                          ),
-                        ),
+                    child: Center(
+                      child: CommonWidget.text(
+                        'People',
+                        style: FontTextStyle.kPrimaryLightBlue16W400SSP,
                       ),
                     ),
                   ),
@@ -418,33 +409,46 @@ class _HeaderState extends State<Header> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   buildHeaderGesture(
-                      'Home', FontTextStyle.kWhite16W400PR, context, Home()),
-                  buildHeaderGesture('Profile',
-                      FontTextStyle.kPrimaryLightBlue16W400PR, context, Home()),
+                      'Home', FontTextStyle.kWhite16W400PR, context, '/'),
+                  buildHeaderGesture(
+                      'Profile',
+                      FontTextStyle.kPrimaryLightBlue16W400PR,
+                      context,
+                      '/home'),
                   buildHeaderGesture(
                       'News',
                       FontTextStyle.kPrimaryLightBlue16W400PR,
                       context,
-                      UpdateNews()),
-                  buildHeaderGesture('Jobs',
-                      FontTextStyle.kPrimaryLightBlue16W400PR, context, Home()),
-                  buildHeaderGesture('Recruitment',
-                      FontTextStyle.kPrimaryLightBlue16W400PR, context, Home()),
-                  buildHeaderGesture('Help',
-                      FontTextStyle.kPrimaryLightBlue16W400PR, context, Home()),
+                      '/home'),
+                  buildHeaderGesture(
+                      'Jobs',
+                      FontTextStyle.kPrimaryLightBlue16W400PR,
+                      context,
+                      '/home'),
+                  buildHeaderGesture(
+                      'Recruitment',
+                      FontTextStyle.kPrimaryLightBlue16W400PR,
+                      context,
+                      '/home'),
+                  buildHeaderGesture(
+                      'Help',
+                      FontTextStyle.kPrimaryLightBlue16W400PR,
+                      context,
+                      '/home'),
                 ],
               ),
             ),
             SizedBox(
-              width: Get.width * 0.03,
+              width: Get.width * 0.02,
             ),
             Container(
               width: Get.width * 0.05,
               decoration: BoxDecoration(
-                  border: Border.symmetric(
-                vertical:
-                    BorderSide(color: ColorPicker.kPrimaryLight, width: 1),
-              )),
+                  border: Border(
+                      left: BorderSide(
+                          color: ColorPicker.kPrimaryLight, width: 3),
+                      right: BorderSide(
+                          color: ColorPicker.kPrimaryLight, width: 3))),
               child: Center(
                   child: Stack(
                 overflow: Overflow.visible,
@@ -464,7 +468,7 @@ class _HeaderState extends State<Header> {
                         borderRadius: BorderRadius.circular(3),
                       ),
                       child: Center(
-                        child: Text(
+                        child: CommonWidget.text(
                           '2',
                           style: FontTextStyle.kWhite12W700SSP,
                         ),
@@ -477,10 +481,9 @@ class _HeaderState extends State<Header> {
             Container(
               width: Get.width * 0.05,
               decoration: BoxDecoration(
-                  border: Border.symmetric(
-                vertical:
-                    BorderSide(color: ColorPicker.kPrimaryLight, width: 1),
-              )),
+                  border: Border(
+                      right: BorderSide(
+                          color: ColorPicker.kPrimaryLight, width: 3))),
               child: Center(
                   child: Stack(
                 overflow: Overflow.visible,
@@ -500,7 +503,7 @@ class _HeaderState extends State<Header> {
                         borderRadius: BorderRadius.circular(3),
                       ),
                       child: Center(
-                        child: Text(
+                        child: CommonWidget.text(
                           '2',
                           style: FontTextStyle.kWhite12W700SSP,
                         ),
@@ -513,10 +516,9 @@ class _HeaderState extends State<Header> {
             Container(
               width: 90,
               decoration: BoxDecoration(
-                  border: Border.symmetric(
-                vertical:
-                    BorderSide(color: ColorPicker.kPrimaryLight, width: 1),
-              )),
+                  border: Border(
+                      right: BorderSide(
+                          color: ColorPicker.kPrimaryLight, width: 3))),
               child: Center(
                   child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -532,25 +534,23 @@ class _HeaderState extends State<Header> {
                     height: 20,
                     width: 30,
                     decoration: BoxDecoration(
-                      color: Color(0xff546088),
+                      color: ColorPicker.kPrimaryLight3,
                       borderRadius: BorderRadius.circular(3),
                     ),
                     child: Center(
-                      child: Text('352',
+                      child: CommonWidget.text('352',
                           style: FontTextStyle.kPrimaryLight10W700SSP),
                     ),
                   ),
                 ],
               )),
             ),
-
             Container(
               width: Get.width * 0.05,
               decoration: BoxDecoration(
-                  border: Border.symmetric(
-                vertical:
-                    BorderSide(color: ColorPicker.kPrimaryLight, width: 1),
-              )),
+                  border: Border(
+                      right: BorderSide(
+                          color: ColorPicker.kPrimaryLight, width: 3))),
               child: Center(
                 child: Container(
                   height: 26,

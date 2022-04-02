@@ -7,13 +7,13 @@ import 'header-card.dart';
 import 'package:get/get.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  static const String route = '/home';
 
   @override
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
+class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   TabController? _tabController;
   int _current = 0;
   int tabBar = 0;
@@ -117,7 +117,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
             scrollDirection: Axis.vertical,
             headerSliverBuilder: (context, innerBoxIsScrolled) {
               return [
-
                 SliverToBoxAdapter(
                   child: HeaderCard(
                     isEditable: isEditable,

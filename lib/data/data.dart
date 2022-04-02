@@ -51,4 +51,31 @@ class Data {
     'Browse industry news',
     ' Promote your career'
   ];
+
+  static List categories = [
+    {
+      'text': "Hotels and resorts",
+    },
+    {
+      'text': "Food and beverage",
+    },
+    {
+      'text': "Spa",
+    },
+    {
+      'text': "Tourism",
+    },
+    {
+      'text': "Apartments",
+    },
+    {
+      'text': "Tours",
+    },
+    {
+      'text': "Leisure",
+    },
+    {
+      'text': "Boutique Hotels",
+    },
+  ];
 }
