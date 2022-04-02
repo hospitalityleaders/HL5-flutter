@@ -279,6 +279,27 @@ class FontTextStyle {
     fontFamily: 'SourceSansPro',
   );
 
+  static TextStyle kWhite26W400SSP = TextStyle(
+    color: ColorPicker.kWhite,
+    fontSize: 26,
+    fontWeight: FontWeight.w400,
+    fontFamily: 'SourceSansPro',
+  );
+
+  static TextStyle kWhite14W600SSP = TextStyle(
+    color: ColorPicker.kWhite,
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
+    fontFamily: 'SourceSansPro',
+  );
+
+  static TextStyle kWhite16W700SSP = TextStyle(
+    color: ColorPicker.kWhite,
+    fontSize: 16,
+    fontWeight: FontWeight.w700,
+    fontFamily: 'SourceSansPro',
+  );
+
   static TextStyle kWhite16W400PR = TextStyle(
     color: ColorPicker.kWhite,
     fontSize: 16,
@@ -505,6 +526,20 @@ class FontTextStyle {
     fontFamily: 'SourceSansPro',
   );
 
+  static TextStyle kRed10W400SSP = TextStyle(
+    color: ColorPicker.kRed,
+    fontSize: 10,
+    fontWeight: FontWeight.w400,
+    fontFamily: 'SourceSansPro',
+  );
+
+  static TextStyle kWhite13W700SSP = TextStyle(
+    fontSize: 13,
+    color: Colors.white,
+    fontWeight: FontWeight.w700,
+    fontFamily: 'SourceSansPro',
+  );
+
   static TextStyle kBlueLight236W400SSP = TextStyle(
     fontSize: 36,
     color: ColorPicker.kBlueLight2,
@@ -542,6 +577,13 @@ class FontTextStyle {
   static TextStyle kGreyLight712W700SSP = TextStyle(
     fontSize: 12,
     color: ColorPicker.kGreyLight7,
+    fontWeight: FontWeight.w700,
+    fontFamily: 'SourceSansPro',
+  );
+
+  static TextStyle kGreyLight516W700SSP = TextStyle(
+    color: ColorPicker.kGreyLight5,
+    fontSize: 16,
     fontWeight: FontWeight.w700,
     fontFamily: 'SourceSansPro',
   );
@@ -584,6 +626,13 @@ class FontTextStyle {
     color: ColorPicker.kPrimaryLightBlue,
     fontSize: 16,
     fontWeight: FontWeight.w400,
+    fontFamily: 'SourceSansPro',
+  );
+
+  static TextStyle kPrimaryLightBlue9W700SSP = TextStyle(
+    color: ColorPicker.kPrimaryLightBlue,
+    fontSize: 9,
+    fontWeight: FontWeight.w700,
     fontFamily: 'SourceSansPro',
   );
 
@@ -651,6 +700,13 @@ class FontTextStyle {
     color: ColorPicker.kBlueDark1,
     fontSize: 26,
     fontWeight: FontWeight.w400,
+    fontFamily: 'SourceSansPro',
+  );
+
+  static TextStyle kBlueDark114W600SSP = TextStyle(
+    color: ColorPicker.kBlueDark1,
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
     fontFamily: 'SourceSansPro',
   );
 

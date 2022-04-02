@@ -1,15 +1,18 @@
+import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import '../../../common/common_widget.dart';
 import '../../../constant/colorPicker/color_picker.dart';
 import '../../../constant/fontStyle/font_style.dart';
+import '../../../constant/sizedbox.dart';
 import '../../../responsive/responsive.dart';
+import '../NewsSingle/news_single_logged_in.dart';
 import '../../profile-pages/home-pages/header.dart';
-import '../../profile-pages/home-pages/home.dart';
-import '../update/update_news.dart';
 
 class NewsSingleScreen extends StatefulWidget {
+  static const String route = '/category';
   @override
   _NewsSignalScreenState createState() => _NewsSignalScreenState();
 }
@@ -21,7 +24,6 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
   int _current = 0;
   int tabBar = 0;
   int indexCircle = 0;
-
   void initState() {
     _tabController = TabController(length: 5, vsync: this);
     super.initState();
@@ -33,55 +35,75 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
       'text1':
           'Mantra Group Reports Total Revenue Increase of 9.7% for Year Ending June 2015',
       'text2': '',
+      'text3': 'Pam Carrol',
+      'text4': '26 August 2015 • 10:40',
     },
     {
       'img': 'assets/images/t2.png',
       'text1':
           'How Technology Can Deliver a Seamless Travel Experience - Information Age',
       'text2': 'MEMBERS ONLY',
+      'text3': 'Pam Carrol',
+      'text4': '26 August 2015 • 10:40',
     },
     {
       'img': 'assets/images/t3.png',
       'text1': 'Baha Mar Files Chapter 11 Plan of Reorganization',
       'text2': '',
+      'text3': 'Pam Carrol',
+      'text4': '26 August 2015 • 10:40',
     },
     {
       'img': 'assets/images/t4.png',
       'text1': 'The Quincy Hotel in Downtown Washington D.C. Sold to RLHC JV',
       'text2': 'MEMBERS ONLY',
+      'text3': 'Pam Carrol',
+      'text4': '26 August 2015 • 10:40',
     },
     {
       'img': 'assets/images/t5.png',
       'text1':
           'Welk Resorts Reports Increased Revenue and Plans for Two New Properties',
       'text2': '',
+      'text3': 'Pam Carrol',
+      'text4': '26 August 2015 • 10:40',
     },
     {
       'img': 'assets/images/t5.png',
       'text1':
           'Welk Resorts Reports Increased Revenue and Plans for Two New Properties',
       'text2': '',
+      'text3': 'Pam Carrol',
+      'text4': '26 August 2015 • 10:40',
     },
     {
       'img': 'assets/images/t6.png',
       'text1':
           'Hotel Price Index Reveals Midwest, Southwest and Western Cities Are Surging Domestically',
       'text2': '',
+      'text3': 'Pam Carrol',
+      'text4': '26 August 2015 • 10:40',
     },
     {
       'img': 'assets/images/t7.png',
       'text1': 'MainStay Suites Hotel Sydney Opens in Montana',
       'text2': '',
+      'text3': 'Pam Carrol',
+      'text4': '26 August 2015 • 10:40',
     },
     {
       'img': 'assets/images/t8.png',
       'text1': 'California raisin’ prices as deal volume drops',
       'text2': '',
+      'text3': 'Pam Carrol',
+      'text4': '26 August 2015 • 10:40',
     },
     {
       'img': 'assets/images/t9.png',
       'text1': 'Hotel Industry Opposes NLRB Joint-Employer Decision',
       'text2': 'MEMBERS ONLY',
+      'text3': 'Pam Carrol',
+      'text4': '26 August 2015 • 10:40',
     },
   ];
 
@@ -272,7 +294,6 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 10),
                     child: SingleChildScrollView(
-                      physics: NeverScrollableScrollPhysics(),
                       scrollDirection: Axis.vertical,
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1143,13 +1164,13 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
                           child: Image(
                             image: AssetImage('assets/icons/logo1.png'),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         Expanded(
@@ -1204,11 +1225,9 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                               fit: BoxFit.cover,
                               color: ColorPicker.kPrimaryLightBlue,
                             ),
-                            SizedBox(height: 5),
-                            Text('MENU',
-                                style: TextStyle(
-                                    fontSize: 9,
-                                    color: ColorPicker.kPrimaryLightBlue)),
+                            SB.SH5(),
+                            CommonWidget.text('MENU',
+                                style: FontTextStyle.kPrimaryLightBlue9W700SSP),
                           ],
                         ),
                         SizedBox(
@@ -1251,24 +1270,16 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                               mainAxisAlignment: MainAxisAlignment.end,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
+                                CommonWidget.text(
                                   'RESOURCES',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.white,
-                                  ),
+                                  style: FontTextStyle.kWhite12W700SSP,
                                 ),
                                 SizedBox(height: Get.width * 0.02),
                                 Padding(
                                   padding: EdgeInsets.only(right: 8.0),
-                                  child: Text(
+                                  child: CommonWidget.text(
                                     '5 Steps for Travel Brands to Build a Brand Ambassador Program',
-                                    style: TextStyle(
-                                      fontSize: 26,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.white,
-                                    ),
+                                    style: FontTextStyle.kWhite26W400SSP,
                                   ),
                                 ),
                                 SizedBox(height: Get.width * 0.02),
@@ -1277,31 +1288,19 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                     children: [
                                       TextSpan(
                                         text: 'By: ',
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w400,
-                                          color: Colors.white,
-                                        ),
+                                        style: FontTextStyle.kWhite14W400SSP,
                                       ),
                                       TextSpan(
                                         text: 'Pam Carrol',
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w600,
-                                          color: Colors.white,
-                                        ),
+                                        style: FontTextStyle.kWhite14W600SSP,
                                       ),
                                     ],
                                   ),
                                 ),
                                 SizedBox(height: Get.width * 0.015),
-                                Text(
+                                CommonWidget.text(
                                   '26 August 2015 • 10:40',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.white,
-                                  ),
+                                  style: FontTextStyle.kWhite14W400SSP,
                                 ),
                               ],
                             ),
@@ -1330,12 +1329,9 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                           },
                         )),
                     ExpansionTile(
-                      title: Text(
+                      title: CommonWidget.text(
                         'Categories',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w400,
-                        ),
+                        style: FontTextStyle.kBlueDark120W400SSP,
                       ),
                       backgroundColor: Colors.white,
                       textColor: Colors.black,
@@ -1346,13 +1342,9 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                           padding: EdgeInsets.symmetric(
                               horizontal: 12, vertical: 15),
                           width: 200,
-                          child: Text(
+                          child: CommonWidget.text(
                             'Hotels and resorts',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Color(0xFF32A3FD),
-                              fontWeight: FontWeight.w400,
-                            ),
+                            style: FontTextStyle.kBlueLight114W400SSP,
                           ),
                         ),
                         Container(
@@ -1360,13 +1352,9 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                           padding: EdgeInsets.symmetric(
                               horizontal: 12, vertical: 15),
                           width: 200,
-                          child: Text(
+                          child: CommonWidget.text(
                             'Food and beverage',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Color(0xFF32A3FD),
-                              fontWeight: FontWeight.w400,
-                            ),
+                            style: FontTextStyle.kBlueLight114W400SSP,
                           ),
                         ),
                         Container(
@@ -1374,13 +1362,9 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                           padding: EdgeInsets.symmetric(
                               horizontal: 12, vertical: 15),
                           width: 200,
-                          child: Text(
+                          child: CommonWidget.text(
                             'Spa',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Color(0xFF32A3FD),
-                              fontWeight: FontWeight.w400,
-                            ),
+                            style: FontTextStyle.kBlueLight114W400SSP,
                           ),
                         ),
                         Container(
@@ -1388,13 +1372,9 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                           padding: EdgeInsets.symmetric(
                               horizontal: 12, vertical: 15),
                           width: 200,
-                          child: Text(
+                          child: CommonWidget.text(
                             'Tourism',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Color(0xFF32A3FD),
-                              fontWeight: FontWeight.w400,
-                            ),
+                            style: FontTextStyle.kBlueLight114W400SSP,
                           ),
                         ),
                         Container(
@@ -1402,13 +1382,9 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                           padding: EdgeInsets.symmetric(
                               horizontal: 12, vertical: 15),
                           width: 200,
-                          child: Text(
+                          child: CommonWidget.text(
                             'Apartments',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Color(0xFF32A3FD),
-                              fontWeight: FontWeight.w400,
-                            ),
+                            style: FontTextStyle.kBlueLight114W400SSP,
                           ),
                         ),
                         Container(
@@ -1416,13 +1392,9 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                           padding: EdgeInsets.symmetric(
                               horizontal: 12, vertical: 15),
                           width: 200,
-                          child: Text(
+                          child: CommonWidget.text(
                             'Tours',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Color(0xFF32A3FD),
-                              fontWeight: FontWeight.w400,
-                            ),
+                            style: FontTextStyle.kBlueLight114W400SSP,
                           ),
                         ),
                         Container(
@@ -1430,13 +1402,9 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                           padding: EdgeInsets.symmetric(
                               horizontal: 12, vertical: 15),
                           width: 200,
-                          child: Text(
+                          child: CommonWidget.text(
                             'Leisure',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Color(0xFF32A3FD),
-                              fontWeight: FontWeight.w400,
-                            ),
+                            style: FontTextStyle.kBlueLight114W400SSP,
                           ),
                         ),
                         Container(
@@ -1444,13 +1412,9 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                           padding: EdgeInsets.symmetric(
                               horizontal: 12, vertical: 15),
                           width: 200,
-                          child: Text(
+                          child: CommonWidget.text(
                             'Boutique Hotels',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Color(0xFF32A3FD),
-                              fontWeight: FontWeight.w400,
-                            ),
+                            style: FontTextStyle.kBlueLight114W400SSP,
                           ),
                         ),
                         Container(
@@ -1458,18 +1422,14 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                           padding: EdgeInsets.symmetric(
                               horizontal: 12, vertical: 15),
                           width: 200,
-                          child: Text(
+                          child: CommonWidget.text(
                             '+ Show more',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Color(0xFF32A3FD),
-                              fontWeight: FontWeight.w400,
-                            ),
+                            style: FontTextStyle.kBlueLight114W400SSP,
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(height: 20),
+                    SB.SH20(),
                     Container(
                       // height: Get.height,
                       width: Get.width,
@@ -1503,12 +1463,12 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                         children: [
                                           Icon(
                                             Icons.apartment_rounded,
-                                            color: Color(0xFF546088),
+                                            color: ColorPicker.kPrimaryLight3,
                                           ),
                                           Container(
                                             width: 2,
                                             height: Get.height * 0.09,
-                                            color: Color(0xFF546088),
+                                            color: ColorPicker.kPrimaryLight3,
                                           ),
                                         ],
                                       ),
@@ -1518,30 +1478,23 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(
+                                        CommonWidget.text(
                                           'SIGN UP TO JOIN',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 12,
-                                            color: Colors.white,
-                                          ),
+                                          style: FontTextStyle.kWhite12W700SSP,
                                         ),
                                         SizedBox(
                                           width: Get.width * 0.7,
-                                          child: Text(
+                                          child: CommonWidget.text(
                                             'Get priority news access',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 36,
-                                              color: Colors.white,
-                                            ),
+                                            style:
+                                                FontTextStyle.kWhite36W400SSP,
                                           ),
                                         ),
                                       ],
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: 10),
+                                SB.SH10(),
                                 Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -1551,12 +1504,12 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                       children: [
                                         Icon(
                                           Icons.verified,
-                                          color: Color(0xFF546088),
+                                          color: ColorPicker.kPrimaryLight3,
                                         ),
                                         Container(
                                           width: 2,
                                           height: Get.height * 0.078,
-                                          color: Color(0xFF546088),
+                                          color: ColorPicker.kPrimaryLight3,
                                         ),
                                       ],
                                     ),
@@ -1565,23 +1518,16 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(
+                                        CommonWidget.text(
                                           'All the latest news',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 16,
-                                            color: Colors.white,
-                                          ),
+                                          style: FontTextStyle.kWhite16W700SSP,
                                         ),
                                         SizedBox(
                                           width: Get.width * 0.7,
-                                          child: Text(
+                                          child: CommonWidget.text(
                                             'Stay up to date with news from the tourism and hospitality industry.',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 14,
-                                              color: Colors.white,
-                                            ),
+                                            style:
+                                                FontTextStyle.kWhite14W400SSP,
                                           ),
                                         ),
                                       ],
@@ -1598,12 +1544,12 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                       children: [
                                         Icon(
                                           Icons.verified,
-                                          color: Color(0xFF546088),
+                                          color: ColorPicker.kPrimaryLight3,
                                         ),
                                         Container(
                                           width: 2,
                                           height: Get.height * 0.078,
-                                          color: Color(0xFF546088),
+                                          color: ColorPicker.kPrimaryLight3,
                                         ),
                                       ],
                                     ),
@@ -1612,23 +1558,16 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(
+                                        CommonWidget.text(
                                           'Credible sources',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 16,
-                                            color: Colors.white,
-                                          ),
+                                          style: FontTextStyle.kWhite16W700SSP,
                                         ),
                                         SizedBox(
                                           width: Get.width * 0.7,
-                                          child: Text(
+                                          child: CommonWidget.text(
                                             'I’ts gathered from hundreds of trusted sources and updates in real time.',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 14,
-                                              color: Colors.white,
-                                            ),
+                                            style:
+                                                FontTextStyle.kWhite14W400SSP,
                                           ),
                                         ),
                                       ],
@@ -1645,12 +1584,12 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                       children: [
                                         Icon(
                                           Icons.verified,
-                                          color: Color(0xFF546088),
+                                          color: ColorPicker.kPrimaryLight3,
                                         ),
                                         Container(
                                           width: 2,
                                           height: Get.height * 0.078,
-                                          color: Color(0xFF546088),
+                                          color: ColorPicker.kPrimaryLight3,
                                         ),
                                       ],
                                     ),
@@ -1659,23 +1598,16 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(
+                                        CommonWidget.text(
                                           'Wide scope of research',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 16,
-                                            color: Colors.white,
-                                          ),
+                                          style: FontTextStyle.kWhite16W700SSP,
                                         ),
                                         SizedBox(
                                           width: Get.width * 0.7,
-                                          child: Text(
+                                          child: CommonWidget.text(
                                             'We cover all aspects of the tourism and hospitality sectors including airlines, tour operators, hotels, education, research and more.',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 14,
-                                              color: Colors.white,
-                                            ),
+                                            style:
+                                                FontTextStyle.kWhite14W400SSP,
                                           ),
                                         ),
                                       ],
@@ -1693,7 +1625,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                         Container(
                                           width: 2,
                                           height: Get.height * 0.078,
-                                          color: Color(0xFF546088),
+                                          color: ColorPicker.kPrimaryLight3,
                                         ),
                                       ],
                                     ),
@@ -1711,15 +1643,15 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
-                                              Icon(Icons.person_add, size: 15),
-                                              Text(
-                                                'Sign up now. It’s free',
-                                                style: TextStyle(
+                                              Icon(Icons.person_add,
+                                                  size: 15,
                                                   color:
-                                                      ColorPicker.kGreyLight5,
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
+                                                      ColorPicker.kBlueDark1),
+                                              SB.SW5(),
+                                              CommonWidget.text(
+                                                'Sign up now. It’s free',
+                                                style: FontTextStyle
+                                                    .kBlueDark114W600SSP,
                                               ),
                                             ],
                                           ),
@@ -1736,7 +1668,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                       children: [
                                         Icon(
                                           Icons.download_rounded,
-                                          color: Color(0xFF546088),
+                                          color: ColorPicker.kPrimaryLight3,
                                         ),
                                       ],
                                     ),
@@ -1747,20 +1679,17 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                       children: [
                                         SizedBox(
                                           width: Get.width * 0.7,
-                                          child: Text(
-                                            'OR IMPORT YOUR DETAILS FROM',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: 16,
-                                              color: Colors.white,
-                                            ),
+                                          child: CommonWidget.text(
+                                            'OR IMPORT YOUR\nDETAILS FROM',
+                                            style:
+                                                FontTextStyle.kWhite13W700SSP,
                                           ),
                                         ),
                                       ],
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: 10),
+                                SB.SH10(),
                                 Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -1768,11 +1697,11 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                       // mainAxisAlignment:
                                       //     MainAxisAlignment.start,
                                       children: [
-                                        SizedBox(width: 24),
+                                        SB.SW10(),
                                         Container(
                                           width: 2,
                                           height: Get.height * 0.078,
-                                          color: Color(0xFF546088),
+                                          color: ColorPicker.kPrimaryLight3,
                                         ),
                                       ],
                                     ),
@@ -1785,7 +1714,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                             child: Container(
                                               height: Get.height * 0.05,
                                               decoration: BoxDecoration(
-                                                color: Color(0xFF344F8D),
+                                                color: ColorPicker.kSocial,
                                                 borderRadius:
                                                     BorderRadius.circular(2),
                                               ),
@@ -1795,12 +1724,12 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                               ),
                                             ),
                                           ),
-                                          SizedBox(width: 5),
+                                          SB.SW5(),
                                           Flexible(
                                             child: Container(
                                               height: Get.height * 0.05,
                                               decoration: BoxDecoration(
-                                                color: Color(0xFFD63B30),
+                                                color: ColorPicker.kRedGoogle,
                                                 borderRadius:
                                                     BorderRadius.circular(2),
                                               ),
@@ -1810,7 +1739,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                               ),
                                             ),
                                           ),
-                                          SizedBox(width: 5),
+                                          SB.SW5(),
                                           Flexible(
                                             child: Container(
                                               height: Get.height * 0.05,
@@ -1836,88 +1765,100 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                         ],
                       ),
                     ),
-                    SizedBox(height: 20),
+                    SB.SH20(),
                     ListView.builder(
                       itemCount: data.length,
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
-                        return Container(
-                          padding: EdgeInsets.all(10),
-                          margin: EdgeInsets.only(bottom: 10),
-                          height: Get.width * 0.8,
-                          width: Get.width,
-                          color: Colors.white,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Image(
-                                image: AssetImage('${data[index]['img']}'),
-                                width: Get.width,
-                                height: Get.width * 0.4,
-                                fit: BoxFit.cover,
-                              ),
-                              Flexible(
-                                child: Container(
-                                    child: Column(
+                        return InkWell(
+                          onTap: () {
+                            Navigator.of(context)
+                                .pushNamed(NewsSingleLoggedInScreen.route);
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(10),
+                            margin: EdgeInsets.only(bottom: 10),
+                            color: Colors.white,
+                            child: ListView(
+                              shrinkWrap: true,
+                              children: [
+                                Image(
+                                  image: AssetImage('${data[index]['img']}'),
+                                  width: Get.width,
+                                  height: Get.width * 0.4,
+                                  fit: BoxFit.cover,
+                                ),
+                                SB.SH20(),
+                                Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
                                   children: [
-                                    Text(
+                                    CommonWidget.text(
                                       '${data[index]['text1']}',
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w700,
+                                      style: FontTextStyle.kBlueDark118W700SSP,
+                                    ),
+                                    SB.SH10(),
+                                    RichText(
+                                      text: TextSpan(
+                                        text: "By: ",
+                                        style: FontTextStyle
+                                            .kGreyLight514W400SSP
+                                            .copyWith(height: 1.5),
+                                        children: [
+                                          TextSpan(
+                                            text: '${data[index]['text3']}',
+                                            style: FontTextStyle
+                                                .kGreyLight514W600SSP,
+                                          ),
+                                          TextSpan(
+                                            text: ' • ${data[index]['text4']}',
+                                            style: FontTextStyle
+                                                .kGreyLight514W400SSP,
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                    Text(
-                                      '${data[index]['text3']}',
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w600,
-                                        color: ColorPicker.kGreyLight5,
-                                      ),
-                                    ),
+                                    SB.SH10(),
                                     data[index]['text2'].toString().isEmpty
                                         ? SizedBox()
                                         : Container(
                                             padding: EdgeInsets.all(5),
-                                            child: Text('MEMBERS ONLY',
-                                                style: TextStyle(
-                                                    fontSize: 10,
-                                                    fontWeight: FontWeight.w400,
-                                                    color: Colors.red)),
+                                            child: CommonWidget.text(
+                                                'MEMBERS ONLY',
+                                                style: FontTextStyle
+                                                    .kRed210W700SSP),
                                             decoration: BoxDecoration(
-                                              color: Color(0xFFFECDCC),
+                                              color: ColorPicker.kRedlight,
                                               borderRadius:
                                                   BorderRadius.circular(2),
                                             ),
                                           ),
                                   ],
-                                )),
-                              ),
-                            ],
+                                ),
+                              ],
+                            ),
                           ),
                         );
                       },
                     ),
-                    SizedBox(height: 20),
+                    SB.SH20(),
 
                     ///LOAD MORE
                     Container(
                       height: 52,
                       width: 119,
                       child: Center(
-                          child: Text(
+                          child: CommonWidget.text(
                         'LOAD MORE',
-                        style: TextStyle(),
+                        style: FontTextStyle.kWhite14W600SSP,
                       )),
                       decoration: BoxDecoration(
-                          color: Color(0xFF32A3FD),
+                          color: ColorPicker.kBlueLight1,
                           borderRadius: BorderRadius.circular(2)),
                     ),
-                    SizedBox(height: 20),
+                    SB.SH20(),
 
                     ///Banner Image
                     Container(
