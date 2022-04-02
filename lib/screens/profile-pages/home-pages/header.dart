@@ -343,64 +343,63 @@ class _HeaderState extends State<Header> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 46,
-        width: MediaQuery.of(context).size.width,
-        color: ColorPicker.kPrimaryLight1,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image(
-              image: AssetImage('assets/icons/logo.png'),
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(6.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                width: 270,
-                child: TextFormField(
-                  cursorColor: Colors.white,
-                  style: FontTextStyle.kWhitePR,
-                  decoration: InputDecoration(
-                    disabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    hintStyle: TextStyle(
-                      color: ColorPicker.kPrimaryLightBlue,
-                    ),
-                    filled: true,
-                    fillColor: ColorPicker.kPrimaryLight,
-                    hintText: "Search",
-                    prefixIcon: Icon(
-                      Icons.search,
-                      color: ColorPicker.kPrimaryLightBlue,
-                    ),
-                    suffixIcon: Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Container(
-                        margin: EdgeInsets.only(right: 5),
-                        height: 40,
-                        width: Get.width * 0.045,
-                        decoration: BoxDecoration(
-                          color: ColorPicker.kPrimaryLight1,
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                        child: Center(
-                          child: Text(
-                            'People',
-                            style: TextStyle(
-                              color: ColorPicker.kPrimaryLightBlue,
-                            ),
+      height: 46,
+      width: MediaQuery.of(context).size.width,
+      color: ColorPicker.kPrimaryLight1,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image(
+            image: AssetImage('assets/icons/logo.png'),
+          ),
+          SizedBox(
+            width: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(6.0),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              width: 270,
+              child: TextFormField(
+                cursorColor: Colors.white,
+                style: FontTextStyle.kWhitePR,
+                decoration: InputDecoration(
+                  disabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  hintStyle: TextStyle(
+                    color: ColorPicker.kPrimaryLightBlue,
+                  ),
+                  filled: true,
+                  fillColor: ColorPicker.kPrimaryLight,
+                  hintText: "Search",
+                  prefixIcon: Icon(
+                    Icons.search,
+                    color: ColorPicker.kPrimaryLightBlue,
+                  ),
+                  suffixIcon: Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Container(
+                      margin: EdgeInsets.only(right: 5),
+                      height: 40,
+                      width: Get.width * 0.045,
+                      decoration: BoxDecoration(
+                        color: ColorPicker.kPrimaryLight1,
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'People',
+                          style: TextStyle(
+                            color: ColorPicker.kPrimaryLightBlue,
                           ),
                         ),
                       ),
@@ -409,159 +408,154 @@ class _HeaderState extends State<Header> {
                 ),
               ),
             ),
-            SizedBox(
-              width: Get.width * 0.02,
+          ),
+          SizedBox(
+            width: Get.width * 0.02,
+          ),
+          Container(
+            width: 380,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                buildHeaderGesture(
+                    'Home', FontTextStyle.kWhite16W400PR, context, Home()),
+                buildHeaderGesture('Profile',
+                    FontTextStyle.kPrimaryLightBlue16W400PR, context, Home()),
+                buildHeaderGesture(
+                    'News',
+                    FontTextStyle.kPrimaryLightBlue16W400PR,
+                    context,
+                    UpdateNews()),
+                buildHeaderGesture('Jobs',
+                    FontTextStyle.kPrimaryLightBlue16W400PR, context, Home()),
+                buildHeaderGesture('Recruitment',
+                    FontTextStyle.kPrimaryLightBlue16W400PR, context, Home()),
+                buildHeaderGesture('Help',
+                    FontTextStyle.kPrimaryLightBlue16W400PR, context, Home()),
+              ],
             ),
-            Container(
-              width: 380,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  buildHeaderGesture(
-                      'Home', FontTextStyle.kWhite16W400PR, context, Home()),
-                  buildHeaderGesture('Profile',
-                      FontTextStyle.kPrimaryLightBlue16W400PR, context, Home()),
-                  buildHeaderGesture(
-                      'News',
-                      FontTextStyle.kPrimaryLightBlue16W400PR,
-                      context,
-                      UpdateNews()),
-                  buildHeaderGesture('Jobs',
-                      FontTextStyle.kPrimaryLightBlue16W400PR, context, Home()),
-                  buildHeaderGesture('Recruitment',
-                      FontTextStyle.kPrimaryLightBlue16W400PR, context, Home()),
-                  buildHeaderGesture('Help',
-                      FontTextStyle.kPrimaryLightBlue16W400PR, context, Home()),
-                ],
-              ),
-            ),
-            SizedBox(
-              width: Get.width * 0.03,
-            ),
-            Container(
-              width: Get.width * 0.05,
-              decoration: BoxDecoration(
-                  border: Border.symmetric(
-                vertical:
-                    BorderSide(color: ColorPicker.kPrimaryLight, width: 1),
-              )),
-              child: Center(
-                  child: Stack(
-                overflow: Overflow.visible,
-                children: [
-                  Icon(
-                    Icons.email,
-                    color: ColorPicker.kPrimaryLightBlue,
-                  ),
-                  Positioned(
-                    right: -5,
-                    top: -5,
-                    child: Container(
-                      height: 16,
-                      width: 16,
-                      decoration: BoxDecoration(
-                        color: ColorPicker.kRed,
-                        borderRadius: BorderRadius.circular(3),
-                      ),
-                      child: Center(
-                        child: Text(
-                          '2',
-                          style: FontTextStyle.kWhite12W700SSP,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              )),
-            ),
-            Container(
-              width: Get.width * 0.05,
-              decoration: BoxDecoration(
-                  border: Border.symmetric(
-                vertical:
-                    BorderSide(color: ColorPicker.kPrimaryLight, width: 1),
-              )),
-              child: Center(
-                  child: Stack(
-                overflow: Overflow.visible,
-                children: [
-                  Icon(
-                    Icons.flag,
-                    color: ColorPicker.kPrimaryLightBlue,
-                  ),
-                  Positioned(
-                    right: -5,
-                    top: -5,
-                    child: Container(
-                      height: 16,
-                      width: 16,
-                      decoration: BoxDecoration(
-                        color: ColorPicker.kRed,
-                        borderRadius: BorderRadius.circular(3),
-                      ),
-                      child: Center(
-                        child: Text(
-                          '2',
-                          style: FontTextStyle.kWhite12W700SSP,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              )),
-            ),
-            Container(
-              width: 90,
-              decoration: BoxDecoration(
-                  border: Border.symmetric(
-                vertical:
-                    BorderSide(color: ColorPicker.kPrimaryLight, width: 1),
-              )),
-              child: Center(
-                  child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.person_add,
-                    color: ColorPicker.kPrimaryLightBlue,
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  Container(
-                    height: 20,
-                    width: 30,
+          ),
+          SizedBox(
+            width: Get.width * 0.03,
+          ),
+          Container(
+            width: Get.width * 0.05,
+            decoration: BoxDecoration(
+                border: Border.symmetric(
+              vertical: BorderSide(color: ColorPicker.kPrimaryLight, width: 1),
+            )),
+            child: Center(
+                child: Stack(
+              overflow: Overflow.visible,
+              children: [
+                Icon(
+                  Icons.email,
+                  color: ColorPicker.kPrimaryLightBlue,
+                ),
+                Positioned(
+                  right: -5,
+                  top: -5,
+                  child: Container(
+                    height: 16,
+                    width: 16,
                     decoration: BoxDecoration(
-                      color: Color(0xff546088),
+                      color: ColorPicker.kRed,
                       borderRadius: BorderRadius.circular(3),
                     ),
                     child: Center(
-                      child: Text('352',
-                          style: FontTextStyle.kPrimaryLight10W700SSP),
+                      child: Text(
+                        '2',
+                        style: FontTextStyle.kWhite12W700SSP,
+                      ),
                     ),
                   ),
-                ],
-              )),
-            ),
-
-            Container(
-              width: Get.width * 0.05,
-              decoration: BoxDecoration(
-                  border: Border.symmetric(
-                vertical:
-                    BorderSide(color: ColorPicker.kPrimaryLight, width: 1),
-              )),
-              child: Center(
-                child: Container(
-                  height: 26,
-                  width: 26,
-                  child: Image(
-                    image: AssetImage('assets/images/avatar.png'),
+                ),
+              ],
+            )),
+          ),
+          Container(
+            width: Get.width * 0.05,
+            decoration: BoxDecoration(
+                border: Border.symmetric(
+              vertical: BorderSide(color: ColorPicker.kPrimaryLight, width: 1),
+            )),
+            child: Center(
+                child: Stack(
+              overflow: Overflow.visible,
+              children: [
+                Icon(
+                  Icons.flag,
+                  color: ColorPicker.kPrimaryLightBlue,
+                ),
+                Positioned(
+                  right: -5,
+                  top: -5,
+                  child: Container(
+                    height: 16,
+                    width: 16,
+                    decoration: BoxDecoration(
+                      color: ColorPicker.kRed,
+                      borderRadius: BorderRadius.circular(3),
+                    ),
+                    child: Center(
+                      child: Text(
+                        '2',
+                        style: FontTextStyle.kWhite12W700SSP,
+                      ),
+                    ),
                   ),
+                ),
+              ],
+            )),
+          ),
+          Container(
+            width: 90,
+            decoration: BoxDecoration(
+                border: Border.symmetric(
+              vertical: BorderSide(color: ColorPicker.kPrimaryLight, width: 1),
+            )),
+            child: Center(
+                child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.person_add,
+                  color: ColorPicker.kPrimaryLightBlue,
+                ),
+                SizedBox(
+                  width: 5,
+                ),
+                Container(
+                  height: 20,
+                  width: 30,
+                  decoration: BoxDecoration(
+                    color: Color(0xff546088),
+                    borderRadius: BorderRadius.circular(3),
+                  ),
+                  child: Center(
+                    child: Text('352',
+                        style: FontTextStyle.kPrimaryLight10W700SSP),
+                  ),
+                ),
+              ],
+            )),
+          ),
+          Container(
+            width: Get.width * 0.05,
+            decoration: BoxDecoration(
+                border: Border.all(width: 1, color: ColorPicker.kPrimaryLight)),
+            child: Center(
+              child: Container(
+                height: 26,
+                width: 26,
+                child: Image(
+                  image: AssetImage('assets/images/avatar.png'),
                 ),
               ),
             ),
-          ],
-        ));
+          ),
+        ],
+      ),
+    );
   }
 }
