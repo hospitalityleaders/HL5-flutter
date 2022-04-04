@@ -3,6 +3,7 @@ import 'package:holedo/screens/profile-pages/profile-edit/profile-edit.dart';
 import 'package:holedo/screens/profile-pages/profile-overview/profile-overview.dart';
 import 'package:holedo/screens/profile-pages/references/references.dart';
 import 'package:holedo/screens/profile-pages/timeline/timeline.dart';
+import '../../../responsive/responsive.dart';
 import 'header-card.dart';
 import 'package:get/get.dart';
 
@@ -101,12 +102,15 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     });
   }
 
+  // References card edit functionality
+
+
   @override
   Widget build(BuildContext context) {
     var _height = MediaQuery.of(context).size.height;
     var _width = MediaQuery.of(context).size.width;
 
-    return Scaffold(
+    return Responsive.isMobile(context)? Scaffold(appBar: AppBar(),endDrawer: Drawer(),):Scaffold(
       body: Container(
         color: const Color(0xFFdddfe3),
         child: DefaultTabController(

@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:holedo/screens/news/NewsSingle/jobs_no_jobs.dart';
 import 'package:holedo/screens/news/NewsSingle/news_single_logged_in.dart';
 import 'package:holedo/screens/news/categories/news_signal.dart';
 import 'package:holedo/screens/news/update/update_news.dart';
