@@ -3,13 +3,11 @@ import 'package:holedo/screens/profile-pages/profile-edit/profile-edit.dart';
 import 'package:holedo/screens/profile-pages/profile-overview/profile-overview.dart';
 import 'package:holedo/screens/profile-pages/references/references.dart';
 import 'package:holedo/screens/profile-pages/timeline/timeline.dart';
-import '../../../responsive/responsive.dart';
 import 'header-card.dart';
 import 'package:get/get.dart';
 
 class Home extends StatefulWidget {
   static const String route = '/home';
-
   @override
   _HomeState createState() => _HomeState();
 }
@@ -102,15 +100,12 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     });
   }
 
-  // References card edit functionality
-
-
   @override
   Widget build(BuildContext context) {
     var _height = MediaQuery.of(context).size.height;
     var _width = MediaQuery.of(context).size.width;
 
-    return Responsive.isMobile(context)? Scaffold(appBar: AppBar(),endDrawer: Drawer(),):Scaffold(
+    return Scaffold(
       body: Container(
         color: const Color(0xFFdddfe3),
         child: DefaultTabController(
@@ -284,7 +279,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   profileOverviewSec1ProSumm_W: profileOverviewSec1ProSumm_W,
                   profileOverviewSec1AreaOfExpKey:
                       profileOverviewSec1AreaOfExpKey,
-
                   profileOverviewSec1AreaOfExp_H:
                       profileOverviewSec1AreaOfExp_H,
                   profileOverviewSec1AreaOfExp_W:

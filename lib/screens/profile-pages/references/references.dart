@@ -324,16 +324,18 @@ class _ReferencesState extends State<References> {
     var _height = MediaQuery.of(context).size.height;
     return Padding(
         padding: EdgeInsets.symmetric(
-            horizontal: _width * 0.070, vertical: _height * .02),
+            horizontal: _width * 0.03, vertical: _height * .01),
         child: SingleChildScrollView(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                 flex: 2,
-                child: StaggeredGrid.count(
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: StaggeredGrid.count(
                     crossAxisCount: 2,
-                    children: List<Widget>.generate(
+                    children: List.generate(
                       10,
                       (index) => buildReferencesCard(
                         'https://images.pexels.com/photos/712521/pexels-photo-712521.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
@@ -341,7 +343,9 @@ class _ReferencesState extends State<References> {
                         'General Manager, One & Only Hotel',
                         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
                       ),
-                    )),
+                    ),
+                  ),
+                ),
               ),
               // Expanded(flex:1,child: ProfileOverviewSec3()),
               Expanded(child: ProfileOverviewSec3())

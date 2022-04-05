@@ -599,84 +599,90 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                             crossAxisSpacing: 10),
                                     itemCount: 10,
                                     itemBuilder: (context, index) {
-                                      return Container(
-                                        padding: EdgeInsets.all(8),
-                                        width: Get.width * 0.25,
-                                        decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            border: Border(
-                                              bottom: BorderSide(
-                                                  color: Colors.white,
-                                                  width: 4),
-                                            )),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Container(
-                                              height: Get.height * 0.20,
-                                              width: Get.width,
-                                              child: Image(
-                                                fit: BoxFit.fill,
-                                                image: AssetImage(
-                                                    '${data[index]['img']}'),
+                                      return GestureDetector(
+                                        onTap: () {
+                                          Navigator.of(context).pushNamed(
+                                              NewsSingleLoggedInScreen.route);
+                                        },
+                                        child: Container(
+                                          padding: EdgeInsets.all(8),
+                                          width: Get.width * 0.25,
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              border: Border(
+                                                bottom: BorderSide(
+                                                    color: Colors.white,
+                                                    width: 4),
+                                              )),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                height: Get.height * 0.20,
+                                                width: Get.width,
+                                                child: Image(
+                                                  fit: BoxFit.fill,
+                                                  image: AssetImage(
+                                                      '${data[index]['img']}'),
+                                                ),
                                               ),
-                                            ),
-                                            SizedBox(
-                                              height: 7,
-                                            ),
-                                            Flexible(
-                                              child: Text(
-                                                '${data[index]['text1']}',
-                                                style: FontTextStyle
-                                                    .kBlueDark118W700SSP,
+                                              SizedBox(
+                                                height: 7,
                                               ),
-                                            ),
-                                            SizedBox(
-                                              height: 7,
-                                            ),
-                                            RichText(
-                                              text: TextSpan(
-                                                text: "by",
-                                                style: FontTextStyle
-                                                    .kGreyLight514W600PR,
-                                                children: [
-                                                  TextSpan(
-                                                      text: "  Pam Carrol •",
-                                                      style: FontTextStyle
-                                                          .kGreyLight514W600PR),
-                                                  TextSpan(
-                                                      text:
-                                                          "  26 August 2015 •",
-                                                      style: FontTextStyle
-                                                          .kGreyLight514W600PR),
-                                                  TextSpan(
-                                                      text: "  10:40",
-                                                      style: FontTextStyle
-                                                          .kGreyLight514W600PR),
-                                                ],
+                                              Flexible(
+                                                child: Text(
+                                                  '${data[index]['text1']}',
+                                                  style: FontTextStyle
+                                                      .kBlueDark118W700SSP,
+                                                ),
                                               ),
-                                            ),
-                                            SizedBox(
-                                              height: 12,
-                                            ),
-                                            data[index]['text2']
-                                                    .toString()
-                                                    .isEmpty
-                                                ? SizedBox()
-                                                : Container(
-                                                    height: 20,
-                                                    width: 92,
-                                                    color: Color(0xFFFECDCC),
-                                                    child: Center(
-                                                      child: Text(
-                                                        '${data[index]['text2']}',
+                                              SizedBox(
+                                                height: 7,
+                                              ),
+                                              RichText(
+                                                text: TextSpan(
+                                                  text: "by",
+                                                  style: FontTextStyle
+                                                      .kGreyLight514W600PR,
+                                                  children: [
+                                                    TextSpan(
+                                                        text: "  Pam Carrol •",
                                                         style: FontTextStyle
-                                                            .kRed210W700SSP,
+                                                            .kGreyLight514W600PR),
+                                                    TextSpan(
+                                                        text:
+                                                            "  26 August 2015 •",
+                                                        style: FontTextStyle
+                                                            .kGreyLight514W600PR),
+                                                    TextSpan(
+                                                        text: "  10:40",
+                                                        style: FontTextStyle
+                                                            .kGreyLight514W600PR),
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 12,
+                                              ),
+                                              data[index]['text2']
+                                                      .toString()
+                                                      .isEmpty
+                                                  ? SizedBox()
+                                                  : Container(
+                                                      height: 20,
+                                                      width: 92,
+                                                      color: Color(0xFFFECDCC),
+                                                      child: Center(
+                                                        child: Text(
+                                                          '${data[index]['text2']}',
+                                                          style: FontTextStyle
+                                                              .kRed210W700SSP,
+                                                        ),
                                                       ),
-                                                    ),
-                                                  )
-                                          ],
+                                                    )
+                                            ],
+                                          ),
                                         ),
                                       );
                                     },
@@ -1773,6 +1779,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                       itemBuilder: (context, index) {
                         return InkWell(
                           onTap: () {
+                            print('hello');
                             Navigator.of(context)
                                 .pushNamed(NewsSingleLoggedInScreen.route);
                           },

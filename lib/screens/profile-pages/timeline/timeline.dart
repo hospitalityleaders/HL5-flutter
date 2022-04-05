@@ -125,7 +125,7 @@ class _TimelineState extends State<Timeline> {
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.symmetric(
-            horizontal: _width * 0.070, vertical: _height * .02),
+            horizontal: _width * 0.03, vertical: _height * .01),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -133,13 +133,16 @@ class _TimelineState extends State<Timeline> {
             Expanded(child: Container()),
             Expanded(
               flex: 3,
-              child: Column(children: [
-                buildTimelineWithCard('2013', _height, _width),
-                buildTimelineWithCard('2012', _height, _width),
-                buildTimelineWithCard('2012', _height, _width),
-                buildTimelineWithCard('2010', _height, _width),
-                buildTimelineWithCard('2010', _height, _width),
-              ]),
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Column(children: [
+                  buildTimelineWithCard('2013', _height, _width),
+                  buildTimelineWithCard('2012', _height, _width),
+                  buildTimelineWithCard('2012', _height, _width),
+                  buildTimelineWithCard('2010', _height, _width),
+                  buildTimelineWithCard('2010', _height, _width),
+                ]),
+              ),
             ),
             Expanded(flex: 2, child: ProfileOverviewSec3())
           ],

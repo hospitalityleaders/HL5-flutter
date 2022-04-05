@@ -24,7 +24,6 @@ class HeaderCard extends StatefulWidget {
 }
 
 class _HeaderCardState extends State<HeaderCard> {
-
   Widget cardDataLoad(String no, String name) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -481,10 +480,10 @@ class _HeaderCardState extends State<HeaderCard> {
                       }),
                 )
               : Container(),
-          Positioned(
-            top: 0,
-            child: Header(),
-          )
+          // Positioned(
+          //   top: 0,
+          //   child: Header(),
+          // )
         ],
       ),
     );
