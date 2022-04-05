@@ -88,7 +88,7 @@ class CommonWidget {
         preferredSize: const Size.fromHeight(100));
   }
 
-  static PreferredSize tabletAppBar() {
+  static PreferredSize tabletAppBar({Function()? onTap}) {
     return PreferredSize(
       child: Container(
         height: 71,
@@ -102,10 +102,13 @@ class CommonWidget {
               height: Get.height * 0.05,
               width: Get.width * 0.19,
             ),
-            Icon(
-              Icons.menu,
-              color: Colors.white,
-              size: Get.width * 0.05,
+            GestureDetector(
+              onTap: onTap!,
+              child: Icon(
+                Icons.menu,
+                color: Colors.white,
+                size: Get.width * 0.05,
+              ),
             )
           ],
         ),

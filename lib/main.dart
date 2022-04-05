@@ -1,10 +1,13 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:holedo/controller/menu_controller.dart';
 import 'package:holedo/screens/news/NewsSingle/jobs_no_jobs.dart';
 import 'package:holedo/screens/news/NewsSingle/news_single_logged_in.dart';
 import 'package:holedo/screens/news/categories/news_signal.dart';
 import 'package:holedo/screens/news/update/update_news.dart';
+
 import 'package:holedo/screens/profile-pages/home-pages/home.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:seo_renderer/helpers/renderer_state.dart';
@@ -54,6 +57,7 @@ void main() {
       ),
     ),
   );
+  MenuController controller = Get.put(MenuController());
 }
 
 class MyApp extends StatelessWidget {

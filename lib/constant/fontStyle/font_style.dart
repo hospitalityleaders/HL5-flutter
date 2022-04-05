@@ -443,9 +443,9 @@ class FontTextStyle {
     fontFamily: 'ProximaNova-Regular',
   );
 
-  static TextStyle kGreyDark18W600PR = TextStyle(
+  static TextStyle kGreyDark14W600PR = TextStyle(
     color: ColorPicker.kGreyDark,
-    fontSize: 18,
+    fontSize: 14,
     fontWeight: FontWeight.w600,
     fontFamily: 'ProximaNova-Regular',
   );

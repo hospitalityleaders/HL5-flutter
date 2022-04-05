@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:holedo/screens/profile-pages/profile-overview/profile-overview-sec3.dart';
 
-
-
 class ReferencesCard {
   Widget buildReferencesCard(
       _width,
@@ -325,7 +323,8 @@ class _ReferencesState extends State<References> {
     var _width = MediaQuery.of(context).size.width;
     var _height = MediaQuery.of(context).size.height;
     return Padding(
-        padding: EdgeInsets.symmetric(horizontal: _width*0.03, vertical: _height*.01),
+        padding: EdgeInsets.symmetric(
+            horizontal: _width * 0.03, vertical: _height * .01),
         child: SingleChildScrollView(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -336,25 +335,22 @@ class _ReferencesState extends State<References> {
                   padding: const EdgeInsets.all(12.0),
                   child: StaggeredGrid.count(
                     crossAxisCount: 2,
-                    children: [
-                      for (var i = 0; i < 10; i++)
-                        buildReferencesCard(
-                          'https://images.pexels.com/photos/712521/pexels-photo-712521.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-                          'Sarah Lee MHL',
-                          'General Manager, One & Only Hotel',
-                          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                        ),
-                    ],
+                    children: List.generate(
+                      10,
+                      (index) => buildReferencesCard(
+                        'https://images.pexels.com/photos/712521/pexels-photo-712521.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+                        'Sarah Lee MHL',
+                        'General Manager, One & Only Hotel',
+                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                      ),
+                    ),
                   ),
                 ),
               ),
               // Expanded(flex:1,child: ProfileOverviewSec3()),
-              Expanded(child:  ProfileOverviewSec3())
-
+              Expanded(child: ProfileOverviewSec3())
             ],
           ),
         ));
   }
 }
-
-

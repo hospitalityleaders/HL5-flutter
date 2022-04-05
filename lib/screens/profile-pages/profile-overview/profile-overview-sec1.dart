@@ -334,220 +334,222 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
   Widget build(BuildContext context) {
     var _height = MediaQuery.of(context).size.height;
     var _width = MediaQuery.of(context).size.width;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Profile Summary
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Profile Summary
 
-        Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                key: widget.profileOverviewSec1ProSummKey,
-                color: Colors.white,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.only(right: 20, left: 20, top: 13),
-                      child: AutoSizeText(
-                        'Profile summary',
-                        minFontSize: 14,
-                        style: TextStyle(
-                            color: Color(0xFF171f39),
-                            fontSize: 20,
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    const Divider(
-                      height: 0.5,
-                      color: Color(0xffE5E5E5),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(right: 20, left: 20, top: 13),
-                      child: AutoSizeText(
-                        profileSummary,
-                        minFontSize: 8,
-                        style: const TextStyle(
-                            fontSize: 16,
-                            color: Color(
-                              0xFF7C8990,
-                            ),
-                            fontWeight: FontWeight.w400,
-                            height: 1.5),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 13,
-                    )
-                  ],
-                ),
-              ),
-            ),
-            widget.sec1IsEditable
-                ? ProfileEdit.buildProfileEdit(
-                    width: widget.profileOverviewSec1ProSumm_W,
-                    height: widget.profileOverviewSec1ProSumm_H,
-                    popUp: () {
-                      buildProfileCard(_height, _width);
-                    })
-                : Container(),
-          ],
-        ),
-
-        const SizedBox(
-          height: 8,
-        ),
-        // Areas of expertise
-        Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8),
-              child: Container(
-                key: widget.profileOverviewSec1AreaOfExpKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: _width,
-                      color: Colors.white,
-                      child: const Padding(
-                        padding: EdgeInsets.only(
-                            right: 20, left: 20, bottom: 13, top: 13),
+          Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  key: widget.profileOverviewSec1ProSummKey,
+                  color: Colors.white,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.only(right: 20, left: 20, top: 13),
                         child: AutoSizeText(
-                          'Areas of expertise',
+                          'Profile summary',
+                          minFontSize: 14,
                           style: TextStyle(
                               color: Color(0xFF171f39),
                               fontSize: 20,
                               fontWeight: FontWeight.w400),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 3,
-                    ),
-                    Wrap(
-                      spacing: 5,
-                      runSpacing: 3,
-                      children: [
-                        buildAreaOfExpertiseButton('Business management'),
-                        buildAreaOfExpertiseButton('Training'),
-                        buildAreaOfExpertiseButton('Leadership'),
-                        buildAreaOfExpertiseButton('Growth hacking'),
-                        buildAreaOfExpertiseButton('Finance'),
-                        buildAreaOfExpertiseButton('Acquisitions'),
-                        buildAreaOfExpertiseButton('Recruitment'),
-                        buildAreaOfExpertiseButton(' Hotel groups'),
-                        buildAreaOfExpertiseButton('Consulting'),
-                        buildAreaOfExpertiseButton('Public speaking'),
-                        ElevatedButton.icon(
-                          style: ElevatedButton.styleFrom(
-                            primary: const Color(0xFFe5f4fb),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(1),
-                            ),
-                          ),
-                          onPressed: () {},
-                          icon: const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 12.0),
-                            child: Icon(
-                              Icons.add,
-                              color: Color(0xFF0D9BDC),
-                              size: 16,
-                            ),
-                          ),
-                          label: const Padding(
-                            padding: EdgeInsets.all(1.0),
-                            child: Text(
-                              'Show all',
-                              style: TextStyle(
-                                  color: Color(0xFF0D9BDC),
-                                  fontWeight: FontWeight.w300,
-                                  fontSize: 14),
-                            ),
+                      const SizedBox(height: 8),
+                      const Divider(
+                        height: 0.5,
+                        color: Color(0xffE5E5E5),
+                      ),
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(right: 20, left: 20, top: 13),
+                        child: AutoSizeText(
+                          profileSummary,
+                          minFontSize: 8,
+                          style: const TextStyle(
+                              fontSize: 16,
+                              color: Color(
+                                0xFF7C8990,
+                              ),
+                              fontWeight: FontWeight.w400,
+                              height: 1.5),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 13,
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              widget.sec1IsEditable
+                  ? ProfileEdit.buildProfileEdit(
+                      width: widget.profileOverviewSec1ProSumm_W,
+                      height: widget.profileOverviewSec1ProSumm_H,
+                      popUp: () {
+                        buildProfileCard(_height, _width);
+                      })
+                  : Container(),
+            ],
+          ),
+
+          const SizedBox(
+            height: 8,
+          ),
+          // Areas of expertise
+          Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8),
+                child: Container(
+                  key: widget.profileOverviewSec1AreaOfExpKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: _width,
+                        color: Colors.white,
+                        child: const Padding(
+                          padding: EdgeInsets.only(
+                              right: 20, left: 20, bottom: 13, top: 13),
+                          child: AutoSizeText(
+                            'Areas of expertise',
+                            style: TextStyle(
+                                color: Color(0xFF171f39),
+                                fontSize: 20,
+                                fontWeight: FontWeight.w400),
                           ),
                         ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            widget.sec1IsEditable
-                ? ProfileEdit.buildProfileEdit(
-                    width: widget.profileOverviewSec1AreaOfExp_W,
-                    height: widget.profileOverviewSec1AreaOfExp_H,
-                    popUp: () {
-                      buildProfileCard(_height, _width);
-                    })
-                : Container(),
-          ],
-        ),
-
-        const SizedBox(height: 10),
-
-        //References card
-        Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                key: widget.profileOverviewSec1ReferencesKey,
-                color: Colors.white,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.only(
-                          right: 20, left: 20, bottom: 5, top: 13),
-                      child: Text(
-                        'References',
-                        style: TextStyle(
-                            color: Color(0xFF171f39),
-                            fontSize: 20,
-                            fontWeight: FontWeight.w400),
                       ),
-                    ),
-                    const SizedBox(height: 8),
-                    const Divider(color: Colors.grey, height: 1),
-                    buildReferencesCard(
-                      'https://images.pexels.com/photos/712521/pexels-photo-712521.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-                      'Sarah Lee MHL',
-                      'General Manager, One & Only Hotel',
-                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                    ),
-
-                    const Divider(
-                      height: 1,
-                      color: Colors.grey,
-                    ),
-                    buildReferencesCard(
-                      'https://images.pexels.com/photos/712521/pexels-photo-712521.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-                      'Sarah Lee MHL',
-                      'General Manager, One & Only Hotel',
-                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                    ),
-                    //work experience card
-                    const SizedBox(height: 10),
-                  ],
+                      SizedBox(
+                        height: 3,
+                      ),
+                      Wrap(
+                        spacing: 5,
+                        runSpacing: 3,
+                        children: [
+                          buildAreaOfExpertiseButton('Business management'),
+                          buildAreaOfExpertiseButton('Training'),
+                          buildAreaOfExpertiseButton('Leadership'),
+                          buildAreaOfExpertiseButton('Growth hacking'),
+                          buildAreaOfExpertiseButton('Finance'),
+                          buildAreaOfExpertiseButton('Acquisitions'),
+                          buildAreaOfExpertiseButton('Recruitment'),
+                          buildAreaOfExpertiseButton(' Hotel groups'),
+                          buildAreaOfExpertiseButton('Consulting'),
+                          buildAreaOfExpertiseButton('Public speaking'),
+                          ElevatedButton.icon(
+                            style: ElevatedButton.styleFrom(
+                              primary: const Color(0xFFe5f4fb),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(1),
+                              ),
+                            ),
+                            onPressed: () {},
+                            icon: const Padding(
+                              padding: EdgeInsets.symmetric(vertical: 12.0),
+                              child: Icon(
+                                Icons.add,
+                                color: Color(0xFF0D9BDC),
+                                size: 16,
+                              ),
+                            ),
+                            label: const Padding(
+                              padding: EdgeInsets.all(1.0),
+                              child: Text(
+                                'Show all',
+                                style: TextStyle(
+                                    color: Color(0xFF0D9BDC),
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: 14),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            widget.sec1IsEditable
-                ? ProfileEdit.buildProfileEdit(
-                    width: widget.profileOverviewSec1References_W,
-                    height: widget.profileOverviewSec1References_H,
-                    popUp: () {
-                      buildProfileCard(_height, _width);
-                    })
-                : Container(),
-          ],
-        ),
-        const SizedBox(height: 50)
-      ],
+              widget.sec1IsEditable
+                  ? ProfileEdit.buildProfileEdit(
+                      width: widget.profileOverviewSec1AreaOfExp_W,
+                      height: widget.profileOverviewSec1AreaOfExp_H,
+                      popUp: () {
+                        buildProfileCard(_height, _width);
+                      })
+                  : Container(),
+            ],
+          ),
+
+          const SizedBox(height: 10),
+
+          //References card
+          Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  key: widget.profileOverviewSec1ReferencesKey,
+                  color: Colors.white,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.only(
+                            right: 20, left: 20, bottom: 5, top: 13),
+                        child: Text(
+                          'References',
+                          style: TextStyle(
+                              color: Color(0xFF171f39),
+                              fontSize: 20,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      const Divider(color: Colors.grey, height: 1),
+                      buildReferencesCard(
+                        'https://images.pexels.com/photos/712521/pexels-photo-712521.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+                        'Sarah Lee MHL',
+                        'General Manager, One & Only Hotel',
+                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                      ),
+
+                      const Divider(
+                        height: 1,
+                        color: Colors.grey,
+                      ),
+                      buildReferencesCard(
+                        'https://images.pexels.com/photos/712521/pexels-photo-712521.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+                        'Sarah Lee MHL',
+                        'General Manager, One & Only Hotel',
+                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                      ),
+                      //work experience card
+                      const SizedBox(height: 10),
+                    ],
+                  ),
+                ),
+              ),
+              widget.sec1IsEditable
+                  ? ProfileEdit.buildProfileEdit(
+                      width: widget.profileOverviewSec1References_W,
+                      height: widget.profileOverviewSec1References_H,
+                      popUp: () {
+                        buildProfileCard(_height, _width);
+                      })
+                  : Container(),
+            ],
+          ),
+          const SizedBox(height: 50)
+        ],
+      ),
     );
   }
 }

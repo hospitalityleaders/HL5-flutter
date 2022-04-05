@@ -313,12 +313,14 @@
 // }
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:holedo/controller/menu_controller.dart';
 
 import '../../../common/common_widget.dart';
 import '../../../constant/colorPicker/color_picker.dart';
 import '../../../constant/fontStyle/font_style.dart';
 import '../../../constant/sizedbox.dart';
 import '../../news/update/update_news.dart';
+
 import 'home.dart';
 
 class Header extends StatefulWidget {
@@ -329,11 +331,14 @@ class Header extends StatefulWidget {
 }
 
 class _HeaderState extends State<Header> {
+  MenuController _controller = Get.find();
+
   buildHeaderGesture(
-      String menuName, _fontStyle, BuildContext context, routeName) {
+      String menuName, _fontStyle, BuildContext context, routeName, index) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, routeName);
+        _controller.setIndex(index);
+        print('$index');
       },
       child: Text(menuName, style: _fontStyle),
     );
@@ -408,33 +413,38 @@ class _HeaderState extends State<Header> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  buildHeaderGesture(
-                      'Home', FontTextStyle.kWhite16W400PR, context, '/'),
+                  buildHeaderGesture('Home', FontTextStyle.kWhite16W400PR,
+                      context, '/home', 0),
                   buildHeaderGesture(
                       'Profile',
                       FontTextStyle.kPrimaryLightBlue16W400PR,
                       context,
-                      '/home'),
+                      '/home',
+                      1),
                   buildHeaderGesture(
                       'News',
                       FontTextStyle.kPrimaryLightBlue16W400PR,
                       context,
-                      '/home'),
+                      '/home',
+                      2),
                   buildHeaderGesture(
                       'Jobs',
                       FontTextStyle.kPrimaryLightBlue16W400PR,
                       context,
-                      '/home'),
+                      '/home',
+                      3),
                   buildHeaderGesture(
                       'Recruitment',
                       FontTextStyle.kPrimaryLightBlue16W400PR,
                       context,
-                      '/home'),
+                      '/home',
+                      4),
                   buildHeaderGesture(
                       'Help',
                       FontTextStyle.kPrimaryLightBlue16W400PR,
                       context,
-                      '/home'),
+                      '/home',
+                      5),
                 ],
               ),
             ),
