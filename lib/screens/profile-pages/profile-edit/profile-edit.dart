@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 class ProfileEdit {
   // static bool isEditable = false;
 
-  static Padding buildProfileEdit(
-      {required double width, required double height, required popUp,}) {
+  static Padding buildProfileEdit({
+    required double width,
+    required double height,
+    required popUp,
+  }) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -34,7 +37,6 @@ class EditButton extends StatefulWidget {
   final isEditable;
   final callBackHeader;
   final headerCardKey;
-
   final callBackButtonSec1;
   final profileOverviewSec1ProSummKey;
   final profileOverviewSec1AreaOfExpKey;
@@ -44,6 +46,8 @@ class EditButton extends StatefulWidget {
   final profileOverviewSec2EducationKey;
   final profileOverviewSec2AchievementKey;
   final profileOverviewSec2LanguagesKey;
+  final callBackReference;
+  final referenceCardKey;
 
   EditButton({
     Key? key,
@@ -60,6 +64,8 @@ class EditButton extends StatefulWidget {
     this.profileOverviewSec2EducationKey,
     this.profileOverviewSec2AchievementKey,
     this.profileOverviewSec2LanguagesKey,
+    this.callBackReference,
+    this.referenceCardKey,
   }) : super(key: key);
 
   @override
@@ -87,6 +93,11 @@ class _EditButtonState extends State<EditButton> {
           widget.profileOverviewSec2EducationKey.currentContext.size,
           widget.profileOverviewSec2AchievementKey.currentContext.size,
           widget.profileOverviewSec2LanguagesKey.currentContext.size,
+        );
+
+        widget.callBackReference(
+          widget.referenceCardKey.currentContext.size,
+
         );
       },
       label: widget.isEditable

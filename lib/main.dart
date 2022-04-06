@@ -41,7 +41,7 @@ void main() {
         routes: {
           // 'timeline': (context) => const Timeline(),
           // 'references': (context) => const References(),
-          Home.route: (context) => Home(),
+          // Home.route: (context) => Home(),
           UpdateNews.route: (context) => UpdateNews(),
           NewsSingleScreen.route: (context) => NewsSingleScreen(),
           NewsSingleLoggedInScreen.route: (context) =>
@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: UpdateNews(),
+      body: Home(),
     );
   }
 }

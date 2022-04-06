@@ -1,6 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:holedo/screens/profile-pages/profile-overview/profile-overview-sec3.dart';
+
+import '../profile-edit/profile-edit.dart';
 
 class ReferencesCard {
   Widget buildReferencesCard(
@@ -134,95 +138,119 @@ class ReferencesCard {
 }
 
 class References extends StatefulWidget {
-  const References({Key? key}) : super(key: key);
+  final isEditable;
+  final referenceCardKey;
+  final referenceCard_H;
+  final referenceCard_W;
+
+  References({
+    Key? key,
+    required this.isEditable,
+    this.referenceCardKey,
+    this.referenceCard_H,
+    this.referenceCard_W,
+  }) : super(key: key);
 
   @override
   _ReferencesState createState() => _ReferencesState();
 }
 
 class _ReferencesState extends State<References> {
-  Widget buildReferencesCard(
-      String img, String title, String subTitle, String description) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        width: 364,
-        padding: const EdgeInsets.all(6),
-        color: Colors.white,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ListTile(
-              leading: Image(
-                width: 45,
-                height: 45,
-                image: NetworkImage(img),
-                fit: BoxFit.cover,
-              ),
-              title: Text(
-                title,
-                textAlign: TextAlign.start,
-                style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                    color: Color(0xff272E41)),
-              ),
-              subtitle: Padding(
-                padding: const EdgeInsets.only(right: 30.0),
-                child: Text(
-                  subTitle,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xff7C8990),
+  Widget buildReferencesCard(String img, String title, String subTitle,
+      String description, _height, _width) {
+    return Stack(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            // key: widget.referenceCardKey,
+            width: 364,
+            padding: const EdgeInsets.all(6),
+            color: Colors.white,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ListTile(
+                  leading: Image(
+                    width: 45,
+                    height: 45,
+                    image: NetworkImage(img),
+                    fit: BoxFit.cover,
+                  ),
+                  title: Text(
+                    title,
+                    textAlign: TextAlign.start,
+                    style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        color: Color(0xff272E41)),
+                  ),
+                  subtitle: Padding(
+                    padding: const EdgeInsets.only(right: 30.0),
+                    child: Text(
+                      subTitle,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        color: Color(0xff7C8990),
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: RichText(
-                text: TextSpan(
-                  style: const TextStyle(color: Colors.black, fontSize: 30),
-                  children: [
-                    WidgetSpan(
-                      child: SizedBox(
-                        height: 50,
-                        width: 50,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 2.0, vertical: 2),
-                          child: Card(
-                            color: Colors.blue,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(1.0)),
-                            child: const Icon(
-                              Icons.format_quote_rounded,
-                              color: Colors.white,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: RichText(
+                    text: TextSpan(
+                      style: const TextStyle(color: Colors.black, fontSize: 30),
+                      children: [
+                        WidgetSpan(
+                          child: SizedBox(
+                            height: 50,
+                            width: 50,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 2.0, vertical: 2),
+                              child: Card(
+                                color: Colors.blue,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(1.0)),
+                                child: const Icon(
+                                  Icons.format_quote_rounded,
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
                           ),
                         ),
-                      ),
+                        TextSpan(
+                          text: description,
+                          style: const TextStyle(
+                              height: 1.2,
+                              fontSize: 14,
+                              color: Color(0xff7C8990),
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ],
                     ),
-                    TextSpan(
-                      text: description,
-                      style: const TextStyle(
-                          height: 1.2,
-                          fontSize: 14,
-                          color: Color(0xff7C8990),
-                          fontWeight: FontWeight.w400),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
-          ],
+          ),
         ),
-      ),
+        widget.isEditable
+            ? ProfileEdit.buildProfileEdit(
+                width: _width * .27,
+                height: 177,
+                popUp: () {
+                  buildProfileCard(_height, _width);
+                })
+            : Container(),
+      ],
     );
   }
 
-  Future<String?> buildProfileCard() {
+  Future<String?> buildProfileCard(height, width) {
     return showDialog<String>(
         context: context,
         builder: (BuildContext context) {
@@ -322,7 +350,8 @@ class _ReferencesState extends State<References> {
   Widget build(BuildContext context) {
     var _width = MediaQuery.of(context).size.width;
     var _height = MediaQuery.of(context).size.height;
-    return Padding(
+    return Container(
+      child: Padding(
         padding: EdgeInsets.symmetric(
             horizontal: _width * 0.03, vertical: _height * .01),
         child: SingleChildScrollView(
@@ -342,6 +371,8 @@ class _ReferencesState extends State<References> {
                         'Sarah Lee MHL',
                         'General Manager, One & Only Hotel',
                         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                        _height,
+                        _width,
                       ),
                     ),
                   ),
@@ -351,6 +382,8 @@ class _ReferencesState extends State<References> {
               Expanded(child: ProfileOverviewSec3())
             ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

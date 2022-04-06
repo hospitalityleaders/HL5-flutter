@@ -69,6 +69,7 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
     );
   }
 
+  //references card
   Widget buildReferencesCard(
       String img, String title, String subTitle, String description) {
     return Container(
@@ -171,7 +172,7 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
           return Dialog(
             child: Container(
               color: ColorPicker.kGreyLight3,
-              width: _width * .33,
+              width: _width * .45,
               child: SingleChildScrollView(
                 child: Column(
                   children: [
@@ -183,11 +184,14 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  'Profile Summary',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 16),
+                                Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Text(
+                                    'Profile Summary',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 16),
+                                  ),
                                 ),
                               ],
                             ),
@@ -210,13 +214,36 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(16.0),
                       child: Container(
                           color: Colors.white,
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Summery'),
-                              TextField(decoration: InputDecoration()),
+                              Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Text(
+                                  'Summery',
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w700,
+                                      color: ColorPicker.kBlueDark),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TextField(
+                                  autocorrect: true,
+                                  minLines: 4,
+                                  maxLines: 6,
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.redAccent),
+                                    ),
+                                  ),
+                                ),
+                              ),
                               Padding(
                                 padding: const EdgeInsets.all(4.0),
                                 child: Row(
@@ -248,87 +275,15 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
         });
   }
 
-  // buildProfilePictureCard() {
-  //   return Form(
-  //     child: Container(
-  //       color: Colors.white,
-  //       child: Column(
-  //         children: [
-  //           Row(
-  //             children: [
-  //               Padding(
-  //                 padding: const EdgeInsets.all(8.0),
-  //                 child: Container(
-  //                   height: 50,
-  //                   width: 50,
-  //                   color: const Color(0xFF0d9bdc),
-  //                   child: const Center(
-  //                     child: Icon(
-  //                       Icons.camera_alt,
-  //                       color: Colors.white,
-  //                     ),
-  //                   ),
-  //                 ),
-  //               ),
-  //               Column(
-  //                 crossAxisAlignment: CrossAxisAlignment.start,
-  //                 children: const [
-  //                   Text(
-  //                     'Profile picture',
-  //                     style:
-  //                         TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
-  //                   ),
-  //                   Text(
-  //                       'Your profile picture will be used on your profile and throughout the site.',
-  //                       style: TextStyle(
-  //                           fontWeight: FontWeight.w400,
-  //                           fontSize: 12,
-  //                           color: Color(0xffbdb5c2)))
-  //                 ],
-  //               )
-  //             ],
-  //           ),
-  //           const Padding(
-  //             padding: EdgeInsets.all(8.0),
-  //             child: Divider(
-  //               height: 1,
-  //               color: Colors.grey,
-  //             ),
-  //           ),
-  //           Row(
-  //             children: [
-  //               Padding(
-  //                 padding: const EdgeInsets.all(8.0),
-  //                 child: Column(
-  //                     crossAxisAlignment: CrossAxisAlignment.start,
-  //                     children: [
-  //                       Container(
-  //                         height: 150,
-  //                         width: 150,
-  //                         decoration: const BoxDecoration(
-  //                           image: DecorationImage(
-  //                               image: NetworkImage(
-  //                                   'https://cdn.pixabay.com/photo/2019/10/20/20/02/nature-4564618_960_720.jpg'),
-  //                               fit: BoxFit.cover),
-  //                         ),
-  //                       ),
-  //                       TextButton.icon(
-  //                         onPressed: () {
-  //                           Navigator.of(context).pop();
-  //                         },
-  //                         icon: Icon(Icons.delete),
-  //                         label: Text('Delete photo'),
-  //                       )
-  //                     ]),
-  //               ),
-  //               Column(children: []),
-  //             ],
-  //           )
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
+  Future<String?> buildAreaOfExpePopUp() {
+    return showDialog<String>(
+        context: context,
+          builder: (BuildContext contexr) {
+          return Dialog(
+            child: Container(),
+          );
+        });
+  }
 
   @override
   Widget build(BuildContext context) {

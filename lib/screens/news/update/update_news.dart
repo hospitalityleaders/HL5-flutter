@@ -73,10 +73,15 @@ class _UpdateNewsState extends State<UpdateNews>
           child: Center(
         child: CommonWidget.text('No Data'),
       ));
+
+  var nestedKey=GlobalKey();
+
+
   Widget build(BuildContext context) {
     return Responsive.isDesktop(context)
         ? Scaffold(
             body: NestedScrollView(
+              key: nestedKey,
               controller: _scrollController,
               headerSliverBuilder: (context, value) {
                 return [
@@ -291,7 +296,7 @@ class _UpdateNewsState extends State<UpdateNews>
                         ),
                       )
                     : _menuController.bottomIndex.value == 1
-                        ? Home()
+                        ? Container()
                         : _menuController.bottomIndex.value == 2
                             ? Center(child: Text('News'))
                             : _menuController.bottomIndex.value == 3
