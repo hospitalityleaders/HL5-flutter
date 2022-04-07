@@ -10,7 +10,12 @@ import '../../../constant/sizedbox.dart';
 import '../../../controller/menu_controller.dart';
 import '../../../data/data.dart';
 import '../../../responsive/responsive.dart';
+import '../../profile-pages/home-pages/header-card.dart';
 import '../../profile-pages/home-pages/header.dart';
+import '../../profile-pages/profile-edit/profile-edit.dart';
+import '../../profile-pages/profile-overview/profile-overview.dart';
+import '../../profile-pages/references/references.dart';
+import '../../profile-pages/timeline/timeline.dart';
 import '../categories/news_signal.dart';
 
 class UpdateNews extends StatefulWidget {
@@ -23,44 +28,93 @@ class UpdateNews extends StatefulWidget {
 
 class _UpdateNewsState extends State<UpdateNews>
     with SingleTickerProviderStateMixin {
-  final bodyGlobalKey = GlobalKey();
-
   TabController? _tabController;
-  ScrollController? _scrollController;
-  bool? fixedScroll;
+
+  final headerCardKey = GlobalKey();
+  var headerCard_H;
+  var headerCard_W;
+  bool isEditable = false;
+  callBackHeader(headerCardKey) {
+    setState(() {
+      headerCard_H = headerCardKey.height;
+      headerCard_W = headerCardKey.width;
+    });
+  }
+
+  //section1 edit functionality
+  final profileOverviewSec1ProSummKey = GlobalKey();
+  var profileOverviewSec1ProSumm_H;
+  var profileOverviewSec1ProSumm_W;
+
+  final profileOverviewSec1AreaOfExpKey = GlobalKey();
+  var profileOverviewSec1AreaOfExp_H;
+  var profileOverviewSec1AreaOfExp_W;
+
+  final profileOverviewSec1ReferencesKey = GlobalKey();
+  var profileOverviewSec1References_H;
+  var profileOverviewSec1References_W;
+
+  callBackButtonSec1(profileOverviewSec1Key, profileOverviewSec1AreaOfExpKey,
+      profileOverviewSec1ReferencesKey) {
+    setState(() {
+      profileOverviewSec1ProSumm_H = profileOverviewSec1Key.height;
+      profileOverviewSec1ProSumm_W = profileOverviewSec1Key.width;
+
+      profileOverviewSec1AreaOfExp_H = profileOverviewSec1AreaOfExpKey.height;
+      profileOverviewSec1AreaOfExp_W = profileOverviewSec1AreaOfExpKey.width;
+
+      profileOverviewSec1References_H = profileOverviewSec1ReferencesKey.height;
+      profileOverviewSec1References_W = profileOverviewSec1ReferencesKey.width;
+    });
+  }
+
+  //section2 edit functionality
+
+  final profileOverviewSec2WorkExpKey = GlobalKey();
+  var profileOverviewSec2WorkExp_H;
+  var profileOverviewSec2WorkExp_W;
+  final profileOverviewSec2EducationKey = GlobalKey();
+  var profileOverviewSec2Education_H;
+  var profileOverviewSec2Education_W;
+  final profileOverviewSec2AchievementKey = GlobalKey();
+  var profileOverviewSec2Achievement_H;
+  var profileOverviewSec2Achievement_W;
+  final profileOverviewSec2LanguagesKey = GlobalKey();
+  var profileOverviewSec2Languages_H;
+  var profileOverviewSec2Languages_W;
+
+  callBackButtonSec2(
+      profileOverviewSec2WorkExpKey,
+      profileOverviewSec2EducationKey,
+      profileOverviewSec2AchievementKey,
+      profileOverviewSec2LanguagesKey) {
+    setState(() {
+      profileOverviewSec2WorkExp_H = profileOverviewSec2WorkExpKey.height;
+      profileOverviewSec2WorkExp_W = profileOverviewSec2WorkExpKey.width;
+
+      profileOverviewSec2Education_H = profileOverviewSec2EducationKey.height;
+      profileOverviewSec2Education_W = profileOverviewSec2EducationKey.width;
+
+      profileOverviewSec2Achievement_H =
+          profileOverviewSec2AchievementKey.height;
+      profileOverviewSec2Achievement_W =
+          profileOverviewSec2AchievementKey.width;
+
+      profileOverviewSec2Languages_H = profileOverviewSec2LanguagesKey.height;
+      profileOverviewSec2Languages_W = profileOverviewSec2LanguagesKey.width;
+    });
+  }
 
   @override
   void initState() {
-    _scrollController = ScrollController();
-    _scrollController!.addListener(_scrollListener);
     _tabController = TabController(length: 5, vsync: this);
-    _tabController!.addListener(_smoothScrollToTop);
     super.initState();
   }
 
   @override
   void dispose() {
     _tabController!.dispose();
-    _scrollController!.dispose();
     super.dispose();
-  }
-
-  _scrollListener() {
-    if (fixedScroll!) {
-      _scrollController!.jumpTo(0);
-    }
-  }
-
-  _smoothScrollToTop() {
-    _scrollController!.animateTo(
-      0,
-      duration: Duration(microseconds: 300),
-      curve: Curves.ease,
-    );
-
-    setState(() {
-      fixedScroll = _tabController!.index == 2;
-    });
   }
 
   MenuController _menuController = Get.find();
@@ -75,258 +129,702 @@ class _UpdateNewsState extends State<UpdateNews>
   Widget build(BuildContext context) {
     return Responsive.isDesktop(context)
         ? Scaffold(
-            body: NestedScrollView(
-              controller: _scrollController,
-              headerSliverBuilder: (context, value) {
-                return [
-                  SliverToBoxAdapter(
-                    child: Header(),
-                  ),
-                  Obx(() => _menuController.bottomIndex.value == 0
-                      ? SliverToBoxAdapter(
-                          child: Container(
-                            height: 147,
-                            color: ColorPicker.kPrimary,
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                    color: ColorPicker.kPrimary,
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: Get.height * 0.07),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Row(
+            body: Obx(() {
+              return SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Header(),
+                    _menuController.menuIndex.value == 0
+                        ? Column(
+                            children: [
+                              Container(
+                                height: 147,
+                                color: ColorPicker.kPrimary,
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: Container(
+                                        color: ColorPicker.kPrimary,
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: Get.height * 0.07),
+                                        child: Column(
                                           crossAxisAlignment:
-                                              CrossAxisAlignment.center,
+                                              CrossAxisAlignment.end,
                                           mainAxisAlignment:
-                                              MainAxisAlignment.end,
+                                              MainAxisAlignment.center,
                                           children: [
-                                            Image.asset(
-                                              'assets/icons/rightShield.png',
-                                              height: 33,
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              children: [
+                                                Image.asset(
+                                                  'assets/icons/rightShield.png',
+                                                  height: 33,
+                                                ),
+                                                SizedBox(
+                                                  width: 10,
+                                                ),
+                                                CommonWidget.text(
+                                                  'AHL',
+                                                  style: FontTextStyle
+                                                      .kWhite33W600PR,
+                                                )
+                                              ],
                                             ),
                                             SizedBox(
-                                              width: 10,
+                                              height: 10,
                                             ),
                                             CommonWidget.text(
-                                              'AHL',
-                                              style:
-                                                  FontTextStyle.kWhite33W600PR,
+                                              'MY GRADE',
+                                              style: FontTextStyle
+                                                  .kWhite16W600PR
+                                                  .copyWith(letterSpacing: 2.5),
                                             )
                                           ],
                                         ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        CommonWidget.text(
-                                          'MY GRADE',
-                                          style: FontTextStyle.kWhite16W600PR
-                                              .copyWith(letterSpacing: 2.5),
-                                        )
-                                      ],
+                                      ),
                                     ),
-                                  ),
-                                ),
-                                VerticalDivider(
-                                  width: 2,
-                                  color: Colors.black,
-                                ),
-                                Expanded(
-                                  child: Container(
-                                    color: ColorPicker.kPrimary,
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: Get.height * 0.07),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Row(
+                                    VerticalDivider(
+                                      width: 2,
+                                      color: Colors.black,
+                                    ),
+                                    Expanded(
+                                      child: Container(
+                                        color: ColorPicker.kPrimary,
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: Get.height * 0.07),
+                                        child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
-                                            CommonWidget.text(
-                                              '33% ',
-                                              style: FontTextStyle
-                                                  .kBlueLight33W600PR,
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                CommonWidget.text(
+                                                  '33% ',
+                                                  style: FontTextStyle
+                                                      .kBlueLight33W600PR,
+                                                ),
+                                                const SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Image.asset(
+                                                  'assets/icons/info.png',
+                                                  height: 33,
+                                                ),
+                                              ],
                                             ),
                                             const SizedBox(
-                                              width: 10,
-                                            ),
-                                            Image.asset(
-                                              'assets/icons/info.png',
-                                              height: 33,
-                                            ),
-                                          ],
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        CommonWidget.text(
-                                          'TO NEXT GRADE',
-                                          style: FontTextStyle.kGreyDark16W600PR
-                                              .copyWith(letterSpacing: 2.5),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                VerticalDivider(
-                                  width: 2,
-                                  color: Colors.black,
-                                ),
-                                Expanded(
-                                  child: Container(
-                                    color: ColorPicker.kPrimary,
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: Get.height * 0.07),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Image.asset(
-                                              'assets/icons/shield.png',
-                                              height: 33,
-                                            ),
-                                            const SizedBox(
-                                              width: 10,
+                                              height: 10,
                                             ),
                                             CommonWidget.text(
-                                              'MHL',
+                                              'TO NEXT GRADE',
                                               style: FontTextStyle
-                                                  .kGreyDark33W600PR,
+                                                  .kGreyDark16W600PR
+                                                  .copyWith(letterSpacing: 2.5),
                                             )
                                           ],
                                         ),
-                                        const SizedBox(
-                                          height: 10,
+                                      ),
+                                    ),
+                                    VerticalDivider(
+                                      width: 2,
+                                      color: Colors.black,
+                                    ),
+                                    Expanded(
+                                      child: Container(
+                                        color: ColorPicker.kPrimary,
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: Get.height * 0.07),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Image.asset(
+                                                  'assets/icons/shield.png',
+                                                  height: 33,
+                                                ),
+                                                const SizedBox(
+                                                  width: 10,
+                                                ),
+                                                CommonWidget.text(
+                                                  'MHL',
+                                                  style: FontTextStyle
+                                                      .kGreyDark33W600PR,
+                                                )
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            CommonWidget.text(
+                                              'NEXT GRADE',
+                                              style: FontTextStyle
+                                                  .kGreyDark16W600PR
+                                                  .copyWith(letterSpacing: 2.5),
+                                            )
+                                          ],
                                         ),
-                                        CommonWidget.text(
-                                          'NEXT GRADE',
-                                          style: FontTextStyle.kGreyDark16W600PR
-                                              .copyWith(letterSpacing: 2.5),
-                                        )
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                height: 87,
+                                width: Get.width,
+                                color: Colors.white,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Container(
+                                      width: 600,
+                                      color: Colors.white,
+                                      child: TabBar(
+                                        controller: _tabController,
+                                        onTap: (int value) {
+                                          _menuController.setTabIndex(value);
+                                        },
+                                        labelPadding:
+                                            const EdgeInsets.only(bottom: 15),
+                                        tabs: List.generate(
+                                          Data.tabItem.length,
+                                          (index) => CommonWidget.text(
+                                            Data.tabItem[index],
+                                            style:
+                                                FontTextStyle.kGreyDark16W600PR,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              IndexedStack(
+                                key: ValueKey<int>(_menuController
+                                    .tabIndex.value
+                                    .toInt()), // add this line
+                                index: _menuController.tabIndex.value.toInt(),
+                                children: <Widget>[
+                                  SingleChildScrollView(
+                                    scrollDirection: Axis.vertical,
+                                    child: Column(
+                                      children: [
+                                        Responsive.isDesktop(context)
+                                            ? SizedBox(
+                                                height: Get.height * 0.05)
+                                            : SizedBox(),
+                                        webView(),
                                       ],
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        )
-                      : SliverToBoxAdapter(
-                          child: SizedBox(),
-                        )),
-                  Obx(() => _menuController.bottomIndex.value == 0
-                      ? SliverToBoxAdapter(
-                          child: Container(
-                            height: 87,
-                            width: Get.width,
-                            color: Colors.white,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Container(
-                                  width: 600,
-                                  color: Colors.white,
-                                  child: TabBar(
-                                    controller: _tabController,
-                                    labelPadding:
-                                        const EdgeInsets.only(bottom: 15),
-                                    tabs: List.generate(
-                                      Data.tabItem.length,
-                                      (index) => CommonWidget.text(
-                                        Data.tabItem[index],
-                                        style: FontTextStyle.kGreyDark16W600PR,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        )
-                      : SliverToBoxAdapter(child: SizedBox()))
-                ];
-              },
-              body: Obx(() {
-                return _menuController.bottomIndex.value == 0
-                    ? Container(
-                        child: TabBarView(
-                          controller: _tabController,
-                          children: [
-                            SingleChildScrollView(
-                              scrollDirection: Axis.vertical,
-                              child: Column(
-                                children: [
-                                  Responsive.isDesktop(context)
-                                      ? SizedBox(height: Get.height * 0.05)
-                                      : SizedBox(),
-                                  webView(),
+                                  _buildTabContext(200),
+                                  _buildTabContext(2),
+                                  _buildTabContext(200),
+                                  _buildTabContext(2)
                                 ],
                               ),
-                            ),
-                            _buildTabContext(200),
-                            _buildTabContext(2),
-                            _buildTabContext(200),
-                            _buildTabContext(2)
-                          ],
-                        ),
-                      )
-                    : _menuController.bottomIndex.value == 1
-                        ? Center(child: Text('Profile'))
-                        : _menuController.bottomIndex.value == 2
-                            ? Container(
-                                child: TabBarView(
-                                  controller: _tabController,
-                                  children: [
-                                    SingleChildScrollView(
-                                      scrollDirection: Axis.vertical,
-                                      child: Column(
+                            ],
+                          )
+                        : _menuController.menuIndex.value == 1
+                            ? Column(
+                                children: [
+                                  HeaderCard(
+                                    isEditable: isEditable,
+                                    headerCardKey: headerCardKey,
+                                    headerCard_H: headerCard_H,
+                                    headerCard_W: headerCard_W,
+                                  ),
+                                  Container(
+                                    height: Get.height * 0.06,
+                                    width: Get.width,
+                                    decoration: const BoxDecoration(
+                                        color: Colors.white,
+                                        border: Border(
+                                            bottom: BorderSide(
+                                                color: Color(0xFFBDC4C7),
+                                                width: 2))),
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: Get.width * .080),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Responsive.isDesktop(context)
-                                              ? SizedBox(
-                                                  height: Get.height * 0.05)
-                                              : SizedBox(),
-                                          webView(),
+                                          Row(
+                                            children: [
+                                              Container(
+                                                height: 26,
+                                                width: 26,
+                                                decoration: const BoxDecoration(
+                                                    image: DecorationImage(
+                                                        image: NetworkImage(
+                                                            'https://images.pexels.com/photos/937481/pexels-photo-937481.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'))),
+                                              ),
+                                              const Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 8.0),
+                                                child: Text(
+                                                  'Noberto Holden',
+                                                  style: TextStyle(
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      color: Color(0xFF272E41)),
+                                                ),
+                                              ),
+                                              const Text(
+                                                'MHL',
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: Color(0xFF272E41),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              TabBar(
+                                                controller: _tabController,
+                                                onTap: (int value) {
+                                                  _menuController
+                                                      .setTabIndex1(value);
+                                                },
+                                                physics:
+                                                    NeverScrollableScrollPhysics(),
+                                                isScrollable: true,
+                                                automaticIndicatorColorAdjustment:
+                                                    true,
+                                                tabs: const [
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsets.all(10.0),
+                                                    child: Text(
+                                                      'Profile overview',
+                                                      style: TextStyle(
+                                                          color:
+                                                              Color(0xFF879399),
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          fontSize: 14),
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsets.all(10.0),
+                                                    child: Text(
+                                                      'Timeline',
+                                                      style: TextStyle(
+                                                          color:
+                                                              Color(0xFF879399),
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          fontSize: 14),
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsets.all(10.0),
+                                                    child: Text(
+                                                      'Articles',
+                                                      style: TextStyle(
+                                                          color:
+                                                              Color(0xFF879399),
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          fontSize: 14),
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsets.all(10.0),
+                                                    child: Text(
+                                                      'Activity',
+                                                      style: TextStyle(
+                                                          color:
+                                                              Color(0xFF879399),
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          fontSize: 14),
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsets.all(10.0),
+                                                    child: Text(
+                                                      'References',
+                                                      style: TextStyle(
+                                                          color:
+                                                              Color(0xFF879399),
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          fontSize: 14),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                          EditButton(
+                                            onChanged: (value) {
+                                              setState(() {
+                                                isEditable = !value;
+                                              });
+                                            },
+                                            isEditable: isEditable,
+                                            //header card edit functionality
+
+                                            callBackHeader: callBackHeader,
+                                            headerCardKey: headerCardKey,
+
+                                            //section1 edit functionality
+                                            callBackButtonSec1:
+                                                callBackButtonSec1,
+                                            profileOverviewSec1ProSummKey:
+                                                profileOverviewSec1ProSummKey,
+                                            profileOverviewSec1AreaOfExpKey:
+                                                profileOverviewSec1AreaOfExpKey,
+                                            profileOverviewSec1ReferencesKey:
+                                                profileOverviewSec1ReferencesKey,
+                                            //section2 edit functionality
+                                            callBackButtonSec2:
+                                                callBackButtonSec2,
+                                            profileOverviewSec2WorkExpKey:
+                                                profileOverviewSec2WorkExpKey,
+                                            profileOverviewSec2EducationKey:
+                                                profileOverviewSec2EducationKey,
+                                            profileOverviewSec2AchievementKey:
+                                                profileOverviewSec2AchievementKey,
+                                            profileOverviewSec2LanguagesKey:
+                                                profileOverviewSec2LanguagesKey,
+                                          ),
                                         ],
                                       ),
                                     ),
-                                    _buildTabContext(200),
-                                    _buildTabContext(2),
-                                    _buildTabContext(200),
-                                    _buildTabContext(2)
-                                  ],
-                                ),
+                                  ),
+                                  IndexedStack(
+                                    // This key causes the AnimatedSwitcher to interpret this as a "new"
+                                    // child each time the count changes, so that it will begin its animation
+                                    // when the count changes.
+                                    key: ValueKey<int>(_menuController
+                                        .tabIndex1.value
+                                        .toInt()), // add this line
+                                    index:
+                                        _menuController.tabIndex1.value.toInt(),
+                                    children: <Widget>[
+                                      ProfileOverview(
+                                        isEditable: isEditable,
+                                        //section1 edit functionality
+                                        profileOverviewSec1ProSummKey:
+                                            profileOverviewSec1ProSummKey,
+                                        profileOverviewSec1ProSumm_H:
+                                            profileOverviewSec1ProSumm_H,
+                                        profileOverviewSec1ProSumm_W:
+                                            profileOverviewSec1ProSumm_W,
+                                        profileOverviewSec1AreaOfExpKey:
+                                            profileOverviewSec1AreaOfExpKey,
+                                        profileOverviewSec1AreaOfExp_H:
+                                            profileOverviewSec1AreaOfExp_H,
+                                        profileOverviewSec1AreaOfExp_W:
+                                            profileOverviewSec1AreaOfExp_W,
+
+                                        profileOverviewSec1ReferencesKey:
+                                            profileOverviewSec1ReferencesKey,
+                                        profileOverviewSec1References_H:
+                                            profileOverviewSec1References_H,
+                                        profileOverviewSec1References_W:
+                                            profileOverviewSec1References_W,
+
+                                        //section2 edit functionality
+
+                                        profileOverviewSec2WorkExpKey:
+                                            profileOverviewSec2WorkExpKey,
+                                        profileOverviewSec2WorkExp_H:
+                                            profileOverviewSec2WorkExp_H,
+                                        profileOverviewSec2WorkExp_W:
+                                            profileOverviewSec2WorkExp_W,
+
+                                        profileOverviewSec2EducationKey:
+                                            profileOverviewSec2EducationKey,
+                                        profileOverviewSec2Education_H:
+                                            profileOverviewSec2Education_H,
+                                        profileOverviewSec2Education_W:
+                                            profileOverviewSec2Education_W,
+
+                                        profileOverviewSec2AchievementKey:
+                                            profileOverviewSec2AchievementKey,
+                                        profileOverviewSec2Achievement_H:
+                                            profileOverviewSec2Achievement_H,
+                                        profileOverviewSec2Achievement_W:
+                                            profileOverviewSec2Achievement_W,
+
+                                        profileOverviewSec2LanguagesKey:
+                                            profileOverviewSec2LanguagesKey,
+                                        profileOverviewSec2Languages_H:
+                                            profileOverviewSec2Languages_H,
+                                        profileOverviewSec2Languages_W:
+                                            profileOverviewSec2Languages_W,
+                                      ),
+                                      Timeline(),
+                                      References(),
+                                      References(),
+                                      References(),
+                                    ],
+                                  )
+                                ],
                               )
-                            : _menuController.bottomIndex.value == 3
-                                ? Center(child: Text('Jobs'))
-                                : _menuController.bottomIndex.value == 4
-                                    ? Center(child: Text('Recruitment'))
-                                    : Center(child: Text('Help'));
-              }),
-            ),
+                            : _menuController.menuIndex.value == 2
+                                ? Column(
+                                    children: [
+                                      Container(
+                                        height: 147,
+                                        color: ColorPicker.kPrimary,
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                              child: Container(
+                                                color: ColorPicker.kPrimary,
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal:
+                                                        Get.height * 0.07),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.end,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Row(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment.end,
+                                                      children: [
+                                                        Image.asset(
+                                                          'assets/icons/rightShield.png',
+                                                          height: 33,
+                                                        ),
+                                                        SizedBox(
+                                                          width: 10,
+                                                        ),
+                                                        CommonWidget.text(
+                                                          'AHL',
+                                                          style: FontTextStyle
+                                                              .kWhite33W600PR,
+                                                        )
+                                                      ],
+                                                    ),
+                                                    SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    CommonWidget.text(
+                                                      'MY GRADE',
+                                                      style: FontTextStyle
+                                                          .kWhite16W600PR
+                                                          .copyWith(
+                                                              letterSpacing:
+                                                                  2.5),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            VerticalDivider(
+                                              width: 2,
+                                              color: Colors.black,
+                                            ),
+                                            Expanded(
+                                              child: Container(
+                                                color: ColorPicker.kPrimary,
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal:
+                                                        Get.height * 0.07),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Row(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        CommonWidget.text(
+                                                          '33% ',
+                                                          style: FontTextStyle
+                                                              .kBlueLight33W600PR,
+                                                        ),
+                                                        const SizedBox(
+                                                          width: 10,
+                                                        ),
+                                                        Image.asset(
+                                                          'assets/icons/info.png',
+                                                          height: 33,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    CommonWidget.text(
+                                                      'TO NEXT GRADE',
+                                                      style: FontTextStyle
+                                                          .kGreyDark16W600PR
+                                                          .copyWith(
+                                                              letterSpacing:
+                                                                  2.5),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            VerticalDivider(
+                                              width: 2,
+                                              color: Colors.black,
+                                            ),
+                                            Expanded(
+                                              child: Container(
+                                                color: ColorPicker.kPrimary,
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal:
+                                                        Get.height * 0.07),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Row(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Image.asset(
+                                                          'assets/icons/shield.png',
+                                                          height: 33,
+                                                        ),
+                                                        const SizedBox(
+                                                          width: 10,
+                                                        ),
+                                                        CommonWidget.text(
+                                                          'MHL',
+                                                          style: FontTextStyle
+                                                              .kGreyDark33W600PR,
+                                                        )
+                                                      ],
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    CommonWidget.text(
+                                                      'NEXT GRADE',
+                                                      style: FontTextStyle
+                                                          .kGreyDark16W600PR
+                                                          .copyWith(
+                                                              letterSpacing:
+                                                                  2.5),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        height: 87,
+                                        width: Get.width,
+                                        color: Colors.white,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            Container(
+                                              width: 600,
+                                              color: Colors.white,
+                                              child: TabBar(
+                                                controller: _tabController,
+                                                labelPadding:
+                                                    const EdgeInsets.only(
+                                                        bottom: 15),
+                                                tabs: List.generate(
+                                                  Data.tabItem.length,
+                                                  (index) => CommonWidget.text(
+                                                    Data.tabItem[index],
+                                                    style: FontTextStyle
+                                                        .kGreyDark16W600PR,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      IndexedStack(
+                                        // This key causes the AnimatedSwitcher to interpret this as a "new"
+                                        // child each time the count changes, so that it will begin its animation
+                                        // when the count changes.
+                                        key: ValueKey<int>(_tabController!
+                                            .index), // add this line
+                                        index: _tabController!.index,
+                                        children: <Widget>[
+                                          SingleChildScrollView(
+                                            scrollDirection: Axis.vertical,
+                                            child: Column(
+                                              children: [
+                                                Responsive.isDesktop(context)
+                                                    ? SizedBox(
+                                                        height:
+                                                            Get.height * 0.05)
+                                                    : SizedBox(),
+                                                webView(),
+                                              ],
+                                            ),
+                                          ),
+                                          _buildTabContext(200),
+                                          _buildTabContext(2),
+                                          _buildTabContext(200),
+                                          _buildTabContext(2)
+                                        ],
+                                      ),
+                                    ],
+                                  )
+                                : _menuController.menuIndex.value == 3
+                                    ? Center(child: Text('Jobs'))
+                                    : _menuController.menuIndex.value == 4
+                                        ? Center(child: Text('Recruitment'))
+                                        : Center(child: Text('Help')),
+                  ],
+                ),
+              );
+            }),
           )
         : Scaffold(
             key: _scaffoldKey,
-            appBar: CommonWidget.tabletAppBar(onTap: () {
-              print('called');
+            appBar: CommonWidget.tabletAppBarLogIn(onTap: () {
               _scaffoldKey.currentState!.openEndDrawer();
             }),
             endDrawer: Drawer(
@@ -345,9 +843,7 @@ class _UpdateNewsState extends State<UpdateNews>
                       'Hello Noberto',
                       style: FontTextStyle.kWhite20W600PR,
                     ),
-                    Divider(
-                      color: ColorPicker.kWhite,
-                    ),
+                    SB.SH10(),
                     SizedBox(
                       width: Get.width,
                       child: Column(
@@ -364,14 +860,20 @@ class _UpdateNewsState extends State<UpdateNews>
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.all(10.0),
-                                  child: Text(
-                                    '${drawerItem[index]}',
-                                    style: FontTextStyle.kWhite16W400SSP,
-                                  ),
+                                  child: Obx(() => Text(
+                                        '${drawerItem[index]}',
+                                        style:
+                                            _menuController.menuIndex.value ==
+                                                    index
+                                                ? FontTextStyle.kWhite16W400SSP
+                                                : FontTextStyle
+                                                    .kPrimaryLight216W400SSP,
+                                      )),
                                 ),
                               ),
                               Divider(
-                                color: ColorPicker.kPrimaryLight,
+                                color:
+                                    ColorPicker.kGreyLight10.withOpacity(0.1),
                               )
                             ],
                           ),
@@ -383,9 +885,150 @@ class _UpdateNewsState extends State<UpdateNews>
               ),
             ),
             body: Obx(() {
-              return _menuController.bottomIndex.value == 0
+              return _menuController.menuIndex.value == 0
                   ? Column(
                       children: [
+                        Container(
+                          height: 56,
+                          color: ColorPicker.kPrimary,
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Container(
+                                  color: ColorPicker.kPrimary,
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: Get.height * 0.01),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Image.asset(
+                                            'assets/icons/rightShield.png',
+                                            height: 18,
+                                          ),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          CommonWidget.text(
+                                            'AHL',
+                                            style: FontTextStyle.kWhite20W600PR,
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      CommonWidget.text(
+                                        'MY GRADE',
+                                        style: FontTextStyle.kWhite10W600PR
+                                            .copyWith(letterSpacing: 2.5),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              VerticalDivider(
+                                width: 2,
+                                color: Colors.black,
+                              ),
+                              Expanded(
+                                child: Container(
+                                  color: ColorPicker.kPrimary,
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: Get.height * 0.01),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          CommonWidget.text(
+                                            '33% ',
+                                            style: FontTextStyle
+                                                .kBlueLight20W600PR,
+                                          ),
+                                          const SizedBox(
+                                            width: 10,
+                                          ),
+                                          Image.asset(
+                                            'assets/icons/info.png',
+                                            height: 18,
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      CommonWidget.text(
+                                        'TO NEXT GRADE',
+                                        style: FontTextStyle.kGreyDark10W600PR
+                                            .copyWith(letterSpacing: 2.5),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              VerticalDivider(
+                                width: 2,
+                                color: Colors.black,
+                              ),
+                              Expanded(
+                                child: Container(
+                                  color: ColorPicker.kPrimary,
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: Get.height * 0.01),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Image.asset(
+                                            'assets/icons/shield.png',
+                                            height: 18,
+                                          ),
+                                          const SizedBox(
+                                            width: 10,
+                                          ),
+                                          CommonWidget.text(
+                                            'MHL',
+                                            style:
+                                                FontTextStyle.kGreyDark20W600PR,
+                                          )
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      CommonWidget.text(
+                                        'NEXT GRADE',
+                                        style: FontTextStyle.kGreyDark10W600PR
+                                            .copyWith(letterSpacing: 2.5),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                         Container(
                           height: 65,
                           width: Get.width,
@@ -428,9 +1071,9 @@ class _UpdateNewsState extends State<UpdateNews>
                         ),
                       ],
                     )
-                  : _menuController.bottomIndex.value == 1
+                  : _menuController.menuIndex.value == 1
                       ? Center(child: Text('Profile'))
-                      : _menuController.bottomIndex.value == 2
+                      : _menuController.menuIndex.value == 2
                           ? Column(
                               children: [
                                 Container(
@@ -479,9 +1122,9 @@ class _UpdateNewsState extends State<UpdateNews>
                                 ),
                               ],
                             )
-                          : _menuController.bottomIndex.value == 3
+                          : _menuController.menuIndex.value == 3
                               ? Center(child: Text('Jobs'))
-                              : _menuController.bottomIndex.value == 4
+                              : _menuController.menuIndex.value == 4
                                   ? Center(child: Text('Recruitment'))
                                   : Center(child: Text('Help'));
             }),
@@ -2919,6 +3562,9 @@ class _UpdateNewsState extends State<UpdateNews>
                 child: Container(
                   height: 413,
                   decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(color: ColorPicker.kBorder, blurRadius: 5),
+                      ],
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(5)),
                   child: Column(
@@ -3018,6 +3664,9 @@ class _UpdateNewsState extends State<UpdateNews>
                   height: 413,
                   decoration: BoxDecoration(
                     color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(color: ColorPicker.kBorder, blurRadius: 5),
+                    ],
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: Row(

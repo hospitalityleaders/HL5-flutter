@@ -16,6 +16,9 @@ class HomeWidget {
         padding: EdgeInsets.symmetric(vertical: 34),
         decoration: BoxDecoration(
           color: ColorPicker.kYellowLight,
+          boxShadow: [
+            BoxShadow(color: ColorPicker.kBorder, blurRadius: 5),
+          ],
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -331,7 +334,7 @@ class HomeWidget {
       height: 743,
       decoration: BoxDecoration(
           color: Colors.white,
-          border: Border.all(color: ColorPicker.kBorder, width: 2)),
+          border: Border.all(color: ColorPicker.kBorder2, width: 1)),
       child: Row(
         children: [
           Expanded(

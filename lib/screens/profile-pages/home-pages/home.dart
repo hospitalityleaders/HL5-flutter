@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 
 class Home extends StatefulWidget {
   static const String route = '/home';
-
   @override
   _HomeState createState() => _HomeState();
 }
@@ -280,7 +279,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   profileOverviewSec1ProSumm_W: profileOverviewSec1ProSumm_W,
                   profileOverviewSec1AreaOfExpKey:
                       profileOverviewSec1AreaOfExpKey,
-
                   profileOverviewSec1AreaOfExp_H:
                       profileOverviewSec1AreaOfExp_H,
                   profileOverviewSec1AreaOfExp_W:
