@@ -312,206 +312,202 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
     var _height = MediaQuery.of(context).size.height;
     var _width = MediaQuery.of(context).size.width;
 
-    return Expanded(
-      child: Column(
-        children: [
-          buildProfileCards(
-              widget.profileOverviewSec2WorkExpKey,
-              widget.profileOverviewSec2WorkExp_H,
-              widget.profileOverviewSec2WorkExp_W,
-              _width,
-              _height,
-              'Work experience',
-              'Food and Beverage Manager',
-              'Marriott Hotels',
-              'February 2013 – 2014 (1 year 6 months)',
-              'Show more',
-              'Card-Details',
-              Icons.apartment_rounded),
-          buildProfileCards(
-              widget.profileOverviewSec2EducationKey,
-              widget.profileOverviewSec2Education_H,
-              widget.profileOverviewSec2Education_W,
-              _width,
-              _height,
-              'Education',
-              'University of Cape Town',
-              'Postgraduate Degree in Business Science',
-              '2010 - 2013',
-              'Course outline',
-              'Card-Details',
-              Icons.school_outlined),
-          buildProfileCards(
-              widget.profileOverviewSec2AchievementKey,
-              widget.profileOverviewSec2Achievement_H,
-              widget.profileOverviewSec2Achievement_W,
-              _width,
-              _height,
-              'Achievement',
-              'Marriott Hotel and Resorts employee of the year awards',
-              'www.mariiott.com/awards',
-              '',
-              ' More info',
-              'Card-Details',
-              Icons.shield),
-          Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  key: widget.profileOverviewSec2LanguagesKey,
-                  color: Colors.white,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: AutoSizeText(
-                          'Languages',
-                          style: TextStyle(
-                              color: Color(0xFF272E41),
-                              fontSize: 20,
-                              fontWeight: FontWeight.w400),
+    return Column(
+      children: [
+        buildProfileCards(
+            widget.profileOverviewSec2WorkExpKey,
+            widget.profileOverviewSec2WorkExp_H,
+            widget.profileOverviewSec2WorkExp_W,
+            _width,
+            _height,
+            'Work experience',
+            'Food and Beverage Manager',
+            'Marriott Hotels',
+            'February 2013 – 2014 (1 year 6 months)',
+            'Show more',
+            'Card-Details',
+            Icons.apartment_rounded),
+        buildProfileCards(
+            widget.profileOverviewSec2EducationKey,
+            widget.profileOverviewSec2Education_H,
+            widget.profileOverviewSec2Education_W,
+            _width,
+            _height,
+            'Education',
+            'University of Cape Town',
+            'Postgraduate Degree in Business Science',
+            '2010 - 2013',
+            'Course outline',
+            'Card-Details',
+            Icons.school_outlined),
+        buildProfileCards(
+            widget.profileOverviewSec2AchievementKey,
+            widget.profileOverviewSec2Achievement_H,
+            widget.profileOverviewSec2Achievement_W,
+            _width,
+            _height,
+            'Achievement',
+            'Marriott Hotel and Resorts employee of the year awards',
+            'www.mariiott.com/awards',
+            '',
+            ' More info',
+            'Card-Details',
+            Icons.shield),
+        Stack(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                key: widget.profileOverviewSec2LanguagesKey,
+                color: Colors.white,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: AutoSizeText(
+                        'Languages',
+                        style: TextStyle(
+                            color: Color(0xFF272E41),
+                            fontSize: 20,
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Divider(height: 1, color: Colors.grey.shade400),
+                    const SizedBox(height: 10),
+                    Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 50,
+                                      width: 50,
+                                      color: const Color(0xFF0d9bdc),
+                                      child: const Center(
+                                        child: Icon(
+                                          CupertinoIcons.globe,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                flex: 3,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: const [
+                                    AutoSizeText(
+                                      'English',
+                                      style: TextStyle(
+                                          color: Color(0xFF272E41),
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    AutoSizeText(
+                                      'Native and bilingual profiency',
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w400,
+                                          color: Color(0xFF7C8990)),
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(width: 6),
+                            ],
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 8),
-                      Divider(height: 1, color: Colors.grey.shade400),
-                      const SizedBox(height: 10),
-                      Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        height: 50,
-                                        width: 50,
-                                        color: const Color(0xFF0d9bdc),
-                                        child: const Center(
-                                          child: Icon(
-                                            CupertinoIcons.globe,
-                                            color: Colors.white,
-                                          ),
+                        Divider(
+                          height: 1,
+                          color: Colors.grey.shade400,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 50,
+                                      width: 50,
+                                      color: const Color(0xFF0d9bdc),
+                                      child: const Center(
+                                        child: Icon(
+                                          CupertinoIcons.globe,
+                                          color: Colors.white,
                                         ),
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
-                                Expanded(
-                                  flex: 3,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: const [
-                                      AutoSizeText(
-                                        'English',
-                                        style: TextStyle(
-                                            color: Color(0xFF272E41),
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w700),
-                                      ),
-                                      SizedBox(
-                                        height: 5,
-                                      ),
-                                      AutoSizeText(
-                                        'Native and bilingual profiency',
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w400,
-                                            color: Color(0xFF7C8990)),
-                                      ),
-                                      SizedBox(
-                                        height: 5,
-                                      ),
-                                    ],
-                                  ),
+                              ),
+                              Expanded(
+                                flex: 3,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: const [
+                                    Text(
+                                      'Spanish',
+                                      style: TextStyle(
+                                          color: Color(0xFF272E41),
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(
+                                      'Elementary profiency',
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w400,
+                                          color: Color(0xFF7C8990)),
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                  ],
                                 ),
-                                const SizedBox(width: 6),
-                              ],
-                            ),
+                              ),
+                              const SizedBox(width: 6),
+                            ],
                           ),
-                          Divider(
-                            height: 1,
-                            color: Colors.grey.shade400,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        height: 50,
-                                        width: 50,
-                                        color: const Color(0xFF0d9bdc),
-                                        child: const Center(
-                                          child: Icon(
-                                            CupertinoIcons.globe,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 3,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: const [
-                                      Text(
-                                        'Spanish',
-                                        style: TextStyle(
-                                            color: Color(0xFF272E41),
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w700),
-                                      ),
-                                      SizedBox(
-                                        height: 5,
-                                      ),
-                                      Text(
-                                        'Elementary profiency',
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w400,
-                                            color: Color(0xFF7C8990)),
-                                      ),
-                                      SizedBox(
-                                        height: 5,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                const SizedBox(width: 6),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 5),
-                    ],
-                  ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 5),
+                  ],
                 ),
               ),
-              widget.sec2IsEditable
-                  ? ProfileEdit.buildProfileEdit(
-                      width: widget.profileOverviewSec2Languages_W,
-                      height: widget.profileOverviewSec2Languages_H,
-                      popUp: () {
-                        buildProfileCard();
-                      })
-                  : Container(),
-            ],
-          ),
-        ],
-      ),
+            ),
+            widget.sec2IsEditable
+                ? ProfileEdit.buildProfileEdit(
+                    width: widget.profileOverviewSec2Languages_W,
+                    height: widget.profileOverviewSec2Languages_H,
+                    popUp: () {
+                      buildProfileCard();
+                    })
+                : Container(),
+          ],
+        ),
+      ],
     );
   }
 }

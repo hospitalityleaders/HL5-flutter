@@ -2,7 +2,7 @@
 // import 'dart:math';
 // import 'package:flutter/material.dart';
 // import 'package:auto_size_text/auto_size_text.dart';
-// import 'package:holedo/screens/profile-pages/home-pages/home.dart';
+// import 'package:holedo/screens/profile/profile/home.dart';
 //
 // import '../../news/categories/news_signal.dart';
 //
@@ -320,7 +320,6 @@ import '../../../constant/colorPicker/color_picker.dart';
 import '../../../constant/fontStyle/font_style.dart';
 import '../../../constant/sizedbox.dart';
 
-import 'home.dart';
 
 class Header extends StatefulWidget {
   const Header({Key? key}) : super(key: key);

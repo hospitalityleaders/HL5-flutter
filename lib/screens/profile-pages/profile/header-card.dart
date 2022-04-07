@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:holedo/responsive/responsive.dart';
-import 'package:holedo/screens/profile-pages/home-pages/header.dart';
+
 import '../profile-edit/profile-edit.dart';
 
 //Header card
@@ -710,12 +710,12 @@ class _HeaderCardState extends State<HeaderCard> {
                       }),
                 )
               : Container(),
-          Responsive.isDesktop(context)
-              ? Positioned(
-                  top: 0,
-                  child: Header(),
-                )
-              : Container()
+          // Responsive.isDesktop(context)
+          //     ? Positioned(
+          //         top: 0,
+          //         child: Header(),
+          //       )
+          //     : Container()
         ],
       ),
     );

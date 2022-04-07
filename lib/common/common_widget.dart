@@ -26,9 +26,9 @@ class CommonWidget {
                 Row(
                   children: List.generate(
                     4,
-                    (index) => Padding(
+                        (index) => Padding(
                       padding:
-                          EdgeInsets.symmetric(horizontal: Get.width * 0.02),
+                      EdgeInsets.symmetric(horizontal: Get.width * 0.02),
                       child: Text(
                         Data.menuItem[index],
                         style: FontTextStyle.kWhite16W600PR,
@@ -41,7 +41,7 @@ class CommonWidget {
                     Container(
                       height: 46,
                       padding:
-                          EdgeInsets.symmetric(horizontal: Get.height * 0.01),
+                      EdgeInsets.symmetric(horizontal: Get.height * 0.01),
                       decoration: BoxDecoration(
                         color: ColorPicker.kBlack,
                         borderRadius: BorderRadius.circular(5),
@@ -67,7 +67,7 @@ class CommonWidget {
                     Container(
                       height: 46,
                       padding:
-                          EdgeInsets.symmetric(horizontal: Get.height * 0.01),
+                      EdgeInsets.symmetric(horizontal: Get.height * 0.01),
                       decoration: BoxDecoration(
                         color: ColorPicker.kBlueLight,
                         borderRadius: BorderRadius.circular(5),
@@ -117,30 +117,114 @@ class CommonWidget {
     );
   }
 
+  static PreferredSize tabletAppBarLogIn({Function()? onTap}) {
+    return PreferredSize(
+      preferredSize: Size.fromHeight(46),
+      child: Container(
+          height: 46,
+          width: Get.width,
+          color: ColorPicker.kPrimaryLight1,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Image(
+                  image: AssetImage('assets/icons/logo1.png'),
+                ),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              Expanded(
+                child: Container(
+                  margin: EdgeInsets.all(4),
+                  decoration: BoxDecoration(
+                      color: ColorPicker.kPrimaryLight1,
+                      borderRadius: BorderRadius.circular(8)),
+                  child: TextFormField(
+                    cursorColor: Colors.white,
+                    style: FontTextStyle.kWhitePR,
+                    decoration: InputDecoration(
+                      hintStyle: TextStyle(
+                        color: ColorPicker.kPrimaryLightBlue,
+                      ),
+                      filled: true,
+                      fillColor: ColorPicker.kPrimaryLight,
+                      hintText: "Search",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: BorderSide(color: Colors.transparent),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: BorderSide(color: Colors.transparent),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: BorderSide(color: Colors.transparent),
+                      ),
+                      prefixIcon: Icon(
+                        Icons.search,
+                        color: ColorPicker.kPrimaryLightBlue,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: Get.width * 0.01,
+              ),
+              InkWell(
+                onTap: onTap,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/icons/menu.png',
+                      height: 18,
+                      width: 25,
+                      fit: BoxFit.cover,
+                      color: ColorPicker.kPrimaryLightBlue,
+                    ),
+                    SB.SH5(),
+                    CommonWidget.text('MENU',
+                        style: FontTextStyle.kPrimaryLightBlue9W700SSP),
+                  ],
+                ),
+              ),
+              SizedBox(
+                width: Get.width * 0.01,
+              ),
+            ],
+          )),
+    );
+  }
+
   static Widget text(
-    String text, {
-    TextStyle? style,
-    TextAlign? textAlign,
-    int? maxLines,
-    TextOverflow? overflow,
-  }) {
+      String text, {
+        TextStyle? style,
+        TextAlign? textAlign,
+        int? maxLines,
+        TextOverflow? overflow,
+      }) {
     return TextRenderer(
         child: Text(
-      text,
-      style: style,
-      maxLines: maxLines,
-      overflow: overflow,
-      textAlign: textAlign,
-    ));
+          text,
+          style: style,
+          maxLines: maxLines,
+          overflow: overflow,
+          textAlign: textAlign,
+        ));
   }
 
   static Widget seoRenderAutoText(
-    String text, {
-    TextStyle? style,
-    TextAlign? textAlign,
-    double? minFontSize,
-    int? maxLines,
-  }) {
+      String text, {
+        TextStyle? style,
+        TextAlign? textAlign,
+        double? minFontSize,
+        int? maxLines,
+      }) {
     return TextRenderer(
       child: AutoSizeText(
         text,

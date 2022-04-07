@@ -1,10 +1,20 @@
 import 'package:get/get.dart';
 
 class MenuController extends GetxController {
-  RxInt bottomIndex = 0.obs;
+  RxInt menuIndex = 0.obs;
 
   void setIndex(int? id) {
-    bottomIndex.value = id!;
+    menuIndex.value = id!;
     update();
+  }
+
+  RxInt tabIndex = 0.obs;
+  void setTabIndex(int? index) {
+    tabIndex.value = index!;
+  }
+
+  RxInt tabIndex1 = 0.obs;
+  void setTabIndex1(int? index) {
+    tabIndex1.value = index!;
   }
 }

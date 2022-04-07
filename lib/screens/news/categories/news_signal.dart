@@ -3,13 +3,15 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:holedo/screens/profile-pages/profile/header.dart';
 import '../../../common/common_widget.dart';
 import '../../../constant/colorPicker/color_picker.dart';
 import '../../../constant/fontStyle/font_style.dart';
 import '../../../constant/sizedbox.dart';
 import '../../../responsive/responsive.dart';
+
 import '../NewsSingle/news_single_logged_in.dart';
-import '../../profile-pages/home-pages/header.dart';
+
 
 class NewsSingleScreen extends StatefulWidget {
   static const String route = '/category';

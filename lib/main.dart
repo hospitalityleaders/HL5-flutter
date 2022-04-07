@@ -5,7 +5,7 @@ import 'package:holedo/controller/menu_controller.dart';
 import 'package:holedo/screens/news/NewsSingle/news_single_logged_in.dart';
 import 'package:holedo/screens/news/categories/news_signal.dart';
 import 'package:holedo/screens/news/update/update_news.dart';
-import 'package:holedo/screens/profile-pages/home-pages/home.dart';
+
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:seo_renderer/helpers/renderer_state.dart';
 import 'package:seo_renderer/helpers/robot_detector_vm.dart';
@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Home(),
+      body: UpdateNews(),
     );
   }
 }

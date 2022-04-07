@@ -272,17 +272,14 @@ class _ReferencesState extends State<References> {
           children: [
             Row(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    height: 50,
-                    width: 50,
-                    color: const Color(0xFF0d9bdc),
-                    child: const Center(
-                      child: Icon(
-                        Icons.camera_alt,
-                        color: Colors.white,
-                      ),
+                Container(
+                  height: 50,
+                  width: 50,
+                  color: const Color(0xFF0d9bdc),
+                  child: const Center(
+                    child: Icon(
+                      Icons.camera_alt,
+                      color: Colors.white,
                     ),
                   ),
                 ),
@@ -353,27 +350,24 @@ class _ReferencesState extends State<References> {
     return Container(
       child: Padding(
         padding: EdgeInsets.symmetric(
-            horizontal: _width * 0.03, vertical: _height * .01),
+            horizontal: _width * 0.070, vertical: _height * .02),
         child: SingleChildScrollView(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                 flex: 2,
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: StaggeredGrid.count(
-                    crossAxisCount: 2,
-                    children: List.generate(
-                      10,
-                      (index) => buildReferencesCard(
-                        'https://images.pexels.com/photos/712521/pexels-photo-712521.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-                        'Sarah Lee MHL',
-                        'General Manager, One & Only Hotel',
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                        _height,
-                        _width,
-                      ),
+                child: StaggeredGrid.count(
+                  crossAxisCount: 2,
+                  children: List.generate(
+                    10,
+                    (index) => buildReferencesCard(
+                      'https://images.pexels.com/photos/712521/pexels-photo-712521.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+                      'Sarah Lee MHL',
+                      'General Manager, One & Only Hotel',
+                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                      _height,
+                      _width,
                     ),
                   ),
                 ),
