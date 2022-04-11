@@ -1,4 +1,4 @@
-import 'dart:math';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -242,9 +242,9 @@ class _ReferencesState extends State<References> {
             ? ProfileEdit.buildProfileEdit(
                 width: _width * .27,
                 height: 177,
-                popUp: () {
+                popUpEdit: () {
                   buildProfileCard(_height, _width);
-                })
+                },showAddButton: true)
             : Container(),
       ],
     );

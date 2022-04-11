@@ -173,9 +173,9 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
             ? ProfileEdit.buildProfileEdit(
                 width: sec2_W,
                 height: sec2_H,
-                popUp: () {
+                popUpEdit: () {
                   buildProfileCard();
-                })
+                },showAddButton: true)
             : Container()
       ],
     );
@@ -501,9 +501,9 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                 ? ProfileEdit.buildProfileEdit(
                     width: widget.profileOverviewSec2Languages_W,
                     height: widget.profileOverviewSec2Languages_H,
-                    popUp: () {
+                    popUpEdit: () {
                       buildProfileCard();
-                    })
+                    },showAddButton: true)
                 : Container(),
           ],
         ),

@@ -32,6 +32,7 @@ List<Item> generateItems(int numberOfItems) {
 //mobile view end
 
 class ProfilePage extends StatefulWidget {
+  static const String route = '/second';
   const ProfilePage({Key? key}) : super(key: key);
 
   @override

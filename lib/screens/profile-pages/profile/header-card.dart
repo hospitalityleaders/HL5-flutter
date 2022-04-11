@@ -705,9 +705,9 @@ class _HeaderCardState extends State<HeaderCard> {
                   child: ProfileEdit.buildProfileEdit(
                       width: widget.headerCard_W,
                       height: widget.headerCard_H,
-                      popUp: () {
+                      popUpEdit: () {
                         buildProfileCard();
-                      }),
+                      },showAddButton: false),
                 )
               : Container(),
           // Responsive.isDesktop(context)

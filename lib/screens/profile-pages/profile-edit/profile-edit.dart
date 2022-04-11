@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ProfileEdit {
@@ -6,7 +7,10 @@ class ProfileEdit {
   static Padding buildProfileEdit({
     required double width,
     required double height,
-    required popUp,
+    required popUpEdit,
+    required bool showAddButton,
+    popUpAdd,
+
   }) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -15,16 +19,35 @@ class ProfileEdit {
         height: height,
         color: const Color(0xFF79d5ff).withOpacity(0.5),
         child: Center(
-          child: CircleAvatar(
-            backgroundColor: Colors.blue,
-            radius: 30,
-            child: IconButton(
-              onPressed: popUp,
-              icon: const Icon(
-                Icons.edit,
-                color: Colors.white,
+          child: Row(mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircleAvatar(
+                backgroundColor: Colors.blue,
+                radius: 30,
+                child: IconButton(
+                  onPressed: popUpEdit,
+                  icon: const Icon(
+                    Icons.edit,
+                    color: Colors.white,
+                  ),
+                ),
               ),
-            ),
+
+
+              SizedBox(width: 6),
+
+              showAddButton? CircleAvatar(
+                backgroundColor: Colors.blue,
+                radius: 30,
+                child: IconButton(
+                  onPressed: popUpAdd,
+                  icon: const Icon(
+                    Icons.add,
+                    color: Colors.white,
+                  ),
+                ),
+              ):Container()
+            ],
           ),
         ),
       ),

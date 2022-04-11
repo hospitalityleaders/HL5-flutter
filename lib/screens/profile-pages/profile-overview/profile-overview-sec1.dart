@@ -1,7 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:holedo/common/popUpHeadMenu.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
+import 'package:holedo/constant/sizedbox.dart';
+import '../../../constant/fontStyle/font_style.dart';
 import '../profile-edit/profile-edit.dart';
 
 class ProfileOverviewSec1 extends StatefulWidget {
@@ -36,7 +38,7 @@ class ProfileOverviewSec1 extends StatefulWidget {
 
 class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
   String profileSummary =
-      '''Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+  '''Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
 
 Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
 
@@ -69,9 +71,9 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
     );
   }
 
-  //references card
-  Widget buildReferencesCard(
-      String img, String title, String subTitle, String description) {
+  ///references card
+  Widget buildReferencesCard(String img, String title, String subTitle,
+      String description) {
     return Container(
       padding: const EdgeInsets.all(6),
       color: Colors.white,
@@ -165,54 +167,20 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
     );
   }
 
-  Future<String?> buildProfileCard(_height, _width) {
+  ///profile section1 pop up functionality Start
+
+  Future<String?> buildProfileCardPopUp() {
     return showDialog<String>(
         context: context,
         builder: (BuildContext context) {
           return Dialog(
             child: Container(
               color: ColorPicker.kGreyLight3,
-              width: _width * .45,
+              width: SS.sW(context) * .45,
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    Container(
-                      color: Colors.white,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(4.0),
-                                  child: Text(
-                                    'Profile Summary',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 16),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                IconButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    icon: Icon(
-                                      Icons.cancel,
-                                    )),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
+                    PopUpHeadMenu.popUpHead('Profile Summary', context),
                     Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Container(
@@ -239,7 +207,7 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(
                                       borderSide:
-                                          BorderSide(color: Colors.redAccent),
+                                      BorderSide(color: Colors.redAccent),
                                     ),
                                   ),
                                 ),
@@ -278,21 +246,166 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
   Future<String?> buildAreaOfExpePopUp() {
     return showDialog<String>(
         context: context,
-          builder: (BuildContext contexr) {
+        builder: (BuildContext context) {
           return Dialog(
-            child: Container(),
+            child: Container(
+                color: ColorPicker.kGreyLight3,
+                width: SS.sW(context) * .45,
+                height: 400,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      PopUpHeadMenu.popUpHead('Expertise', context),
+                      SizedBox(
+                        height: SS.sH(context) * .05,
+                      ),
+                      Container(
+                        color: ColorPicker.kWhite,
+                        width: SS.sW(context) * .40,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: RichText(
+                                text: TextSpan(children: [
+                                  TextSpan(
+                                      text: 'What are your areas of expertise?',
+                                      style: TextStyle()),
+                                  WidgetSpan(
+                                      child: GestureDetector(
+                                          onTap: () {},
+                                          child: Icon(
+                                            Icons.question_mark_outlined,
+                                            size: 20,
+                                            color: Colors.blue,
+                                          )))
+                                ]),
+                              ),
+                            ),
+                            SB.SH5(),
+                            Row(
+                              children: [
+                                Flexible(
+                                  child: TextField(
+                                    decoration: InputDecoration(
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                OutlinedButton(
+                                    onPressed: () {},
+                                    child: Text('Add to list'))
+                              ],
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                )),
           );
         });
   }
 
+  bool isOpen = false;
+
+  Future<String?> buildReferencesCardPopUp() {
+    return showDialog<String>(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            child: Container(
+              color: ColorPicker.kGreyLight3,
+              width: SS.sW(context) * .45,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    PopUpHeadMenu.popUpHead('My references', context),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(
+                        children: [
+                          Text(
+                            ''' Select from your references below which ones you would like to display on your profile overview. You can display up to two references to show on your profile overview.''',
+                            style: FontTextStyle.kGreyLight16W600PR,
+                            textAlign: TextAlign.center,
+                          ),
+                          Container(
+                            height: 50,
+                            color: ColorPicker.kGreenNeon,
+                            width: double.infinity,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Text(
+                                  'You’ve got a new reference! All you have to do now is approve it.',
+                                  style: FontTextStyle.kWhite14W400SSP,
+                                ),
+                                OutlinedButton(
+                                  onPressed: () {},
+                                  style: OutlinedButton.styleFrom(
+                                      backgroundColor: Colors.transparent),
+                                  child: Text(
+                                    'Approve Reference',
+                                    style: FontTextStyle.kWhite14W600PR,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          Container(
+                              width: double.infinity,
+                              color: Colors.white,
+                              child: ExpansionPanelList(
+                                animationDuration: Duration(milliseconds: 2000),
+                                children: [
+                                  ExpansionPanel(
+                                      headerBuilder: (context, isExpanded) {
+                                        return Text('show more');
+                                      },
+                                      body: Text('data showing '),
+                                      isExpanded: isOpen,
+                                  ),
+
+                                ],
+                                expansionCallback: (Index, isExpanded) {
+                                  isOpen = !isOpen;
+                                  setState(() {
+
+                                  });
+                                },
+                              )),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        });
+  }
+
+  ///profile section1 pop up functionality End
+
   @override
   Widget build(BuildContext context) {
-    var _height = MediaQuery.of(context).size.height;
-    var _width = MediaQuery.of(context).size.width;
+    var _height = MediaQuery
+        .of(context)
+        .size
+        .height;
+    var _width = MediaQuery
+        .of(context)
+        .size
+        .width;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Profile Summary
+
+        /// Profile Summary
 
         Stack(
           children: [
@@ -315,14 +428,14 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                             fontWeight: FontWeight.w400),
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    SS.sB(8, 0),
                     const Divider(
                       height: 0.5,
                       color: Color(0xffE5E5E5),
                     ),
                     Padding(
                       padding:
-                          const EdgeInsets.only(right: 20, left: 20, top: 13),
+                      const EdgeInsets.only(right: 20, left: 20, top: 13),
                       child: AutoSizeText(
                         profileSummary,
                         minFontSize: 8,
@@ -335,28 +448,26 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                             height: 1.5),
                       ),
                     ),
-                    const SizedBox(
-                      height: 13,
-                    )
+                    SS.sB(13, 0),
                   ],
                 ),
               ),
             ),
             widget.sec1IsEditable
                 ? ProfileEdit.buildProfileEdit(
-                    width: widget.profileOverviewSec1ProSumm_W,
-                    height: widget.profileOverviewSec1ProSumm_H,
-                    popUp: () {
-                      buildProfileCard(_height, _width);
-                    })
+                width: widget.profileOverviewSec1ProSumm_W,
+                height: widget.profileOverviewSec1ProSumm_H,
+                popUpEdit: () {
+                  buildProfileCardPopUp();
+                },
+                showAddButton: false)
                 : Container(),
           ],
         ),
 
-        const SizedBox(
-          height: 8,
-        ),
-        // Areas of expertise
+        SS.sB(8, 0),
+
+        /// Areas of expertise
         Stack(
           children: [
             Padding(
@@ -381,9 +492,7 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 3,
-                    ),
+                    SS.sB(3, 0),
                     Wrap(
                       spacing: 5,
                       runSpacing: 3,
@@ -433,18 +542,19 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
             ),
             widget.sec1IsEditable
                 ? ProfileEdit.buildProfileEdit(
-                    width: widget.profileOverviewSec1AreaOfExp_W,
-                    height: widget.profileOverviewSec1AreaOfExp_H,
-                    popUp: () {
-                      buildProfileCard(_height, _width);
-                    })
+                width: widget.profileOverviewSec1AreaOfExp_W,
+                height: widget.profileOverviewSec1AreaOfExp_H,
+                popUpEdit: () {
+                  buildAreaOfExpePopUp();
+                },
+                showAddButton: true)
                 : Container(),
           ],
         ),
 
-        const SizedBox(height: 10),
+        SS.sB(10, 0),
 
-        //References card
+        ///References card
         Stack(
           children: [
             Padding(
@@ -466,7 +576,7 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                             fontWeight: FontWeight.w400),
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    SS.sB(8, 0),
                     const Divider(color: Colors.grey, height: 1),
                     buildReferencesCard(
                       'https://images.pexels.com/photos/712521/pexels-photo-712521.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
@@ -486,22 +596,23 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
                     ),
                     //work experience card
-                    const SizedBox(height: 10),
+                    SS.sB(10, 0)
                   ],
                 ),
               ),
             ),
             widget.sec1IsEditable
                 ? ProfileEdit.buildProfileEdit(
-                    width: widget.profileOverviewSec1References_W,
-                    height: widget.profileOverviewSec1References_H,
-                    popUp: () {
-                      buildProfileCard(_height, _width);
-                    })
+                width: widget.profileOverviewSec1References_W,
+                height: widget.profileOverviewSec1References_H,
+                popUpEdit: () {
+                  buildReferencesCardPopUp();
+                },
+                showAddButton: true)
                 : Container(),
           ],
         ),
-        const SizedBox(height: 50)
+        SS.sB(50, 0)
       ],
     );
   }

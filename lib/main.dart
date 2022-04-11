@@ -5,6 +5,7 @@ import 'package:holedo/controller/menu_controller.dart';
 import 'package:holedo/screens/news/NewsSingle/news_single_logged_in.dart';
 import 'package:holedo/screens/news/categories/news_signal.dart';
 import 'package:holedo/screens/news/update/update_news.dart';
+import 'package:holedo/screens/profile-pages/profile/profile-page.dart';
 
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:seo_renderer/helpers/renderer_state.dart';
@@ -41,7 +42,7 @@ void main() {
         routes: {
           // 'timeline': (context) => const Timeline(),
           // 'references': (context) => const References(),
-          // Home.route: (context) => Home(),
+          ProfilePage.route: (context) => ProfilePage(),
           UpdateNews.route: (context) => UpdateNews(),
           NewsSingleScreen.route: (context) => NewsSingleScreen(),
           NewsSingleLoggedInScreen.route: (context) =>
@@ -63,6 +64,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: UpdateNews(),
     );
   }
