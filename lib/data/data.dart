@@ -14,6 +14,15 @@ class Data {
     'Sunset'
   ];
 
+  static List items = [
+    'Home',
+    'Profile',
+    'News',
+    'Jobs',
+    'Recruitment',
+    'Help'
+  ];
+
   static List<String> bedecketValue = [
     '10 mph',
     '1011 mb',
@@ -77,5 +86,14 @@ class Data {
     {
       'text': "Boutique Hotels",
     },
+  ];
+
+  static List<String> drawerItem = [
+    'Home',
+    'Profile',
+    'News',
+    'Jobs',
+    'Recruitment',
+    'Help',
   ];
 }

@@ -45,6 +45,8 @@ dependencies:
   percent_indicator: ^4.0.0
   carousel_slider: ^4.0.0
   seo_renderer: ^0.6.0
+  fluro: ^2.0.3
+  url_strategy: ^0.2.0
 
 dev_dependencies:
   flutter_test:

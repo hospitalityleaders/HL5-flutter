@@ -6,7 +6,10 @@ import 'package:seo_renderer/renderers/text_renderer/text_renderer_vm.dart';
 import '../constant/colorPicker/color_picker.dart';
 import '../constant/fontStyle/font_style.dart';
 import '../constant/sizedbox.dart';
+import '../controller/menu_controller.dart';
 import '../data/data.dart';
+
+MenuController _menuController = MenuController();
 
 class CommonWidget {
   static PreferredSize descktopAppBar() {
@@ -198,6 +201,68 @@ class CommonWidget {
               ),
             ],
           )),
+    );
+  }
+
+  static Drawer drawer(String page) {
+    return Drawer(
+      child: Builder(
+        builder: (context) => Container(
+          color: ColorPicker.kPrimaryLight,
+          child: Column(
+            children: [
+              SB.SH20(),
+              CircleAvatar(
+                radius: Get.width * 0.12,
+                backgroundImage: AssetImage('assets/images/alone_girl.png'),
+              ),
+              SB.SH10(),
+              Text(
+                'Hello Noberto',
+                style: FontTextStyle.kWhite20W600PR,
+              ),
+              SB.SH10(),
+              SizedBox(
+                width: Get.width,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: List.generate(
+                    Data.drawerItem.length,
+                    (index) => Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.pop(context);
+                            Navigator.pushNamed(
+                                context, '/${Data.drawerItem[index]}');
+                            _menuController.setIndex(index);
+                            _menuController.setString(page);
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Obx(
+                              () => Text(
+                                '${Data.drawerItem[index]}',
+                                style: _menuController.menuIndex.value == index
+                                    ? FontTextStyle.kWhite16W400SSP
+                                    : FontTextStyle.kPrimaryLight216W400SSP,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Divider(
+                          color: ColorPicker.kGreyLight10.withOpacity(0.1),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 

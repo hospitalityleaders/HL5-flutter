@@ -26,3 +26,11 @@ class SB {
   static SizedBox SW50() => SizedBox(width: 50);
   static SizedBox SW60() => SizedBox(width: 60);
 }
+
+class SS {
+  static SizedBox sB(double h, double w) => SizedBox(height: h, width: w);
+
+  static sH(BuildContext context) => MediaQuery.of(context).size.height;
+
+  static sW(BuildContext context) => MediaQuery.of(context).size.width;
+}
