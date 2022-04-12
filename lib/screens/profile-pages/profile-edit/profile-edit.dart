@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ProfileEdit {
-  // static bool isEditable = false;
+
 
   static Padding buildProfileEdit({
     required double width,

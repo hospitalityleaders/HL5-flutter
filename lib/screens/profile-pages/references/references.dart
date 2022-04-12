@@ -1,9 +1,8 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:holedo/screens/profile-pages/profile-overview/profile-overview-sec3.dart';
 
+import '../../../common/popUpHeadMenu.dart';
 import '../profile-edit/profile-edit.dart';
 
 class ReferencesCard {
@@ -243,8 +242,12 @@ class _ReferencesState extends State<References> {
                 width: _width * .27,
                 height: 177,
                 popUpEdit: () {
-                  buildProfileCard(_height, _width);
-                },showAddButton: true)
+                  PopUpHeadMenu.buildReferencesCardPopUp(context);
+                },
+                showAddButton: true,
+                popUpAdd: () {
+                  PopUpHeadMenu.buildReferencesCardPopUp(context);
+                })
             : Container(),
       ],
     );
