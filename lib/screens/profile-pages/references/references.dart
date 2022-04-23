@@ -1,140 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:holedo/constant/sizedbox.dart';
 import 'package:holedo/screens/profile-pages/profile-overview/profile-overview-sec3.dart';
 
 import '../../../common/popUpHeadMenu.dart';
 import '../profile-edit/profile-edit.dart';
-
-class ReferencesCard {
-  Widget buildReferencesCard(
-      _width,
-      String cardName,
-      String cardTitle,
-      String cardSubTitle,
-      String cardDate,
-      String cardBtn,
-      String cardDetail,
-      IconData cardIcon) {
-    return Stack(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            color: Colors.white,
-            width: _width * .29,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                      right: 20, left: 20, bottom: 5, top: 13),
-                  child: Text(
-                    cardName,
-                    style: const TextStyle(
-                        color: Color(0xFF272E41),
-                        fontSize: 20,
-                        fontWeight: FontWeight.w400),
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Divider(
-                  height: .5,
-                  color: Color(0xFFE5E5E5),
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        children: [
-                          Container(
-                            height: 50,
-                            width: 50,
-                            color: const Color(0xFF0d9bdc),
-                            child: Center(
-                              child: Icon(
-                                cardIcon,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      flex: 3,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            cardTitle,
-                            style: const TextStyle(
-                                color: Color(0xFF272E41),
-                                fontSize: 16,
-                                fontWeight: FontWeight.w700),
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          GestureDetector(
-                              child: Text(
-                                cardSubTitle,
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                  color: Color(0xFF32A3FD),
-                                ),
-                              ),
-                              onTap: () {}),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            cardDate,
-                            style: const TextStyle(
-                                fontSize: 14,
-                                color: Color(0xFF7C8990),
-                                fontWeight: FontWeight.w400),
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(width: 6),
-                  ],
-                ),
-                const SizedBox(height: 5),
-                Container(
-                  padding: const EdgeInsets.all(5),
-                  color: const Color(0xFFEDEFF1),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      TextButton.icon(
-                        onPressed: () {},
-                        icon: const Icon(Icons.add),
-                        label: Text(
-                          cardBtn,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 14,
-                              color: Color(0xff32A3FD)),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
 
 class References extends StatefulWidget {
   final isEditable;
@@ -155,15 +25,22 @@ class References extends StatefulWidget {
 }
 
 class _ReferencesState extends State<References> {
-  Widget buildReferencesCard(String img, String title, String subTitle,
-      String description, _height, _width) {
+  Widget buildReferencesCard(
+    String img,
+    String title,
+    String subTitle,
+    String description,
+    _height,
+    _width,
+    referenceCardKey,
+  ) {
     return Stack(
       children: [
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
-            // key: widget.referenceCardKey,
-            width: 364,
+            key: referenceCardKey,
+            width: SS.sW(context) * .30,
             padding: const EdgeInsets.all(6),
             color: Colors.white,
             child: Column(
@@ -239,7 +116,7 @@ class _ReferencesState extends State<References> {
         ),
         widget.isEditable
             ? ProfileEdit.buildProfileEdit(
-                width: _width * .27,
+                width: SS.sW(context) * .30,
                 height: 177,
                 popUpEdit: () {
                   PopUpHeadMenu.buildReferencesCardPopUp(context);
@@ -355,28 +232,32 @@ class _ReferencesState extends State<References> {
         padding: EdgeInsets.symmetric(
             horizontal: _width * 0.070, vertical: _height * .02),
         child: SingleChildScrollView(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Column(
             children: [
-              Expanded(
-                flex: 2,
-                child: StaggeredGrid.count(
-                  crossAxisCount: 2,
-                  children: List.generate(
-                    10,
-                    (index) => buildReferencesCard(
-                      'https://images.pexels.com/photos/712521/pexels-photo-712521.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-                      'Sarah Lee MHL',
-                      'General Manager, One & Only Hotel',
-                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                      _height,
-                      _width,
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: StaggeredGrid.count(
+                      crossAxisCount: 2,
+                      children: List.generate(
+                        widget.referenceCardKey.length,
+                        (index) => buildReferencesCard(
+                            'https://images.pexels.com/photos/712521/pexels-photo-712521.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+                            'Sarah Lee MHL',
+                            'General Manager, One & Only Hotel',
+                            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                            _height,
+                            _width,
+                            widget.referenceCardKey[index]),
+                      ),
                     ),
                   ),
-                ),
+                  // Expanded(flex:1,child: ProfileOverviewSec3()),
+                  Expanded(child: ProfileOverviewSec3()),
+                ],
               ),
-              // Expanded(flex:1,child: ProfileOverviewSec3()),
-              Expanded(child: ProfileOverviewSec3())
             ],
           ),
         ),

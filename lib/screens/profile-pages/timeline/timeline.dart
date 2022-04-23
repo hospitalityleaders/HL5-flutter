@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:timeline_tile/timeline_tile.dart';
 
+import '../../../constant/colorPicker/color_picker.dart';
 import '../profile-overview/profile-overview-sec3.dart';
 
 class Timeline extends StatefulWidget {
@@ -63,23 +64,57 @@ class _TimelineState extends State<Timeline> {
                 )
               ],
             ),
-            Container(
-              color: Colors.grey.shade50,
-              padding: EdgeInsets.all(5),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  TextButton.icon(
-                      onPressed: () {
-                        setState(() {
-                          isVisible = !isVisible;
-                        });
-                      },
-                      icon: Icon(Icons.add),
-                      label: isVisible ? Text('Close') : Text('Show more')),
-                ],
+            Divider(
+              height: 0.1,
+              color: ColorPicker.kGreyLight3,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                color: ColorPicker.kWhite,
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment:
+                    CrossAxisAlignment.start,
+                    children: [
+                      AnimatedContainer(
+                          height: isVisible ? 120 : 0,
+                          color: ColorPicker.kWhite,
+                          duration: Duration(seconds: 1),
+                          alignment: isVisible
+                              ? Alignment.topCenter
+                              : Alignment.bottomCenter,
+                          curve: Curves.fastOutSlowIn,
+                          child: SingleChildScrollView(
+                            child: Padding(
+                              padding:
+                              const EdgeInsets.all(8.0),
+                              child: Text(description,
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      color: ColorPicker
+                                          .kGreyLight6)),
+                            ),
+                          )),
+                      TextButton.icon(
+                        label: Text(isVisible
+                            ? 'Close'
+                            : 'Show more'),
+                        icon: Icon(isVisible
+                            ? Icons.remove
+                            : Icons.add),
+                        onPressed: () {
+                          setState(() {
+                            isVisible = !isVisible;
+                          });
+                        },
+                      )
+                    ],
+                  ),
+                ),
               ),
-            )
+            ),
+
           ],
         ),
       ),

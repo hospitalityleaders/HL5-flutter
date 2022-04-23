@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:holedo/common/popUpHeadMenu.dart';
 import 'package:holedo/responsive/responsive.dart';
 
+import '../../../constant/colorPicker/color_picker.dart';
+import '../../../constant/sizedbox.dart';
 import '../profile-edit/profile-edit.dart';
+import 'package:image_picker/image_picker.dart';
 
 //Header card
 
@@ -88,97 +92,87 @@ class _HeaderCardState extends State<HeaderCard> {
             ));
   }
 
-  buildProfileCard() {
-    return showDialog(
-      context: context,
-      builder: (BuildContext context) => SingleChildScrollView(
-          child: Center(
-        child: Container(
-          color: Color(0xffb5bdc2),
-          width: 600,
-          child: Column(
-            children: [
-              Container(
-                color: Colors.white,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text("Profile card"),
-                    ),
-                    Material(
-                      child: IconButton(
-                          icon: Icon(Icons.cancel), onPressed: () {}),
-                    )
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Container(
-                  color: Color(0xffb5bdc2),
+  Future<String?> buildProfileCardPopUp() {
+    return showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => Dialog(
+              child: Container(
+                color: ColorPicker.kGreyLight3,
+                width: SS.sW(context) * .50,
+                child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      buildProfilePictureCard(),
+                      PopUpHeadMenu.popUpHead('Profile Card', context),
+                      // buildProfilePictureCard()
+                      OutlinedButton(
+                        onPressed: () {
+                          pickImage();
+                        },
+                        child: Text('Choose File'),
+                      ),
                     ],
                   ),
                 ),
-              )
-            ],
-          ),
-        ),
-      )),
-    );
+              ),
+            ));
+  }
+
+  String profilePicCardDes =
+      ' Upload an image from your computer in either JPG, GIF or PNG format. Maximum file size can not exceed 3MB. Make sure you look good on Hospitality Leaders? Upload a photo that\'s at least 150px in width and height.';
+
+  Future pickImage() async {
+    await ImagePicker().pickImage(source: ImageSource.gallery);
   }
 
   buildProfilePictureCard() {
-    return Form(
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
       child: Container(
+        width: 200,
         color: Colors.white,
         child: Column(
           children: [
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    height: 50,
-                    width: 50,
-                    color: const Color(0xFF0d9bdc),
-                    child: const Center(
-                      child: Icon(
-                        Icons.camera_alt,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text(
-                      'Profile picture',
-                      style:
-                          TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
-                    ),
-                    Text(
-                        'Your profile picture will be used on your profile and throughout the site.',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 12,
-                            color: Color(0xffbdb5c2)))
-                  ],
-                )
-              ],
-            ),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Divider(
-                height: 1,
-                color: Colors.grey,
-              ),
-            ),
+            // Row(
+            //   children: [
+            //     Padding(
+            //       padding: const EdgeInsets.all(8.0),
+            //       child: Container(
+            //         height: 50,
+            //         width: 50,
+            //         color: const Color(0xFF0d9bdc),
+            //         child: const Center(
+            //           child: Icon(
+            //             Icons.camera_alt,
+            //             color: Colors.white,
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+            //     Column(
+            //       crossAxisAlignment: CrossAxisAlignment.start,
+            //       children: const [
+            //         Text(
+            //           'Profile picture',
+            //           style: TextStyle(
+            //               fontWeight: FontWeight.w400, fontSize: 16),
+            //         ),
+            //         Text(
+            //             'Your profile picture will be used on your profile and throughout the site.',
+            //             style: TextStyle(
+            //                 fontWeight: FontWeight.w400,
+            //                 fontSize: 12,
+            //                 color: Color(0xffbdb5c2)))
+            //       ],
+            //     )
+            //   ],
+            // ),
+            // const Padding(
+            //   padding: EdgeInsets.all(8.0),
+            //   child: Divider(
+            //     height: 1,
+            //     color: Colors.grey,
+            //   ),
+            // ),
             Row(
               children: [
                 Padding(
@@ -197,15 +191,40 @@ class _HeaderCardState extends State<HeaderCard> {
                           ),
                         ),
                         TextButton.icon(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
+                          onPressed: () {},
                           icon: Icon(Icons.delete),
                           label: Text('Delete photo'),
                         )
                       ]),
                 ),
-                Column(children: []),
+                Column(
+                  children: [
+                    Card(
+                      color: Colors.grey,
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            OutlinedButton(
+                              onPressed: () {
+                                pickImage();
+                              },
+                              child: Text('Choose File'),
+                            ),
+                            Text('No file choosen'),
+                            ElevatedButton(
+                                onPressed: () {}, child: Text('Upload'))
+                          ],
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: double.infinity,
+                      child: Text(profilePicCardDes),
+                    ),
+                  ],
+                ),
               ],
             )
           ],
@@ -213,6 +232,8 @@ class _HeaderCardState extends State<HeaderCard> {
       ),
     );
   }
+
+  bool isHovering = false;
 
   @override
   Widget build(BuildContext context) {
@@ -272,22 +293,46 @@ class _HeaderCardState extends State<HeaderCard> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: DropdownButton(
-                                    value: valueChoose,
-                                    onChanged: (newValue) {
-                                      setState(() {
-                                        valueChoose = newValue as String;
-                                      });
-                                    },
-                                    items: listItem.map((valueItem) {
-                                      return DropdownMenuItem(
-                                        value: valueItem,
-                                        child: Text(valueItem),
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: StatefulBuilder(
+                                        builder: (context, setState) {
+                                      return InkWell(
+                                        onTap: () {},
+                                        onHover: (value) {
+                                          setState(() {
+                                            isHovering = value;
+                                            print(isHovering);
+                                          });
+                                        },
+                                        child: Container(clipBehavior: Clip.antiAlias,
+                                          height: SS.sH(context)*0.050,width: SS.sW(context)*0.032,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                              isHovering?  BorderRadius.circular(3): BorderRadius.circular(0),
+                                              border: isHovering
+                                                  ? Border.all(
+                                                      width: 1,
+                                                      color: Colors.grey)
+                                                  : Border.all(
+                                                      width: 0,
+                                                      color: Colors.transparent)),
+                                          child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                            children: [
+                                              Icon(
+                                                Icons.menu_outlined,
+                                                color: ColorPicker.kGreyLight3,
+                                                size: 18,
+                                              ),
+                                              Icon(
+                                                Icons.arrow_drop_down_outlined,
+                                                color: ColorPicker.kGreyLight3,
+                                                size: 18,
+                                              )
+                                            ],
+                                          ),
+                                        ),
                                       );
-                                    }).toList(),
-                                  ),
-                                ),
+                                    })),
                               ],
                             ),
                             const Padding(
@@ -458,7 +503,6 @@ class _HeaderCardState extends State<HeaderCard> {
               : Padding(
                   padding: EdgeInsets.only(
                     top: _height * .22,
-
                   ),
                   child: Center(
                     child: Padding(
@@ -524,7 +568,8 @@ class _HeaderCardState extends State<HeaderCard> {
                                 ),
                               ),
                             ),
-                            Row(mainAxisAlignment: MainAxisAlignment.center,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
@@ -535,8 +580,8 @@ class _HeaderCardState extends State<HeaderCard> {
                                     },
                                     label: const Text(
                                       'contact card',
-                                      style:
-                                      TextStyle(color: Colors.grey, fontSize: 12),
+                                      style: TextStyle(
+                                          color: Colors.grey, fontSize: 12),
                                     ),
                                     icon: const Icon(
                                       Icons.contact_phone_outlined,
@@ -564,7 +609,6 @@ class _HeaderCardState extends State<HeaderCard> {
                                 ),
                               ],
                             ),
-
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: ElevatedButton.icon(
@@ -658,22 +702,20 @@ class _HeaderCardState extends State<HeaderCard> {
                               height: 3,
                               color: Colors.grey,
                             ),
-
                             Padding(
                               padding: const EdgeInsets.symmetric(
                                   vertical: 12, horizontal: 4),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: [
                                   cardDataLoad('250+', 'CONNECTIONS'),
                                   cardDataLoad('14k', 'LEADER POINTS'),
-
                                   cardDataLoad('3', 'REFERENCES'),
                                   cardDataLoad('312', 'RECOMMENDATIONS')
                                 ],
                               ),
                             ),
-
                           ],
                         ),
                       ),
@@ -706,8 +748,9 @@ class _HeaderCardState extends State<HeaderCard> {
                       width: widget.headerCard_W,
                       height: widget.headerCard_H,
                       popUpEdit: () {
-                        buildProfileCard();
-                      },showAddButton: false),
+                        buildProfileCardPopUp();
+                      },
+                      showAddButton: false),
                 )
               : Container(),
           // Responsive.isDesktop(context)

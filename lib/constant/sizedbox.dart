@@ -51,7 +51,7 @@ class SB {
 }
 
 class SS {
-  static SizedBox sB(double h, double w) => SizedBox(height: h, width: w);
+  static SizedBox sB([double? h, double? w]) => SizedBox(height: h, width: w);
 
   static sH(BuildContext context) => MediaQuery.of(context).size.height;
 

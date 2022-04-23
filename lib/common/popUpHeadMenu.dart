@@ -7,57 +7,55 @@ import '../constant/fontStyle/font_style.dart';
 import '../constant/sizedbox.dart';
 
 class PopUpHeadMenu {
-  static Container popUpHead(String headName,BuildContext context) {
-      return Container(
-        color: Colors.white,
-        child: Row(
-          children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: Text(
-                      headName,
-                      style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
-                    ),
+  static Container popUpHead(String headName, BuildContext context) {
+    return Container(
+      color: Colors.white,
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Text(
+                    headName,
+                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: Icon(
-                        Icons.close,
-                        color: ColorPicker.kBlueLight,
-                      )),
-                ],
-              ),
-            )
-          ],
-        ),
-      );
-    }
+          ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(
+                      Icons.close,
+                      color: ColorPicker.kBlueLight,
+                    )),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
 
+  /// Reference card popUp
 
-
-    /// Reference card popUp
-
- static bool isOpen1 = false;
- static bool isOpen2 = false;
- static String refContent =
-  '''Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+  static bool isOpen1 = false;
+  static bool isOpen2 = false;
+  static String refContent =
+      '''Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
 
 Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.''';
 
- static  Future<String?> buildReferencesCardPopUp(BuildContext context) {
+  static Future<String?> buildReferencesCardPopUp(BuildContext context) {
     return showDialog<String>(
       context: context,
       builder: (context) => StatefulBuilder(
@@ -91,15 +89,17 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                                 'You’ve got a new reference! All you have to do now is approve it.',
                                 style: FontTextStyle.kWhite14W400SSP,
                               ),
-                              OutlinedButton(
-                                onPressed: () {},
-                                style: OutlinedButton.styleFrom(
-                                    backgroundColor: Colors.transparent),
-                                child: Text(
-                                  'Approve Reference',
-                                  style: FontTextStyle.kWhite14W600PR,
+                              StatefulBuilder(
+                                builder: (context, setState) => OutlinedButton(
+                                  onPressed: () {},
+                                  style: OutlinedButton.styleFrom(
+                                      backgroundColor: Colors.transparent),
+                                  child: Text(
+                                    'Approve Reference',
+                                    style: FontTextStyle.kWhite14W600PR,
+                                  ),
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         ),
@@ -123,11 +123,11 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                                       TextSpan(
                                           text: 'Ealasiad Wang',
                                           style:
-                                          FontTextStyle.kBlackPure16W700PR),
+                                              FontTextStyle.kBlackPure16W700PR),
                                       TextSpan(
                                           text: 'MHL',
                                           style:
-                                          FontTextStyle.kBlackPure16W700PR),
+                                              FontTextStyle.kBlackPure16W700PR),
                                     ]),
                                   ),
                                   subtitle: Text(
@@ -138,9 +138,9 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                                     children: [
                                       Card(
                                           child: Icon(
-                                            Icons.remove_red_eye_outlined,
-                                            color: ColorPicker.kRedlight,
-                                          )),
+                                        Icons.remove_red_eye_outlined,
+                                        color: ColorPicker.kRedlight,
+                                      )),
                                       InkWell(
                                         onTap: () {},
                                         child: Card(
@@ -162,7 +162,7 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                                   child: SingleChildScrollView(
                                     child: Column(
                                       crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                          CrossAxisAlignment.start,
                                       children: [
                                         AnimatedContainer(
                                             height: isOpen1 ? 120 : 0,
@@ -175,7 +175,7 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                                             child: SingleChildScrollView(
                                               child: Padding(
                                                 padding:
-                                                const EdgeInsets.all(8.0),
+                                                    const EdgeInsets.all(8.0),
                                                 child: Text(refContent,
                                                     style: TextStyle(
                                                         fontSize: 16,
@@ -195,7 +195,7 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                                               isOpen1 = !isOpen1;
                                             });
                                           },
-                                        )
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -225,11 +225,11 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                                       TextSpan(
                                           text: 'Ealasiad Wang',
                                           style:
-                                          FontTextStyle.kBlackPure16W700PR),
+                                              FontTextStyle.kBlackPure16W700PR),
                                       TextSpan(
                                           text: 'MHL',
                                           style:
-                                          FontTextStyle.kBlackPure16W700PR),
+                                              FontTextStyle.kBlackPure16W700PR),
                                     ]),
                                   ),
                                   subtitle: Text(
@@ -240,9 +240,9 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                                     children: [
                                       Card(
                                           child: Icon(
-                                            Icons.remove_red_eye_outlined,
-                                            color: ColorPicker.kRedlight,
-                                          )),
+                                        Icons.remove_red_eye_outlined,
+                                        color: ColorPicker.kRedlight,
+                                      )),
                                       InkWell(
                                         onTap: () {},
                                         child: Card(
@@ -264,27 +264,28 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                                   child: SingleChildScrollView(
                                     child: Column(
                                       crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                          CrossAxisAlignment.start,
                                       children: [
                                         AnimatedContainer(
-                                            height: isOpen2 ? 120 : 0,
-                                            color: ColorPicker.kWhite,
-                                            duration: Duration(seconds: 1),
-                                            alignment: isOpen2
-                                                ? Alignment.topCenter
-                                                : Alignment.bottomCenter,
-                                            curve: Curves.fastOutSlowIn,
-                                            child: SingleChildScrollView(
-                                              child: Padding(
-                                                padding:
-                                                const EdgeInsets.all(8.0),
-                                                child: Text(refContent,
-                                                    style: TextStyle(
-                                                        fontSize: 16,
-                                                        color: ColorPicker
-                                                            .kGreyLight6)),
-                                              ),
-                                            )),
+                                          height: isOpen2 ? 120 : 0,
+                                          color: ColorPicker.kWhite,
+                                          duration: Duration(seconds: 1),
+                                          alignment: isOpen2
+                                              ? Alignment.topCenter
+                                              : Alignment.bottomCenter,
+                                          curve: Curves.fastOutSlowIn,
+                                          child: SingleChildScrollView(
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Text(refContent,
+                                                  style: TextStyle(
+                                                      fontSize: 16,
+                                                      color: ColorPicker
+                                                          .kGreyLight6)),
+                                            ),
+                                          ),
+                                        ),
                                         TextButton.icon(
                                           label: Text(isOpen2
                                               ? 'Hide reference'
@@ -297,12 +298,12 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                                               isOpen2 = !isOpen2;
                                             });
                                           },
-                                        )
+                                        ),
                                       ],
                                     ),
                                   ),
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         ),
@@ -317,7 +318,4 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
       ),
     );
   }
-
-
-  }
-
+}
