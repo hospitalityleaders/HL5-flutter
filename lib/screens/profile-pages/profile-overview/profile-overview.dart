@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:holedo/models/userProfileModel.dart';
 import 'package:holedo/screens/profile-pages/profile-overview/profile-overview-sec1.dart';
 import 'package:holedo/screens/profile-pages/profile-overview/profile-overview-sec2.dart';
 import 'package:holedo/screens/profile-pages/profile-overview/profile-overview-sec3.dart';
@@ -37,6 +38,8 @@ class ProfileOverview extends StatefulWidget {
 
   final pOApiData;
 
+
+
   const ProfileOverview({
     Key? key,
     required this.isEditable,
@@ -63,8 +66,8 @@ class ProfileOverview extends StatefulWidget {
     this.profileOverviewSec2Achievement_W,
     this.profileOverviewSec2LanguagesKey,
     this.profileOverviewSec2Languages_H,
-    this.profileOverviewSec2Languages_W,
-    this.pOApiData,
+    this.profileOverviewSec2Languages_W, this.pOApiData,
+
   }) : super(key: key);
 
   @override
@@ -109,9 +112,10 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                                   widget.profileOverviewSec1References_H,
                               profileOverviewSec1References_W:
                                   widget.profileOverviewSec1References_W,
-                              pOApiDataSec1: widget.pOApiData),
+                            pOApiDataSec1: widget.pOApiData,
+                              ),
                         ),
-                        SS.sW(context) * 0.01,
+                        SS.sB(0,SS.sW(context)*0.01),
                         Expanded(
                           child: ProfileOverviewSec2(
                               sec2IsEditable: widget.isEditable,
@@ -139,12 +143,13 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                                   widget.profileOverviewSec2Languages_H,
                               profileOverviewSec2Languages_W:
                                   widget.profileOverviewSec2Languages_W,
-                              pOApiDataSec2: widget.pOApiData),
+                            pOApiDataSec2: widget.pOApiData,
+                              ),
                         ),
-                        SS.sW(context) * 0.01,
+                        SS.sB(0,SS.sW(context)*0.01),
                         Expanded(
-                            child: ProfileOverviewSec3(
-                                pOApiDataSec3: widget.pOApiData)),
+                            child: ProfileOverviewSec3(pOApiDataSec3: widget.pOApiData,
+                                )),
                       ],
                     )),
               ],

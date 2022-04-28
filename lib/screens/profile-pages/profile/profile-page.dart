@@ -158,7 +158,7 @@ class _ProfilePageState extends State<ProfilePage>
 
   List drawerItem = ['Home', 'Profile', 'News', 'Jobs', 'Recruitment', 'Help'];
 
-  final key = GlobalKey();
+
 
   @override
   Widget build(BuildContext context) {
@@ -168,7 +168,6 @@ class _ProfilePageState extends State<ProfilePage>
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Container(
-                  key: key,
                   color: ColorPicker.kBG,
                   child: Column(
                     children: [
@@ -197,23 +196,26 @@ class _ProfilePageState extends State<ProfilePage>
                                   Container(
                                     height: 26,
                                     width: 26,
-                                    decoration:  BoxDecoration(
+                                    decoration: BoxDecoration(
                                         image: DecorationImage(
-                                            image: NetworkImage(snapshot.data!.data!.user!.avatar.toString()
-                                              ))),
+                                            image: NetworkImage(snapshot
+                                                .data!.data!.user!.avatar
+                                                .toString()))),
                                   ),
-                                   Padding(
+                                  Padding(
                                     padding:
                                         EdgeInsets.symmetric(horizontal: 8.0),
                                     child: Text(
-                                      snapshot.data!.data!.user!.fullName.toString(),
-                                      style: FontTextStyle.kBlueDark116W700SSP
-                                    ),
+                                        snapshot.data!.data!.user!.fullName
+                                            .toString(),
+                                        style:
+                                            FontTextStyle.kBlueDark116W700SSP),
                                   ),
-                                   Text(
-                                       snapshot.data!.data!.user!.userTitleTypesId.toString(),
-                                    style: FontTextStyle.kBlueDark112W700SSP
-                                  ),
+                                  Text(
+                                      snapshot
+                                          .data!.data!.user!.userTitleTypesId
+                                          .toString(),
+                                      style: FontTextStyle.kBlueDark112W700SSP),
                                 ],
                               ),
                               Row(
@@ -330,6 +332,7 @@ class _ProfilePageState extends State<ProfilePage>
                                 .toInt()), // add this line
                             index: _menuController.tabIndex1.value.toInt(),
                             children: <Widget>[
+
                               ProfileOverview(
                                 isEditable: isEditable,
                                 //section1 edit functionality
@@ -382,9 +385,9 @@ class _ProfilePageState extends State<ProfilePage>
                                     profileOverviewSec2Languages_H,
                                 profileOverviewSec2Languages_W:
                                     profileOverviewSec2Languages_W,
-
                                 pOApiData:snapshot.data!.data!.user
                               ),
+
                               Timeline(),
                               Timeline(),
                               Timeline(),
@@ -400,11 +403,7 @@ class _ProfilePageState extends State<ProfilePage>
                   ),
                 );
               } else {
-                return Container(
-                  key: key,
-                  height: MediaQuery.of(context).size.height,
-                  width: MediaQuery.of(context).size.width,
-                );
+                return Container();
               }
             })
         : SingleChildScrollView(
