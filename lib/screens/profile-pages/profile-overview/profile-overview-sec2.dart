@@ -22,6 +22,7 @@ class ProfileOverviewSec2 extends StatefulWidget {
   final profileOverviewSec2LanguagesKey;
   final profileOverviewSec2Languages_H;
   final profileOverviewSec2Languages_W;
+  final pOApiDataSec2;
 
   const ProfileOverviewSec2({
     Key? key,
@@ -37,7 +38,7 @@ class ProfileOverviewSec2 extends StatefulWidget {
     this.profileOverviewSec2Achievement_W,
     this.profileOverviewSec2LanguagesKey,
     this.profileOverviewSec2Languages_H,
-    this.profileOverviewSec2Languages_W,
+    this.profileOverviewSec2Languages_W, this.pOApiDataSec2,
   }) : super(key: key);
 
   @override
@@ -45,6 +46,8 @@ class ProfileOverviewSec2 extends StatefulWidget {
 }
 
 class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
+  bool isVisible = false;
+
   Widget buildProfileSec2Cards(
       sec2Key,
       sec2_H,
@@ -59,123 +62,154 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
       String cardDetail,
       IconData cardIcon,
       popUpEditCards,
-      popUpAddCards) {
+      popUpAddCards,
+      bool isVisible,
+      String description) {
     return Stack(
       children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            key: sec2Key,
-            color: Colors.white,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                      right: 20, left: 20, bottom: 5, top: 13),
-                  child: Text(
-                    cardName,
-                    style: const TextStyle(
-                        color: Color(0xFF272E41),
-                        fontSize: 20,
-                        fontWeight: FontWeight.w400),
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Divider(
-                  height: .5,
-                  color: Color(0xFFE5E5E5),
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        children: [
-                          Container(
-                            height: 50,
-                            width: 50,
-                            color: const Color(0xFF0d9bdc),
-                            child: Center(
-                              child: Icon(
-                                cardIcon,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+        StatefulBuilder(builder: (context, setState) {
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              key: sec2Key,
+              color: Colors.white,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        right: 20, left: 20, bottom: 5, top: 13),
+                    child: Text(
+                      cardName,
+                      style: const TextStyle(
+                          color: Color(0xFF272E41),
+                          fontSize: 20,
+                          fontWeight: FontWeight.w400),
                     ),
-                    Expanded(
-                      flex: 3,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            cardTitle,
-                            style: const TextStyle(
-                                color: Color(0xFF272E41),
-                                fontSize: 16,
-                                fontWeight: FontWeight.w700),
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          GestureDetector(
-                              child: Text(
-                                cardSubTitle,
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                  color: Color(0xFF32A3FD),
+                  ),
+                  const SizedBox(height: 8),
+                  Divider(
+                    height: .5,
+                    color: Color(0xFFE5E5E5),
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          children: [
+                            Container(
+                              height: 50,
+                              width: 50,
+                              color: const Color(0xFF0d9bdc),
+                              child: Center(
+                                child: Icon(
+                                  cardIcon,
+                                  color: Colors.white,
                                 ),
                               ),
-                              onTap: () {}),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            cardDate,
-                            style: const TextStyle(
-                                fontSize: 14,
-                                color: Color(0xFF7C8990),
-                                fontWeight: FontWeight.w400),
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(width: 6),
-                  ],
-                ),
-                const SizedBox(height: 5),
-                Container(
-                  padding: const EdgeInsets.all(5),
-                  color: const Color(0xFFEDEFF1),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      TextButton.icon(
-                        onPressed: () {},
-                        icon: const Icon(Icons.add),
-                        label: Text(
-                          cardBtn,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 14,
-                              color: Color(0xff32A3FD)),
+                            ),
+                          ],
                         ),
                       ),
+                      Expanded(
+                        flex: 3,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              cardTitle,
+                              style: const TextStyle(
+                                  color: Color(0xFF272E41),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            GestureDetector(
+                                child: Text(
+                                  cardSubTitle,
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    color: Color(0xFF32A3FD),
+                                  ),
+                                ),
+                                onTap: () {}),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              cardDate,
+                              style: const TextStyle(
+                                  fontSize: 14,
+                                  color: Color(0xFF7C8990),
+                                  fontWeight: FontWeight.w400),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 6),
                     ],
                   ),
-                ),
-              ],
+                  const SizedBox(height: 5),
+                  SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        AnimatedContainer(
+                          height: isVisible ? 120 : 0,
+                          color: ColorPicker.kGreyLight2,
+                          duration: Duration(seconds: 1),
+                          alignment: isVisible
+                              ? Alignment.topCenter
+                              : Alignment.bottomCenter,
+                          curve: Curves.fastOutSlowIn,
+                          child: SingleChildScrollView(
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text(description,style: FontTextStyle.kGreyDark16W600PR,),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.all(5),
+                          color:  ColorPicker.kGreyLight2,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              TextButton.icon(
+                                onPressed: () {
+                                  setState(() {
+                                    isVisible = !isVisible;
+                                  });
+                                },
+                                icon:
+                                    Icon(isVisible ? Icons.remove : Icons.add),
+                                label: Text(
+                                  isVisible ? 'Close' : cardBtn,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 14,
+                                      color: Color(0xff32A3FD)),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ),
+          );
+        }),
         widget.sec2IsEditable
             ? ProfileEdit.buildProfileEdit(
                 width: sec2_W,
@@ -220,7 +254,8 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
           height: 36,
           color: ColorPicker.kGreyLight9,
           child: TextFormField(
-            decoration: InputDecoration(hintText: hintText,
+            decoration: InputDecoration(
+              hintText: hintText,
               border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(2),
                   borderSide:
@@ -235,25 +270,154 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
 
   /// build field Name Common end
 
+  /// Work experience pop up edit functionality start
+
+  bool isVisibleExperience = false;
+  bool isExperienceEditable = false;
+  bool isExperienceShowCard = false;
+  int indexExp = 1;
+
+  buildExpInnerCard(
+      bool isExperienceEditable, bool isExperienceShowCard, int indexExp) {
+    return StatefulBuilder(builder: (context, setState) {
+      return Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Container(
+          width: SS.sW(context) * .50,
+          color: ColorPicker.kWhite,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ListTile(
+                    leading: Container(
+                      height: SS.sH(context) * .08,
+                      width: SS.sW(context) * .03,
+                      color: ColorPicker.kBlueLight1,
+                    ),
+                    title: Text(''),
+                    subtitle: Text(''),
+                    trailing: isExperienceEditable
+                        ? IconButton(
+                            onPressed: () {
+                              setState(() {
+                                isExperienceShowCard = !isExperienceShowCard;
+                              });
+                            },
+                            icon: Icon(Icons.edit),
+                          )
+                        : null,
+                  ),
+                ),
+                isExperienceShowCard
+                    ? SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Divider(
+                              height: SS.sH(context) * 0.01,
+                              color: ColorPicker.kGreyLight3,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  buildFieldName('Title / position', '*'),
+                                  buildTextField('General manager'),
+                                  buildFieldName('Company name', '*'),
+                                  buildTextField('Fairmont Zimbali Resort'),
+                                  buildFieldName('Company website'),
+                                  buildTextField('www.fairmontzimbali.com'),
+                                  buildFieldName('Job description'),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: TextField(
+                                      autocorrect: true,
+                                      minLines: 4,
+                                      maxLines: 6,
+                                      decoration: InputDecoration(
+                                        border: OutlineInputBorder(
+                                          borderSide: BorderSide(),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      OutlinedButton(
+                                          onPressed: () {},
+                                          child: Text('Cancel')),
+                                      SS.sB(0, 10),
+                                      ElevatedButton(
+                                          onPressed: () {}, child: Text('Save'))
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    : Container()
+              ],
+            ),
+          ),
+        ),
+      );
+    });
+  }
+
   Future<String?> buildWorkExpPopUp() {
     return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return Dialog(
-            child: Container(
-              color: ColorPicker.kGreyLight3,
-              width: SS.sW(context) * .50,
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    PopUpHeadMenu.popUpHead('Work experience', context),
-                  ],
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return Dialog(
+              child: Container(
+                color: ColorPicker.kGreyLight3,
+                width: SS.sW(context) * .50,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      PopUpHeadMenu.popUpHead('Work experience', context),
+                      isVisibleExperience
+                          ? buildExpInnerCard(false, true, indexExp)
+                          : Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: CircleAvatar(
+                                radius: 30,
+                                backgroundColor: ColorPicker.kGreenNeon,
+                                child: IconButton(
+                                  color: ColorPicker.kWhite,
+                                  onPressed: () {
+                                    setState(
+                                      () {
+                                        isVisibleExperience =
+                                            !isVisibleExperience;
+                                      },
+                                    );
+                                  },
+                                  icon: Icon(Icons.add),
+                                ),
+                              ),
+                            ),
+                      buildExpInnerCard(true, isExperienceShowCard, indexExp),
+                      buildExpInnerCard(true, isExperienceShowCard, indexExp),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          );
-        });
+            );
+          },
+        );
+      },
+    );
   }
+
+  /// Work experience pop up edit functionality end
 
   /// Education pop up edit functionality start
 
@@ -262,7 +426,8 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
   bool isEducationShowCard = false;
   int indexEdu = 1;
 
-  buildEduInnerCard(bool isEducationEditable, bool isEducationShowCard,int indexEdu) {
+  buildEduInnerCard(
+      bool isEducationEditable, bool isEducationShowCard, int indexEdu) {
     return StatefulBuilder(builder: (context, setState) {
       List<Widget> eduTextFieldGenerate =
           List.generate(indexEdu, (int i) => buildTextField('Course name'));
@@ -340,16 +505,14 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                                     label: Text('Add another'),
                                   ),
                                   Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.end,
+                                    mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       OutlinedButton(
                                           onPressed: () {},
                                           child: Text('Cancel')),
                                       SS.sB(0, 10),
                                       ElevatedButton(
-                                          onPressed: () {},
-                                          child: Text('Save'))
+                                          onPressed: () {}, child: Text('Save'))
                                     ],
                                   )
                                 ],
@@ -382,7 +545,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                       children: [
                         PopUpHeadMenu.popUpHead('Education', context),
                         isVisibleEducation
-                            ? buildEduInnerCard(false, true,indexEdu)
+                            ? buildEduInnerCard(false, true, indexEdu)
                             : Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: CircleAvatar(
@@ -399,8 +562,8 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                                       icon: Icon(Icons.add)),
                                 ),
                               ),
-                        buildEduInnerCard(true, isEducationShowCard,indexEdu),
-                        buildEduInnerCard(true, isEducationShowCard,indexEdu),
+                        buildEduInnerCard(true, isEducationShowCard, indexEdu),
+                        buildEduInnerCard(true, isEducationShowCard, indexEdu),
                       ],
                     ),
                   ),
@@ -670,6 +833,12 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
 
   /// Language pop up edit functionality end
 
+  List description = [
+    '''Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.''',
+    '''Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.''',
+    '''Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.''',
+  ];
+
   @override
   Widget build(BuildContext context) {
     var _height = MediaQuery.of(context).size.height;
@@ -691,7 +860,9 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
             'Card-Details',
             Icons.apartment_rounded,
             buildWorkExpPopUp,
-            buildWorkExpPopUp),
+            buildWorkExpPopUp,
+            isVisible,
+            description[0]),
         buildProfileSec2Cards(
             widget.profileOverviewSec2EducationKey,
             widget.profileOverviewSec2Education_H,
@@ -706,7 +877,9 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
             'Card-Details',
             Icons.school_outlined,
             buildEducationPopUp,
-            buildEducationPopUp),
+            buildEducationPopUp,
+            isVisible,
+            description[1]),
         buildProfileSec2Cards(
             widget.profileOverviewSec2AchievementKey,
             widget.profileOverviewSec2Achievement_H,
@@ -721,7 +894,9 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
             'Card-Details',
             Icons.shield,
             buildAchivementPopUp,
-            buildAchivementPopUp),
+            buildAchivementPopUp,
+            isVisible,
+            description[2]),
         Stack(
           children: [
             Padding(

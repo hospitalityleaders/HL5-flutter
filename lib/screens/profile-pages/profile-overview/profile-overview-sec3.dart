@@ -2,7 +2,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class ProfileOverviewSec3 extends StatefulWidget {
-  const ProfileOverviewSec3({Key? key}) : super(key: key);
+  final pOApiDataSec3;
+  const ProfileOverviewSec3({Key? key,this.pOApiDataSec3}) : super(key: key);
 
   @override
   State<ProfileOverviewSec3> createState() => _ProfileOverviewSec3State();

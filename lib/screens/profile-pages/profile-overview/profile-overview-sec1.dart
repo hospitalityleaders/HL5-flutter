@@ -18,6 +18,7 @@ class ProfileOverviewSec1 extends StatefulWidget {
   final profileOverviewSec1ReferencesKey;
   final profileOverviewSec1References_H;
   final profileOverviewSec1References_W;
+  final pOApiDataSec1;
 
   const ProfileOverviewSec1({
     Key? key,
@@ -30,7 +31,7 @@ class ProfileOverviewSec1 extends StatefulWidget {
     this.profileOverviewSec1AreaOfExp_W,
     this.profileOverviewSec1ReferencesKey,
     this.profileOverviewSec1References_H,
-    this.profileOverviewSec1References_W,
+    this.profileOverviewSec1References_W, this.pOApiDataSec1,
   }) : super(key: key);
 
   @override

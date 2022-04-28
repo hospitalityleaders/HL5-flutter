@@ -4,6 +4,7 @@ import 'package:holedo/screens/profile-pages/profile-overview/profile-overview-s
 import 'package:holedo/screens/profile-pages/profile-overview/profile-overview-sec2.dart';
 import 'package:holedo/screens/profile-pages/profile-overview/profile-overview-sec3.dart';
 
+import '../../../constant/sizedbox.dart';
 import '../../../responsive/responsive.dart';
 
 class ProfileOverview extends StatefulWidget {
@@ -34,6 +35,8 @@ class ProfileOverview extends StatefulWidget {
   final profileOverviewSec2Languages_H;
   final profileOverviewSec2Languages_W;
 
+  final pOApiData;
+
   const ProfileOverview({
     Key? key,
     required this.isEditable,
@@ -61,6 +64,7 @@ class ProfileOverview extends StatefulWidget {
     this.profileOverviewSec2LanguagesKey,
     this.profileOverviewSec2Languages_H,
     this.profileOverviewSec2Languages_W,
+    this.pOApiData,
   }) : super(key: key);
 
   @override
@@ -75,80 +79,79 @@ class _ProfileOverviewState extends State<ProfileOverview> {
 
     return Responsive.isDesktop(context)
         ? SingleChildScrollView(
-          child: Stack(
-            children: [
-              Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: _width * 0.070, vertical: _height * .02),
-                  // Profile Overview Rows
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: ProfileOverviewSec1(
-                            sec1IsEditable: widget.isEditable,
-                            profileOverviewSec1ProSummKey:
-                                widget.profileOverviewSec1ProSummKey,
-                            profileOverviewSec1ProSumm_H:
-                                widget.profileOverviewSec1ProSumm_H,
-                            profileOverviewSec1ProSumm_W:
-                                widget.profileOverviewSec1ProSumm_W,
-                            profileOverviewSec1AreaOfExpKey:
-                                widget.profileOverviewSec1AreaOfExpKey,
-                            profileOverviewSec1AreaOfExp_H:
-                                widget.profileOverviewSec1AreaOfExp_H,
-                            profileOverviewSec1AreaOfExp_W:
-                                widget.profileOverviewSec1AreaOfExp_W,
-                            profileOverviewSec1ReferencesKey:
-                                widget.profileOverviewSec1ReferencesKey,
-                            profileOverviewSec1References_H:
-                                widget.profileOverviewSec1References_H,
-                            profileOverviewSec1References_W:
-                                widget.profileOverviewSec1References_W),
-                      ),
-                      SizedBox(
-                        width: _width * 0.01,
-                      ),
-                      Expanded(
-                        child: ProfileOverviewSec2(
-                          sec2IsEditable: widget.isEditable,
-                          profileOverviewSec2WorkExpKey:
-                              widget.profileOverviewSec2WorkExpKey,
-                          profileOverviewSec2WorkExp_H:
-                              widget.profileOverviewSec2WorkExp_H,
-                          profileOverviewSec2WorkExp_W:
-                              widget.profileOverviewSec2WorkExp_W,
-                          profileOverviewSec2EducationKey:
-                              widget.profileOverviewSec2EducationKey,
-                          profileOverviewSec2Education_H:
-                              widget.profileOverviewSec2Education_H,
-                          profileOverviewSec2Education_W:
-                              widget.profileOverviewSec2Education_W,
-                          profileOverviewSec2AchievementKey:
-                              widget.profileOverviewSec2AchievementKey,
-                          profileOverviewSec2Achievement_H:
-                              widget.profileOverviewSec2Achievement_H,
-                          profileOverviewSec2Achievement_W:
-                              widget.profileOverviewSec2Achievement_W,
-                          profileOverviewSec2LanguagesKey:
-                              widget.profileOverviewSec2LanguagesKey,
-                          profileOverviewSec2Languages_H:
-                              widget.profileOverviewSec2Languages_H,
-                          profileOverviewSec2Languages_W:
-                              widget.profileOverviewSec2Languages_W,
+            child: Stack(
+              children: [
+                Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: _width * 0.070, vertical: _height * .02),
+                    // Profile Overview Rows
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: ProfileOverviewSec1(
+                              sec1IsEditable: widget.isEditable,
+                              profileOverviewSec1ProSummKey:
+                                  widget.profileOverviewSec1ProSummKey,
+                              profileOverviewSec1ProSumm_H:
+                                  widget.profileOverviewSec1ProSumm_H,
+                              profileOverviewSec1ProSumm_W:
+                                  widget.profileOverviewSec1ProSumm_W,
+                              profileOverviewSec1AreaOfExpKey:
+                                  widget.profileOverviewSec1AreaOfExpKey,
+                              profileOverviewSec1AreaOfExp_H:
+                                  widget.profileOverviewSec1AreaOfExp_H,
+                              profileOverviewSec1AreaOfExp_W:
+                                  widget.profileOverviewSec1AreaOfExp_W,
+                              profileOverviewSec1ReferencesKey:
+                                  widget.profileOverviewSec1ReferencesKey,
+                              profileOverviewSec1References_H:
+                                  widget.profileOverviewSec1References_H,
+                              profileOverviewSec1References_W:
+                                  widget.profileOverviewSec1References_W,
+                              pOApiDataSec1: widget.pOApiData),
                         ),
-                      ),
-                      SizedBox(
-                        width: _width * 0.01,
-                      ),
-                      Expanded(child: ProfileOverviewSec3()),
-                    ],
-                  )),
-            ],
-          ),
-        )
+                        SS.sW(context) * 0.01,
+                        Expanded(
+                          child: ProfileOverviewSec2(
+                              sec2IsEditable: widget.isEditable,
+                              profileOverviewSec2WorkExpKey:
+                                  widget.profileOverviewSec2WorkExpKey,
+                              profileOverviewSec2WorkExp_H:
+                                  widget.profileOverviewSec2WorkExp_H,
+                              profileOverviewSec2WorkExp_W:
+                                  widget.profileOverviewSec2WorkExp_W,
+                              profileOverviewSec2EducationKey:
+                                  widget.profileOverviewSec2EducationKey,
+                              profileOverviewSec2Education_H:
+                                  widget.profileOverviewSec2Education_H,
+                              profileOverviewSec2Education_W:
+                                  widget.profileOverviewSec2Education_W,
+                              profileOverviewSec2AchievementKey:
+                                  widget.profileOverviewSec2AchievementKey,
+                              profileOverviewSec2Achievement_H:
+                                  widget.profileOverviewSec2Achievement_H,
+                              profileOverviewSec2Achievement_W:
+                                  widget.profileOverviewSec2Achievement_W,
+                              profileOverviewSec2LanguagesKey:
+                                  widget.profileOverviewSec2LanguagesKey,
+                              profileOverviewSec2Languages_H:
+                                  widget.profileOverviewSec2Languages_H,
+                              profileOverviewSec2Languages_W:
+                                  widget.profileOverviewSec2Languages_W,
+                              pOApiDataSec2: widget.pOApiData),
+                        ),
+                        SS.sW(context) * 0.01,
+                        Expanded(
+                            child: ProfileOverviewSec3(
+                                pOApiDataSec3: widget.pOApiData)),
+                      ],
+                    )),
+              ],
+            ),
+          )
         : SingleChildScrollView(
-          child: Column(
+            child: Column(
               children: [
                 ProfileOverviewSec1(
                     sec1IsEditable: widget.isEditable,
@@ -200,6 +203,6 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                 // ProfileOverviewSec3(),
               ],
             ),
-        );
+          );
   }
 }

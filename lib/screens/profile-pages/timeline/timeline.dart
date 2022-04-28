@@ -16,112 +16,116 @@ class _TimelineState extends State<Timeline> {
   bool isVisible = false;
 
   buildTimelineCard(IconData icon, String title, String subtitle, String date,
-      String description, var _height, var _width) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        color: Colors.white,
-        child: Column(
-          children: [
-            Row(
+      String description, var _height, var _width,bool isVisible) {
+    return StatefulBuilder(
+      builder: (context,setState) {
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            color: Colors.white,
+            child: Column(
               children: [
-                Container(
-                  margin: const EdgeInsets.only(
-                      top: 23, bottom: 23, right: 14, left: 20),
-                  height: 50,
-                  width: 50,
-                  color: Colors.blue,
-                  child: Icon(
-                    icon,
-                    color: Colors.white,
+                Row(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(
+                          top: 23, bottom: 23, right: 14, left: 20),
+                      height: 50,
+                      width: 50,
+                      color: Colors.blue,
+                      child: Icon(
+                        icon,
+                        color: Colors.white,
+                      ),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          title,
+                          style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                              color: Color(0xff272E41)),
+                        ),
+                        Text(
+                          subtitle,
+                          style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: Color(0xff32A3FD)),
+                        ),
+                        Text(
+                          date,
+                          style: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: Color(0xff7C8990)),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+                Divider(
+                  height: 0.1,
+                  color: ColorPicker.kGreyLight3,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    color: ColorPicker.kWhite,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment:
+                        CrossAxisAlignment.start,
+                        children: [
+                          AnimatedContainer(
+                              height: isVisible ? 120 : 0,
+                              color: ColorPicker.kWhite,
+                              duration: Duration(seconds: 1),
+                              alignment: isVisible
+                                  ? Alignment.topCenter
+                                  : Alignment.bottomCenter,
+                              curve: Curves.fastOutSlowIn,
+                              child: SingleChildScrollView(
+                                child: Padding(
+                                  padding:
+                                  const EdgeInsets.all(8.0),
+                                  child: Text(description,
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          color: ColorPicker
+                                              .kGreyLight6)),
+                                ),
+                              )),
+                          TextButton.icon(
+                            label: Text(isVisible
+                                ? 'Close'
+                                : 'Show more'),
+                            icon: Icon(isVisible
+                                ? Icons.remove
+                                : Icons.add),
+                            onPressed: () {
+                              setState(() {
+                                isVisible = !isVisible;
+                              });
+                            },
+                          )
+                        ],
+                      ),
+                    ),
                   ),
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                          color: Color(0xff272E41)),
-                    ),
-                    Text(
-                      subtitle,
-                      style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: Color(0xff32A3FD)),
-                    ),
-                    Text(
-                      date,
-                      style: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: Color(0xff7C8990)),
-                    ),
-                  ],
-                )
+
               ],
             ),
-            Divider(
-              height: 0.1,
-              color: ColorPicker.kGreyLight3,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                color: ColorPicker.kWhite,
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment:
-                    CrossAxisAlignment.start,
-                    children: [
-                      AnimatedContainer(
-                          height: isVisible ? 120 : 0,
-                          color: ColorPicker.kWhite,
-                          duration: Duration(seconds: 1),
-                          alignment: isVisible
-                              ? Alignment.topCenter
-                              : Alignment.bottomCenter,
-                          curve: Curves.fastOutSlowIn,
-                          child: SingleChildScrollView(
-                            child: Padding(
-                              padding:
-                              const EdgeInsets.all(8.0),
-                              child: Text(description,
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      color: ColorPicker
-                                          .kGreyLight6)),
-                            ),
-                          )),
-                      TextButton.icon(
-                        label: Text(isVisible
-                            ? 'Close'
-                            : 'Show more'),
-                        icon: Icon(isVisible
-                            ? Icons.remove
-                            : Icons.add),
-                        onPressed: () {
-                          setState(() {
-                            isVisible = !isVisible;
-                          });
-                        },
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
-
-          ],
-        ),
-      ),
+          ),
+        );
+      }
     );
   }
 
-  buildTimelineWithCard(String year, var _height, var _width) {
+  buildTimelineWithCard(String year, var _height, var _width,bool isVisible) {
     return TimelineTile(
         hasIndicator: true,
         indicatorStyle: IndicatorStyle(
@@ -150,7 +154,8 @@ class _TimelineState extends State<Timeline> {
             'February 2013 – present (1 year 6 months)',
             '''Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum''',
             _height,
-            _width));
+            _width,
+            isVisible));
   }
 
   @override
@@ -169,11 +174,11 @@ class _TimelineState extends State<Timeline> {
             Expanded(
               flex: 3,
               child: Column(children: [
-                buildTimelineWithCard('2013', _height, _width),
-                buildTimelineWithCard('2012', _height, _width),
-                buildTimelineWithCard('2012', _height, _width),
-                buildTimelineWithCard('2010', _height, _width),
-                buildTimelineWithCard('2010', _height, _width),
+                buildTimelineWithCard('2013', _height, _width,isVisible),
+                buildTimelineWithCard('2012', _height, _width,isVisible),
+                buildTimelineWithCard('2012', _height, _width,isVisible),
+                buildTimelineWithCard('2010', _height, _width,isVisible),
+                buildTimelineWithCard('2010', _height, _width,isVisible),
               ]),
             ),
             Expanded(flex: 2, child: ProfileOverviewSec3())

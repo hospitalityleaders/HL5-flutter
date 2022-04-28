@@ -1,12 +1,12 @@
-import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/material.dart';
 import 'package:holedo/common/popUpHeadMenu.dart';
 import 'package:holedo/responsive/responsive.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../constant/colorPicker/color_picker.dart';
 import '../../../constant/sizedbox.dart';
 import '../profile-edit/profile-edit.dart';
-import 'package:image_picker/image_picker.dart';
 
 //Header card
 
@@ -15,14 +15,16 @@ class HeaderCard extends StatefulWidget {
   final headerCardKey;
   final headerCard_H;
   final headerCard_W;
+  final hCardApiData;
 
-  const HeaderCard({
-    Key? key,
-    required this.isEditable,
-    required this.headerCardKey,
-    this.headerCard_H,
-    this.headerCard_W,
-  }) : super(key: key);
+  const HeaderCard(
+      {Key? key,
+      required this.isEditable,
+      required this.headerCardKey,
+      this.headerCard_H,
+      this.headerCard_W,
+      this.hCardApiData})
+      : super(key: key);
 
   @override
   _HeaderCardState createState() => _HeaderCardState();
@@ -235,17 +237,22 @@ class _HeaderCardState extends State<HeaderCard> {
 
   bool isHovering = false;
 
+  final key = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     var _height = MediaQuery.of(context).size.height;
     var _width = MediaQuery.of(context).size.width;
+
     return Container(
+      key: key,
       width: _width,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         image: DecorationImage(
           image: NetworkImage(
-            'https://cdn.pixabay.com/photo/2019/10/20/20/02/nature-4564618_960_720.jpg',
+            widget.hCardApiData.banner.toString(),
           ),
+          filterQuality: FilterQuality.high,
           fit: BoxFit.cover,
         ),
       ),
@@ -304,19 +311,25 @@ class _HeaderCardState extends State<HeaderCard> {
                                             print(isHovering);
                                           });
                                         },
-                                        child: Container(clipBehavior: Clip.antiAlias,
-                                          height: SS.sH(context)*0.050,width: SS.sW(context)*0.032,
+                                        child: Container(
+                                          clipBehavior: Clip.antiAlias,
+                                          height: SS.sH(context) * 0.050,
+                                          width: SS.sW(context) * 0.032,
                                           decoration: BoxDecoration(
-                                              borderRadius:
-                                              isHovering?  BorderRadius.circular(3): BorderRadius.circular(0),
+                                              borderRadius: isHovering
+                                                  ? BorderRadius.circular(3)
+                                                  : BorderRadius.circular(0),
                                               border: isHovering
                                                   ? Border.all(
                                                       width: 1,
                                                       color: Colors.grey)
                                                   : Border.all(
                                                       width: 0,
-                                                      color: Colors.transparent)),
-                                          child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                      color:
+                                                          Colors.transparent)),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
                                             children: [
                                               Icon(
                                                 Icons.menu_outlined,
@@ -335,14 +348,14 @@ class _HeaderCardState extends State<HeaderCard> {
                                     })),
                               ],
                             ),
-                            const Padding(
+                            Padding(
                               padding: EdgeInsets.all(4.0),
                               child: Text(
-                                'Noberto Holden',
+                                widget.hCardApiData.fullName.toString(),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontSize: 40,
-                                    color: Color(0xFF272E41),
+                                    color: ColorPicker.kBlueDark1,
                                     fontWeight: FontWeight.w400),
                               ),
                             ),
@@ -375,8 +388,9 @@ class _HeaderCardState extends State<HeaderCard> {
                                         ),
                                       ),
                                     ),
-                                    const TextSpan(
-                                        text: 'Cape Town, South Africa',
+                                    TextSpan(
+                                        text: widget.hCardApiData.address1
+                                            .toString(),
                                         style: TextStyle(
                                             fontSize: 14,
                                             color: Color(0xff7C8990)))
@@ -730,9 +744,10 @@ class _HeaderCardState extends State<HeaderCard> {
                 width: 76,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
-                  image: const DecorationImage(
-                      image: NetworkImage(
-                          'https://images.pexels.com/photos/937481/pexels-photo-937481.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
+                  image: DecorationImage(
+                      image:
+                          NetworkImage(widget.hCardApiData.avatar.toString()),
+                      filterQuality: FilterQuality.high,
                       fit: BoxFit.cover),
                 ),
               ),
