@@ -154,11 +154,9 @@ class _ProfilePageState extends State<ProfilePage>
   final List<Item> _data = generateItems(1);
 
   MenuController _menuController = Get.find();
-  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  // GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   List drawerItem = ['Home', 'Profile', 'News', 'Jobs', 'Recruitment', 'Help'];
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -176,7 +174,7 @@ class _ProfilePageState extends State<ProfilePage>
                           headerCardKey: headerCardKey,
                           headerCard_H: headerCard_H,
                           headerCard_W: headerCard_W,
-                          hCardApiData: snapshot.data!.data!.user),
+                          hCardApiData: snapshot.data!.data!.user!),
                       Container(
                         height: Get.height * 0.06,
                         width: Get.width,
@@ -283,8 +281,7 @@ class _ProfilePageState extends State<ProfilePage>
                                   ),
                                 ],
                               ),
-                              StatefulBuilder(builder: (context, setState) {
-                                return EditButton(
+                               EditButton(
                                   onChanged: (value) {
                                     setState(() {
                                       isEditable = !value;
@@ -318,8 +315,8 @@ class _ProfilePageState extends State<ProfilePage>
                                       profileOverviewSec2AchievementKey,
                                   profileOverviewSec2LanguagesKey:
                                       profileOverviewSec2LanguagesKey,
-                                );
-                              })
+                                )
+
                             ],
                           ),
                         ),
@@ -332,7 +329,6 @@ class _ProfilePageState extends State<ProfilePage>
                                 .toInt()), // add this line
                             index: _menuController.tabIndex1.value.toInt(),
                             children: <Widget>[
-
                               ProfileOverview(
                                 isEditable: isEditable,
                                 //section1 edit functionality
@@ -385,9 +381,8 @@ class _ProfilePageState extends State<ProfilePage>
                                     profileOverviewSec2Languages_H,
                                 profileOverviewSec2Languages_W:
                                     profileOverviewSec2Languages_W,
-                                pOApiData:snapshot.data!.data!.user
+                                pOApiData: snapshot.data!.data!.user!,
                               ),
-
                               Timeline(),
                               Timeline(),
                               Timeline(),

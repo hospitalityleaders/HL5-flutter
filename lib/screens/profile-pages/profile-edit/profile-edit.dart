@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 
 class ProfileEdit {
-
-
   static Padding buildProfileEdit({
     required double width,
     required double height,
     required popUpEdit,
     required bool showAddButton,
     popUpAdd,
-
   }) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -18,7 +15,8 @@ class ProfileEdit {
         height: height,
         color: const Color(0xFF79d5ff).withOpacity(0.5),
         child: Center(
-          child: Row(mainAxisAlignment: MainAxisAlignment.center,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CircleAvatar(
                 backgroundColor: Colors.blue,
@@ -31,21 +29,20 @@ class ProfileEdit {
                   ),
                 ),
               ),
-
-
               SizedBox(width: 6),
-
-              showAddButton? CircleAvatar(
-                backgroundColor: Colors.blue,
-                radius: 30,
-                child: IconButton(
-                  onPressed: popUpAdd,
-                  icon: const Icon(
-                    Icons.add,
-                    color: Colors.white,
-                  ),
-                ),
-              ):Container()
+              showAddButton
+                  ? CircleAvatar(
+                      backgroundColor: Colors.blue,
+                      radius: 30,
+                      child: IconButton(
+                        onPressed: popUpAdd,
+                        icon: const Icon(
+                          Icons.add,
+                          color: Colors.white,
+                        ),
+                      ),
+                    )
+                  : Container()
             ],
           ),
         ),
@@ -86,7 +83,7 @@ class EditButton extends StatefulWidget {
     this.profileOverviewSec2EducationKey,
     this.profileOverviewSec2AchievementKey,
     this.profileOverviewSec2LanguagesKey,
-    this.callBackReference,
+   required this.callBackReference,
     this.referenceCardKey,
   }) : super(key: key);
 
@@ -119,7 +116,6 @@ class _EditButtonState extends State<EditButton> {
 
         widget.callBackReference(
           widget.referenceCardKey.currentContext.size,
-
         );
       },
       label: widget.isEditable

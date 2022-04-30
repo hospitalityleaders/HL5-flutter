@@ -225,12 +225,10 @@ class _ReferencesState extends State<References> {
 
   @override
   Widget build(BuildContext context) {
-    var _width = MediaQuery.of(context).size.width;
-    var _height = MediaQuery.of(context).size.height;
-    return Container(
+        return Container(
       child: Padding(
         padding: EdgeInsets.symmetric(
-            horizontal: _width * 0.070, vertical: _height * .02),
+            horizontal: SS.sW(context) * 0.070, vertical: SS.sH(context) * .02),
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -248,8 +246,8 @@ class _ReferencesState extends State<References> {
                             'Sarah Lee MHL',
                             'General Manager, One & Only Hotel',
                             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                            _height,
-                            _width,
+                            SS.sH(context),
+                            SS.sW(context),
                             widget.referenceCardKey[index]),
                       ),
                     ),

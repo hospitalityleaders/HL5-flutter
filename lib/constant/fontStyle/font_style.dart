@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../colorPicker/color_picker.dart';
@@ -409,6 +408,12 @@ class FontTextStyle {
     fontWeight: FontWeight.w600,
     fontFamily: 'ProximaNova-Regular',
   );
+  static TextStyle kGreyLight514W700PR = TextStyle(
+    color: ColorPicker.kGreyLight5,
+    fontSize: 14,
+    fontWeight: FontWeight.w700,
+    fontFamily: 'ProximaNova-Regular',
+  );
 
   static TextStyle kGreyLight515W600PR = TextStyle(
     color: ColorPicker.kGreyLight5,
@@ -675,6 +680,12 @@ class FontTextStyle {
     color: ColorPicker.kGreyLight5,
     fontSize: 14,
     fontWeight: FontWeight.w400,
+    fontFamily: 'SourceSansPro',
+  );
+  static TextStyle kGreyLight514W700SSP = TextStyle(
+    color: ColorPicker.kGreyLight5,
+    fontSize: 16,
+    fontWeight: FontWeight.w700,
     fontFamily: 'SourceSansPro',
   );
   static TextStyle kGreyLight514W600SSP = TextStyle(

@@ -288,27 +288,24 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ListTile(
-                    leading: Container(
-                      height: SS.sH(context) * .08,
-                      width: SS.sW(context) * .03,
-                      color: ColorPicker.kBlueLight1,
-                    ),
-                    title: Text(''),
-                    subtitle: Text(''),
-                    trailing: isExperienceEditable
-                        ? IconButton(
-                            onPressed: () {
-                              setState(() {
-                                isExperienceShowCard = !isExperienceShowCard;
-                              });
-                            },
-                            icon: Icon(Icons.edit),
-                          )
-                        : null,
+                ListTile(
+                  leading: Container(
+                    height: SS.sH(context) * .08,
+                    width: SS.sW(context) * .03,
+                    color: ColorPicker.kBlueLight1,
                   ),
+                  title: Text(''),
+                  subtitle: Text(''),
+                  trailing: isExperienceEditable
+                      ? IconButton(
+                          onPressed: () {
+                            setState(() {
+                              isExperienceShowCard = !isExperienceShowCard;
+                            });
+                          },
+                          icon: Icon(Icons.edit),
+                        )
+                      : null,
                 ),
                 isExperienceShowCard
                     ? SingleChildScrollView(
@@ -319,7 +316,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                               color: ColorPicker.kGreyLight3,
                             ),
                             Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(16.0),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -440,27 +437,24 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ListTile(
-                    leading: Container(
-                      height: SS.sH(context) * .08,
-                      width: SS.sW(context) * .03,
-                      color: ColorPicker.kBlueLight1,
-                    ),
-                    title: Text(''),
-                    subtitle: Text(''),
-                    trailing: isEducationEditable
-                        ? IconButton(
-                            onPressed: () {
-                              setState(() {
-                                isEducationShowCard = !isEducationShowCard;
-                              });
-                            },
-                            icon: Icon(Icons.edit),
-                          )
-                        : null,
+                ListTile(
+                  leading: Container(
+                    height: SS.sH(context) * .08,
+                    width: SS.sW(context) * .03,
+                    color: ColorPicker.kBlueLight1,
                   ),
+                  title: Text(''),
+                  subtitle: Text(''),
+                  trailing: isEducationEditable
+                      ? IconButton(
+                          onPressed: () {
+                            setState(() {
+                              isEducationShowCard = !isEducationShowCard;
+                            });
+                          },
+                          icon: Icon(Icons.edit),
+                        )
+                      : null,
                 ),
                 isEducationShowCard
                     ? SingleChildScrollView(
@@ -471,7 +465,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                               color: ColorPicker.kGreyLight3,
                             ),
                             Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(16.0),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -596,27 +590,24 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ListTile(
-                    leading: Container(
-                      height: SS.sH(context) * .08,
-                      width: SS.sW(context) * .03,
-                      color: ColorPicker.kBlueLight1,
-                    ),
-                    title: Text(''),
-                    subtitle: Text(''),
-                    trailing: isArchiveEditable
-                        ? IconButton(
-                            onPressed: () {
-                              setState(() {
-                                isArchiveShowCard = !isArchiveShowCard;
-                              });
-                            },
-                            icon: Icon(Icons.edit),
-                          )
-                        : null,
+                ListTile(
+                  leading: Container(
+                    height: SS.sH(context) * .08,
+                    width: SS.sW(context) * .03,
+                    color: ColorPicker.kBlueLight1,
                   ),
+                  title: Text(''),
+                  subtitle: Text(''),
+                  trailing: isArchiveEditable
+                      ? IconButton(
+                          onPressed: () {
+                            setState(() {
+                              isArchiveShowCard = !isArchiveShowCard;
+                            });
+                          },
+                          icon: Icon(Icons.edit),
+                        )
+                      : null,
                 ),
                 isArchiveShowCard
                     ? Column(
@@ -626,7 +617,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                             color: ColorPicker.kGreyLight3,
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(16.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.center,

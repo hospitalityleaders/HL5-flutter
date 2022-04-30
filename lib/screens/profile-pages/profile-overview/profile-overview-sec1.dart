@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:holedo/common/popUpHeadMenu.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/sizedbox.dart';
-import '../../../constant/fontStyle/font_style.dart';
+
 import '../profile-edit/profile-edit.dart';
 
 class ProfileOverviewSec1 extends StatefulWidget {
@@ -31,7 +31,8 @@ class ProfileOverviewSec1 extends StatefulWidget {
     this.profileOverviewSec1AreaOfExp_W,
     this.profileOverviewSec1ReferencesKey,
     this.profileOverviewSec1References_H,
-    this.profileOverviewSec1References_W, this.pOApiDataSec1,
+    this.profileOverviewSec1References_W,
+    this.pOApiDataSec1,
   }) : super(key: key);
 
   @override
@@ -39,13 +40,6 @@ class ProfileOverviewSec1 extends StatefulWidget {
 }
 
 class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
-  String profileSummary =
-      '''Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-
-Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-
-Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.''';
-
   Widget buildAreaOfExpertiseButton(String btnName) {
     return ElevatedButton.icon(
       style: ElevatedButton.styleFrom(
@@ -171,6 +165,8 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
 
   ///profile section1 pop up functionality Start
 
+  //Profile pop up start
+
   Future<String?> buildProfileCardPopUp() {
     return showDialog<String>(
         context: context,
@@ -208,8 +204,7 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                                   maxLines: 6,
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(
-                                      borderSide:
-                                          BorderSide(),
+                                      borderSide: BorderSide(),
                                     ),
                                   ),
                                 ),
@@ -245,79 +240,126 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
         });
   }
 
-  Future<String?> buildAreaOfExpePopUp() {
+  // profile pop up end
+
+  //Area of exper pop up start
+
+  List<String> chipValueList = [];
+  String? newValue;
+
+  Future<String?> buildAreaOfExpePopUp(
+      List chipValueList, BuildContext context) {
     return showDialog<String>(
         context: context,
         builder: (BuildContext context) {
-          return Dialog(
-            child: Container(
-              color: ColorPicker.kGreyLight3,
-              width: SS.sW(context) * .50,
-              height: 400,
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    PopUpHeadMenu.popUpHead('Expertise', context),
-                    SizedBox(
-                      height: SS.sH(context) * .05,
-                    ),
-                    Container(
-                      color: ColorPicker.kWhite,
-                      width: SS.sW(context) * .40,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: RichText(
-                              text: TextSpan(children: [
-                                TextSpan(
-                                    text: 'What are your areas of expertise?',
-                                    style: TextStyle()),
-                                WidgetSpan(
-                                    child: GestureDetector(
-                                        onTap: () {},
-                                        child: Icon(
-                                          Icons.question_mark_outlined,
-                                          size: 20,
-                                          color: Colors.blue,
-                                        )))
-                              ]),
+          return StatefulBuilder(builder: (context, setState) {
+            return Dialog(
+              child: Container(
+                color: ColorPicker.kGreyLight3,
+                width: SS.sW(context) * .50,
+                height: 400,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      PopUpHeadMenu.popUpHead('Expertise', context),
+                      SizedBox(
+                        height: SS.sH(context) * .05,
+                      ),
+                      Container(
+                        color: ColorPicker.kWhite,
+                        width: double.infinity,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: RichText(
+                                text: TextSpan(children: [
+                                  TextSpan(
+                                      text: 'What are your areas of expertise?',
+                                      style: TextStyle()),
+                                  WidgetSpan(
+                                      child: GestureDetector(
+                                          onTap: () {},
+                                          child: Icon(
+                                            Icons.question_mark_outlined,
+                                            size: 20,
+                                            color: Colors.blue,
+                                          )))
+                                ]),
+                              ),
                             ),
-                          ),
-                          SB.SH5(),
-                          Row(
-                            children: [
-                              Flexible(
-                                child: TextField(
-                                  decoration: InputDecoration(
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(4),
+                            SB.SH5(),
+                            Row(
+                              children: [
+                                Expanded(
+                                  flex: 3,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: TextField(
+                                      onChanged: (text) {
+                                        setState(() {
+                                          newValue = text;
+                                        });
+                                      },
+                                      decoration: InputDecoration(
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(4),
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              OutlinedButton(
-                                  onPressed: () {}, child: Text('Add to list'))
-                            ],
-                          ),
-                        ],
+                                Expanded(
+                                  flex: 1,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: OutlinedButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            chipValueList.add(newValue!);
+                                            print(chipValueList);
+                                          });
+                                        },
+                                        child: Text('Add to list')),
+                                  ),
+                                )
+                              ],
+                            ),
+                            for (var i in chipValueList)
+                              Wrap(
+                                spacing: 2,
+                                alignment: WrapAlignment.start,
+                                children: [
+                                  Chip(
+                                    label: Text(i),
+                                    onDeleted: () {
+                                      setState(() {
+                                        chipValueList.removeAt(i);
+                                      });
+                                    },
+                                  )
+                                ],
+                              )
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
-          );
+            );
+          });
         });
   }
+
+  //Area of exper pop up end
 
   ///profile section1 pop up functionality End
 
   @override
   Widget build(BuildContext context) {
-    var _height = MediaQuery.of(context).size.height;
-    var _width = MediaQuery.of(context).size.width;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -350,10 +392,9 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                       color: Color(0xffE5E5E5),
                     ),
                     Padding(
-                      padding:
-                          const EdgeInsets.only(right: 20, left: 20, top: 13),
+                      padding: EdgeInsets.only(right: 20, left: 20, top: 13),
                       child: AutoSizeText(
-                        profileSummary,
+                        widget.pOApiDataSec1.profileSummary.toString(),
                         minFontSize: 8,
                         style: const TextStyle(
                             fontSize: 16,
@@ -394,7 +435,7 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      width: _width,
+                      width: SS.sW(context),
                       color: Colors.white,
                       child: const Padding(
                         padding: EdgeInsets.only(
@@ -461,7 +502,7 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                     width: widget.profileOverviewSec1AreaOfExp_W,
                     height: widget.profileOverviewSec1AreaOfExp_H,
                     popUpEdit: () {
-                      buildAreaOfExpePopUp();
+                      buildAreaOfExpePopUp(chipValueList, context);
                     },
                     showAddButton: true)
                 : Container(),
