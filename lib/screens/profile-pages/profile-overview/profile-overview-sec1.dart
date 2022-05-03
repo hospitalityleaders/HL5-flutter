@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:holedo/common/popUpHeadMenu.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
+import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/constant/sizedbox.dart';
 
 import '../profile-edit/profile-edit.dart';
@@ -53,26 +54,23 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
         padding: EdgeInsets.symmetric(vertical: 12.0),
         child: Icon(
           Icons.check_circle,
-          color: Color(0xFF0D9BDC),
+          color: ColorPicker.kBlueLight1,
           size: 14,
         ),
       ),
       label: Text(
         btnName,
-        style: const TextStyle(
-            color: Color(0xff272E41),
-            fontSize: 14,
-            fontWeight: FontWeight.w400),
+        style: FontTextStyle.kBlueDark114W400SSP,
       ),
     );
   }
 
   ///references card
-  Widget buildReferencesCard(
-      String img, String title, String subTitle, String description) {
+  Widget buildReferencesCard(String img, String title, String userId,
+      String subTitle, String description) {
     return Container(
-      padding: const EdgeInsets.all(6),
-      color: Colors.white,
+      padding: EdgeInsets.all(6),
+      color: ColorPicker.kWhite,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -83,24 +81,21 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
               image: NetworkImage(img),
               fit: BoxFit.cover,
             ),
-            title: Text(
-              title,
-              textAlign: TextAlign.start,
-              style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w700,
-                  color: Color(0xff272E41)),
+            // title: Text(
+            //   title,
+            //   textAlign: TextAlign.start,
+            //   style: FontTextStyle.kBlueDark116W700SSP,
+            // ),
+
+            title: RichText(
+              text: TextSpan(children: [
+                TextSpan(text: title, style: FontTextStyle.kBlueDark116W700SSP),
+                TextSpan(text: userId, style: FontTextStyle.kBlueDark112W700SSP)
+              ]),
             ),
             subtitle: Padding(
-              padding: const EdgeInsets.only(right: 30.0),
-              child: Text(
-                subTitle,
-                style: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  color: Color(0xff7C8990),
-                ),
-              ),
+              padding: EdgeInsets.only(right: 30.0),
+              child: Text(subTitle, style: FontTextStyle.kGreyLight514W400SSP),
             ),
           ),
           Padding(
@@ -130,11 +125,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                   ),
                   TextSpan(
                     text: description,
-                    style: const TextStyle(
-                        height: 1.2,
-                        fontSize: 14,
-                        color: Color(0xff7C8990),
-                        fontWeight: FontWeight.w400),
+                    style:FontTextStyle.kGreyLight516W400SSP,
                   ),
                 ],
               ),
@@ -148,13 +139,13 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
             children: [
               TextButton.icon(
                   onPressed: () {},
-                  icon: const Icon(
+                  icon:  Icon(
                     Icons.add,
-                    color: Color(0xFF0d9bdc),
+                    color: ColorPicker.kBlueLight1,
                   ),
-                  label: const Text(
+                  label:  Text(
                     'Show more',
-                    style: TextStyle(color: Color(0xFF0d9bdc), fontSize: 14),
+                    style: FontTextStyle.kBlueLight114W400SSP,
                   )),
             ],
           ),
@@ -375,15 +366,12 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.only(right: 20, left: 20, top: 13),
                       child: AutoSizeText(
                         'Profile summary',
                         minFontSize: 14,
-                        style: TextStyle(
-                            color: Color(0xFF171f39),
-                            fontSize: 20,
-                            fontWeight: FontWeight.w400),
+                        style: FontTextStyle.kBlueDark120W400SSP,
                       ),
                     ),
                     SS.sB(8, 0),
@@ -394,16 +382,9 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                     Padding(
                       padding: EdgeInsets.only(right: 20, left: 20, top: 13),
                       child: AutoSizeText(
-                        widget.pOApiDataSec1.profileSummary.toString(),
-                        minFontSize: 8,
-                        style: const TextStyle(
-                            fontSize: 16,
-                            color: Color(
-                              0xFF7C8990,
-                            ),
-                            fontWeight: FontWeight.w400,
-                            height: 1.5),
-                      ),
+                          widget.pOApiDataSec1.profileSummary.toString(),
+                          minFontSize: 8,
+                          style: FontTextStyle.kGreyLight516W400SSP),
                     ),
                     SS.sB(13, 0),
                   ],
@@ -437,15 +418,12 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                     Container(
                       width: SS.sW(context),
                       color: Colors.white,
-                      child: const Padding(
+                      child: Padding(
                         padding: EdgeInsets.only(
                             right: 20, left: 20, bottom: 13, top: 13),
                         child: AutoSizeText(
                           'Areas of expertise',
-                          style: TextStyle(
-                              color: Color(0xFF171f39),
-                              fontSize: 20,
-                              fontWeight: FontWeight.w400),
+                          style: FontTextStyle.kBlueDark120W400SSP,
                         ),
                       ),
                     ),
@@ -480,15 +458,10 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                               size: 16,
                             ),
                           ),
-                          label: const Padding(
+                          label: Padding(
                             padding: EdgeInsets.all(1.0),
-                            child: Text(
-                              'Show all',
-                              style: TextStyle(
-                                  color: Color(0xFF0D9BDC),
-                                  fontWeight: FontWeight.w300,
-                                  fontSize: 14),
-                            ),
+                            child: Text('Show all',
+                                style: FontTextStyle.kBlueLight114W400SSP),
                           ),
                         ),
                       ],
@@ -518,26 +491,24 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
               padding: const EdgeInsets.all(8.0),
               child: Container(
                 key: widget.profileOverviewSec1ReferencesKey,
-                color: Colors.white,
+                color: ColorPicker.kWhite,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.only(
                           right: 20, left: 20, bottom: 5, top: 13),
                       child: Text(
                         'References',
-                        style: TextStyle(
-                            color: Color(0xFF171f39),
-                            fontSize: 20,
-                            fontWeight: FontWeight.w400),
+                        style: FontTextStyle.kBlueDark120W400SSP,
                       ),
                     ),
                     SS.sB(8, 0),
                     const Divider(color: Colors.grey, height: 1),
                     buildReferencesCard(
                       'https://images.pexels.com/photos/712521/pexels-photo-712521.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-                      'Sarah Lee MHL',
+                      'Sarah Lee',
+                      'MHL',
                       'General Manager, One & Only Hotel',
                       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
                     ),
@@ -548,7 +519,8 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                     ),
                     buildReferencesCard(
                       'https://images.pexels.com/photos/712521/pexels-photo-712521.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-                      'Sarah Lee MHL',
+                      'Sarah Lee',
+                      'MHL',
                       'General Manager, One & Only Hotel',
                       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
                     ),

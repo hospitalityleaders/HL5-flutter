@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:holedo/common/dropDownButton.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
+
 import '../../../common/popUpHeadMenu.dart';
 import '../../../constant/colorPicker/color_picker.dart';
 import '../../../constant/sizedbox.dart';
@@ -38,7 +39,8 @@ class ProfileOverviewSec2 extends StatefulWidget {
     this.profileOverviewSec2Achievement_W,
     this.profileOverviewSec2LanguagesKey,
     this.profileOverviewSec2Languages_H,
-    this.profileOverviewSec2Languages_W, this.pOApiDataSec2,
+    this.profileOverviewSec2Languages_W,
+    this.pOApiDataSec2,
   }) : super(key: key);
 
   @override
@@ -72,20 +74,15 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
             padding: const EdgeInsets.all(8.0),
             child: Container(
               key: sec2Key,
-              color: Colors.white,
+              color: ColorPicker.kWhite,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(
                         right: 20, left: 20, bottom: 5, top: 13),
-                    child: Text(
-                      cardName,
-                      style: const TextStyle(
-                          color: Color(0xFF272E41),
-                          fontSize: 20,
-                          fontWeight: FontWeight.w400),
-                    ),
+                    child: Text(cardName,
+                        style: FontTextStyle.kBlueDark120W400SSP),
                   ),
                   const SizedBox(height: 8),
                   Divider(
@@ -118,24 +115,15 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              cardTitle,
-                              style: const TextStyle(
-                                  color: Color(0xFF272E41),
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w700),
-                            ),
+                            Text(cardTitle,
+                                style: FontTextStyle.kBlueDark116W700SSP),
                             const SizedBox(
                               height: 5,
                             ),
                             GestureDetector(
                                 child: Text(
                                   cardSubTitle,
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                    color: Color(0xFF32A3FD),
-                                  ),
+                                  style: FontTextStyle.kBlueLight114W400SSP,
                                 ),
                                 onTap: () {}),
                             const SizedBox(
@@ -143,10 +131,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                             ),
                             Text(
                               cardDate,
-                              style: const TextStyle(
-                                  fontSize: 14,
-                                  color: Color(0xFF7C8990),
-                                  fontWeight: FontWeight.w400),
+                              style: FontTextStyle.kGreyLight5146W400SSP,
                             ),
                             const SizedBox(
                               height: 5,
@@ -173,13 +158,16 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                           child: SingleChildScrollView(
                             child: Padding(
                               padding: EdgeInsets.all(8.0),
-                              child: Text(description,style: FontTextStyle.kGreyDark16W600PR,),
+                              child: Text(
+                                description,
+                                style: FontTextStyle.kGreyLight516W400SSP,
+                              ),
                             ),
                           ),
                         ),
                         Container(
                           padding: const EdgeInsets.all(5),
-                          color:  ColorPicker.kGreyLight2,
+                          color: ColorPicker.kGreyLight2,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
@@ -189,15 +177,12 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                                     isVisible = !isVisible;
                                   });
                                 },
-                                icon:
-                                    Icon(isVisible ? Icons.remove : Icons.add),
-                                label: Text(
-                                  isVisible ? 'Close' : cardBtn,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 14,
-                                      color: Color(0xff32A3FD)),
+                                icon: Icon(
+                                  isVisible ? Icons.remove : Icons.add,
+                                  color: ColorPicker.kBlueLight1,
                                 ),
+                                label: Text(isVisible ? 'Close' : cardBtn,
+                                    style: FontTextStyle.kBlueLight114W400SSP),
                               ),
                             ],
                           ),
@@ -898,14 +883,11 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.all(8.0),
                       child: AutoSizeText(
                         'Languages',
-                        style: TextStyle(
-                            color: Color(0xFF272E41),
-                            fontSize: 20,
-                            fontWeight: FontWeight.w400),
+                        style: FontTextStyle.kBlueDark120W400SSP,
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -928,7 +910,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                                       child: const Center(
                                         child: Icon(
                                           CupertinoIcons.globe,
-                                          color: Colors.white,
+                                          color: ColorPicker.kWhite,
                                         ),
                                       ),
                                     ),
@@ -939,23 +921,16 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                                 flex: 3,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: const [
-                                    AutoSizeText(
-                                      'English',
-                                      style: TextStyle(
-                                          color: Color(0xFF272E41),
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w700),
-                                    ),
+                                  children: [
+                                    AutoSizeText('English',
+                                        style:
+                                            FontTextStyle.kBlueDark116W700SSP),
                                     SizedBox(
                                       height: 5,
                                     ),
                                     AutoSizeText(
                                       'Native and bilingual profiency',
-                                      style: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w400,
-                                          color: Color(0xFF7C8990)),
+                                      style: FontTextStyle.kGreyLight514W400SSP,
                                     ),
                                     SizedBox(
                                       height: 5,
@@ -997,23 +972,17 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                                 flex: 3,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: const [
+                                  children: [
                                     Text(
                                       'Spanish',
-                                      style: TextStyle(
-                                          color: Color(0xFF272E41),
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w700),
+                                      style: FontTextStyle.kBlueDark116W700SSP,
                                     ),
                                     SizedBox(
                                       height: 5,
                                     ),
                                     Text(
                                       'Elementary profiency',
-                                      style: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w400,
-                                          color: Color(0xFF7C8990)),
+                                      style: FontTextStyle.kGreyLight514W400SSP,
                                     ),
                                     SizedBox(
                                       height: 5,

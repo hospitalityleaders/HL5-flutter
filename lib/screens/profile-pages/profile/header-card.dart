@@ -1,5 +1,4 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:holedo/common/popUpHeadMenu.dart';
@@ -111,29 +110,30 @@ class _HeaderCardState extends State<HeaderCard> {
 
   buildSocialButton(bool isHoveringCard, IconData btnIcon) {
     return Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: StatefulBuilder(builder: (context, setState) {
-          return InkWell(
-              onTap: () {},
-              onHover: (value) {
-                setState(() {
-                  isHoveringCard = value;
-                });
-              },
-              child: Container(
-                alignment: Alignment.center,
-                height: 38,
-                width: 38,
-                color: isHoveringCard
-                    ? ColorPicker.kWhite
-                    : ColorPicker.kGreyLight9,
-                child: FaIcon(
-                  btnIcon,
-                  color: ColorPicker.kBlueLight1,
-                  size: 12,
-                ),
-              ));
-        }));
+      padding: const EdgeInsets.all(8.0),
+      child: StatefulBuilder(builder: (context, setState) {
+        return InkWell(
+          onTap: () {},
+          onHover: (value) {
+            setState(() {
+              isHoveringCard = value;
+            });
+          },
+          child: Container(
+            alignment: Alignment.center,
+            height: 38,
+            width: 38,
+            color:
+                isHoveringCard ? ColorPicker.kWhite : ColorPicker.kGreyLight9,
+            child: FaIcon(
+              btnIcon,
+              color: ColorPicker.kBlueLight1,
+              size: 12,
+            ),
+          ),
+        );
+      }),
+    );
   }
 
   buildInnerSocialButton(bool isHoveringCard, IconData btnIcon, [Uri? url]) {
@@ -542,7 +542,8 @@ class _HeaderCardState extends State<HeaderCard> {
                                                       color: ColorPicker
                                                           .kGreyLight5)),
                                               child: Padding(
-                                                padding: const EdgeInsets.all(12.0),
+                                                padding:
+                                                    const EdgeInsets.all(12.0),
                                                 child: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
@@ -581,123 +582,17 @@ class _HeaderCardState extends State<HeaderCard> {
     );
   }
 
-  /// Porfile card pop up functionality End
-
-  // String profilePicCardDes =
-  //     ' Upload an image from your computer in either JPG, GIF or PNG format. Maximum file size can not exceed 3MB. Make sure you look good on Hospitality Leaders? Upload a photo that\'s at least 150px in width and height.';
 
   Future pickImage() async {
     await ImagePicker().pickImage(source: ImageSource.gallery);
   }
+  /// Porfile card pop up functionality End
 
-  // buildProfilePictureCard() {
-  //   return Padding(
-  //     padding: const EdgeInsets.all(16.0),
-  //     child: Container(
-  //       width: 200,
-  //       color: Colors.white,
-  //       child: Column(
-  //         children: [
-  //           // Row(
-  //           //   children: [
-  //           //     Padding(
-  //           //       padding: const EdgeInsets.all(8.0),
-  //           //       child: Container(
-  //           //         height: 50,
-  //           //         width: 50,
-  //           //         color: const Color(0xFF0d9bdc),
-  //           //         child: const Center(
-  //           //           child: Icon(
-  //           //             Icons.camera_alt,
-  //           //             color: Colors.white,
-  //           //           ),
-  //           //         ),
-  //           //       ),
-  //           //     ),
-  //           //     Column(
-  //           //       crossAxisAlignment: CrossAxisAlignment.start,
-  //           //       children: const [
-  //           //         Text(
-  //           //           'Profile picture',
-  //           //           style: TextStyle(
-  //           //               fontWeight: FontWeight.w400, fontSize: 16),
-  //           //         ),
-  //           //         Text(
-  //           //             'Your profile picture will be used on your profile and throughout the site.',
-  //           //             style: TextStyle(
-  //           //                 fontWeight: FontWeight.w400,
-  //           //                 fontSize: 12,
-  //           //                 color: Color(0xffbdb5c2)))
-  //           //       ],
-  //           //     )
-  //           //   ],
-  //           // ),
-  //           // const Padding(
-  //           //   padding: EdgeInsets.all(8.0),
-  //           //   child: Divider(
-  //           //     height: 1,
-  //           //     color: Colors.grey,
-  //           //   ),
-  //           // ),
-  //           Row(
-  //             children: [
-  //               Padding(
-  //                 padding: const EdgeInsets.all(8.0),
-  //                 child: Column(
-  //                     crossAxisAlignment: CrossAxisAlignment.start,
-  //                     children: [
-  //                       Container(
-  //                         height: 150,
-  //                         width: 150,
-  //                         decoration: const BoxDecoration(
-  //                           image: DecorationImage(
-  //                               image: NetworkImage(
-  //                                   'https://cdn.pixabay.com/photo/2019/10/20/20/02/nature-4564618_960_720.jpg'),
-  //                               fit: BoxFit.cover),
-  //                         ),
-  //                       ),
-  //                       TextButton.icon(
-  //                         onPressed: () {},
-  //                         icon: Icon(Icons.delete),
-  //                         label: Text('Delete photo'),
-  //                       )
-  //                     ]),
-  //               ),
-  //               Column(
-  //                 children: [
-  //                   Card(
-  //                     color: Colors.grey,
-  //                     child: Padding(
-  //                       padding: const EdgeInsets.all(16.0),
-  //                       child: Row(
-  //                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  //                         children: [
-  //                           OutlinedButton(
-  //                             onPressed: () {
-  //                               pickImage();
-  //                             },
-  //                             child: Text('Choose File'),
-  //                           ),
-  //                           Text('No file choosen'),
-  //                           ElevatedButton(
-  //                               onPressed: () {}, child: Text('Upload'))
-  //                         ],
-  //                       ),
-  //                     ),
-  //                   ),
-  //                   Container(
-  //                     width: double.infinity,
-  //                     child: Text(profilePicCardDes),
-  //                   ),
-  //                 ],
-  //               ),
-  //             ],
-  //           )
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
+
+
+
+
+
 
   bool isHovering = false;
 

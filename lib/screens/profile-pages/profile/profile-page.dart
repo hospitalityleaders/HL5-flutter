@@ -8,7 +8,6 @@ import 'package:holedo/screens/profile-pages/profile-overview/profile-overview.d
 import 'package:holedo/screens/profile-pages/references/references.dart';
 import 'package:holedo/screens/profile-pages/timeline/timeline.dart';
 import 'package:holedo/services/user_profile_service.dart';
-
 import '../../../controller/menu_controller.dart';
 import '../../../responsive/responsive.dart';
 import 'header-card.dart';
@@ -218,7 +217,10 @@ class _ProfilePageState extends State<ProfilePage>
                               ),
                               Row(
                                 children: [
-                                  TabBar(
+                                  TabBar(labelColor: ColorPicker.kBlueLight1,
+                                    unselectedLabelColor: ColorPicker.kGreyLight7,
+                                    indicatorColor: ColorPicker.kBlueLight1,
+                                    indicatorPadding: EdgeInsets.symmetric(horizontal: 10),
                                     controller: _tabController,
                                     onTap: (int value) {
                                       _menuController.setTabIndex1(value);
@@ -232,8 +234,9 @@ class _ProfilePageState extends State<ProfilePage>
                                         child: Text(
                                           'Profile overview',
                                           style: TextStyle(
-                                              color: Color(0xFF879399),
+
                                               fontWeight: FontWeight.w600,
+                                              fontFamily: 'SourceSansPro',
                                               fontSize: 14),
                                         ),
                                       ),
@@ -242,18 +245,18 @@ class _ProfilePageState extends State<ProfilePage>
                                         child: Text(
                                           'Timeline',
                                           style: TextStyle(
-                                              color: Color(0xFF879399),
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 14),
+                                            fontWeight: FontWeight.w600,
+                                            fontFamily: 'SourceSansPro',
+                                            fontSize: 14,
                                         ),
-                                      ),
+                                      )),
                                       Padding(
                                         padding: EdgeInsets.all(10.0),
                                         child: Text(
                                           'Articles',
                                           style: TextStyle(
-                                              color: Color(0xFF879399),
                                               fontWeight: FontWeight.w600,
+                                              fontFamily: 'SourceSansPro',
                                               fontSize: 14),
                                         ),
                                       ),
@@ -262,8 +265,8 @@ class _ProfilePageState extends State<ProfilePage>
                                         child: Text(
                                           'Activity',
                                           style: TextStyle(
-                                              color: Color(0xFF879399),
                                               fontWeight: FontWeight.w600,
+                                              fontFamily: 'SourceSansPro',
                                               fontSize: 14),
                                         ),
                                       ),
@@ -272,8 +275,8 @@ class _ProfilePageState extends State<ProfilePage>
                                         child: Text(
                                           'References',
                                           style: TextStyle(
-                                              color: Color(0xFF879399),
                                               fontWeight: FontWeight.w600,
+                                              fontFamily: 'SourceSansPro',
                                               fontSize: 14),
                                         ),
                                       ),

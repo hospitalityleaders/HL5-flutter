@@ -1,9 +1,13 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:holedo/constant/colorPicker/color_picker.dart';
+import 'package:holedo/constant/fontStyle/font_style.dart';
+import 'package:holedo/constant/sizedbox.dart';
 
 class ProfileOverviewSec3 extends StatefulWidget {
   final pOApiDataSec3;
-  const ProfileOverviewSec3({Key? key,this.pOApiDataSec3}) : super(key: key);
+
+  const ProfileOverviewSec3({Key? key, this.pOApiDataSec3}) : super(key: key);
 
   @override
   State<ProfileOverviewSec3> createState() => _ProfileOverviewSec3State();
@@ -16,81 +20,81 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
     return Column(
       children: [
         ListTile(
-          onTap: () {
-            showDialog(
-              context: context,
-              builder: (context) => Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: ListView(
-                  children: [
-                    Card(
-                      color: const Color(0xFFdddfe3),
-                      child: Column(
-                        children: [
-                          Card(
-                            color: Colors.white,
-                            elevation: 0.0,
-                            child: ListTile(
-                              minLeadingWidth: 1,
-                              title: const Text('Work experience'),
-                              trailing: IconButton(
-                                  icon: const Icon(
-                                    Icons.cancel_outlined,
-                                    color: Color(0xff0d9bdc),
-                                  ),
-                                  onPressed: () => Navigator.pop(context)),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 80,
-                          ),
-                          Card(
-                            color: Colors.white,
-                            elevation: 0.0,
-                            child: ListTile(
-                              leading: Container(
-                                height: 40,
-                                width: 40,
-                                decoration: const BoxDecoration(
-                                  color: Color(0xFF0d9bdc),
-                                ),
-                                child: const Icon(
-                                  Icons.apartment_outlined,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              title: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: const [
-                                  Text('General Manager'),
-                                  Text('Fairmont Zimbali Resort · Cape Town'),
-                                ],
-                              ),
-                              subtitle: const Text(
-                                  'February 2012 – January 2013 (11 months)'),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 500,
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
+          // pop up functionality
+          // onTap: () {
+          //   showDialog(
+          //     context: context,
+          //     builder: (context) =>
+          //         Padding(
+          //           padding: const EdgeInsets.symmetric(horizontal: 20),
+          //           child: ListView(
+          //             children: [
+          //               Card(
+          //                 color: const Color(0xFFdddfe3),
+          //                 child: Column(
+          //                   children: [
+          //                     Card(
+          //                       color: Colors.white,
+          //                       elevation: 0.0,
+          //                       child: ListTile(
+          //                         minLeadingWidth: 1,
+          //                         title: const Text('Work experience'),
+          //                         trailing: IconButton(
+          //                             icon: const Icon(
+          //                               Icons.cancel_outlined,
+          //                               color: Color(0xff0d9bdc),
+          //                             ),
+          //                             onPressed: () => Navigator.pop(context)),
+          //                       ),
+          //                     ),
+          //                     const SizedBox(
+          //                       height: 80,
+          //                     ),
+          //                     Card(
+          //                       color: Colors.white,
+          //                       elevation: 0.0,
+          //                       child: ListTile(
+          //                         leading: Container(
+          //                           height: 40,
+          //                           width: 40,
+          //                           decoration: const BoxDecoration(
+          //                             color: Color(0xFF0d9bdc),
+          //                           ),
+          //                           child: const Icon(
+          //                             Icons.apartment_outlined,
+          //                             color: Colors.white,
+          //                           ),
+          //                         ),
+          //                         title: Column(
+          //                           mainAxisAlignment: MainAxisAlignment.start,
+          //                           children: const [
+          //                             Text('General Manager'),
+          //                             Text(
+          //                                 'Fairmont Zimbali Resort · Cape Town'),
+          //                           ],
+          //                         ),
+          //                         subtitle: const Text(
+          //                             'February 2012 – January 2013 (11 months)'),
+          //                       ),
+          //                     ),
+          //                     const SizedBox(
+          //                       height: 500,
+          //                     )
+          //                   ],
+          //                 ),
+          //               ),
+          //             ],
+          //           ),
+          //         ),
+          //   );
+          // },
           leading: Icon(
             icon,
             color: const Color(0xFF0d9bdc),
           ),
           title: Text(
             title,
-            style: const TextStyle(
-                color: Color(0xFF0d9bdc),
-                fontSize: 16,
-                fontWeight: FontWeight.bold),
+            style: FontTextStyle.kBlueLight116W400SSP,
           ),
           trailing: const Card(
             elevation: 1.0,
@@ -125,42 +129,38 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
 
   @override
   Widget build(BuildContext context) {
-    var _height = MediaQuery.of(context).size.height;
-    var _width = MediaQuery.of(context).size.width;
     return Column(
       children: [
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
-            color: const Color(0xff2b375e),
+            padding: EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+            color: ColorPicker.kPrimaryLight1,
             child: Column(
               children: [
                 Text(
                   '${(value * 100).toInt()}%',
-                  style: const TextStyle(fontSize: 48, color: Colors.white),
+                  style: TextStyle(fontSize: 48, color: ColorPicker.kWhite),
                 ),
                 const SizedBox(height: 10),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(8.0),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
                     child: LinearProgressIndicator(
                       value: value,
-                      valueColor: const AlwaysStoppedAnimation(Colors.red),
-                      backgroundColor: const Color(0xFF212b4d),
+                      valueColor: AlwaysStoppedAnimation(ColorPicker.kRed2),
+                      backgroundColor: ColorPicker.kPrimaryLight,
                       minHeight: 10,
                     ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(8.0),
                   child: Text(
-                    'Your profile is only ${(value * 100).toInt()}% complete.Improve it now.Here\'s how',
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                        color: Colors.white, fontSize: 20, height: 1.5),
-                  ),
+                      'Your profile is only ${(value * 100).toInt()}% complete.Improve it now.Here\'s how',
+                      textAlign: TextAlign.center,
+                      style: FontTextStyle.kWhite20W400SSP),
                 ),
                 profileListTile(
                     Icons.add_box_outlined, 'Add your work experience'),
@@ -176,7 +176,8 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                   },
                   child: Padding(
                     padding: EdgeInsets.symmetric(
-                        vertical: _height * .014, horizontal: _width * .085),
+                        vertical: SS.sH(context) * .014,
+                        horizontal: SS.sW(context) * .085),
                     child: AutoSizeText(
                       'Edit my profile',
                       maxLines: 1,
@@ -202,14 +203,11 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Padding(
+                 Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text(
                     'Connections',
-                    style: TextStyle(
-                        color: Color(0xFF272E41),
-                        fontSize: 20,
-                        fontWeight: FontWeight.w400),
+                    style:FontTextStyle.kBlueDark120W400SSP
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -256,25 +254,18 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                     ],
                   ),
                 ),
-                const Padding(
+                Padding(
                   padding: EdgeInsets.symmetric(horizontal: 12.0),
                   child: Text(
                     'You and Noberto have 25 shared connections.',
-                    style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xff7C8990)),
+                    style: FontTextStyle.kGreyLight514W400SSP,
                   ),
                 ),
-                const Padding(
+                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 12, vertical: 5),
                   child: Text(
                     'View mutual connections',
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                      color: Color(0xff32A3FD),
-                    ),
+                    style:FontTextStyle.kBlueLight114W400SSP
                   ),
                 ),
                 Divider(height: 1, color: Colors.grey.shade400),
@@ -289,7 +280,7 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                     onPressed: () {},
                     child: Padding(
                       padding: EdgeInsets.symmetric(
-                        vertical: _height * 0.010,
+                        vertical: SS.sH(context) * 0.010,
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -300,7 +291,7 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                             size: 12,
                           ),
                           SizedBox(
-                            width: _width * .01,
+                            width: SS.sW(context) * .01,
                           ),
                           AutoSizeText(
                             'Grow your network',

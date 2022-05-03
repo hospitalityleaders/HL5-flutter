@@ -3272,6 +3272,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:holedo/screens/Authentication/login.dart';
 import 'package:holedo/screens/news/update/widget/update_news_widget.dart';
 import 'package:holedo/screens/profile-pages/profile/header.dart';
 import 'package:holedo/screens/profile-pages/profile/profile-page.dart';
@@ -3329,7 +3330,7 @@ class _UpdateNewsState extends State<UpdateNews>
                 child: Column(
                   children: [
                     Header(),
-                    _menuController.menuIndex.value == 1
+                    _menuController.menuIndex.value == 0
                         ? Column(
                             children: [
                               Container(
@@ -3539,7 +3540,7 @@ class _UpdateNewsState extends State<UpdateNews>
 
                         //Profile page functionality
 
-                        : _menuController.menuIndex.value == 0
+                        : _menuController.menuIndex.value == 1
                             ? ProfilePage()
                             : _menuController.menuIndex.value == 2
                                 ? Column(
@@ -3767,8 +3768,8 @@ class _UpdateNewsState extends State<UpdateNews>
                                 : _menuController.menuIndex.value == 3
                                     ? Center(child: Text('Jobs'))
                                     : _menuController.menuIndex.value == 4
-                                        ? Center(child: Text('Recruitment'))
-                                        : Center(child: Text('Help')),
+                                        ?LogIn(): Center(child: Text('Recruitment'))
+
                   ],
                 ),
               );
