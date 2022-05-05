@@ -4,6 +4,7 @@ import 'package:holedo/constant/sizedbox.dart';
 import 'package:holedo/screens/profile-pages/profile-overview/profile-overview-sec3.dart';
 
 import '../../../common/popUpHeadMenu.dart';
+import '../../../constant/fontStyle/font_style.dart';
 import '../profile-edit/profile-edit.dart';
 
 class References extends StatefulWidget {
@@ -28,6 +29,7 @@ class _ReferencesState extends State<References> {
   Widget buildReferencesCard(
     String img,
     String title,
+    String userId,
     String subTitle,
     String description,
     _height,
@@ -53,23 +55,17 @@ class _ReferencesState extends State<References> {
                     image: NetworkImage(img),
                     fit: BoxFit.cover,
                   ),
-                  title: Text(
-                    title,
-                    textAlign: TextAlign.start,
-                    style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                        color: Color(0xff272E41)),
+                  title:RichText(
+                    text: TextSpan(children: [
+                      TextSpan(text: title, style: FontTextStyle.kBlueDark116W700SSP),
+                      TextSpan(text: userId, style: FontTextStyle.kBlueDark112W700SSP)
+                    ]),
                   ),
                   subtitle: Padding(
                     padding: const EdgeInsets.only(right: 30.0),
                     child: Text(
                       subTitle,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xff7C8990),
-                      ),
+                      style: FontTextStyle.kGreyLight514W400SSP
                     ),
                   ),
                 ),
@@ -100,11 +96,7 @@ class _ReferencesState extends State<References> {
                         ),
                         TextSpan(
                           text: description,
-                          style: const TextStyle(
-                              height: 1.2,
-                              fontSize: 14,
-                              color: Color(0xff7C8990),
-                              fontWeight: FontWeight.w400),
+                          style:FontTextStyle.kGreyLight516W400SSP,
                         ),
                       ],
                     ),
@@ -243,7 +235,8 @@ class _ReferencesState extends State<References> {
                         widget.referenceCardKey.length,
                         (index) => buildReferencesCard(
                             'https://images.pexels.com/photos/712521/pexels-photo-712521.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-                            'Sarah Lee MHL',
+                            'Sarah Lee ',
+                            'MHL',
                             'General Manager, One & Only Hotel',
                             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
                             SS.sH(context),

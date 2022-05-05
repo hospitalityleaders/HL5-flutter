@@ -572,7 +572,7 @@ class FontTextStyle {
   );
 
   static TextStyle kWhite14W400SSP = TextStyle(
-    fontSize: 15,
+    fontSize: 14,
     color: Colors.white,
     fontWeight: FontWeight.w400,
     fontFamily: 'SourceSansPro',

@@ -81,11 +81,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
               image: NetworkImage(img),
               fit: BoxFit.cover,
             ),
-            // title: Text(
-            //   title,
-            //   textAlign: TextAlign.start,
-            //   style: FontTextStyle.kBlueDark116W700SSP,
-            // ),
+
 
             title: RichText(
               text: TextSpan(children: [
@@ -173,7 +169,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                     Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Container(
-                          color: Colors.white,
+                          color: ColorPicker.kWhite,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [

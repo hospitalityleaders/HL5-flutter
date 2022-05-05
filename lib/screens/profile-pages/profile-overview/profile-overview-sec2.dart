@@ -49,6 +49,8 @@ class ProfileOverviewSec2 extends StatefulWidget {
 
 class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
   bool isVisible = false;
+  bool showIcon = false;
+  bool isHovering = false;
 
   Widget buildProfileSec2Cards(
       sec2Key,
@@ -66,7 +68,8 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
       popUpEditCards,
       popUpAddCards,
       bool isVisible,
-      String description) {
+      String description,
+      bool showIcon) {
     return Stack(
       children: [
         StatefulBuilder(builder: (context, setState) {
@@ -78,11 +81,55 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        right: 20, left: 20, bottom: 5, top: 13),
-                    child: Text(cardName,
-                        style: FontTextStyle.kBlueDark120W400SSP),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Expanded(child: Padding(
+                        padding: const EdgeInsets.only(left: 20, top: 13),
+                        child: Text(cardName, style: FontTextStyle.kBlueDark120W400SSP),
+                      )),
+                      Expanded(child:
+                      Stack(
+                        children: [
+                          Row(mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              showIcon
+                                  ? InkWell(
+                                      onTap: () {
+
+
+
+
+
+                                      },
+                                      onHover: (value) {
+                                       setState((){
+                                         isHovering = value;
+                                       });
+                                      },
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(top: 13,right: 20),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius: isHovering
+                                                  ? BorderRadius.circular(3)
+                                                  : BorderRadius.circular(0),
+                                              border: isHovering
+                                                  ? Border.all(
+                                                      width: 1, color: Colors.grey)
+                                                  : Border.all(
+                                                      width: 0,
+                                                      color: Colors.transparent)),
+                                          child: Icon(Icons.arrow_drop_down_sharp,color: ColorPicker.kBlueDark1,),
+                                        ),
+                                      ))
+                                  : Container(),
+                            ],
+                          ),
+                        ],
+                      ))
+                    ],
                   ),
                   const SizedBox(height: 8),
                   Divider(
@@ -838,7 +885,8 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
             buildWorkExpPopUp,
             buildWorkExpPopUp,
             isVisible,
-            description[0]),
+            description[0],
+            true),
         buildProfileSec2Cards(
             widget.profileOverviewSec2EducationKey,
             widget.profileOverviewSec2Education_H,
@@ -855,7 +903,8 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
             buildEducationPopUp,
             buildEducationPopUp,
             isVisible,
-            description[1]),
+            description[1],
+            false),
         buildProfileSec2Cards(
             widget.profileOverviewSec2AchievementKey,
             widget.profileOverviewSec2Achievement_H,
@@ -872,7 +921,8 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
             buildAchivementPopUp,
             buildAchivementPopUp,
             isVisible,
-            description[2]),
+            description[2],
+            false),
         Stack(
           children: [
             Padding(

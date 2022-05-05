@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:holedo/common/clipper.dart';
 import 'package:holedo/common/popUpHeadMenu.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/responsive/responsive.dart';
@@ -557,14 +558,14 @@ class _HeaderCardState extends State<HeaderCard> {
                                                       'Your contact details are not only useful for other connections to contact you, but with your consent, can also be made available to recruiters to inform you of exciting indistry opportunities. You can select which information is seen by who by selecting the privacy setting for each contact detail.',
                                                       style: FontTextStyle
                                                           .kGreyLight514W400SSP,
-                                                    )
+                                                    ),
                                                   ],
                                                 ),
                                               ),
-                                            )
+                                            ),
                                           ],
                                         ),
-                                      )
+                                      ),
                                     ],
                                   )
                                 : Container()
@@ -582,30 +583,260 @@ class _HeaderCardState extends State<HeaderCard> {
     );
   }
 
-
   Future pickImage() async {
     await ImagePicker().pickImage(source: ImageSource.gallery);
   }
+
   /// Porfile card pop up functionality End
 
+  /// buildSendConnReqPopUpCard functionality start
 
+  Future buildSendConnReqPopUpCard() {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) => Dialog(
+              child: Container(
+                color: ColorPicker.kWhite,
+                width: SS.sW(context) * .45,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      PopUpHeadMenu.popUpHead(
+                          'Send conection request', context),
+                      Divider(
+                        color: ColorPicker.kGreyLight4,
+                        thickness: 0.5,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            buildFieldName('Send to:'),
+                            buildTextField(),
+                            buildFieldName('Intro message'),
+                            Text(
+                              'Send a message along with your connection request.',
+                              style: FontTextStyle.kGreyLight514W400SSP,
+                            ),
+                            TextField(
+                              autocorrect: true,
+                              minLines: 6,
+                              maxLines: 8,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide(),
+                                ),
+                              ),
+                            ),
+                            SS.sB(15),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                InkWell(
+                                  onTap: () {},
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    height: SS.sH(context) * .05,
+                                    decoration: BoxDecoration(
+                                        color: ColorPicker.kBlueLight1,
+                                        borderRadius: BorderRadius.circular(4)),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text('Send Request',
+                                          style: FontTextStyle.kWhite14W400SSP),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SS.sB(15),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ));
+  }
 
+  /// buildSendConnReqPopUpCard functionality End
 
+  /// buildWriteRefPopUPCard functionality Start
+  Future buildWriteRefPopUPCard() {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) => Dialog(
+        child: Container(
+          width: SS.sW(context) * .60,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                PopUpHeadMenu.popUpHead('Write a reference', context),
+                Divider(
+                  color: ColorPicker.kGreyLight4,
+                  height: .5,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      flex: 3,
+                      child: Container(
+                        color: ColorPicker.kWhite,
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              buildFieldName('Reference recipient'),
+                              buildTextField(),
+                              buildFieldName('Reference'),
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    'You can edit or delete your reference after submitting it.',
+                                    style: FontTextStyle.kGreyLight514W400SSP,
+                                  ),
+                                ],
+                              ),
+                              TextField(
+                                autocorrect: true,
+                                minLines: 6,
+                                maxLines: 8,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide(),
+                                  ),
+                                ),
+                              ),
+                              SS.sB(15),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  InkWell(
+                                    onTap: () {},
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      height: SS.sH(context) * .05,
+                                      decoration: BoxDecoration(
+                                          color: ColorPicker.kBlueLight1,
+                                          borderRadius:
+                                              BorderRadius.circular(4)),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text('Submit Reference',
+                                            style:
+                                                FontTextStyle.kWhite14W400SSP),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SS.sB(15),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: Container(
+                        color: ColorPicker.kBlueLight1,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'REFERENCES',
+                                style: FontTextStyle.kWhite12W700SSP,
+                              ),
+                              SS.sB(10),
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Expanded(
+                                    flex: 2,
+                                    child: Text(
+                                      'What should I include in my reference?',
+                                      style: FontTextStyle.kWhite26W400SSP,
+                                    ),
+                                  ),
+                                  Expanded(flex: 1, child: Container())
+                                ],
+                              ),
+                              SS.sB(20),
+                              RichText(
+                                text: TextSpan(
+                                  children: [
+                                    WidgetSpan(
+                                      child: Icon(
+                                        Icons.check_circle,
+                                        color: ColorPicker.kWhite,
+                                        size: 14,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                        text:
+                                            ''' Your professional relationship''',
+                                        style: FontTextStyle.kWhite14W600SSP)
+                                  ],
+                                ),
+                              ),
+                              Text(
+                                'Briefly explain the professional relationship or background to give the reference context.',
+                                style: FontTextStyle.kWhite16W400SSP,
+                              ),
+                              SS.sB(15),
+                              RichText(
+                                text: TextSpan(
+                                  children: [
+                                    WidgetSpan(
+                                      child: Icon(
+                                        Icons.check_circle,
+                                        color: ColorPicker.kWhite,
+                                        size: 14,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                        text: ''' An endorsement''',
+                                        style: FontTextStyle.kWhite14W600SSP),
+                                  ],
+                                ),
+                              ),
+                              Text(
+                                  '''Explain the reason for your recommendation? What are the person’s skills, attributes and personality traits that you are recommending?''',
+                                  style: FontTextStyle.kWhite16W400SSP),
+                              SS.sB(60),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 
-
+  /// buildWriteRefPopUPCard functionality End
 
   bool isHovering = false;
-
+  bool isVisible = false;
   final key = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
-    var _height = MediaQuery.of(context).size.height;
-    var _width = MediaQuery.of(context).size.width;
-
     return Container(
       key: key,
-      width: _width,
+      width: SS.sW(context),
       decoration: BoxDecoration(
         image: DecorationImage(
           image: NetworkImage(
@@ -621,16 +852,15 @@ class _HeaderCardState extends State<HeaderCard> {
           Responsive.isDesktop(context)
               ? Padding(
                   padding: EdgeInsets.only(
-                    top: _height * .18,
-                    bottom: _height * .18,
+                    top: SS.sH(context) * .18,
+                    bottom: SS.sH(context) * .18,
                   ),
                   child: Center(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
                         key: widget.headerCardKey,
-                        width: 550,
-                        // height: _height,
+                        width: SS.sW(context) * .4,
                         color: Colors.white,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -661,51 +891,51 @@ class _HeaderCardState extends State<HeaderCard> {
                                   ),
                                 ),
                                 Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: StatefulBuilder(
-                                        builder: (context, setState) {
-                                      return InkWell(
-                                        onTap: () {},
-                                        onHover: (value) {
-                                          setState(() {
-                                            isHovering = value;
-                                          });
-                                        },
-                                        child: Container(
-                                          clipBehavior: Clip.antiAlias,
-                                          height: SS.sH(context) * 0.050,
-                                          width: SS.sW(context) * 0.032,
-                                          decoration: BoxDecoration(
-                                              borderRadius: isHovering
-                                                  ? BorderRadius.circular(3)
-                                                  : BorderRadius.circular(0),
-                                              border: isHovering
-                                                  ? Border.all(
-                                                      width: 1,
-                                                      color: Colors.grey)
-                                                  : Border.all(
-                                                      width: 0,
-                                                      color:
-                                                          Colors.transparent)),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            children: [
-                                              Icon(
-                                                Icons.menu_outlined,
-                                                color: ColorPicker.kGreyLight3,
-                                                size: 18,
-                                              ),
-                                              Icon(
-                                                Icons.arrow_drop_down_outlined,
-                                                color: ColorPicker.kGreyLight3,
-                                                size: 18,
-                                              )
-                                            ],
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        isVisible = !isVisible;
+                                      });
+                                    },
+                                    onHover: (value) {
+                                      setState(() {
+                                        isHovering = value;
+                                      });
+                                    },
+                                    child: Container(
+                                      clipBehavior: Clip.antiAlias,
+                                      height: SS.sH(context) * 0.050,
+                                      width: SS.sW(context) * 0.032,
+                                      decoration: BoxDecoration(
+                                          borderRadius: isHovering
+                                              ? BorderRadius.circular(3)
+                                              : BorderRadius.circular(0),
+                                          border: isHovering
+                                              ? Border.all(
+                                                  width: 1, color: Colors.grey)
+                                              : Border.all(
+                                                  width: 0,
+                                                  color: Colors.transparent)),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          Icon(
+                                            Icons.menu_outlined,
+                                            color: ColorPicker.kGreyLight3,
+                                            size: 18,
                                           ),
-                                        ),
-                                      );
-                                    })),
+                                          Icon(
+                                            Icons.arrow_drop_down_outlined,
+                                            color: ColorPicker.kGreyLight3,
+                                            size: 18,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
                             Padding(
@@ -761,28 +991,34 @@ class _HeaderCardState extends State<HeaderCard> {
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: ElevatedButton.icon(
-                                onPressed: () {},
-                                icon: const Icon(Icons.person_add),
-                                label: Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 14, horizontal: 18),
-                                  child: AutoSizeText(
-                                    'SEND CONNECTION REQUEST',
-                                    maxLines: 1,
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w400),
-                                  ),
-                                ),
-                                style: ElevatedButton.styleFrom(
-                                  primary: const Color(0xFF0d9bdc),
-                                ),
+                            InkWell(
+                              onTap: () {
+                                buildSendConnReqPopUpCard();
+                              },
+                              child: Container(
+                                alignment: Alignment.center,
+                                height: SS.sH(context) * .06,
+                                width: SS.sW(context) * .21,
+                                decoration: BoxDecoration(
+                                    color: ColorPicker.kBlueLight1,
+                                    borderRadius: BorderRadius.circular(4)),
+                                child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.person_add,
+                                        color: ColorPicker.kWhite,
+                                        size: 12,
+                                      ),
+                                      SS.sB(0, 6.5),
+                                      Text(
+                                        'SEND CONNECTION REQUEST',
+                                        style: FontTextStyle.kWhite14W400SSP,
+                                      ),
+                                    ]),
                               ),
                             ),
+                            SB.SH5(),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -792,7 +1028,9 @@ class _HeaderCardState extends State<HeaderCard> {
                                       const Color(0xFFe5f4fb),
                                     ),
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    buildWriteRefPopUPCard();
+                                  },
                                   label: const Padding(
                                     padding: EdgeInsets.symmetric(vertical: 10),
                                     child: AutoSizeText(
@@ -876,13 +1114,13 @@ class _HeaderCardState extends State<HeaderCard> {
                 )
               : Padding(
                   padding: EdgeInsets.only(
-                    top: _height * .22,
+                    top: SS.sH(context) * .22,
                   ),
                   child: Center(
                     child: Padding(
                       padding: EdgeInsets.all(8),
                       child: Container(
-                        width: _width,
+                        width: SS.sW(context),
                         key: widget.headerCardKey,
                         color: Colors.white,
                         child: Column(
@@ -1097,7 +1335,7 @@ class _HeaderCardState extends State<HeaderCard> {
                   ),
                 ),
           Positioned(
-            top: _height * 0.14,
+            top: SS.sH(context) * 0.14,
             child: Center(
               child: Container(
                 height: 76,
@@ -1113,11 +1351,100 @@ class _HeaderCardState extends State<HeaderCard> {
               ),
             ),
           ),
+
+          isVisible
+              ? Column(
+                  children: [
+                    SS.sB(SS.sH(context) * .26),
+                    Align(
+                      alignment: Alignment(.35, 0),
+                      child: ClipPath(
+                        clipper: ArrowClipper(),
+                        child: Container(
+                          height: 15,
+                          width: 12,
+                          decoration: BoxDecoration(
+                            color: ColorPicker.kGreyLight7.withOpacity(0.5),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment(.25, 0),
+                      child: Container(
+                        width: 244,
+                        decoration: BoxDecoration(
+                          color: ColorPicker.kWhite,
+                          border: Border.all(
+                              width: 0.5, color: ColorPicker.kGreyLight7),
+                        ),
+                        child: Column(
+                          children: [
+                            Container(
+                              height: 38,
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.contact_phone_outlined,
+                                      color: ColorPicker.kBlueLight1,
+                                      size: 12,
+                                    ),
+                                    SS.sB(0, 6),
+                                    Text(
+                                      'Share profile via email',
+                                      style: FontTextStyle.kBlueLight114W400SSP,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Divider(
+                              thickness: .5,
+                              color: ColorPicker.kGreyLight5,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  isVisible = !isVisible;
+                                });
+                              },
+                              child: Container(
+                                height: 38,
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 12.5, vertical: 9),
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.close,
+                                        color: ColorPicker.kBlueLight1,
+                                        size: 12,
+                                      ),
+                                      SS.sB(0, 8.5),
+                                      Text('Cancel connection',
+                                          style: FontTextStyle
+                                              .kBlueLight114W400SSP),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                )
+              : Container(),
+
           widget.isEditable
               ? Padding(
                   padding: EdgeInsets.only(
-                    top: _height * .18,
-                    bottom: _height * .16,
+                    top: SS.sH(context) * .18,
+                    bottom: SS.sH(context) * .16,
                   ),
                   child: ProfileEdit.buildProfileEdit(
                       width: widget.headerCard_W,
