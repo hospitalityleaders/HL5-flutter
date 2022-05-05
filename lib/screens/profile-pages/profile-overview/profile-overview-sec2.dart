@@ -51,6 +51,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
   bool isVisible = false;
   bool showIcon = false;
   bool isHovering = false;
+  bool isShowingPopUpCard=false;
 
   Widget buildProfileSec2Cards(
       sec2Key,
@@ -85,50 +86,61 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Expanded(child: Padding(
-                        padding: const EdgeInsets.only(left: 20, top: 13),
-                        child: Text(cardName, style: FontTextStyle.kBlueDark120W400SSP),
-                      )),
-                      Expanded(child:
-                      Stack(
-                        children: [
-                          Row(mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              showIcon
-                                  ? InkWell(
-                                      onTap: () {
-
-
-
-
-
-                                      },
-                                      onHover: (value) {
-                                       setState((){
-                                         isHovering = value;
-                                       });
-                                      },
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(top: 13,right: 20),
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              borderRadius: isHovering
-                                                  ? BorderRadius.circular(3)
-                                                  : BorderRadius.circular(0),
-                                              border: isHovering
-                                                  ? Border.all(
-                                                      width: 1, color: Colors.grey)
-                                                  : Border.all(
-                                                      width: 0,
-                                                      color: Colors.transparent)),
-                                          child: Icon(Icons.arrow_drop_down_sharp,color: ColorPicker.kBlueDark1,),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 20, top: 13),
+                          child: Text(cardName,
+                              style: FontTextStyle.kBlueDark120W400SSP),
+                        ),
+                      ),
+                      Expanded(
+                        child: Stack(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                showIcon
+                                    ? InkWell(
+                                        onTap: () {
+                                         setState((){
+                                           isShowingPopUpCard=!isShowingPopUpCard;
+                                         });
+                                        },
+                                        onHover: (value) {
+                                          setState(() {
+                                            isHovering = value;
+                                          });
+                                        },
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 13, right: 20),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                borderRadius: isHovering
+                                                    ? BorderRadius.circular(3)
+                                                    : BorderRadius.circular(0),
+                                                border: isHovering
+                                                    ? Border.all(
+                                                        width: 1,
+                                                        color: Colors.grey)
+                                                    : Border.all(
+                                                        width: 0,
+                                                        color: Colors
+                                                            .transparent)),
+                                            child: Icon(
+                                              Icons.arrow_drop_down_sharp,
+                                              color: ColorPicker.kBlueDark1,
+                                            ),
+                                          ),
                                         ),
-                                      ))
-                                  : Container(),
-                            ],
-                          ),
-                        ],
-                      ))
+                                      )
+                                    : Container(),
+                              ],
+                            ),
+
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 8),
@@ -242,6 +254,15 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
             ),
           );
         }),
+
+
+
+        isShowingPopUpCard?Text('showing'):Container(),
+
+
+
+
+
         widget.sec2IsEditable
             ? ProfileEdit.buildProfileEdit(
                 width: sec2_W,
