@@ -193,6 +193,15 @@ class FontTextStyle {
     fontFamily: 'ProximaNova-Regular',
   );
 
+
+  static TextStyle kBlueLight212W700SSP = TextStyle(
+    color: ColorPicker.kBlueLight2,
+    fontSize: 12,
+    fontWeight: FontWeight.w700,
+    fontFamily: 'SourceSansPro',
+  );
+
+
   static TextStyle kPrimary32W600PR = TextStyle(
     color: ColorPicker.kPrimary,
     fontSize: 32,

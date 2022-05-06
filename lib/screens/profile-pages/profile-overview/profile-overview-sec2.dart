@@ -51,7 +51,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
   bool isVisible = false;
   bool showIcon = false;
   bool isHovering = false;
-  bool isShowingPopUpCard=false;
+  bool isShowingPopUpCard = false;
 
   Widget buildProfileSec2Cards(
       sec2Key,
@@ -102,9 +102,10 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                                 showIcon
                                     ? InkWell(
                                         onTap: () {
-                                         setState((){
-                                           isShowingPopUpCard=!isShowingPopUpCard;
-                                         });
+                                          setState(() {
+                                            isShowingPopUpCard =
+                                                !isShowingPopUpCard;
+                                          });
                                         },
                                         onHover: (value) {
                                           setState(() {
@@ -137,7 +138,6 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                                     : Container(),
                               ],
                             ),
-
                           ],
                         ),
                       ),
@@ -254,15 +254,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
             ),
           );
         }),
-
-
-
-        isShowingPopUpCard?Text('showing'):Container(),
-
-
-
-
-
+        isShowingPopUpCard ? Text('showing') : Container(),
         widget.sec2IsEditable
             ? ProfileEdit.buildProfileEdit(
                 width: sec2_W,
@@ -403,7 +395,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                                       ElevatedButton(
                                           onPressed: () {}, child: Text('Save'))
                                     ],
-                                  )
+                                  ),
                                 ],
                               ),
                             ),

@@ -504,7 +504,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                     buildReferencesCard(
                       'https://images.pexels.com/photos/712521/pexels-photo-712521.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
                       'Sarah Lee',
-                      'MHL',
+                      ' MHL',
                       'General Manager, One & Only Hotel',
                       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
                     ),
@@ -516,7 +516,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                     buildReferencesCard(
                       'https://images.pexels.com/photos/712521/pexels-photo-712521.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
                       'Sarah Lee',
-                      'MHL',
+                      ' MHL',
                       'General Manager, One & Only Hotel',
                       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
                     ),

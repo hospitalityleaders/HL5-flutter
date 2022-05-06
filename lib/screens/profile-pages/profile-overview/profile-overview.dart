@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:holedo/constant/IconPicker/icon_picker.dart';
+import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/screens/profile-pages/profile-overview/profile-overview-sec1.dart';
 import 'package:holedo/screens/profile-pages/profile-overview/profile-overview-sec2.dart';
 import 'package:holedo/screens/profile-pages/profile-overview/profile-overview-sec3.dart';
 
+import '../../../constant/colorPicker/color_picker.dart';
 import '../../../constant/sizedbox.dart';
 import '../../../responsive/responsive.dart';
 
@@ -71,6 +74,8 @@ class ProfileOverview extends StatefulWidget {
 }
 
 class _ProfileOverviewState extends State<ProfileOverview> {
+  bool isHovering = false;
+
   @override
   Widget build(BuildContext context) {
     return Responsive.isDesktop(context)
@@ -138,11 +143,54 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                   ),
                 ),
                 SS.sB(0, SS.sW(context) * 0.01),
-                Expanded(
-                  child: ProfileOverviewSec3(
-                    pOApiDataSec3: widget.pOApiData,
-                  ),
-                ),
+                StatefulBuilder(builder: (context, setState) {
+                  return Expanded(
+                    child: Column(
+                      children: [
+                        ProfileOverviewSec3(
+                          pOApiDataSec3: widget.pOApiData,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            width: SS.sW(context),
+                            color: ColorPicker.kBlueLight3,
+                            child: Padding(
+                              padding: const EdgeInsets.all(25.0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'TIMELINE',
+                                    style: FontTextStyle.kBlueLight212W700SSP,
+                                  ),
+                                  Text(
+                                    'New Noberto Holden’s career timeline.',
+                                    style: FontTextStyle.kBlueLight236W400SSP,
+                                  ),
+                                  InkWell(
+                                      onHover: (value) {
+                                        setState(() {
+                                          isHovering = value;
+                                        });
+                                      },
+                                      onTap: () {},
+                                      child: Container(alignment: Alignment.center,
+                                        color: isHovering
+                                            ? ColorPicker.kBlueLight2
+                                            : ColorPicker.kWhite,
+                                     child:   Row(children: [IconPicker.menu(ColorPicker.kBlueLight1),],)
+                                      ),),
+                                ],
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  );
+                }),
               ],
             ))
         : SingleChildScrollView(
