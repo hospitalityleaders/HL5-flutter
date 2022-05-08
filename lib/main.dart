@@ -1,7 +1,10 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:holedo/controller/menu_controller.dart';
+import 'package:holedo/controller/auth_controller.dart';
+import 'package:holedo/screens/Authentication/login.dart';
 import 'package:holedo/screens/news/NewsSingle/news_single_logged_in.dart';
 import 'package:holedo/screens/news/categories/news_signal.dart';
 import 'package:holedo/screens/news/update/update_news.dart';
@@ -19,7 +22,9 @@ class MyCustomScrollBehavior extends MaterialScrollBehavior {
       };
 }
 
-void main() {
+void main() async {
+  await Get.put(AuthController()).initStorage();
+
   runApp(
     RobotDetector(
       child: MaterialApp(
@@ -40,6 +45,7 @@ void main() {
         ),
         initialRoute: '/',
         routes: {
+          //LogIn.route: (context) => LogIn(),
           // 'timeline': (context) => const Timeline(),
           // 'references': (context) => const References(),
           ProfilePage.route: (context) => ProfilePage(),
@@ -64,8 +70,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-      body: UpdateNews(),
+      body: Get.find<AuthController>().restoreModel().isLogined
+          ? UpdateNews()
+          : LogIn(),
     );
   }
 }
