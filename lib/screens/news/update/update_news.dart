@@ -3768,7 +3768,7 @@ class _UpdateNewsState extends State<UpdateNews>
                                 : _menuController.menuIndex.value == 3
                                     ? Center(child: Text('Jobs'))
                                     : _menuController.menuIndex.value == 4
-                                        ?LogIn(): Center(child: Text('Recruitment'))
+                                        ? Center(child: Text('Recruitment')):Container(child: Text('help'),)
 
                   ],
                 ),
