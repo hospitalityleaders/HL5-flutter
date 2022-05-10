@@ -3330,7 +3330,7 @@ class _UpdateNewsState extends State<UpdateNews>
                 child: Column(
                   children: [
                     Header(),
-                    _menuController.menuIndex.value == 1
+                    _menuController.menuIndex.value == 0
                         ? Column(
                             children: [
                               Container(
@@ -3540,7 +3540,7 @@ class _UpdateNewsState extends State<UpdateNews>
 
                         //Profile page functionality
 
-                        : _menuController.menuIndex.value == 0
+                        : _menuController.menuIndex.value == 1
                             ? ProfilePage()
                             : _menuController.menuIndex.value == 2
                                 ? Column(

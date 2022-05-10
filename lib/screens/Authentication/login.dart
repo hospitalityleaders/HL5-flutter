@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:holedo/controller/auth_controller.dart';
 import 'package:holedo/services/loginServices.dart';
 import 'package:holedo/utils/validator.dart';
 import '../../controller/menu_controller.dart';
+import '../news/update/update_news.dart';
 import '../profile-pages/profile/profile-page.dart';
 
 class LogIn extends StatefulWidget {
   static const String route = '/login';
+
   const LogIn({Key? key}) : super(key: key);
 
   @override
@@ -21,11 +22,11 @@ class _LogInState extends State<LogIn> {
   final ApiServices _apiClient = ApiServices();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  MenuController _menuController = Get.find();
   bool _showPassword = false;
   bool checked = false;
 
-  // GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  MenuController _menuController = Get.find();
+  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   List drawerItem = ['Home', 'Profile', 'News', 'Jobs', 'Recruitment', 'Help'];
 
@@ -39,78 +40,78 @@ class _LogInState extends State<LogIn> {
   }
 
   ///footer
-  buildFooterCard(
-      IconData icon, String follower, String subtext, double height) {
-    return Column(
-      children: [
-        Icon(
-          icon,
-          color: const Color(0xffB5BDC2),
-          size: 25,
-        ),
-        SizedBox(
-          height: height * 0.01,
-        ),
-        Text(
-          follower,
-          style: const TextStyle(
-              color: const Color(0xffB5BDC2),
-              fontSize: 14,
-              fontWeight: FontWeight.bold),
-        ),
-        SizedBox(
-          height: height * 0.01,
-        ),
-        Text(subtext,
-            style: const TextStyle(
-              color: const Color(0xffB5BDC2),
-              fontSize: 8,
-            ))
-      ],
-    );
-  }
-
-  builTextButton(String textName, routName) {
-    return GestureDetector(
-      onTap: () {},
-      child: Text(
-        textName,
-        style: const TextStyle(fontSize: 9, color: const Color(0xffB5BDC2)),
-      ),
-    );
-  }
+  // buildFooterCard(
+  //     IconData icon, String follower, String subtext, double height) {
+  //   return Column(
+  //     children: [
+  //       Icon(
+  //         icon,
+  //         color: const Color(0xffB5BDC2),
+  //         size: 25,
+  //       ),
+  //       SizedBox(
+  //         height: height * 0.01,
+  //       ),
+  //       Text(
+  //         follower,
+  //         style: const TextStyle(
+  //             color: const Color(0xffB5BDC2),
+  //             fontSize: 14,
+  //             fontWeight: FontWeight.bold),
+  //       ),
+  //       SizedBox(
+  //         height: height * 0.01,
+  //       ),
+  //       Text(subtext,
+  //           style: const TextStyle(
+  //             color: const Color(0xffB5BDC2),
+  //             fontSize: 8,
+  //           ))
+  //     ],
+  //   );
+  // }
+  //
+  // builTextButton(String textName, routName) {
+  //   return GestureDetector(
+  //     onTap: () {},
+  //     child: Text(
+  //       textName,
+  //       style: const TextStyle(fontSize: 9, color: const Color(0xffB5BDC2)),
+  //     ),
+  //   );
+  // }
 
   /// api integration functionality
 
-  buildSocialButton(IconData socialIcon) {
-    return Container(
-      child: FaIcon(socialIcon),
-    );
-  }
-
-  callLoginApi(String email, String password) {
-    final service = ApiServices();
-    service.apiCallLogin({
-      'email': email.trim(),
-      'password': password.trim(),
-    }).then(
-      (value) {
-        if (value.error != null) {
-          print('success');
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (BuildContext context) {
-          //       return const LogIn();
-          //     },
-          //   ),
-          // );
-        } else {
-          Text('failed');
-        }
-      },
-    );
-  }
+  // buildSocialButton(IconData socialIcon) {
+  //   return Container(
+  //     child: FaIcon(socialIcon),
+  //   );
+  // }
+  //
+  // callLoginApi(String email, String password) {
+  //   final service = ApiServices();
+  //   service.apiCallLogin({
+  //     'email': email.trim(),
+  //     'password': password.trim(),
+  //   }).then(
+  //     (value) {
+  //       if (value.error != null) {
+  //         print('success');
+  //         // Navigator.push(
+  //         //   context,
+  //         //   MaterialPageRoute(
+  //         //     builder: (BuildContext context) {
+  //         //       return const LogIn();
+  //         //     },
+  //         //   ),
+  //         // );
+  //       } else {
+  //         Text('failed');
+  //       }
+  //     },
+  //   );
+  // }
 
   Future<void> login() async {
     if (_formKey.currentState!.validate()) {
@@ -134,7 +135,10 @@ class _LogInState extends State<LogIn> {
         Get.find<AuthController>().authModel(model);
 
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => ProfilePage()));
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    _menuController.menuIndex == 0 ? UpdateNews() : LogIn()));
       } else {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text('Error: ${res['messages']}'),
