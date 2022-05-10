@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:holedo/controller/auth_controller.dart';
 import 'package:http/http.dart' as http;
+import '../models/userProfileModel.dart';
 
 class ApiServices {
   final Dio _dio = Dio();
@@ -36,16 +37,24 @@ class ApiServices {
     }
   }
 
-  Future<dynamic> getUserProfileData(String accessToken) async {
+  Future<UserProfileModel> getUserProfileData() async {
+    var token = AuthData.token;
+    print('using: ${AuthData.token}');
     try {
       Response response = await _dio.get(
         'https://api.holedo.com/rest/users/me',
         queryParameters: {'apikey': AuthData.apiKey},
         options: Options(
-          headers: {'AuthApi': 'Bearer $accessToken'},
+          headers: {'AuthApi': 'Bearer $token'},
         ),
       );
-      return response.data;
+      var data = jsonDecode(response.data);
+
+      if (response.statusCode == 200) {
+        return UserProfileModel.fromJson(data);
+      } else {
+        return UserProfileModel.fromJson(data);
+      }
     } on DioError catch (e) {
       return e.response!.data;
     }

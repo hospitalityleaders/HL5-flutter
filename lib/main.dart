@@ -71,7 +71,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Get.find<AuthController>().restoreModel().isLogined
-          ? UpdateNews()
+          ? ProfilePage()
           : LogIn(),
     );
   }

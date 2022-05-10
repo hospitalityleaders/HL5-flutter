@@ -7,6 +7,7 @@ import 'package:holedo/screens/profile-pages/profile-edit/profile-edit.dart';
 import 'package:holedo/screens/profile-pages/profile-overview/profile-overview.dart';
 import 'package:holedo/screens/profile-pages/references/references.dart';
 import 'package:holedo/screens/profile-pages/timeline/timeline.dart';
+import 'package:holedo/services/login_services.dart';
 import 'package:holedo/services/user_profile_service.dart';
 import '../../../controller/menu_controller.dart';
 import '../../../responsive/responsive.dart';
@@ -151,7 +152,7 @@ class _ProfilePageState extends State<ProfilePage>
   //mobile view functionality
 
   final List<Item> _data = generateItems(1);
-
+  final ApiServices _apiClient = ApiServices();
   MenuController _menuController = Get.find();
   // GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
@@ -161,9 +162,9 @@ class _ProfilePageState extends State<ProfilePage>
   Widget build(BuildContext context) {
     return Responsive.isDesktop(context)
         ? FutureBuilder<UserProfileModel>(
-            future: UserProfileService.getUserApi(),
+            future: _apiClient.getUserProfileData(),
             builder: (context, snapshot) {
-              if (snapshot.hasData) {
+              
                 return Container(
                   color: ColorPicker.kBG,
                   child: Column(
@@ -217,10 +218,13 @@ class _ProfilePageState extends State<ProfilePage>
                               ),
                               Row(
                                 children: [
-                                  TabBar(labelColor: ColorPicker.kBlueLight1,
-                                    unselectedLabelColor: ColorPicker.kGreyLight7,
+                                  TabBar(
+                                    labelColor: ColorPicker.kBlueLight1,
+                                    unselectedLabelColor:
+                                        ColorPicker.kGreyLight7,
                                     indicatorColor: ColorPicker.kBlueLight1,
-                                    indicatorPadding: EdgeInsets.symmetric(horizontal: 10),
+                                    indicatorPadding:
+                                        EdgeInsets.symmetric(horizontal: 10),
                                     controller: _tabController,
                                     onTap: (int value) {
                                       _menuController.setTabIndex1(value);
@@ -234,22 +238,21 @@ class _ProfilePageState extends State<ProfilePage>
                                         child: Text(
                                           'Profile overview',
                                           style: TextStyle(
-
                                               fontWeight: FontWeight.w600,
                                               fontFamily: 'SourceSansPro',
                                               fontSize: 14),
                                         ),
                                       ),
                                       Padding(
-                                        padding: EdgeInsets.all(10.0),
-                                        child: Text(
-                                          'Timeline',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            fontFamily: 'SourceSansPro',
-                                            fontSize: 14,
-                                        ),
-                                      )),
+                                          padding: EdgeInsets.all(10.0),
+                                          child: Text(
+                                            'Timeline',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.w600,
+                                              fontFamily: 'SourceSansPro',
+                                              fontSize: 14,
+                                            ),
+                                          )),
                                       Padding(
                                         padding: EdgeInsets.all(10.0),
                                         child: Text(
@@ -284,42 +287,41 @@ class _ProfilePageState extends State<ProfilePage>
                                   ),
                                 ],
                               ),
-                               EditButton(
-                                  onChanged: (value) {
-                                    setState(() {
-                                      isEditable = !value;
-                                    });
-                                  },
-                                  isEditable: isEditable,
-                                  //header card edit functionality
+                              EditButton(
+                                onChanged: (value) {
+                                  setState(() {
+                                    isEditable = !value;
+                                  });
+                                },
+                                isEditable: isEditable,
+                                //header card edit functionality
 
-                                  callBackHeader: callBackHeader,
-                                  headerCardKey: headerCardKey,
+                                callBackHeader: callBackHeader,
+                                headerCardKey: headerCardKey,
 
-                                  //referece card edit functionality
-                                  callBackReference: callBackReference,
-                                  referenceCardKey: referenceCardKey,
+                                //referece card edit functionality
+                                callBackReference: callBackReference,
+                                referenceCardKey: referenceCardKey,
 
-                                  //section1 edit functionality
-                                  callBackButtonSec1: callBackButtonSec1,
-                                  profileOverviewSec1ProSummKey:
-                                      profileOverviewSec1ProSummKey,
-                                  profileOverviewSec1AreaOfExpKey:
-                                      profileOverviewSec1AreaOfExpKey,
-                                  profileOverviewSec1ReferencesKey:
-                                      profileOverviewSec1ReferencesKey,
-                                  //section2 edit functionality
-                                  callBackButtonSec2: callBackButtonSec2,
-                                  profileOverviewSec2WorkExpKey:
-                                      profileOverviewSec2WorkExpKey,
-                                  profileOverviewSec2EducationKey:
-                                      profileOverviewSec2EducationKey,
-                                  profileOverviewSec2AchievementKey:
-                                      profileOverviewSec2AchievementKey,
-                                  profileOverviewSec2LanguagesKey:
-                                      profileOverviewSec2LanguagesKey,
-                                )
-
+                                //section1 edit functionality
+                                callBackButtonSec1: callBackButtonSec1,
+                                profileOverviewSec1ProSummKey:
+                                    profileOverviewSec1ProSummKey,
+                                profileOverviewSec1AreaOfExpKey:
+                                    profileOverviewSec1AreaOfExpKey,
+                                profileOverviewSec1ReferencesKey:
+                                    profileOverviewSec1ReferencesKey,
+                                //section2 edit functionality
+                                callBackButtonSec2: callBackButtonSec2,
+                                profileOverviewSec2WorkExpKey:
+                                    profileOverviewSec2WorkExpKey,
+                                profileOverviewSec2EducationKey:
+                                    profileOverviewSec2EducationKey,
+                                profileOverviewSec2AchievementKey:
+                                    profileOverviewSec2AchievementKey,
+                                profileOverviewSec2LanguagesKey:
+                                    profileOverviewSec2LanguagesKey,
+                              )
                             ],
                           ),
                         ),
