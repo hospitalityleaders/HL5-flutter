@@ -139,7 +139,7 @@ class _LogInState extends State<LogIn> {
             context,
             MaterialPageRoute(
                 builder: (context) =>
-                    _menuController.menuIndex == 0 ? UpdateNews() : LogIn()));
+                    _menuController.menuIndex == 0 ? UpdateNews(token:accessToken) : LogIn()));
       } else {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text('Error: ${res['messages']}'),

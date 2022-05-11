@@ -36,8 +36,8 @@ List<Item> generateItems(int numberOfItems) {
 
 class ProfilePage extends StatefulWidget {
   static const String route = '/second';
-
-  const ProfilePage({Key? key}) : super(key: key);
+String? token;
+   ProfilePage({Key? key,this.token}) : super(key: key);
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -70,7 +70,7 @@ class _ProfilePageState extends State<ProfilePage>
 
   // References card edit functionality
 
-  // final GlobalKey<FormState> referenceCardKey = GlobalKey<FormState>();
+
   var referenceCardKey = List<GlobalKey>.generate(10, (index) => GlobalKey());
   var referenceCard_H;
   var referenceCard_W;
@@ -161,7 +161,7 @@ class _ProfilePageState extends State<ProfilePage>
   Widget build(BuildContext context) {
     return Responsive.isDesktop(context)
         ? FutureBuilder<UserProfileModel>(
-            future: UserProfileService.getUserApi(),
+            future: UserProfileService.getUserApi(widget.token.toString()),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Container(
@@ -406,7 +406,7 @@ class _ProfilePageState extends State<ProfilePage>
             })
         : SingleChildScrollView(
             child: FutureBuilder<UserProfileModel>(
-              future: UserProfileService.getUserApi(),
+              future: UserProfileService.getUserApi(widget.token.toString()),
               builder: (context,snapshot) {
 
               if(snapshot.hasData){

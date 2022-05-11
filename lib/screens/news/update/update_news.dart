@@ -3289,8 +3289,9 @@ import '../categories/news_signal.dart';
 
 class UpdateNews extends StatefulWidget {
   static const String route = '/first';
+  String? token;
 
-  const UpdateNews({Key? key}) : super(key: key);
+   UpdateNews({Key? key,this.token}) : super(key: key);
 
   @override
   _UpdateNewsState createState() => _UpdateNewsState();
@@ -3541,7 +3542,7 @@ class _UpdateNewsState extends State<UpdateNews>
                         //Profile page functionality
 
                         : _menuController.menuIndex.value == 1
-                            ? ProfilePage()
+                            ? ProfilePage(token:widget.token)
                             : _menuController.menuIndex.value == 2
                                 ? Column(
                                     children: [
