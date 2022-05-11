@@ -4,6 +4,10 @@ import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/constant/sizedbox.dart';
 
+import '../../../common/dropDownButton.dart';
+import '../../../common/popUpHeadMenu.dart';
+import '../../../common/textfield_fieldname.dart';
+
 class ProfileOverviewSec3 extends StatefulWidget {
   final pOApiDataSec3;
 
@@ -16,78 +20,273 @@ class ProfileOverviewSec3 extends StatefulWidget {
 class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
   double value = 0.25;
 
-  Widget profileListTile(IconData icon, String title) {
+  /// buildAddyourworkexperiencePopUpCard endstart
+
+  bool isVisibleExperience = false;
+  bool isExperienceEditable = false;
+  bool isExperienceShowCard = false;
+  int indexExp = 1;
+
+  buildExpInnerCard(
+      bool isExperienceEditable, bool isExperienceShowCard, int indexExp) {
+    return StatefulBuilder(builder: (context, setState) {
+      return Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Container(
+          width: SS.sW(context) * .50,
+          color: ColorPicker.kWhite,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                ListTile(
+                  leading: Container(
+                    height: SS.sH(context) * .08,
+                    width: SS.sW(context) * .03,
+                    color: ColorPicker.kBlueLight1,
+                  ),
+                  title: Text(''),
+                  subtitle: Text(''),
+                  trailing: isExperienceEditable
+                      ? IconButton(
+                    onPressed: () {
+                      setState(() {
+                        isExperienceShowCard = !isExperienceShowCard;
+                      });
+                    },
+                    icon: Icon(Icons.edit),
+                  )
+                      : null,
+                ),
+                isExperienceShowCard
+                    ? SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Divider(
+                        height: SS.sH(context) * 0.01,
+                        color: ColorPicker.kGreyLight3,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            TextFieldAndFieldName.buildFieldName('Title / position', '*'),
+                            TextFieldAndFieldName.buildTextField('General manager'),
+                            TextFieldAndFieldName.buildFieldName('Company name', '*'),
+                            TextFieldAndFieldName.buildTextField('Fairmont Zimbali Resort'),
+                            TextFieldAndFieldName.buildFieldName('Company website'),
+                            TextFieldAndFieldName.buildTextField('www.fairmontzimbali.com'),
+                            TextFieldAndFieldName.buildFieldName('Job description'),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: TextField(
+                                autocorrect: true,
+                                minLines: 4,
+                                maxLines: 6,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide(),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                OutlinedButton(
+                                    onPressed: () {},
+                                    child: Text('Cancel')),
+                                SS.sB(0, 10),
+                                ElevatedButton(
+                                    onPressed: () {}, child: Text('Save'))
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+                    : Container()
+              ],
+            ),
+          ),
+        ),
+      );
+    });
+  }
+
+  Future<String?> buildAddyourworkexperiencePopUpCard() {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return Dialog(
+              child: Container(
+                color: ColorPicker.kGreyLight3,
+                width: SS.sW(context) * .50,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      PopUpHeadMenu.popUpHead('Work experience', context),
+                      isVisibleExperience
+                          ? buildExpInnerCard(false, true, indexExp)
+                          : Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: CircleAvatar(
+                          radius: 30,
+                          backgroundColor: ColorPicker.kGreenNeon,
+                          child: IconButton(
+                            color: ColorPicker.kWhite,
+                            onPressed: () {
+                              setState(
+                                    () {
+                                  isVisibleExperience =
+                                  !isVisibleExperience;
+                                },
+                              );
+                            },
+                            icon: Icon(Icons.add),
+                          ),
+                        ),
+                      ),
+                      buildExpInnerCard(true, isExperienceShowCard, indexExp),
+                      buildExpInnerCard(true, isExperienceShowCard, indexExp),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  /// buildAddyourworkexperiencePopUpCard end
+
+
+  buildAddyourqualificationsPopUpCard() {}
+
+  buildAddyourspecialitiesPopUpCard() {}
+  int langIndex = 2;
+
+  List langItem = [
+    'Native or bilingual profiency1',
+    'Native or bilingual profiency2',
+    'Native or bilingual profiency3'
+  ];
+
+  Future<String?>buildAddyourlanguagesPopUpCards() {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return StatefulBuilder(builder: (BuildContext context, setState) {
+            List<Widget> textField =
+                List.generate(langIndex, (int i) => TextFieldAndFieldName.buildTextField());
+            List<Widget> menuItem = List.generate(
+                langIndex,
+                (int i) => DropDownButton(
+                      menuList: langItem,
+                      hintText: 'Native or bilingual profiency',
+                    ));
+            return Dialog(
+              child: Container(
+                color: ColorPicker.kGreyLight3,
+                width: SS.sW(context) * .50,
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      PopUpHeadMenu.popUpHead('Languages', context),
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Container(
+                          width: SS.sW(context) * .50,
+                          color: ColorPicker.kWhite,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                    TextFieldAndFieldName.buildFieldName('Language', '*'),
+                                      SS.sB(10, 0),
+                                      Column(
+                                        children: textField,
+                                      ),
+                                      TextButton.icon(
+                                        onPressed: () {
+                                          setState(() {
+                                            langIndex++;
+                                          });
+                                        },
+                                        icon: Icon(Icons.add),
+                                        label: Text('Add another'),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 2,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      TextFieldAndFieldName.buildFieldName('Proficiency', '*'),
+                                      SS.sB(10, 0),
+                                      Column(
+                                        children: menuItem,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          OutlinedButton(
+                                              onPressed: () {},
+                                              child: Text('Cancel')),
+                                          SS.sB(0, 10),
+                                          ElevatedButton(
+                                              onPressed: () {},
+                                              child: Text('Save'))
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          });
+        });
+  }
+
+  Widget profileListTile(IconData icon, String title, popUp) {
     return Column(
       children: [
         ListTile(
-          // pop up functionality
-          // onTap: () {
-          //   showDialog(
-          //     context: context,
-          //     builder: (context) =>
-          //         Padding(
-          //           padding: const EdgeInsets.symmetric(horizontal: 20),
-          //           child: ListView(
-          //             children: [
-          //               Card(
-          //                 color: const Color(0xFFdddfe3),
-          //                 child: Column(
-          //                   children: [
-          //                     Card(
-          //                       color: Colors.white,
-          //                       elevation: 0.0,
-          //                       child: ListTile(
-          //                         minLeadingWidth: 1,
-          //                         title: const Text('Work experience'),
-          //                         trailing: IconButton(
-          //                             icon: const Icon(
-          //                               Icons.cancel_outlined,
-          //                               color: Color(0xff0d9bdc),
-          //                             ),
-          //                             onPressed: () => Navigator.pop(context)),
-          //                       ),
-          //                     ),
-          //                     const SizedBox(
-          //                       height: 80,
-          //                     ),
-          //                     Card(
-          //                       color: Colors.white,
-          //                       elevation: 0.0,
-          //                       child: ListTile(
-          //                         leading: Container(
-          //                           height: 40,
-          //                           width: 40,
-          //                           decoration: const BoxDecoration(
-          //                             color: Color(0xFF0d9bdc),
-          //                           ),
-          //                           child: const Icon(
-          //                             Icons.apartment_outlined,
-          //                             color: Colors.white,
-          //                           ),
-          //                         ),
-          //                         title: Column(
-          //                           mainAxisAlignment: MainAxisAlignment.start,
-          //                           children: const [
-          //                             Text('General Manager'),
-          //                             Text(
-          //                                 'Fairmont Zimbali Resort · Cape Town'),
-          //                           ],
-          //                         ),
-          //                         subtitle: const Text(
-          //                             'February 2012 – January 2013 (11 months)'),
-          //                       ),
-          //                     ),
-          //                     const SizedBox(
-          //                       height: 500,
-          //                     )
-          //                   ],
-          //                 ),
-          //               ),
-          //             ],
-          //           ),
-          //         ),
-          //   );
-          // },
+          onTap: () {
+            popUp();
+          },
           leading: Icon(
             icon,
             color: const Color(0xFF0d9bdc),
@@ -163,12 +362,23 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                       style: FontTextStyle.kWhite20W400SSP),
                 ),
                 profileListTile(
-                    Icons.add_box_outlined, 'Add your work experience'),
+                  Icons.add_box_outlined,
+                  'Add your work experience',buildAddyourworkexperiencePopUpCard
+                ),
                 profileListTile(
-                    Icons.add_box_outlined, 'Add your qualifications'),
+                  Icons.add_box_outlined,
+                  'Add your qualifications',buildAddyourqualificationsPopUpCard
+                ),
                 profileListTile(
-                    Icons.add_box_outlined, 'Add your specialities'),
-                profileListTile(Icons.add_box_outlined, 'Add your languages'),
+                  Icons.add_box_outlined,
+                  'Add your specialities',
+                    buildAddyourspecialitiesPopUpCard
+                ),
+                profileListTile(
+                  Icons.add_box_outlined,
+                  'Add your languages',
+                    buildAddyourlanguagesPopUpCards
+                ),
                 const SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: () {
@@ -203,12 +413,10 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                 Padding(
+                Padding(
                   padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    'Connections',
-                    style:FontTextStyle.kBlueDark120W400SSP
-                  ),
+                  child: Text('Connections',
+                      style: FontTextStyle.kBlueDark120W400SSP),
                 ),
                 const SizedBox(height: 8),
                 Divider(height: 1, color: Colors.grey.shade400),
@@ -261,12 +469,10 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                     style: FontTextStyle.kGreyLight514W400SSP,
                   ),
                 ),
-                 Padding(
+                Padding(
                   padding: EdgeInsets.symmetric(horizontal: 12, vertical: 5),
-                  child: Text(
-                    'View mutual connections',
-                    style:FontTextStyle.kBlueLight114W400SSP
-                  ),
+                  child: Text('View mutual connections',
+                      style: FontTextStyle.kBlueLight114W400SSP),
                 ),
                 Divider(height: 1, color: Colors.grey.shade400),
                 Padding(

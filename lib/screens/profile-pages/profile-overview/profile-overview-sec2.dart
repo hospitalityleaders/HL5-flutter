@@ -5,6 +5,7 @@ import 'package:holedo/common/dropDownButton.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
 
 import '../../../common/popUpHeadMenu.dart';
+import '../../../common/textfield_fieldname.dart';
 import '../../../constant/colorPicker/color_picker.dart';
 import '../../../constant/sizedbox.dart';
 import '../profile-edit/profile-edit.dart';
@@ -273,47 +274,47 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
 
   /// pop up functionality Start
 
-  /// build field Name Common start
-
-  buildFieldName(String fieldName, [String? reqField]) {
-    return Column(
-      children: [
-        RichText(
-          text: TextSpan(
-              text: '$fieldName ',
-              style: FontTextStyle.kBlueDark118W700SSP,
-              children: [
-                TextSpan(
-                    text: reqField, style: FontTextStyle.kBlueLight114W400SSP),
-              ]),
-        ),
-        SS.sB(5)
-      ],
-    );
-  }
-
-  buildTextField([String? hintText]) {
-    return Column(
-      children: [
-        Container(
-          height: 36,
-          color: ColorPicker.kGreyLight9,
-          child: TextFormField(
-            decoration: InputDecoration(
-              hintText: hintText,
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(2),
-                  borderSide:
-                      BorderSide(color: ColorPicker.kGreyLight9, width: 2)),
-            ),
-          ),
-        ),
-        SS.sB(18),
-      ],
-    );
-  }
-
-  /// build field Name Common end
+  // /// build field Name Common start
+  //
+  // buildFieldName(String fieldName, [String? reqField]) {
+  //   return Column(
+  //     children: [
+  //       RichText(
+  //         text: TextSpan(
+  //             text: '$fieldName ',
+  //             style: FontTextStyle.kBlueDark118W700SSP,
+  //             children: [
+  //               TextSpan(
+  //                   text: reqField, style: FontTextStyle.kBlueLight114W400SSP),
+  //             ]),
+  //       ),
+  //       SS.sB(5)
+  //     ],
+  //   );
+  // }
+  //
+  // buildTextField([String? hintText]) {
+  //   return Column(
+  //     children: [
+  //       Container(
+  //         height: 36,
+  //         color: ColorPicker.kGreyLight9,
+  //         child: TextFormField(
+  //           decoration: InputDecoration(
+  //             hintText: hintText,
+  //             border: OutlineInputBorder(
+  //                 borderRadius: BorderRadius.circular(2),
+  //                 borderSide:
+  //                     BorderSide(color: ColorPicker.kGreyLight9, width: 2)),
+  //           ),
+  //         ),
+  //       ),
+  //       SS.sB(18),
+  //     ],
+  //   );
+  // }
+  //
+  // /// build field Name Common end
 
   /// Work experience pop up edit functionality start
 
@@ -365,13 +366,13 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  buildFieldName('Title / position', '*'),
-                                  buildTextField('General manager'),
-                                  buildFieldName('Company name', '*'),
-                                  buildTextField('Fairmont Zimbali Resort'),
-                                  buildFieldName('Company website'),
-                                  buildTextField('www.fairmontzimbali.com'),
-                                  buildFieldName('Job description'),
+                                  TextFieldAndFieldName.buildFieldName('Title / position', '*'),
+                                  TextFieldAndFieldName.buildTextField('General manager'),
+                                  TextFieldAndFieldName.buildFieldName('Company name', '*'),
+                                  TextFieldAndFieldName.buildTextField('Fairmont Zimbali Resort'),
+                                  TextFieldAndFieldName.buildFieldName('Company website'),
+                                  TextFieldAndFieldName.buildTextField('www.fairmontzimbali.com'),
+                                  TextFieldAndFieldName.buildFieldName('Job description'),
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: TextField(
@@ -472,7 +473,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
       bool isEducationEditable, bool isEducationShowCard, int indexEdu) {
     return StatefulBuilder(builder: (context, setState) {
       List<Widget> eduTextFieldGenerate =
-          List.generate(indexEdu, (int i) => buildTextField('Course name'));
+          List.generate(indexEdu, (int i) => TextFieldAndFieldName.buildTextField('Course name'));
       return Padding(
         padding: const EdgeInsets.all(16.0),
         child: Container(
@@ -514,13 +515,13 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  buildFieldName(
+                                  TextFieldAndFieldName.buildFieldName(
                                       'Educational institution', '*'),
-                                  buildTextField(),
-                                  buildFieldName('Course duration'),
-                                  buildFieldName('Qualification title'),
-                                  buildTextField(),
-                                  buildFieldName('Description'),
+                                  TextFieldAndFieldName.buildTextField(),
+                                  TextFieldAndFieldName.buildFieldName('Course duration'),
+                                  TextFieldAndFieldName.buildFieldName('Qualification title'),
+                                  TextFieldAndFieldName.buildTextField(),
+                                  TextFieldAndFieldName.buildFieldName('Description'),
                                   TextField(
                                     autocorrect: true,
                                     minLines: 4,
@@ -532,7 +533,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                                     ),
                                   ),
                                   SS.sB(18),
-                                  buildFieldName('Course outline'),
+                                  TextFieldAndFieldName.buildFieldName('Course outline'),
                                   Column(children: eduTextFieldGenerate),
                                   TextButton.icon(
                                     onPressed: () {
@@ -667,17 +668,17 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                buildFieldName('Achievement type', '*'),
+                                TextFieldAndFieldName.buildFieldName('Achievement type', '*'),
                                 DropDownButton(
                                     menuList: achiveList,
                                     hintText: 'Presentation'),
-                                buildFieldName('Achievement title'),
-                                buildTextField(),
-                                buildFieldName('Issuing entity'),
-                                buildTextField(),
-                                buildFieldName('Award/Website link'),
-                                buildTextField(),
-                                buildFieldName('Date received'),
+                                TextFieldAndFieldName.buildFieldName('Achievement title'),
+                                TextFieldAndFieldName.buildTextField(),
+                                TextFieldAndFieldName.buildFieldName('Issuing entity'),
+                                TextFieldAndFieldName.buildTextField(),
+                                TextFieldAndFieldName.buildFieldName('Award/Website link'),
+                                TextFieldAndFieldName.buildTextField(),
+                                TextFieldAndFieldName.buildFieldName('Date received'),
                                 SizedBox(
                                   width: 100,
                                   child: DropDownButton(
@@ -771,7 +772,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
         builder: (BuildContext context) {
           return StatefulBuilder(builder: (BuildContext context, setState) {
             List<Widget> textField =
-                List.generate(langIndex, (int i) => buildTextField());
+                List.generate(langIndex, (int i) => TextFieldAndFieldName.buildTextField());
             List<Widget> menuItem = List.generate(
                 langIndex,
                 (int i) => DropDownButton(
@@ -805,7 +806,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      buildFieldName('Language', '*'),
+                                      TextFieldAndFieldName.buildFieldName('Language', '*'),
                                       SS.sB(10, 0),
                                       Column(
                                         children: textField,
@@ -832,7 +833,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                                         CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      buildFieldName('Proficiency', '*'),
+                                      TextFieldAndFieldName.buildFieldName('Proficiency', '*'),
                                       SS.sB(10, 0),
                                       Column(
                                         children: menuItem,

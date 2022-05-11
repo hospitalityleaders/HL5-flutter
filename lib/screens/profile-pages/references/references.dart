@@ -55,18 +55,20 @@ class _ReferencesState extends State<References> {
                     image: NetworkImage(img),
                     fit: BoxFit.cover,
                   ),
-                  title:RichText(
+                  title: RichText(
                     text: TextSpan(children: [
-                      TextSpan(text: title, style: FontTextStyle.kBlueDark116W700SSP),
-                      TextSpan(text: userId, style: FontTextStyle.kBlueDark112W700SSP)
+                      TextSpan(
+                          text: title,
+                          style: FontTextStyle.kBlueDark116W700SSP),
+                      TextSpan(
+                          text: userId,
+                          style: FontTextStyle.kBlueDark112W700SSP)
                     ]),
                   ),
                   subtitle: Padding(
                     padding: const EdgeInsets.only(right: 30.0),
-                    child: Text(
-                      subTitle,
-                      style: FontTextStyle.kGreyLight514W400SSP
-                    ),
+                    child: Text(subTitle,
+                        style: FontTextStyle.kGreyLight514W400SSP),
                   ),
                 ),
                 Padding(
@@ -96,7 +98,7 @@ class _ReferencesState extends State<References> {
                         ),
                         TextSpan(
                           text: description,
-                          style:FontTextStyle.kGreyLight516W400SSP,
+                          style: FontTextStyle.kGreyLight516W400SSP,
                         ),
                       ],
                     ),
@@ -164,11 +166,13 @@ class _ReferencesState extends State<References> {
                           TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
                     ),
                     Text(
-                        'Your profile picture will be used on your profile and throughout the site.',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 12,
-                            color: Color(0xffbdb5c2)))
+                      'Your profile picture will be used on your profile and throughout the site.',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                        color: Color(0xffbdb5c2),
+                      ),
+                    ),
                   ],
                 )
               ],
@@ -208,7 +212,7 @@ class _ReferencesState extends State<References> {
                 ),
                 Column(children: []),
               ],
-            )
+            ),
           ],
         ),
       ),
@@ -217,7 +221,7 @@ class _ReferencesState extends State<References> {
 
   @override
   Widget build(BuildContext context) {
-        return Container(
+    return Container(
       child: Padding(
         padding: EdgeInsets.symmetric(
             horizontal: SS.sW(context) * 0.070, vertical: SS.sH(context) * .02),
