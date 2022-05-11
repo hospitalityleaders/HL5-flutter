@@ -405,178 +405,192 @@ class _ProfilePageState extends State<ProfilePage>
               }
             })
         : SingleChildScrollView(
-            child: Column(
-              children: [
-                HeaderCard(
-                  isEditable: isEditable,
-                  headerCardKey: headerCardKey,
-                  headerCard_H: headerCard_H,
-                  headerCard_W: headerCard_W,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ExpansionPanelList(
-                    expansionCallback: (int index, bool isExpanded) {
-                      setState(() {
-                        _data[index].isExpanded = !isExpanded;
-                      });
-                    },
-                    children: _data.map<ExpansionPanel>((Item item) {
-                      return ExpansionPanel(
-                        headerBuilder: (BuildContext context, bool isExpanded) {
-                          return ListTile(
-                            leading: Container(
-                              height: 26,
-                              width: 26,
-                              decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                      image: NetworkImage(
-                                          'https://images.pexels.com/photos/937481/pexels-photo-937481.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'))),
-                            ),
-                            title: Row(
-                              children: [
-                                Text(
-                                  'Noberto Holden',
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w700,
-                                      color: Color(0xFF272E41)),
+            child: FutureBuilder<UserProfileModel>(
+              future: UserProfileService.getUserApi(),
+              builder: (context,snapshot) {
+
+              if(snapshot.hasData){
+                return Column(
+                  children: [
+
+                    HeaderCard(
+                        isEditable: isEditable,
+                        headerCardKey: headerCardKey,
+                        headerCard_H: headerCard_H,
+                        headerCard_W: headerCard_W,
+                        hCardApiData: snapshot.data!.data!.user!
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ExpansionPanelList(
+                        expansionCallback: (int index, bool isExpanded) {
+                          setState(() {
+                            _data[index].isExpanded = !isExpanded;
+                          });
+                        },
+                        children: _data.map<ExpansionPanel>((Item item) {
+                          return ExpansionPanel(
+                            headerBuilder: (BuildContext context, bool isExpanded) {
+                              return ListTile(
+                                leading: Container(
+                                  height: 26,
+                                  width: 26,
+                                  decoration: const BoxDecoration(
+                                      image: DecorationImage(
+                                          image: NetworkImage(
+                                              'https://images.pexels.com/photos/937481/pexels-photo-937481.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'))),
                                 ),
-                                const Text(
-                                  'MHL',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w700,
-                                    color: Color(0xFF272E41),
+                                title: Row(
+                                  children: [
+                                    Text(
+                                      'Noberto Holden',
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w700,
+                                          color: Color(0xFF272E41)),
+                                    ),
+                                    const Text(
+                                      'MHL',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w700,
+                                        color: Color(0xFF272E41),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                            body: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      TextButton(
+                                          onPressed: () {},
+                                          child: Text('Profile Overview')),
+                                      TextButton(
+                                        onPressed: () {},
+                                        child: Text('Timeline'),
+                                      ),
+                                      TextButton(
+                                          onPressed: () {},
+                                          child: Text('Articles')),
+                                      TextButton(
+                                        onPressed: () {},
+                                        child: Text('Activity'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {},
+                                        child: Text('References'),
+                                      ),
+                                      StatefulBuilder(
+                                        builder: (context, setState) => EditButton(
+                                          onChanged: (value) {
+                                            setState(() {
+                                              isEditable = !value;
+                                            });
+                                          },
+                                          isEditable: isEditable,
+                                          //header card edit functionality
+
+                                          callBackHeader: callBackHeader,
+                                          headerCardKey: headerCardKey,
+
+                                          //section1 edit functionality
+                                          callBackButtonSec1: callBackButtonSec1,
+                                          profileOverviewSec1ProSummKey:
+                                          profileOverviewSec1ProSummKey,
+                                          profileOverviewSec1AreaOfExpKey:
+                                          profileOverviewSec1AreaOfExpKey,
+                                          profileOverviewSec1ReferencesKey:
+                                          profileOverviewSec1ReferencesKey,
+                                          //section2 edit functionality
+                                          callBackButtonSec2: callBackButtonSec2,
+                                          profileOverviewSec2WorkExpKey:
+                                          profileOverviewSec2WorkExpKey,
+                                          profileOverviewSec2EducationKey:
+                                          profileOverviewSec2EducationKey,
+                                          profileOverviewSec2AchievementKey:
+                                          profileOverviewSec2AchievementKey,
+                                          profileOverviewSec2LanguagesKey:
+                                          profileOverviewSec2LanguagesKey,
+
+                                          // References card edit functionality
+
+                                          callBackReference: callBackReference,
+                                          referenceCardKey: referenceCardKey,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ],
                             ),
+                            isExpanded: item.isExpanded,
                           );
-                        },
-                        body: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  TextButton(
-                                      onPressed: () {},
-                                      child: Text('Profile Overview')),
-                                  TextButton(
-                                    onPressed: () {},
-                                    child: Text('Timeline'),
-                                  ),
-                                  TextButton(
-                                      onPressed: () {},
-                                      child: Text('Articles')),
-                                  TextButton(
-                                    onPressed: () {},
-                                    child: Text('Activity'),
-                                  ),
-                                  TextButton(
-                                    onPressed: () {},
-                                    child: Text('References'),
-                                  ),
-                                  StatefulBuilder(
-                                    builder: (context, setState) => EditButton(
-                                      onChanged: (value) {
-                                        setState(() {
-                                          isEditable = !value;
-                                        });
-                                      },
-                                      isEditable: isEditable,
-                                      //header card edit functionality
-
-                                      callBackHeader: callBackHeader,
-                                      headerCardKey: headerCardKey,
-
-                                      //section1 edit functionality
-                                      callBackButtonSec1: callBackButtonSec1,
-                                      profileOverviewSec1ProSummKey:
-                                          profileOverviewSec1ProSummKey,
-                                      profileOverviewSec1AreaOfExpKey:
-                                          profileOverviewSec1AreaOfExpKey,
-                                      profileOverviewSec1ReferencesKey:
-                                          profileOverviewSec1ReferencesKey,
-                                      //section2 edit functionality
-                                      callBackButtonSec2: callBackButtonSec2,
-                                      profileOverviewSec2WorkExpKey:
-                                          profileOverviewSec2WorkExpKey,
-                                      profileOverviewSec2EducationKey:
-                                          profileOverviewSec2EducationKey,
-                                      profileOverviewSec2AchievementKey:
-                                          profileOverviewSec2AchievementKey,
-                                      profileOverviewSec2LanguagesKey:
-                                          profileOverviewSec2LanguagesKey,
-
-                                      // References card edit functionality
-
-                                      callBackReference: callBackReference,
-                                      referenceCardKey: referenceCardKey,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        isExpanded: item.isExpanded,
-                      );
-                    }).toList(),
-                  ),
-                ),
-                ProfileOverview(
-                  isEditable: isEditable,
-                  //section1 edit functionality
-                  profileOverviewSec1ProSummKey: profileOverviewSec1ProSummKey,
-                  profileOverviewSec1ProSumm_H: profileOverviewSec1ProSumm_H,
-                  profileOverviewSec1ProSumm_W: profileOverviewSec1ProSumm_W,
-                  profileOverviewSec1AreaOfExpKey:
+                        }).toList(),
+                      ),
+                    ),
+                    ProfileOverview(
+                      isEditable: isEditable,
+                      //section1 edit functionality
+                      profileOverviewSec1ProSummKey: profileOverviewSec1ProSummKey,
+                      profileOverviewSec1ProSumm_H: profileOverviewSec1ProSumm_H,
+                      profileOverviewSec1ProSumm_W: profileOverviewSec1ProSumm_W,
+                      profileOverviewSec1AreaOfExpKey:
                       profileOverviewSec1AreaOfExpKey,
 
-                  profileOverviewSec1AreaOfExp_H:
+                      profileOverviewSec1AreaOfExp_H:
                       profileOverviewSec1AreaOfExp_H,
-                  profileOverviewSec1AreaOfExp_W:
+                      profileOverviewSec1AreaOfExp_W:
                       profileOverviewSec1AreaOfExp_W,
 
-                  profileOverviewSec1ReferencesKey:
+                      profileOverviewSec1ReferencesKey:
                       profileOverviewSec1ReferencesKey,
-                  profileOverviewSec1References_H:
+                      profileOverviewSec1References_H:
                       profileOverviewSec1References_H,
-                  profileOverviewSec1References_W:
+                      profileOverviewSec1References_W:
                       profileOverviewSec1References_W,
 
-                  //section2 edit functionality
+                      //section2 edit functionality
 
-                  profileOverviewSec2WorkExpKey: profileOverviewSec2WorkExpKey,
-                  profileOverviewSec2WorkExp_H: profileOverviewSec2WorkExp_H,
-                  profileOverviewSec2WorkExp_W: profileOverviewSec2WorkExp_W,
+                      profileOverviewSec2WorkExpKey: profileOverviewSec2WorkExpKey,
+                      profileOverviewSec2WorkExp_H: profileOverviewSec2WorkExp_H,
+                      profileOverviewSec2WorkExp_W: profileOverviewSec2WorkExp_W,
 
-                  profileOverviewSec2EducationKey:
+                      profileOverviewSec2EducationKey:
                       profileOverviewSec2EducationKey,
-                  profileOverviewSec2Education_H:
+                      profileOverviewSec2Education_H:
                       profileOverviewSec2Education_H,
-                  profileOverviewSec2Education_W:
+                      profileOverviewSec2Education_W:
                       profileOverviewSec2Education_W,
 
-                  profileOverviewSec2AchievementKey:
+                      profileOverviewSec2AchievementKey:
                       profileOverviewSec2AchievementKey,
-                  profileOverviewSec2Achievement_H:
+                      profileOverviewSec2Achievement_H:
                       profileOverviewSec2Achievement_H,
-                  profileOverviewSec2Achievement_W:
+                      profileOverviewSec2Achievement_W:
                       profileOverviewSec2Achievement_W,
 
-                  profileOverviewSec2LanguagesKey:
+                      profileOverviewSec2LanguagesKey:
                       profileOverviewSec2LanguagesKey,
-                  profileOverviewSec2Languages_H:
+                      profileOverviewSec2Languages_H:
                       profileOverviewSec2Languages_H,
-                  profileOverviewSec2Languages_W:
+                      profileOverviewSec2Languages_W:
                       profileOverviewSec2Languages_W,
-                ),
-              ],
+                      pOApiData: snapshot.data!.data!.user!,
+                    ),
+                  ],
+                );
+              }
+              else{
+                return Container();
+              }
+              }
             ),
           );
   }

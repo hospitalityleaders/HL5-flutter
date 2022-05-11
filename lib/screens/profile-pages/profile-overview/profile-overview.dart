@@ -194,7 +194,7 @@ class _ProfileOverviewState extends State<ProfileOverview> {
               ],
             ))
         : SingleChildScrollView(
-            child: Column(
+            child: Column(  
               children: [
                 ProfileOverviewSec1(
                     sec1IsEditable: widget.isEditable,
@@ -215,35 +215,37 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                     profileOverviewSec1References_H:
                         widget.profileOverviewSec1References_H,
                     profileOverviewSec1References_W:
-                        widget.profileOverviewSec1References_W),
-                // ProfileOverviewSec2(
-                //   sec2IsEditable: widget.isEditable,
-                //   profileOverviewSec2WorkExpKey:
-                //       widget.profileOverviewSec2WorkExpKey,
-                //   profileOverviewSec2WorkExp_H:
-                //       widget.profileOverviewSec2WorkExp_H,
-                //   profileOverviewSec2WorkExp_W:
-                //       widget.profileOverviewSec2WorkExp_W,
-                //   profileOverviewSec2EducationKey:
-                //       widget.profileOverviewSec2EducationKey,
-                //   profileOverviewSec2Education_H:
-                //       widget.profileOverviewSec2Education_H,
-                //   profileOverviewSec2Education_W:
-                //       widget.profileOverviewSec2Education_W,
-                //   profileOverviewSec2AchievementKey:
-                //       widget.profileOverviewSec2AchievementKey,
-                //   profileOverviewSec2Achievement_H:
-                //       widget.profileOverviewSec2Achievement_H,
-                //   profileOverviewSec2Achievement_W:
-                //       widget.profileOverviewSec2Achievement_W,
-                //   profileOverviewSec2LanguagesKey:
-                //       widget.profileOverviewSec2LanguagesKey,
-                //   profileOverviewSec2Languages_H:
-                //       widget.profileOverviewSec2Languages_H,
-                //   profileOverviewSec2Languages_W:
-                //       widget.profileOverviewSec2Languages_W,
-                // ),
-                // ProfileOverviewSec3(),
+                        widget.profileOverviewSec1References_W,
+                  pOApiDataSec1: widget.pOApiData,),
+                ProfileOverviewSec2(
+                  sec2IsEditable: widget.isEditable,
+                  profileOverviewSec2WorkExpKey:
+                      widget.profileOverviewSec2WorkExpKey,
+                  profileOverviewSec2WorkExp_H:
+                      widget.profileOverviewSec2WorkExp_H,
+                  profileOverviewSec2WorkExp_W:
+                      widget.profileOverviewSec2WorkExp_W,
+                  profileOverviewSec2EducationKey:
+                      widget.profileOverviewSec2EducationKey,
+                  profileOverviewSec2Education_H:
+                      widget.profileOverviewSec2Education_H,
+                  profileOverviewSec2Education_W:
+                      widget.profileOverviewSec2Education_W,
+                  profileOverviewSec2AchievementKey:
+                      widget.profileOverviewSec2AchievementKey,
+                  profileOverviewSec2Achievement_H:
+                      widget.profileOverviewSec2Achievement_H,
+                  profileOverviewSec2Achievement_W:
+                      widget.profileOverviewSec2Achievement_W,
+                  profileOverviewSec2LanguagesKey:
+                      widget.profileOverviewSec2LanguagesKey,
+                  profileOverviewSec2Languages_H:
+                      widget.profileOverviewSec2Languages_H,
+                  profileOverviewSec2Languages_W:
+                      widget.profileOverviewSec2Languages_W,
+                  pOApiDataSec2: widget.pOApiData,
+                ),
+                ProfileOverviewSec3(pOApiDataSec3: widget.pOApiData,),
               ],
             ),
           );
