@@ -65,12 +65,6 @@ class _HeaderCardState extends State<HeaderCard> {
   bool isHoveringCard = false;
   bool isHoveringInnerCard = false;
 
-  // _launchUrl(url) async {
-  //   if (!await launchUrl(url)) throw 'Could not launch $url';
-  // }
-
-  final Uri url = Uri.parse('https://flutter.dev');
-
   buildContactCardPopUpInnerCard(
       IconData icon, String title, bool isHoveringInnerCard) {
     return StatefulBuilder(builder: (context, setState) {
@@ -177,7 +171,7 @@ class _HeaderCardState extends State<HeaderCard> {
         builder: (context, setState) {
           return Dialog(
             child: Container(
-              decoration: BoxDecoration(borderRadius: BorderRadius.zero),
+              color: ColorPicker.kWhite,
               width: SS.sW(context) * .50,
               child: SingleChildScrollView(
                 child: Column(
@@ -225,15 +219,16 @@ class _HeaderCardState extends State<HeaderCard> {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 GestureDetector(
-                                    onTap: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: Container(
-                                      child: Icon(
-                                        Icons.close,
-                                        color: ColorPicker.kBlueLight,
-                                      ),
-                                    ))
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Container(
+                                    child: Icon(
+                                      Icons.close,
+                                      color: ColorPicker.kBlueLight,
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
                           ),
@@ -345,7 +340,7 @@ class _HeaderCardState extends State<HeaderCard> {
         RichText(
           text: TextSpan(
               text: '$fieldName ',
-              style: FontTextStyle.kBlueDark118W700SSP,
+              style: FontTextStyle.kBlueDark114W700SSP,
               children: [
                 TextSpan(
                     text: reqField, style: FontTextStyle.kBlueLight114W400SSP),
@@ -601,20 +596,30 @@ class _HeaderCardState extends State<HeaderCard> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      PopUpHeadMenu.popUpHead(
-                          'Send conection request', context),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 4, horizontal: 16),
+                        child: PopUpHeadMenu.popUpHead(
+                            'Send conection request', context),
+                      ),
                       Divider(
                         color: ColorPicker.kGreyLight4,
                         thickness: 0.5,
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.all(20.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            buildFieldName('Send to:'),
-                            buildTextField(),
-                            buildFieldName('Intro message'),
+                            buildFieldName('Send to'),
+                            Container(decoration: BoxDecoration(border: Border.all(color: ColorPicker.kGreyLight8)),
+                              child: ListTile(
+                                leading: Image.network(
+                                    widget.hCardApiData.avatar.toString(),height: 26,width: 26,fit: BoxFit.cover,),
+                              title: Text(widget.hCardApiData.fullName.toString(),style: FontTextStyle.kGreyLight516W700SSP,),),
+                            ),
+                            SS.sB(20),
+                           buildFieldName('Intro message'),
                             Text(
                               'Send a message along with your connection request.',
                               style: FontTextStyle.kGreyLight514W400SSP,
@@ -668,12 +673,15 @@ class _HeaderCardState extends State<HeaderCard> {
     return showDialog(
       context: context,
       builder: (BuildContext context) => Dialog(
-        child: Container(
+        child: Container(color: ColorPicker.kWhite,
           width: SS.sW(context) * .60,
           child: SingleChildScrollView(
             child: Column(
               children: [
-                PopUpHeadMenu.popUpHead('Write a reference', context),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 4),
+                  child: PopUpHeadMenu.popUpHead('Write a reference', context),
+                ),
                 Divider(
                   color: ColorPicker.kGreyLight4,
                   height: .5,
@@ -686,12 +694,18 @@ class _HeaderCardState extends State<HeaderCard> {
                       child: Container(
                         color: ColorPicker.kWhite,
                         child: Padding(
-                          padding: const EdgeInsets.all(16.0),
+                          padding: const EdgeInsets.all(20.0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               buildFieldName('Reference recipient'),
-                              buildTextField(),
+                              Container(decoration: BoxDecoration(border: Border.all(color: ColorPicker.kGreyLight8)),
+                                child: ListTile(
+                                  leading: Image.network(
+                                    widget.hCardApiData.avatar.toString(),height: 26,width: 26,fit: BoxFit.cover,),
+                                  title: Text(widget.hCardApiData.fullName.toString(),style: FontTextStyle.kGreyLight516W700SSP,),),
+                              ),
+                              SS.sB(20),
                               buildFieldName('Reference'),
                               Row(
                                 mainAxisSize: MainAxisSize.min,
@@ -752,7 +766,7 @@ class _HeaderCardState extends State<HeaderCard> {
                             children: [
                               Text(
                                 'REFERENCES',
-                                style: FontTextStyle.kWhite12W700SSP,
+                                style: FontTextStyle.kWhite13W700SSP,
                               ),
                               SS.sB(10),
                               Row(
@@ -762,7 +776,7 @@ class _HeaderCardState extends State<HeaderCard> {
                                     flex: 2,
                                     child: Text(
                                       'What should I include in my reference?',
-                                      style: FontTextStyle.kWhite26W400SSP,
+                                      style: FontTextStyle.kWhite36W400SSP,
                                     ),
                                   ),
                                   Expanded(flex: 1, child: Container())
@@ -782,7 +796,7 @@ class _HeaderCardState extends State<HeaderCard> {
                                     TextSpan(
                                         text:
                                             ''' Your professional relationship''',
-                                        style: FontTextStyle.kWhite14W600SSP)
+                                        style: FontTextStyle.kWhite16W700SSP)
                                   ],
                                 ),
                               ),
@@ -803,14 +817,14 @@ class _HeaderCardState extends State<HeaderCard> {
                                     ),
                                     TextSpan(
                                         text: ''' An endorsement''',
-                                        style: FontTextStyle.kWhite14W600SSP),
+                                        style: FontTextStyle.kWhite16W700SSP),
                                   ],
                                 ),
                               ),
                               Text(
                                   '''Explain the reason for your recommendation? What are the person’s skills, attributes and personality traits that you are recommending?''',
                                   style: FontTextStyle.kWhite16W400SSP),
-                              SS.sB(60),
+                              SS.sB(35),
                             ],
                           ),
                         ),
@@ -827,6 +841,91 @@ class _HeaderCardState extends State<HeaderCard> {
   }
 
   /// buildWriteRefPopUPCard functionality End
+
+
+  /// buildRecommendPopUpCard functionality Start
+
+
+  Future buildRecommendPopUpCard() {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) => Dialog(
+          child: Container(
+            color: ColorPicker.kWhite,
+            width: SS.sW(context) * .45,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 4, horizontal: 16),
+                    child: PopUpHeadMenu.popUpHead(
+                        'Send message', context),
+                  ),
+                  Divider(
+                    color: ColorPicker.kGreyLight4,
+                    thickness: 0.5,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        buildFieldName('Send to'),
+                        Container(decoration: BoxDecoration(border: Border.all(color: ColorPicker.kGreyLight8)),
+                          child: ListTile(
+                            leading: Image.network(
+                              widget.hCardApiData.avatar.toString(),height: 26,width: 26,fit: BoxFit.cover,),
+                            title: Text(widget.hCardApiData.fullName.toString(),style: FontTextStyle.kGreyLight516W700SSP,),),
+                        ),
+                        SS.sB(20),
+                        buildFieldName('Message'),
+
+                        TextField(
+                          autocorrect: true,
+                          minLines: 6,
+                          maxLines: 8,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(),
+                            ),
+                          ),
+                        ),
+                        SS.sB(15),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            InkWell(
+                              onTap: () {},
+                              child: Container(
+                                alignment: Alignment.center,
+                                height: SS.sH(context) * .05,
+                                decoration: BoxDecoration(
+                                    color: ColorPicker.kBlueLight1,
+                                    borderRadius: BorderRadius.circular(4)),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text('Send Request',
+                                      style: FontTextStyle.kWhite14W400SSP),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SS.sB(15),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ));
+  }
+
+
+
+  /// buildRecommendPopUpCard functionality End
 
   bool isHovering = false;
   bool isVisible = false;
@@ -1058,7 +1157,9 @@ class _HeaderCardState extends State<HeaderCard> {
                                       const Color(0xFFe5f4fb),
                                     ),
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    buildRecommendPopUpCard();
+                                  },
                                   label: const Padding(
                                     padding: EdgeInsets.symmetric(vertical: 10),
                                     child: AutoSizeText(
@@ -1096,10 +1197,11 @@ class _HeaderCardState extends State<HeaderCard> {
                                 children: [
                                   cardDataLoad('250+', 'CONNECTIONS'),
                                   cardDataLoad('14k', 'LEADER POINTS'),
-                                  const CircleAvatar(
+                                   CircleAvatar(
                                     radius: 30,
-                                    backgroundImage: NetworkImage(
-                                        'https://cdn.pixabay.com/photo/2012/11/26/15/07/earth-67359__340.jpg'),
+                                    backgroundImage: NetworkImage(widget.hCardApiData.avatarCdn.toString()),
+                                    // backgroundImage: NetworkImage(
+                                    //     'https://cdn.pixabay.com/photo/2012/11/26/15/07/earth-67359__340.jpg'),
                                   ),
                                   cardDataLoad('3', 'REFERENCES'),
                                   cardDataLoad('312', 'RECOMMENDATIONS')

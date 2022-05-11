@@ -129,6 +129,7 @@ class _LogInState extends State<LogIn> {
 
       if (res['errors'] == null) {
         String accessToken = res['data']['token'];
+        print(accessToken);
         final model = Get.put(AuthController()).restoreModel();
         model.setToken = accessToken;
         model.setIsLogined = true;

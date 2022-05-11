@@ -1,7 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:holedo/controller/menu_controller.dart';
 import 'package:holedo/controller/auth_controller.dart';
 import 'package:holedo/screens/Authentication/login.dart';
@@ -21,10 +20,8 @@ class MyCustomScrollBehavior extends MaterialScrollBehavior {
         PointerDeviceKind.touch,
       };
 }
-
 void main() async {
   await Get.put(AuthController()).initStorage();
-
   runApp(
     RobotDetector(
       child: MaterialApp(

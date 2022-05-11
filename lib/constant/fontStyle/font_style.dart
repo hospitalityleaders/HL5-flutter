@@ -741,6 +741,11 @@ class FontTextStyle {
     fontSize: 14,
     fontWeight: FontWeight.w600,
     fontFamily: 'SourceSansPro',
+  );  static TextStyle kBlueDark114W700SSP = TextStyle(
+    color: ColorPicker.kBlueDark1,
+    fontSize: 14,
+    fontWeight: FontWeight.w700,
+    fontFamily: 'SourceSansPro',
   );
   static TextStyle kBlueDark114W400SSP = TextStyle(
     color: ColorPicker.kBlueDark1,

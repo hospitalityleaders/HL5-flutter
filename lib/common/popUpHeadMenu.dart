@@ -20,7 +20,7 @@ class PopUpHeadMenu {
                   padding: const EdgeInsets.all(4.0),
                   child: Text(
                     headName,
-                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
+                    style: FontTextStyle.kBlueDark120W400SSP,
                   ),
                 ),
               ],
