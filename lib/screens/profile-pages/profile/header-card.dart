@@ -612,14 +612,25 @@ class _HeaderCardState extends State<HeaderCard> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             buildFieldName('Send to'),
-                            Container(decoration: BoxDecoration(border: Border.all(color: ColorPicker.kGreyLight8)),
+                            Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: ColorPicker.kGreyLight8)),
                               child: ListTile(
                                 leading: Image.network(
-                                    widget.hCardApiData.avatar.toString(),height: 26,width: 26,fit: BoxFit.cover,),
-                              title: Text(widget.hCardApiData.fullName.toString(),style: FontTextStyle.kGreyLight516W700SSP,),),
+                                  widget.hCardApiData.avatar.toString(),
+                                  height: 26,
+                                  width: 26,
+                                  fit: BoxFit.cover,
+                                ),
+                                title: Text(
+                                  widget.hCardApiData.fullName.toString(),
+                                  style: FontTextStyle.kGreyLight516W700SSP,
+                                ),
+                              ),
                             ),
                             SS.sB(20),
-                           buildFieldName('Intro message'),
+                            buildFieldName('Intro message'),
                             Text(
                               'Send a message along with your connection request.',
                               style: FontTextStyle.kGreyLight514W400SSP,
@@ -673,13 +684,15 @@ class _HeaderCardState extends State<HeaderCard> {
     return showDialog(
       context: context,
       builder: (BuildContext context) => Dialog(
-        child: Container(color: ColorPicker.kWhite,
+        child: Container(
+          color: ColorPicker.kWhite,
           width: SS.sW(context) * .60,
           child: SingleChildScrollView(
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 4),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                   child: PopUpHeadMenu.popUpHead('Write a reference', context),
                 ),
                 Divider(
@@ -699,11 +712,22 @@ class _HeaderCardState extends State<HeaderCard> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               buildFieldName('Reference recipient'),
-                              Container(decoration: BoxDecoration(border: Border.all(color: ColorPicker.kGreyLight8)),
+                              Container(
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: ColorPicker.kGreyLight8)),
                                 child: ListTile(
                                   leading: Image.network(
-                                    widget.hCardApiData.avatar.toString(),height: 26,width: 26,fit: BoxFit.cover,),
-                                  title: Text(widget.hCardApiData.fullName.toString(),style: FontTextStyle.kGreyLight516W700SSP,),),
+                                    widget.hCardApiData.avatar.toString(),
+                                    height: 26,
+                                    width: 26,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  title: Text(
+                                    widget.hCardApiData.fullName.toString(),
+                                    style: FontTextStyle.kGreyLight516W700SSP,
+                                  ),
+                                ),
                               ),
                               SS.sB(20),
                               buildFieldName('Reference'),
@@ -842,88 +866,93 @@ class _HeaderCardState extends State<HeaderCard> {
 
   /// buildWriteRefPopUPCard functionality End
 
-
   /// buildRecommendPopUpCard functionality Start
-
 
   Future buildRecommendPopUpCard() {
     return showDialog(
         context: context,
         builder: (BuildContext context) => Dialog(
-          child: Container(
-            color: ColorPicker.kWhite,
-            width: SS.sW(context) * .45,
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 4, horizontal: 16),
-                    child: PopUpHeadMenu.popUpHead(
-                        'Send message', context),
-                  ),
-                  Divider(
-                    color: ColorPicker.kGreyLight4,
-                    thickness: 0.5,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        buildFieldName('Send to'),
-                        Container(decoration: BoxDecoration(border: Border.all(color: ColorPicker.kGreyLight8)),
-                          child: ListTile(
-                            leading: Image.network(
-                              widget.hCardApiData.avatar.toString(),height: 26,width: 26,fit: BoxFit.cover,),
-                            title: Text(widget.hCardApiData.fullName.toString(),style: FontTextStyle.kGreyLight516W700SSP,),),
-                        ),
-                        SS.sB(20),
-                        buildFieldName('Message'),
-
-                        TextField(
-                          autocorrect: true,
-                          minLines: 6,
-                          maxLines: 8,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(),
-                            ),
-                          ),
-                        ),
-                        SS.sB(15),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
+              child: Container(
+                color: ColorPicker.kWhite,
+                width: SS.sW(context) * .45,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 4, horizontal: 16),
+                        child: PopUpHeadMenu.popUpHead('Send message', context),
+                      ),
+                      Divider(
+                        color: ColorPicker.kGreyLight4,
+                        thickness: 0.5,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            InkWell(
-                              onTap: () {},
-                              child: Container(
-                                alignment: Alignment.center,
-                                height: SS.sH(context) * .05,
-                                decoration: BoxDecoration(
-                                    color: ColorPicker.kBlueLight1,
-                                    borderRadius: BorderRadius.circular(4)),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text('Send Request',
-                                      style: FontTextStyle.kWhite14W400SSP),
+                            buildFieldName('Send to'),
+                            Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: ColorPicker.kGreyLight8)),
+                              child: ListTile(
+                                leading: Image.network(
+                                  widget.hCardApiData.avatar.toString(),
+                                  height: 26,
+                                  width: 26,
+                                  fit: BoxFit.cover,
+                                ),
+                                title: Text(
+                                  widget.hCardApiData.fullName.toString(),
+                                  style: FontTextStyle.kGreyLight516W700SSP,
                                 ),
                               ),
                             ),
+                            SS.sB(20),
+                            buildFieldName('Message'),
+                            TextField(
+                              autocorrect: true,
+                              minLines: 6,
+                              maxLines: 8,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide(),
+                                ),
+                              ),
+                            ),
+                            SS.sB(15),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                InkWell(
+                                  onTap: () {},
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    height: SS.sH(context) * .05,
+                                    decoration: BoxDecoration(
+                                        color: ColorPicker.kBlueLight1,
+                                        borderRadius: BorderRadius.circular(4)),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text('Send Request',
+                                          style: FontTextStyle.kWhite14W400SSP),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SS.sB(15),
                           ],
                         ),
-                        SS.sB(15),
-                      ],
-                    ),
-                  )
-                ],
+                      )
+                    ],
+                  ),
+                ),
               ),
-            ),
-          ),
-        ));
+            ));
   }
-
-
 
   /// buildRecommendPopUpCard functionality End
 
@@ -1096,8 +1125,10 @@ class _HeaderCardState extends State<HeaderCard> {
                               },
                               child: Container(
                                 alignment: Alignment.center,
-                                height: SS.sH(context) * .06,
-                                width: SS.sW(context) * .21,
+                                // height: SS.sH(context) * .06,
+                                // width: SS.sW(context) * .21,
+                                height: 52,
+                                width :285,
                                 decoration: BoxDecoration(
                                     color: ColorPicker.kBlueLight1,
                                     borderRadius: BorderRadius.circular(4)),
@@ -1197,9 +1228,11 @@ class _HeaderCardState extends State<HeaderCard> {
                                 children: [
                                   cardDataLoad('250+', 'CONNECTIONS'),
                                   cardDataLoad('14k', 'LEADER POINTS'),
-                                   CircleAvatar(
+                                  CircleAvatar(
                                     radius: 30,
-                                    backgroundImage: NetworkImage(widget.hCardApiData.avatarCdn.toString()),
+                                    backgroundImage: NetworkImage(widget
+                                        .hCardApiData.avatarCdn
+                                        .toString()),
                                     // backgroundImage: NetworkImage(
                                     //     'https://cdn.pixabay.com/photo/2012/11/26/15/07/earth-67359__340.jpg'),
                                   ),

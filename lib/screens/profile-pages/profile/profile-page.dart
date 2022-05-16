@@ -36,8 +36,9 @@ List<Item> generateItems(int numberOfItems) {
 
 class ProfilePage extends StatefulWidget {
   static const String route = '/second';
-String? token;
-   ProfilePage({Key? key,this.token}) : super(key: key);
+  String? token;
+
+  ProfilePage({Key? key, this.token}) : super(key: key);
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -53,6 +54,7 @@ class _ProfilePageState extends State<ProfilePage>
 
   void initState() {
     _tabController = TabController(length: 5, vsync: this);
+
     super.initState();
   }
 
@@ -69,7 +71,6 @@ class _ProfilePageState extends State<ProfilePage>
   }
 
   // References card edit functionality
-
 
   var referenceCardKey = List<GlobalKey>.generate(10, (index) => GlobalKey());
   var referenceCard_H;
@@ -153,6 +154,7 @@ class _ProfilePageState extends State<ProfilePage>
   final List<Item> _data = generateItems(1);
 
   MenuController _menuController = Get.find();
+
   // GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   List drawerItem = ['Home', 'Profile', 'News', 'Jobs', 'Recruitment', 'Help'];
@@ -217,10 +219,13 @@ class _ProfilePageState extends State<ProfilePage>
                               ),
                               Row(
                                 children: [
-                                  TabBar(labelColor: ColorPicker.kBlueLight1,
-                                    unselectedLabelColor: ColorPicker.kGreyLight7,
+                                  TabBar(
+                                    labelColor: ColorPicker.kBlueLight1,
+                                    unselectedLabelColor:
+                                        ColorPicker.kGreyLight7,
                                     indicatorColor: ColorPicker.kBlueLight1,
-                                    indicatorPadding: EdgeInsets.symmetric(horizontal: 10),
+                                    indicatorPadding:
+                                        EdgeInsets.symmetric(horizontal: 10),
                                     controller: _tabController,
                                     onTap: (int value) {
                                       _menuController.setTabIndex1(value);
@@ -234,22 +239,21 @@ class _ProfilePageState extends State<ProfilePage>
                                         child: Text(
                                           'Profile overview',
                                           style: TextStyle(
-
                                               fontWeight: FontWeight.w600,
                                               fontFamily: 'SourceSansPro',
                                               fontSize: 14),
                                         ),
                                       ),
                                       Padding(
-                                        padding: EdgeInsets.all(10.0),
-                                        child: Text(
-                                          'Timeline',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            fontFamily: 'SourceSansPro',
-                                            fontSize: 14,
-                                        ),
-                                      )),
+                                          padding: EdgeInsets.all(10.0),
+                                          child: Text(
+                                            'Timeline',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.w600,
+                                              fontFamily: 'SourceSansPro',
+                                              fontSize: 14,
+                                            ),
+                                          )),
                                       Padding(
                                         padding: EdgeInsets.all(10.0),
                                         child: Text(
@@ -284,42 +288,41 @@ class _ProfilePageState extends State<ProfilePage>
                                   ),
                                 ],
                               ),
-                               EditButton(
-                                  onChanged: (value) {
-                                    setState(() {
-                                      isEditable = !value;
-                                    });
-                                  },
-                                  isEditable: isEditable,
-                                  //header card edit functionality
+                              EditButton(
+                                onChanged: (value) {
+                                  setState(() {
+                                    isEditable = !value;
+                                  });
+                                },
+                                isEditable: isEditable,
+                                //header card edit functionality
 
-                                  callBackHeader: callBackHeader,
-                                  headerCardKey: headerCardKey,
+                                callBackHeader: callBackHeader,
+                                headerCardKey: headerCardKey,
 
-                                  //referece card edit functionality
-                                  callBackReference: callBackReference,
-                                  referenceCardKey: referenceCardKey,
+                                //referece card edit functionality
+                                callBackReference: callBackReference,
+                                referenceCardKey: referenceCardKey,
 
-                                  //section1 edit functionality
-                                  callBackButtonSec1: callBackButtonSec1,
-                                  profileOverviewSec1ProSummKey:
-                                      profileOverviewSec1ProSummKey,
-                                  profileOverviewSec1AreaOfExpKey:
-                                      profileOverviewSec1AreaOfExpKey,
-                                  profileOverviewSec1ReferencesKey:
-                                      profileOverviewSec1ReferencesKey,
-                                  //section2 edit functionality
-                                  callBackButtonSec2: callBackButtonSec2,
-                                  profileOverviewSec2WorkExpKey:
-                                      profileOverviewSec2WorkExpKey,
-                                  profileOverviewSec2EducationKey:
-                                      profileOverviewSec2EducationKey,
-                                  profileOverviewSec2AchievementKey:
-                                      profileOverviewSec2AchievementKey,
-                                  profileOverviewSec2LanguagesKey:
-                                      profileOverviewSec2LanguagesKey,
-                                )
-
+                                //section1 edit functionality
+                                callBackButtonSec1: callBackButtonSec1,
+                                profileOverviewSec1ProSummKey:
+                                    profileOverviewSec1ProSummKey,
+                                profileOverviewSec1AreaOfExpKey:
+                                    profileOverviewSec1AreaOfExpKey,
+                                profileOverviewSec1ReferencesKey:
+                                    profileOverviewSec1ReferencesKey,
+                                //section2 edit functionality
+                                callBackButtonSec2: callBackButtonSec2,
+                                profileOverviewSec2WorkExpKey:
+                                    profileOverviewSec2WorkExpKey,
+                                profileOverviewSec2EducationKey:
+                                    profileOverviewSec2EducationKey,
+                                profileOverviewSec2AchievementKey:
+                                    profileOverviewSec2AchievementKey,
+                                profileOverviewSec2LanguagesKey:
+                                    profileOverviewSec2LanguagesKey,
+                              )
                             ],
                           ),
                         ),
@@ -406,192 +409,200 @@ class _ProfilePageState extends State<ProfilePage>
             })
         : SingleChildScrollView(
             child: FutureBuilder<UserProfileModel>(
-              future: UserProfileService.getUserApi(widget.token.toString()),
-              builder: (context,snapshot) {
-
-              if(snapshot.hasData){
-                return Column(
-                  children: [
-
-                    HeaderCard(
-                        isEditable: isEditable,
-                        headerCardKey: headerCardKey,
-                        headerCard_H: headerCard_H,
-                        headerCard_W: headerCard_W,
-                        hCardApiData: snapshot.data!.data!.user!
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ExpansionPanelList(
-                        expansionCallback: (int index, bool isExpanded) {
-                          setState(() {
-                            _data[index].isExpanded = !isExpanded;
-                          });
-                        },
-                        children: _data.map<ExpansionPanel>((Item item) {
-                          return ExpansionPanel(
-                            headerBuilder: (BuildContext context, bool isExpanded) {
-                              return ListTile(
-                                leading: Container(
-                                  height: 26,
-                                  width: 26,
-                                  decoration: const BoxDecoration(
-                                      image: DecorationImage(
-                                          image: NetworkImage(
-                                              'https://images.pexels.com/photos/937481/pexels-photo-937481.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'))),
-                                ),
-                                title: Row(
-                                  children: [
-                                    Text(
-                                      'Noberto Holden',
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w700,
-                                          color: Color(0xFF272E41)),
+                future: UserProfileService.getUserApi(widget.token.toString()),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return Column(
+                      children: [
+                        HeaderCard(
+                            isEditable: isEditable,
+                            headerCardKey: headerCardKey,
+                            headerCard_H: headerCard_H,
+                            headerCard_W: headerCard_W,
+                            hCardApiData: snapshot.data!.data!.user!),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ExpansionPanelList(
+                            expansionCallback: (int index, bool isExpanded) {
+                              setState(() {
+                                _data[index].isExpanded = !isExpanded;
+                              });
+                            },
+                            children: _data.map<ExpansionPanel>((Item item) {
+                              return ExpansionPanel(
+                                headerBuilder:
+                                    (BuildContext context, bool isExpanded) {
+                                  return ListTile(
+                                    leading: Container(
+                                      height: 26,
+                                      width: 26,
+                                      decoration: const BoxDecoration(
+                                          image: DecorationImage(
+                                              image: NetworkImage(
+                                                  'https://images.pexels.com/photos/937481/pexels-photo-937481.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'))),
                                     ),
-                                    const Text(
-                                      'MHL',
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w700,
-                                        color: Color(0xFF272E41),
+                                    title: Row(
+                                      children: [
+                                        Text(
+                                          'Noberto Holden',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w700,
+                                              color: Color(0xFF272E41)),
+                                        ),
+                                        const Text(
+                                          'MHL',
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w700,
+                                            color: Color(0xFF272E41),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                                body: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          TextButton(
+                                              onPressed: () {},
+                                              child: Text('Profile Overview')),
+                                          TextButton(
+                                            onPressed: () {},
+                                            child: Text('Timeline'),
+                                          ),
+                                          TextButton(
+                                              onPressed: () {},
+                                              child: Text('Articles')),
+                                          TextButton(
+                                            onPressed: () {},
+                                            child: Text('Activity'),
+                                          ),
+                                          TextButton(
+                                            onPressed: () {},
+                                            child: Text('References'),
+                                          ),
+                                          StatefulBuilder(
+                                            builder: (context, setState) =>
+                                                EditButton(
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  isEditable = !value;
+                                                });
+                                              },
+                                              isEditable: isEditable,
+                                              //header card edit functionality
+
+                                              callBackHeader: callBackHeader,
+                                              headerCardKey: headerCardKey,
+
+                                              //section1 edit functionality
+                                              callBackButtonSec1:
+                                                  callBackButtonSec1,
+                                              profileOverviewSec1ProSummKey:
+                                                  profileOverviewSec1ProSummKey,
+                                              profileOverviewSec1AreaOfExpKey:
+                                                  profileOverviewSec1AreaOfExpKey,
+                                              profileOverviewSec1ReferencesKey:
+                                                  profileOverviewSec1ReferencesKey,
+                                              //section2 edit functionality
+                                              callBackButtonSec2:
+                                                  callBackButtonSec2,
+                                              profileOverviewSec2WorkExpKey:
+                                                  profileOverviewSec2WorkExpKey,
+                                              profileOverviewSec2EducationKey:
+                                                  profileOverviewSec2EducationKey,
+                                              profileOverviewSec2AchievementKey:
+                                                  profileOverviewSec2AchievementKey,
+                                              profileOverviewSec2LanguagesKey:
+                                                  profileOverviewSec2LanguagesKey,
+
+                                              // References card edit functionality
+
+                                              callBackReference:
+                                                  callBackReference,
+                                              referenceCardKey:
+                                                  referenceCardKey,
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ],
                                 ),
+                                isExpanded: item.isExpanded,
                               );
-                            },
-                            body: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      TextButton(
-                                          onPressed: () {},
-                                          child: Text('Profile Overview')),
-                                      TextButton(
-                                        onPressed: () {},
-                                        child: Text('Timeline'),
-                                      ),
-                                      TextButton(
-                                          onPressed: () {},
-                                          child: Text('Articles')),
-                                      TextButton(
-                                        onPressed: () {},
-                                        child: Text('Activity'),
-                                      ),
-                                      TextButton(
-                                        onPressed: () {},
-                                        child: Text('References'),
-                                      ),
-                                      StatefulBuilder(
-                                        builder: (context, setState) => EditButton(
-                                          onChanged: (value) {
-                                            setState(() {
-                                              isEditable = !value;
-                                            });
-                                          },
-                                          isEditable: isEditable,
-                                          //header card edit functionality
+                            }).toList(),
+                          ),
+                        ),
+                        ProfileOverview(
+                          isEditable: isEditable,
+                          //section1 edit functionality
+                          profileOverviewSec1ProSummKey:
+                              profileOverviewSec1ProSummKey,
+                          profileOverviewSec1ProSumm_H:
+                              profileOverviewSec1ProSumm_H,
+                          profileOverviewSec1ProSumm_W:
+                              profileOverviewSec1ProSumm_W,
+                          profileOverviewSec1AreaOfExpKey:
+                              profileOverviewSec1AreaOfExpKey,
 
-                                          callBackHeader: callBackHeader,
-                                          headerCardKey: headerCardKey,
+                          profileOverviewSec1AreaOfExp_H:
+                              profileOverviewSec1AreaOfExp_H,
+                          profileOverviewSec1AreaOfExp_W:
+                              profileOverviewSec1AreaOfExp_W,
 
-                                          //section1 edit functionality
-                                          callBackButtonSec1: callBackButtonSec1,
-                                          profileOverviewSec1ProSummKey:
-                                          profileOverviewSec1ProSummKey,
-                                          profileOverviewSec1AreaOfExpKey:
-                                          profileOverviewSec1AreaOfExpKey,
-                                          profileOverviewSec1ReferencesKey:
-                                          profileOverviewSec1ReferencesKey,
-                                          //section2 edit functionality
-                                          callBackButtonSec2: callBackButtonSec2,
-                                          profileOverviewSec2WorkExpKey:
-                                          profileOverviewSec2WorkExpKey,
-                                          profileOverviewSec2EducationKey:
-                                          profileOverviewSec2EducationKey,
-                                          profileOverviewSec2AchievementKey:
-                                          profileOverviewSec2AchievementKey,
-                                          profileOverviewSec2LanguagesKey:
-                                          profileOverviewSec2LanguagesKey,
+                          profileOverviewSec1ReferencesKey:
+                              profileOverviewSec1ReferencesKey,
+                          profileOverviewSec1References_H:
+                              profileOverviewSec1References_H,
+                          profileOverviewSec1References_W:
+                              profileOverviewSec1References_W,
 
-                                          // References card edit functionality
+                          //section2 edit functionality
 
-                                          callBackReference: callBackReference,
-                                          referenceCardKey: referenceCardKey,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                            isExpanded: item.isExpanded,
-                          );
-                        }).toList(),
-                      ),
-                    ),
-                    ProfileOverview(
-                      isEditable: isEditable,
-                      //section1 edit functionality
-                      profileOverviewSec1ProSummKey: profileOverviewSec1ProSummKey,
-                      profileOverviewSec1ProSumm_H: profileOverviewSec1ProSumm_H,
-                      profileOverviewSec1ProSumm_W: profileOverviewSec1ProSumm_W,
-                      profileOverviewSec1AreaOfExpKey:
-                      profileOverviewSec1AreaOfExpKey,
+                          profileOverviewSec2WorkExpKey:
+                              profileOverviewSec2WorkExpKey,
+                          profileOverviewSec2WorkExp_H:
+                              profileOverviewSec2WorkExp_H,
+                          profileOverviewSec2WorkExp_W:
+                              profileOverviewSec2WorkExp_W,
 
-                      profileOverviewSec1AreaOfExp_H:
-                      profileOverviewSec1AreaOfExp_H,
-                      profileOverviewSec1AreaOfExp_W:
-                      profileOverviewSec1AreaOfExp_W,
+                          profileOverviewSec2EducationKey:
+                              profileOverviewSec2EducationKey,
+                          profileOverviewSec2Education_H:
+                              profileOverviewSec2Education_H,
+                          profileOverviewSec2Education_W:
+                              profileOverviewSec2Education_W,
 
-                      profileOverviewSec1ReferencesKey:
-                      profileOverviewSec1ReferencesKey,
-                      profileOverviewSec1References_H:
-                      profileOverviewSec1References_H,
-                      profileOverviewSec1References_W:
-                      profileOverviewSec1References_W,
+                          profileOverviewSec2AchievementKey:
+                              profileOverviewSec2AchievementKey,
+                          profileOverviewSec2Achievement_H:
+                              profileOverviewSec2Achievement_H,
+                          profileOverviewSec2Achievement_W:
+                              profileOverviewSec2Achievement_W,
 
-                      //section2 edit functionality
-
-                      profileOverviewSec2WorkExpKey: profileOverviewSec2WorkExpKey,
-                      profileOverviewSec2WorkExp_H: profileOverviewSec2WorkExp_H,
-                      profileOverviewSec2WorkExp_W: profileOverviewSec2WorkExp_W,
-
-                      profileOverviewSec2EducationKey:
-                      profileOverviewSec2EducationKey,
-                      profileOverviewSec2Education_H:
-                      profileOverviewSec2Education_H,
-                      profileOverviewSec2Education_W:
-                      profileOverviewSec2Education_W,
-
-                      profileOverviewSec2AchievementKey:
-                      profileOverviewSec2AchievementKey,
-                      profileOverviewSec2Achievement_H:
-                      profileOverviewSec2Achievement_H,
-                      profileOverviewSec2Achievement_W:
-                      profileOverviewSec2Achievement_W,
-
-                      profileOverviewSec2LanguagesKey:
-                      profileOverviewSec2LanguagesKey,
-                      profileOverviewSec2Languages_H:
-                      profileOverviewSec2Languages_H,
-                      profileOverviewSec2Languages_W:
-                      profileOverviewSec2Languages_W,
-                      pOApiData: snapshot.data!.data!.user!,
-                    ),
-                  ],
-                );
-              }
-              else{
-                return Container();
-              }
-              }
-            ),
+                          profileOverviewSec2LanguagesKey:
+                              profileOverviewSec2LanguagesKey,
+                          profileOverviewSec2Languages_H:
+                              profileOverviewSec2Languages_H,
+                          profileOverviewSec2Languages_W:
+                              profileOverviewSec2Languages_W,
+                          pOApiData: snapshot.data!.data!.user!,
+                        ),
+                      ],
+                    );
+                  } else {
+                    return Container();
+                  }
+                }),
           );
   }
 }

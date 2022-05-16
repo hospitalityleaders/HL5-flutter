@@ -2,11 +2,11 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../models/userProfileModel.dart';
 
-class UserProfileService{
-  static Future<UserProfileModel> getUserApi(String token) async {
+class UserProfileService {
+  static Future<UserProfileModel> getUserApi([String? token]) async {
     var uri = 'https://api.holedo.com/rest/users/me';
-    // var token ='eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjM2MDgsImV4cCI6MTk2NjY1NDg4MH0.qhWZs2C7r2BZGzCPH0XeAs0gcXGO3jaJ1XxnUA4Y1wU';
-        // "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQyODAsImV4cCI6MTk2NjQxMTI0NH0.umSFTSYjB9XCv6AHHfeOIpG-v0foRHwoaM2MnBgTDpw";
+    var token =
+        'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjM2MDgsImV4cCI6MTk2NzY5NDExOH0.1QJgDDgRm-GmQ-nHcAUDrFmaBSoLJWcDaum6_kj9m-8';
 
     final response = await http.get(Uri.parse(uri), headers: {
       'Content-Type': 'application/json',
@@ -21,4 +21,26 @@ class UserProfileService{
     }
   }
 
+  static Future<UserProfileModel> updateUserProfileSummary(String firstName) async {
+    var token =
+        'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjM2MDgsImV4cCI6MTk2NzY5NDExOH0.1QJgDDgRm-GmQ-nHcAUDrFmaBSoLJWcDaum6_kj9m-8';
+
+    var response = await http.put(
+      Uri.parse('https://api.holedo.com/rest/users/me'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Accept': 'application/json',
+        'AuthApi': 'Bearer $token'
+      },
+      body: jsonEncode(<String, String>{
+        'first_name': firstName.toString(),
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      return UserProfileModel.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception('Failed to update album.');
+    }
+  }
 }

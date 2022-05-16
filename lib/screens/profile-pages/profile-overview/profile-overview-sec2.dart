@@ -71,7 +71,8 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
       popUpAddCards,
       bool isVisible,
       String description,
-      bool showIcon) {
+      bool showIcon,
+      bool isShowingPopUpCard) {
     return Stack(
       children: [
         StatefulBuilder(builder: (context, setState) {
@@ -83,6 +84,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  isShowingPopUpCard ? Text('showing') : Container(),
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -95,17 +97,18 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                         ),
                       ),
                       Expanded(
-                        child: Stack(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                showIcon
-                                    ? InkWell(
+                            showIcon
+                                ? StatefulBuilder(
+                                  builder: (context,set) {
+                                    return InkWell(
                                         onTap: () {
-                                          setState(() {
+                                          set(() {
                                             isShowingPopUpCard =
                                                 !isShowingPopUpCard;
+                                            print(isShowingPopUpCard);
                                           });
                                         },
                                         onHover: (value) {
@@ -135,10 +138,10 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                                             ),
                                           ),
                                         ),
-                                      )
-                                    : Container(),
-                              ],
-                            ),
+                                      );
+                                  }
+                                )
+                                : Container(),
                           ],
                         ),
                       ),
@@ -255,7 +258,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
             ),
           );
         }),
-        isShowingPopUpCard ? Text('showing') : Container(),
+
         widget.sec2IsEditable
             ? ProfileEdit.buildProfileEdit(
                 width: sec2_W,
@@ -900,7 +903,8 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
             buildWorkExpPopUp,
             isVisible,
             description[0],
-            true),
+            true,
+        isShowingPopUpCard),
         buildProfileSec2Cards(
             widget.profileOverviewSec2EducationKey,
             widget.profileOverviewSec2Education_H,
@@ -918,7 +922,8 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
             buildEducationPopUp,
             isVisible,
             description[1],
-            false),
+            false
+        ,isShowingPopUpCard),
         buildProfileSec2Cards(
             widget.profileOverviewSec2AchievementKey,
             widget.profileOverviewSec2Achievement_H,
@@ -936,7 +941,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
             buildAchivementPopUp,
             isVisible,
             description[2],
-            false),
+            false,isShowingPopUpCard),
         Stack(
           children: [
             Padding(
