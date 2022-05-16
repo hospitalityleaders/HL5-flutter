@@ -5,8 +5,8 @@ import '../models/userProfileModel.dart';
 class UserProfileService {
   static Future<UserProfileModel> getUserApi([String? token]) async {
     var uri = 'https://api.holedo.com/rest/users/me';
-    var token =
-        'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjM2MDgsImV4cCI6MTk2NzY5NDExOH0.1QJgDDgRm-GmQ-nHcAUDrFmaBSoLJWcDaum6_kj9m-8';
+    // var token =
+    //     'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjM2MDgsImV4cCI6MTk2NzY5NDExOH0.1QJgDDgRm-GmQ-nHcAUDrFmaBSoLJWcDaum6_kj9m-8';
 
     final response = await http.get(Uri.parse(uri), headers: {
       'Content-Type': 'application/json',
@@ -21,9 +21,9 @@ class UserProfileService {
     }
   }
 
-  static Future<UserProfileModel> updateUserProfileSummary(String firstName) async {
-    var token =
-        'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjM2MDgsImV4cCI6MTk2NzY5NDExOH0.1QJgDDgRm-GmQ-nHcAUDrFmaBSoLJWcDaum6_kj9m-8';
+  static Future<UserProfileModel> updateUserProfileSummary(String firstName,String token) async {
+    // var token =
+    //     'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjM2MDgsImV4cCI6MTk2NzY5NDExOH0.1QJgDDgRm-GmQ-nHcAUDrFmaBSoLJWcDaum6_kj9m-8';
 
     var response = await http.put(
       Uri.parse('https://api.holedo.com/rest/users/me'),

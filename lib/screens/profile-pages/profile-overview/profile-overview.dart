@@ -12,6 +12,7 @@ import '../../../responsive/responsive.dart';
 
 class ProfileOverview extends StatefulWidget {
   final isEditable;
+  final token;
 
   // profileoverviewsection1
   final profileOverviewSec1ProSummKey;
@@ -42,6 +43,7 @@ class ProfileOverview extends StatefulWidget {
   const ProfileOverview({
     Key? key,
     required this.isEditable,
+    this.token,
     // profileoverviewsection1
     this.profileOverviewSec1ProSummKey,
     this.profileOverviewSec1ProSumm_H,
@@ -109,6 +111,7 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                     profileOverviewSec1References_W:
                         widget.profileOverviewSec1References_W,
                     pOApiDataSec1: widget.pOApiData,
+                    token:widget.token
                   ),
                 ),
                 SS.sB(0, SS.sW(context) * 0.01),

@@ -544,6 +544,7 @@ class _ProfilePageState extends State<ProfilePage>
                         ),
                         ProfileOverview(
                           isEditable: isEditable,
+                          token:widget.token,
                           //section1 edit functionality
                           profileOverviewSec1ProSummKey:
                               profileOverviewSec1ProSummKey,

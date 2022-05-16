@@ -22,6 +22,7 @@ class ProfileOverviewSec1 extends StatefulWidget {
   final profileOverviewSec1References_H;
   final profileOverviewSec1References_W;
   final pOApiDataSec1;
+  final token;
 
   const ProfileOverviewSec1({
     Key? key,
@@ -35,7 +36,7 @@ class ProfileOverviewSec1 extends StatefulWidget {
     this.profileOverviewSec1ReferencesKey,
     this.profileOverviewSec1References_H,
     this.profileOverviewSec1References_W,
-    this.pOApiDataSec1,
+    this.pOApiDataSec1, this.token,
   }) : super(key: key);
 
   @override
@@ -231,7 +232,8 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                                                   UserProfileService
                                                       .updateUserProfileSummary(
                                                           profileSummaryController
-                                                              .text);
+                                                              .text,widget.token.toString());
+                                              print(profileSummaryController.text.toString());
                                             });
                                           },
                                           child: Text('Save')),
@@ -369,23 +371,23 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
   ///profile section1 pop up functionality End
 
   ///submit data to Api Start
-  late UserProfileModel _userProfileModel;
-
-  Future<UserProfileModel?> profileSummerySubmitData(
-      String profileSummaryController) async {
-    var response =
-        await http.post(Uri.https('api.holedo.com', 'rest/users/me'), body: {
-      'profileSummary': profileSummaryController,
-    });
-    var data = response.body;
-    print(data);
-
-    if (response.statusCode == 201) {
-      String responseString = response.body;
-      userProfileModelFromJson(responseString);
-    } else
-      return null;
-  }
+  // late UserProfileModel _userProfileModel;
+  //
+  // Future<UserProfileModel?> profileSummerySubmitData(
+  //     String profileSummaryController) async {
+  //   var response =
+  //       await http.post(Uri.https('api.holedo.com', 'rest/users/me'), body: {
+  //     'profileSummary': profileSummaryController,
+  //   });
+  //   var data = response.body;
+  //   print(data);
+  //
+  //   if (response.statusCode == 201) {
+  //     String responseString = response.body;
+  //     userProfileModelFromJson(responseString);
+  //   } else
+  //     return null;
+  // }
 
   ///submit data to Api End
 
