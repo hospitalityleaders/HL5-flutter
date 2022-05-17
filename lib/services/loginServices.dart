@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:holedo/controller/auth_controller.dart';
 import 'package:http/http.dart' as http;
 
@@ -18,8 +19,9 @@ class ApiServices {
       return e.response!.data;
     }
   }
-
+  final userData = GetStorage();
   Future<dynamic> login(String email, String password) async {
+    
     try {
       Response response = await _dio.post(
         'https://api.holedo.com/rest/users/login',
@@ -29,6 +31,9 @@ class ApiServices {
         },
         queryParameters: {'apikey': AuthData.apiKey},
       );
+      userData.write('isLogined', true);
+      userData.write('email', email);
+
 
       return response.data;
     } on DioError catch (e) {

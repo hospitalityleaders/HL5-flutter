@@ -1,10 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:holedo/common/popUpHeadMenu.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/constant/sizedbox.dart';
+import 'package:holedo/controller/auth_controller.dart';
 import '../../../models/userProfileModel.dart';
 import '../../../services/user_profile_service.dart';
 import '../profile-edit/profile-edit.dart';
@@ -36,7 +36,8 @@ class ProfileOverviewSec1 extends StatefulWidget {
     this.profileOverviewSec1ReferencesKey,
     this.profileOverviewSec1References_H,
     this.profileOverviewSec1References_W,
-    this.pOApiDataSec1, this.token,
+    this.pOApiDataSec1,
+    this.token,
   }) : super(key: key);
 
   @override
@@ -232,8 +233,10 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                                                   UserProfileService
                                                       .updateUserProfileSummary(
                                                           profileSummaryController
-                                                              .text,widget.token.toString());
-                                              print(profileSummaryController.text.toString());
+                                                              .text);
+                                              print(profileSummaryController
+                                                  .text
+                                                  .toString());
                                             });
                                           },
                                           child: Text('Save')),

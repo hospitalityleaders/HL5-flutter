@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:holedo/controller/menu_controller.dart';
 import 'package:holedo/controller/auth_controller.dart';
 import 'package:holedo/screens/Authentication/login.dart';
@@ -8,7 +9,6 @@ import 'package:holedo/screens/news/NewsSingle/news_single_logged_in.dart';
 import 'package:holedo/screens/news/categories/news_signal.dart';
 import 'package:holedo/screens/news/update/update_news.dart';
 import 'package:holedo/screens/profile-pages/profile/profile-page.dart';
-
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:seo_renderer/helpers/renderer_state.dart';
 import 'package:seo_renderer/helpers/robot_detector_vm.dart';
@@ -20,8 +20,10 @@ class MyCustomScrollBehavior extends MaterialScrollBehavior {
         PointerDeviceKind.touch,
       };
 }
+
 void main() async {
   await Get.put(AuthController()).initStorage();
+  await GetStorage.init();
   runApp(
     RobotDetector(
       child: MaterialApp(
@@ -42,9 +44,6 @@ void main() async {
         ),
         initialRoute: '/',
         routes: {
-          //LogIn.route: (context) => LogIn(),
-          // 'timeline': (context) => const Timeline(),
-          // 'references': (context) => const References(),
           ProfilePage.route: (context) => ProfilePage(),
           UpdateNews.route: (context) => UpdateNews(),
           NewsSingleScreen.route: (context) => NewsSingleScreen(),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:holedo/controller/auth_controller.dart';
 import 'package:holedo/services/loginServices.dart';
 import 'package:holedo/utils/validator.dart';
@@ -22,9 +23,9 @@ class _LogInState extends State<LogIn> {
   final ApiServices _apiClient = ApiServices();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
   bool _showPassword = false;
   bool checked = false;
-
   MenuController _menuController = Get.find();
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
@@ -113,12 +114,16 @@ class _LogInState extends State<LogIn> {
   //   );
   // }
 
+  final userData = GetStorage();
+
   Future<void> login() async {
     if (_formKey.currentState!.validate()) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: const Text('Processing Data'),
-        backgroundColor: Colors.green.shade300,
-      ));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text('Processing Data'),
+          backgroundColor: Colors.green.shade300,
+        ),
+      );
 
       dynamic res = await _apiClient.login(
         emailController.text,
@@ -130,21 +135,28 @@ class _LogInState extends State<LogIn> {
       if (res['errors'] == null) {
         String accessToken = res['data']['token'];
         print(accessToken);
+
+        userData.write('token', accessToken);
+        userData.write('isLoggedIn', true);
+
         final model = Get.put(AuthController()).restoreModel();
         model.setToken = accessToken;
         model.setIsLogined = true;
         Get.find<AuthController>().authModel(model);
 
         Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    _menuController.menuIndex == 0 ? UpdateNews(token:accessToken) : LogIn()));
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  _menuController.menuIndex == 0 ? UpdateNews() : LogIn()),
+        );
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text('Error: ${res['messages']}'),
-          backgroundColor: Colors.red.shade300,
-        ));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error: ${res['messages']}'),
+            backgroundColor: Colors.red.shade300,
+          ),
+        );
       }
     }
   }
@@ -153,113 +165,113 @@ class _LogInState extends State<LogIn> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-        backgroundColor: Colors.blueGrey[200],
-        body: Form(
-          key: _formKey,
-          child: Stack(children: [
-            SizedBox(
-              width: size.width,
-              height: size.height,
-              child: Align(
-                alignment: Alignment.center,
-                child: Container(
-                  width: size.width * 0.85,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: SingleChildScrollView(
-                    child: Center(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          // SizedBox(height: size.height * 0.08),
-                          const Center(
-                            child: Text(
-                              "Login",
-                              style: TextStyle(
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold,
-                              ),
+      backgroundColor: Colors.blueGrey[200],
+      body: Form(
+        key: _formKey,
+        child: Stack(children: [
+          SizedBox(
+            width: size.width,
+            height: size.height,
+            child: Align(
+              alignment: Alignment.center,
+              child: Container(
+                width: size.width * 0.85,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: SingleChildScrollView(
+                  child: Center(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        // SizedBox(height: size.height * 0.08),
+                        const Center(
+                          child: Text(
+                            "Login",
+                            style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(height: size.height * 0.06),
-                          TextFormField(
-                            controller: emailController,
-                            validator: (value) {
-                              return Validator.validateEmail(value ?? "");
-                            },
-                            decoration: InputDecoration(
-                              hintText: "Email",
-                              isDense: true,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
+                        ),
+                        SizedBox(height: size.height * 0.06),
+                        TextFormField(
+                          controller: emailController,
+                          validator: (value) {
+                            return Validator.validateEmail(value ?? "");
+                          },
+                          decoration: InputDecoration(
+                            hintText: "Email",
+                            isDense: true,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
                             ),
                           ),
-                          SizedBox(height: size.height * 0.03),
-                          TextFormField(
-                            obscureText: _showPassword,
-                            controller: passwordController,
-                            validator: (value) {
-                              return Validator.validatePassword(value ?? "");
-                            },
-                            decoration: InputDecoration(
-                              suffixIcon: GestureDetector(
-                                onTap: () {
-                                  setState(
-                                      () => _showPassword = !_showPassword);
-                                },
-                                child: Icon(
-                                  _showPassword
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                              hintText: "Password",
-                              isDense: true,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
+                        ),
+                        SizedBox(height: size.height * 0.03),
+                        TextFormField(
+                          obscureText: _showPassword,
+                          controller: passwordController,
+                          validator: (value) {
+                            return Validator.validatePassword(value ?? "");
+                          },
+                          decoration: InputDecoration(
+                            suffixIcon: GestureDetector(
+                              onTap: () {
+                                setState(() => _showPassword = !_showPassword);
+                              },
+                              child: Icon(
+                                _showPassword
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: Colors.grey,
                               ),
                             ),
+                            hintText: "Password",
+                            isDense: true,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                           ),
-                          SizedBox(height: size.height * 0.04),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                child: ElevatedButton(
-                                  onPressed: login,
-                                  style: ElevatedButton.styleFrom(
-                                      primary: Colors.indigo,
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 40, vertical: 15)),
-                                  child: const Text(
-                                    "Login",
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                        ),
+                        SizedBox(height: size.height * 0.04),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: ElevatedButton(
+                                onPressed: login,
+                                style: ElevatedButton.styleFrom(
+                                    primary: Colors.indigo,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 40, vertical: 15)),
+                                child: const Text(
+                                  "Login",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
                               ),
-                            ],
-                          ),
-                        ],
-                      ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
                 ),
               ),
             ),
-          ]),
-        ));
+          ),
+        ]),
+      ),
+    );
   }
 }

@@ -43,7 +43,7 @@ class ProfileOverview extends StatefulWidget {
   const ProfileOverview({
     Key? key,
     required this.isEditable,
-    this.token,
+    required this.token,
     // profileoverviewsection1
     this.profileOverviewSec1ProSummKey,
     this.profileOverviewSec1ProSumm_H,

@@ -163,7 +163,7 @@ class _ProfilePageState extends State<ProfilePage>
   Widget build(BuildContext context) {
     return Responsive.isDesktop(context)
         ? FutureBuilder<UserProfileModel>(
-            future: UserProfileService.getUserApi(widget.token.toString()),
+            future: UserProfileService.getUserApi(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Container(
@@ -337,6 +337,7 @@ class _ProfilePageState extends State<ProfilePage>
                             children: <Widget>[
                               ProfileOverview(
                                 isEditable: isEditable,
+                                token: widget.token,
                                 //section1 edit functionality
                                 profileOverviewSec1ProSummKey:
                                     profileOverviewSec1ProSummKey,
@@ -409,7 +410,7 @@ class _ProfilePageState extends State<ProfilePage>
             })
         : SingleChildScrollView(
             child: FutureBuilder<UserProfileModel>(
-                future: UserProfileService.getUserApi(widget.token.toString()),
+                future: UserProfileService.getUserApi(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return Column(
@@ -544,7 +545,7 @@ class _ProfilePageState extends State<ProfilePage>
                         ),
                         ProfileOverview(
                           isEditable: isEditable,
-                          token:widget.token,
+                          token: widget.token,
                           //section1 edit functionality
                           profileOverviewSec1ProSummKey:
                               profileOverviewSec1ProSummKey,
