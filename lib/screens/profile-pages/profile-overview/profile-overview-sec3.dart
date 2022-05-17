@@ -48,65 +48,72 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                   subtitle: Text(''),
                   trailing: isExperienceEditable
                       ? IconButton(
-                    onPressed: () {
-                      setState(() {
-                        isExperienceShowCard = !isExperienceShowCard;
-                      });
-                    },
-                    icon: Icon(Icons.edit),
-                  )
+                          onPressed: () {
+                            setState(() {
+                              isExperienceShowCard = !isExperienceShowCard;
+                            });
+                          },
+                          icon: Icon(Icons.edit),
+                        )
                       : null,
                 ),
                 isExperienceShowCard
                     ? SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Divider(
-                        height: SS.sH(context) * 0.01,
-                        color: ColorPicker.kGreyLight3,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            TextFieldAndFieldName.buildFieldName('Title / position', '*'),
-                            TextFieldAndFieldName.buildTextField('General manager'),
-                            TextFieldAndFieldName.buildFieldName('Company name', '*'),
-                            TextFieldAndFieldName.buildTextField('Fairmont Zimbali Resort'),
-                            TextFieldAndFieldName.buildFieldName('Company website'),
-                            TextFieldAndFieldName.buildTextField('www.fairmontzimbali.com'),
-                            TextFieldAndFieldName.buildFieldName('Job description'),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextField(
-                                autocorrect: true,
-                                minLines: 4,
-                                maxLines: 6,
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide(),
-                                  ),
-                                ),
-                              ),
+                            Divider(
+                              height: SS.sH(context) * 0.01,
+                              color: ColorPicker.kGreyLight3,
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                OutlinedButton(
-                                    onPressed: () {},
-                                    child: Text('Cancel')),
-                                SS.sB(0, 10),
-                                ElevatedButton(
-                                    onPressed: () {}, child: Text('Save'))
-                              ],
+                            Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  TextFieldAndFieldName.buildFieldName(
+                                      'Title / position', '*'),
+                                  TextFieldAndFieldName.buildTextField(
+                                      'General manager'),
+                                  TextFieldAndFieldName.buildFieldName(
+                                      'Company name', '*'),
+                                  TextFieldAndFieldName.buildTextField(
+                                      'Fairmont Zimbali Resort'),
+                                  TextFieldAndFieldName.buildFieldName(
+                                      'Company website'),
+                                  TextFieldAndFieldName.buildTextField(
+                                      'www.fairmontzimbali.com'),
+                                  TextFieldAndFieldName.buildFieldName(
+                                      'Job description'),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: TextField(
+                                      autocorrect: true,
+                                      minLines: 4,
+                                      maxLines: 6,
+                                      decoration: InputDecoration(
+                                        border: OutlineInputBorder(
+                                          borderSide: BorderSide(),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      OutlinedButton(
+                                          onPressed: () {},
+                                          child: Text('Cancel')),
+                                      SS.sB(0, 10),
+                                      ElevatedButton(
+                                          onPressed: () {}, child: Text('Save'))
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),
-                      ),
-                    ],
-                  ),
-                )
+                      )
                     : Container()
               ],
             ),
@@ -133,24 +140,24 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                       isVisibleExperience
                           ? buildExpInnerCard(false, true, indexExp)
                           : Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: CircleAvatar(
-                          radius: 30,
-                          backgroundColor: ColorPicker.kGreenNeon,
-                          child: IconButton(
-                            color: ColorPicker.kWhite,
-                            onPressed: () {
-                              setState(
-                                    () {
-                                  isVisibleExperience =
-                                  !isVisibleExperience;
-                                },
-                              );
-                            },
-                            icon: Icon(Icons.add),
-                          ),
-                        ),
-                      ),
+                              padding: const EdgeInsets.all(8.0),
+                              child: CircleAvatar(
+                                radius: 30,
+                                backgroundColor: ColorPicker.kGreenNeon,
+                                child: IconButton(
+                                  color: ColorPicker.kWhite,
+                                  onPressed: () {
+                                    setState(
+                                      () {
+                                        isVisibleExperience =
+                                            !isVisibleExperience;
+                                      },
+                                    );
+                                  },
+                                  icon: Icon(Icons.add),
+                                ),
+                              ),
+                            ),
                       buildExpInnerCard(true, isExperienceShowCard, indexExp),
                       buildExpInnerCard(true, isExperienceShowCard, indexExp),
                     ],
@@ -166,8 +173,204 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
 
   /// buildAddyourworkexperiencePopUpCard end
 
+  ///buildAddyourqualificationsPopUpCard start
 
-  buildAddyourqualificationsPopUpCard() {}
+  TextEditingController _controller = TextEditingController();
+  List chipList = [];
+
+  Future<String?> buildAddyourqualificationsPopUpCard() {
+    return showDialog<String>(
+        context: context,
+        builder: (BuildContext context) {
+          return StatefulBuilder(builder: (context, setState) {
+            return Dialog(
+              child: Container(
+                color: ColorPicker.kGreyLight8,
+                width: SS.sW(context) * .50,
+                // height: 375,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      PopUpHeadMenu.popUpHead('Expertise', context),
+                      SizedBox(
+                        height: SS.sH(context) * .05,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          children: [
+                            Container(
+                              color: ColorPicker.kWhite,
+                              width: double.infinity,
+                              child: Padding(
+                                padding: const EdgeInsets.all(20),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    RichText(
+                                      text: TextSpan(
+                                        children: [
+                                          TextSpan(
+                                              text:
+                                                  'What are your areas of expertise ',
+                                              style: FontTextStyle
+                                                  .kBlueDark114W700SSP),
+                                          WidgetSpan(
+                                            child: GestureDetector(
+                                              onTap: () {},
+                                              child: Icon(
+                                                Icons.help,
+                                                size: 15,
+                                                color: ColorPicker.kBlueLight1,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SS.sB(5),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Expanded(
+                                          flex: 3,
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              SizedBox(
+                                                height: 36,
+                                                child: TextField(
+                                                  controller: _controller,
+                                                  decoration: InputDecoration(
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              1),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 1,
+                                          child: InkWell(
+                                            onTap: () {
+                                              setState(() {
+                                                if (_controller.text != '') {
+                                                  chipList
+                                                      .add(_controller.text);
+                                                } else {
+                                                  null;
+                                                }
+                                              });
+                                            },
+                                            onHover: (value) {},
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 6),
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            2),
+                                                    color:
+                                                        ColorPicker.kBlueLight2,
+                                                    border: Border.all(
+                                                        width: 1,
+                                                        color: ColorPicker
+                                                            .kBlueLight3)),
+                                                alignment: Alignment.center,
+                                                width: SS.sW(context) * .091,
+                                                height: 36,
+                                                child: Text(
+                                                  'Add to list',
+                                                  style: FontTextStyle
+                                                      .kBlueLight114W400SSP,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            SS.sB(10),
+                            Container(
+                              width: double.infinity,
+                              color: ColorPicker.kGreyLight9,
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: SingleChildScrollView(
+                                      child: Wrap(
+                                        spacing: 3.0,
+                                        runSpacing: 5.0,
+                                        children: [
+                                          for (var i in chipList)
+                                            Chip(
+                                              backgroundColor: Colors.white,
+                                              elevation: 0.5,
+                                              shadowColor: Colors.black,
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 15, horizontal: 5),
+                                              shape: RoundedRectangleBorder(),
+                                              label: Text(i),
+                                              deleteIcon: Icon(
+                                                Icons.close,
+                                                color: ColorPicker.kBlueLight1,
+                                                size: 10,
+                                              ),
+                                              onDeleted: () {
+                                                setState(() {
+                                                  chipList.removeAt(
+                                                      chipList.indexOf(i));
+                                                });
+                                              },
+                                            )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(20),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        OutlinedButton(
+                                            onPressed: () {},
+                                            child: Text('Cancel')),
+                                        SS.sB(0, 10),
+                                        ElevatedButton(
+                                            onPressed: () {},
+                                            child: Text('Save'))
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          });
+        });
+  }
+
+  ///buildAddyourqualificationsPopUpCard end
 
   buildAddyourspecialitiesPopUpCard() {}
   int langIndex = 2;
@@ -178,13 +381,13 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
     'Native or bilingual profiency3'
   ];
 
-  Future<String?>buildAddyourlanguagesPopUpCards() {
+  Future<String?> buildAddyourlanguagesPopUpCards() {
     return showDialog(
         context: context,
         builder: (BuildContext context) {
           return StatefulBuilder(builder: (BuildContext context, setState) {
-            List<Widget> textField =
-                List.generate(langIndex, (int i) => TextFieldAndFieldName.buildTextField());
+            List<Widget> textField = List.generate(
+                langIndex, (int i) => TextFieldAndFieldName.buildTextField());
             List<Widget> menuItem = List.generate(
                 langIndex,
                 (int i) => DropDownButton(
@@ -218,7 +421,8 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                    TextFieldAndFieldName.buildFieldName('Language', '*'),
+                                      TextFieldAndFieldName.buildFieldName(
+                                          'Language', '*'),
                                       SS.sB(10, 0),
                                       Column(
                                         children: textField,
@@ -245,7 +449,8 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                                         CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      TextFieldAndFieldName.buildFieldName('Proficiency', '*'),
+                                      TextFieldAndFieldName.buildFieldName(
+                                          'Proficiency', '*'),
                                       SS.sB(10, 0),
                                       Column(
                                         children: menuItem,
@@ -362,23 +567,17 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                       style: FontTextStyle.kWhite20W400SSP),
                 ),
                 profileListTile(
-                  Icons.add_box_outlined,
-                  'Add your work experience',buildAddyourworkexperiencePopUpCard
-                ),
+                    Icons.add_box_outlined,
+                    'Add your work experience',
+                    buildAddyourworkexperiencePopUpCard),
                 profileListTile(
-                  Icons.add_box_outlined,
-                  'Add your qualifications',buildAddyourqualificationsPopUpCard
-                ),
-                profileListTile(
-                  Icons.add_box_outlined,
-                  'Add your specialities',
-                    buildAddyourspecialitiesPopUpCard
-                ),
-                profileListTile(
-                  Icons.add_box_outlined,
-                  'Add your languages',
-                    buildAddyourlanguagesPopUpCards
-                ),
+                    Icons.add_box_outlined,
+                    'Add your qualifications',
+                    buildAddyourqualificationsPopUpCard),
+                profileListTile(Icons.add_box_outlined, 'Add your specialities',
+                    buildAddyourspecialitiesPopUpCard),
+                profileListTile(Icons.add_box_outlined, 'Add your languages',
+                    buildAddyourlanguagesPopUpCards),
                 const SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: () {

@@ -17,7 +17,7 @@ class PopUpHeadMenu {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(4.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5.5),
                   child: Text(
                     headName,
                     style: FontTextStyle.kBlueDark120W400SSP,
@@ -74,7 +74,7 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                       children: [
                         Text(
                           ''' Select from your references below which ones you would like to display on your profile overview. You can display up to two references to show on your profile overview.''',
-                          style: FontTextStyle.kGreyLight16W600PR,
+                          style: FontTextStyle.kGreyLight516W400SSP,
                           textAlign: TextAlign.center,
                         ),
                         SS.sB(10, 0),
@@ -123,15 +123,16 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                                       TextSpan(
                                           text: 'Ealasiad Wang',
                                           style:
-                                              FontTextStyle.kBlackPure16W700PR),
+                                              FontTextStyle.kBlueDark116W700SSP),
                                       TextSpan(
-                                          text: 'MHL',
+                                          text: ' MHL',
                                           style:
-                                              FontTextStyle.kBlackPure16W700PR),
+                                              FontTextStyle.kBlueDark112W700SSP),
                                     ]),
                                   ),
                                   subtitle: Text(
                                     'Recruiter, Top Talent Recruiters',
+                                    style: FontTextStyle.kGreyLight514W400SSP,
                                   ),
                                   trailing: Row(
                                     mainAxisSize: MainAxisSize.min,
@@ -177,10 +178,7 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                                                 padding:
                                                     const EdgeInsets.all(8.0),
                                                 child: Text(refContent,
-                                                    style: TextStyle(
-                                                        fontSize: 16,
-                                                        color: ColorPicker
-                                                            .kGreyLight6)),
+                                                    style:FontTextStyle.kGreyLight516W400SSP),
                                               ),
                                             )),
                                         TextButton.icon(
@@ -225,15 +223,16 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                                       TextSpan(
                                           text: 'Ealasiad Wang',
                                           style:
-                                              FontTextStyle.kBlackPure16W700PR),
+                                              FontTextStyle.kBlueDark116W700SSP),
                                       TextSpan(
-                                          text: 'MHL',
+                                          text: ' MHL',
                                           style:
-                                              FontTextStyle.kBlackPure16W700PR),
+                                              FontTextStyle.kBlueDark112W700SSP),
                                     ]),
                                   ),
                                   subtitle: Text(
                                     'Recruiter, Top Talent Recruiters',
+                                      style: FontTextStyle.kGreyLight514W400SSP,
                                   ),
                                   trailing: Row(
                                     mainAxisSize: MainAxisSize.min,
@@ -279,10 +278,7 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                                               padding:
                                                   const EdgeInsets.all(8.0),
                                               child: Text(refContent,
-                                                  style: TextStyle(
-                                                      fontSize: 16,
-                                                      color: ColorPicker
-                                                          .kGreyLight6)),
+                                                  style:FontTextStyle.kGreyLight516W400SSP),
                                             ),
                                           ),
                                         ),

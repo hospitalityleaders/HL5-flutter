@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:holedo/common/popUpHeadMenu.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
@@ -166,7 +167,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
 
   ///profile section1 pop up functionality Start
 
-  //Profile summary pop up start
+  ///Profile summary pop up start
 
   Future<String?> buildProfileCardPopUp(profileSummaryController) {
     return showDialog<String>(
@@ -191,10 +192,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                                 padding: const EdgeInsets.all(4.0),
                                 child: Text(
                                   'Summery',
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w700,
-                                      color: ColorPicker.kBlueDark),
+                                  style: FontTextStyle.kBlueDark114W700SSP,
                                 ),
                               ),
                               Padding(
@@ -255,24 +253,30 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
         });
   }
 
-  // profile summary pop up end
+  /// profile summary pop up end
 
-  //Area of exper pop up start
+  ///Area of exper pop up start
 
-  List<String> chipValueList = [];
-  String? newValue;
+  TextEditingController _controller = TextEditingController();
 
-  Future<String?> buildAreaOfExpePopUp(
-      List chipValueList, BuildContext context) {
+  List chipList = ['Business'];
+
+  // @override
+  // void dispose() {
+  //   _controller.dispose();
+  //   super.dispose();
+  // }
+
+  Future<String?> buildAreaOfExpePopUp(BuildContext context) {
     return showDialog<String>(
         context: context,
         builder: (BuildContext context) {
           return StatefulBuilder(builder: (context, setState) {
             return Dialog(
               child: Container(
-                color: ColorPicker.kGreyLight3,
+                color: ColorPicker.kGreyLight8,
                 width: SS.sW(context) * .50,
-                height: 400,
+                // height: 375,
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
@@ -280,83 +284,169 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                       SizedBox(
                         height: SS.sH(context) * .05,
                       ),
-                      Container(
-                        color: ColorPicker.kWhite,
-                        width: double.infinity,
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.all(4.0),
-                              child: RichText(
-                                text: TextSpan(children: [
-                                  TextSpan(
-                                      text: 'What are your areas of expertise?',
-                                      style: TextStyle()),
-                                  WidgetSpan(
-                                      child: GestureDetector(
-                                          onTap: () {},
-                                          child: Icon(
-                                            Icons.question_mark_outlined,
-                                            size: 20,
-                                            color: Colors.blue,
-                                          )))
-                                ]),
+                            Container(
+                              color: ColorPicker.kWhite,
+                              width: double.infinity,
+                              child: Padding(
+                                padding: const EdgeInsets.all(20),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    RichText(
+                                      text: TextSpan(
+                                        children: [
+                                          TextSpan(
+                                              text:
+                                                  'What are your areas of expertise ',
+                                              style: FontTextStyle
+                                                  .kBlueDark114W700SSP),
+                                          WidgetSpan(
+                                            child: GestureDetector(
+                                              onTap: () {},
+                                              child: Icon(
+                                                Icons.help,
+                                                size: 15,
+                                                color: ColorPicker.kBlueLight1,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SS.sB(5),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Expanded(
+                                          flex: 3,
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              SizedBox(
+                                                height: 36,
+                                                child: TextField(
+                                                  controller: _controller,
+                                                  decoration: InputDecoration(
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              1),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 1,
+                                          child: InkWell(
+                                            onTap: () {
+                                              setState(() {
+                                                if (_controller.text != '') {
+                                                  chipList
+                                                      .add(_controller.text);
+                                                } else {
+                                                  null;
+                                                }
+                                              });
+                                            },
+                                            onHover: (value) {},
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 6),
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            2),
+                                                    color:
+                                                        ColorPicker.kBlueLight2,
+                                                    border: Border.all(
+                                                        width: 1,
+                                                        color: ColorPicker
+                                                            .kBlueLight3)),
+                                                alignment: Alignment.center,
+                                                width: SS.sW(context) * .091,
+                                                height: 36,
+                                                child: Text(
+                                                  'Add to list',
+                                                  style: FontTextStyle
+                                                      .kBlueLight114W400SSP,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                            SB.SH5(),
-                            Row(
-                              children: [
-                                Expanded(
-                                  flex: 3,
-                                  child: Padding(
+                            SS.sB(10),
+                            Container(
+                              width: double.infinity,
+                              color: ColorPicker.kGreyLight9,
+                              child: Column(
+                                children: [
+                                  Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: TextField(
-                                      onChanged: (text) {
-                                        setState(() {
-                                          newValue = text;
-                                        });
-                                      },
-                                      decoration: InputDecoration(
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                        ),
+                                    child: SingleChildScrollView(
+                                      child: Wrap(
+                                        spacing: 3.0,
+                                        runSpacing: 5.0,
+                                        children: [
+                                          for (var i in chipList)
+                                            Chip(
+                                              backgroundColor: Colors.white,
+                                              elevation: 0.5,
+                                              shadowColor: Colors.black,
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 15, horizontal: 5),
+                                              shape: RoundedRectangleBorder(),
+                                              label: Text(i),
+                                              deleteIcon: Icon(
+                                                Icons.close,
+                                                color: ColorPicker.kBlueLight1,
+                                                size: 10,
+                                              ),
+                                              onDeleted: () {
+                                                setState(() {
+                                                  chipList.removeAt(
+                                                      chipList.indexOf(i));
+                                                });
+                                              },
+                                            )
+                                        ],
                                       ),
                                     ),
                                   ),
-                                ),
-                                Expanded(
-                                  flex: 1,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: OutlinedButton(
-                                        onPressed: () {
-                                          setState(() {
-                                            chipValueList.add(newValue!);
-                                            print(chipValueList);
-                                          });
-                                        },
-                                        child: Text('Add to list')),
+                                  Padding(
+                                    padding: const EdgeInsets.all(20),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        OutlinedButton(
+                                            onPressed: () {},
+                                            child: Text('Cancel')),
+                                        SS.sB(0, 10),
+                                        ElevatedButton(
+                                            onPressed: () {},
+                                            child: Text('Save'))
+                                      ],
+                                    ),
                                   ),
-                                )
-                              ],
-                            ),
-                            for (var i in chipValueList)
-                              Wrap(
-                                spacing: 2,
-                                alignment: WrapAlignment.start,
-                                children: [
-                                  Chip(
-                                    label: Text(i),
-                                    onDeleted: () {
-                                      setState(() {
-                                        chipValueList.removeAt(i);
-                                      });
-                                    },
-                                  )
                                 ],
-                              )
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -419,9 +509,8 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                               Padding(
                                 padding: EdgeInsets.only(
                                     right: 20, left: 20, top: 13),
-                                child: AutoSizeText(
+                                child: Text(
                                   'Profile summary',
-                                  minFontSize: 14,
                                   style: FontTextStyle.kBlueDark120W400SSP,
                                 ),
                               ),
@@ -533,9 +622,12 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                               width: widget.profileOverviewSec1AreaOfExp_W,
                               height: widget.profileOverviewSec1AreaOfExp_H,
                               popUpEdit: () {
-                                buildAreaOfExpePopUp(chipValueList, context);
+                                buildAreaOfExpePopUp(context);
                               },
-                              showAddButton: true)
+                              showAddButton: true,
+                              popUpAdd: () {
+                                buildAreaOfExpePopUp(context);
+                              })
                           : Container(),
                     ],
                   ),
