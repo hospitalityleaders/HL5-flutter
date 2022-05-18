@@ -6,6 +6,7 @@ import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/constant/sizedbox.dart';
 import 'package:holedo/controller/auth_controller.dart';
 import '../../../models/userProfileModel.dart';
+import '../../../services/loginServices.dart';
 import '../../../services/user_profile_service.dart';
 import '../profile-edit/profile-edit.dart';
 import 'package:http/http.dart' as http;
@@ -46,9 +47,12 @@ class ProfileOverviewSec1 extends StatefulWidget {
 
 class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
   ///api get and update functionality Start
+  ApiServices _apiServices = ApiServices();
 
   void initState() {
-    _futureUpdateData = UserProfileService.getUserApi();
+    // _futureUpdateData = UserProfileService.getUserApi();
+    _futureUpdateData =
+        _apiServices.getUserProfileData('${userData.read('token')}');
     super.initState();
   }
 

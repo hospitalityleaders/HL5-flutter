@@ -582,8 +582,7 @@ class _HeaderState extends State<Header> {
           ),
           TextButton(
               onPressed: () async {
-                // await _apiServices.logout('${userData.read('token')}');
-                await _apiServices.logout('');
+                await _apiServices.logout('${userData.read('token')}');
                 Navigator.pushReplacement(
                     context, MaterialPageRoute(builder: (context) => LogIn()));
               },

@@ -4,6 +4,8 @@ import 'package:get_storage/get_storage.dart';
 import 'package:holedo/controller/auth_controller.dart';
 import 'package:http/http.dart' as http;
 
+import '../models/userProfileModel.dart';
+
 class ApiServices {
   final Dio _dio = Dio();
 
@@ -19,9 +21,10 @@ class ApiServices {
       return e.response!.data;
     }
   }
+
   final userData = GetStorage();
+
   Future<dynamic> login(String email, String password) async {
-    
     try {
       Response response = await _dio.post(
         'https://api.holedo.com/rest/users/login',
@@ -34,14 +37,13 @@ class ApiServices {
       userData.write('isLogined', true);
       userData.write('email', email);
 
-
       return response.data;
     } on DioError catch (e) {
       return e.response!.data;
     }
   }
 
-  Future<dynamic> getUserProfileData(String accessToken) async {
+  Future<UserProfileModel> getUserProfileData(String accessToken) async {
     try {
       Response response = await _dio.get(
         'https://api.holedo.com/rest/users/me',
@@ -50,7 +52,12 @@ class ApiServices {
           headers: {'AuthApi': 'Bearer $accessToken'},
         ),
       );
-      return response.data;
+      // return response.data;
+      if (response.statusCode == 200) {
+        return UserProfileModel.fromJson(response.data);
+      } else {
+        return UserProfileModel.fromJson(response.data);
+      }
     } on DioError catch (e) {
       return e.response!.data;
     }

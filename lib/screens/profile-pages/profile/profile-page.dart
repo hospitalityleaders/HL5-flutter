@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
+import 'package:holedo/controller/auth_controller.dart';
 import 'package:holedo/models/userProfileModel.dart';
 import 'package:holedo/screens/profile-pages/profile-edit/profile-edit.dart';
 import 'package:holedo/screens/profile-pages/profile-overview/profile-overview.dart';
 import 'package:holedo/screens/profile-pages/references/references.dart';
 import 'package:holedo/screens/profile-pages/timeline/timeline.dart';
+import 'package:holedo/services/loginServices.dart';
 import 'package:holedo/services/user_profile_service.dart';
 import '../../../controller/menu_controller.dart';
 import '../../../responsive/responsive.dart';
@@ -159,11 +161,15 @@ class _ProfilePageState extends State<ProfilePage>
 
   List drawerItem = ['Home', 'Profile', 'News', 'Jobs', 'Recruitment', 'Help'];
 
+  ApiServices _apiServices = ApiServices();
+
   @override
   Widget build(BuildContext context) {
     return Responsive.isDesktop(context)
         ? FutureBuilder<UserProfileModel>(
-            future: UserProfileService.getUserApi(),
+            // future: UserProfileService.getUserApi(),
+            future:
+                _apiServices.getUserProfileData('${userData.read('token')}'),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Container(
@@ -410,7 +416,9 @@ class _ProfilePageState extends State<ProfilePage>
             })
         : SingleChildScrollView(
             child: FutureBuilder<UserProfileModel>(
-                future: UserProfileService.getUserApi(),
+                // future: UserProfileService.getUserApi(),
+                future: _apiServices
+                    .getUserProfileData('${userData.read('token')}'),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return Column(
