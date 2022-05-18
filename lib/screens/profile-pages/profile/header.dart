@@ -315,11 +315,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:holedo/controller/menu_controller.dart';
-
+import 'package:holedo/main.dart';
 import '../../../common/common_widget.dart';
 import '../../../constant/colorPicker/color_picker.dart';
 import '../../../constant/fontStyle/font_style.dart';
 import '../../../constant/sizedbox.dart';
+import '../../../services/user_profile_service.dart';
+import '../../Authentication/login.dart';
 
 class Header extends StatefulWidget {
   const Header({Key? key}) : super(key: key);
@@ -330,6 +332,8 @@ class Header extends StatefulWidget {
 
 class _HeaderState extends State<Header> {
   MenuController _controller = Get.find();
+  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  List drawerItem = ['Home', 'Profile', 'News', 'Jobs', 'Recruitment', 'Help'];
 
   buildHeaderGesture(
       String menuName, _fontStyle, BuildContext context, routeName, index) {
@@ -493,33 +497,34 @@ class _HeaderState extends State<Header> {
                     right: BorderSide(
                         color: ColorPicker.kPrimaryLight, width: 3))),
             child: Center(
-                child: Stack(
-              // overflow: Overflow.visible,
-              children: [
-                Icon(
-                  Icons.flag,
-                  color: ColorPicker.kPrimaryLightBlue,
-                ),
-                Positioned(
-                  right: -5,
-                  top: -5,
-                  child: Container(
-                    height: 16,
-                    width: 16,
-                    decoration: BoxDecoration(
-                      color: ColorPicker.kRed,
-                      borderRadius: BorderRadius.circular(3),
-                    ),
-                    child: Center(
-                      child: CommonWidget.text(
-                        '2',
-                        style: FontTextStyle.kWhite12W700SSP,
+              child: Stack(
+                // overflow: Overflow.visible,
+                children: [
+                  Icon(
+                    Icons.flag,
+                    color: ColorPicker.kPrimaryLightBlue,
+                  ),
+                  Positioned(
+                    right: -5,
+                    top: -5,
+                    child: Container(
+                      height: 16,
+                      width: 16,
+                      decoration: BoxDecoration(
+                        color: ColorPicker.kRed,
+                        borderRadius: BorderRadius.circular(3),
+                      ),
+                      child: Center(
+                        child: CommonWidget.text(
+                          '2',
+                          style: FontTextStyle.kWhite12W700SSP,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            )),
+                ],
+              ),
+            ),
           ),
           Container(
             width: 90,
@@ -570,6 +575,16 @@ class _HeaderState extends State<Header> {
               ),
             ),
           ),
+          TextButton(
+              onPressed: () {
+                setState(() {
+                  userData.write('isLogined', false);
+                  userData.remove('email');
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => LogIn()));
+                });
+              },
+              child: Text('Log out'))
         ],
       ),
     );

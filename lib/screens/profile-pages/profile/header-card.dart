@@ -1128,7 +1128,7 @@ class _HeaderCardState extends State<HeaderCard> {
                                 // height: SS.sH(context) * .06,
                                 // width: SS.sW(context) * .21,
                                 height: 52,
-                                width :285,
+                                width: 285,
                                 decoration: BoxDecoration(
                                     color: ColorPicker.kBlueLight1,
                                     borderRadius: BorderRadius.circular(4)),
@@ -1566,7 +1566,7 @@ class _HeaderCardState extends State<HeaderCard> {
                                   ),
                                 ),
                               ),
-                            )
+                            ),
                           ],
                         ),
                       ),
