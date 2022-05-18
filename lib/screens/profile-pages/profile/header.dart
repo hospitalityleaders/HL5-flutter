@@ -320,6 +320,7 @@ import '../../../common/common_widget.dart';
 import '../../../constant/colorPicker/color_picker.dart';
 import '../../../constant/fontStyle/font_style.dart';
 import '../../../constant/sizedbox.dart';
+import '../../../services/loginServices.dart';
 import '../../../services/user_profile_service.dart';
 import '../../Authentication/login.dart';
 
@@ -331,6 +332,10 @@ class Header extends StatefulWidget {
 }
 
 class _HeaderState extends State<Header> {
+  ///logout functionality
+
+  ApiServices _apiServices = ApiServices();
+
   MenuController _controller = Get.find();
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   List drawerItem = ['Home', 'Profile', 'News', 'Jobs', 'Recruitment', 'Help'];
@@ -576,13 +581,11 @@ class _HeaderState extends State<Header> {
             ),
           ),
           TextButton(
-              onPressed: () {
-                setState(() {
-                  userData.write('isLogined', false);
-                  userData.remove('email');
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => LogIn()));
-                });
+              onPressed: () async {
+                // await _apiServices.logout('${userData.read('token')}');
+                await _apiServices.logout('');
+                Navigator.pushReplacement(
+                    context, MaterialPageRoute(builder: (context) => LogIn()));
               },
               child: Text('Log out'))
         ],
