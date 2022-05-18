@@ -24,8 +24,8 @@ class UserProfileService {
   }
 
   static Future<UserProfileModel> updateUserProfileSummary(
-      String firstName,) async {
-
+    String firstName,
+  ) async {
     var response = await http.put(
       Uri.parse('https://api.holedo.com/rest/users/me'),
       headers: <String, String>{

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/constant/sizedbox.dart';
-
 import '../../../common/dropDownButton.dart';
 import '../../../common/popUpHeadMenu.dart';
 import '../../../common/textfield_fieldname.dart';
@@ -579,28 +578,35 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                 profileListTile(Icons.add_box_outlined, 'Add your languages',
                     buildAddyourlanguagesPopUpCards),
                 const SizedBox(height: 10),
-                ElevatedButton(
-                  onPressed: () {
-                    setState(() {});
-                  },
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                        vertical: SS.sH(context) * .014,
-                        horizontal: SS.sW(context) * .085),
-                    child: AutoSizeText(
-                      'Edit my profile',
-                      maxLines: 1,
-                      minFontSize: 10,
-                      style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w400),
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    primary: const Color(0xFF32A3FD),
+
+                GestureDetector(
+                  child: Container(
+                    alignment: Alignment.center,
+                    width: double.infinity,
+                    height: 36,
+                    decoration: BoxDecoration(
+                        color: ColorPicker.kBlueLight1,
+                        borderRadius: BorderRadius.circular(4)),
+                    child: Text('Edit my profile',
+                        style: FontTextStyle.kWhite14W400SSP),
                   ),
                 ),
+
+                // ElevatedButton(
+                //   onPressed: () {
+                //     setState(() {});
+                //   },
+                //   child: Padding(
+                //     padding: EdgeInsets.symmetric(
+                //         vertical: SS.sH(context) * .014,
+                //         horizontal: SS.sW(context) * .085),
+                //     child: Text('Edit my profile',
+                //         style: FontTextStyle.kWhite14W400SSP),
+                //   ),
+                //   style: ElevatedButton.styleFrom(
+                //     primary: const Color(0xFF32A3FD),
+                //   ),
+                // ),
               ],
             ),
           ),

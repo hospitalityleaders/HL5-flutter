@@ -1,5 +1,4 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:holedo/common/popUpHeadMenu.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
@@ -171,86 +170,91 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
 
   Future<String?> buildProfileCardPopUp(profileSummaryController) {
     return showDialog<String>(
-        context: context,
-        builder: (BuildContext context) {
-          return Dialog(
-            child: Container(
-              color: ColorPicker.kGreyLight3,
-              width: SS.sW(context) * .50,
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    PopUpHeadMenu.popUpHead('Profile Summary', context),
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Container(
-                          color: ColorPicker.kWhite,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: Text(
-                                  'Summery',
-                                  style: FontTextStyle.kBlueDark114W700SSP,
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: Container(
+            color: ColorPicker.kGreyLight3,
+            width: SS.sW(context) * .50,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  PopUpHeadMenu.popUpHead('Profile Summary', context),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Container(
+                      color: ColorPicker.kWhite,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: Text(
+                              'Summery',
+                              style: FontTextStyle.kBlueDark114W700SSP,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextField(
+                              controller: profileSummaryController,
+                              autocorrect: true,
+                              minLines: 4,
+                              maxLines: 6,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide(),
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: TextField(
-                                  controller: profileSummaryController,
-                                  autocorrect: true,
-                                  minLines: 4,
-                                  maxLines: 6,
-                                  decoration: InputDecoration(
-                                    border: OutlineInputBorder(
-                                      borderSide: BorderSide(),
-                                    ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: OutlinedButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text('Cancel')),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      setState(
+                                        () {
+                                          _futureUpdateData = UserProfileService
+                                              .updateUserProfileSummary(
+                                            profileSummaryController.text,
+                                          );
+                                          print(
+                                            profileSummaryController.text
+                                                .toString(),
+                                          );
+                                        },
+                                      );
+                                    },
+                                    child: Text('Save'),
                                   ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(4.0),
-                                      child: OutlinedButton(
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          },
-                                          child: Text('Cancel')),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: ElevatedButton(
-                                          onPressed: () {
-                                            setState(() {
-                                              _futureUpdateData =
-                                                  UserProfileService
-                                                      .updateUserProfileSummary(
-                                                          profileSummaryController
-                                                              .text);
-                                              print(profileSummaryController
-                                                  .text
-                                                  .toString());
-                                            });
-                                          },
-                                          child: Text('Save')),
-                                    )
-                                  ],
-                                ),
-                              )
-                            ],
-                          )),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 
   /// profile summary pop up end
