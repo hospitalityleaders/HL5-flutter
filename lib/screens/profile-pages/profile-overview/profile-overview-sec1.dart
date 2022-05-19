@@ -4,12 +4,10 @@ import 'package:holedo/common/popUpHeadMenu.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/constant/sizedbox.dart';
-import 'package:holedo/controller/auth_controller.dart';
 import '../../../models/userProfileModel.dart';
 import '../../../services/loginServices.dart';
 import '../../../services/user_profile_service.dart';
 import '../profile-edit/profile-edit.dart';
-import 'package:http/http.dart' as http;
 
 class ProfileOverviewSec1 extends StatefulWidget {
   final sec1IsEditable;
@@ -494,224 +492,221 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<UserProfileModel>(
-        future: _futureUpdateData,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            if (snapshot.hasData) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  /// Profile Summary
+    // return FutureBuilder<UserProfileModel>(
+    //     future: _futureUpdateData,
+    //     builder: (context, snapshot) {
+    //       if (snapshot.connectionState == ConnectionState.done) {
+    //         if (snapshot.hasData) {
+    //
 
-                  Stack(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          key: widget.profileOverviewSec1ProSummKey,
-                          color: Colors.white,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    right: 20, left: 20, top: 13),
-                                child: Text(
-                                  'Profile summary',
-                                  style: FontTextStyle.kBlueDark120W400SSP,
-                                ),
-                              ),
-                              SS.sB(8, 0),
-                              const Divider(
-                                height: 0.5,
-                                color: Color(0xffE5E5E5),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    right: 20, left: 20, top: 13),
-                                child: AutoSizeText(
-                                    // widget.pOApiDataSec1.profileSummary
-                                    //     .toString(),
-                                    snapshot.data!.data!.user!.profileSummary
-                                        .toString(),
-                                    minFontSize: 8,
-                                    style: FontTextStyle.kGreyLight516W400SSP),
-                              ),
-                              SS.sB(13, 0),
-                            ],
-                          ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        /// Profile Summary
+
+        Stack(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                key: widget.profileOverviewSec1ProSummKey,
+                color: Colors.white,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(right: 20, left: 20, top: 13),
+                      child: Text(
+                        'Profile summary',
+                        style: FontTextStyle.kBlueDark120W400SSP,
+                      ),
+                    ),
+                    SS.sB(8, 0),
+                    const Divider(
+                      height: 0.5,
+                      color: Color(0xffE5E5E5),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(right: 20, left: 20, top: 13),
+                      child: AutoSizeText(
+                          widget.pOApiDataSec1.profileSummary.toString(),
+                          // snapshot.data!.data!.user!.profileSummary
+                          //     .toString(),
+                          minFontSize: 8,
+                          style: FontTextStyle.kGreyLight516W400SSP),
+                    ),
+                    SS.sB(13, 0),
+                  ],
+                ),
+              ),
+            ),
+            widget.sec1IsEditable
+                ? ProfileEdit.buildProfileEdit(
+                    width: widget.profileOverviewSec1ProSumm_W,
+                    height: widget.profileOverviewSec1ProSumm_H,
+                    popUpEdit: () {
+                      buildProfileCardPopUp(profileSummaryController);
+                    },
+                    showAddButton: false)
+                : Container(),
+          ],
+        ),
+
+        SS.sB(8, 0),
+
+        /// Areas of expertise
+        Stack(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: Container(
+                key: widget.profileOverviewSec1AreaOfExpKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: SS.sW(context),
+                      color: Colors.white,
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            right: 20, left: 20, bottom: 13, top: 13),
+                        child: AutoSizeText(
+                          'Areas of expertise',
+                          style: FontTextStyle.kBlueDark120W400SSP,
                         ),
                       ),
-                      widget.sec1IsEditable
-                          ? ProfileEdit.buildProfileEdit(
-                              width: widget.profileOverviewSec1ProSumm_W,
-                              height: widget.profileOverviewSec1ProSumm_H,
-                              popUpEdit: () {
-                                buildProfileCardPopUp(profileSummaryController);
-                              },
-                              showAddButton: false)
-                          : Container(),
-                    ],
-                  ),
-
-                  SS.sB(8, 0),
-
-                  /// Areas of expertise
-                  Stack(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8),
-                        child: Container(
-                          key: widget.profileOverviewSec1AreaOfExpKey,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                width: SS.sW(context),
-                                color: Colors.white,
-                                child: Padding(
-                                  padding: EdgeInsets.only(
-                                      right: 20, left: 20, bottom: 13, top: 13),
-                                  child: AutoSizeText(
-                                    'Areas of expertise',
-                                    style: FontTextStyle.kBlueDark120W400SSP,
-                                  ),
-                                ),
-                              ),
-                              SS.sB(3, 0),
-                              Wrap(
-                                spacing: 5,
-                                runSpacing: 3,
-                                children: [
-                                  buildAreaOfExpertiseButton(
-                                      'Business management'),
-                                  buildAreaOfExpertiseButton('Training'),
-                                  buildAreaOfExpertiseButton('Leadership'),
-                                  buildAreaOfExpertiseButton('Growth hacking'),
-                                  buildAreaOfExpertiseButton('Finance'),
-                                  buildAreaOfExpertiseButton('Acquisitions'),
-                                  buildAreaOfExpertiseButton('Recruitment'),
-                                  buildAreaOfExpertiseButton(' Hotel groups'),
-                                  buildAreaOfExpertiseButton('Consulting'),
-                                  buildAreaOfExpertiseButton('Public speaking'),
-                                  ElevatedButton.icon(
-                                    style: ElevatedButton.styleFrom(
-                                      primary: const Color(0xFFe5f4fb),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(1),
-                                      ),
-                                    ),
-                                    onPressed: () {},
-                                    icon: const Padding(
-                                      padding:
-                                          EdgeInsets.symmetric(vertical: 12.0),
-                                      child: Icon(
-                                        Icons.add,
-                                        color: Color(0xFF0D9BDC),
-                                        size: 16,
-                                      ),
-                                    ),
-                                    label: Padding(
-                                      padding: EdgeInsets.all(1.0),
-                                      child: Text('Show all',
-                                          style: FontTextStyle
-                                              .kBlueLight114W400SSP),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
+                    ),
+                    SS.sB(3, 0),
+                    Wrap(
+                      spacing: 5,
+                      runSpacing: 3,
+                      children: [
+                        buildAreaOfExpertiseButton('Business management'),
+                        buildAreaOfExpertiseButton('Training'),
+                        buildAreaOfExpertiseButton('Leadership'),
+                        buildAreaOfExpertiseButton('Growth hacking'),
+                        buildAreaOfExpertiseButton('Finance'),
+                        buildAreaOfExpertiseButton('Acquisitions'),
+                        buildAreaOfExpertiseButton('Recruitment'),
+                        buildAreaOfExpertiseButton(' Hotel groups'),
+                        buildAreaOfExpertiseButton('Consulting'),
+                        buildAreaOfExpertiseButton('Public speaking'),
+                        ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            primary: const Color(0xFFe5f4fb),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(1),
+                            ),
+                          ),
+                          onPressed: () {},
+                          icon: const Padding(
+                            padding: EdgeInsets.symmetric(vertical: 12.0),
+                            child: Icon(
+                              Icons.add,
+                              color: Color(0xFF0D9BDC),
+                              size: 16,
+                            ),
+                          ),
+                          label: Padding(
+                            padding: EdgeInsets.all(1.0),
+                            child: Text('Show all',
+                                style: FontTextStyle.kBlueLight114W400SSP),
                           ),
                         ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            widget.sec1IsEditable
+                ? ProfileEdit.buildProfileEdit(
+                    width: widget.profileOverviewSec1AreaOfExp_W,
+                    height: widget.profileOverviewSec1AreaOfExp_H,
+                    popUpEdit: () {
+                      buildAreaOfExpePopUp(context);
+                    },
+                    showAddButton: true,
+                    popUpAdd: () {
+                      buildAreaOfExpePopUp(context);
+                    })
+                : Container(),
+          ],
+        ),
+
+        SS.sB(10, 0),
+
+        ///References card
+        Stack(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                key: widget.profileOverviewSec1ReferencesKey,
+                color: ColorPicker.kWhite,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(
+                          right: 20, left: 20, bottom: 5, top: 13),
+                      child: Text(
+                        'References',
+                        style: FontTextStyle.kBlueDark120W400SSP,
                       ),
-                      widget.sec1IsEditable
-                          ? ProfileEdit.buildProfileEdit(
-                              width: widget.profileOverviewSec1AreaOfExp_W,
-                              height: widget.profileOverviewSec1AreaOfExp_H,
-                              popUpEdit: () {
-                                buildAreaOfExpePopUp(context);
-                              },
-                              showAddButton: true,
-                              popUpAdd: () {
-                                buildAreaOfExpePopUp(context);
-                              })
-                          : Container(),
-                    ],
-                  ),
+                    ),
+                    SS.sB(8, 0),
+                    const Divider(color: Colors.grey, height: 1),
+                    buildReferencesCard(
+                      'https://images.pexels.com/photos/712521/pexels-photo-712521.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+                      'Sarah Lee',
+                      ' MHL',
+                      'General Manager, One & Only Hotel',
+                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                    ),
 
-                  SS.sB(10, 0),
+                    const Divider(
+                      height: 1,
+                      color: Colors.grey,
+                    ),
+                    buildReferencesCard(
+                      'https://images.pexels.com/photos/712521/pexels-photo-712521.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+                      'Sarah Lee',
+                      ' MHL',
+                      'General Manager, One & Only Hotel',
+                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                    ),
+                    //work experience card
+                    SS.sB(10, 0)
+                  ],
+                ),
+              ),
+            ),
+            widget.sec1IsEditable
+                ? ProfileEdit.buildProfileEdit(
+                    width: widget.profileOverviewSec1References_W,
+                    height: widget.profileOverviewSec1References_H,
+                    popUpEdit: () {
+                      PopUpHeadMenu.buildReferencesCardPopUp(context);
+                    },
+                    showAddButton: true,
+                    popUpAdd: () {
+                      PopUpHeadMenu.buildReferencesCardPopUp(context);
+                    })
+                : Container(),
+          ],
+        ),
+        SS.sB(50, 0)
+      ],
+    );
 
-                  ///References card
-                  Stack(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          key: widget.profileOverviewSec1ReferencesKey,
-                          color: ColorPicker.kWhite,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    right: 20, left: 20, bottom: 5, top: 13),
-                                child: Text(
-                                  'References',
-                                  style: FontTextStyle.kBlueDark120W400SSP,
-                                ),
-                              ),
-                              SS.sB(8, 0),
-                              const Divider(color: Colors.grey, height: 1),
-                              buildReferencesCard(
-                                'https://images.pexels.com/photos/712521/pexels-photo-712521.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-                                'Sarah Lee',
-                                ' MHL',
-                                'General Manager, One & Only Hotel',
-                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                              ),
-
-                              const Divider(
-                                height: 1,
-                                color: Colors.grey,
-                              ),
-                              buildReferencesCard(
-                                'https://images.pexels.com/photos/712521/pexels-photo-712521.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-                                'Sarah Lee',
-                                ' MHL',
-                                'General Manager, One & Only Hotel',
-                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                              ),
-                              //work experience card
-                              SS.sB(10, 0)
-                            ],
-                          ),
-                        ),
-                      ),
-                      widget.sec1IsEditable
-                          ? ProfileEdit.buildProfileEdit(
-                              width: widget.profileOverviewSec1References_W,
-                              height: widget.profileOverviewSec1References_H,
-                              popUpEdit: () {
-                                PopUpHeadMenu.buildReferencesCardPopUp(context);
-                              },
-                              showAddButton: true,
-                              popUpAdd: () {
-                                PopUpHeadMenu.buildReferencesCardPopUp(context);
-                              })
-                          : Container(),
-                    ],
-                  ),
-                  SS.sB(50, 0)
-                ],
-              );
-            } else if (snapshot.hasError) {
-              print(snapshot.hasError);
-            }
-          }
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        });
+    //     } else if (snapshot.hasError) {
+    //       print(snapshot.hasError);
+    //     }
+    //   }
+    //   return Center(
+    //     child: CircularProgressIndicator(),
+    //   );
+    // });
   }
 }

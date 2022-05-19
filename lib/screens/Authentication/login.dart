@@ -144,8 +144,8 @@ class _LogInState extends State<LogIn> {
         print('token1::- ${AuthData.setToken.toString()}');
         print('token2::- ${AuthData.token.toString()}');
         print('token3::-${userData.read('token')}');
-        print('token4::- ${Get.put(AuthController()).restoreModel().token}');
-        print('token5::- ${Get.put(AuthController()).restoreModel().setToken}');
+        print('token4::-${Get.put(AuthController()).restoreModel().token}');
+        print('token5::-${Get.put(AuthController()).restoreModel().setToken}');
 
         model.setIsLogined = true;
         Get.find<AuthController>().authModel(model);

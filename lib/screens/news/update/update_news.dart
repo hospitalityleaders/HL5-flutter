@@ -3289,9 +3289,8 @@ import '../categories/news_signal.dart';
 
 class UpdateNews extends StatefulWidget {
   static const String route = '/first';
-  String? token;
 
-   UpdateNews({Key? key,this.token}) : super(key: key);
+  UpdateNews({Key? key}) : super(key: key);
 
   @override
   _UpdateNewsState createState() => _UpdateNewsState();
@@ -3542,7 +3541,7 @@ class _UpdateNewsState extends State<UpdateNews>
                         //Profile page functionality
 
                         : _menuController.menuIndex.value == 1
-                            ? ProfilePage(token:widget.token)
+                            ? ProfilePage()
                             : _menuController.menuIndex.value == 2
                                 ? Column(
                                     children: [
@@ -3779,7 +3778,7 @@ class _UpdateNewsState extends State<UpdateNews>
             }),
           )
         : SafeArea(
-          child: Scaffold(
+            child: Scaffold(
               key: _scaffoldKey,
               appBar: CommonWidget.tabletAppBarLogIn(onTap: () {
                 _scaffoldKey.currentState!.openEndDrawer();
@@ -3819,12 +3818,12 @@ class _UpdateNewsState extends State<UpdateNews>
                                     padding: const EdgeInsets.all(10.0),
                                     child: Obx(() => Text(
                                           '${drawerItem[index]}',
-                                          style:
-                                              _menuController.menuIndex.value ==
-                                                      index
-                                                  ? FontTextStyle.kWhite16W400SSP
-                                                  : FontTextStyle
-                                                      .kPrimaryLight216W400SSP,
+                                          style: _menuController
+                                                      .menuIndex.value ==
+                                                  index
+                                              ? FontTextStyle.kWhite16W400SSP
+                                              : FontTextStyle
+                                                  .kPrimaryLight216W400SSP,
                                         )),
                                   ),
                                 ),
@@ -3858,7 +3857,8 @@ class _UpdateNewsState extends State<UpdateNews>
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Row(
                                           crossAxisAlignment:
@@ -3875,7 +3875,8 @@ class _UpdateNewsState extends State<UpdateNews>
                                             ),
                                             CommonWidget.text(
                                               'AHL',
-                                              style: FontTextStyle.kWhite20W600PR,
+                                              style:
+                                                  FontTextStyle.kWhite20W600PR,
                                             )
                                           ],
                                         ),
@@ -3903,7 +3904,8 @@ class _UpdateNewsState extends State<UpdateNews>
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Row(
                                           crossAxisAlignment:
@@ -3949,7 +3951,8 @@ class _UpdateNewsState extends State<UpdateNews>
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Row(
                                           crossAxisAlignment:
@@ -3966,8 +3969,8 @@ class _UpdateNewsState extends State<UpdateNews>
                                             ),
                                             CommonWidget.text(
                                               'MHL',
-                                              style:
-                                                  FontTextStyle.kGreyDark10W600PR,
+                                              style: FontTextStyle
+                                                  .kGreyDark10W600PR,
                                             )
                                           ],
                                         ),
@@ -4045,8 +4048,8 @@ class _UpdateNewsState extends State<UpdateNews>
                                           color: Colors.white,
                                           child: TabBar(
                                             controller: _tabController,
-                                            labelPadding:
-                                                const EdgeInsets.only(bottom: 15),
+                                            labelPadding: const EdgeInsets.only(
+                                                bottom: 15),
                                             tabs: List.generate(
                                               Data.tabItem.length,
                                               (index) => CommonWidget.text(
@@ -4086,7 +4089,7 @@ class _UpdateNewsState extends State<UpdateNews>
                                     : Center(child: Text('Help'));
               }),
             ),
-        );
+          );
   }
 
   Padding mobileView() {

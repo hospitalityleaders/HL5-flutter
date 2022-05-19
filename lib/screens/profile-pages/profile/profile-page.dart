@@ -169,7 +169,10 @@ class _ProfilePageState extends State<ProfilePage>
         ? FutureBuilder<UserProfileModel>(
             // future: UserProfileService.getUserApi(),
             future:
-                _apiServices.getUserProfileData('${userData.read('token')}'),
+                // _apiServices.getUserProfileData('${userData.read('token')}'),
+                //  _apiServices.getUserProfileData('${Get.put(AuthController()).restoreModel().setToken}'),
+                _apiServices.getUserProfileData(
+                    '${Get.put(AuthController()).restoreModel().token}'),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Container(

@@ -111,7 +111,7 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                     profileOverviewSec1References_W:
                         widget.profileOverviewSec1References_W,
                     pOApiDataSec1: widget.pOApiData,
-                    token:widget.token
+
                   ),
                 ),
                 SS.sB(0, SS.sW(context) * 0.01),
