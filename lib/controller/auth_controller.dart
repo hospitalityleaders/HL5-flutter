@@ -1,8 +1,57 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-Map<dynamic, dynamic> myJson = <dynamic, dynamic>{
+Map<dynamic, dynamic> settings = <dynamic, dynamic>{
+  'apiHost': 'dev.holedo.com',
   'apiKey': 'test',
+};
+Map<dynamic, dynamic> setup = <dynamic, dynamic>{
+  'settings': settings,
+  'name': '',
+  'token': '',
+  'sott': false,
+  'isLogined': false
+};
+
+enum Config {
+  apiSettings,
+  loginData,
+  cache,
+}
+
+class SetupData {
+  const SetupData({required this.name, required this.value});
+
+  final String name;
+  final bool value;
+
+  static const Map<Config, SetupData> setup = {
+    Config.apiSettings: SetupData(name: 'api', value: true),
+    Config.loginData: SetupData(name: 'api', value: true),
+    Config.cache: SetupData(name: 'cache', value: true),
+  };
+
+  static List<SetupData> get list {
+    List<SetupData> list = [];
+    setup.forEach((k, v) => list.add(v));
+    return list;
+  }
+
+  @override
+  String toString() {
+    return 'SetupData{name: $name, value: $value}';
+  }
+}
+
+const set = SetupData(name: 'wtf', value: true);
+void main() {
+  print('set: ${SetupData.setup}');
+  print('ss: ${set}');
+}
+
+Map<dynamic, dynamic> myJson = <dynamic, dynamic>{
+  'apiHost': 'dev.holedo.com',
+  'apiKey': 'holedo_flutter_tests',
   'name': '',
   'token': '',
   'sott': false,
@@ -10,13 +59,16 @@ Map<dynamic, dynamic> myJson = <dynamic, dynamic>{
 };
 
 class Auth {
+  dynamic apiHost;
   dynamic apiKey;
   dynamic sott;
   dynamic name;
   dynamic token;
+  dynamic data;
   bool isLogined;
 
-  Auth(this.apiKey, this.sott, this.name, this.token, this.isLogined);
+  Auth(this.apiHost, this.apiKey, this.sott, this.name, this.token,
+      this.isLogined, this.data);
 
   dynamic get setToken => token;
 
@@ -30,6 +82,12 @@ class Auth {
     name = value;
   }
 
+  dynamic get setData => data;
+
+  set setData(dynamic value) {
+    data = value;
+  }
+
   bool get setIsLogined => isLogined;
 
   set setIsLogined(bool value) {
@@ -37,17 +95,21 @@ class Auth {
   }
 
   Auth.fromJson(Map<dynamic, dynamic> json)
-      : apiKey = json['apiKey'],
+      : apiHost = json['apiHost'],
+        apiKey = json['apiKey'],
         sott = json['sott'],
         name = json['name'],
         token = json['token'],
+        data = json['data'],
         isLogined = json['isLogined'];
 
   Map<dynamic, dynamic> toJson() => {
+        'apiHost': apiHost,
         'apiKey': apiKey,
         'sott': sott,
         'name': name,
         'token': token,
+        'data': data,
         'isLogined': isLogined,
       };
 }

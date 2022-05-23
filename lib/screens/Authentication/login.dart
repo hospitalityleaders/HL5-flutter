@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:holedo/controller/auth_controller.dart';
-import 'package:holedo/services/loginServices.dart';
+import 'package:holedo/services/holedo_api_services.dart';
 import 'package:holedo/utils/validator.dart';
 import '../../controller/menu_controller.dart';
 import '../news/update/update_news.dart';

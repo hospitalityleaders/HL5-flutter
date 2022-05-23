@@ -9,7 +9,7 @@ import 'package:holedo/screens/profile-pages/profile-edit/profile-edit.dart';
 import 'package:holedo/screens/profile-pages/profile-overview/profile-overview.dart';
 import 'package:holedo/screens/profile-pages/references/references.dart';
 import 'package:holedo/screens/profile-pages/timeline/timeline.dart';
-import 'package:holedo/services/loginServices.dart';
+import 'package:holedo/services/holedo_api_services.dart';
 import 'package:holedo/services/user_profile_service.dart';
 import '../../../controller/menu_controller.dart';
 import '../../../responsive/responsive.dart';
@@ -170,11 +170,7 @@ class _ProfilePageState extends State<ProfilePage>
     return Responsive.isDesktop(context)
         ? FutureBuilder<UserProfileModel>(
             // future: UserProfileService.getUserApi(),
-            future:
-                // _apiServices.getUserProfileData('${userData.read('token')}'),
-                //  _apiServices.getUserProfileData('${Get.put(AuthController()).restoreModel().setToken}'),
-                _apiServices.getUserProfileData(
-                    '${Get.put(AuthController()).restoreModel().token}'),
+            future: _apiServices.getUserProfileData('${AuthData.token}'),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Container(
