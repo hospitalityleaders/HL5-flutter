@@ -1802,7 +1802,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                               color: ColorPicker.kPrimaryLight, width: 3))),
                   child: Center(
                       child: Stack(
-                    overflow: Overflow.visible,
+                    //overflow: Overflow.visible,
                     children: [
                       Icon(
                         Icons.email,
@@ -1837,7 +1837,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                               color: ColorPicker.kPrimaryLight, width: 3))),
                   child: Center(
                       child: Stack(
-                    overflow: Overflow.visible,
+                    //overflow: Overflow.visible,
                     children: [
                       Icon(
                         Icons.flag,
@@ -1964,7 +1964,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
             ),
 
             Stack(
-              overflow: Overflow.visible,
+              //overflow: Overflow.visible,
               children: [
                 Container(
                   height: Get.height * 0.5,

@@ -286,7 +286,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                     width: 3))),
                         child: Center(
                             child: Stack(
-                          overflow: Overflow.visible,
+                          //overflow: Overflow.visible,
                           children: [
                             Icon(
                               Icons.email,
@@ -322,7 +322,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                     width: 3))),
                         child: Center(
                             child: Stack(
-                          overflow: Overflow.visible,
+                          //overflow: Overflow.visible,
                           children: [
                             Icon(
                               Icons.flag,

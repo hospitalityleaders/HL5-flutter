@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
+import 'package:get/get.dart' as Getx;
+
 import 'package:get_storage/get_storage.dart';
 import 'package:holedo/controller/auth_controller.dart';
 import 'package:http/http.dart' as http;
@@ -52,6 +54,7 @@ class ApiServices {
           headers: {'AuthApi': 'Bearer $accessToken'},
         ),
       );
+
       // return response.data;
       if (response.statusCode == 200) {
         return UserProfileModel.fromJson(response.data);
@@ -70,8 +73,8 @@ class ApiServices {
   }) async {
     User? updatedUser;
     try {
-      Response response = await _dio.put(
-        'https://api.holedo.com/rest/users/me',
+      Response response = await _dio.post(
+        'https://api.holedo.com/rest/users/update',
         data: user.toJson(),
         queryParameters: {'apikey': AuthData.apiKey},
         options: Options(
@@ -88,7 +91,7 @@ class ApiServices {
   }
 
   Future<dynamic> logout(String accessToken) async {
-    try {
+    /*try {
       Response response = await _dio.get(
         'https://api.holedo.com/rest/users/access_token/InValidate',
         queryParameters: {'apikey': AuthData.apiKey},
@@ -96,10 +99,12 @@ class ApiServices {
           headers: {'AuthApi': 'Bearer $accessToken'},
         ),
       );
+      
       return response.data;
     } on DioError catch (e) {
       return e.response!.data;
-    }
+    }*/
+    Getx.Get.find<AuthController>().resetModel();
   }
 
   Future<LoginApiResponse> apiCallLogin(Map<String, dynamic> param) async {

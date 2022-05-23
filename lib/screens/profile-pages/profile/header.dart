@@ -471,7 +471,7 @@ class _HeaderState extends State<Header> {
                         color: ColorPicker.kPrimaryLight, width: 3))),
             child: Center(
                 child: Stack(
-              // overflow: Overflow.visible,
+              // //overflow: Overflow.visible,
               children: [
                 Icon(
                   Icons.email,
@@ -506,7 +506,7 @@ class _HeaderState extends State<Header> {
                         color: ColorPicker.kPrimaryLight, width: 3))),
             child: Center(
               child: Stack(
-                // overflow: Overflow.visible,
+                // //overflow: Overflow.visible,
                 children: [
                   Icon(
                     Icons.flag,

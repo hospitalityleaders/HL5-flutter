@@ -285,7 +285,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                     width: 3))),
                         child: Center(
                             child: Stack(
-                          overflow: Overflow.visible,
+                          //overflow: Overflow.visible,
                           children: [
                             Icon(
                               Icons.email,
@@ -321,7 +321,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                     width: 3))),
                         child: Center(
                             child: Stack(
-                          overflow: Overflow.visible,
+                          //overflow: Overflow.visible,
                           children: [
                             Icon(
                               Icons.flag,
@@ -450,7 +450,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                   ),
 
                   Stack(
-                    overflow: Overflow.visible,
+                    //overflow: Overflow.visible,
                     children: [
                       Container(
                         height: Get.height * 0.5,
@@ -865,7 +865,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                         )),
                         child: Center(
                             child: Stack(
-                          overflow: Overflow.visible,
+                          //overflow: Overflow.visible,
                           children: [
                             Icon(
                               Icons.email,
@@ -901,7 +901,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                         )),
                         child: Center(
                             child: Stack(
-                          overflow: Overflow.visible,
+                          //overflow: Overflow.visible,
                           children: [
                             Icon(
                               Icons.flag,
