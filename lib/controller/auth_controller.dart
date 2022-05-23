@@ -19,16 +19,19 @@ class Auth {
   Auth(this.apiKey, this.sott, this.name, this.token, this.isLogined);
 
   dynamic get setToken => token;
+
   set setToken(dynamic value) {
     token = value;
   }
 
   dynamic get setName => name;
+
   set setName(dynamic value) {
     name = value;
   }
 
   bool get setIsLogined => isLogined;
+
   set setIsLogined(bool value) {
     isLogined = value;
   }
@@ -74,19 +77,18 @@ class AuthController extends GetxController {
 
 var AuthData = Get.put(AuthController()).restoreModel();
 
-
 /* notes:
  To log out:
     Get.put(AuthController()).restModel();
 
   This will erase all the data on the storage.
 
- To save data: 
+ To save data:
     final model = Get.put(AuthController()).restoreModel();
     model.setToken = accessToken;
     model.setIsLogined = true;
     Get.find<AuthController>().authModel(model);
-  
+
   AuthData constant:
     AuthData is available everywhere.
 
@@ -96,6 +98,6 @@ var AuthData = Get.put(AuthController()).restoreModel();
     etc.
 
     If for some reason AuthData doesn't work. You can use
-      Get.put(AuthController()).restoreModel().isLogined  
+      Get.put(AuthController()).restoreModel().isLogined
 
 */

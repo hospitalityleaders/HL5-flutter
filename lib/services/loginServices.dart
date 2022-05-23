@@ -63,23 +63,28 @@ class ApiServices {
     }
   }
 
-  Future<dynamic> updateUserProfile({
+  Future<User?> updateUserProfile({
     required String accessToken,
-    required Map<String, dynamic> data,
+    required User user,
+    required String profileSummary,
   }) async {
+    User? updatedUser;
     try {
       Response response = await _dio.put(
-        'https://api.holedo.com/rest/users/account',
-        data: data,
+        'https://api.holedo.com/rest/users/me',
+        data: user.toJson(),
         queryParameters: {'apikey': AuthData.apiKey},
         options: Options(
           headers: {'AuthApi': 'Bearer $accessToken'},
         ),
       );
-      return response.data;
-    } on DioError catch (e) {
-      return e.response!.data;
+      // return response.data;
+      print('User updated: ${response.data}');
+      updatedUser = User.fromJson(response.data);
+    } catch (e) {
+      print('Error updating user: $e');
     }
+    return updatedUser;
   }
 
   Future<dynamic> logout(String accessToken) async {

@@ -1,12 +1,13 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:holedo/common/popUpHeadMenu.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/constant/sizedbox.dart';
+import '../../../controller/auth_controller.dart';
 import '../../../models/userProfileModel.dart';
 import '../../../services/loginServices.dart';
-import '../../../services/user_profile_service.dart';
 import '../profile-edit/profile-edit.dart';
 
 class ProfileOverviewSec1 extends StatefulWidget {
@@ -45,17 +46,14 @@ class ProfileOverviewSec1 extends StatefulWidget {
 
 class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
   ///api get and update functionality Start
-  ApiServices _apiServices = ApiServices();
-
-  void initState() {
-    // _futureUpdateData = UserProfileService.getUserApi();
-    _futureUpdateData =
-        _apiServices.getUserProfileData('${userData.read('token')}');
-    super.initState();
-  }
-
-  TextEditingController profileSummaryController = TextEditingController();
-  late Future<UserProfileModel> _futureUpdateData;
+  // ApiServices _apiServices = ApiServices();
+  // void initState() {
+  //   // _futureUpdateData = UserProfileService.getUserApi();
+  //   _futureUpdateData =
+  //       _apiServices.getUserProfileData('${userData.read('token')}');
+  //   super.initState();
+  // }
+  // late Future<UserProfileModel> _futureUpdateData;
 
   ///api get and update functionality End
 
@@ -170,6 +168,18 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
 
   ///Profile summary pop up start
 
+  ///api to fetch and update data
+
+  final ApiServices _apiServices = ApiServices();
+  TextEditingController profileSummaryController = TextEditingController();
+  bool isUpdating = false;
+
+  @override
+  void initState() {
+    profileSummaryController;
+    super.initState();
+  }
+
   Future<String?> buildProfileCardPopUp(profileSummaryController) {
     return showDialog<String>(
       context: context,
@@ -225,23 +235,43 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      setState(
-                                        () {
-                                          _futureUpdateData = UserProfileService
-                                              .updateUserProfileSummary(
-                                            profileSummaryController.text,
-                                          );
-                                          print(
-                                            profileSummaryController.text
-                                                .toString(),
-                                          );
-                                        },
-                                      );
-                                    },
-                                    child: Text('Save'),
-                                  ),
+                                  child: isUpdating
+                                      ? CircularProgressIndicator()
+                                      : ElevatedButton(
+                                          onPressed: () async {
+                                            setState(
+                                              () {
+                                                isUpdating = true;
+                                              },
+                                            );
+
+                                            if (profileSummaryController.text !=
+                                                '') {
+                                              User user = User(
+                                                  profileSummary:
+                                                      profileSummaryController
+                                                          .text);
+                                              User? retrievedUser = await _apiServices
+                                                  .updateUserProfile(
+                                                      accessToken:
+                                                          '${Get.put(AuthController()).restoreModel().token}',
+                                                      user: user,
+                                                      profileSummary:
+                                                          profileSummaryController
+                                                              .text);
+                                              if (retrievedUser != null) {
+                                                print(retrievedUser
+                                                    .profileSummary);
+                                              }
+                                            }
+                                            setState(
+                                              () {
+                                                isUpdating = false;
+                                              },
+                                            );
+                                          },
+                                          child: Text('Save'),
+                                        ),
                                 ),
                               ],
                             ),
@@ -267,17 +297,12 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
 
   List chipList = ['Business'];
 
-  // @override
-  // void dispose() {
-  //   _controller.dispose();
-  //   super.dispose();
-  // }
-
   Future<String?> buildAreaOfExpePopUp(BuildContext context) {
     return showDialog<String>(
-        context: context,
-        builder: (BuildContext context) {
-          return StatefulBuilder(builder: (context, setState) {
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
             return Dialog(
               child: Container(
                 color: ColorPicker.kGreyLight8,
@@ -354,14 +379,16 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                                           flex: 1,
                                           child: InkWell(
                                             onTap: () {
-                                              setState(() {
-                                                if (_controller.text != '') {
-                                                  chipList
-                                                      .add(_controller.text);
-                                                } else {
-                                                  null;
-                                                }
-                                              });
+                                              setState(
+                                                () {
+                                                  if (_controller.text != '') {
+                                                    chipList
+                                                        .add(_controller.text);
+                                                  } else {
+                                                    null;
+                                                  }
+                                                },
+                                              );
                                             },
                                             onHover: (value) {},
                                             child: Padding(
@@ -425,12 +452,14 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                                                 size: 10,
                                               ),
                                               onDeleted: () {
-                                                setState(() {
-                                                  chipList.removeAt(
-                                                      chipList.indexOf(i));
-                                                });
+                                                setState(
+                                                  () {
+                                                    chipList.removeAt(
+                                                        chipList.indexOf(i));
+                                                  },
+                                                );
                                               },
-                                            )
+                                            ),
                                         ],
                                       ),
                                     ),
@@ -461,44 +490,18 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                 ),
               ),
             );
-          });
-        });
+          },
+        );
+      },
+    );
   }
 
-  //Area of exper pop up end
+  ///Area of exper pop up end
 
   ///profile section1 pop up functionality End
 
-  ///submit data to Api Start
-  // late UserProfileModel _userProfileModel;
-  //
-  // Future<UserProfileModel?> profileSummerySubmitData(
-  //     String profileSummaryController) async {
-  //   var response =
-  //       await http.post(Uri.https('api.holedo.com', 'rest/users/me'), body: {
-  //     'profileSummary': profileSummaryController,
-  //   });
-  //   var data = response.body;
-  //   print(data);
-  //
-  //   if (response.statusCode == 201) {
-  //     String responseString = response.body;
-  //     userProfileModelFromJson(responseString);
-  //   } else
-  //     return null;
-  // }
-
-  ///submit data to Api End
-
   @override
   Widget build(BuildContext context) {
-    // return FutureBuilder<UserProfileModel>(
-    //     future: _futureUpdateData,
-    //     builder: (context, snapshot) {
-    //       if (snapshot.connectionState == ConnectionState.done) {
-    //         if (snapshot.hasData) {
-    //
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -699,14 +702,5 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
         SS.sB(50, 0)
       ],
     );
-
-    //     } else if (snapshot.hasError) {
-    //       print(snapshot.hasError);
-    //     }
-    //   }
-    //   return Center(
-    //     child: CircularProgressIndicator(),
-    //   );
-    // });
   }
 }

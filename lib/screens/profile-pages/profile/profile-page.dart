@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/controller/auth_controller.dart';
@@ -162,6 +163,7 @@ class _ProfilePageState extends State<ProfilePage>
   List drawerItem = ['Home', 'Profile', 'News', 'Jobs', 'Recruitment', 'Help'];
 
   ApiServices _apiServices = ApiServices();
+  final userData = GetStorage();
 
   @override
   Widget build(BuildContext context) {
@@ -420,8 +422,8 @@ class _ProfilePageState extends State<ProfilePage>
         : SingleChildScrollView(
             child: FutureBuilder<UserProfileModel>(
                 // future: UserProfileService.getUserApi(),
-                future: _apiServices
-                    .getUserProfileData('${userData.read('token')}'),
+                future: _apiServices.getUserProfileData(
+                    '${Get.put(AuthController()).restoreModel().token}'),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return Column(
