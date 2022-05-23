@@ -1,56 +1,8 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-Map<dynamic, dynamic> settings = <dynamic, dynamic>{
-  'apiHost': 'dev.holedo.com',
-  'apiKey': 'test',
-};
-Map<dynamic, dynamic> setup = <dynamic, dynamic>{
-  'settings': settings,
-  'name': '',
-  'token': '',
-  'sott': false,
-  'isLogined': false
-};
-
-enum Config {
-  apiSettings,
-  loginData,
-  cache,
-}
-
-class SetupData {
-  const SetupData({required this.name, required this.value});
-
-  final String name;
-  final bool value;
-
-  static const Map<Config, SetupData> setup = {
-    Config.apiSettings: SetupData(name: 'api', value: true),
-    Config.loginData: SetupData(name: 'api', value: true),
-    Config.cache: SetupData(name: 'cache', value: true),
-  };
-
-  static List<SetupData> get list {
-    List<SetupData> list = [];
-    setup.forEach((k, v) => list.add(v));
-    return list;
-  }
-
-  @override
-  String toString() {
-    return 'SetupData{name: $name, value: $value}';
-  }
-}
-
-const set = SetupData(name: 'wtf', value: true);
-void main() {
-  print('set: ${SetupData.setup}');
-  print('ss: ${set}');
-}
-
 Map<dynamic, dynamic> myJson = <dynamic, dynamic>{
-  'apiHost': 'dev.holedo.com',
+  'apiHost': 'api.holedo.com',
   'apiKey': 'holedo_flutter_tests',
   'name': '',
   'token': '',
