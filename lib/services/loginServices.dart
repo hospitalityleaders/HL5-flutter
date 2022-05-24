@@ -3,7 +3,6 @@ import 'package:dio/dio.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:holedo/controller/auth_controller.dart';
 import 'package:http/http.dart' as http;
-
 import '../models/userProfileModel.dart';
 
 class ApiServices {

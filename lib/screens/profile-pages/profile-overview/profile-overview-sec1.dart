@@ -45,18 +45,6 @@ class ProfileOverviewSec1 extends StatefulWidget {
 }
 
 class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
-  ///api get and update functionality Start
-  // ApiServices _apiServices = ApiServices();
-  // void initState() {
-  //   // _futureUpdateData = UserProfileService.getUserApi();
-  //   _futureUpdateData =
-  //       _apiServices.getUserProfileData('${userData.read('token')}');
-  //   super.initState();
-  // }
-  // late Future<UserProfileModel> _futureUpdateData;
-
-  ///api get and update functionality End
-
   Widget buildAreaOfExpertiseButton(String btnName) {
     return ElevatedButton.icon(
       style: ElevatedButton.styleFrom(
