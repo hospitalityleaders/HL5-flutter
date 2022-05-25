@@ -415,7 +415,7 @@ class HomeWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: Stack(
-                      overflow: Overflow.visible,
+                      //overflow: Overflow.visible,
                       children: [
                         Image(
                           image: AssetImage('assets/images/couple_bg.png'),

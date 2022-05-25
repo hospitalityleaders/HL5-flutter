@@ -321,7 +321,7 @@ import '../../../constant/colorPicker/color_picker.dart';
 import '../../../constant/fontStyle/font_style.dart';
 import '../../../constant/sizedbox.dart';
 import '../../../controller/auth_controller.dart';
-import '../../../services/loginServices.dart';
+import '../../../services/holedo_api_services.dart';
 import '../../../services/user_profile_service.dart';
 import '../../Authentication/login.dart';
 
@@ -471,7 +471,7 @@ class _HeaderState extends State<Header> {
                         color: ColorPicker.kPrimaryLight, width: 3))),
             child: Center(
                 child: Stack(
-              // overflow: Overflow.visible,
+              // //overflow: Overflow.visible,
               children: [
                 Icon(
                   Icons.email,
@@ -506,7 +506,7 @@ class _HeaderState extends State<Header> {
                         color: ColorPicker.kPrimaryLight, width: 3))),
             child: Center(
               child: Stack(
-                // overflow: Overflow.visible,
+                // //overflow: Overflow.visible,
                 children: [
                   Icon(
                     Icons.flag,

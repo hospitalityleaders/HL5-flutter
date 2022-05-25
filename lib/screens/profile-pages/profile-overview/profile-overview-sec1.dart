@@ -1,13 +1,14 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
 import 'package:holedo/common/popUpHeadMenu.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/constant/sizedbox.dart';
+import 'package:holedo/screens/Authentication/login.dart';
 import '../../../controller/auth_controller.dart';
 import '../../../models/userProfileModel.dart';
-import '../../../services/loginServices.dart';
+import '../../../services/holedo_api_services.dart';
 import '../profile-edit/profile-edit.dart';
 
 class ProfileOverviewSec1 extends StatefulWidget {
@@ -45,6 +46,53 @@ class ProfileOverviewSec1 extends StatefulWidget {
 }
 
 class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
+  final ApiServices _apiServices = ApiServices();
+  final UserProfileModel profile = UserProfileModel.fromJson(AuthData.data);
+  User? user;
+  late TextEditingController profileSummaryController;
+
+  bool isUpdating = false;
+
+  @override
+  void initState() {
+    super.initState();
+    user = profile.data?.user;
+    print('pp: ${user?.profileSummary}');
+    profileSummaryController =
+        new TextEditingController(text: ' ${user?.profileSummary}');
+  }
+
+  Future<void> updateUsers() async {
+    setState(() {
+      isUpdating = true;
+    });
+    if (profileSummaryController.text != '') {
+      Map<String, dynamic> userData = {
+        "id": user?.id,
+        "profile_summary": profileSummaryController.text
+      };
+
+      print('usser: ${userData}');
+
+      dynamic res = await _apiServices.updateUserProfile(
+          accessToken: '${AuthData.token}', profileData: userData);
+
+      if (res?.errors == null) {
+        Navigator.pop(context);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error: ${res?.messages}'),
+            backgroundColor: Colors.red.shade300,
+          ),
+        );
+      }
+    }
+    setState(() {
+      isUpdating = false;
+    });
+  }
+
   Widget buildAreaOfExpertiseButton(String btnName) {
     return ElevatedButton.icon(
       style: ElevatedButton.styleFrom(
@@ -158,16 +206,6 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
 
   ///api to fetch and update data
 
-  final ApiServices _apiServices = ApiServices();
-  TextEditingController profileSummaryController = TextEditingController();
-  bool isUpdating = false;
-
-  @override
-  void initState() {
-    profileSummaryController;
-    super.initState();
-  }
-
   Future<String?> buildProfileCardPopUp(profileSummaryController) {
     return showDialog<String>(
       context: context,
@@ -190,7 +228,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                           Padding(
                             padding: const EdgeInsets.all(4.0),
                             child: Text(
-                              'Summery',
+                              'Summary',
                               style: FontTextStyle.kBlueDark114W700SSP,
                             ),
                           ),
@@ -226,38 +264,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                                   child: isUpdating
                                       ? CircularProgressIndicator()
                                       : ElevatedButton(
-                                          onPressed: () async {
-                                            setState(
-                                              () {
-                                                isUpdating = true;
-                                              },
-                                            );
-
-                                            if (profileSummaryController.text !=
-                                                '') {
-                                              User user = User(
-                                                  profileSummary:
-                                                      profileSummaryController
-                                                          .text);
-                                              User? retrievedUser = await _apiServices
-                                                  .updateUserProfile(
-                                                      accessToken:
-                                                          '${Get.put(AuthController()).restoreModel().token}',
-                                                      user: user,
-                                                      profileSummary:
-                                                          profileSummaryController
-                                                              .text);
-                                              if (retrievedUser != null) {
-                                                print(retrievedUser
-                                                    .profileSummary);
-                                              }
-                                            }
-                                            setState(
-                                              () {
-                                                isUpdating = false;
-                                              },
-                                            );
-                                          },
+                                          onPressed: updateUsers,
                                           child: Text('Save'),
                                         ),
                                 ),
@@ -521,8 +528,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                       padding: EdgeInsets.only(right: 20, left: 20, top: 13),
                       child: AutoSizeText(
                           widget.pOApiDataSec1.profileSummary.toString(),
-                          // snapshot.data!.data!.user!.profileSummary
-                          //     .toString(),
+
                           minFontSize: 8,
                           style: FontTextStyle.kGreyLight516W400SSP),
                     ),
@@ -542,7 +548,6 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                 : Container(),
           ],
         ),
-
         SS.sB(8, 0),
 
         /// Areas of expertise
@@ -624,7 +629,6 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                 : Container(),
           ],
         ),
-
         SS.sB(10, 0),
 
         ///References card

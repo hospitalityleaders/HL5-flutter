@@ -10,7 +10,8 @@
   // static Future<UserProfileModel> getUserApi() async {
   //   var uri = 'https://api.holedo.com/rest/users/me';
   //
-  //   final response = await http.get(Uri.parse(uri), headers: {
+  //   final response = await http.get(Uri.parse(uri),
+//   headers: {
   //     'Content-Type': 'application/json',
   //     'Accept': 'application/json',
   //     'AuthApi': 'Bearer ${userData.read('token')}'

@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
+import 'package:get/get.dart' as Store;
+
 import 'package:get_storage/get_storage.dart';
 import 'package:holedo/controller/auth_controller.dart';
-import 'package:http/http.dart' as http;
+
 import '../models/userProfileModel.dart';
 
 class ApiServices {
@@ -11,7 +13,7 @@ class ApiServices {
   Future<dynamic> registerUser(Map<String, dynamic>? data) async {
     try {
       Response response = await _dio.post(
-          'https://api.holedo.com/rest/users/register',
+          'https://${AuthData.apiHost}/rest/users/register',
           data: data,
           queryParameters: {'apikey': AuthData.apiKey},
           options: Options(headers: {'X-LoginRadius-Sott': AuthData.sott}));
@@ -26,7 +28,7 @@ class ApiServices {
   Future<dynamic> login(String email, String password) async {
     try {
       Response response = await _dio.post(
-        'https://api.holedo.com/rest/users/login',
+        'https://${AuthData.apiHost}/rest/users/login',
         data: {
           'email': email,
           'password': password,
@@ -45,15 +47,19 @@ class ApiServices {
   Future<UserProfileModel> getUserProfileData(String accessToken) async {
     try {
       Response response = await _dio.get(
-        'https://api.holedo.com/rest/users/me',
+        'https://${AuthData.apiHost}/rest/users/me',
         queryParameters: {'apikey': AuthData.apiKey},
         options: Options(
           headers: {'AuthApi': 'Bearer $accessToken'},
         ),
       );
+
       // return response.data;
       if (response.statusCode == 200) {
-        return UserProfileModel.fromJson(response.data);
+        final model = Store.Get.put(AuthController()).restoreModel();
+        model.setData = UserProfileModel.fromJson(response.data);
+        Store.Get.find<AuthController>().authModel(model);
+        return model.setData;
       } else {
         return UserProfileModel.fromJson(response.data);
       }
@@ -62,59 +68,47 @@ class ApiServices {
     }
   }
 
-  Future<User?> updateUserProfile({
+  Future<UserProfileModel> updateUserProfile({
     required String accessToken,
-    required User user,
-    required String profileSummary,
+    required Map<String, dynamic> profileData,
   }) async {
-    User? updatedUser;
     try {
-      Response response = await _dio.put(
-        'https://api.holedo.com/rest/users/me',
-        data: user.toJson(),
+      Response response = await _dio.post(
+        'https://${AuthData.apiHost}/rest/users/update',
+        data: profileData,
         queryParameters: {'apikey': AuthData.apiKey},
         options: Options(
           headers: {'AuthApi': 'Bearer $accessToken'},
         ),
       );
-      // return response.data;
-      print('User updated: ${response.data}');
-      updatedUser = User.fromJson(response.data);
-    } catch (e) {
-      print('Error updating user: $e');
-    }
-    return updatedUser;
-  }
-
-  Future<dynamic> logout(String accessToken) async {
-    try {
-      Response response = await _dio.get(
-        'https://api.holedo.com/rest/users/access_token/InValidate',
-        queryParameters: {'apikey': AuthData.apiKey},
-        options: Options(
-          headers: {'AuthApi': 'Bearer $accessToken'},
-        ),
-      );
-      return response.data;
+      if (response.statusCode == 200) {
+        final model = Store.Get.put(AuthController()).restoreModel();
+        model.setData = UserProfileModel.fromJson(response.data);
+        Store.Get.find<AuthController>().authModel(model);
+        return model.setData;
+      } else {
+        return UserProfileModel.fromJson(response.data);
+      }
     } on DioError catch (e) {
       return e.response!.data;
     }
   }
 
-  Future<LoginApiResponse> apiCallLogin(Map<String, dynamic> param) async {
-    var url = Uri.parse('https://api.holedo.com/rest/users/login');
-
-    var response = await http.post(url, body: param);
-    var data;
-
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      return LoginApiResponse(
-        token: data['token'],
-        error: data['error'],
+  Future<dynamic> logout(String accessToken) async {
+    /*try {
+      Response response = await _dio.get(
+        'https://${AuthData.apiHost}/rest/users/access_token/InValidate',
+        queryParameters: {'apikey': AuthData.apiKey},
+        options: Options(
+          headers: {'AuthApi': 'Bearer $accessToken'},
+        ),
       );
-    }
-    return data;
+      
+      return response.data;
+    } on DioError catch (e) {
+      return e.response!.data;
+    }*/
+    Store.Get.find<AuthController>().resetModel();
   }
 }
 

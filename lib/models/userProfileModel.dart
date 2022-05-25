@@ -1,22 +1,27 @@
 import 'dart:convert';
+
 /// success : true
 /// errors : null
 /// messages : null
 /// data : {"user":{"id":4280,"company_id":null,"role_id":2,"company_role_id":null,"country_id":null,"user_title_types_id":null,"currency_id":null,"contact_number_types_id":null,"marital_status_id":null,"gender_id":null,"current_membership_grade_id":1,"next_membership_grade_id":2,"slug":"johnd","first_name":"John","last_name":"Ubalde","email":"john@limabean.co.za","email_visibility":0,"date_of_birth":null,"avatar":"https://res.cloudinary.com/hospitalityleaders/image/upload/v1644465746/uploads/images/users/b62-mortal-kombat-movie-poster-thumb-1613594784791-Boi.jpg","banner":"https://res.cloudinary.com/hospitalityleaders/image/upload/v1643922455/uploads/images/users/6bc-136475-acoustic-guitar-wallpaper-1920x1080-photos-IPF.jpg","professional_title":null,"area":null,"contact_number":"","contact_number_visibility":false,"contactable_whatsapp":0,"contactable_sms":0,"website":null,"website_visibility":false,"skype":null,"skype_visibility":false,"facebook":null,"facebook_visibility":false,"twitter":null,"twitter_visibility":false,"google":null,"google_visibility":false,"xing":null,"xing_visibility":false,"linkedin":null,"linkedin_visibility":false,"proxycurl_whodis":null,"allow_recruiter_access":false,"address_1":null,"address_2":null,"address_postal_code":null,"address_area":null,"work_permits":null,"relocate":false,"next_job":null,"salary_expectation":null,"profile_summary":null,"active":false,"profile_video_title":null,"profile_video_description":null,"profile_video_url":null,"membership_grade_leader_points":1500,"membership_grade_needed_leader_points":48500,"membership_grade_percent_accomplished":3,"membership_grade_eligibility":true,"matrix_uid":"@johnd:holedo.com","matrix_room_sync":null,"allow_api_login":false,"company":null,"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQyODAsImV4cCI6MTk2NjQxMTI0NH0.umSFTSYjB9XCv6AHHfeOIpG-v0foRHwoaM2MnBgTDpw","embed_src":"","full_name":"John Ubalde","expertise_string":"","active_status":"inactive","avatar_cdn":"https://res.cloudinary.com/hospitalityleaders/image/upload/w_500/v1644465746/uploads/images/users/b62-mortal-kombat-movie-poster-thumb-1613594784791-Boi.jpg","holedo_url":"http://holedo.com/johnd"}}
 
-UserProfileModel userProfileModelFromJson(String str) => UserProfileModel.fromJson(json.decode(str));
-String userProfileModelToJson(UserProfileModel data) => json.encode(data.toJson());
+UserProfileModel userProfileModelFromJson(String str) =>
+    UserProfileModel.fromJson(json.decode(str));
+String userProfileModelToJson(UserProfileModel data) =>
+    json.encode(data.toJson());
+
 class UserProfileModel {
   UserProfileModel({
-      bool? success, 
-      dynamic errors, 
-      dynamic messages, 
-      Data? data,}){
+    bool? success,
+    dynamic errors,
+    dynamic messages,
+    Data? data,
+  }) {
     _success = success;
     _errors = errors;
     _messages = messages;
     _data = data;
-}
+  }
 
   UserProfileModel.fromJson(dynamic json) {
     _success = json['success'];
@@ -28,15 +33,18 @@ class UserProfileModel {
   dynamic _errors;
   dynamic _messages;
   Data? _data;
-UserProfileModel copyWith({  bool? success,
-  dynamic errors,
-  dynamic messages,
-  Data? data,
-}) => UserProfileModel(  success: success ?? _success,
-  errors: errors ?? _errors,
-  messages: messages ?? _messages,
-  data: data ?? _data,
-);
+  UserProfileModel copyWith({
+    bool? success,
+    dynamic errors,
+    dynamic messages,
+    Data? data,
+  }) =>
+      UserProfileModel(
+        success: success ?? _success,
+        errors: errors ?? _errors,
+        messages: messages ?? _messages,
+        data: data ?? _data,
+      );
   bool? get success => _success;
   dynamic get errors => _errors;
   dynamic get messages => _messages;
@@ -52,26 +60,30 @@ UserProfileModel copyWith({  bool? success,
     }
     return map;
   }
-
 }
 
 /// user : {"id":4280,"company_id":null,"role_id":2,"company_role_id":null,"country_id":null,"user_title_types_id":null,"currency_id":null,"contact_number_types_id":null,"marital_status_id":null,"gender_id":null,"current_membership_grade_id":1,"next_membership_grade_id":2,"slug":"johnd","first_name":"John","last_name":"Ubalde","email":"john@limabean.co.za","email_visibility":0,"date_of_birth":null,"avatar":"https://res.cloudinary.com/hospitalityleaders/image/upload/v1644465746/uploads/images/users/b62-mortal-kombat-movie-poster-thumb-1613594784791-Boi.jpg","banner":"https://res.cloudinary.com/hospitalityleaders/image/upload/v1643922455/uploads/images/users/6bc-136475-acoustic-guitar-wallpaper-1920x1080-photos-IPF.jpg","professional_title":null,"area":null,"contact_number":"","contact_number_visibility":false,"contactable_whatsapp":0,"contactable_sms":0,"website":null,"website_visibility":false,"skype":null,"skype_visibility":false,"facebook":null,"facebook_visibility":false,"twitter":null,"twitter_visibility":false,"google":null,"google_visibility":false,"xing":null,"xing_visibility":false,"linkedin":null,"linkedin_visibility":false,"proxycurl_whodis":null,"allow_recruiter_access":false,"address_1":null,"address_2":null,"address_postal_code":null,"address_area":null,"work_permits":null,"relocate":false,"next_job":null,"salary_expectation":null,"profile_summary":null,"active":false,"profile_video_title":null,"profile_video_description":null,"profile_video_url":null,"membership_grade_leader_points":1500,"membership_grade_needed_leader_points":48500,"membership_grade_percent_accomplished":3,"membership_grade_eligibility":true,"matrix_uid":"@johnd:holedo.com","matrix_room_sync":null,"allow_api_login":false,"company":null,"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQyODAsImV4cCI6MTk2NjQxMTI0NH0.umSFTSYjB9XCv6AHHfeOIpG-v0foRHwoaM2MnBgTDpw","embed_src":"","full_name":"John Ubalde","expertise_string":"","active_status":"inactive","avatar_cdn":"https://res.cloudinary.com/hospitalityleaders/image/upload/w_500/v1644465746/uploads/images/users/b62-mortal-kombat-movie-poster-thumb-1613594784791-Boi.jpg","holedo_url":"http://holedo.com/johnd"}
 
 Data dataFromJson(String str) => Data.fromJson(json.decode(str));
 String dataToJson(Data data) => json.encode(data.toJson());
+
 class Data {
   Data({
-      User? user,}){
+    User? user,
+  }) {
     _user = user;
-}
+  }
 
   Data.fromJson(dynamic json) {
     _user = json['user'] != null ? User.fromJson(json['user']) : null;
   }
   User? _user;
-Data copyWith({  User? user,
-}) => Data(  user: user ?? _user,
-);
+  Data copyWith({
+    User? user,
+  }) =>
+      Data(
+        user: user ?? _user,
+      );
   User? get user => _user;
 
   Map<String, dynamic> toJson() {
@@ -81,7 +93,6 @@ Data copyWith({  User? user,
     }
     return map;
   }
-
 }
 
 /// id : 4280
@@ -157,78 +168,80 @@ Data copyWith({  User? user,
 
 User userFromJson(String str) => User.fromJson(json.decode(str));
 String userToJson(User data) => json.encode(data.toJson());
+
 class User {
   User({
-      int? id, 
-      dynamic companyId, 
-      int? roleId, 
-      dynamic companyRoleId, 
-      dynamic countryId, 
-      dynamic userTitleTypesId, 
-      dynamic currencyId, 
-      dynamic contactNumberTypesId, 
-      dynamic maritalStatusId, 
-      dynamic genderId, 
-      int? currentMembershipGradeId, 
-      int? nextMembershipGradeId, 
-      String? slug, 
-      String? firstName, 
-      String? lastName, 
-      String? email, 
-      int? emailVisibility, 
-      dynamic dateOfBirth, 
-      String? avatar, 
-      String? banner, 
-      dynamic professionalTitle, 
-      dynamic area, 
-      String? contactNumber, 
-      bool? contactNumberVisibility, 
-      int? contactableWhatsapp, 
-      int? contactableSms, 
-      dynamic website, 
-      bool? websiteVisibility, 
-      dynamic skype, 
-      bool? skypeVisibility, 
-      dynamic facebook, 
-      bool? facebookVisibility, 
-      dynamic twitter, 
-      bool? twitterVisibility, 
-      dynamic google, 
-      bool? googleVisibility, 
-      dynamic xing, 
-      bool? xingVisibility, 
-      dynamic linkedin, 
-      bool? linkedinVisibility, 
-      dynamic proxycurlWhodis, 
-      bool? allowRecruiterAccess, 
-      dynamic address1, 
-      dynamic address2, 
-      dynamic addressPostalCode, 
-      dynamic addressArea, 
-      dynamic workPermits, 
-      bool? relocate, 
-      dynamic nextJob, 
-      dynamic salaryExpectation, 
-      dynamic profileSummary, 
-      bool? active, 
-      dynamic profileVideoTitle, 
-      dynamic profileVideoDescription, 
-      dynamic profileVideoUrl, 
-      int? membershipGradeLeaderPoints, 
-      int? membershipGradeNeededLeaderPoints, 
-      int? membershipGradePercentAccomplished, 
-      bool? membershipGradeEligibility, 
-      String? matrixUid, 
-      dynamic matrixRoomSync, 
-      bool? allowApiLogin, 
-      dynamic company, 
-      String? token, 
-      String? embedSrc, 
-      String? fullName, 
-      String? expertiseString, 
-      String? activeStatus, 
-      String? avatarCdn, 
-      String? holedoUrl,}){
+    int? id,
+    dynamic companyId,
+    int? roleId,
+    dynamic companyRoleId,
+    dynamic countryId,
+    dynamic userTitleTypesId,
+    dynamic currencyId,
+    dynamic contactNumberTypesId,
+    dynamic maritalStatusId,
+    dynamic genderId,
+    int? currentMembershipGradeId,
+    int? nextMembershipGradeId,
+    String? slug,
+    String? firstName,
+    String? lastName,
+    String? email,
+    int? emailVisibility,
+    dynamic dateOfBirth,
+    String? avatar,
+    String? banner,
+    dynamic professionalTitle,
+    dynamic area,
+    String? contactNumber,
+    bool? contactNumberVisibility,
+    int? contactableWhatsapp,
+    int? contactableSms,
+    dynamic website,
+    bool? websiteVisibility,
+    dynamic skype,
+    bool? skypeVisibility,
+    dynamic facebook,
+    bool? facebookVisibility,
+    dynamic twitter,
+    bool? twitterVisibility,
+    dynamic google,
+    bool? googleVisibility,
+    dynamic xing,
+    bool? xingVisibility,
+    dynamic linkedin,
+    bool? linkedinVisibility,
+    dynamic proxycurlWhodis,
+    bool? allowRecruiterAccess,
+    dynamic address1,
+    dynamic address2,
+    dynamic addressPostalCode,
+    dynamic addressArea,
+    dynamic workPermits,
+    bool? relocate,
+    dynamic nextJob,
+    dynamic salaryExpectation,
+    dynamic profileSummary,
+    bool? active,
+    dynamic profileVideoTitle,
+    dynamic profileVideoDescription,
+    dynamic profileVideoUrl,
+    int? membershipGradeLeaderPoints,
+    int? membershipGradeNeededLeaderPoints,
+    int? membershipGradePercentAccomplished,
+    bool? membershipGradeEligibility,
+    String? matrixUid,
+    dynamic matrixRoomSync,
+    bool? allowApiLogin,
+    dynamic company,
+    String? token,
+    String? embedSrc,
+    String? fullName,
+    String? expertiseString,
+    String? activeStatus,
+    String? avatarCdn,
+    String? holedoUrl,
+  }) {
     _id = id;
     _companyId = companyId;
     _roleId = roleId;
@@ -299,7 +312,7 @@ class User {
     _activeStatus = activeStatus;
     _avatarCdn = avatarCdn;
     _holedoUrl = holedoUrl;
-}
+  }
 
   User.fromJson(dynamic json) {
     _id = json['id'];
@@ -358,8 +371,10 @@ class User {
     _profileVideoDescription = json['profile_video_description'];
     _profileVideoUrl = json['profile_video_url'];
     _membershipGradeLeaderPoints = json['membership_grade_leader_points'];
-    _membershipGradeNeededLeaderPoints = json['membership_grade_needed_leader_points'];
-    _membershipGradePercentAccomplished = json['membership_grade_percent_accomplished'];
+    _membershipGradeNeededLeaderPoints =
+        json['membership_grade_needed_leader_points'];
+    _membershipGradePercentAccomplished =
+        json['membership_grade_percent_accomplished'];
     _membershipGradeEligibility = json['membership_grade_eligibility'];
     _matrixUid = json['matrix_uid'];
     _matrixRoomSync = json['matrix_room_sync'];
@@ -443,147 +458,158 @@ class User {
   String? _activeStatus;
   String? _avatarCdn;
   String? _holedoUrl;
-User copyWith({  int? id,
-  dynamic companyId,
-  int? roleId,
-  dynamic companyRoleId,
-  dynamic countryId,
-  dynamic userTitleTypesId,
-  dynamic currencyId,
-  dynamic contactNumberTypesId,
-  dynamic maritalStatusId,
-  dynamic genderId,
-  int? currentMembershipGradeId,
-  int? nextMembershipGradeId,
-  String? slug,
-  String? firstName,
-  String? lastName,
-  String? email,
-  int? emailVisibility,
-  dynamic dateOfBirth,
-  String? avatar,
-  String? banner,
-  dynamic professionalTitle,
-  dynamic area,
-  String? contactNumber,
-  bool? contactNumberVisibility,
-  int? contactableWhatsapp,
-  int? contactableSms,
-  dynamic website,
-  bool? websiteVisibility,
-  dynamic skype,
-  bool? skypeVisibility,
-  dynamic facebook,
-  bool? facebookVisibility,
-  dynamic twitter,
-  bool? twitterVisibility,
-  dynamic google,
-  bool? googleVisibility,
-  dynamic xing,
-  bool? xingVisibility,
-  dynamic linkedin,
-  bool? linkedinVisibility,
-  dynamic proxycurlWhodis,
-  bool? allowRecruiterAccess,
-  dynamic address1,
-  dynamic address2,
-  dynamic addressPostalCode,
-  dynamic addressArea,
-  dynamic workPermits,
-  bool? relocate,
-  dynamic nextJob,
-  dynamic salaryExpectation,
-  dynamic profileSummary,
-  bool? active,
-  dynamic profileVideoTitle,
-  dynamic profileVideoDescription,
-  dynamic profileVideoUrl,
-  int? membershipGradeLeaderPoints,
-  int? membershipGradeNeededLeaderPoints,
-  int? membershipGradePercentAccomplished,
-  bool? membershipGradeEligibility,
-  String? matrixUid,
-  dynamic matrixRoomSync,
-  bool? allowApiLogin,
-  dynamic company,
-  String? token,
-  String? embedSrc,
-  String? fullName,
-  String? expertiseString,
-  String? activeStatus,
-  String? avatarCdn,
-  String? holedoUrl,
-}) => User(  id: id ?? _id,
-  companyId: companyId ?? _companyId,
-  roleId: roleId ?? _roleId,
-  companyRoleId: companyRoleId ?? _companyRoleId,
-  countryId: countryId ?? _countryId,
-  userTitleTypesId: userTitleTypesId ?? _userTitleTypesId,
-  currencyId: currencyId ?? _currencyId,
-  contactNumberTypesId: contactNumberTypesId ?? _contactNumberTypesId,
-  maritalStatusId: maritalStatusId ?? _maritalStatusId,
-  genderId: genderId ?? _genderId,
-  currentMembershipGradeId: currentMembershipGradeId ?? _currentMembershipGradeId,
-  nextMembershipGradeId: nextMembershipGradeId ?? _nextMembershipGradeId,
-  slug: slug ?? _slug,
-  firstName: firstName ?? _firstName,
-  lastName: lastName ?? _lastName,
-  email: email ?? _email,
-  emailVisibility: emailVisibility ?? _emailVisibility,
-  dateOfBirth: dateOfBirth ?? _dateOfBirth,
-  avatar: avatar ?? _avatar,
-  banner: banner ?? _banner,
-  professionalTitle: professionalTitle ?? _professionalTitle,
-  area: area ?? _area,
-  contactNumber: contactNumber ?? _contactNumber,
-  contactNumberVisibility: contactNumberVisibility ?? _contactNumberVisibility,
-  contactableWhatsapp: contactableWhatsapp ?? _contactableWhatsapp,
-  contactableSms: contactableSms ?? _contactableSms,
-  website: website ?? _website,
-  websiteVisibility: websiteVisibility ?? _websiteVisibility,
-  skype: skype ?? _skype,
-  skypeVisibility: skypeVisibility ?? _skypeVisibility,
-  facebook: facebook ?? _facebook,
-  facebookVisibility: facebookVisibility ?? _facebookVisibility,
-  twitter: twitter ?? _twitter,
-  twitterVisibility: twitterVisibility ?? _twitterVisibility,
-  google: google ?? _google,
-  googleVisibility: googleVisibility ?? _googleVisibility,
-  xing: xing ?? _xing,
-  xingVisibility: xingVisibility ?? _xingVisibility,
-  linkedin: linkedin ?? _linkedin,
-  linkedinVisibility: linkedinVisibility ?? _linkedinVisibility,
-  proxycurlWhodis: proxycurlWhodis ?? _proxycurlWhodis,
-  allowRecruiterAccess: allowRecruiterAccess ?? _allowRecruiterAccess,
-  address1: address1 ?? _address1,
-  address2: address2 ?? _address2,
-  addressPostalCode: addressPostalCode ?? _addressPostalCode,
-  addressArea: addressArea ?? _addressArea,
-  workPermits: workPermits ?? _workPermits,
-  relocate: relocate ?? _relocate,
-  nextJob: nextJob ?? _nextJob,
-  salaryExpectation: salaryExpectation ?? _salaryExpectation,
-  profileSummary: profileSummary ?? _profileSummary,
-  active: active ?? _active,
-  profileVideoTitle: profileVideoTitle ?? _profileVideoTitle,
-  profileVideoDescription: profileVideoDescription ?? _profileVideoDescription,
-  profileVideoUrl: profileVideoUrl ?? _profileVideoUrl,
-  membershipGradeLeaderPoints: membershipGradeLeaderPoints ?? _membershipGradeLeaderPoints,
-  membershipGradeNeededLeaderPoints: membershipGradeNeededLeaderPoints ?? _membershipGradeNeededLeaderPoints,
-  membershipGradePercentAccomplished: membershipGradePercentAccomplished ?? _membershipGradePercentAccomplished,
-  membershipGradeEligibility: membershipGradeEligibility ?? _membershipGradeEligibility,
-  matrixUid: matrixUid ?? _matrixUid,
-  matrixRoomSync: matrixRoomSync ?? _matrixRoomSync,
-  allowApiLogin: allowApiLogin ?? _allowApiLogin,
-  company: company ?? _company,
-  token: token ?? _token,
-  embedSrc: embedSrc ?? _embedSrc,
-  fullName: fullName ?? _fullName,
-  expertiseString: expertiseString ?? _expertiseString,
-  activeStatus: activeStatus ?? _activeStatus,
-  avatarCdn: avatarCdn ?? _avatarCdn,
-  holedoUrl: holedoUrl ?? _holedoUrl,
-);
+  User copyWith({
+    int? id,
+    dynamic companyId,
+    int? roleId,
+    dynamic companyRoleId,
+    dynamic countryId,
+    dynamic userTitleTypesId,
+    dynamic currencyId,
+    dynamic contactNumberTypesId,
+    dynamic maritalStatusId,
+    dynamic genderId,
+    int? currentMembershipGradeId,
+    int? nextMembershipGradeId,
+    String? slug,
+    String? firstName,
+    String? lastName,
+    String? email,
+    int? emailVisibility,
+    dynamic dateOfBirth,
+    String? avatar,
+    String? banner,
+    dynamic professionalTitle,
+    dynamic area,
+    String? contactNumber,
+    bool? contactNumberVisibility,
+    int? contactableWhatsapp,
+    int? contactableSms,
+    dynamic website,
+    bool? websiteVisibility,
+    dynamic skype,
+    bool? skypeVisibility,
+    dynamic facebook,
+    bool? facebookVisibility,
+    dynamic twitter,
+    bool? twitterVisibility,
+    dynamic google,
+    bool? googleVisibility,
+    dynamic xing,
+    bool? xingVisibility,
+    dynamic linkedin,
+    bool? linkedinVisibility,
+    dynamic proxycurlWhodis,
+    bool? allowRecruiterAccess,
+    dynamic address1,
+    dynamic address2,
+    dynamic addressPostalCode,
+    dynamic addressArea,
+    dynamic workPermits,
+    bool? relocate,
+    dynamic nextJob,
+    dynamic salaryExpectation,
+    dynamic profileSummary,
+    bool? active,
+    dynamic profileVideoTitle,
+    dynamic profileVideoDescription,
+    dynamic profileVideoUrl,
+    int? membershipGradeLeaderPoints,
+    int? membershipGradeNeededLeaderPoints,
+    int? membershipGradePercentAccomplished,
+    bool? membershipGradeEligibility,
+    String? matrixUid,
+    dynamic matrixRoomSync,
+    bool? allowApiLogin,
+    dynamic company,
+    String? token,
+    String? embedSrc,
+    String? fullName,
+    String? expertiseString,
+    String? activeStatus,
+    String? avatarCdn,
+    String? holedoUrl,
+  }) =>
+      User(
+        id: id ?? _id,
+        companyId: companyId ?? _companyId,
+        roleId: roleId ?? _roleId,
+        companyRoleId: companyRoleId ?? _companyRoleId,
+        countryId: countryId ?? _countryId,
+        userTitleTypesId: userTitleTypesId ?? _userTitleTypesId,
+        currencyId: currencyId ?? _currencyId,
+        contactNumberTypesId: contactNumberTypesId ?? _contactNumberTypesId,
+        maritalStatusId: maritalStatusId ?? _maritalStatusId,
+        genderId: genderId ?? _genderId,
+        currentMembershipGradeId:
+            currentMembershipGradeId ?? _currentMembershipGradeId,
+        nextMembershipGradeId: nextMembershipGradeId ?? _nextMembershipGradeId,
+        slug: slug ?? _slug,
+        firstName: firstName ?? _firstName,
+        lastName: lastName ?? _lastName,
+        email: email ?? _email,
+        emailVisibility: emailVisibility ?? _emailVisibility,
+        dateOfBirth: dateOfBirth ?? _dateOfBirth,
+        avatar: avatar ?? _avatar,
+        banner: banner ?? _banner,
+        professionalTitle: professionalTitle ?? _professionalTitle,
+        area: area ?? _area,
+        contactNumber: contactNumber ?? _contactNumber,
+        contactNumberVisibility:
+            contactNumberVisibility ?? _contactNumberVisibility,
+        contactableWhatsapp: contactableWhatsapp ?? _contactableWhatsapp,
+        contactableSms: contactableSms ?? _contactableSms,
+        website: website ?? _website,
+        websiteVisibility: websiteVisibility ?? _websiteVisibility,
+        skype: skype ?? _skype,
+        skypeVisibility: skypeVisibility ?? _skypeVisibility,
+        facebook: facebook ?? _facebook,
+        facebookVisibility: facebookVisibility ?? _facebookVisibility,
+        twitter: twitter ?? _twitter,
+        twitterVisibility: twitterVisibility ?? _twitterVisibility,
+        google: google ?? _google,
+        googleVisibility: googleVisibility ?? _googleVisibility,
+        xing: xing ?? _xing,
+        xingVisibility: xingVisibility ?? _xingVisibility,
+        linkedin: linkedin ?? _linkedin,
+        linkedinVisibility: linkedinVisibility ?? _linkedinVisibility,
+        proxycurlWhodis: proxycurlWhodis ?? _proxycurlWhodis,
+        allowRecruiterAccess: allowRecruiterAccess ?? _allowRecruiterAccess,
+        address1: address1 ?? _address1,
+        address2: address2 ?? _address2,
+        addressPostalCode: addressPostalCode ?? _addressPostalCode,
+        addressArea: addressArea ?? _addressArea,
+        workPermits: workPermits ?? _workPermits,
+        relocate: relocate ?? _relocate,
+        nextJob: nextJob ?? _nextJob,
+        salaryExpectation: salaryExpectation ?? _salaryExpectation,
+        profileSummary: profileSummary ?? _profileSummary,
+        active: active ?? _active,
+        profileVideoTitle: profileVideoTitle ?? _profileVideoTitle,
+        profileVideoDescription:
+            profileVideoDescription ?? _profileVideoDescription,
+        profileVideoUrl: profileVideoUrl ?? _profileVideoUrl,
+        membershipGradeLeaderPoints:
+            membershipGradeLeaderPoints ?? _membershipGradeLeaderPoints,
+        membershipGradeNeededLeaderPoints: membershipGradeNeededLeaderPoints ??
+            _membershipGradeNeededLeaderPoints,
+        membershipGradePercentAccomplished:
+            membershipGradePercentAccomplished ??
+                _membershipGradePercentAccomplished,
+        membershipGradeEligibility:
+            membershipGradeEligibility ?? _membershipGradeEligibility,
+        matrixUid: matrixUid ?? _matrixUid,
+        matrixRoomSync: matrixRoomSync ?? _matrixRoomSync,
+        allowApiLogin: allowApiLogin ?? _allowApiLogin,
+        company: company ?? _company,
+        token: token ?? _token,
+        embedSrc: embedSrc ?? _embedSrc,
+        fullName: fullName ?? _fullName,
+        expertiseString: expertiseString ?? _expertiseString,
+        activeStatus: activeStatus ?? _activeStatus,
+        avatarCdn: avatarCdn ?? _avatarCdn,
+        holedoUrl: holedoUrl ?? _holedoUrl,
+      );
   int? get id => _id;
   dynamic get companyId => _companyId;
   int? get roleId => _roleId;
@@ -640,8 +666,10 @@ User copyWith({  int? id,
   dynamic get profileVideoDescription => _profileVideoDescription;
   dynamic get profileVideoUrl => _profileVideoUrl;
   int? get membershipGradeLeaderPoints => _membershipGradeLeaderPoints;
-  int? get membershipGradeNeededLeaderPoints => _membershipGradeNeededLeaderPoints;
-  int? get membershipGradePercentAccomplished => _membershipGradePercentAccomplished;
+  int? get membershipGradeNeededLeaderPoints =>
+      _membershipGradeNeededLeaderPoints;
+  int? get membershipGradePercentAccomplished =>
+      _membershipGradePercentAccomplished;
   bool? get membershipGradeEligibility => _membershipGradeEligibility;
   String? get matrixUid => _matrixUid;
   dynamic get matrixRoomSync => _matrixRoomSync;
@@ -713,8 +741,10 @@ User copyWith({  int? id,
     map['profile_video_description'] = _profileVideoDescription;
     map['profile_video_url'] = _profileVideoUrl;
     map['membership_grade_leader_points'] = _membershipGradeLeaderPoints;
-    map['membership_grade_needed_leader_points'] = _membershipGradeNeededLeaderPoints;
-    map['membership_grade_percent_accomplished'] = _membershipGradePercentAccomplished;
+    map['membership_grade_needed_leader_points'] =
+        _membershipGradeNeededLeaderPoints;
+    map['membership_grade_percent_accomplished'] =
+        _membershipGradePercentAccomplished;
     map['membership_grade_eligibility'] = _membershipGradeEligibility;
     map['matrix_uid'] = _matrixUid;
     map['matrix_room_sync'] = _matrixRoomSync;
@@ -729,5 +759,4 @@ User copyWith({  int? id,
     map['holedo_url'] = _holedoUrl;
     return map;
   }
-
 }
