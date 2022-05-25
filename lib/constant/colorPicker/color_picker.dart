@@ -49,6 +49,7 @@ class ColorPicker {
 
   static const Color kGreen = Color(0xff83C65D);
   static const Color kGreenNeon = Color(0xff7EC81B);
+  static const Color kGreen1 = Color(0xff7DC81B);
 
   static const Color kGreenX = Color(0xff04595B);
 }

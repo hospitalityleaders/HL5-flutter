@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:holedo/constant/colorPicker/color_picker.dart';
+import 'package:holedo/constant/fontStyle/font_style.dart';
+
+import '../../../constant/sizedbox.dart';
 
 class ProfileEdit {
   static Padding buildProfileEdit({
@@ -83,7 +87,7 @@ class EditButton extends StatefulWidget {
     this.profileOverviewSec2EducationKey,
     this.profileOverviewSec2AchievementKey,
     this.profileOverviewSec2LanguagesKey,
-   required this.callBackReference,
+    required this.callBackReference,
     this.referenceCardKey,
   }) : super(key: key);
 
@@ -94,8 +98,8 @@ class EditButton extends StatefulWidget {
 class _EditButtonState extends State<EditButton> {
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton.icon(
-      onPressed: () {
+    return InkWell(
+      onTap: () {
         widget.onChanged(widget.isEditable);
 
         widget.callBackHeader(
@@ -118,26 +122,44 @@ class _EditButtonState extends State<EditButton> {
           widget.referenceCardKey.currentContext.size,
         );
       },
-      label: widget.isEditable
-          ? Text(
-              'Done editing',
-              style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
-            )
-          : Text(
-              'Edit Profile',
-              style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
-            ),
-      icon: widget.isEditable
-          ? Icon(
-              Icons.done,
-              size: 9,
-            )
-          : Icon(
-              Icons.edit,
-              size: 9,
-            ),
-      style: ElevatedButton.styleFrom(
-          primary: widget.isEditable ? Color(0xFF7DC81B) : Color(0xFF32A3FD)),
+      child: Container(
+        alignment: Alignment.center,
+        height: 36,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(4),
+          color:
+              widget.isEditable ? ColorPicker.kGreen1 : ColorPicker.kBlueLight1,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              widget.isEditable
+                  ? Icon(
+                      Icons.done,
+                      size: 9,
+                      color: ColorPicker.kWhite,
+                    )
+                  : Icon(
+                      Icons.edit,
+                      size: 9,
+                      color: ColorPicker.kWhite,
+                    ),
+              SS.sB(0, 7.5),
+              widget.isEditable
+                  ? Text(
+                      'Done editing',
+                      style: FontTextStyle.kWhite14W400SSP,
+                    )
+                  : Text(
+                      'Edit Profile',
+                      style: FontTextStyle.kWhite14W400SSP,
+                    ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

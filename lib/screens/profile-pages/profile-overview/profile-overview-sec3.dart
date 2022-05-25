@@ -9,8 +9,9 @@ import '../../../common/textfield_fieldname.dart';
 
 class ProfileOverviewSec3 extends StatefulWidget {
   final pOApiDataSec3;
+  final editProfileBtn;
 
-  const ProfileOverviewSec3({Key? key, this.pOApiDataSec3}) : super(key: key);
+  const ProfileOverviewSec3({Key? key, this.pOApiDataSec3, this.editProfileBtn}) : super(key: key);
 
   @override
   State<ProfileOverviewSec3> createState() => _ProfileOverviewSec3State();
@@ -580,6 +581,7 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                 const SizedBox(height: 10),
 
                 GestureDetector(
+                  onTap:widget.editProfileBtn,
                   child: Container(
                     alignment: Alignment.center,
                     width: double.infinity,

@@ -315,7 +315,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:holedo/controller/menu_controller.dart';
-import 'package:holedo/main.dart';
+
 import '../../../common/common_widget.dart';
 import '../../../constant/colorPicker/color_picker.dart';
 import '../../../constant/fontStyle/font_style.dart';

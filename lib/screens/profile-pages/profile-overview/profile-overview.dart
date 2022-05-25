@@ -40,6 +40,8 @@ class ProfileOverview extends StatefulWidget {
   final profileOverviewSec2Languages_W;
   final pOApiData;
 
+  final editProfileBtn;
+
   const ProfileOverview({
     Key? key,
     required this.isEditable,
@@ -68,7 +70,7 @@ class ProfileOverview extends StatefulWidget {
     this.profileOverviewSec2LanguagesKey,
     this.profileOverviewSec2Languages_H,
     this.profileOverviewSec2Languages_W,
-    this.pOApiData,
+    this.pOApiData, this.editProfileBtn,
   }) : super(key: key);
 
   @override
@@ -152,6 +154,7 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                       children: [
                         ProfileOverviewSec3(
                           pOApiDataSec3: widget.pOApiData,
+                            editProfileBtn:widget.editProfileBtn
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -220,8 +223,8 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                     profileOverviewSec1References_W:
                         widget.profileOverviewSec1References_W,
                   pOApiDataSec1: widget.pOApiData,),
-                ProfileOverviewSec2(
-                  sec2IsEditable: widget.isEditable,
+                  ProfileOverviewSec2(
+                    sec2IsEditable: widget.isEditable,
                   profileOverviewSec2WorkExpKey:
                       widget.profileOverviewSec2WorkExpKey,
                   profileOverviewSec2WorkExp_H:
@@ -248,7 +251,8 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                       widget.profileOverviewSec2Languages_W,
                   pOApiDataSec2: widget.pOApiData,
                 ),
-                ProfileOverviewSec3(pOApiDataSec3: widget.pOApiData,),
+                ProfileOverviewSec3(pOApiDataSec3: widget.pOApiData,
+                    editProfileBtn:widget.editProfileBtn),
               ],
             ),
           );
