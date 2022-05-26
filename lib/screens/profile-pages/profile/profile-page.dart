@@ -492,10 +492,13 @@ class _ProfilePageState extends State<ProfilePage>
                                         height: 26,
                                         width: 26,
                                         decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                                image: NetworkImage(snapshot
-                                                    .data!.data!.user!.avatar
-                                                    .toString()))),
+                                          image: DecorationImage(
+                                            image: NetworkImage(
+                                              snapshot.data!.data!.user!.avatar
+                                                  .toString(),
+                                            ),
+                                          ),
+                                        ),
                                       ),
                                       title: Row(
                                         children: [

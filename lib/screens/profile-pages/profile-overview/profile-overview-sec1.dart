@@ -5,7 +5,6 @@ import 'package:holedo/common/popUpHeadMenu.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/constant/sizedbox.dart';
-import 'package:holedo/screens/Authentication/login.dart';
 import '../../../controller/auth_controller.dart';
 import '../../../models/userProfileModel.dart';
 import '../../../services/holedo_api_services.dart';
