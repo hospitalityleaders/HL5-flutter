@@ -1008,8 +1008,9 @@ class _HeaderCardState extends State<HeaderCard> {
       isUpdating = true;
     });
 
-    if (fNameController.text != null && lNameController.text != null) {
+    if (fNameController.text != '' && lNameController.text != '') {
       Map<String, dynamic> profileData = {
+        "id": user?.id,
         "first_Name": fNameController.text,
         "last_Name": lNameController.text,
       };
