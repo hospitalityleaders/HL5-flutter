@@ -10,6 +10,9 @@ import 'package:image_picker/image_picker.dart';
 import '../../../common/dropDownButton.dart';
 import '../../../constant/colorPicker/color_picker.dart';
 import '../../../constant/sizedbox.dart';
+import '../../../controller/auth_controller.dart';
+import '../../../models/userProfileModel.dart';
+import '../../../services/holedo_api_services.dart';
 import '../profile-edit/profile-edit.dart';
 //Header card
 
@@ -328,264 +331,7 @@ class _HeaderCardState extends State<HeaderCard> {
   String? valueChoose;
   List listItem = ['item1 ', 'item2'];
 
-  /// Porfile card pop up functionality Start
-
-  bool isPorfileDetailShowCard = true;
-  bool isContactDetailShowCard = true;
-  List countryNameList = ['Country1', 'Country2', 'Country3'];
-
-  buildFieldName(String fieldName, [String? reqField]) {
-    return Column(
-      children: [
-        RichText(
-          text: TextSpan(
-              text: '$fieldName ',
-              style: FontTextStyle.kBlueDark114W700SSP,
-              children: [
-                TextSpan(
-                    text: reqField, style: FontTextStyle.kBlueLight114W400SSP),
-              ]),
-        ),
-        SS.sB(5)
-      ],
-    );
-  }
-
-  buildTextField([String? hintText]) {
-    return Column(
-      children: [
-        Container(
-          height: 36,
-          color: ColorPicker.kGreyLight9,
-          child: TextFormField(
-            decoration: InputDecoration(
-              hintText: hintText,
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(2),
-                  borderSide:
-                      BorderSide(color: ColorPicker.kGreyLight9, width: 2)),
-            ),
-          ),
-        ),
-        SS.sB(18),
-      ],
-    );
-  }
-
-  Future<String?> buildProfileCardPopUp() {
-    return showDialog<String>(
-      context: context,
-      builder: (BuildContext context) => StatefulBuilder(
-        builder: (context, setState) {
-          return Dialog(
-            child: Container(
-              color: ColorPicker.kGreyLight3,
-              width: SS.sW(context) * .50,
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    PopUpHeadMenu.popUpHead('Profile Card', context),
-                    // buildProfilePictureCard()
-                    OutlinedButton(
-                      onPressed: () {
-                        pickImage();
-                      },
-                      child: Text('Choose File'),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Container(
-                        width: SS.sW(context) * .50,
-                        color: ColorPicker.kWhite,
-                        child: Column(
-                          children: [
-                            ListTile(
-                                leading: Container(
-                                  height: SS.sH(context) * .08,
-                                  width: SS.sW(context) * .03,
-                                  color: ColorPicker.kBlueLight1,
-                                ),
-                                title: Text('Profile details'),
-                                subtitle: Text(
-                                    'Your name, surname, professional title and location.'),
-                                trailing: IconButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      isPorfileDetailShowCard =
-                                          !isPorfileDetailShowCard;
-                                    });
-                                  },
-                                  icon: isPorfileDetailShowCard
-                                      ? Icon(Icons.remove)
-                                      : Icon(Icons.add),
-                                )),
-                            isPorfileDetailShowCard
-                                ? Column(
-                                    children: [
-                                      Divider(
-                                        height: SS.sH(context) * 0.01,
-                                        color: ColorPicker.kGreyLight3,
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(16.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            buildFieldName('Name', '*'),
-                                            buildTextField('Name'),
-                                            buildFieldName('Surname', '*'),
-                                            buildTextField('Surname'),
-                                            buildFieldName(
-                                                'Professional title' '?'),
-                                            buildTextField(
-                                                'Business development manager, recruiter and hotel specialist'),
-                                            Row(
-                                              children: [
-                                                Expanded(
-                                                    child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    buildFieldName(
-                                                        'City / Area  / Region',
-                                                        '*'),
-                                                    buildTextField()
-                                                  ],
-                                                )),
-                                                SS.sB(0, SS.sW(context) * 0.02),
-                                                Expanded(
-                                                    child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    buildFieldName(
-                                                        'Country', '*'),
-                                                    DropDownButton(
-                                                      menuList: countryNameList,
-                                                      hintText: '',
-                                                    )
-                                                  ],
-                                                )),
-                                              ],
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.end,
-                                              children: [
-                                                OutlinedButton(
-                                                    onPressed: () {},
-                                                    child: Text('Cancel')),
-                                                SS.sB(0, 10),
-                                                ElevatedButton(
-                                                    onPressed: () {},
-                                                    child: Text('Save'))
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                : Container()
-                          ],
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(16),
-                      child: Container(
-                        width: SS.sW(context) * .50,
-                        color: ColorPicker.kWhite,
-                        child: Column(
-                          children: [
-                            ListTile(
-                              leading: Container(
-                                height: SS.sH(context) * .08,
-                                width: SS.sW(context) * .03,
-                                color: ColorPicker.kBlueLight1,
-                              ),
-                              title: Text('Contact details'),
-                              subtitle: Text(
-                                  'Your contact numbers, email address, website link and social profiles.'),
-                              trailing: IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    isContactDetailShowCard =
-                                        !isContactDetailShowCard;
-                                  });
-                                },
-                                icon: isContactDetailShowCard
-                                    ? Icon(Icons.remove)
-                                    : Icon(Icons.add),
-                              ),
-                            ),
-                            isContactDetailShowCard
-                                ? Column(
-                                    children: [
-                                      Divider(
-                                        height: SS.sH(context) * 0.01,
-                                        color: ColorPicker.kGreyLight3,
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(16.0),
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      width: 0.2,
-                                                      color: ColorPicker
-                                                          .kGreyLight5)),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(12.0),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      'Who gets to see my contact details?',
-                                                      style: FontTextStyle
-                                                          .kGreyLight514W700SSP,
-                                                    ),
-                                                    Text(
-                                                      'Your contact details are not only useful for other connections to contact you, but with your consent, can also be made available to recruiters to inform you of exciting indistry opportunities. You can select which information is seen by who by selecting the privacy setting for each contact detail.',
-                                                      style: FontTextStyle
-                                                          .kGreyLight514W400SSP,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                : Container()
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
-
-  Future pickImage() async {
-    await ImagePicker().pickImage(source: ImageSource.gallery);
-  }
-
-  /// Porfile card pop up functionality End
-
   /// buildSendConnReqPopUpCard functionality start
-
   Future buildSendConnReqPopUpCard() {
     return showDialog(
       context: context,
@@ -961,6 +707,334 @@ class _HeaderCardState extends State<HeaderCard> {
   bool isShowing = false;
   final key = GlobalKey();
 
+  /// Porfile card pop up functionality Start
+
+  bool isPorfileDetailShowCard = true;
+  bool isContactDetailShowCard = true;
+  List countryNameList = ['Country1', 'Country2', 'Country3'];
+
+  ///common field
+
+  buildFieldName(String fieldName, [String? reqField]) {
+    return Column(
+      children: [
+        RichText(
+          text: TextSpan(
+              text: '$fieldName ',
+              style: FontTextStyle.kBlueDark114W700SSP,
+              children: [
+                TextSpan(
+                    text: reqField, style: FontTextStyle.kBlueLight114W400SSP),
+              ]),
+        ),
+        SS.sB(5)
+      ],
+    );
+  }
+
+  buildTextField([
+    String? hintText,
+    TextEditingController? _controller,
+  ]) {
+    return Column(
+      children: [
+        Container(
+          height: 36,
+          color: ColorPicker.kGreyLight9,
+          child: TextFormField(
+            controller: _controller,
+            decoration: InputDecoration(
+              hintText: hintText,
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(2),
+                  borderSide:
+                      BorderSide(color: ColorPicker.kGreyLight9, width: 2)),
+            ),
+          ),
+        ),
+        SS.sB(18),
+      ],
+    );
+  }
+
+  Future<String?> buildProfileCardPopUp() {
+    return showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => StatefulBuilder(
+        builder: (context, setState) {
+          return Dialog(
+            child: Container(
+              color: ColorPicker.kGreyLight3,
+              width: SS.sW(context) * .50,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    PopUpHeadMenu.popUpHead('Profile Card', context),
+                    // buildProfilePictureCard()
+                    OutlinedButton(
+                      onPressed: () {
+                        pickImage();
+                      },
+                      child: Text('Choose File'),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Container(
+                        width: SS.sW(context) * .50,
+                        color: ColorPicker.kWhite,
+                        child: Column(
+                          children: [
+                            ListTile(
+                                leading: Container(
+                                  height: SS.sH(context) * .08,
+                                  width: SS.sW(context) * .03,
+                                  color: ColorPicker.kBlueLight1,
+                                ),
+                                title: Text('Profile details'),
+                                subtitle: Text(
+                                    'Your name, surname, professional title and location.'),
+                                trailing: IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      isPorfileDetailShowCard =
+                                          !isPorfileDetailShowCard;
+                                    });
+                                  },
+                                  icon: isPorfileDetailShowCard
+                                      ? Icon(Icons.remove)
+                                      : Icon(Icons.add),
+                                )),
+                            isPorfileDetailShowCard
+                                ? Column(
+                                    children: [
+                                      Divider(
+                                        height: SS.sH(context) * 0.01,
+                                        color: ColorPicker.kGreyLight3,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(16.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            buildFieldName('Name', '*'),
+                                            buildTextField(
+                                                'Name', fNameController),
+                                            buildFieldName('Surname', '*'),
+                                            buildTextField(
+                                                'Surname', lNameController),
+                                            buildFieldName(
+                                                'Professional title' '?'),
+                                            buildTextField(
+                                                'Business development manager, recruiter and hotel specialist',
+                                                professionalTitleController),
+                                            Row(
+                                              children: [
+                                                Expanded(
+                                                    child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    buildFieldName(
+                                                        'City / Area  / Region',
+                                                        '*'),
+                                                    buildTextField(
+                                                        '', cityController)
+                                                  ],
+                                                )),
+                                                SS.sB(0, SS.sW(context) * 0.02),
+                                                Expanded(
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      buildFieldName(
+                                                          'Country', '*'),
+                                                      DropDownButton(
+                                                        menuList:
+                                                            countryNameList,
+                                                        hintText: '',
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              children: [
+                                                OutlinedButton(
+                                                    onPressed: () {
+                                                      Navigator.pop(context);
+                                                    },
+                                                    child: Text('Cancel')),
+                                                SS.sB(0, 10),
+                                                ElevatedButton(
+                                                    onPressed:
+                                                        updateProfileCard,
+                                                    child: Text('Save'))
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                : Container()
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(16),
+                      child: Container(
+                        width: SS.sW(context) * .50,
+                        color: ColorPicker.kWhite,
+                        child: Column(
+                          children: [
+                            ListTile(
+                              leading: Container(
+                                height: SS.sH(context) * .08,
+                                width: SS.sW(context) * .03,
+                                color: ColorPicker.kBlueLight1,
+                              ),
+                              title: Text('Contact details'),
+                              subtitle: Text(
+                                  'Your contact numbers, email address, website link and social profiles.'),
+                              trailing: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    isContactDetailShowCard =
+                                        !isContactDetailShowCard;
+                                  });
+                                },
+                                icon: isContactDetailShowCard
+                                    ? Icon(Icons.remove)
+                                    : Icon(Icons.add),
+                              ),
+                            ),
+                            isContactDetailShowCard
+                                ? Column(
+                                    children: [
+                                      Divider(
+                                        height: SS.sH(context) * 0.01,
+                                        color: ColorPicker.kGreyLight3,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(16.0),
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      width: 0.2,
+                                                      color: ColorPicker
+                                                          .kGreyLight5)),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(12.0),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Who gets to see my contact details?',
+                                                      style: FontTextStyle
+                                                          .kGreyLight514W700SSP,
+                                                    ),
+                                                    Text(
+                                                      'Your contact details are not only useful for other connections to contact you, but with your consent, can also be made available to recruiters to inform you of exciting indistry opportunities. You can select which information is seen by who by selecting the privacy setting for each contact detail.',
+                                                      style: FontTextStyle
+                                                          .kGreyLight514W400SSP,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                : Container()
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Future pickImage() async {
+    await ImagePicker().pickImage(source: ImageSource.gallery);
+  }
+
+  /// Porfile card pop up functionality End
+
+  /// API to fetch and update data functionality
+
+  final ApiServices _apiServices = ApiServices();
+  final UserProfileModel profile = UserProfileModel.fromJson(AuthData.data);
+  User? user;
+  late TextEditingController fNameController;
+  late TextEditingController lNameController;
+  late TextEditingController professionalTitleController;
+  late TextEditingController cityController;
+  late TextEditingController countryController;
+  bool isUpdating = false;
+
+  @override
+  void initState() {
+    super.initState();
+    user = profile.data?.user;
+    fNameController = TextEditingController(text: ' ${user?.firstName}');
+    lNameController = TextEditingController(text: ' ${user?.lastName}');
+    professionalTitleController =
+        TextEditingController(text: ' ${user?.professionalTitle}');
+    cityController = TextEditingController(text: ' ${user?.addressArea}');
+    countryController = TextEditingController(text: ' ${user?.countryId}');
+  }
+
+  Future<void> updateProfileCard() async {
+    setState(() {
+      isUpdating = true;
+    });
+
+    if (fNameController.text != null && lNameController.text != null) {
+      Map<String, dynamic> profileData = {
+        "first_Name": fNameController.text,
+        "last_Name": lNameController.text,
+      };
+      print(profileData);
+
+      dynamic res = await _apiServices.updateUserProfile(
+          accessToken: '${AuthData.token}', profileData: profileData);
+
+      if (res?.errors == null) {
+        Navigator.pop(context);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error: ${res?.messages}'),
+            backgroundColor: Colors.red.shade300,
+          ),
+        );
+      }
+    }
+
+    setState(() {
+      isUpdating = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -1069,7 +1143,7 @@ class _HeaderCardState extends State<HeaderCard> {
                             Padding(
                               padding: EdgeInsets.all(4.0),
                               child: Text(
-                                widget.hCardApiData.fullName.toString(),
+                                '${widget.hCardApiData.firstName.toString() + widget.hCardApiData.lastName.toString()}',
                                 textAlign: TextAlign.center,
                                 style: FontTextStyle.kBlueDark140W400SSP,
                               ),
@@ -1345,8 +1419,8 @@ class _HeaderCardState extends State<HeaderCard> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.all(4.0),
-                                    child: InkWell(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: InkWell(
                                         onTap: () {
                                           setState(() {
                                             isShowing = !isShowing;
@@ -1377,9 +1451,7 @@ class _HeaderCardState extends State<HeaderCard> {
                                             ],
                                           ),
                                         ),
-                                      )
-
-                                  ),
+                                      )),
                                 ],
                               ),
                               Visibility(
