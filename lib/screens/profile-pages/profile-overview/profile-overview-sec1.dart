@@ -1,12 +1,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-
 import 'package:holedo/common/popUpHeadMenu.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/constant/sizedbox.dart';
 import '../../../controller/auth_controller.dart';
-import '../../../models/userProfileModel.dart';
+import '../../../models/HoledoProfileModel.dart';
+
 import '../../../services/holedo_api_services.dart';
 import '../profile-edit/profile-edit.dart';
 
@@ -46,7 +46,8 @@ class ProfileOverviewSec1 extends StatefulWidget {
 
 class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
   final ApiServices _apiServices = ApiServices();
-  final UserProfileModel profile = UserProfileModel.fromJson(AuthData.data);
+
+  final HoledoProfileModel profile = HoledoProfileModel.fromJson(AuthData.data);
   User? user;
   late TextEditingController profileSummaryController;
 
@@ -56,6 +57,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
   void initState() {
     super.initState();
     user = profile.data?.user;
+
     print('pp: ${user?.profileSummary}');
     profileSummaryController =
         new TextEditingController(text: ' ${user?.profileSummary ?? ''}');

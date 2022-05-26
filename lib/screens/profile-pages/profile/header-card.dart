@@ -11,6 +11,7 @@ import '../../../common/dropDownButton.dart';
 import '../../../constant/colorPicker/color_picker.dart';
 import '../../../constant/sizedbox.dart';
 import '../../../controller/auth_controller.dart';
+import '../../../models/HoledoProfileModel.dart';
 import '../../../models/userProfileModel.dart';
 import '../../../services/holedo_api_services.dart';
 import '../profile-edit/profile-edit.dart';
@@ -732,23 +733,24 @@ class _HeaderCardState extends State<HeaderCard> {
     );
   }
 
-  buildTextField([
-    String? hintText,
-    TextEditingController? _controller,
-  ]) {
+  buildTextField([String? hintText, TextEditingController? _controller]) {
     return Column(
       children: [
         Container(
+          alignment: Alignment.center,
           height: 36,
           color: ColorPicker.kGreyLight9,
           child: TextFormField(
             controller: _controller,
+            maxLines: 1,
+            textAlignVertical: TextAlignVertical.center,
             decoration: InputDecoration(
               hintText: hintText,
               border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(2),
-                  borderSide:
-                      BorderSide(color: ColorPicker.kGreyLight9, width: 2)),
+                borderRadius: BorderRadius.circular(2),
+                borderSide:
+                    BorderSide(color: ColorPicker.kGreyLight9, width: 2),
+              ),
             ),
           ),
         ),
@@ -757,7 +759,8 @@ class _HeaderCardState extends State<HeaderCard> {
     );
   }
 
-  Future<String?> buildProfileCardPopUp() {
+  Future<String?> buildProfileCardPopUp(fNameController, lNameController,
+      professionalTitleController, cityController) {
     return showDialog<String>(
       context: context,
       builder: (BuildContext context) => StatefulBuilder(
@@ -871,10 +874,12 @@ class _HeaderCardState extends State<HeaderCard> {
                                                     },
                                                     child: Text('Cancel')),
                                                 SS.sB(0, 10),
-                                                ElevatedButton(
-                                                    onPressed:
-                                                        updateProfileCard,
-                                                    child: Text('Save'))
+                                                isUpdating
+                                                    ? CircularProgressIndicator()
+                                                    : ElevatedButton(
+                                                        onPressed:
+                                                            updateProfileCard,
+                                                        child: Text('Save'))
                                               ],
                                             )
                                           ],
@@ -982,7 +987,7 @@ class _HeaderCardState extends State<HeaderCard> {
   /// API to fetch and update data functionality
 
   final ApiServices _apiServices = ApiServices();
-  final UserProfileModel profile = UserProfileModel.fromJson(AuthData.data);
+  final HoledoProfileModel profile = HoledoProfileModel.fromJson(AuthData.data);
   User? user;
   late TextEditingController fNameController;
   late TextEditingController lNameController;
@@ -994,6 +999,7 @@ class _HeaderCardState extends State<HeaderCard> {
   @override
   void initState() {
     super.initState();
+
     user = profile.data?.user;
     fNameController = TextEditingController(text: ' ${user?.firstName}');
     lNameController = TextEditingController(text: ' ${user?.lastName}');
@@ -1008,11 +1014,11 @@ class _HeaderCardState extends State<HeaderCard> {
       isUpdating = true;
     });
 
-    if (fNameController.text != '' && lNameController.text != '') {
+    if (fNameController.text != '') {
       Map<String, dynamic> profileData = {
         "id": user?.id,
         "first_Name": fNameController.text,
-        "last_Name": lNameController.text,
+        "last_Name": lNameController.text
       };
       print(profileData);
 
@@ -1144,7 +1150,7 @@ class _HeaderCardState extends State<HeaderCard> {
                             Padding(
                               padding: EdgeInsets.all(4.0),
                               child: Text(
-                                '${widget.hCardApiData.firstName.toString() + widget.hCardApiData.lastName.toString()}',
+                                "${widget.hCardApiData.firstName.toString() + widget.hCardApiData.lastName.toString()}",
                                 textAlign: TextAlign.center,
                                 style: FontTextStyle.kBlueDark140W400SSP,
                               ),
@@ -1697,7 +1703,8 @@ class _HeaderCardState extends State<HeaderCard> {
                       width: widget.headerCard_W,
                       height: widget.headerCard_H,
                       popUpEdit: () {
-                        buildProfileCardPopUp();
+                        buildProfileCardPopUp(fNameController, lNameController,
+                            professionalTitleController, cityController);
                       },
                       showAddButton: false),
                 )

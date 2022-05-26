@@ -1,11 +1,12 @@
 import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' as Store;
-
 import 'package:get_storage/get_storage.dart';
 import 'package:holedo/controller/auth_controller.dart';
-
+import '../models/HoledoProfileModel.dart';
 import '../models/userProfileModel.dart';
+import 'package:http/http.dart' as http;
 
 class ApiServices {
   final Dio _dio = Dio();
@@ -44,31 +45,35 @@ class ApiServices {
     }
   }
 
-  Future<UserProfileModel> getUserProfileData(String accessToken) async {
+  Future<HoledoProfileModel> getUserProfileData(String accessToken) async {
     try {
       Response response = await _dio.get(
         'https://${AuthData.apiHost}/rest/users/me',
         queryParameters: {'apikey': AuthData.apiKey},
         options: Options(
-          headers: {'AuthApi': 'Bearer $accessToken'},
+          headers: <String, dynamic>{
+            'AuthApi': 'Bearer $accessToken',
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Accept': 'application/json',
+          },
         ),
       );
 
       // return response.data;
       if (response.statusCode == 200) {
         final model = Store.Get.put(AuthController()).restoreModel();
-        model.setData = UserProfileModel.fromJson(response.data);
+        model.setData = HoledoProfileModel.fromJson(response.data);
         Store.Get.find<AuthController>().authModel(model);
         return model.data;
       } else {
-        return UserProfileModel.fromJson(response.data);
+        return HoledoProfileModel.fromJson(response.data);
       }
     } on DioError catch (e) {
       return e.response!.data;
     }
   }
 
-  Future<UserProfileModel> updateUserProfile({
+  Future<HoledoProfileModel> updateUserProfile({
     required String accessToken,
     required Map<String, dynamic> profileData,
   }) async {
@@ -83,18 +88,16 @@ class ApiServices {
       );
       if (response.statusCode == 200) {
         final model = Store.Get.put(AuthController()).restoreModel();
-        model.setData = UserProfileModel.fromJson(response.data);
+        model.setData = HoledoProfileModel.fromJson(response.data);
         Store.Get.find<AuthController>().authModel(model);
         return model.setData;
       } else {
-        return UserProfileModel.fromJson(response.data);
+        return HoledoProfileModel.fromJson(response.data);
       }
     } on DioError catch (e) {
       return e.response!.data;
     }
   }
-
-
 
   Future<dynamic> logout(String accessToken) async {
     /*try {
@@ -112,6 +115,27 @@ class ApiServices {
     }*/
     Store.Get.find<AuthController>().resetModel();
   }
+
+
+
+ Future<HoledoProfileModel> getUserApi(String accessToken) async {
+  var uri = 'https://${AuthData.apiHost}/rest/users/me';
+
+  final response = await http.get(Uri.parse(uri),
+  headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'AuthApi': 'Bearer $accessToken'
+  });
+  var data = jsonDecode(response.body.toString());
+  if (response.statusCode == 200) {
+    return HoledoProfileModel.fromJson(data);
+  } else {
+    return HoledoProfileModel.fromJson(data);
+  }
+}
+
+
 }
 
 class LoginApiResponse {
