@@ -59,7 +59,7 @@ class ApiServices {
         final model = Store.Get.put(AuthController()).restoreModel();
         model.setData = UserProfileModel.fromJson(response.data);
         Store.Get.find<AuthController>().authModel(model);
-        return model.setData;
+        return model.data;
       } else {
         return UserProfileModel.fromJson(response.data);
       }
