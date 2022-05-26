@@ -59,7 +59,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
     user = profile.data?.user;
     print('pp: ${user?.profileSummary}');
     profileSummaryController =
-        new TextEditingController(text: ' ${user!.profileSummary ?? ''}');
+        new TextEditingController(text: ' ${user?.profileSummary ?? ''}');
   }
 
   Future<void> updateUsers() async {
