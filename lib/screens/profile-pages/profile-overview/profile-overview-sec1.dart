@@ -58,7 +58,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
     user = profile.data?.user;
     print('pp: ${user?.profileSummary}');
     profileSummaryController =
-        new TextEditingController(text: ' ${user?.profileSummary}');
+        new TextEditingController(text: ' ${user?.profileSummary ?? ''}');
   }
 
   Future<void> updateUsers() async {
@@ -527,7 +527,6 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                       padding: EdgeInsets.only(right: 20, left: 20, top: 13),
                       child: AutoSizeText(
                           widget.pOApiDataSec1.profileSummary.toString(),
-
                           minFontSize: 8,
                           style: FontTextStyle.kGreyLight516W400SSP),
                     ),

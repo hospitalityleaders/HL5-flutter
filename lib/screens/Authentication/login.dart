@@ -124,7 +124,7 @@ class _LogInState extends State<LogIn> {
           backgroundColor: Colors.green.shade300,
         ),
       );
-
+      Get.put(AuthController()).resetModel();
       dynamic res = await _apiClient.login(
         emailController.text,
         passwordController.text,
