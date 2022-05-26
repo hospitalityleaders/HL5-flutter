@@ -209,12 +209,15 @@ class _ProfilePageState extends State<ProfilePage>
   }
 
   ApiServices _apiServices = ApiServices();
+  Future<UserProfileModel> profile() async {
+    return await _apiServices.getUserProfileData('${AuthData.token}');
+  }
 
   @override
   Widget build(BuildContext context) {
     return Responsive.isDesktop(context)
         ? FutureBuilder<UserProfileModel>(
-            future: _apiServices.getUserProfileData('${AuthData.token}'),
+            future: profile(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Container(
