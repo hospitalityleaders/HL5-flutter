@@ -81,6 +81,7 @@ class AuthController extends GetxController {
   }
 
   void resetModel() {
+    box.erase();
     box.remove('model');
   }
 

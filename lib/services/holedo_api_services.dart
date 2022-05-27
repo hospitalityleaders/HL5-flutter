@@ -36,8 +36,6 @@ class ApiServices {
         },
         queryParameters: {'apikey': AuthData.apiKey},
       );
-      userData.write('isLogined', true);
-      userData.write('email', email);
 
       return response.data;
     } on DioError catch (e) {
@@ -45,7 +43,7 @@ class ApiServices {
     }
   }
 
-  Future<HoledoProfileModel> getUserProfileData() async {
+  Future<dynamic> getUserProfileData() async {
     try {
       Response response = await _dio.get(
         'https://${AuthData.apiHost}/rest/users/me',
@@ -59,22 +57,13 @@ class ApiServices {
         ),
       );
 
-      // return response.data;
-      if (response.statusCode == 200) {
-        final model = Store.Get.put(AuthController()).restoreModel();
-        model.setData = HoledoProfileModel.fromJson(response.data);
-        Store.Get.find<AuthController>().authModel(model);
-
-        return model.data;
-      } else {
-        return HoledoProfileModel.fromJson(response.data);
-      }
+      return response.data;
     } on DioError catch (e) {
       return e.response!.data;
     }
   }
 
-  Future<HoledoProfileModel> updateUserProfile({
+  Future<dynamic> updateUserProfile({
     // required String accessToken,
     required Map<String, dynamic> profileData,
   }) async {
@@ -87,14 +76,7 @@ class ApiServices {
           headers: {'AuthApi': 'Bearer ${AuthData.token}'},
         ),
       );
-      if (response.statusCode == 200) {
-        final model = Store.Get.put(AuthController()).restoreModel();
-        model.setData = HoledoProfileModel.fromJson(response.data);
-        Store.Get.find<AuthController>().authModel(model);
-        return model.data;
-      } else {
-        return HoledoProfileModel.fromJson(response.data);
-      }
+      return response.data;
     } on DioError catch (e) {
       return e.response!.data;
     }

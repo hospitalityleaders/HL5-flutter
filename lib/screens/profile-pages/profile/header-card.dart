@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart' as Store;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:holedo/common/clipper.dart';
 import 'package:holedo/common/popUpHeadMenu.dart';
@@ -61,7 +62,7 @@ class _HeaderCardState extends State<HeaderCard> {
     countryController = TextEditingController(text: ' ${user?.countryId}');
   }
 
-  Future<void> updateProfileCard() async {
+  Future<void> updateProfileCard(context) async {
     setState(() {
       isUpdating = true;
     });
@@ -83,12 +84,16 @@ class _HeaderCardState extends State<HeaderCard> {
           // accessToken: '${AuthData.token}',
           profileData: profileData);
 
-      if (res?.errors == null) {
+      if (res['errors'] == null) {
+        final model = Store.Get.put(AuthController()).restoreModel();
+        model.setData = HoledoProfileModel.fromJson(res.data);
+        Store.Get.find<AuthController>().authModel(model);
+
         Navigator.pop(context);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Error: ${res?.messages}'),
+            content: Text('Error: ${res['messages']}'),
             backgroundColor: Colors.red.shade300,
           ),
         );
@@ -259,8 +264,10 @@ class _HeaderCardState extends State<HeaderCard> {
                                             isUpdating
                                                 ? CircularProgressIndicator()
                                                 : ElevatedButton(
-                                                    onPressed:
-                                                        updateProfileCard,
+                                                    onPressed: () {
+                                                      updateProfileCard(
+                                                          context);
+                                                    },
                                                     child: Text('Save'))
                                           ],
                                         )

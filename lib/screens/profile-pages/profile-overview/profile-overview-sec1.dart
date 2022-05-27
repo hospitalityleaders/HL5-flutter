@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart' as Store;
 import 'package:holedo/common/popUpHeadMenu.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
@@ -21,7 +22,6 @@ class ProfileOverviewSec1 extends StatefulWidget {
   final profileOverviewSec1References_H;
   final profileOverviewSec1References_W;
   final pOApiDataSec1;
-  final token;
 
   const ProfileOverviewSec1({
     Key? key,
@@ -36,7 +36,6 @@ class ProfileOverviewSec1 extends StatefulWidget {
     this.profileOverviewSec1References_H,
     this.profileOverviewSec1References_W,
     this.pOApiDataSec1,
-    this.token,
   }) : super(key: key);
 
   @override
@@ -55,12 +54,12 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
   void initState() {
     super.initState();
     user = profile.data?.user;
-    print('pp: ${user?.profileSummary}');
+
     profileSummaryController =
-         TextEditingController(text: '${user?.profileSummary}');
+        TextEditingController(text: '${user?.profileSummary}');
   }
 
-  Future<void> updateUsers() async {
+  Future<void> updateUsers(context) async {
     setState(() {
       isUpdating = true;
     });
@@ -74,14 +73,18 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
 
       dynamic res = await _apiServices.updateUserProfile(
           // accessToken: '${AuthData.token}',
-           profileData: userData);
+          profileData: userData);
 
-      if (res?.errors == null) {
+      if (res['errors'] == null) {
+        final model = Store.Get.put(AuthController()).restoreModel();
+        model.setData = HoledoProfileModel.fromJson(res.data);
+        Store.Get.find<AuthController>().authModel(model);
+
         Navigator.pop(context);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Error: ${res?.messages}'),
+            content: Text('Error: ${res['messages']}'),
             backgroundColor: Colors.red.shade300,
           ),
         );
@@ -259,11 +262,13 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                                       child: Text('Cancel')),
                                 ),
                                 Padding(
-                                  padding:  EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(8.0),
                                   child: isUpdating
                                       ? CircularProgressIndicator()
                                       : ElevatedButton(
-                                          onPressed: updateUsers,
+                                          onPressed: () {
+                                            updateUsers(context);
+                                          },
                                           child: Text('Save'),
                                         ),
                                 ),

@@ -1,7 +1,7 @@
 // import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' as Store;
 import 'package:get_storage/get_storage.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
@@ -46,9 +46,7 @@ List<Item> generateItems(int numberOfItems) {
 // ignore: must_be_immutable
 class ProfilePage extends StatefulWidget {
   static const String route = '/second';
-  String? token;
-
-  ProfilePage({Key? key, this.token}) : super(key: key);
+  ProfilePage({Key? key}) : super(key: key);
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -189,7 +187,6 @@ class _ProfilePageState extends State<ProfilePage>
 
   List drawerItem = ['Home', 'Profile', 'News', 'Jobs', 'Recruitment', 'Help'];
 
-  final userData = GetStorage();
   TabController? _tabController;
   int _current = 0;
   int tabBar = 0;
@@ -220,7 +217,14 @@ class _ProfilePageState extends State<ProfilePage>
   ApiServices _apiServices = ApiServices();
 
   Future<HoledoProfileModel> profile() async {
-    return await _apiServices.getUserProfileData();
+    dynamic res = await _apiServices.getUserProfileData();
+    final model = Store.Get.put(AuthController()).restoreModel();
+    if (res['errors'] == null) {
+      final model = Store.Get.put(AuthController()).restoreModel();
+      model.setData = HoledoProfileModel.fromJson(res.data);
+      Store.Get.find<AuthController>().authModel(model);
+    }
+    return model.data;
   }
 
   @override
@@ -373,7 +377,6 @@ class _ProfilePageState extends State<ProfilePage>
                               children: <Widget>[
                                 ProfileOverview(
                                     isEditable: isEditable,
-                                    token: widget.token,
                                     //section1 edit functionality
                                     profileOverviewSec1ProSummKey:
                                         profileOverviewSec1ProSummKey,
@@ -533,7 +536,6 @@ class _ProfilePageState extends State<ProfilePage>
                         ),
                         ProfileOverview(
                             isEditable: isEditable,
-                            token: widget.token,
                             //section1 edit functionality
                             profileOverviewSec1ProSummKey:
                                 profileOverviewSec1ProSummKey,

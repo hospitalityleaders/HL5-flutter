@@ -114,8 +114,6 @@ class _LogInState extends State<LogIn> {
   //   );
   // }
 
-  final userData = GetStorage();
-
   Future<void> login() async {
     if (_formKey.currentState!.validate()) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -132,12 +130,9 @@ class _LogInState extends State<LogIn> {
 
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
 
-      if (res['errors'] == null) {
+      if (res['errors'] == null && res['success'] == true) {
         String accessToken = res['data']['token'];
         print(accessToken);
-
-        userData.write('token', accessToken);
-        userData.write('isLoggedIn', true);
 
         final model = Get.put(AuthController()).restoreModel();
         model.setToken = accessToken;
@@ -146,15 +141,13 @@ class _LogInState extends State<LogIn> {
 
         print('token1::- ${AuthData.setToken.toString()}');
         print('token2::- ${AuthData.token.toString()}');
-        print('token3::-${userData.read('token')}');
+
         print('token4::-${Get.put(AuthController()).restoreModel().token}');
         print('islogin::-${Get.put(AuthController()).restoreModel().setToken}');
 
         Navigator.push(
           context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  _menuController.menuIndex == 0 ? UpdateNews() : LogIn()),
+          MaterialPageRoute(builder: (context) => ProfilePage()),
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(

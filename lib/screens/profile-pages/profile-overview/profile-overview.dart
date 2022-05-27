@@ -12,7 +12,6 @@ import '../../../responsive/responsive.dart';
 
 class ProfileOverview extends StatefulWidget {
   final isEditable;
-  final token;
 
   // profileoverviewsection1
   final profileOverviewSec1ProSummKey;
@@ -45,7 +44,6 @@ class ProfileOverview extends StatefulWidget {
   const ProfileOverview({
     Key? key,
     required this.isEditable,
-    required this.token,
     // profileoverviewsection1
     this.profileOverviewSec1ProSummKey,
     this.profileOverviewSec1ProSumm_H,
@@ -70,7 +68,8 @@ class ProfileOverview extends StatefulWidget {
     this.profileOverviewSec2LanguagesKey,
     this.profileOverviewSec2Languages_H,
     this.profileOverviewSec2Languages_W,
-    this.pOApiData, this.editProfileBtn,
+    this.pOApiData,
+    this.editProfileBtn,
   }) : super(key: key);
 
   @override
@@ -113,7 +112,6 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                     profileOverviewSec1References_W:
                         widget.profileOverviewSec1References_W,
                     pOApiDataSec1: widget.pOApiData,
-
                   ),
                 ),
                 SS.sB(0, SS.sW(context) * 0.01),
@@ -153,9 +151,8 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                     child: Column(
                       children: [
                         ProfileOverviewSec3(
-                          pOApiDataSec3: widget.pOApiData,
-                            editProfileBtn:widget.editProfileBtn
-                        ),
+                            pOApiDataSec3: widget.pOApiData,
+                            editProfileBtn: widget.editProfileBtn),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
@@ -176,18 +173,24 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                                     style: FontTextStyle.kBlueLight236W400SSP,
                                   ),
                                   InkWell(
-                                      onHover: (value) {
-                                        setState(() {
-                                          isHovering = value;
-                                        });
-                                      },
-                                      onTap: () {},
-                                      child: Container(alignment: Alignment.center,
+                                    onHover: (value) {
+                                      setState(() {
+                                        isHovering = value;
+                                      });
+                                    },
+                                    onTap: () {},
+                                    child: Container(
+                                        alignment: Alignment.center,
                                         color: isHovering
                                             ? ColorPicker.kBlueLight2
                                             : ColorPicker.kWhite,
-                                     child:   Row(children: [IconPicker.menu(ColorPicker.kBlueLight1),],)
-                                      ),),
+                                        child: Row(
+                                          children: [
+                                            IconPicker.menu(
+                                                ColorPicker.kBlueLight1),
+                                          ],
+                                        )),
+                                  ),
                                 ],
                               ),
                             ),
@@ -200,31 +203,32 @@ class _ProfileOverviewState extends State<ProfileOverview> {
               ],
             ))
         : SingleChildScrollView(
-            child: Column(  
+            child: Column(
               children: [
                 ProfileOverviewSec1(
-                    sec1IsEditable: widget.isEditable,
-                    profileOverviewSec1ProSummKey:
-                        widget.profileOverviewSec1ProSummKey,
-                    profileOverviewSec1ProSumm_H:
-                        widget.profileOverviewSec1ProSumm_H,
-                    profileOverviewSec1ProSumm_W:
-                        widget.profileOverviewSec1ProSumm_W,
-                    profileOverviewSec1AreaOfExpKey:
-                        widget.profileOverviewSec1AreaOfExpKey,
-                    profileOverviewSec1AreaOfExp_H:
-                        widget.profileOverviewSec1AreaOfExp_H,
-                    profileOverviewSec1AreaOfExp_W:
-                        widget.profileOverviewSec1AreaOfExp_W,
-                    profileOverviewSec1ReferencesKey:
-                        widget.profileOverviewSec1ReferencesKey,
-                    profileOverviewSec1References_H:
-                        widget.profileOverviewSec1References_H,
-                    profileOverviewSec1References_W:
-                        widget.profileOverviewSec1References_W,
-                  pOApiDataSec1: widget.pOApiData,),
-                  ProfileOverviewSec2(
-                    sec2IsEditable: widget.isEditable,
+                  sec1IsEditable: widget.isEditable,
+                  profileOverviewSec1ProSummKey:
+                      widget.profileOverviewSec1ProSummKey,
+                  profileOverviewSec1ProSumm_H:
+                      widget.profileOverviewSec1ProSumm_H,
+                  profileOverviewSec1ProSumm_W:
+                      widget.profileOverviewSec1ProSumm_W,
+                  profileOverviewSec1AreaOfExpKey:
+                      widget.profileOverviewSec1AreaOfExpKey,
+                  profileOverviewSec1AreaOfExp_H:
+                      widget.profileOverviewSec1AreaOfExp_H,
+                  profileOverviewSec1AreaOfExp_W:
+                      widget.profileOverviewSec1AreaOfExp_W,
+                  profileOverviewSec1ReferencesKey:
+                      widget.profileOverviewSec1ReferencesKey,
+                  profileOverviewSec1References_H:
+                      widget.profileOverviewSec1References_H,
+                  profileOverviewSec1References_W:
+                      widget.profileOverviewSec1References_W,
+                  pOApiDataSec1: widget.pOApiData,
+                ),
+                ProfileOverviewSec2(
+                  sec2IsEditable: widget.isEditable,
                   profileOverviewSec2WorkExpKey:
                       widget.profileOverviewSec2WorkExpKey,
                   profileOverviewSec2WorkExp_H:
@@ -251,8 +255,9 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                       widget.profileOverviewSec2Languages_W,
                   pOApiDataSec2: widget.pOApiData,
                 ),
-                ProfileOverviewSec3(pOApiDataSec3: widget.pOApiData,
-                    editProfileBtn:widget.editProfileBtn),
+                ProfileOverviewSec3(
+                    pOApiDataSec3: widget.pOApiData,
+                    editProfileBtn: widget.editProfileBtn),
               ],
             ),
           );
