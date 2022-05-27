@@ -131,7 +131,6 @@ class _HeaderCardState extends State<HeaderCard> {
       children: [
         TextFormField(
           controller: _controller,
-          textAlignVertical: TextAlignVertical.center,
           decoration: InputDecoration(
             hintText: hintText,
             isDense: true,
@@ -1142,7 +1141,7 @@ class _HeaderCardState extends State<HeaderCard> {
                             Padding(
                               padding: EdgeInsets.all(4.0),
                               child: Text(
-                                "${widget.hCardApiData.firstName.toString() + widget.hCardApiData.lastName.toString()}",
+                                widget.hCardApiData.fullName.toString(),
                                 textAlign: TextAlign.center,
                                 style: FontTextStyle.kBlueDark140W400SSP,
                               ),
