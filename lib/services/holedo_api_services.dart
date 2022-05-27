@@ -74,7 +74,7 @@ class ApiServices {
   }
 
   Future<HoledoProfileModel> updateUserProfile({
-    required String accessToken,
+    // required String accessToken,
     required Map<String, dynamic> profileData,
   }) async {
     try {
@@ -83,7 +83,7 @@ class ApiServices {
         data: profileData,
         queryParameters: {'apikey': AuthData.apiKey},
         options: Options(
-          headers: {'AuthApi': 'Bearer $accessToken'},
+          headers: {'AuthApi': 'Bearer ${AuthData.token}'},
         ),
       );
       if (response.statusCode == 200) {

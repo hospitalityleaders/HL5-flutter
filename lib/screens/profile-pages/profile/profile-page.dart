@@ -1,4 +1,4 @@
-import 'dart:developer';
+// import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,7 +7,6 @@ import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/constant/sizedbox.dart';
 import 'package:holedo/controller/auth_controller.dart';
-import 'package:holedo/models/userProfileModel.dart';
 import 'package:holedo/screens/profile-pages/profile-edit/profile-edit.dart';
 import 'package:holedo/screens/profile-pages/profile-overview/profile-overview.dart';
 import 'package:holedo/screens/profile-pages/timeline/timeline.dart';
@@ -18,6 +17,11 @@ import '../../../responsive/responsive.dart';
 import '../references/references.dart';
 import 'header-card.dart';
 
+
+class GlobalKeys{
+  static final refKey=GlobalKey();
+
+}
 class Item {
   Item({
     required this.expandedValue,
@@ -64,9 +68,11 @@ class _ProfilePageState extends State<ProfilePage>
     });
   }
 
-  // References card edit functionality
+  /// References card edit functionality
+  final List<GlobalObjectKey<FormState>> referenceCardKey = List.generate(10, (index) => GlobalObjectKey<FormState>(index));
 
-  var referenceCardKey = List<GlobalKey>.generate(10, (index) => GlobalKey());
+  // final referenceCardKey = List<GlobalKey>.generate(10, (index) => GlobalKeys.refKey);
+  // final referenceCardKey = GlobalKey();
   var referenceCard_H;
   var referenceCard_W;
 
@@ -141,38 +147,36 @@ class _ProfilePageState extends State<ProfilePage>
     });
   }
 
-  //Common widgets
+  ///Common widgets
   buildEditButton() {
-    return StatefulBuilder(
-      builder: (context, setState) => EditButton(
-        onChanged: (value) {
-          setState(() {
-            isEditable = !value;
-          });
-        },
-        isEditable: isEditable,
-        //header card edit functionality
+    return EditButton(
+      onChanged: (value) {
+        setState(() {
+          isEditable = !value;
+        });
+      },
+      isEditable: isEditable,
+      //header card edit functionality
 
-        callBackHeader: callBackHeader,
-        headerCardKey: headerCardKey,
+      callBackHeader: callBackHeader,
+      headerCardKey: headerCardKey,
 
-        //section1 edit functionality
-        callBackButtonSec1: callBackButtonSec1,
-        profileOverviewSec1ProSummKey: profileOverviewSec1ProSummKey,
-        profileOverviewSec1AreaOfExpKey: profileOverviewSec1AreaOfExpKey,
-        profileOverviewSec1ReferencesKey: profileOverviewSec1ReferencesKey,
-        //section2 edit functionality
-        callBackButtonSec2: callBackButtonSec2,
-        profileOverviewSec2WorkExpKey: profileOverviewSec2WorkExpKey,
-        profileOverviewSec2EducationKey: profileOverviewSec2EducationKey,
-        profileOverviewSec2AchievementKey: profileOverviewSec2AchievementKey,
-        profileOverviewSec2LanguagesKey: profileOverviewSec2LanguagesKey,
+      //section1 edit functionality
+      callBackButtonSec1: callBackButtonSec1,
+      profileOverviewSec1ProSummKey: profileOverviewSec1ProSummKey,
+      profileOverviewSec1AreaOfExpKey: profileOverviewSec1AreaOfExpKey,
+      profileOverviewSec1ReferencesKey: profileOverviewSec1ReferencesKey,
+      //section2 edit functionality
+      callBackButtonSec2: callBackButtonSec2,
+      profileOverviewSec2WorkExpKey: profileOverviewSec2WorkExpKey,
+      profileOverviewSec2EducationKey: profileOverviewSec2EducationKey,
+      profileOverviewSec2AchievementKey: profileOverviewSec2AchievementKey,
+      profileOverviewSec2LanguagesKey: profileOverviewSec2LanguagesKey,
 
-        // References card edit functionality
+      // References card edit functionality
 
-        callBackReference: callBackReference,
-        referenceCardKey: referenceCardKey,
-      ),
+      callBackReference: callBackReference,
+      referenceCardKey: referenceCardKey,
     );
   }
 
@@ -353,41 +357,7 @@ class _ProfilePageState extends State<ProfilePage>
                                     ),
                                   ],
                                 ),
-                                EditButton(
-                                  onChanged: (value) {
-                                    setState(() {
-                                      isEditable = !value;
-                                    });
-                                  },
-                                  isEditable: isEditable,
-                                  //header card edit functionality
-
-                                  callBackHeader: callBackHeader,
-                                  headerCardKey: headerCardKey,
-
-                                  //referece card edit functionality
-                                  callBackReference: callBackReference,
-                                  referenceCardKey: referenceCardKey,
-
-                                  //section1 edit functionality
-                                  callBackButtonSec1: callBackButtonSec1,
-                                  profileOverviewSec1ProSummKey:
-                                      profileOverviewSec1ProSummKey,
-                                  profileOverviewSec1AreaOfExpKey:
-                                      profileOverviewSec1AreaOfExpKey,
-                                  profileOverviewSec1ReferencesKey:
-                                      profileOverviewSec1ReferencesKey,
-                                  //section2 edit functionality
-                                  callBackButtonSec2: callBackButtonSec2,
-                                  profileOverviewSec2WorkExpKey:
-                                      profileOverviewSec2WorkExpKey,
-                                  profileOverviewSec2EducationKey:
-                                      profileOverviewSec2EducationKey,
-                                  profileOverviewSec2AchievementKey:
-                                      profileOverviewSec2AchievementKey,
-                                  profileOverviewSec2LanguagesKey:
-                                      profileOverviewSec2LanguagesKey,
-                                )
+                                buildEditButton(),
                               ],
                             ),
                           ),
@@ -466,7 +436,7 @@ class _ProfilePageState extends State<ProfilePage>
                     ),
                   )
                 : SingleChildScrollView(
-                  child: Column(
+                    child: Column(
                       children: [
                         HeaderCard(
                             isEditable: isEditable,
@@ -495,7 +465,8 @@ class _ProfilePageState extends State<ProfilePage>
                                           decoration: BoxDecoration(
                                             image: DecorationImage(
                                               image: NetworkImage(
-                                                snapshot.data!.data!.user!.avatar
+                                                snapshot
+                                                    .data!.data!.user!.avatar
                                                     .toString(),
                                               ),
                                             ),
@@ -504,7 +475,8 @@ class _ProfilePageState extends State<ProfilePage>
                                         title: Row(
                                           children: [
                                             Text(
-                                              snapshot.data!.data!.user!.fullName
+                                              snapshot
+                                                  .data!.data!.user!.fullName
                                                   .toString(),
                                               textAlign: TextAlign.center,
                                               style: FontTextStyle
@@ -522,7 +494,9 @@ class _ProfilePageState extends State<ProfilePage>
                                           ],
                                         ),
                                       ),
-                                      isExpanded ? Container() : buildEditButton()
+                                      isExpanded
+                                          ? Container()
+                                          : buildEditButton()
                                     ],
                                   );
                                 },
@@ -609,7 +583,7 @@ class _ProfilePageState extends State<ProfilePage>
                             editProfileBtn: buildEditButton),
                       ],
                     ),
-                );
+                  );
           } else {
             return Center(child: CircularProgressIndicator());
           }

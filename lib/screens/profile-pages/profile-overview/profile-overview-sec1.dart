@@ -6,7 +6,6 @@ import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/constant/sizedbox.dart';
 import '../../../controller/auth_controller.dart';
 import '../../../models/HoledoProfileModel.dart';
-
 import '../../../services/holedo_api_services.dart';
 import '../profile-edit/profile-edit.dart';
 
@@ -46,7 +45,6 @@ class ProfileOverviewSec1 extends StatefulWidget {
 
 class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
   final ApiServices _apiServices = ApiServices();
-
   final HoledoProfileModel profile = HoledoProfileModel.fromJson(AuthData.data);
   User? user;
   late TextEditingController profileSummaryController;
@@ -57,10 +55,9 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
   void initState() {
     super.initState();
     user = profile.data?.user;
-
     print('pp: ${user?.profileSummary}');
     profileSummaryController =
-        new TextEditingController(text: ' ${user?.profileSummary ?? ''}');
+         TextEditingController(text: '${user?.profileSummary}');
   }
 
   Future<void> updateUsers() async {
@@ -76,7 +73,8 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
       print('usser: ${userData}');
 
       dynamic res = await _apiServices.updateUserProfile(
-          accessToken: '${AuthData.token}', profileData: userData);
+          // accessToken: '${AuthData.token}',
+           profileData: userData);
 
       if (res?.errors == null) {
         Navigator.pop(context);
@@ -261,7 +259,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                                       child: Text('Cancel')),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding:  EdgeInsets.all(8.0),
                                   child: isUpdating
                                       ? CircularProgressIndicator()
                                       : ElevatedButton(
