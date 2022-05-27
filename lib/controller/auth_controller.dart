@@ -7,7 +7,9 @@ Map<dynamic, dynamic> myJson = <dynamic, dynamic>{
   'name': '',
   'token': '',
   'sott': false,
-  'isLogined': false
+  'isLogined': false,
+  'data': null,
+  //'cache': null,
 };
 
 class Auth {

@@ -17,11 +17,10 @@ import '../../../responsive/responsive.dart';
 import '../references/references.dart';
 import 'header-card.dart';
 
-
-class GlobalKeys{
-  static final refKey=GlobalKey();
-
+class GlobalKeys {
+  static final refKey = GlobalKey();
 }
+
 class Item {
   Item({
     required this.expandedValue,
@@ -44,6 +43,7 @@ List<Item> generateItems(int numberOfItems) {
 }
 //mobile view end
 
+// ignore: must_be_immutable
 class ProfilePage extends StatefulWidget {
   static const String route = '/second';
   String? token;
@@ -69,7 +69,8 @@ class _ProfilePageState extends State<ProfilePage>
   }
 
   /// References card edit functionality
-  final List<GlobalObjectKey<FormState>> referenceCardKey = List.generate(10, (index) => GlobalObjectKey<FormState>(index));
+  final List<GlobalObjectKey<FormState>> referenceCardKey =
+      List.generate(10, (index) => GlobalObjectKey<FormState>(index));
 
   // final referenceCardKey = List<GlobalKey>.generate(10, (index) => GlobalKeys.refKey);
   // final referenceCardKey = GlobalKey();
@@ -211,21 +212,21 @@ class _ProfilePageState extends State<ProfilePage>
 
   void initState() {
     _tabController = TabController(length: 5, vsync: this);
-    profile();
-    _apiServices.getUserApi('${AuthData.token}');
+    //profile();
+    //_apiServices.getUserApi('${AuthData.token}');
     super.initState();
   }
 
   ApiServices _apiServices = ApiServices();
 
   Future<HoledoProfileModel> profile() async {
-    return await _apiServices.getUserProfileData('${AuthData.token}');
+    return await _apiServices.getUserProfileData();
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<HoledoProfileModel?>(
-        future: _apiServices.getUserApi('${AuthData.token}'),
+        future: profile(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return Responsive.isDesktop(context)

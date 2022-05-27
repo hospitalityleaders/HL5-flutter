@@ -45,14 +45,14 @@ class ApiServices {
     }
   }
 
-  Future<HoledoProfileModel> getUserProfileData(String accessToken) async {
+  Future<HoledoProfileModel> getUserProfileData() async {
     try {
       Response response = await _dio.get(
         'https://${AuthData.apiHost}/rest/users/me',
         queryParameters: {'apikey': AuthData.apiKey},
         options: Options(
           headers: <String, dynamic>{
-            'AuthApi': 'Bearer $accessToken',
+            'AuthApi': 'Bearer ${AuthData.token}',
             'Content-Type': 'application/json; charset=UTF-8',
             'Accept': 'application/json',
           },
@@ -64,6 +64,7 @@ class ApiServices {
         final model = Store.Get.put(AuthController()).restoreModel();
         model.setData = HoledoProfileModel.fromJson(response.data);
         Store.Get.find<AuthController>().authModel(model);
+
         return model.data;
       } else {
         return HoledoProfileModel.fromJson(response.data);
@@ -90,7 +91,7 @@ class ApiServices {
         final model = Store.Get.put(AuthController()).restoreModel();
         model.setData = HoledoProfileModel.fromJson(response.data);
         Store.Get.find<AuthController>().authModel(model);
-        return model.setData;
+        return model.data;
       } else {
         return HoledoProfileModel.fromJson(response.data);
       }
@@ -115,27 +116,6 @@ class ApiServices {
     }*/
     Store.Get.find<AuthController>().resetModel();
   }
-
-
-
- Future<HoledoProfileModel> getUserApi(String accessToken) async {
-  var uri = 'https://${AuthData.apiHost}/rest/users/me';
-
-  final response = await http.get(Uri.parse(uri),
-  headers: {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
-    'AuthApi': 'Bearer $accessToken'
-  });
-  var data = jsonDecode(response.body.toString());
-  if (response.statusCode == 200) {
-    return HoledoProfileModel.fromJson(data);
-  } else {
-    return HoledoProfileModel.fromJson(data);
-  }
-}
-
-
 }
 
 class LoginApiResponse {

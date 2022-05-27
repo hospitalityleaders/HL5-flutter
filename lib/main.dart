@@ -25,7 +25,7 @@ class MyCustomScrollBehavior extends MaterialScrollBehavior {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Get.put(AuthController()).initStorage();
-  await GetStorage.init();
+
   runApp(
     RobotDetector(
       child: MaterialApp(
