@@ -9,8 +9,6 @@ import 'package:image_picker/image_picker.dart';
 import '../../../common/dropDownButton.dart';
 import '../../../constant/colorPicker/color_picker.dart';
 import '../../../constant/sizedbox.dart';
-import '../../../controller/auth_controller.dart';
-import '../../../models/HoledoProfileModel.dart';
 import '../../../services/holedo_api_services.dart';
 import '../profile-edit/profile-edit.dart';
 //Header card
@@ -36,77 +34,6 @@ class HeaderCard extends StatefulWidget {
 }
 
 class _HeaderCardState extends State<HeaderCard> {
-  /// API to fetch and update data functionality Start
-
-  final ApiServices _apiServices = ApiServices();
-  final HoledoProfileModel profile = HoledoProfileModel.fromJson(AuthData.data);
-  User? user;
-  late TextEditingController fNameController;
-  late TextEditingController lNameController;
-  late TextEditingController professionalTitleController;
-  late TextEditingController cityController;
-  late TextEditingController countryController;
-  bool isUpdating = false;
-
-  @override
-  void initState() {
-    super.initState();
-
-    user = profile.data?.user;
-    fNameController = TextEditingController(text: ' ${user?.firstName}');
-    lNameController = TextEditingController(text: ' ${user?.lastName}');
-    professionalTitleController =
-        TextEditingController(text: ' ${user?.professionalTitle}');
-    cityController = TextEditingController(text: ' ${user?.addressArea}');
-    countryController = TextEditingController(text: ' ${user?.countryId}');
-  }
-
-  Future<void> updateProfileCard() async {
-    setState(() {
-      isUpdating = true;
-    });
-
-    if (fNameController.text != '' &&
-        lNameController.text != '' &&
-        professionalTitleController != '' &&
-        cityController != '') {
-      Map<String, dynamic> profileData = {
-        "id": user?.id,
-        "first_name": fNameController.text,
-        "last_name": lNameController.text,
-        "professional_title": professionalTitleController.text,
-        "city": cityController.text
-      };
-      print(profileData);
-
-      dynamic res = await _apiServices.updateUserProfile(
-          // accessToken: '${AuthData.token}',
-          profileData: profileData);
-
-      if (res?.errors == null) {
-        Navigator.pop(context);
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Error: ${res?.messages}'),
-            backgroundColor: Colors.red.shade300,
-          ),
-        );
-      }
-    }
-    setState(() {
-      isUpdating = false;
-    });
-  }
-
-  /// API to fetch and update data functionality End
-
-  /// Porfile card pop up functionality Start
-
-  bool isPorfileDetailShowCard = true;
-  bool isContactDetailShowCard = true;
-  List countryNameList = ['Country1', 'Country2', 'Country3'];
-
   ///common field
 
   buildFieldName(String fieldName, [String? reqField]) {
@@ -145,8 +72,72 @@ class _HeaderCardState extends State<HeaderCard> {
     );
   }
 
-  Future<String?> buildProfileCardPopUp(fNameController, lNameController,
-      professionalTitleController, cityController) {
+  /// API to fetch and update data functionality Start
+
+  final ApiServices _apiServices = ApiServices();
+  bool isUpdating = false;
+
+  Future<void> updateProfileCard(
+      dynamic id,
+      String fNameController,
+      String lNameController,
+      String professionalTitleController,
+      String areaController) async {
+    setState(() {
+      isUpdating = true;
+    });
+
+    if (fNameController.toString() != '' &&
+        lNameController.toString() != '' &&
+        professionalTitleController.toString() != '' &&
+        areaController.toString() != '') {
+      Map<String, dynamic> profileData = {
+        "id": id,
+        "first_name": fNameController,
+        "last_name": lNameController,
+        "professional_title": professionalTitleController,
+        "area": areaController
+      };
+      print('usser profile: ${profileData}');
+      dynamic res =
+          await _apiServices.updateUserProfile(profileData: profileData);
+
+      if (res?.success) {
+        Navigator.pop(context);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error: ${res?.messages}'),
+            backgroundColor: Colors.red.shade300,
+          ),
+        );
+      }
+    }
+    setState(() {
+      isUpdating = false;
+    });
+  }
+
+  /// API to fetch and update data functionality End
+
+  /// Porfile card pop up functionality Start
+
+  bool isPorfileDetailShowCard = true;
+  bool isContactDetailShowCard = true;
+  List countryNameList = ['Country1', 'Country2', 'Country3'];
+
+  Future buildProfileCardPopUp(
+      {required dynamic id,
+      required String fName,
+      required String lName,
+      required String professionalTitle,
+      required String area}) {
+    TextEditingController _fNameController = TextEditingController(text: fName);
+    TextEditingController _lNameController = TextEditingController(text: lName);
+    TextEditingController _professionalTitleController =
+        TextEditingController(text: professionalTitle);
+    TextEditingController _areaController = TextEditingController(text: area);
+
     return showDialog<String>(
       context: context,
       builder: (BuildContext context) => Dialog(
@@ -205,15 +196,16 @@ class _HeaderCardState extends State<HeaderCard> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         buildFieldName('Name', '*'),
-                                        buildTextField('Name', fNameController),
+                                        buildTextField(
+                                            'Name', _fNameController),
                                         buildFieldName('Surname', '*'),
                                         buildTextField(
-                                            'Surname', lNameController),
+                                            'Surname', _lNameController),
                                         buildFieldName(
                                             'Professional title' '?'),
                                         buildTextField(
                                             'Business development manager, recruiter and hotel specialist',
-                                            professionalTitleController),
+                                            _professionalTitleController),
                                         Row(
                                           children: [
                                             Expanded(
@@ -225,7 +217,7 @@ class _HeaderCardState extends State<HeaderCard> {
                                                       'City / Area  / Region',
                                                       '*'),
                                                   buildTextField(
-                                                      '', cityController)
+                                                      '', _areaController)
                                                 ],
                                               ),
                                             ),
@@ -259,8 +251,15 @@ class _HeaderCardState extends State<HeaderCard> {
                                             isUpdating
                                                 ? CircularProgressIndicator()
                                                 : ElevatedButton(
-                                                    onPressed:
-                                                        updateProfileCard,
+                                                    onPressed: () {
+                                                      updateProfileCard(
+                                                          id,
+                                                          _fNameController.text,
+                                                          _lNameController.text,
+                                                          _professionalTitleController
+                                                              .text,
+                                                          _areaController.text);
+                                                    },
                                                     child: Text('Save'))
                                           ],
                                         )
@@ -491,9 +490,7 @@ class _HeaderCardState extends State<HeaderCard> {
     );
   }
 
-  Future<String?> buildContactCardPopUp(
-    bool isHoveringCard,
-  ) {
+  Future<String?> buildContactCardPopUp(bool isHoveringCard) {
     return showDialog<String>(
       context: context,
       builder: (BuildContext context) => StatefulBuilder(
@@ -1035,6 +1032,7 @@ class _HeaderCardState extends State<HeaderCard> {
 
   @override
   Widget build(BuildContext context) {
+    final userData = widget.hCardApiData;
     return Container(
       key: key,
       width: SS.sW(context),
@@ -1173,8 +1171,7 @@ class _HeaderCardState extends State<HeaderCard> {
                                       ),
                                     ),
                                     TextSpan(
-                                        text: widget.hCardApiData.address1
-                                            .toString(),
+                                        text: userData.area.toString(),
                                         style:
                                             FontTextStyle.kGreyLight514W400SSP)
                                   ],
@@ -1577,7 +1574,6 @@ class _HeaderCardState extends State<HeaderCard> {
                     ),
                   ),
                 ),
-
           Positioned(
             top: SS.sH(context) * 0.14,
             child: Center(
@@ -1595,7 +1591,6 @@ class _HeaderCardState extends State<HeaderCard> {
               ),
             ),
           ),
-
           isVisible
               ? Column(
                   children: [
@@ -1683,7 +1678,6 @@ class _HeaderCardState extends State<HeaderCard> {
                   ],
                 )
               : Container(),
-
           widget.isEditable
               ? Padding(
                   padding: EdgeInsets.only(
@@ -1694,18 +1688,17 @@ class _HeaderCardState extends State<HeaderCard> {
                       width: widget.headerCard_W,
                       height: widget.headerCard_H,
                       popUpEdit: () {
-                        buildProfileCardPopUp(fNameController, lNameController,
-                            professionalTitleController, cityController);
+                        buildProfileCardPopUp(
+                            id: userData.id,
+                            fName: userData.firstName.toString(),
+                            lName: userData.lastName.toString(),
+                            professionalTitle:
+                                userData.professionalTitle.toString(),
+                            area: userData.area.toString());
                       },
                       showAddButton: false),
                 )
               : Container(),
-          // Responsive.isDesktop(context)
-          //     ? Positioned(
-          //         top: 0,
-          //         child: Header(),
-          //       )
-          //     : Container()
         ],
       ),
     );

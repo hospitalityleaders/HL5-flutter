@@ -1,12 +1,9 @@
-// import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/constant/sizedbox.dart';
-import 'package:holedo/controller/auth_controller.dart';
 import 'package:holedo/screens/profile-pages/profile-edit/profile-edit.dart';
 import 'package:holedo/screens/profile-pages/profile-overview/profile-overview.dart';
 import 'package:holedo/screens/profile-pages/timeline/timeline.dart';
@@ -191,7 +188,7 @@ class _ProfilePageState extends State<ProfilePage>
 
   final userData = GetStorage();
   TabController? _tabController;
-  int _current = 0;
+
   int tabBar = 0;
   int indexCircle = 0;
   bool isEditable = false;
@@ -212,8 +209,6 @@ class _ProfilePageState extends State<ProfilePage>
 
   void initState() {
     _tabController = TabController(length: 5, vsync: this);
-    //profile();
-    //_apiServices.getUserApi('${AuthData.token}');
     super.initState();
   }
 
@@ -225,7 +220,7 @@ class _ProfilePageState extends State<ProfilePage>
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<HoledoProfileModel?>(
+    return FutureBuilder<HoledoProfileModel>(
         future: profile(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
@@ -589,17 +584,5 @@ class _ProfilePageState extends State<ProfilePage>
             return Center(child: CircularProgressIndicator());
           }
         });
-    // SingleChildScrollView(
-    //   child: FutureBuilder<HoledoProfileModel>(
-    //     future: profile(),
-    //     builder: (context, snapshot) {
-    //       if (snapshot.hasData) {
-    //         return
-    //       } else {
-    //         return CircularProgressIndicator();
-    //       }
-    //     },
-    //   ),
-    // );
   }
 }

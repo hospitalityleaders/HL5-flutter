@@ -4,8 +4,6 @@ import 'package:holedo/common/popUpHeadMenu.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/constant/sizedbox.dart';
-import '../../../controller/auth_controller.dart';
-import '../../../models/HoledoProfileModel.dart';
 import '../../../services/holedo_api_services.dart';
 import '../profile-edit/profile-edit.dart';
 
@@ -45,38 +43,20 @@ class ProfileOverviewSec1 extends StatefulWidget {
 
 class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
   final ApiServices _apiServices = ApiServices();
-  final HoledoProfileModel profile = HoledoProfileModel.fromJson(AuthData.data);
-  User? user;
-  late TextEditingController profileSummaryController;
-
   bool isUpdating = false;
 
-  @override
-  void initState() {
-    super.initState();
-    user = profile.data?.user;
-    print('pp: ${user?.profileSummary}');
-    profileSummaryController =
-         TextEditingController(text: '${user?.profileSummary}');
-  }
-
-  Future<void> updateUsers() async {
+  Future<void> updateUsers(dynamic id, String profileSummaryController) async {
     setState(() {
       isUpdating = true;
     });
-    if (profileSummaryController.text != '') {
+    if (profileSummaryController.toString() != '') {
       Map<String, dynamic> userData = {
-        "id": user?.id,
-        "profile_summary": profileSummaryController.text
+        "id": id,
+        "profile_summary": profileSummaryController
       };
-
       print('usser: ${userData}');
-
-      dynamic res = await _apiServices.updateUserProfile(
-          // accessToken: '${AuthData.token}',
-           profileData: userData);
-
-      if (res?.errors == null) {
+      dynamic res = await _apiServices.updateUserProfile(profileData: userData);
+      if (res?.success) {
         Navigator.pop(context);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -203,9 +183,10 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
 
   ///Profile summary pop up start
 
-  ///api to fetch and update data
-
-  Future<String?> buildProfileCardPopUp(profileSummaryController) {
+  Future<String?> buildProfileCardPopUp(
+      {required dynamic id, required String profileSummary}) {
+    TextEditingController _profileCtrl =
+        TextEditingController(text: profileSummary);
     return showDialog<String>(
       context: context,
       builder: (BuildContext context) {
@@ -234,7 +215,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: TextField(
-                              controller: profileSummaryController,
+                              controller: _profileCtrl,
                               autocorrect: true,
                               minLines: 4,
                               maxLines: 6,
@@ -259,11 +240,13 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                                       child: Text('Cancel')),
                                 ),
                                 Padding(
-                                  padding:  EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(8.0),
                                   child: isUpdating
                                       ? CircularProgressIndicator()
                                       : ElevatedButton(
-                                          onPressed: updateUsers,
+                                          onPressed: () {
+                                            updateUsers(id, _profileCtrl.text);
+                                          },
                                           child: Text('Save'),
                                         ),
                                 ),
@@ -540,7 +523,10 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                     width: widget.profileOverviewSec1ProSumm_W,
                     height: widget.profileOverviewSec1ProSumm_H,
                     popUpEdit: () {
-                      buildProfileCardPopUp(profileSummaryController);
+                      buildProfileCardPopUp(
+                          id: widget.pOApiDataSec1.id.toString(),
+                          profileSummary:
+                              widget.pOApiDataSec1.profileSummary.toString());
                     },
                     showAddButton: false)
                 : Container(),
