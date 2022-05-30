@@ -322,7 +322,7 @@ import '../../../constant/fontStyle/font_style.dart';
 import '../../../constant/sizedbox.dart';
 import '../../../controller/auth_controller.dart';
 import '../../../services/holedo_api_services.dart';
-import '../../../services/user_profile_service.dart';
+
 import '../../Authentication/login.dart';
 
 class Header extends StatefulWidget {

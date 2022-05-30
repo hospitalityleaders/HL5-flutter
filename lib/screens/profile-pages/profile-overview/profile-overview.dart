@@ -12,7 +12,6 @@ import '../../../responsive/responsive.dart';
 
 class ProfileOverview extends StatefulWidget {
   final isEditable;
-  final token;
 
   // profileoverviewsection1
   final profileOverviewSec1ProSummKey;
@@ -45,7 +44,7 @@ class ProfileOverview extends StatefulWidget {
   const ProfileOverview({
     Key? key,
     required this.isEditable,
-    required this.token,
+
     // profileoverviewsection1
     this.profileOverviewSec1ProSummKey,
     this.profileOverviewSec1ProSumm_H,

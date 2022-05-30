@@ -41,7 +41,7 @@ class _HeaderCardState extends State<HeaderCard> {
       children: [
         RichText(
           text: TextSpan(
-              text: '$fieldName ',
+              text: '$fieldName',
               style: FontTextStyle.kBlueDark114W700SSP,
               children: [
                 TextSpan(
@@ -190,7 +190,7 @@ class _HeaderCardState extends State<HeaderCard> {
                                     color: ColorPicker.kGreyLight3,
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.all(16.0),
+                                    padding: EdgeInsets.all(16.0),
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,

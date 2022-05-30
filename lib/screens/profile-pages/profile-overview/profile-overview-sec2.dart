@@ -7,6 +7,7 @@ import 'package:holedo/constant/fontStyle/font_style.dart';
 import '../../../common/popUpHeadMenu.dart';
 import '../../../common/textfield_fieldname.dart';
 import '../../../constant/colorPicker/color_picker.dart';
+
 import '../../../constant/sizedbox.dart';
 import '../profile-edit/profile-edit.dart';
 
@@ -26,7 +27,7 @@ class ProfileOverviewSec2 extends StatefulWidget {
   final profileOverviewSec2Languages_W;
   final pOApiDataSec2;
 
-  const ProfileOverviewSec2({
+   ProfileOverviewSec2({
     Key? key,
     required this.sec2IsEditable,
     this.profileOverviewSec2WorkExpKey,
@@ -77,7 +78,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
       children: [
         StatefulBuilder(builder: (context, setState) {
           return Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding:  EdgeInsets.all(8.0),
             child: Container(
               key: sec2Key,
               color: ColorPicker.kWhite,
@@ -91,7 +92,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                     children: [
                       Expanded(
                         child: Padding(
-                          padding: const EdgeInsets.only(left: 20, top: 13),
+                          padding:  EdgeInsets.only(left: 20, top: 13),
                           child: Text(cardName,
                               style: FontTextStyle.kBlueDark120W400SSP),
                         ),
@@ -117,7 +118,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                                           });
                                         },
                                         child: Padding(
-                                          padding: const EdgeInsets.only(
+                                          padding:  EdgeInsets.only(
                                               top: 13, right: 20),
                                           child: Container(
                                             decoration: BoxDecoration(
@@ -147,12 +148,12 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 8),
+                   SizedBox(height: 8),
                   Divider(
                     height: .5,
                     color: Color(0xFFE5E5E5),
                   ),
-                  const SizedBox(height: 10),
+                   SizedBox(height: 10),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -162,7 +163,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                             Container(
                               height: 50,
                               width: 50,
-                              color: const Color(0xFF0d9bdc),
+                              color:  Color(0xFF0d9bdc),
                               child: Center(
                                 child: Icon(
                                   cardIcon,
@@ -180,7 +181,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                           children: [
                             Text(cardTitle,
                                 style: FontTextStyle.kBlueDark116W700SSP),
-                            const SizedBox(
+                             SizedBox(
                               height: 5,
                             ),
                             GestureDetector(
@@ -189,23 +190,23 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                                   style: FontTextStyle.kBlueLight114W400SSP,
                                 ),
                                 onTap: () {}),
-                            const SizedBox(
+                             SizedBox(
                               height: 5,
                             ),
                             Text(
                               cardDate,
                               style: FontTextStyle.kGreyLight5146W400SSP,
                             ),
-                            const SizedBox(
+                             SizedBox(
                               height: 5,
                             ),
                           ],
                         ),
                       ),
-                      const SizedBox(width: 6),
+                       SizedBox(width: 6),
                     ],
                   ),
-                  const SizedBox(height: 5),
+                   SizedBox(height: 5),
                   SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -229,7 +230,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                           ),
                         ),
                         Container(
-                          padding: const EdgeInsets.all(5),
+                          padding:  EdgeInsets.all(5),
                           color: ColorPicker.kGreyLight2,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -330,7 +331,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
       bool isExperienceEditable, bool isExperienceShowCard, int indexExp) {
     return StatefulBuilder(builder: (context, setState) {
       return Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding:  EdgeInsets.all(16.0),
         child: Container(
           width: SS.sW(context) * .50,
           color: ColorPicker.kWhite,
@@ -365,7 +366,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                               color: ColorPicker.kGreyLight3,
                             ),
                             Padding(
-                              padding: const EdgeInsets.all(16.0),
+                              padding:  EdgeInsets.all(16.0),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -377,7 +378,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                                   TextFieldAndFieldName.buildTextField('www.fairmontzimbali.com'),
                                   TextFieldAndFieldName.buildFieldName('Job description'),
                                   Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding:  EdgeInsets.all(8.0),
                                     child: TextField(
                                       autocorrect: true,
                                       minLines: 4,
@@ -432,7 +433,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                       isVisibleExperience
                           ? buildExpInnerCard(false, true, indexExp)
                           : Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding:  EdgeInsets.all(8.0),
                               child: CircleAvatar(
                                 radius: 30,
                                 backgroundColor: ColorPicker.kGreenNeon,
@@ -478,7 +479,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
       List<Widget> eduTextFieldGenerate =
           List.generate(indexEdu, (int i) => TextFieldAndFieldName.buildTextField('Course name'));
       return Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding:  EdgeInsets.all(16.0),
         child: Container(
           width: SS.sW(context) * .50,
           color: ColorPicker.kWhite,
@@ -514,7 +515,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                               color: ColorPicker.kGreyLight3,
                             ),
                             Padding(
-                              padding: const EdgeInsets.all(16.0),
+                              padding:  EdgeInsets.all(16.0),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -590,7 +591,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                         isVisibleEducation
                             ? buildEduInnerCard(false, true, indexEdu)
                             : Padding(
-                                padding: const EdgeInsets.all(8.0),
+                                padding:  EdgeInsets.all(8.0),
                                 child: CircleAvatar(
                                   radius: 30,
                                   backgroundColor: ColorPicker.kGreenNeon,
@@ -631,7 +632,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
       [String? title, String? subTitle, String? year]) {
     return StatefulBuilder(builder: (context, setState) {
       return Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding:  EdgeInsets.all(16.0),
         child: Container(
           width: SS.sW(context) * .50,
           color: ColorPicker.kWhite,
@@ -666,7 +667,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                             color: ColorPicker.kGreyLight3,
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(16.0),
+                            padding:  EdgeInsets.all(16.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -730,7 +731,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                       isVisibleAchivement
                           ? buildAchiveInnerCard(false, true)
                           : Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding:  EdgeInsets.all(8.0),
                               child: CircleAvatar(
                                 radius: 30,
                                 backgroundColor: ColorPicker.kGreenNeon,
@@ -792,7 +793,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                     children: [
                       PopUpHeadMenu.popUpHead('Languages', context),
                       Padding(
-                        padding: const EdgeInsets.all(16.0),
+                        padding:  EdgeInsets.all(16.0),
                         child: Container(
                           width: SS.sW(context) * .50,
                           color: ColorPicker.kWhite,
@@ -804,7 +805,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                               Expanded(
                                 flex: 1,
                                 child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding:  EdgeInsets.all(8.0),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -830,7 +831,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                               Expanded(
                                 flex: 2,
                                 child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding:  EdgeInsets.all(8.0),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -945,7 +946,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
         Stack(
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding:  EdgeInsets.all(8.0),
               child: Container(
                 key: widget.profileOverviewSec2LanguagesKey,
                 color: Colors.white,
@@ -959,13 +960,13 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                         style: FontTextStyle.kBlueDark120W400SSP,
                       ),
                     ),
-                    const SizedBox(height: 8),
+                     SizedBox(height: 8),
                     Divider(height: 1, color: Colors.grey.shade400),
-                    const SizedBox(height: 10),
+                     SizedBox(height: 10),
                     Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(12.0),
+                          padding:  EdgeInsets.all(12.0),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -975,8 +976,8 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                                     Container(
                                       height: 50,
                                       width: 50,
-                                      color: const Color(0xFF0d9bdc),
-                                      child: const Center(
+                                      color:  Color(0xFF0d9bdc),
+                                      child:  Center(
                                         child: Icon(
                                           CupertinoIcons.globe,
                                           color: ColorPicker.kWhite,
@@ -1007,7 +1008,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                                   ],
                                 ),
                               ),
-                              const SizedBox(width: 6),
+                               SizedBox(width: 6),
                             ],
                           ),
                         ),
@@ -1016,7 +1017,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                           color: Colors.grey.shade400,
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(12.0),
+                          padding:  EdgeInsets.all(12.0),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -1026,8 +1027,8 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                                     Container(
                                       height: 50,
                                       width: 50,
-                                      color: const Color(0xFF0d9bdc),
-                                      child: const Center(
+                                      color:  Color(0xFF0d9bdc),
+                                      child:  Center(
                                         child: Icon(
                                           CupertinoIcons.globe,
                                           color: Colors.white,
@@ -1059,13 +1060,13 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                                   ],
                                 ),
                               ),
-                              const SizedBox(width: 6),
+                               SizedBox(width: 6),
                             ],
                           ),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 5),
+                     SizedBox(height: 5),
                   ],
                 ),
               ),

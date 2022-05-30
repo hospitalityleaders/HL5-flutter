@@ -11,7 +11,7 @@ class ProfileOverviewSec3 extends StatefulWidget {
   final pOApiDataSec3;
   final editProfileBtn;
 
-  const ProfileOverviewSec3({Key? key, this.pOApiDataSec3, this.editProfileBtn}) : super(key: key);
+   ProfileOverviewSec3({Key? key, this.pOApiDataSec3, this.editProfileBtn}) : super(key: key);
 
   @override
   State<ProfileOverviewSec3> createState() => _ProfileOverviewSec3State();
@@ -31,7 +31,7 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
       bool isExperienceEditable, bool isExperienceShowCard, int indexExp) {
     return StatefulBuilder(builder: (context, setState) {
       return Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding:  EdgeInsets.all(16.0),
         child: Container(
           width: SS.sW(context) * .50,
           color: ColorPicker.kWhite,
@@ -66,7 +66,7 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                               color: ColorPicker.kGreyLight3,
                             ),
                             Padding(
-                              padding: const EdgeInsets.all(16.0),
+                              padding:  EdgeInsets.all(16.0),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -85,7 +85,7 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                                   TextFieldAndFieldName.buildFieldName(
                                       'Job description'),
                                   Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding:  EdgeInsets.all(8.0),
                                     child: TextField(
                                       autocorrect: true,
                                       minLines: 4,
@@ -140,7 +140,7 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                       isVisibleExperience
                           ? buildExpInnerCard(false, true, indexExp)
                           : Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding:  EdgeInsets.all(8.0),
                               child: CircleAvatar(
                                 radius: 30,
                                 backgroundColor: ColorPicker.kGreenNeon,
@@ -196,14 +196,14 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                         height: SS.sH(context) * .05,
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(16.0),
+                        padding:  EdgeInsets.all(16.0),
                         child: Column(
                           children: [
                             Container(
                               color: ColorPicker.kWhite,
                               width: double.infinity,
                               child: Padding(
-                                padding: const EdgeInsets.all(20),
+                                padding:  EdgeInsets.all(20),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -271,7 +271,7 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                                             onHover: (value) {},
                                             child: Padding(
                                               padding:
-                                                  const EdgeInsets.symmetric(
+                                                   EdgeInsets.symmetric(
                                                       horizontal: 6),
                                               child: Container(
                                                 decoration: BoxDecoration(
@@ -309,7 +309,7 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                               child: Column(
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding:  EdgeInsets.all(8.0),
                                     child: SingleChildScrollView(
                                       child: Wrap(
                                         spacing: 3.0,
@@ -341,7 +341,7 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.all(20),
+                                    padding:  EdgeInsets.all(20),
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
@@ -404,7 +404,7 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                     children: [
                       PopUpHeadMenu.popUpHead('Languages', context),
                       Padding(
-                        padding: const EdgeInsets.all(16.0),
+                        padding:  EdgeInsets.all(16.0),
                         child: Container(
                           width: SS.sW(context) * .50,
                           color: ColorPicker.kWhite,
@@ -416,7 +416,7 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                               Expanded(
                                 flex: 1,
                                 child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding:  EdgeInsets.all(8.0),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -443,7 +443,7 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                               Expanded(
                                 flex: 2,
                                 child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding:  EdgeInsets.all(8.0),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -494,13 +494,13 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
           },
           leading: Icon(
             icon,
-            color: const Color(0xFF0d9bdc),
+            color:  Color(0xFF0d9bdc),
           ),
           title: Text(
             title,
             style: FontTextStyle.kBlueLight116W400SSP,
           ),
-          trailing: const Card(
+          trailing:  Card(
             elevation: 1.0,
             margin: EdgeInsets.all(2),
             color: Color(0xff1d2645),
@@ -512,8 +512,8 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
             ),
           ),
         ),
-        const SizedBox(height: 10),
-        const Divider(
+        SizedBox(height: 10),
+         Divider(
           height: 1,
           color: Color(0xFF1d2645),
         ),
@@ -536,7 +536,7 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding:  EdgeInsets.all(8.0),
           child: Container(
             padding: EdgeInsets.symmetric(vertical: 16, horizontal: 8),
             color: ColorPicker.kPrimaryLight1,
@@ -546,7 +546,7 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                   '${(value * 100).toInt()}%',
                   style: TextStyle(fontSize: 48, color: ColorPicker.kWhite),
                 ),
-                const SizedBox(height: 10),
+                 SizedBox(height: 10),
                 Padding(
                   padding: EdgeInsets.all(8.0),
                   child: ClipRRect(
@@ -578,7 +578,7 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                     buildAddyourspecialitiesPopUpCard),
                 profileListTile(Icons.add_box_outlined, 'Add your languages',
                     buildAddyourlanguagesPopUpCards),
-                const SizedBox(height: 10),
+                 SizedBox(height: 10),
 
                 GestureDetector(
                   onTap:widget.editProfileBtn,
@@ -606,7 +606,7 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                 //         style: FontTextStyle.kWhite14W400SSP),
                 //   ),
                 //   style: ElevatedButton.styleFrom(
-                //     primary: const Color(0xFF32A3FD),
+                //     primary:  Color(0xFF32A3FD),
                 //   ),
                 // ),
               ],
@@ -614,7 +614,7 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding:  EdgeInsets.all(8.0),
           child: Container(
             color: Colors.white,
             child: Column(
@@ -625,18 +625,18 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                   child: Text('Connections',
                       style: FontTextStyle.kBlueDark120W400SSP),
                 ),
-                const SizedBox(height: 8),
+                 SizedBox(height: 8),
                 Divider(height: 1, color: Colors.grey.shade400),
-                const SizedBox(height: 10),
+                 SizedBox(height: 10),
                 Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding:  EdgeInsets.all(12.0),
                   child: Wrap(
                     children: [
                       Container(
                         height: 60,
                         width: 120,
-                        color: const Color(0xff0D9BDC),
-                        child: const Center(
+                        color:  Color(0xff0D9BDC),
+                        child:  Center(
                           child: Text(
                             '250+',
                             style: TextStyle(
@@ -683,11 +683,11 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                 ),
                 Divider(height: 1, color: Colors.grey.shade400),
                 Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding:  EdgeInsets.all(12.0),
                   child: OutlinedButton(
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(
-                        const Color(0xFFCCE8FE),
+                         Color(0xFFCCE8FE),
                       ),
                     ),
                     onPressed: () {},

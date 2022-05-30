@@ -21,7 +21,7 @@ class ProfileOverviewSec1 extends StatefulWidget {
   final pOApiDataSec1;
   final token;
 
-  const ProfileOverviewSec1({
+   ProfileOverviewSec1({
     Key? key,
     required this.sec1IsEditable,
     this.profileOverviewSec1ProSummKey,
@@ -81,7 +81,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
         ),
       ),
       onPressed: () {},
-      icon: const Padding(
+      icon:  Padding(
         padding: EdgeInsets.symmetric(vertical: 12.0),
         child: Icon(
           Icons.check_circle,
@@ -124,23 +124,23 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding:  EdgeInsets.all(8.0),
             child: RichText(
               text: TextSpan(
-                style: const TextStyle(color: Colors.black, fontSize: 30),
+                style:  TextStyle(color: Colors.black, fontSize: 30),
                 children: [
                   WidgetSpan(
                     child: SizedBox(
                       height: 50,
                       width: 50,
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(
+                        padding:  EdgeInsets.symmetric(
                             horizontal: 2.0, vertical: 2),
                         child: Card(
                           color: Colors.blue,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(1.0)),
-                          child: const Icon(
+                          child:  Icon(
                             Icons.format_quote_rounded,
                             color: Colors.white,
                           ),
@@ -156,7 +156,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
               ),
             ),
           ),
-          const SizedBox(
+           SizedBox(
             height: 10,
           ),
           Row(
@@ -199,21 +199,21 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                 children: [
                   PopUpHeadMenu.popUpHead('Profile Summary', context),
                   Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding:  EdgeInsets.all(16.0),
                     child: Container(
                       color: ColorPicker.kWhite,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.all(4.0),
+                            padding:  EdgeInsets.all(4.0),
                             child: Text(
                               'Summary',
                               style: FontTextStyle.kBlueDark114W700SSP,
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding:  EdgeInsets.all(8.0),
                             child: TextField(
                               controller: _profileCtrl,
                               autocorrect: true,
@@ -227,12 +227,12 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(4.0),
+                            padding:   EdgeInsets.all(4.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.all(4.0),
+                                  padding:  EdgeInsets.all(4.0),
                                   child: OutlinedButton(
                                       onPressed: () {
                                         Navigator.pop(context);
@@ -293,14 +293,14 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                         height: SS.sH(context) * .05,
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(16.0),
+                        padding:  EdgeInsets.all(16.0),
                         child: Column(
                           children: [
                             Container(
                               color: ColorPicker.kWhite,
                               width: double.infinity,
                               child: Padding(
-                                padding: const EdgeInsets.all(20),
+                                padding:  EdgeInsets.all(20),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -370,7 +370,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                                             onHover: (value) {},
                                             child: Padding(
                                               padding:
-                                                  const EdgeInsets.symmetric(
+                                                   EdgeInsets.symmetric(
                                                       horizontal: 6),
                                               child: Container(
                                                 decoration: BoxDecoration(
@@ -408,7 +408,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                               child: Column(
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding:  EdgeInsets.all(8.0),
                                     child: SingleChildScrollView(
                                       child: Wrap(
                                         spacing: 3.0,
@@ -442,7 +442,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.all(20),
+                                    padding:  EdgeInsets.all(20),
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
@@ -487,7 +487,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
         Stack(
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding:  EdgeInsets.all(8.0),
               child: Container(
                 key: widget.profileOverviewSec1ProSummKey,
                 color: Colors.white,
@@ -502,7 +502,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                       ),
                     ),
                     SS.sB(8, 0),
-                    const Divider(
+                     Divider(
                       height: 0.5,
                       color: Color(0xffE5E5E5),
                     ),
@@ -538,7 +538,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
         Stack(
           children: [
             Padding(
-              padding: const EdgeInsets.all(8),
+              padding:  EdgeInsets.all(8),
               child: Container(
                 key: widget.profileOverviewSec1AreaOfExpKey,
                 child: Column(
@@ -573,13 +573,13 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                         buildAreaOfExpertiseButton('Public speaking'),
                         ElevatedButton.icon(
                           style: ElevatedButton.styleFrom(
-                            primary: const Color(0xFFe5f4fb),
+                            primary:  Color(0xFFe5f4fb),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(1),
                             ),
                           ),
                           onPressed: () {},
-                          icon: const Padding(
+                          icon:  Padding(
                             padding: EdgeInsets.symmetric(vertical: 12.0),
                             child: Icon(
                               Icons.add,
@@ -619,7 +619,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
         Stack(
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding:  EdgeInsets.all(8.0),
               child: Container(
                 key: widget.profileOverviewSec1ReferencesKey,
                 color: ColorPicker.kWhite,
@@ -635,7 +635,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                       ),
                     ),
                     SS.sB(8, 0),
-                    const Divider(color: Colors.grey, height: 1),
+                     Divider(color: Colors.grey, height: 1),
                     buildReferencesCard(
                       'https://images.pexels.com/photos/712521/pexels-photo-712521.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
                       'Sarah Lee',
@@ -644,7 +644,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
                     ),
 
-                    const Divider(
+                     Divider(
                       height: 1,
                       color: Colors.grey,
                     ),

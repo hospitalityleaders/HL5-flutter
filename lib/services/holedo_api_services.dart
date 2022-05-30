@@ -106,8 +106,9 @@ class ApiServices {
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
             'Accept': 'application/json',
-            'AuthApi': 'Bearer ${AuthData.token}'
-          });
+            'AuthApi': 'Bearer ${userData.read('token')}'
+            // 'AuthApi': 'Bearer ${AuthData.token}'
+             });
       var data = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
@@ -130,7 +131,8 @@ class ApiServices {
           'Content-Type': 'application/json; charset=UTF-8',
           'apikey': AuthData.apiKey,
           'Accept': 'application/json',
-          'AuthApi': 'Bearer ${AuthData.token}'
+          'AuthApi': 'Bearer ${userData.read('token')}'
+          // 'AuthApi': 'Bearer ${AuthData.token}'
         },
         body: jsonEncode(profileData),
       );

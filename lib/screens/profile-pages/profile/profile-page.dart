@@ -40,12 +40,12 @@ List<Item> generateItems(int numberOfItems) {
 }
 //mobile view end
 
-// ignore: must_be_immutable
 class ProfilePage extends StatefulWidget {
-  static const String route = '/second';
-  String? token;
+  static String route = '/second';
 
-  ProfilePage({Key? key, this.token}) : super(key: key);
+  final userData;
+
+  ProfilePage({Key? key, this.userData}) : super(key: key);
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -222,7 +222,7 @@ class _ProfilePageState extends State<ProfilePage>
   Widget build(BuildContext context) {
     return FutureBuilder<HoledoProfileModel>(
         future: profile(),
-        builder: (context, snapshot) {
+        builder: (context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
             return Responsive.isDesktop(context)
                 ? Container(
@@ -238,7 +238,7 @@ class _ProfilePageState extends State<ProfilePage>
                         Container(
                           height: Get.height * 0.06,
                           width: Get.width,
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                             color: Colors.white,
                             border: Border(
                               bottom: BorderSide(
@@ -298,7 +298,7 @@ class _ProfilePageState extends State<ProfilePage>
                                       physics: NeverScrollableScrollPhysics(),
                                       isScrollable: true,
                                       automaticIndicatorColorAdjustment: true,
-                                      tabs: const [
+                                      tabs: [
                                         Padding(
                                           padding: EdgeInsets.all(10.0),
                                           child: Text(
@@ -368,7 +368,7 @@ class _ProfilePageState extends State<ProfilePage>
                               children: <Widget>[
                                 ProfileOverview(
                                     isEditable: isEditable,
-                                    token: widget.token,
+
                                     //section1 edit functionality
                                     profileOverviewSec1ProSummKey:
                                         profileOverviewSec1ProSummKey,
@@ -441,7 +441,7 @@ class _ProfilePageState extends State<ProfilePage>
                             headerCard_W: headerCard_W,
                             hCardApiData: snapshot.data!.data!.user!),
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: EdgeInsets.all(8.0),
                           child: ExpansionPanelList(
                             expansionCallback: (int index, bool isExpanded) {
                               setState(() {
@@ -500,7 +500,7 @@ class _ProfilePageState extends State<ProfilePage>
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.all(8.0),
+                                      padding: EdgeInsets.all(8.0),
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -528,7 +528,7 @@ class _ProfilePageState extends State<ProfilePage>
                         ),
                         ProfileOverview(
                             isEditable: isEditable,
-                            token: widget.token,
+
                             //section1 edit functionality
                             profileOverviewSec1ProSummKey:
                                 profileOverviewSec1ProSummKey,

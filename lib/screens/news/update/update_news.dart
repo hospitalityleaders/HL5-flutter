@@ -3303,6 +3303,7 @@ class _UpdateNewsState extends State<UpdateNews>
   @override
   void initState() {
     _tabController = TabController(length: 5, vsync: this);
+    ProfilePage();
     super.initState();
   }
 
