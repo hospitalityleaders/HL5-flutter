@@ -123,7 +123,7 @@ class ApiServices {
   /// update data
   Future<HoledoProfileModel?> updateUserProfile(
       {required Map<String, dynamic> profileData}) async {
-     try {
+    try {
       final response = await http.post(
         Uri.parse('https://${AuthData.apiHost}/rest/users/update'),
         headers: <String, String>{
@@ -135,7 +135,7 @@ class ApiServices {
         body: jsonEncode(profileData),
       );
       if (response.statusCode == 200) {
-        final model =Store.Get.put(AuthController()).restoreModel();
+        final model = Store.Get.put(AuthController()).restoreModel();
         model.setData = HoledoProfileModel.fromJson(jsonDecode(response.body));
         Store.Get.find<AuthController>().authModel(model);
         return model.data;
@@ -146,7 +146,6 @@ class ApiServices {
       return Future.error('Error Fetching Data !');
     }
   }
-
 
   /// Api fetch and update by Http End ///
 
