@@ -214,16 +214,13 @@ class _ProfilePageState extends State<ProfilePage>
 
   ApiServices _apiServices = ApiServices();
 
-  Future<HoledoProfileModel> profile() async {
-    return await _apiServices.getUserProfileData();
-  }
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<HoledoProfileModel>(
-        future: profile(),
+        future: _apiServices.getUserProfileData(),
         builder: (context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
+            final userProfileData = snapshot.data!.data!.user!;
             return Responsive.isDesktop(context)
                 ? Container(
                     decoration: BoxDecoration(color: ColorPicker.kBG),
@@ -234,7 +231,7 @@ class _ProfilePageState extends State<ProfilePage>
                             headerCardKey: headerCardKey,
                             headerCard_H: headerCard_H,
                             headerCard_W: headerCard_W,
-                            hCardApiData: snapshot.data!.data!.user!),
+                            hCardApiData: userProfileData),
                         Container(
                           height: Get.height * 0.06,
                           width: Get.width,
@@ -259,8 +256,7 @@ class _ProfilePageState extends State<ProfilePage>
                                       decoration: BoxDecoration(
                                         image: DecorationImage(
                                           image: NetworkImage(
-                                            snapshot.data!.data!.user!.avatar
-                                                .toString(),
+                                            userProfileData.avatar.toString(),
                                           ),
                                         ),
                                       ),
@@ -269,14 +265,12 @@ class _ProfilePageState extends State<ProfilePage>
                                       padding:
                                           EdgeInsets.symmetric(horizontal: 8.0),
                                       child: Text(
-                                          snapshot.data!.data!.user!.fullName
-                                              .toString(),
+                                          userProfileData.fullName.toString(),
                                           style: FontTextStyle
                                               .kBlueDark116W700SSP),
                                     ),
                                     Text(
-                                        snapshot
-                                            .data!.data!.user!.userTitleTypesId
+                                        userProfileData.userTitleTypesId
                                             .toString(),
                                         style:
                                             FontTextStyle.kBlueDark112W700SSP),
@@ -415,7 +409,7 @@ class _ProfilePageState extends State<ProfilePage>
                                         profileOverviewSec2Languages_H,
                                     profileOverviewSec2Languages_W:
                                         profileOverviewSec2Languages_W,
-                                    pOApiData: snapshot.data!.data!.user!,
+                                    pOApiData: userProfileData,
                                     editProfileBtn: buildEditButton),
                                 Timeline(),
                                 Timeline(),
@@ -439,7 +433,7 @@ class _ProfilePageState extends State<ProfilePage>
                             headerCardKey: headerCardKey,
                             headerCard_H: headerCard_H,
                             headerCard_W: headerCard_W,
-                            hCardApiData: snapshot.data!.data!.user!),
+                            hCardApiData: userProfileData),
                         Padding(
                           padding: EdgeInsets.all(8.0),
                           child: ExpansionPanelList(
@@ -461,8 +455,7 @@ class _ProfilePageState extends State<ProfilePage>
                                           decoration: BoxDecoration(
                                             image: DecorationImage(
                                               image: NetworkImage(
-                                                snapshot
-                                                    .data!.data!.user!.avatar
+                                                userProfileData.avatar
                                                     .toString(),
                                               ),
                                             ),
@@ -471,8 +464,7 @@ class _ProfilePageState extends State<ProfilePage>
                                         title: Row(
                                           children: [
                                             Text(
-                                              snapshot
-                                                  .data!.data!.user!.fullName
+                                              userProfileData.fullName
                                                   .toString(),
                                               textAlign: TextAlign.center,
                                               style: FontTextStyle
@@ -480,8 +472,7 @@ class _ProfilePageState extends State<ProfilePage>
                                             ),
                                             SS.sB(0, 2),
                                             Text(
-                                              snapshot.data!.data!.user!
-                                                  .userTitleTypesId
+                                              userProfileData.userTitleTypesId
                                                   .toString(),
                                               textAlign: TextAlign.center,
                                               style: FontTextStyle
@@ -575,7 +566,7 @@ class _ProfilePageState extends State<ProfilePage>
                                 profileOverviewSec2Languages_H,
                             profileOverviewSec2Languages_W:
                                 profileOverviewSec2Languages_W,
-                            pOApiData: snapshot.data!.data!.user!,
+                            pOApiData: userProfileData,
                             editProfileBtn: buildEditButton),
                       ],
                     ),

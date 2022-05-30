@@ -143,7 +143,11 @@ class _HeaderCardState extends State<HeaderCard> {
       builder: (BuildContext context) => Dialog(
         child: Container(
           color: ColorPicker.kGreyLight3,
-          width: SS.sW(context) * .50,
+          width: Responsive.isDesktop(context)
+              ? SS.sW(context) * .50
+              : Responsive.isMobile(context)
+                  ? SS.sW(context) * .90
+                  : SS.sW(context) * .60,
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -158,14 +162,22 @@ class _HeaderCardState extends State<HeaderCard> {
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Container(
-                    width: SS.sW(context) * .50,
+                    width: Responsive.isDesktop(context)
+                        ? SS.sW(context) * .50
+                        : Responsive.isMobile(context)
+                            ? SS.sW(context) * .90
+                            : SS.sW(context) * .60,
                     color: ColorPicker.kWhite,
                     child: Column(
                       children: [
                         ListTile(
                             leading: Container(
-                              height: SS.sH(context) * .08,
-                              width: SS.sW(context) * .03,
+                              height: Responsive.isMobile(context)
+                                  ? 50
+                                  : SS.sH(context) * .08,
+                              width: Responsive.isMobile(context)
+                                  ? 45
+                                  : SS.sW(context) * .03,
                               color: ColorPicker.kBlueLight1,
                             ),
                             title: Text('Profile details'),
@@ -276,14 +288,22 @@ class _HeaderCardState extends State<HeaderCard> {
                 Padding(
                   padding: EdgeInsets.all(16),
                   child: Container(
-                    width: SS.sW(context) * .50,
+                    width: Responsive.isDesktop(context)
+                        ? SS.sW(context) * .50
+                        : Responsive.isMobile(context)
+                            ? SS.sW(context) * .90
+                            : SS.sW(context) * .60,
                     color: ColorPicker.kWhite,
                     child: Column(
                       children: [
                         ListTile(
                           leading: Container(
-                            height: SS.sH(context) * .08,
-                            width: SS.sW(context) * .03,
+                            height: Responsive.isMobile(context)
+                                ? 50
+                                : SS.sH(context) * .08,
+                            width: Responsive.isMobile(context)
+                                ? 45
+                                : SS.sW(context) * .03,
                             color: ColorPicker.kBlueLight1,
                           ),
                           title: Text('Contact details'),
@@ -498,7 +518,11 @@ class _HeaderCardState extends State<HeaderCard> {
           return Dialog(
             child: Container(
               color: ColorPicker.kWhite,
-              width: SS.sW(context) * .50,
+              width: Responsive.isDesktop(context)
+                  ? SS.sW(context) * .50
+                  : Responsive.isMobile(context)
+                      ? SS.sW(context) * .90
+                      : SS.sW(context) * .65,
               child: SingleChildScrollView(
                 child: Column(
                   children: [
@@ -661,7 +685,11 @@ class _HeaderCardState extends State<HeaderCard> {
       builder: (BuildContext context) => Dialog(
         child: Container(
           color: ColorPicker.kWhite,
-          width: SS.sW(context) * .45,
+          width: Responsive.isDesktop(context)
+              ? SS.sW(context) * .45
+              : Responsive.isMobile(context)
+                  ? SS.sW(context) * .90
+                  : SS.sW(context) * .60,
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -943,7 +971,11 @@ class _HeaderCardState extends State<HeaderCard> {
       builder: (BuildContext context) => Dialog(
         child: Container(
           color: ColorPicker.kWhite,
-          width: SS.sW(context) * .45,
+          width: Responsive.isDesktop(context)
+              ? SS.sW(context) * .45
+              : Responsive.isMobile(context)
+                  ? SS.sW(context) * .90
+                  : SS.sW(context) * .60,
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -1032,14 +1064,14 @@ class _HeaderCardState extends State<HeaderCard> {
 
   @override
   Widget build(BuildContext context) {
-    final userData = widget.hCardApiData;
+    final headerCardData = widget.hCardApiData;
     return Container(
       key: key,
       width: SS.sW(context),
       decoration: BoxDecoration(
         image: DecorationImage(
           image: NetworkImage(
-            widget.hCardApiData.banner.toString(),
+            headerCardData.banner.toString(),
           ),
           filterQuality: FilterQuality.high,
           fit: BoxFit.cover,
@@ -1060,7 +1092,7 @@ class _HeaderCardState extends State<HeaderCard> {
                       child: Container(
                         key: widget.headerCardKey,
                         width: SS.sW(context) * .4,
-                        color: Colors.white,
+                        color: ColorPicker.kWhite,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
@@ -1139,7 +1171,7 @@ class _HeaderCardState extends State<HeaderCard> {
                             Padding(
                               padding: EdgeInsets.all(4.0),
                               child: Text(
-                                widget.hCardApiData.fullName.toString(),
+                                headerCardData.fullName.toString(),
                                 textAlign: TextAlign.center,
                                 style: FontTextStyle.kBlueDark140W400SSP,
                               ),
@@ -1171,7 +1203,7 @@ class _HeaderCardState extends State<HeaderCard> {
                                       ),
                                     ),
                                     TextSpan(
-                                        text: userData.area.toString(),
+                                        text: headerCardData.area.toString(),
                                         style:
                                             FontTextStyle.kGreyLight514W400SSP)
                                   ],
@@ -1311,7 +1343,7 @@ class _HeaderCardState extends State<HeaderCard> {
                 )
               : Padding(
                   padding: EdgeInsets.only(
-                    top: SS.sH(context) * .22,
+                    top: SS.sH(context) * .18,
                   ),
                   child: Center(
                     child: Padding(
@@ -1319,18 +1351,17 @@ class _HeaderCardState extends State<HeaderCard> {
                       child: Container(
                         width: SS.sW(context),
                         key: widget.headerCardKey,
-                        color: Colors.white,
+                        color: ColorPicker.kWhite,
                         child: SingleChildScrollView(
                           child: Column(
                             children: [
-                              Padding(
-                                padding: EdgeInsets.all(4.0),
-                                child: Text(
-                                  widget.hCardApiData.fullName.toString(),
-                                  textAlign: TextAlign.center,
-                                  style: FontTextStyle.kBlueDark136W400SSP,
-                                ),
+                              SS.sB(29),
+                              Text(
+                                widget.hCardApiData.fullName.toString(),
+                                textAlign: TextAlign.center,
+                                style: FontTextStyle.kBlueDark136W400SSP,
                               ),
+                              SS.sB(5),
                               Card(
                                 child: Text(
                                   widget.hCardApiData.userTitleTypesId
@@ -1363,8 +1394,7 @@ class _HeaderCardState extends State<HeaderCard> {
                                         ),
                                       ),
                                       TextSpan(
-                                          text: widget.hCardApiData.address1
-                                              .toString(),
+                                          text: headerCardData.area.toString(),
                                           style: FontTextStyle
                                               .kGreyLight514W400SSP)
                                     ],
@@ -1450,16 +1480,65 @@ class _HeaderCardState extends State<HeaderCard> {
                                 ],
                               ),
                               Visibility(
-                                  visible: isShowing,
-                                  child: Container(
-                                    height: 50,
-                                    width: 100,
-                                    color: Colors.red,
-                                  )),
+                                visible: isShowing,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        color: ColorPicker.kBlueLight2,
+                                        height: 40,
+                                        child: Row(
+                                          children: [
+                                            SS.sB(0, 15),
+                                            Icon(
+                                              Icons.contact_phone_outlined,
+                                              color: ColorPicker.kBlueLight1,
+                                              size: 12,
+                                            ),
+                                            SS.sB(0, 6),
+                                            Text(
+                                              'Share profile via email',
+                                              style: FontTextStyle
+                                                  .kBlueLight114W400SSP,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          setState(() {
+                                            isShowing = !isShowing;
+                                          });
+                                        },
+                                        child: Container(
+                                          height: 40,
+                                          child: Row(
+                                            children: [
+                                              SS.sB(0, 17.5),
+                                              Icon(
+                                                Icons.close,
+                                                color: ColorPicker.kBlueLight1,
+                                                size: 12,
+                                              ),
+                                              SS.sB(0, 8.5),
+                                              Text('Cancel connection',
+                                                  style: FontTextStyle
+                                                      .kBlueLight114W400SSP),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: ElevatedButton.icon(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    buildSendConnReqPopUpCard();
+                                  },
                                   icon: const Icon(Icons.person_add),
                                   label: const Padding(
                                     padding: EdgeInsets.symmetric(
@@ -1488,7 +1567,9 @@ class _HeaderCardState extends State<HeaderCard> {
                                         const Color(0xFFe5f4fb),
                                       ),
                                     ),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      buildWriteRefPopUPCard();
+                                    },
                                     label: const Padding(
                                       padding:
                                           EdgeInsets.symmetric(vertical: 10),
@@ -1518,7 +1599,9 @@ class _HeaderCardState extends State<HeaderCard> {
                                         const Color(0xFFe5f4fb),
                                       ),
                                     ),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      buildRecommendPopUpCard();
+                                    },
                                     label: const Padding(
                                       padding:
                                           EdgeInsets.symmetric(vertical: 10),
@@ -1574,23 +1657,41 @@ class _HeaderCardState extends State<HeaderCard> {
                     ),
                   ),
                 ),
-          Positioned(
-            top: SS.sH(context) * 0.14,
-            child: Center(
-              child: Container(
-                height: 76,
-                width: 76,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  image: DecorationImage(
-                      image:
-                          NetworkImage(widget.hCardApiData.avatar.toString()),
-                      filterQuality: FilterQuality.high,
-                      fit: BoxFit.cover),
+          Responsive.isDesktop(context)
+              ? Positioned(
+                  top: SS.sH(context) * 0.15,
+                  child: Center(
+                    child: Container(
+                      height: 76,
+                      width: 76,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4),
+                        image: DecorationImage(
+                            image: NetworkImage(
+                                widget.hCardApiData.avatar.toString()),
+                            filterQuality: FilterQuality.high,
+                            fit: BoxFit.cover),
+                      ),
+                    ),
+                  ),
+                )
+              : Positioned(
+                  top: SS.sH(context) * 0.14,
+                  child: Center(
+                    child: Container(
+                      height: 76,
+                      width: 76,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4),
+                        image: DecorationImage(
+                            image: NetworkImage(
+                                widget.hCardApiData.avatar.toString()),
+                            filterQuality: FilterQuality.high,
+                            fit: BoxFit.cover),
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          ),
           isVisible
               ? Column(
                   children: [
@@ -1682,19 +1783,21 @@ class _HeaderCardState extends State<HeaderCard> {
               ? Padding(
                   padding: EdgeInsets.only(
                     top: SS.sH(context) * .18,
-                    bottom: SS.sH(context) * .16,
+                    bottom: Responsive.isDesktop(context)
+                        ? SS.sH(context) * .16
+                        : 0,
                   ),
                   child: ProfileEdit.buildProfileEdit(
                       width: widget.headerCard_W,
                       height: widget.headerCard_H,
                       popUpEdit: () {
                         buildProfileCardPopUp(
-                            id: userData.id,
-                            fName: userData.firstName.toString(),
-                            lName: userData.lastName.toString(),
+                            id: headerCardData.id,
+                            fName: headerCardData.firstName.toString(),
+                            lName: headerCardData.lastName.toString(),
                             professionalTitle:
-                                userData.professionalTitle.toString(),
-                            area: userData.area.toString());
+                                headerCardData.professionalTitle.toString(),
+                            area: headerCardData.area.toString());
                       },
                       showAddButton: false),
                 )

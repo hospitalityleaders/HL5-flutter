@@ -4,6 +4,7 @@ import 'package:holedo/common/popUpHeadMenu.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/constant/sizedbox.dart';
+import '../../../responsive/responsive.dart';
 import '../../../services/holedo_api_services.dart';
 import '../profile-edit/profile-edit.dart';
 
@@ -193,7 +194,11 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
         return Dialog(
           child: Container(
             color: ColorPicker.kGreyLight3,
-            width: SS.sW(context) * .50,
+            width: Responsive.isDesktop(context)
+                ? SS.sW(context) * .50
+                : Responsive.isMobile(context)
+                ? SS.sW(context) * .90
+                : SS.sW(context) * .60,
             child: SingleChildScrollView(
               child: Column(
                 children: [
@@ -283,7 +288,11 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
             return Dialog(
               child: Container(
                 color: ColorPicker.kGreyLight8,
-                width: SS.sW(context) * .50,
+                width: Responsive.isDesktop(context)
+                    ? SS.sW(context) * .50
+                    : Responsive.isMobile(context)
+                    ? SS.sW(context) * .90
+                    : SS.sW(context) * .60,
                 // height: 375,
                 child: SingleChildScrollView(
                   child: Column(

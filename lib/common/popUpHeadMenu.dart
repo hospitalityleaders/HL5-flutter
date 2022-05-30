@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../constant/colorPicker/color_picker.dart';
 import '../constant/fontStyle/font_style.dart';
 import '../constant/sizedbox.dart';
+import '../responsive/responsive.dart';
 
 class PopUpHeadMenu {
   static Container popUpHead(String headName, BuildContext context) {
@@ -62,7 +63,11 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
         builder: (context, setState) => Dialog(
           child: Container(
             color: ColorPicker.kGreyLight3,
-            width: SS.sW(context) * .50,
+            width: Responsive.isDesktop(context)
+                ? SS.sW(context) * .50
+                : Responsive.isMobile(context)
+                ? SS.sW(context) * .90
+                : SS.sW(context) * .60,
             child: SingleChildScrollView(
               child: Column(
                 children: [
@@ -85,11 +90,29 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              Text(
-                                'You’ve got a new reference! All you have to do now is approve it.',
-                                style: FontTextStyle.kWhite14W400SSP,
-                              ),
-                              StatefulBuilder(
+                           Responsive(mobile: Expanded(flex: 2,
+                             child: Text(
+                          'You’ve got a new reference! All you have to do now is approve it.',
+                              style: FontTextStyle.kWhite14W400SSP,
+                          ),
+                           ), desktop: Text(
+                             'You’ve got a new reference! All you have to do now is approve it.',
+                             style: FontTextStyle.kWhite14W400SSP,
+                           ),) ,
+                              Responsive(mobile: StatefulBuilder(
+                                builder: (context, setState) => Expanded(flex: 1,
+                                  child: OutlinedButton(
+                                    onPressed: () {},
+                                    style: OutlinedButton.styleFrom(
+                                        backgroundColor: Colors.transparent),
+                                    child: Text(
+                                      'Approve Reference',
+                                      textAlign: TextAlign.center,
+                                      style: FontTextStyle.kWhite14W600PR,
+                                    ),
+                                  ),
+                                ),
+                              ), desktop: StatefulBuilder(
                                 builder: (context, setState) => OutlinedButton(
                                   onPressed: () {},
                                   style: OutlinedButton.styleFrom(
@@ -99,7 +122,7 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                                     style: FontTextStyle.kWhite14W600PR,
                                   ),
                                 ),
-                              ),
+                              ),)
                             ],
                           ),
                         ),

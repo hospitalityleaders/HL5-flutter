@@ -9,6 +9,7 @@ import '../../../common/textfield_fieldname.dart';
 import '../../../constant/colorPicker/color_picker.dart';
 
 import '../../../constant/sizedbox.dart';
+import '../../../responsive/responsive.dart';
 import '../profile-edit/profile-edit.dart';
 
 class ProfileOverviewSec2 extends StatefulWidget {
@@ -278,47 +279,6 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
 
   /// pop up functionality Start
 
-  // /// build field Name Common start
-  //
-  // buildFieldName(String fieldName, [String? reqField]) {
-  //   return Column(
-  //     children: [
-  //       RichText(
-  //         text: TextSpan(
-  //             text: '$fieldName ',
-  //             style: FontTextStyle.kBlueDark118W700SSP,
-  //             children: [
-  //               TextSpan(
-  //                   text: reqField, style: FontTextStyle.kBlueLight114W400SSP),
-  //             ]),
-  //       ),
-  //       SS.sB(5)
-  //     ],
-  //   );
-  // }
-  //
-  // buildTextField([String? hintText]) {
-  //   return Column(
-  //     children: [
-  //       Container(
-  //         height: 36,
-  //         color: ColorPicker.kGreyLight9,
-  //         child: TextFormField(
-  //           decoration: InputDecoration(
-  //             hintText: hintText,
-  //             border: OutlineInputBorder(
-  //                 borderRadius: BorderRadius.circular(2),
-  //                 borderSide:
-  //                     BorderSide(color: ColorPicker.kGreyLight9, width: 2)),
-  //           ),
-  //         ),
-  //       ),
-  //       SS.sB(18),
-  //     ],
-  //   );
-  // }
-  //
-  // /// build field Name Common end
 
   /// Work experience pop up edit functionality start
 
@@ -333,15 +293,24 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
       return Padding(
         padding:  EdgeInsets.all(16.0),
         child: Container(
-          width: SS.sW(context) * .50,
+
+          width: Responsive.isDesktop(context)
+              ? SS.sW(context) * .50
+              : Responsive.isMobile(context)
+              ? SS.sW(context) * .90
+              : SS.sW(context) * .60,
           color: ColorPicker.kWhite,
           child: SingleChildScrollView(
             child: Column(
               children: [
                 ListTile(
                   leading: Container(
-                    height: SS.sH(context) * .08,
-                    width: SS.sW(context) * .03,
+                    height: Responsive.isMobile(context)
+                        ? 50
+                        : SS.sH(context) * .08,
+                    width: Responsive.isMobile(context)
+                        ? 45
+                        : SS.sW(context) * .03,
                     color: ColorPicker.kBlueLight1,
                   ),
                   title: Text(''),
@@ -425,7 +394,12 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
             return Dialog(
               child: Container(
                 color: ColorPicker.kGreyLight3,
-                width: SS.sW(context) * .50,
+
+                width: Responsive.isDesktop(context)
+                    ? SS.sW(context) * .50
+                    : Responsive.isMobile(context)
+                    ? SS.sW(context) * .90
+                    : SS.sW(context) * .60,
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
@@ -481,7 +455,12 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
       return Padding(
         padding:  EdgeInsets.all(16.0),
         child: Container(
-          width: SS.sW(context) * .50,
+
+          width: Responsive.isDesktop(context)
+              ? SS.sW(context) * .50
+              : Responsive.isMobile(context)
+              ? SS.sW(context) * .90
+              : SS.sW(context) * .60,
           color: ColorPicker.kWhite,
           child: SingleChildScrollView(
             child: Column(
@@ -489,8 +468,12 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
               children: [
                 ListTile(
                   leading: Container(
-                    height: SS.sH(context) * .08,
-                    width: SS.sW(context) * .03,
+                    height: Responsive.isMobile(context)
+                        ? 50
+                        : SS.sH(context) * .08,
+                    width: Responsive.isMobile(context)
+                        ? 45
+                        : SS.sW(context) * .03,
                     color: ColorPicker.kBlueLight1,
                   ),
                   title: Text(''),
@@ -583,7 +566,12 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
               child: Dialog(
                 child: Container(
                   color: ColorPicker.kGreyLight3,
-                  width: SS.sW(context) * .50,
+
+                  width: Responsive.isDesktop(context)
+                      ? SS.sW(context) * .50
+                      : Responsive.isMobile(context)
+                      ? SS.sW(context) * .90
+                      : SS.sW(context) * .60,
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
@@ -634,7 +622,12 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
       return Padding(
         padding:  EdgeInsets.all(16.0),
         child: Container(
-          width: SS.sW(context) * .50,
+
+          width: Responsive.isDesktop(context)
+              ? SS.sW(context) * .50
+              : Responsive.isMobile(context)
+              ? SS.sW(context) * .90
+              : SS.sW(context) * .60,
           color: ColorPicker.kWhite,
           child: SingleChildScrollView(
             child: Column(
@@ -642,8 +635,12 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
               children: [
                 ListTile(
                   leading: Container(
-                    height: SS.sH(context) * .08,
-                    width: SS.sW(context) * .03,
+                    height: Responsive.isMobile(context)
+                        ? 50
+                        : SS.sH(context) * .08,
+                    width: Responsive.isMobile(context)
+                        ? 45
+                        : SS.sW(context) * .03,
                     color: ColorPicker.kBlueLight1,
                   ),
                   title: Text(''),
@@ -723,7 +720,12 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
             return Dialog(
               child: Container(
                 color: ColorPicker.kGreyLight3,
-                width: SS.sW(context) * .50,
+
+                width: Responsive.isDesktop(context)
+                    ? SS.sW(context) * .50
+                    : Responsive.isMobile(context)
+                    ? SS.sW(context) * .90
+                    : SS.sW(context) * .60,
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
@@ -786,7 +788,12 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
             return Dialog(
               child: Container(
                 color: ColorPicker.kGreyLight3,
-                width: SS.sW(context) * .50,
+
+                width: Responsive.isDesktop(context)
+                    ? SS.sW(context) * .50
+                    : Responsive.isMobile(context)
+                    ? SS.sW(context) * .90
+                    : SS.sW(context) * .60,
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -795,7 +802,12 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                       Padding(
                         padding:  EdgeInsets.all(16.0),
                         child: Container(
-                          width: SS.sW(context) * .50,
+
+                          width: Responsive.isDesktop(context)
+                              ? SS.sW(context) * .50
+                              : Responsive.isMobile(context)
+                              ? SS.sW(context) * .90
+                              : SS.sW(context) * .60,
                           color: ColorPicker.kWhite,
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -882,17 +894,14 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
 
   @override
   Widget build(BuildContext context) {
-    var _height = MediaQuery.of(context).size.height;
-    var _width = MediaQuery.of(context).size.width;
-
     return Column(
       children: [
         buildProfileSec2Cards(
             widget.profileOverviewSec2WorkExpKey,
             widget.profileOverviewSec2WorkExp_H,
             widget.profileOverviewSec2WorkExp_W,
-            _width,
-            _height,
+            SS.sW(context),
+            SS.sH(context),
             'Work experience',
             'Food and Beverage Manager',
             'Marriott Hotels',
@@ -910,8 +919,8 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
             widget.profileOverviewSec2EducationKey,
             widget.profileOverviewSec2Education_H,
             widget.profileOverviewSec2Education_W,
-            _width,
-            _height,
+            SS.sW(context),
+            SS.sH(context),
             'Education',
             'University of Cape Town',
             'Postgraduate Degree in Business Science',
@@ -929,8 +938,8 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
             widget.profileOverviewSec2AchievementKey,
             widget.profileOverviewSec2Achievement_H,
             widget.profileOverviewSec2Achievement_W,
-            _width,
-            _height,
+            SS.sW(context),
+            SS.sH(context),
             'Achievement',
             'Marriott Hotel and Resorts employee of the year awards',
             'www.mariiott.com/awards',
