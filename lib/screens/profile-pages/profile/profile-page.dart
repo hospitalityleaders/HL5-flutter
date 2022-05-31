@@ -214,13 +214,17 @@ class _ProfilePageState extends State<ProfilePage>
 
   ApiServices _apiServices = ApiServices();
 
+  final localStorage=GetStorage();
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<HoledoProfileModel>(
         future: _apiServices.getUserProfileData(),
         builder: (context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
-            final userProfileData = snapshot.data!.data!.user!;
+           localStorage.writeInMemory('userData', snapshot.data!.data!.user!);
+          final userProfileData=localStorage.read('userData');
+            // final userProfileData = snapshot.data!.data!.user!;
             return Responsive.isDesktop(context)
                 ? Container(
                     decoration: BoxDecoration(color: ColorPicker.kBG),

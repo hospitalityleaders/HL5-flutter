@@ -171,14 +171,10 @@ class _HeaderCardState extends State<HeaderCard> {
                     child: Column(
                       children: [
                         ListTile(
-                            leading: Container(
-                              height: Responsive.isMobile(context)
-                                  ? 50
-                                  : SS.sH(context) * .08,
-                              width: Responsive.isMobile(context)
-                                  ? 45
-                                  : SS.sW(context) * .03,
+                            leading: Container(alignment: Alignment.center,
+                              height: 50,width: 50,
                               color: ColorPicker.kBlueLight1,
+                              child: Icon(Icons.photo_camera,color: ColorPicker.kWhite,size: 18,),
                             ),
                             title: Text('Profile details'),
                             subtitle: Text(
@@ -191,8 +187,8 @@ class _HeaderCardState extends State<HeaderCard> {
                                 });
                               },
                               icon: isPorfileDetailShowCard
-                                  ? Icon(Icons.remove)
-                                  : Icon(Icons.add),
+                                  ? Icon(Icons.remove,size: 10,color: ColorPicker.kBlueLight1,)
+                                  : Icon(Icons.add,size: 10,color: ColorPicker.kBlueLight1,),
                             )),
                         isPorfileDetailShowCard
                             ? Column(
@@ -297,14 +293,10 @@ class _HeaderCardState extends State<HeaderCard> {
                     child: Column(
                       children: [
                         ListTile(
-                          leading: Container(
-                            height: Responsive.isMobile(context)
-                                ? 50
-                                : SS.sH(context) * .08,
-                            width: Responsive.isMobile(context)
-                                ? 45
-                                : SS.sW(context) * .03,
+                          leading: Container(alignment: Alignment.center,
+                            height: 50,width: 50,
                             color: ColorPicker.kBlueLight1,
+                            child: Icon(Icons.photo_camera,color: ColorPicker.kWhite,size: 18,),
                           ),
                           title: Text('Contact details'),
                           subtitle: Text(
@@ -317,8 +309,8 @@ class _HeaderCardState extends State<HeaderCard> {
                               });
                             },
                             icon: isContactDetailShowCard
-                                ? Icon(Icons.remove)
-                                : Icon(Icons.add),
+                                ? Icon(Icons.remove,size: 10,color: ColorPicker.kBlueLight1,)
+                                : Icon(Icons.add,size: 10,color: ColorPicker.kBlueLight1,),
                           ),
                         ),
                         isContactDetailShowCard

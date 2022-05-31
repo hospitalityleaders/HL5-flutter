@@ -193,14 +193,12 @@ class FontTextStyle {
     fontFamily: 'ProximaNova-Regular',
   );
 
-
   static TextStyle kBlueLight212W700SSP = TextStyle(
     color: ColorPicker.kBlueLight2,
     fontSize: 12,
     fontWeight: FontWeight.w700,
     fontFamily: 'SourceSansPro',
   );
-
 
   static TextStyle kPrimary32W600PR = TextStyle(
     color: ColorPicker.kPrimary,
@@ -620,7 +618,8 @@ class FontTextStyle {
     color: ColorPicker.kBlueDark1,
     fontWeight: FontWeight.w400,
     fontFamily: 'SourceSansPro',
-  );  static TextStyle kBlueDark136W400SSP = TextStyle(
+  );
+  static TextStyle kBlueDark136W400SSP = TextStyle(
     fontSize: 36,
     color: ColorPicker.kBlueDark1,
     fontWeight: FontWeight.w400,
@@ -746,7 +745,8 @@ class FontTextStyle {
     fontSize: 14,
     fontWeight: FontWeight.w600,
     fontFamily: 'SourceSansPro',
-  );  static TextStyle kBlueDark114W700SSP = TextStyle(
+  );
+  static TextStyle kBlueDark114W700SSP = TextStyle(
     color: ColorPicker.kBlueDark1,
     fontSize: 14,
     fontWeight: FontWeight.w700,
@@ -763,6 +763,12 @@ class FontTextStyle {
     color: ColorPicker.kGreyLight5,
     fontSize: 16,
     fontWeight: FontWeight.w400,
+    fontFamily: 'SourceSansPro',
+  );
+  static TextStyle kGreyLight516W600SSP = TextStyle(
+    color: ColorPicker.kGreyLight5,
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
     fontFamily: 'SourceSansPro',
   );
 
