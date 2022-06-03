@@ -1,0 +1,16 @@
+class Colour {
+  int? id;
+  String? hex;
+
+  Colour({this.id, this.hex});
+
+  factory Colour.fromJson(Map<String, dynamic> json) => Colour(
+        id: json['id'] as int?,
+        hex: json['hex'] as String?,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'hex': hex,
+      };
+}

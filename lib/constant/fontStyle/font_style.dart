@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../colorPicker/color_picker.dart';
+import 'package:holedo/constant/colorPicker/color_picker.dart';
 
 class FontTextStyle {
   static TextStyle kWhite16W600PR = TextStyle(
@@ -763,12 +763,6 @@ class FontTextStyle {
     color: ColorPicker.kGreyLight5,
     fontSize: 16,
     fontWeight: FontWeight.w400,
-    fontFamily: 'SourceSansPro',
-  );
-  static TextStyle kGreyLight516W600SSP = TextStyle(
-    color: ColorPicker.kGreyLight5,
-    fontSize: 16,
-    fontWeight: FontWeight.w600,
     fontFamily: 'SourceSansPro',
   );
 
