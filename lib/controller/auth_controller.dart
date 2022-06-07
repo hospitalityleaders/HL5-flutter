@@ -55,7 +55,7 @@ class Auth {
         name = json['name'],
         token = json['token'],
         data = json['data'],
-        isLogined = json['isLogined'];
+        isLogined = json['isLogined'] as bool;
 
   Map<dynamic, dynamic> toJson() => {
         'apiHost': apiHost,
@@ -87,7 +87,7 @@ class AuthController extends GetxController {
   Auth restoreModel() {
     //print('model: ${box.read('model')}');
     final map = box.read('model') ?? myJson;
-    return Auth.fromJson(map);
+    return Auth.fromJson(map as Map);
   }
 }
 

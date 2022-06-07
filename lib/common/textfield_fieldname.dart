@@ -1,16 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../constant/colorPicker/color_picker.dart';
-import '../constant/fontStyle/font_style.dart';
-import '../constant/sizedbox.dart';
+import 'package:holedo/constant/colorPicker/color_picker.dart';
+import 'package:holedo/constant/fontStyle/font_style.dart';
+import 'package:holedo/constant/sizedbox.dart';
 
-class TextFieldAndFieldName{
-
-
+class TextFieldAndFieldName {
   /// build field Name Common start
 
- static  buildFieldName(String fieldName, [String? reqField]) {
+  static buildFieldName(String fieldName, [String? reqField]) {
     return Column(
       children: [
         RichText(
@@ -27,7 +24,7 @@ class TextFieldAndFieldName{
     );
   }
 
- static buildTextField([String? hintText]) {
+  static buildTextField([String? hintText]) {
     return Column(
       children: [
         Container(
@@ -39,7 +36,7 @@ class TextFieldAndFieldName{
               border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(2),
                   borderSide:
-                  BorderSide(color: ColorPicker.kGreyLight9, width: 2)),
+                      BorderSide(color: ColorPicker.kGreyLight9, width: 2)),
             ),
           ),
         ),
@@ -48,6 +45,6 @@ class TextFieldAndFieldName{
     );
   }
 
-/// build field Name Common end
+  /// build field Name Common end
 
 }

@@ -1,5 +1,4 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:seo_renderer/renderers/text_renderer/text_renderer_vm.dart';
@@ -26,9 +25,9 @@ class CommonWidget {
                 Row(
                   children: List.generate(
                     4,
-                        (index) => Padding(
+                    (index) => Padding(
                       padding:
-                      EdgeInsets.symmetric(horizontal: Get.width * 0.02),
+                          EdgeInsets.symmetric(horizontal: Get.width * 0.02),
                       child: Text(
                         Data.menuItem[index],
                         style: FontTextStyle.kWhite16W600PR,
@@ -41,7 +40,7 @@ class CommonWidget {
                     Container(
                       height: 46,
                       padding:
-                      EdgeInsets.symmetric(horizontal: Get.height * 0.01),
+                          EdgeInsets.symmetric(horizontal: Get.height * 0.01),
                       decoration: BoxDecoration(
                         color: ColorPicker.kBlack,
                         borderRadius: BorderRadius.circular(5),
@@ -67,7 +66,7 @@ class CommonWidget {
                     Container(
                       height: 46,
                       padding:
-                      EdgeInsets.symmetric(horizontal: Get.height * 0.01),
+                          EdgeInsets.symmetric(horizontal: Get.height * 0.01),
                       decoration: BoxDecoration(
                         color: ColorPicker.kBlueLight,
                         borderRadius: BorderRadius.circular(5),
@@ -202,29 +201,29 @@ class CommonWidget {
   }
 
   static Widget text(
-      String text, {
-        TextStyle? style,
-        TextAlign? textAlign,
-        int? maxLines,
-        TextOverflow? overflow,
-      }) {
+    String text, {
+    TextStyle? style,
+    TextAlign? textAlign,
+    int? maxLines,
+    TextOverflow? overflow,
+  }) {
     return TextRenderer(
         child: Text(
-          text,
-          style: style,
-          maxLines: maxLines,
-          overflow: overflow,
-          textAlign: textAlign,
-        ));
+      text,
+      style: style,
+      maxLines: maxLines,
+      overflow: overflow,
+      textAlign: textAlign,
+    ));
   }
 
   static Widget seoRenderAutoText(
-      String text, {
-        TextStyle? style,
-        TextAlign? textAlign,
-        double? minFontSize,
-        int? maxLines,
-      }) {
+    String text, {
+    TextStyle? style,
+    TextAlign? textAlign,
+    double? minFontSize,
+    int? maxLines,
+  }) {
     return TextRenderer(
       child: AutoSizeText(
         text,
