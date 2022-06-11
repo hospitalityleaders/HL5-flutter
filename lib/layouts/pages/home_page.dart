@@ -17,83 +17,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePage extends State<HomePage> {
-  List data = [
-    {
-      'img': 'assets/images/t1.png',
-      'text1':
-          'Mantra Group Reports Total Revenue Increase of 9.7% for Year Ending June 2015',
-      'text2': '',
-      'text3': 'Pam Carrol',
-      'text4': '26 August 2015 • 10:40',
-    },
-    {
-      'img': 'assets/images/t2.png',
-      'text1':
-          'How Technology Can Deliver a Seamless Travel Experience - Information Age',
-      'text2': 'MEMBERS ONLY',
-      'text3': 'Pam Carrol',
-      'text4': '26 August 2015 • 10:40',
-    },
-    {
-      'img': 'assets/images/t3.png',
-      'text1': 'Baha Mar Files Chapter 11 Plan of Reorganization',
-      'text2': '',
-      'text3': 'Pam Carrol',
-      'text4': '26 August 2015 • 10:40',
-    },
-    {
-      'img': 'assets/images/t4.png',
-      'text1': 'The Quincy Hotel in Downtown Washington D.C. Sold to RLHC JV',
-      'text2': 'MEMBERS ONLY',
-      'text3': 'Pam Carrol',
-      'text4': '26 August 2015 • 10:40',
-    },
-    {
-      'img': 'assets/images/t5.png',
-      'text1':
-          'Welk Resorts Reports Increased Revenue and Plans for Two New Properties',
-      'text2': '',
-      'text3': 'Pam Carrol',
-      'text4': '26 August 2015 • 10:40',
-    },
-    {
-      'img': 'assets/images/t5.png',
-      'text1':
-          'Welk Resorts Reports Increased Revenue and Plans for Two New Properties',
-      'text2': '',
-      'text3': 'Pam Carrol',
-      'text4': '26 August 2015 • 10:40',
-    },
-    {
-      'img': 'assets/images/t6.png',
-      'text1':
-          'Hotel Price Index Reveals Midwest, Southwest and Western Cities Are Surging Domestically',
-      'text2': '',
-      'text3': 'Pam Carrol',
-      'text4': '26 August 2015 • 10:40',
-    },
-    {
-      'img': 'assets/images/t7.png',
-      'text1': 'MainStay Suites Hotel Sydney Opens in Montana',
-      'text2': '',
-      'text3': 'Pam Carrol',
-      'text4': '26 August 2015 • 10:40',
-    },
-    {
-      'img': 'assets/images/t8.png',
-      'text1': 'California raisin’ prices as deal volume drops',
-      'text2': '',
-      'text3': 'Pam Carrol',
-      'text4': '26 August 2015 • 10:40',
-    },
-    {
-      'img': 'assets/images/t9.png',
-      'text1': 'Hotel Industry Opposes NLRB Joint-Employer Decision',
-      'text2': 'MEMBERS ONLY',
-      'text3': 'Pam Carrol',
-      'text4': '26 August 2015 • 10:40',
-    },
-  ];
   CarouselController buttonCarouselController = CarouselController();
   @override
   Widget build(BuildContext context) {
@@ -221,7 +144,33 @@ class _HomePage extends State<HomePage> {
             ),
           ];
         },
-        body: Container(),
+        body: Container(
+          margin: EdgeInsets.symmetric(horizontal: 10),
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: Get.width * 0.55,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: Get.height * 0.03,
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  width: Get.width * 0.01,
+                ),
+                NewsRightColumn()
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
