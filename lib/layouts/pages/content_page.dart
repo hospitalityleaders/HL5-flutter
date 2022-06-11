@@ -15,7 +15,7 @@ class ContentPage extends StatelessWidget {
         title: "Content Content",
         body: FutureBuilder(
             future: Get.put(HoledoDatabase()).getPage(slug: slug),
-            builder: (context, AsyncSnapshot<content.Page> snapshot) {
+            builder: (context, AsyncSnapshot<content.PageContent> snapshot) {
               if (!snapshot.hasData) {
                 return Center(
                   child: CircularProgressIndicator(),

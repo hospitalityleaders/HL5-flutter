@@ -204,6 +204,8 @@ class _UserProfilePageState extends State<UserProfilePage>
   @override
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context);
+    final bool isMine = appState.isLoginnedAndEditable(widget.userProfileData);
+    print('app ${isEditable}');
     return Responsive.isDesktop(context)
         ? Container(
             decoration: BoxDecoration(color: ColorPicker.kBG),
@@ -324,11 +326,7 @@ class _UserProfilePageState extends State<UserProfilePage>
                               ),
                             ],
                           ),
-                          if (appState
-                              .isLoginnedAndEditable(widget.userProfileData))
-                            buildEditButton()
-                          else
-                            Text(''),
+                          (isMine) ? buildEditButton() : Container(),
                         ],
                       ),
                     ),
@@ -457,7 +455,11 @@ class _UserProfilePageState extends State<UserProfilePage>
                                   ],
                                 ),
                               ),
-                              isExpanded ? Container() : buildEditButton()
+                              isExpanded
+                                  ? Container()
+                                  : isMine
+                                      ? buildEditButton()
+                                      : Container()
                             ],
                           );
                         },
@@ -475,7 +477,7 @@ class _UserProfilePageState extends State<UserProfilePage>
                                   buildMobileMenuDropDownButton('Articles'),
                                   buildMobileMenuDropDownButton('Activity'),
                                   buildMobileMenuDropDownButton('References'),
-                                  buildEditButton()
+                                  isMine ? buildEditButton() : Container()
                                 ],
                               ),
                             ),

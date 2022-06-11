@@ -154,8 +154,12 @@ class _PageScaffoldState extends State<PageScaffold> {
             title: _buildAppBar(context, constraints),
           ),
         ),
-        body: SafeArea(
-          child: ListView(children: <Widget>[
+        body: Container(
+          decoration: BoxDecoration(
+            color: ColorPicker.kBG,
+          ),
+          child: widget.body,
+          /*child: ListView(children: <Widget>[
             Container(
                 height: constraints.maxHeight,
                 child: Column(
@@ -169,7 +173,7 @@ class _PageScaffoldState extends State<PageScaffold> {
                   ],
                 )),
             _buildFooter(isMobile),
-          ]),
+          ]),*/
         ),
       );
     });
@@ -321,8 +325,9 @@ class _PageScaffoldState extends State<PageScaffold> {
                   onChanged: (_) =>
                       _search(), // , onSubmitted: (_) => _search(),
                   cursorColor: ColorPicker.kWhite,
-                  style: FontTextStyle.kWhite16W400SSP,
+                  style: FontTextStyle.kWhite18W600PR,
                   decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(4),
                     hintStyle: FontTextStyle.kPrimaryLightBlue16W400SSP,
                     filled: true,
                     fillColor: ColorPicker.kPrimaryLight,
@@ -393,19 +398,19 @@ class _PageScaffoldState extends State<PageScaffold> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           if (appState.isLoggedIn && !isMobile)
-            NavigationBox(
-              inDrawer: false,
-              body: Container(
-                width: Get.width * (isDesktop ? 0.05 : 0.07),
-                decoration: BoxDecoration(
-                    border: Border(
-                        left: BorderSide(
-                            color: ColorPicker.kPrimaryLight, width: 3),
-                        right: BorderSide(
-                            color: ColorPicker.kPrimaryLight, width: 3))),
-                child: Center(
+            Container(
+              width: (isDesktop ? 55 : Get.width * 0.07),
+              decoration: BoxDecoration(
+                  border: Border(
+                      left: BorderSide(
+                          color: ColorPicker.kPrimaryLight, width: 3),
+                      right: BorderSide(
+                          color: ColorPicker.kPrimaryLight, width: 3))),
+              child: NavigationBox(
+                inDrawer: false,
+                body: Center(
                     child: Stack(
-                  //overflow: Overflow.visible,
+                  clipBehavior: Clip.none,
                   children: [
                     Icon(
                       Icons.email,
@@ -434,17 +439,17 @@ class _PageScaffoldState extends State<PageScaffold> {
               ),
             ),
           if (appState.isLoggedIn && !isMobile)
-            NavigationBox(
-              inDrawer: false,
-              body: Container(
-                width: Get.width * (isDesktop ? 0.05 : 0.07),
-                decoration: BoxDecoration(
-                    border: Border(
-                        right: BorderSide(
-                            color: ColorPicker.kPrimaryLight, width: 3))),
-                child: Center(
+            Container(
+              width: (isDesktop ? 55 : Get.width * 0.07),
+              decoration: BoxDecoration(
+                  border: Border(
+                      right: BorderSide(
+                          color: ColorPicker.kPrimaryLight, width: 3))),
+              child: NavigationBox(
+                inDrawer: false,
+                body: Center(
                     child: Stack(
-                  //overflow: Overflow.visible,
+                  clipBehavior: Clip.none,
                   children: [
                     Icon(
                       Icons.flag,
@@ -473,15 +478,15 @@ class _PageScaffoldState extends State<PageScaffold> {
               ),
             ),
           if (appState.isLoggedIn && !isMobile)
-            NavigationBox(
-              inDrawer: false,
-              body: Container(
-                width: Get.width * (isDesktop ? 0.05 : 0.07),
-                decoration: BoxDecoration(
-                    border: Border(
-                        right: BorderSide(
-                            color: ColorPicker.kPrimaryLight, width: 3))),
-                child: Center(
+            Container(
+              width: (isDesktop ? 75 : Get.width * 0.07),
+              decoration: BoxDecoration(
+                  border: Border(
+                      right: BorderSide(
+                          color: ColorPicker.kPrimaryLight, width: 3))),
+              child: NavigationBox(
+                inDrawer: false,
+                body: Center(
                     child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -500,7 +505,7 @@ class _PageScaffoldState extends State<PageScaffold> {
                         borderRadius: BorderRadius.circular(3),
                       ),
                       child: Center(
-                        child: CommonWidget.text('352',
+                        child: CommonWidget.text('3',
                             style: FontTextStyle.kPrimaryLight10W700SSP),
                       ),
                     ),
@@ -508,46 +513,35 @@ class _PageScaffoldState extends State<PageScaffold> {
                 )),
               ),
             ),
-          if (appState.isLoggedIn)
-            NavigationBox(
-              inDrawer: false,
-              body: Container(
-                width: Get.width * 0.05,
-                decoration: BoxDecoration(
-                    border: Border(
-                        right: BorderSide(
-                            color: ColorPicker.kPrimaryLight, width: 3))),
-                child: Center(
-                  child: Container(
-                    height: 26,
-                    width: 26,
-                    child: appState.profile?.avatarCdn != null
-                        ? CircleAvatar(
-                            radius: 30,
-                            backgroundImage: NetworkImage(
-                                appState.profile!.avatarCdn.toString()),
-                          )
-                        : Icon(
-                            CupertinoIcons.profile_circled,
-                            size: 55,
-                            color: Colors.grey,
-                          ),
-                  ),
+          NavigationBox(
+            title: appState.isLoggedIn ? '' : 'Login',
+            path: appState.isLoggedIn
+                ? '/profile/${appState.profile!.slug}'
+                : '/login',
+            inDrawer: false,
+            body: Container(
+              padding: EdgeInsets.all(2),
+              width: 30,
+              child: Center(
+                child: Container(
+                  height: 30,
+                  width: 30,
+                  child: (appState.isLoggedIn &&
+                          appState.profile?.avatarCdn != null)
+                      ? CircleAvatar(
+                          radius: 30,
+                          backgroundImage: NetworkImage(
+                              appState.profile!.avatarCdn.toString()),
+                        )
+                      : Icon(
+                          CupertinoIcons.profile_circled,
+                          size: 26,
+                          color: Colors.grey,
+                        ),
                 ),
               ),
             ),
-          if (appState.isLoggedIn)
-            NavigationLink(
-              title: 'Logout',
-              path: '/logout',
-              inDrawer: false,
-            )
-          else
-            NavigationLink(
-              title: 'Log in',
-              path: '/login',
-              inDrawer: false,
-            ),
+          ),
         ],
       ),
     );
@@ -616,34 +610,42 @@ class _NavigationBox extends State<NavigationBox> {
         widget.path != null ? currentPath.startsWith(widget.path!) : false;
 
     return Container(
+      padding: const EdgeInsets.all(5),
       color: isCurrent || isHover ? Color(0xff068597) : Colors.transparent,
       child: InkWell(
-          onTap: () {
-            if (widget.path != null) {
-              if (widget.inDrawer) {
-                Navigator.pop(context);
-              }
-              Routemaster.of(context).push(widget.path!);
+        onTap: () {
+          if (widget.path != null) {
+            if (widget.inDrawer) {
+              Navigator.pop(context);
             }
-          },
-          onHover: (value) {
-            setState(() {
-              isHover = value;
-            });
-          },
-          child: (widget.title != null)
-              ? Padding(
-                  padding: const EdgeInsets.fromLTRB(12, 10, 12, 10),
-                  child: Text(
-                    widget.title!,
-                    style: isCurrent
-                        ? FontTextStyle.kWhite16W400SSP
-                        : isHover
-                            ? FontTextStyle.kWhite16W400SSP
-                            : FontTextStyle.kPrimaryLightBlue16W400SSP,
-                  ),
-                )
-              : widget.body),
+            Routemaster.of(context).push(widget.path!);
+          }
+        },
+        onHover: (value) {
+          setState(() {
+            isHover = value;
+          });
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            if (widget.body != null) Container(child: widget.body),
+            if (widget.title != null)
+              Padding(
+                padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
+                child: Text(
+                  widget.title!,
+                  style: isCurrent
+                      ? FontTextStyle.kWhite18W600PR
+                      : isHover
+                          ? FontTextStyle.kWhite18W600PR
+                          : FontTextStyle.kPrimaryLightBlue18W400SSP,
+                ),
+              )
+          ],
+        ),
+      ),
     );
   }
 }
@@ -690,7 +692,7 @@ class _NavigationLink extends State<NavigationLink> {
           });
         },
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(12, 10, 12, 10),
+          padding: const EdgeInsets.fromLTRB(12, 5, 12, 5),
           child: Text(
             widget.title,
             style: isCurrent

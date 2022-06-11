@@ -660,6 +660,13 @@ class FontTextStyle {
     fontFamily: 'SourceSansPro',
   );
 
+  static TextStyle kPrimaryLightBlue18W400SSP = TextStyle(
+    color: ColorPicker.kPrimaryLightBlue,
+    fontSize: 18,
+    fontWeight: FontWeight.w600,
+    fontFamily: 'ProximaNova-Regular',
+  );
+
   static TextStyle kPrimaryLightBlue9W700SSP = TextStyle(
     color: ColorPicker.kPrimaryLightBlue,
     fontSize: 9,
@@ -694,8 +701,6 @@ class FontTextStyle {
     fontWeight: FontWeight.w700,
     fontFamily: 'SourceSansPro',
   );
-
-
 
   static TextStyle kGreyLight514W400SSP = TextStyle(
     color: ColorPicker.kGreyLight5,

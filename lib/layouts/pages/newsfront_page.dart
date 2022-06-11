@@ -16,7 +16,7 @@ class NewsfrontPage extends StatelessWidget {
       title: 'Newsfronts',
       body: ListView(
         children: [
-          Wrap(
+          /*Wrap(
             children: [
               //for (final book in Get.put(HoledoDatabase()).books)
               //  BookCard(book: book),
@@ -25,6 +25,22 @@ class NewsfrontPage extends StatelessWidget {
                   .where((category) => category.menuItem == true))
                 NewsCategoryCard(category: category),
             ],
+          ),*/
+          SizedBox(
+            height: 500,
+            child: TabBarView(
+              controller: tabState.controller,
+              children: <Widget>[
+                for (var i = 0;
+                    i <
+                        Get.put(HoledoDatabase())
+                            .articleCategories
+                            .where((category) => category.menuItem == true)
+                            .length;
+                    i++)
+                  PageStackNavigator(stack: tabState.stacks[i]),
+              ],
+            ),
           ),
           Container(
             color: Color(0xff202f3f),
@@ -33,8 +49,28 @@ class NewsfrontPage extends StatelessWidget {
               indicatorWeight: 6,
               controller: tabState.controller,
               tabs: [
-                Tab(icon: Icon(Icons.list), text: 'All News'),
-                Tab(icon: Icon(Icons.star), text: 'Featured'),
+                for (final category in Get.put(HoledoDatabase())
+                    .articleCategories
+                    .where((category) => category.menuItem == true))
+                  Tab(text: category.title),
+                //Tab(icon: Icon(Icons.list), text: 'All News'),
+                //Tab(icon: Icon(Icons.star), text: 'Featured'),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 500,
+            child: TabBarView(
+              controller: tabState.controller,
+              children: <Widget>[
+                for (var i = 0;
+                    i <
+                        Get.put(HoledoDatabase())
+                            .articleCategories
+                            .where((category) => category.menuItem == true)
+                            .length;
+                    i++)
+                  PageStackNavigator(stack: tabState.stacks[i]),
               ],
             ),
           ),

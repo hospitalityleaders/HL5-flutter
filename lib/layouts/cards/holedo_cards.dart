@@ -21,12 +21,12 @@ class CustomCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(0.0),
       child: SizedBox(
         width: 350,
         child: Material(
-          color: Color.fromARGB(255, 216, 72, 16),
-          borderRadius: BorderRadius.circular(8),
+          color: Color.fromARGB(255, 255, 255, 255),
+          borderRadius: BorderRadius.circular(2),
           clipBehavior: Clip.antiAlias,
           child: InkWell(
             onTap: onTap,
@@ -54,7 +54,7 @@ class SmallCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(2.0),
       child: SizedBox(
         width: 250,
         child: Material(
@@ -246,9 +246,8 @@ class FooterLinkCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return LinkCard(
       onTap: () {
-        Routemaster.of(context).push(pathBuilder != null
-            ? pathBuilder!('${path}')
-            : '${path}');
+        Routemaster.of(context)
+            .push(pathBuilder != null ? pathBuilder!('${path}') : '${path}');
       },
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,

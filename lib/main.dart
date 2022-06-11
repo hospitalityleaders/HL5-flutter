@@ -87,23 +87,20 @@ RouteMap _buildRouteMap(BuildContext context) {
           NoAnimationPage(child: ProfilePage(id: route.pathParameters['id']!)),
       '/news': (route) => TabPage(
             child: NewsfrontPage(),
-            paths: [
-              'all',
-              'featured'
-            ], //Get.put(HoledoDatabase()).articlePaths,
+            paths: Get.put(HoledoDatabase()).articlePaths,
             pageBuilder: (child) => NoAnimationPage(child: child),
           ),
-      '/news/all': (route) => NoAnimationPage(
+      /*'/news/all': (route) => NoAnimationPage(
             child: NewsfrontListPage(mode: 'all'),
           ),
       '/news/featured': (route) => NoAnimationPage(
             child: NewsfrontListPage(mode: 'featured'),
-          ),
-      '/news/all/:category': (route) =>
+          ),*/
+      '/news/:category': (route) =>
           _isValidCategory(route.pathParameters['category'])
               ? NoAnimationPage(
                   child: NewsfrontListPage(
-                      mode: 'all',
+                      mode: route.pathParameters['category'] as String,
                       category: Get.put(HoledoDatabase())
                           .articleCategories
                           .firstWhere(

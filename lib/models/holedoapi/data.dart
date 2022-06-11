@@ -1,8 +1,10 @@
 import 'dart:convert';
 
-import 'package:holedo/models/holedoapi/company.dart';
-import 'package:holedo/models/holedoapi/page.dart';
-import 'package:holedo/models/holedoapi/user.dart';
+export 'package:holedo/models/holedoapi/company.dart';
+export 'package:holedo/models/holedoapi/page.dart';
+export 'package:holedo/models/holedoapi/user.dart';
+
+import 'package:holedo/models/models.dart';
 
 import 'article.dart';
 import 'article_category.dart';
@@ -10,6 +12,8 @@ import 'block.dart';
 import 'job.dart';
 import 'settings.dart';
 import 'user.dart';
+import 'page.dart';
+import 'company.dart';
 
 List<DataModel> dataFromJson(Iterable<dynamic> data) => List<DataModel>.from(
     data.map((x) => DataModel.fromJson(x as Map<String, dynamic>)));
@@ -29,7 +33,7 @@ class DataModel {
   List<User>? users;
   User? user;
   String? token;
-  List<Page>? pages;
+  List<PageContent>? pages;
   List<Company>? companies;
 
   DataModel(
@@ -80,7 +84,7 @@ class DataModel {
         pages: json['Pages'] == null
             ? null
             : (json['Pages'] as List<dynamic>?)
-                ?.map((e) => Page.fromJson(e as Map<String, dynamic>))
+                ?.map((e) => PageContent.fromJson(e as Map<String, dynamic>))
                 .toList(),
         companies: json['Companies'] == null
             ? null

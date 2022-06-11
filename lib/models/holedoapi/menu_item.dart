@@ -1,12 +1,11 @@
-
-class MenuItem {
+class MenuNavItem {
   String? title;
   String? path;
   bool? inNav;
   bool? inDrawer;
   bool? loginOnly;
 
-  MenuItem({
+  MenuNavItem({
     this.title,
     this.path,
     this.inNav,
@@ -14,7 +13,7 @@ class MenuItem {
     this.loginOnly,
   });
 
-  factory MenuItem.fromJson(Map<String, dynamic> json) => MenuItem(
+  factory MenuNavItem.fromJson(Map<String, dynamic> json) => MenuNavItem(
         title: json['title'] as String,
         path: json['path'] as String,
         inNav: json['inNav'] as bool?,
