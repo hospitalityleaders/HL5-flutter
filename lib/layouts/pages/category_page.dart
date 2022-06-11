@@ -4,7 +4,6 @@ import 'package:holedo/models/holedoapi/article.dart';
 
 import 'package:holedo/models/models.dart';
 import 'package:holedo/layouts/page_scaffold.dart';
-import 'package:provider/provider.dart';
 
 class CategoryPage extends StatefulWidget {
   final ArticleCategory category;

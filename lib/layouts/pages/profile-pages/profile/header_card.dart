@@ -94,9 +94,7 @@ class _HeaderCardState extends State<HeaderCard> {
     });
     final profile = appState(context, listen: false).profile;
     if (fNameController.toString() != '' &&
-        fNameController.toString() != null &&
         lNameController.toString() != '' &&
-        lNameController.toString() != null &&
         profile != null) {
       var user = new User();
       user.firstName = fNameController;
@@ -790,7 +788,7 @@ class _HeaderCardState extends State<HeaderCard> {
                       return InkWell(
                         onHover: (value) {
                           setState(() {
-                            isHoveringCard = (value as bool);
+                            isHoveringCard = value;
                           });
                         },
                         onTap: () {},

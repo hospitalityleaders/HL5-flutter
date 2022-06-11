@@ -1,11 +1,8 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/rendering.dart';
 import 'package:holedo/layouts/cards/holedo_cards.dart';
 import 'package:holedo/models/models.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:holedo/responsive/responsive.dart';
-import 'package:provider/provider.dart';
 import 'package:routemaster/routemaster.dart';
 export 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 export 'package:holedo/layouts/cards/holedo_cards.dart';
@@ -19,7 +16,6 @@ export 'package:holedo/layouts/pages/newsfront_page.dart';
 export 'package:holedo/layouts/pages/news_page.dart';
 export 'package:holedo/layouts/pages/jobsfront_page.dart';
 export 'package:holedo/layouts/pages/jobs_page.dart';
-import 'appbar/appbar.dart';
 
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';

@@ -1,13 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:holedo/models/holedoapi/company.dart';
 import 'package:holedo/models/holedoapi/job.dart';
 
 import 'package:routemaster/routemaster.dart';
 import 'package:intl/intl.dart';
 import 'package:holedo/models/holedoapi/user.dart';
-import 'package:holedo/models/models.dart';
 export 'package:holedo/layouts/cards/news_cards.dart';
 
 class CustomCard extends StatelessWidget {
@@ -249,7 +247,7 @@ class FooterLinkCard extends StatelessWidget {
     return LinkCard(
       onTap: () {
         Routemaster.of(context).push(pathBuilder != null
-            ? pathBuilder!('${path}' as String)
+            ? pathBuilder!('${path}')
             : '${path}');
       },
       child: Row(

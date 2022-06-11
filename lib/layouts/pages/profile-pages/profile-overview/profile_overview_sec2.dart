@@ -585,7 +585,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                       children: [
                         PopUpHeadMenu.popUpHead('Education', context),
                         SS.sB(15),
-                        isVisibleEducation as bool
+                        isVisibleEducation
                             ? buildEduInnerCard(false, true, indexEdu)
                             : Padding(
                                 padding: EdgeInsets.all(8.0),
