@@ -155,11 +155,11 @@ class _PageScaffoldState extends State<PageScaffold> {
           ),
         ),
         body: Container(
-          decoration: BoxDecoration(
-            color: ColorPicker.kBG,
-          ),
-          child: widget.body,
-          /*child: ListView(children: <Widget>[
+            decoration: BoxDecoration(
+              color: ColorPicker.kBG,
+            ),
+            child: widget
+                .body /* ListView(children: <Widget>[
             Container(
                 height: constraints.maxHeight,
                 child: Column(
@@ -174,7 +174,7 @@ class _PageScaffoldState extends State<PageScaffold> {
                 )),
             _buildFooter(isMobile),
           ]),*/
-        ),
+            ),
       );
     });
   }

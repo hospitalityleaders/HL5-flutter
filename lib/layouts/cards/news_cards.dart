@@ -5,6 +5,7 @@ import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/models/holedoapi/article.dart';
 import 'package:holedo/models/holedoapi/article_category.dart';
 import 'package:holedo/models/models.dart';
+import 'package:holedo/responsive/responsive.dart';
 import 'package:intl/intl.dart';
 import 'package:routemaster/routemaster.dart';
 
@@ -102,65 +103,67 @@ class NewsSingleCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomCard(
-      onTap: () {
-        Routemaster.of(context).push(pathBuilder != null
-            ? pathBuilder!(article.slug as String)
-            : '/article/${article.articleCategories?.first.slug}/${article.slug}');
-      },
-      child: SizedBox(
-        height: 514,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              width: Get.width,
-              height: 348,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(article.bannerImage.toString()),
-                  fit: BoxFit.cover,
-                  alignment: Alignment.center,
-                  repeat: ImageRepeat.noRepeat,
+    final bool isMobile = Responsive.isMobile(context);
+    return Padding(
+      padding: const EdgeInsets.all(0),
+      child: InkWell(
+        onTap: () {
+          Routemaster.of(context).push(pathBuilder != null
+              ? pathBuilder!(article.slug as String)
+              : '/article/${article.articleCategories?.first.slug}/${article.slug}');
+        },
+        child: Container(
+          height: (isMobile ? Get.width * .40 : 500),
+          color: ColorPicker.kWhite,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height: (isMobile ? (Get.width * .40) * .48 : 500 * .70),
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(article.bannerImage.toString()),
+                    fit: BoxFit.cover,
+                    alignment: Alignment.center,
+                    repeat: ImageRepeat.noRepeat,
+                  ),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(0),
                 ),
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(0),
               ),
-              child: article.bannerImage != null
-                  ? null
-                  : Icon(
-                      CupertinoIcons.news,
-                      size: 55,
-                      color: Colors.grey,
-                    ),
-            ),
-            SizedBox(height: 20),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    article.articleCategories!.first.title.toString(),
-                    style: TextStyle(fontSize: 18),
+              SizedBox(height: 4),
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.all(15),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        article.articleCategories!.first.title.toString(),
+                        style: TextStyle(fontSize: 12),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        article.title.toString(),
+                        style: isMobile
+                            ? FontTextStyle.kBlackPure20W400PR
+                            : FontTextStyle.kBlackPure30W400PR,
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        'By: ${article.user!.fullName.toString()} • ${_formatter.format(article.created as DateTime)} ',
+                        style: FontTextStyle.kBlueDark114W400SSP,
+                      ),
+                    ],
                   ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Text(
-                    article.title.toString(),
-                    style: FontTextStyle.kBlackPure30W400PR,
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Text(
-                    'By: ${article.user!.fullName.toString()} • ${_formatter.format(article.created as DateTime)} ',
-                    style: FontTextStyle.kBlackPure16W600PR,
-                  ),
-                ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -290,7 +293,7 @@ class NewsRightColumn extends StatelessWidget {
             height: Get.height * 0.035,
           ),
           Container(
-            height: 815, // height: Get.height,
+            //height: 1050,
             width: 373,
             color: ColorPicker.kPrimaryLight,
             child: Stack(
@@ -661,11 +664,16 @@ class NewsRightColumn extends StatelessWidget {
           ),
           Container(
             height: 280,
-            width: 336,
-            child: Image(
-              fit: BoxFit.cover,
-              image: AssetImage('assets/images/Bannerimage.png'),
+            width: 373,
+            child: Center(
+              child: Image(
+                fit: BoxFit.cover,
+                image: AssetImage('assets/images/Bannerimage.png'),
+              ),
             ),
+          ),
+          SizedBox(
+            height: 125,
           ),
         ],
       ),

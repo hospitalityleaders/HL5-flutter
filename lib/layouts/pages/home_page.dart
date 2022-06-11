@@ -153,6 +153,7 @@ class _HomePage extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
+                  height: Get.height,
                   width: Get.width * 0.55,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -160,6 +161,41 @@ class _HomePage extends State<HomePage> {
                       SizedBox(
                         height: Get.height * 0.03,
                       ),
+                      Expanded(
+                        child: FutureBuilder(
+                          future: Get.put(HoledoDatabase().news)
+                              .fetchArticles(context: context),
+                          builder:
+                              (context, AsyncSnapshot<List<Article>> snapshot) {
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            } else
+                              return CustomScrollView(
+                                slivers: <Widget>[
+                                  SliverGrid(
+                                    delegate: SliverChildBuilderDelegate(
+                                      (context, index) {
+                                        return NewsSingleCard(
+                                            article: snapshot.data![index],
+                                            showReleaseDate: true);
+                                      },
+                                      childCount: snapshot.data!.length,
+                                    ),
+                                    gridDelegate:
+                                        const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 1,
+                                      mainAxisSpacing: 15,
+                                      crossAxisSpacing: 15,
+                                      childAspectRatio: 2.0,
+                                    ),
+                                  ),
+                                ],
+                              );
+                          },
+                        ),
+                      )
                     ],
                   ),
                 ),

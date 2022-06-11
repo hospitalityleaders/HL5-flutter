@@ -19,8 +19,13 @@ class NewsfrontPage extends StatelessWidget {
     CarouselController buttonCarouselController = CarouselController();
     final tabState = TabPage.of(context);
     final newsController = holedoDatabase.news;
+    final bool isMobile = Responsive.isMobile(context);
+    final bool isDesktop = Responsive.isDesktop(context);
     final featuredNews =
         newsController.fetchArticles(context: context, type: 'featured');
+    final tabs = Get.put(HoledoDatabase())
+        .articleCategories
+        .where((category) => category.menuItem == true);
     return PageScaffold(
       title: 'Home Page',
       body: NestedScrollView(
@@ -28,7 +33,7 @@ class NewsfrontPage extends StatelessWidget {
           return [
             SliverToBoxAdapter(
               child: Container(
-                height: Get.height * 0.50,
+                height: isMobile ? 190 : 491,
                 width: Get.width,
                 child: Stack(
                   alignment: Alignment.center,
@@ -46,7 +51,7 @@ class NewsfrontPage extends StatelessWidget {
                           return CarouselSlider.builder(
                               itemCount: newsController.dataList.length,
                               options: CarouselOptions(
-                                height: Get.height * 0.50,
+                                height: isMobile ? 190 : 491,
                                 viewportFraction: 1.0,
                                 initialPage: 1,
                                 enableInfiniteScroll: true,
@@ -115,18 +120,30 @@ class NewsfrontPage extends StatelessWidget {
                 ),
               ),
             ),
-            SliverToBoxAdapter(
+            // ..SliverToBoxAdapter(
+            //   child:
+            // ),
+          ];
+        },
+        body: DefaultTabController(
+          length: tabs.length,
+          child: Scaffold(
+            backgroundColor: ColorPicker.kBG,
+            appBar: PreferredSize(
+              preferredSize: Size.fromHeight(46),
               child: Container(
-                // margin:
-                //     EdgeInsets.symmetric(horizontal: Get.width * 0.2),
-                height: Get.height * 0.06,
+                height: 46,
                 width: Get.width,
                 decoration: BoxDecoration(
+                    color: ColorPicker.kWhite,
                     border: Border(
                         bottom:
                             BorderSide(color: Color(0xFFBDC4C7), width: 2))),
                 child: TabBar(
-                  padding: EdgeInsets.symmetric(horizontal: Get.width * 0.3),
+                  padding: !isMobile
+                      ? EdgeInsets.symmetric(
+                          horizontal: Get.width * (isDesktop ? 0.28 : .2))
+                      : EdgeInsets.all(2),
                   unselectedLabelColor: ColorPicker.kGreyLight7,
                   labelColor: ColorPicker.kBlueLight1,
                   indicatorWeight: 6,
@@ -134,87 +151,55 @@ class NewsfrontPage extends StatelessWidget {
                   physics: NeverScrollableScrollPhysics(),
                   labelStyle: FontTextStyle.kBlueLight114W600SSP,
                   tabs: [
-                    for (final category in Get.put(HoledoDatabase())
-                        .articleCategories
-                        .where((category) => category.menuItem == true))
-                      Tab(text: category.title),
-                    //Tab(icon: Icon(Icons.list), text: 'All News'),
-                    //Tab(icon: Icon(Icons.star), text: 'Featured'),
+                    for (final category in tabs) Tab(text: category.title),
                   ],
                 ),
               ),
             ),
-          ];
-        },
-        body: TabBarView(
-          controller: tabState.controller,
-          physics: NeverScrollableScrollPhysics(),
-          children: <Widget>[
-            for (var i = 0;
-                i <
-                    Get.put(HoledoDatabase())
-                        .articleCategories
-                        .where((category) => category.menuItem == true)
-                        .length;
-                i++)
-              PageStackNavigator(stack: tabState.stacks[i]),
-          ],
+            body: Container(
+              margin: EdgeInsets.symmetric(horizontal: 10),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: Get.height + 500,
+                      width: (!isMobile) ? Get.width * 0.55 : Get.width - 20,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: Get.height * 0.033,
+                          ),
+                          Expanded(
+                            child: TabBarView(
+                              controller: tabState.controller,
+                              children: <Widget>[
+                                for (var i = 0; i < tabs.length; i++)
+                                  PageStackNavigator(stack: tabState.stacks[i]),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 1,
+                          ),
+                        ],
+                      ),
+                    ),
+                    if (!isMobile)
+                      SizedBox(
+                        width: Get.width * 0.01,
+                      ),
+                    if (!isMobile) NewsRightColumn()
+                  ],
+                ),
+              ),
+            ),
+          ),
         ),
-      ),
-    );
-  }
-
-  @override
-  Widget build2(BuildContext context) {
-    final tabState = TabPage.of(context);
-
-    return PageScaffold(
-      title: 'Newsfronts',
-      body: ListView(
-        children: [
-          /*Wrap(
-            children: [
-              //for (final book in Get.put(HoledoDatabase()).books)
-              //  BookCard(book: book),
-              for (final category in Get.put(HoledoDatabase())
-                  .articleCategories
-                  .where((category) => category.menuItem == true))
-                NewsCategoryCard(category: category),
-            ],
-          ),*/
-
-          Container(
-            color: Color(0xff202f3f),
-            height: 70,
-            child: TabBar(
-              indicatorWeight: 6,
-              controller: tabState.controller,
-              tabs: [
-                for (final category in Get.put(HoledoDatabase())
-                    .articleCategories
-                    .where((category) => category.menuItem == true))
-                  Tab(text: category.title),
-                //Tab(icon: Icon(Icons.list), text: 'All News'),
-                //Tab(icon: Icon(Icons.star), text: 'Featured'),
-              ],
-            ),
-          ),
-          Expanded(
-            child: TabBarView(
-              controller: tabState.controller,
-              children: <Widget>[
-                for (var i = 0;
-                    i <
-                        Get.put(HoledoDatabase())
-                            .articleCategories
-                            .where((category) => category.menuItem == true)
-                            .length;
-                    i++)
-                  PageStackNavigator(stack: tabState.stacks[i]),
-              ],
-            ),
-          ),
-        ],
       ),
     );
   }
@@ -229,70 +214,98 @@ class NewsfrontListPage extends StatelessWidget {
     required this.mode,
     this.category,
   }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     //final articles = HoledoDatabase().articles(slug: mode);
     // final NewsController controller = Get.put(HoledoDatabase().news);
     //newsController.fetchArticles(category: mode);
     final bool isMobile = Responsive.isMobile(context);
-    print('test: article ${category?.slug}');
+
+    return FutureBuilder(
+      future: Get.put(HoledoDatabase().news).fetchArticles(
+          context: context, type: mode, category: category?.slug),
+      builder: (context, AsyncSnapshot<List<Article>> snapshot) {
+        if (!snapshot.hasData) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        } else
+          return CustomScrollView(
+            slivers: <Widget>[
+              SliverAlignedGrid.count(
+                crossAxisCount: 1,
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 16,
+                itemCount: snapshot.data!.length,
+                itemBuilder: (context, index) {
+                  return NewsSingleCard(
+                      article: snapshot.data![index], showReleaseDate: true);
+                },
+              ),
+            ],
+          );
+      },
+    );
+  }
+
+  @override
+  Widget build3(BuildContext context) {
+    //final articles = HoledoDatabase().articles(slug: mode);
+    // final NewsController controller = Get.put(HoledoDatabase().news);
+    //newsController.fetchArticles(category: mode);
+    final bool isMobile = Responsive.isMobile(context);
+
     return Scaffold(
       body: Container(
-        margin: EdgeInsets.symmetric(horizontal: 10),
-        child: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                width: (!isMobile) ? Get.width * 0.55 : Get.width - 20,
-                height: Get.height,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      height: Get.height * 0.03,
-                    ),
-                    Expanded(
-                        child: FutureBuilder(
-                            future: Get.put(HoledoDatabase().news)
-                                .fetchArticles(
-                                    context: context,
-                                    type: mode,
-                                    category: category?.slug),
-                            builder: (context,
-                                AsyncSnapshot<List<Article>> snapshot) {
-                              if (!snapshot.hasData) {
-                                return Center(
-                                  child: CircularProgressIndicator(),
-                                );
-                              } else
-                                return AlignedGridView.count(
-                                  crossAxisCount: 1,
-                                  itemCount: snapshot.data!.length,
-                                  crossAxisSpacing: 16,
-                                  mainAxisSpacing: 16,
-                                  itemBuilder: (context, index) {
-                                    return NewsSingleCard(
-                                        article: snapshot.data![index],
-                                        showReleaseDate: true);
-                                  },
-
-                                  //TileBuilder: (index) => StaggeredTile.fit(1),
-                                );
-                            })),
-                  ],
-                ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              width: (!isMobile) ? Get.width * 0.55 : Get.width - 20,
+              child: Column(
+                children: [
+                  Container(
+                    height: Get.height * 0.02,
+                  ),
+                  CustomScrollView(
+                    slivers: [
+                      FutureBuilder(
+                        future: Get.put(HoledoDatabase().news).fetchArticles(
+                            context: context,
+                            type: mode,
+                            category: category?.slug),
+                        builder:
+                            (context, AsyncSnapshot<List<Article>> snapshot) {
+                          if (!snapshot.hasData) {
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          } else
+                            return AlignedGridView.count(
+                              crossAxisCount: 1,
+                              itemCount: snapshot.data!.length,
+                              crossAxisSpacing: 16,
+                              mainAxisSpacing: 16,
+                              itemBuilder: (context, index) {
+                                return NewsSingleCard(
+                                    article: snapshot.data![index],
+                                    showReleaseDate: true);
+                              },
+                            );
+                        },
+                      ),
+                    ],
+                  ),
+                ],
               ),
-              if (!isMobile)
-                SizedBox(
-                  width: Get.width * 0.01,
-                ),
-              if (!isMobile) NewsRightColumn()
-            ],
-          ),
+            ),
+            if (!isMobile)
+              SizedBox(
+                width: Get.width * 0.01,
+              ),
+            if (!isMobile) NewsRightColumn(),
+          ],
         ),
       ),
     );
