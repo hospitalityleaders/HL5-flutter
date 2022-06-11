@@ -26,22 +26,25 @@ class ApiServices {
     try {
       var model = new Holedoapi();
       token = token == null ? Get.put(HoledoDatabase()).apiKey : token;
+      var header = headers == null
+          ? <String, dynamic>{
+              'AuthApi': 'Bearer ${token}',
+              'Content-Type': 'application/json; charset=UTF-8',
+              'Accept': 'application/json',
+            }
+          : headers;
       dio.Response response = await _dio.post(
         '${baseUrl}${target}',
         data: data,
         options: dio.Options(
-          headers: headers == null
-              ? <String, dynamic>{
-                  'AuthApi': 'Bearer ${token}',
-                  'Content-Type': 'application/json; charset=UTF-8',
-                  'Accept': 'application/json',
-                }
-              : headers,
+          headers: header,
         ),
         queryParameters: {'apikey': token},
       );
-      print('POST URL: ${target} data: ${data}');
-
+      print('POST URL: ${target}');
+      print('POST headers: ${header.toString()}');
+      print('POST data: ${data.toString()}');
+      //print('POST respomse: ${response}');
       if (response.statusCode == 200) {
         model = Holedoapi.fromJson(response.data as Map<String, dynamic>);
       }

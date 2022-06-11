@@ -1,3 +1,7 @@
+import 'package:flutter/material.dart';
+import 'package:holedo/models/models.dart';
+import 'package:routemaster/routemaster.dart';
+
 import 'achievement.dart';
 import 'company.dart';
 import 'company_role.dart';
@@ -131,6 +135,8 @@ class User {
   String? avatarCdn;
   String? holedoUrl;
 
+  String? token;
+
   User({
     this.id,
     this.companyId,
@@ -244,6 +250,7 @@ class User {
     this.activeStatus,
     this.avatarCdn,
     this.holedoUrl,
+    this.token,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
@@ -407,6 +414,7 @@ class User {
         activeStatus: json['active_status'] as String?,
         avatarCdn: json['avatar_cdn'] as String?,
         holedoUrl: json['holedo_url'] as String?,
+        token: json['token'] as String?,
       );
 
   Map<String, dynamic> toJson() => {
@@ -524,5 +532,21 @@ class User {
         'active_status': activeStatus,
         'avatar_cdn': avatarCdn,
         'holedo_url': holedoUrl,
+        'token': token,
       };
+
+  Future<User> save(User profile) async {
+    //var data = profile.toJson() as Map<String, dynamic>;
+    //var newElements = [];
+    //print('this ${this.toJson()}');
+    this.id = profile.id;
+    this.slug = profile.slug;
+    //this.token = profile.token;
+    return await Get.put(HoledoDatabase().users).save(this);
+  }
+
+  void toProfile(BuildContext context) {
+    var redirect = '/profile/${this.slug}';
+    Routemaster.of(context).push(redirect);
+  }
 }

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:holedo/layouts/pages/profile-pages/profile/header_card.dart';
 import 'package:holedo/layouts/pages/profile-pages/timeline/timeline.dart';
 import 'package:holedo/models/holedoapi/user.dart';
+import 'package:holedo/models/models.dart';
+import 'package:provider/provider.dart';
 import '../../../../constant/colorPicker/color_picker.dart';
 import '../../../../constant/fontStyle/font_style.dart';
 import '../../../../constant/sizedbox.dart';
@@ -203,6 +205,7 @@ class _UserProfilePageState extends State<UserProfilePage>
 
   @override
   Widget build(BuildContext context) {
+    final appState = Provider.of<AppState>(context);
     return Responsive.isDesktop(context)
         ? Container(
             decoration: BoxDecoration(color: ColorPicker.kBG),
@@ -323,7 +326,11 @@ class _UserProfilePageState extends State<UserProfilePage>
                               ),
                             ],
                           ),
-                          buildEditButton(),
+                          if (appState
+                              .isLoginnedAndEditable(widget.userProfileData))
+                            buildEditButton()
+                          else
+                            Text(''),
                         ],
                       ),
                     ),

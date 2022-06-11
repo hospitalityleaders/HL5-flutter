@@ -4,8 +4,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:holedo/common/clipper.dart';
 import 'package:holedo/common/popUpHeadMenu.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
+import 'package:holedo/models/holedoapi/user.dart';
+import 'package:holedo/models/models.dart';
 import 'package:holedo/responsive/responsive.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:routemaster/routemaster.dart';
+
 import '../../../../common/dropDownButton.dart';
 import '../../../../constant/colorPicker/color_picker.dart';
 import '../../../../constant/sizedbox.dart';
@@ -35,7 +39,7 @@ class HeaderCard extends StatefulWidget {
 
 class _HeaderCardState extends State<HeaderCard> {
   ///common field
-
+  final appState = Provider.of<AppState>;
   Widget buildFieldName(String fieldName, [String? reqField]) {
     return Column(
       children: [
@@ -76,6 +80,7 @@ class _HeaderCardState extends State<HeaderCard> {
   /// API to fetch and update data functionality Start
 
   final ApiServices _apiServices = ApiServices();
+
   bool isUpdating = false;
 
   Future<void> updateProfileCard(
@@ -87,34 +92,30 @@ class _HeaderCardState extends State<HeaderCard> {
     setState(() {
       isUpdating = true;
     });
-
+    final profile = appState(context, listen: false).profile;
     if (fNameController.toString() != '' &&
-            fNameController.toString() != null &&
-            lNameController.toString() != '' &&
-            lNameController.toString() != null
-        // professionalTitleController.toString() != '' &&
-        // areaController.toString() != ''
-        ) {
-      Map<String, dynamic> profileData = {
-        "id": id,
-        "first_name": fNameController,
-        "last_name": lNameController,
-        "professional_title": professionalTitleController,
-        "area": areaController
-      };
-      print('usser profile: ${profileData}');
-      dynamic res = await _apiServices.updateUserProfile();
+        fNameController.toString() != null &&
+        lNameController.toString() != '' &&
+        lNameController.toString() != null &&
+        profile != null) {
+      var user = new User();
+      user.firstName = fNameController;
+      user.lastName = lNameController;
+      user.professionalTitle = professionalTitleController;
+      user.area = areaController;
 
-      // if (res?.success) {
-      //   Navigator.pop(context);
-      // } else {
-      //   ScaffoldMessenger.of(context).showSnackBar(
-      //     SnackBar(
-      //       content: Text('Error: ${res?.messages}'),
-      //       backgroundColor: Colors.red.shade300,
-      //     ),
-      //   );
-      // }
+      await user.save(profile);
+
+      //print(' profile: ${ .toJson()}');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Updated user...'),
+          backgroundColor: Colors.green,
+        ),
+      );
+
+      Navigator.pop(context);
+      Routemaster.of(context).push('/profile/${profile.slug}');
     }
     setState(() {
       isUpdating = false;

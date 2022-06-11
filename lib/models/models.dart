@@ -1,13 +1,16 @@
 export 'package:get/get.dart';
 export 'holedoapi/holedoapi.dart';
+import 'dart:convert';
+
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-
+export 'package:provider/provider.dart';
 import 'package:holedo/models/holedoapi/article.dart';
 import 'package:holedo/models/holedoapi/article_category.dart';
 import 'package:holedo/models/holedoapi/company.dart';
+import 'package:holedo/models/holedoapi/menu_item.dart';
 import 'package:holedo/models/holedoapi/page.dart';
 
 import 'package:holedo/models/holedoapi/user.dart';
@@ -30,6 +33,15 @@ class AppState extends ChangeNotifier {
   set username(String? value) {
     _username = value;
     notifyListeners();
+  }
+
+  bool isLoginnedAndEditable(User data) {
+    if (profile?.slug != null) {
+      if (data.slug == profile?.slug) {
+        return true;
+      }
+    }
+    return false;
   }
 
   User? get profile => _profile;
@@ -64,6 +76,59 @@ class HoledoDatabase extends GetxController {
   List<Company> companies = [];
   final List<String> articlePaths = [];
   final ApiServices _api = ApiServices();
+
+  final menuItems = [
+    MenuItem(
+      title: 'Home',
+      path: '/home',
+      inNav: true,
+      inDrawer: true,
+    ),
+    MenuItem(
+      title: 'News',
+      path: '/news',
+      inNav: true,
+      inDrawer: true,
+    ),
+    MenuItem(
+      title: 'Profile',
+      path: '/profile',
+      inNav: true,
+      inDrawer: true,
+    ),
+    MenuItem(
+      title: 'Jobs',
+      path: '/jobs',
+      inNav: true,
+      inDrawer: true,
+    ),
+    MenuItem(
+      title: 'Recruitments',
+      path: '/recruitments',
+      inNav: true,
+      inDrawer: true,
+    ),
+    MenuItem(
+      title: 'Help',
+      path: '/help',
+      inNav: true,
+      inDrawer: true,
+    ),
+    MenuItem(
+      title: 'Logout',
+      path: '/logout',
+      inNav: false,
+      inDrawer: true,
+      loginOnly: true,
+    ),
+    MenuItem(
+      title: 'Login',
+      path: '/login',
+      inNav: false,
+      inDrawer: true,
+      loginOnly: false,
+    ),
+  ];
 
   void getArticleCategories() async {
     articleCategories = getModel().articleCategories as List<ArticleCategory>;
@@ -212,32 +277,46 @@ class UsersController extends GetxController {
     }
   }
 
+  String? getToken(slug) {
+    final model = Get.put(HoledoDatabase()).getModel();
+    if (model.token != null && model.user?.slug == slug) {
+      print('match: ${slug} token: ${model.token}');
+      return model.token;
+    }
+    return null;
+  }
+
+  void saveUserToModel(User user, String? token) {
+    final model = Get.put(HoledoDatabase()).getModel();
+    model.token = token;
+    model.user = user;
+    print('update user: ${model.user}');
+    Get.find<HoledoDatabase>().setModel(model);
+  }
+
   Future<User> getProfileData(
       {String? slug,
       String? id,
       String? token,
-      required BuildContext context}) async {
+      required BuildContext context,
+      bool? isLoggined = false}) async {
     try {
       isLoading(true);
       var user = new User();
-      final model = Get.put(HoledoDatabase()).getModel();
-      if (model.user?.slug == slug) {
-        print('natch: ${slug} token: ${model.token}');
-        token = model.token;
-      }
+      token = this.getToken(slug);
       var params = {'id': id, 'slug': slug, 'token': token};
       params.removeWhere((k, v) => v == null);
 
       var response = await _api.GET(target: '/users/get/', data: params);
-      print('log: ${response.data}');
+      //print('log: ${response.data}');
       user = response.data?.user as User;
       print('log: ${user.firstName}');
 
-      if (model.user?.slug == slug) {
-        model.user = user;
-        print('update user: ${model.user}');
-        Get.find<HoledoDatabase>().setModel(model);
+      if (token != null) {
+        user.token = token;
+        saveUserToModel(user, token);
       }
+
       return user;
     } finally {
       isLoading(false);
@@ -280,6 +359,31 @@ class UsersController extends GetxController {
       var response = await _api.getUserData(id: id, slug: slug);
       print('log: ${response}');
       user = response;
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  Future<User> save(User user) async {
+    try {
+      isLoading(true);
+      var token = this.getToken(user.slug);
+      var userJson = user.toJson();
+      userJson.removeWhere((k, v) => v == null || v.toString().length == 0);
+      var update = await _api.POST(
+          target: '/users/update/', data: userJson, token: token);
+      // ignore: unnecessary_null_comparison
+      if (update != null) {
+        var response =
+            await _api.GET(target: '/users/get/', data: {'slug': user.slug});
+        //print('log: ${response.data}');
+        user = response.data?.user as User;
+        print('log: ${user.firstName}');
+
+        user.token = token;
+        saveUserToModel(user, token);
+      }
+      return user;
     } finally {
       isLoading(false);
     }

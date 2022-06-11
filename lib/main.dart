@@ -75,6 +75,14 @@ RouteMap _buildRouteMap(BuildContext context) {
               redirectTo: route.queryParameters['redirectTo'],
             ),
           ),
+      '/logout': (route) {
+        final appState = Provider.of<AppState>(context, listen: false);
+        if (appState.isLoggedIn) {
+          appState.username = null;
+          appState.profile = null;
+        }
+        return Redirect('/login', queryParameters: {'redirectTo': route.path});
+      },
       '/recruitments': (route) => NoAnimationPage(child: RecruitmentPage()),
       '/recruitments/:id': (route) =>
           NoAnimationPage(child: ProfilePage(id: route.pathParameters['id']!)),
