@@ -70,10 +70,12 @@ class _PageScaffoldState extends State<PageScaffold> {
   }
 
   void _search() {
-    Routemaster.of(context).push(
-      '/search',
-      queryParameters: {'query': _searchController.text},
-    );
+    if (_searchController.text.length > 3) {
+      Routemaster.of(context).push(
+        '/search',
+        queryParameters: {'query': _searchController.text},
+      );
+    }
   }
 
   void showSnackBar(BuildContext context, String text) {
