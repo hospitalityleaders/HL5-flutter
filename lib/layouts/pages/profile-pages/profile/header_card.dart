@@ -1119,7 +1119,11 @@ class _HeaderCardState extends State<HeaderCard> {
       builder: (BuildContext context) => Dialog(
         child: Container(
           color: ColorPicker.kWhite,
-          width: SS.sW(context) * .60 as double,
+          width: Responsive.isDesktop(context)
+              ? SS.sW(context) * .50 as double
+              : Responsive.isMobile(context)
+              ? SS.sW(context) * .90 as double
+              : SS.sW(context) * .65 as double,
           child: SingleChildScrollView(
             child: Column(
               children: [

@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/constant/sizedbox.dart';
+import '../../../../common/build_work_exp_pop_up.dart';
 import '../../../../common/dropDownButton.dart';
 import '../../../../common/popUpHeadMenu.dart';
 import '../../../../common/textfield_fieldname.dart';
+import '../../../../responsive/responsive.dart';
 
 class ProfileOverviewSec3 extends StatefulWidget {
   final pOApiDataSec3;
@@ -28,101 +30,8 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
   bool isExperienceShowCard = false;
   int indexExp = 1;
 
-  Widget buildExpInnerCard(
-      bool isExperienceEditable, bool isExperienceShowCard, int indexExp) {
-    return StatefulBuilder(builder: (context, setState) {
-      return Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Container(
-          width: SS.sW(context) * .50 as double,
-          color: ColorPicker.kWhite,
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                ListTile(
-                  leading: Container(
-                    height: SS.sH(context) * .08 as double,
-                    width: SS.sW(context) * .03 as double,
-                    color: ColorPicker.kBlueLight1,
-                  ),
-                  title: Text(''),
-                  subtitle: Text(''),
-                  trailing: isExperienceEditable
-                      ? IconButton(
-                          onPressed: () {
-                            setState(() {
-                              isExperienceShowCard = !isExperienceShowCard;
-                            });
-                          },
-                          icon: Icon(Icons.edit),
-                        )
-                      : null,
-                ),
-                isExperienceShowCard
-                    ? SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            Divider(
-                              height: SS.sH(context) * 0.01 as double,
-                              color: ColorPicker.kGreyLight3,
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(16.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  TextFieldAndFieldName.buildFieldName(
-                                      'Title / position', '*') as Widget,
-                                  TextFieldAndFieldName.buildTextField(
-                                      'General manager') as Widget,
-                                  TextFieldAndFieldName.buildFieldName(
-                                      'Company name', '*') as Widget,
-                                  TextFieldAndFieldName.buildTextField(
-                                      'Fairmont Zimbali Resort') as Widget,
-                                  TextFieldAndFieldName.buildFieldName(
-                                      'Company website') as Widget,
-                                  TextFieldAndFieldName.buildTextField(
-                                      'www.fairmontzimbali.com') as Widget,
-                                  TextFieldAndFieldName.buildFieldName(
-                                      'Job description') as Widget,
-                                  Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: TextField(
-                                      autocorrect: true,
-                                      minLines: 4,
-                                      maxLines: 6,
-                                      decoration: InputDecoration(
-                                        border: OutlineInputBorder(
-                                          borderSide: BorderSide(),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      OutlinedButton(
-                                          onPressed: () {},
-                                          child: Text('Cancel')),
-                                      SS.sB(0, 10),
-                                      ElevatedButton(
-                                          onPressed: () {}, child: Text('Save'))
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    : Container()
-              ],
-            ),
-          ),
-        ),
-      );
-    });
-  }
+
+  BuildWorkExpPopUp _buildWorkExpPopUp=BuildWorkExpPopUp();
 
   Future<String?> buildAddyourworkexperiencePopUpCard() {
     return showDialog(
@@ -133,13 +42,17 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
             return Dialog(
               child: Container(
                 color: ColorPicker.kGreyLight3,
-                width: SS.sW(context) * .50 as double,
+                width: Responsive.isDesktop(context)
+                    ? SS.sW(context) * .50 as double
+                    : Responsive.isMobile(context)
+                    ? SS.sW(context) * .90 as double
+                    : SS.sW(context) * .60 as double,
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
                       PopUpHeadMenu.popUpHead('Work experience', context),
                       isVisibleExperience
-                          ? buildExpInnerCard(false, true, indexExp)
+                          ? _buildWorkExpPopUp.buildExpInnerCard(false, true, indexExp)
                           : Padding(
                               padding: EdgeInsets.all(8.0),
                               child: CircleAvatar(
@@ -159,8 +72,8 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                                 ),
                               ),
                             ),
-                      buildExpInnerCard(true, isExperienceShowCard, indexExp),
-                      buildExpInnerCard(true, isExperienceShowCard, indexExp),
+                      _buildWorkExpPopUp.buildExpInnerCard(true, isExperienceShowCard, indexExp),
+                      _buildWorkExpPopUp.buildExpInnerCard(true, isExperienceShowCard, indexExp),
                     ],
                   ),
                 ),
@@ -187,7 +100,11 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
             return Dialog(
               child: Container(
                 color: ColorPicker.kGreyLight8,
-                width: SS.sW(context) * .50 as double,
+                width: Responsive.isDesktop(context)
+                    ? SS.sW(context) * .50 as double
+                    : Responsive.isMobile(context)
+                    ? SS.sW(context) * .90 as double
+                    : SS.sW(context) * .60 as double,
                 // height: 375,
                 child: SingleChildScrollView(
                   child: Column(
@@ -202,7 +119,11 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                           children: [
                             Container(
                               color: ColorPicker.kWhite,
-                              width: double.infinity,
+                              width: Responsive.isDesktop(context)
+                                  ? SS.sW(context) * .50 as double
+                                  : Responsive.isMobile(context)
+                                  ? SS.sW(context) * .90 as double
+                                  : SS.sW(context) * .60 as double,
                               child: Padding(
                                 padding: EdgeInsets.all(20),
                                 child: Column(
@@ -348,11 +269,11 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                                       children: [
                                         OutlinedButton(
                                             onPressed: () {},
-                                            child: Text('Cancel')),
+                                            child: Text('Cancel',style: FontTextStyle.kBlueLight114W400SSP,)),
                                         SS.sB(0, 10),
                                         ElevatedButton(
                                             onPressed: () {},
-                                            child: Text('Save'))
+                                            child: Text('Save',style: FontTextStyle.kWhite14W400SSP,))
                                       ],
                                     ),
                                   ),
@@ -398,7 +319,11 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
             return Dialog(
               child: Container(
                 color: ColorPicker.kGreyLight3,
-                width: SS.sW(context) * .50 as double,
+                width: Responsive.isDesktop(context)
+                    ? SS.sW(context) * .50 as double
+                    : Responsive.isMobile(context)
+                    ? SS.sW(context) * .90 as double
+                    : SS.sW(context) * .60 as double,
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -407,7 +332,11 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                       Padding(
                         padding: EdgeInsets.all(16.0),
                         child: Container(
-                          width: SS.sW(context) * .50 as double,
+                          width: Responsive.isDesktop(context)
+                              ? SS.sW(context) * .50 as double
+                              : Responsive.isMobile(context)
+                              ? SS.sW(context) * .90 as double
+                              : SS.sW(context) * .60 as double,
                           color: ColorPicker.kWhite,
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -434,8 +363,8 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                                             langIndex++;
                                           });
                                         },
-                                        icon: Icon(Icons.add),
-                                        label: Text('Add another'),
+                                        icon: Icon(Icons.add,color: ColorPicker.kBlueLight1,size: 8,),
+                                        label: Text('Add another',style: FontTextStyle.kBlueLight114W400SSP,),
                                       ),
                                     ],
                                   ),

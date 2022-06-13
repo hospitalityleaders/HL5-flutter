@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:holedo/common/dropDownButton.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
+import '../../../../common/build_work_exp_pop_up.dart';
 import '../../../../common/clipper.dart';
 import '../../../../common/popUpHeadMenu.dart';
 import '../../../../common/textfield_fieldname.dart';
@@ -313,116 +314,8 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
   bool isExperienceShowCard = false;
   int indexExp = 1;
 
-  Widget buildExpInnerCard(
-      bool isExperienceEditable, bool isExperienceShowCard, int indexExp) {
-    return StatefulBuilder(builder: (context, setState) {
-      return Padding(
-        padding: EdgeInsets.symmetric(vertical: 5, horizontal: 16),
-        child: Container(
-          width: Responsive.isDesktop(context)
-              ? SS.sW(context) * .50 as double
-              : Responsive.isMobile(context)
-              ? SS.sW(context) * .90 as double
-              : SS.sW(context) * .60 as double,
-          color: ColorPicker.kWhite,
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                ListTile(
-                  leading: Container(
-                    alignment: Alignment.center,
-                    height: 50,
-                    width: 50,
-                    color: ColorPicker.kBlueLight1,
-                    child: Icon(
-                      Icons.apartment_rounded,
-                      size: 18,
-                      color: ColorPicker.kWhite,
-                    ),
-                  ),
-                  title: Text(''),
-                  subtitle: Text(''),
-                  trailing: isExperienceEditable
-                      ? IconButton(
-                    onPressed: () {
-                      setState(() {
-                        isExperienceShowCard = !isExperienceShowCard;
-                      });
-                    },
-                    icon: Icon(
-                      Icons.edit,
-                      size: 10,
-                      color: ColorPicker.kBlueLight1,
-                    ),
-                  )
-                      : null,
-                ),
-                isExperienceShowCard
-                    ? SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Divider(
-                        height: SS.sH(context) * 0.01 as double,
-                        color: ColorPicker.kGreyLight3,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(16.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            TextFieldAndFieldName.buildFieldName(
-                                'Title / position', '*') as Widget,
-                            TextFieldAndFieldName.buildTextField(
-                                'General manager') as Widget,
-                            TextFieldAndFieldName.buildFieldName(
-                                'Company name', '*') as Widget,
-                            TextFieldAndFieldName.buildTextField(
-                                'Fairmont Zimbali Resort') as Widget,
-                            TextFieldAndFieldName.buildFieldName(
-                                'Company website') as Widget,
-                            TextFieldAndFieldName.buildTextField(
-                                'www.fairmontzimbali.com') as Widget,
-                            TextFieldAndFieldName.buildFieldName(
-                                'Job description') as Widget,
-                            Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: TextField(
-                                autocorrect: true,
-                                minLines: 4,
-                                maxLines: 6,
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide(),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                OutlinedButton(
-                                    onPressed: () {},
-                                    child: Text('Cancel')),
-                                SS.sB(0, 10),
-                                ElevatedButton(
-                                    onPressed: () {}, child: Text('Save'))
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-                    : Container()
-              ],
-            ),
-          ),
-        ),
-      );
-    });
-  }
 
+  BuildWorkExpPopUp _buildWorkExpPopUp=BuildWorkExpPopUp();
   Future<String?> buildWorkExpPopUp() {
     return showDialog(
       context: context,
@@ -443,7 +336,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                       PopUpHeadMenu.popUpHead('Work experience', context),
                       SS.sB(15),
                       isVisibleExperience
-                          ? buildExpInnerCard(false, true, indexExp)
+                          ? _buildWorkExpPopUp.buildExpInnerCard(false, true, indexExp)
                           : Padding(
                         padding: EdgeInsets.all(8.0),
                         child: CircleAvatar(
@@ -463,8 +356,8 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                           ),
                         ),
                       ),
-                      buildExpInnerCard(true, isExperienceShowCard, indexExp),
-                      buildExpInnerCard(true, isExperienceShowCard, indexExp),
+                      _buildWorkExpPopUp.buildExpInnerCard(true, isExperienceShowCard, indexExp),
+                      _buildWorkExpPopUp.buildExpInnerCard(true, isExperienceShowCard, indexExp),
                       SS.sB(15)
                     ],
                   ),
