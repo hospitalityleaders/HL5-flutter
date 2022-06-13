@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import '../constant/colorPicker/color_picker.dart';
 import '../constant/fontStyle/font_style.dart';
 import '../constant/sizedbox.dart';
-import '../responsive/responsive.dart';
 
 class PopUpHeadMenu {
   static Container popUpHead(String headName, BuildContext context) {
@@ -18,7 +17,8 @@ class PopUpHeadMenu {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5.5),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 5.5),
                   child: Text(
                     headName,
                     style: FontTextStyle.kBlueDark120W400SSP,
@@ -63,11 +63,7 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
         builder: (context, setState) => Dialog(
           child: Container(
             color: ColorPicker.kGreyLight3,
-            width: Responsive.isDesktop(context)
-                ? SS.sW(context) * .50
-                : Responsive.isMobile(context)
-                ? SS.sW(context) * .90
-                : SS.sW(context) * .60,
+            width: (SS.sW(context) as double) * .50,
             child: SingleChildScrollView(
               child: Column(
                 children: [
@@ -90,29 +86,11 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                           Responsive(mobile: Expanded(flex: 2,
-                             child: Text(
-                          'You’ve got a new reference! All you have to do now is approve it.',
-                              style: FontTextStyle.kWhite14W400SSP,
-                          ),
-                           ), desktop: Text(
-                             'You’ve got a new reference! All you have to do now is approve it.',
-                             style: FontTextStyle.kWhite14W400SSP,
-                           ),) ,
-                              Responsive(mobile: StatefulBuilder(
-                                builder: (context, setState) => Expanded(flex: 1,
-                                  child: OutlinedButton(
-                                    onPressed: () {},
-                                    style: OutlinedButton.styleFrom(
-                                        backgroundColor: Colors.transparent),
-                                    child: Text(
-                                      'Approve Reference',
-                                      textAlign: TextAlign.center,
-                                      style: FontTextStyle.kWhite14W600PR,
-                                    ),
-                                  ),
-                                ),
-                              ), desktop: StatefulBuilder(
+                              Text(
+                                'You’ve got a new reference! All you have to do now is approve it.',
+                                style: FontTextStyle.kWhite14W400SSP,
+                              ),
+                              StatefulBuilder(
                                 builder: (context, setState) => OutlinedButton(
                                   onPressed: () {},
                                   style: OutlinedButton.styleFrom(
@@ -122,7 +100,7 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                                     style: FontTextStyle.kWhite14W600PR,
                                   ),
                                 ),
-                              ),)
+                              ),
                             ],
                           ),
                         ),
@@ -145,12 +123,12 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                                     text: TextSpan(children: [
                                       TextSpan(
                                           text: 'Ealasiad Wang',
-                                          style:
-                                              FontTextStyle.kBlueDark116W700SSP),
+                                          style: FontTextStyle
+                                              .kBlueDark116W700SSP),
                                       TextSpan(
                                           text: ' MHL',
-                                          style:
-                                              FontTextStyle.kBlueDark112W700SSP),
+                                          style: FontTextStyle
+                                              .kBlueDark112W700SSP),
                                     ]),
                                   ),
                                   subtitle: Text(
@@ -201,7 +179,8 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                                                 padding:
                                                     const EdgeInsets.all(8.0),
                                                 child: Text(refContent,
-                                                    style:FontTextStyle.kGreyLight516W400SSP),
+                                                    style: FontTextStyle
+                                                        .kGreyLight516W400SSP),
                                               ),
                                             )),
                                         TextButton.icon(
@@ -245,17 +224,17 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                                     text: TextSpan(children: [
                                       TextSpan(
                                           text: 'Ealasiad Wang',
-                                          style:
-                                              FontTextStyle.kBlueDark116W700SSP),
+                                          style: FontTextStyle
+                                              .kBlueDark116W700SSP),
                                       TextSpan(
                                           text: ' MHL',
-                                          style:
-                                              FontTextStyle.kBlueDark112W700SSP),
+                                          style: FontTextStyle
+                                              .kBlueDark112W700SSP),
                                     ]),
                                   ),
                                   subtitle: Text(
                                     'Recruiter, Top Talent Recruiters',
-                                      style: FontTextStyle.kGreyLight514W400SSP,
+                                    style: FontTextStyle.kGreyLight514W400SSP,
                                   ),
                                   trailing: Row(
                                     mainAxisSize: MainAxisSize.min,
@@ -301,7 +280,8 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                                               padding:
                                                   const EdgeInsets.all(8.0),
                                               child: Text(refContent,
-                                                  style:FontTextStyle.kGreyLight516W400SSP),
+                                                  style: FontTextStyle
+                                                      .kGreyLight516W400SSP),
                                             ),
                                           ),
                                         ),

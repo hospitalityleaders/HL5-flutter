@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../colorPicker/color_picker.dart';
+import 'package:holedo/constant/colorPicker/color_picker.dart';
 
 class FontTextStyle {
   static TextStyle kWhite16W600PR = TextStyle(
@@ -636,6 +636,12 @@ class FontTextStyle {
   static TextStyle kRed210W700SSP = TextStyle(
     fontSize: 10,
     color: ColorPicker.kRed2,
+    fontWeight: FontWeight.w700,
+    fontFamily: 'SourceSansPro',
+  );
+  static TextStyle kRed214W400SSP = TextStyle(
+    fontSize: 14,
+    color: ColorPicker.kRed2,
     fontWeight: FontWeight.w400,
     fontFamily: 'SourceSansPro',
   );
@@ -765,12 +771,6 @@ class FontTextStyle {
     fontWeight: FontWeight.w400,
     fontFamily: 'SourceSansPro',
   );
-  static TextStyle kGreyLight516W600SSP = TextStyle(
-    color: ColorPicker.kGreyLight5,
-    fontSize: 16,
-    fontWeight: FontWeight.w600,
-    fontFamily: 'SourceSansPro',
-  );
 
   static TextStyle kGreyLight612W700SSP = TextStyle(
     color: ColorPicker.kGreyLight6,
@@ -789,6 +789,12 @@ class FontTextStyle {
     color: ColorPicker.kBlueLight1,
     fontSize: 12,
     fontWeight: FontWeight.w700,
+    fontFamily: 'SourceSansPro',
+  );
+  static TextStyle kBlueLight120W400SSP = TextStyle(
+    color: ColorPicker.kBlueLight1,
+    fontSize: 20,
+    fontWeight: FontWeight.w400,
     fontFamily: 'SourceSansPro',
   );
   static TextStyle kBlackPure20W400SSP = TextStyle(
@@ -815,6 +821,13 @@ class FontTextStyle {
   static TextStyle kPrimaryLight216W400SSP = TextStyle(
     color: ColorPicker.kPrimaryLight2,
     fontSize: 16,
+    fontWeight: FontWeight.w400,
+    fontFamily: 'SourceSansPro',
+  );
+
+  static TextStyle kPrimaryLightBlue18W400SSP = TextStyle(
+    color: ColorPicker.kPrimaryLightBlue,
+    fontSize: 18,
     fontWeight: FontWeight.w400,
     fontFamily: 'SourceSansPro',
   );
