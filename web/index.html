@@ -111,5 +111,15 @@
       loadMainDartJs();
     }
   </script>
+
+  <script type="text/javascript">
+    let useHtml = // ...
+    if(useHtml) {
+      window.flutterWebRenderer = "html";
+    } else {
+      window.flutterWebRenderer = "canvaskit";
+    }
+  </script>
+
 </body>
 </html>
