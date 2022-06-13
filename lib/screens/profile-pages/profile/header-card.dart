@@ -87,10 +87,11 @@ class _HeaderCardState extends State<HeaderCard> {
       isUpdating = true;
     });
 
-    if (fNameController.toString() != '' &&
-        lNameController.toString() != '' &&
-        professionalTitleController.toString() != '' &&
-        areaController.toString() != '') {
+    if (fNameController.toString() != '' && fNameController.toString()!=null &&
+        lNameController.toString() != '' && lNameController.toString() !=null
+        // professionalTitleController.toString() != '' &&
+        // areaController.toString() != ''
+    ) {
       Map<String, dynamic> profileData = {
         "id": id,
         "first_name": fNameController,
@@ -1531,7 +1532,7 @@ class _HeaderCardState extends State<HeaderCard> {
                                   onPressed: () {
                                     buildSendConnReqPopUpCard();
                                   },
-                                  icon: const Icon(Icons.person_add),
+                                  icon: const Icon(Icons.person_add,size: 10,color: ColorPicker.kWhite,),
                                   label: const Padding(
                                     padding: EdgeInsets.symmetric(
                                         vertical: 14, horizontal: 18),
@@ -1799,3 +1800,4 @@ class _HeaderCardState extends State<HeaderCard> {
     );
   }
 }
+

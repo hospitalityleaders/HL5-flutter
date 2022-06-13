@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart' as Store;
 import 'package:get_storage/get_storage.dart';
 import 'package:holedo/controller/auth_controller.dart';
+
 import '../models/HoledoProfileModel.dart';
 import 'package:http/http.dart' as http;
 
@@ -102,7 +103,7 @@ class ApiServices {
   Future<HoledoProfileModel> getUserProfileData() async {
     try {
       final response = await http.get(
-          Uri.parse('https://${AuthData.apiHost}/rest/users/me'),
+          Uri.parse('https://${AuthData.apiHost}/rest/users/get/'),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
             'Accept': 'application/json',

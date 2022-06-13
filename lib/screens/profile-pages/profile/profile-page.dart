@@ -43,9 +43,9 @@ List<Item> generateItems(int numberOfItems) {
 class ProfilePage extends StatefulWidget {
   static String route = '/second';
 
-  final userData;
-
-  ProfilePage({Key? key, this.userData}) : super(key: key);
+  ProfilePage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -214,7 +214,7 @@ class _ProfilePageState extends State<ProfilePage>
 
   ApiServices _apiServices = ApiServices();
 
-  final localStorage=GetStorage();
+  final localStorage = GetStorage();
 
   @override
   Widget build(BuildContext context) {
@@ -222,9 +222,9 @@ class _ProfilePageState extends State<ProfilePage>
         future: _apiServices.getUserProfileData(),
         builder: (context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
-           localStorage.writeInMemory('userData', snapshot.data!.data!.user!);
-          final userProfileData=localStorage.read('userData');
-            // final userProfileData = snapshot.data!.data!.user!;
+            localStorage.writeInMemory('userData', snapshot.data!.data!.user!);
+            final userProfileData = localStorage.read('userData');
+            //   final userProfileData = snapshot.data!.data!.user!;
             return Responsive.isDesktop(context)
                 ? Container(
                     decoration: BoxDecoration(color: ColorPicker.kBG),
@@ -237,8 +237,8 @@ class _ProfilePageState extends State<ProfilePage>
                             headerCard_W: headerCard_W,
                             hCardApiData: userProfileData),
                         Container(
-                          height: Get.height * 0.06,
-                          width: Get.width,
+                          height: SS.sH(context) * 0.07,
+                          width: SS.sW(context),
                           decoration: BoxDecoration(
                             color: Colors.white,
                             border: Border(
@@ -248,7 +248,7 @@ class _ProfilePageState extends State<ProfilePage>
                           ),
                           child: Padding(
                             padding: EdgeInsets.symmetric(
-                                horizontal: Get.width * .080),
+                                horizontal: SS.sW(context) * .080),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
