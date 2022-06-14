@@ -1,13 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:holedo/models/holedoapi/company.dart';
 import 'package:holedo/models/holedoapi/job.dart';
 
 import 'package:routemaster/routemaster.dart';
 import 'package:intl/intl.dart';
 import 'package:holedo/models/holedoapi/user.dart';
-import 'package:holedo/models/models.dart';
 export 'package:holedo/layouts/cards/news_cards.dart';
 
 class CustomCard extends StatelessWidget {
@@ -23,12 +21,12 @@ class CustomCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(0.0),
       child: SizedBox(
         width: 350,
         child: Material(
-          color: Color.fromARGB(255, 216, 72, 16),
-          borderRadius: BorderRadius.circular(8),
+          color: Color.fromARGB(255, 255, 255, 255),
+          borderRadius: BorderRadius.circular(2),
           clipBehavior: Clip.antiAlias,
           child: InkWell(
             onTap: onTap,
@@ -56,7 +54,7 @@ class SmallCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(2.0),
       child: SizedBox(
         width: 250,
         child: Material(
@@ -248,9 +246,8 @@ class FooterLinkCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return LinkCard(
       onTap: () {
-        Routemaster.of(context).push(pathBuilder != null
-            ? pathBuilder!('${path}' as String)
-            : '${path}');
+        Routemaster.of(context)
+            .push(pathBuilder != null ? pathBuilder!('${path}') : '${path}');
       },
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,

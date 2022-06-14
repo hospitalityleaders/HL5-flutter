@@ -7,7 +7,7 @@ import 'package:holedo/constant/sizedbox.dart';
 class TextFieldAndFieldName {
   /// build field Name Common start
 
-  static buildFieldName(String fieldName, [String? reqField]) {
+  static Widget buildFieldName(String fieldName, [String? reqField]) {
     return Column(
       children: [
         RichText(
@@ -24,19 +24,33 @@ class TextFieldAndFieldName {
     );
   }
 
-  static buildTextField([String? hintText]) {
+  static Widget buildTextField([String? hintText,TextEditingController? _controller]) {
     return Column(
       children: [
         Container(
+
           height: 36,
-          color: ColorPicker.kGreyLight9,
-          child: TextFormField(
-            decoration: InputDecoration(
-              hintText: hintText,
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(2),
-                  borderSide:
-                      BorderSide(color: ColorPicker.kGreyLight9, width: 2)),
+          decoration: BoxDecoration(
+              color: ColorPicker.kGreyLight9,
+              borderRadius: BorderRadius.circular(2),
+              border: Border.all(
+                color: ColorPicker.kGreyLight7,
+                width: 0.2,
+              )),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4,vertical: 4),
+            child: TextFormField(
+              controller: _controller,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+
+                hintText: hintText,
+                // border: OutlineInputBorder(
+                //
+                //     borderRadius: BorderRadius.circular(2),
+                //     borderSide:
+                //         BorderSide(color: ColorPicker.kGreyLight9, width:0.1, )),
+              ),
             ),
           ),
         ),

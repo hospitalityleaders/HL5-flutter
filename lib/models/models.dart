@@ -1,19 +1,21 @@
 export 'package:get/get.dart';
 export 'holedoapi/holedoapi.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:flutter/foundation.dart';
-import 'package:get/get.dart';
 
+import 'package:flutter/material.dart';
+
+import 'package:get_storage/get_storage.dart';
+
+import 'package:get/get.dart';
+import 'package:holedo/main.dart';
+export 'package:provider/provider.dart';
 import 'package:holedo/models/holedoapi/article.dart';
 import 'package:holedo/models/holedoapi/article_category.dart';
-import 'package:holedo/models/holedoapi/company.dart';
-import 'package:holedo/models/holedoapi/page.dart';
 
-import 'package:holedo/models/holedoapi/user.dart';
+import 'package:holedo/models/holedoapi/holedoapi.dart';
+
 import 'package:holedo/models/holedoapi/job.dart';
+import 'package:holedo/models/holedoapi/menu_item.dart';
 import 'package:holedo/services/holedo_api_services.dart';
-import 'holedoapi/data.dart';
 
 class AppState extends ChangeNotifier {
   AppState({String? username, User? profile})
@@ -30,6 +32,17 @@ class AppState extends ChangeNotifier {
   set username(String? value) {
     _username = value;
     notifyListeners();
+  }
+
+  bool isLoginnedAndEditable(User data) {
+    print('p: ${profile?.slug} ${data.slug}');
+    if (profile?.slug != null) {
+      if (data.slug == profile?.slug) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   User? get profile => _profile;
@@ -60,10 +73,82 @@ class HoledoDatabase extends GetxController {
   DataModel? settingsList;
   List<ArticleCategory> articleCategories = [];
   List<Article> articles = [];
-  List<Page> pages = [];
+  List<PageContent> pages = [];
   List<Company> companies = [];
   final List<String> articlePaths = [];
   final ApiServices _api = ApiServices();
+
+  final List<MenuNavItem> menuItems = [
+    MenuNavItem(
+      title: 'Home',
+      path: '/home',
+      inNav: true,
+      inDrawer: true,
+    ),
+    MenuNavItem(
+      title: 'News',
+      path: '/news',
+      inNav: true,
+      inDrawer: true,
+    ),
+    MenuNavItem(
+      title: 'Profile',
+      path: '/profile',
+      inNav: true,
+      inDrawer: true,
+    ),
+    MenuNavItem(
+      title: 'Jobs',
+      path: '/jobs',
+      inNav: true,
+      inDrawer: true,
+    ),
+    MenuNavItem(
+      title: 'Recruitments',
+      path: '/recruitments',
+      inNav: true,
+      inDrawer: true,
+    ),
+    MenuNavItem(
+      title: 'Help',
+      path: '/help',
+      inNav: true,
+      inDrawer: true,
+    ),
+    MenuNavItem(
+      title: 'Logout',
+      path: '/logout',
+      inNav: false,
+      inDrawer: true,
+      loginOnly: true,
+    ),
+    MenuNavItem(
+      title: 'Login',
+      path: '/login',
+      inNav: false,
+      inDrawer: true,
+      loginOnly: false,
+    ),
+  ];
+
+  void snackBarMessage(BuildContext context, type, message) {
+    var label = 'Info';
+    var color = Colors.blue;
+
+    switch (type) {
+      case 'error':
+        label = 'Error';
+        color = Colors.red;
+        break;
+    }
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('${label}: ${message}'),
+        backgroundColor: color,
+        elevation: 10,
+      ),
+    );
+  }
 
   void getArticleCategories() async {
     articleCategories = getModel().articleCategories as List<ArticleCategory>;
@@ -105,7 +190,7 @@ class HoledoDatabase extends GetxController {
         : new DataModel();
   }
 
-  Future<Page> getPage({required String slug}) async {
+  Future<PageContent> getPage({required String slug}) async {
     try {
       isLoading(true);
 
@@ -116,7 +201,7 @@ class HoledoDatabase extends GetxController {
       if (page != null) {
         print('page: ${page.toString()} ');
       }
-      return page as Page;
+      return page as PageContent;
     } finally {
       isLoading(false);
     }
@@ -151,7 +236,7 @@ class HoledoDatabase extends GetxController {
             await _api.GET(target: '/site-settings/companies?type=2');
         data.companies = response.data!.companies;
       }
-      pages = data.pages as List<Page>;
+      pages = data.pages as List<PageContent>;
       companies = data.companies as List<Company>;
       articleCategories = data.articleCategories as List<ArticleCategory>;
 
@@ -159,6 +244,7 @@ class HoledoDatabase extends GetxController {
           in articleCategories.where((category) => category.menuItem == true)) {
         articlePaths.add(category.slug as String);
       }
+
       settingsList = data;
       this.setModel(data);
 
@@ -178,66 +264,87 @@ class UsersController extends GetxController {
   var page = 1;
   var limit = 10;
   final ApiServices _api = ApiServices();
-
+  //final DB = ;
   @override
   void onInit() {
     //checkLogin();
     super.onInit();
   }
 
-  Future<User> login({required String email, required String password}) async {
+  Future<User> login(
+      {required String email,
+      required String password,
+      required BuildContext context}) async {
+    final DB = holedoDatabase;
     try {
-      isLoading(true);
+      DB.isLoading(true);
+      var api = new Holedoapi();
+      final model = DB.getModel();
       var user = new User();
-      //var response = await _api.login(email: email, password: password);
 
-      var response = await _api.POST(
+      api = await _api.POST(
           target: '/users/login', data: {'email': email, 'password': password});
 
-      if (response.success == true) {
-        print('login: ${response.data!.user!.email.toString()}');
+      if (api.success == true) {
+        print('login: ${api.data!.user!.email.toString()}');
         isLogin.value = true;
-        token.value = response.data?.token as String;
+        token.value = api.data?.token as String;
 
-        user = response.data?.user as User;
-        final model = Get.put(HoledoDatabase()).getModel();
-        model.token = response.data?.token;
+        user = api.data?.user as User;
+
+        model.token = api.data?.token;
         model.user = user;
         print('db save: ${model.user}');
         Get.find<HoledoDatabase>().setModel(model);
+      } else {
+        DB.snackBarMessage(context, 'error', api.errors.toString());
       }
       return user;
     } finally {
-      isLoading(false);
+      DB.isLoading(false);
     }
+  }
+
+  String? getToken(slug) {
+    final model = Get.put(HoledoDatabase()).getModel();
+    if (model.token != null && model.user?.slug == slug) {
+      print('match: ${slug} token: ${model.token}');
+      return model.token;
+    }
+    return null;
+  }
+
+  void saveUserToModel(User user, String? token) {
+    final model = Get.put(HoledoDatabase()).getModel();
+    model.token = token;
+    model.user = user;
+    print('update user: ${model.user}');
+    Get.find<HoledoDatabase>().setModel(model);
   }
 
   Future<User> getProfileData(
       {String? slug,
       String? id,
       String? token,
-      required BuildContext context}) async {
+      required BuildContext context,
+      bool? isLoggined = false}) async {
     try {
       isLoading(true);
       var user = new User();
-      final model = Get.put(HoledoDatabase()).getModel();
-      if (model.user?.slug == slug) {
-        print('natch: ${slug} token: ${model.token}');
-        token = model.token;
-      }
+      token = this.getToken(slug);
       var params = {'id': id, 'slug': slug, 'token': token};
       params.removeWhere((k, v) => v == null);
 
       var response = await _api.GET(target: '/users/get/', data: params);
-      print('log: ${response.data}');
+      //print('log: ${response.data}');
       user = response.data?.user as User;
       print('log: ${user.firstName}');
 
-      if (model.user?.slug == slug) {
-        model.user = user;
-        print('update user: ${model.user}');
-        Get.find<HoledoDatabase>().setModel(model);
+      if (token != null) {
+        user.token = token;
+        saveUserToModel(user, token);
       }
+
       return user;
     } finally {
       isLoading(false);
@@ -280,6 +387,31 @@ class UsersController extends GetxController {
       var response = await _api.getUserData(id: id, slug: slug);
       print('log: ${response}');
       user = response;
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  Future<User> save(User user) async {
+    try {
+      isLoading(true);
+      var token = this.getToken(user.slug);
+      var userJson = user.toJson();
+      userJson.removeWhere((k, v) => v == null || v.toString().length == 0);
+      var update = await _api.POST(
+          target: '/users/update/', data: userJson, token: token);
+      // ignore: unnecessary_null_comparison
+      if (update != null) {
+        var response =
+            await _api.GET(target: '/users/get/', data: {'slug': user.slug});
+        //print('log: ${response.data}');
+        user = response.data?.user as User;
+        print('log: ${user.firstName}');
+
+        user.token = token;
+        saveUserToModel(user, token);
+      }
+      return user;
     } finally {
       isLoading(false);
     }

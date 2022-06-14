@@ -82,8 +82,8 @@ class _ProfileOverviewState extends State<ProfileOverview> {
     return Responsive.isDesktop(context)
         ? Padding(
             padding: EdgeInsets.symmetric(
-                horizontal: SS.sW(context) * 0.070,
-                vertical: SS.sH(context) * .02),
+                horizontal: SS.sW(context)! * 0.070 as double,
+                vertical: SS.sH(context) * .02 as double),
             // Profile Overview Rows
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -112,7 +112,7 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                     pOApiDataSec1: widget.pOApiData,
                   ),
                 ),
-                SS.sB(0, SS.sW(context) * 0.01),
+                SS.sB(0, SS.sW(context) * 0.01 as double),
                 Expanded(
                   child: ProfileOverviewSec2(
                     sec2IsEditable: widget.isEditable,
@@ -143,7 +143,7 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                     pOApiDataSec2: widget.pOApiData,
                   ),
                 ),
-                SS.sB(0, SS.sW(context) * 0.01),
+                SS.sB(0, SS.sW(context) * 0.01 as double),
                 StatefulBuilder(builder: (context, setState) {
                   return Expanded(
                     child: Column(
@@ -154,7 +154,7 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
-                            width: SS.sW(context),
+                            width: SS.sW(context) as double,
                             color: ColorPicker.kBlueLight3,
                             child: Padding(
                               padding: const EdgeInsets.all(25.0),

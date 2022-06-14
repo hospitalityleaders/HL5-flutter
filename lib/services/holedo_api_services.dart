@@ -1,3 +1,12 @@
+
+import 'dart:convert';
+import 'package:dio/dio.dart';
+import 'package:get/get.dart' as Store;
+import 'package:get_storage/get_storage.dart';
+import 'package:holedo/controller/auth_controller.dart';
+
+import 'package:http/http.dart' as http;
+
 //import 'package:get_storage/get_storage.dart';
 //import 'package:holedo/controller/auth_controller.dart';
 import 'package:holedo/models/holedoapi/article.dart';
@@ -10,6 +19,7 @@ import 'package:dio_http_cache/dio_http_cache.dart';
 
 //import 'package:dio/dio.dart';
 final baseUrl = 'https://${Get.put(HoledoDatabase()).apiHost}/rest';
+
 
 class ApiServices {
   dio.Dio _dio = dio.Dio();
@@ -26,22 +36,25 @@ class ApiServices {
     try {
       var model = new Holedoapi();
       token = token == null ? Get.put(HoledoDatabase()).apiKey : token;
+      var header = headers == null
+          ? <String, dynamic>{
+              'AuthApi': 'Bearer ${token}',
+              'Content-Type': 'application/json; charset=UTF-8',
+              'Accept': 'application/json',
+            }
+          : headers;
       dio.Response response = await _dio.post(
         '${baseUrl}${target}',
         data: data,
         options: dio.Options(
-          headers: headers == null
-              ? <String, dynamic>{
-                  'AuthApi': 'Bearer ${token}',
-                  'Content-Type': 'application/json; charset=UTF-8',
-                  'Accept': 'application/json',
-                }
-              : headers,
+          headers: header,
         ),
         queryParameters: {'apikey': token},
       );
-      print('POST URL: ${target} data: ${data}');
-
+      print('POST URL: ${target}');
+      print('POST headers: ${header.toString()}');
+      print('POST data: ${data.toString()}');
+      //print('POST respomse: ${response}');
       if (response.statusCode == 200) {
         model = Holedoapi.fromJson(response.data as Map<String, dynamic>);
       }
@@ -137,6 +150,42 @@ class ApiServices {
     required Map<String, dynamic> profileData,
   }) async {
     try {
+<<<<<<< HEAD
+      final response = await http.get(
+          Uri.parse('https://${AuthData.apiHost}/rest/users/get/'),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Accept': 'application/json',
+            'AuthApi': 'Bearer ${userData.read('token')}'
+            // 'AuthApi': 'Bearer ${AuthData.token}'
+          });
+      var data = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+        return HoledoProfileModel.fromJson(data);
+      } else {
+        return Future.error('Server Error !');
+      }
+    } catch (SocketException) {
+      return Future.error('Error Fetching Data !');
+    }
+  }
+
+  /// update data
+  Future<HoledoProfileModel?> updateUserProfile(
+      {required Map<String, dynamic> profileData}) async {
+    try {
+      final response = await http.post(
+        Uri.parse('https://${AuthData.apiHost}/rest/users/update'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'apikey': AuthData.apiKey,
+          'Accept': 'application/json',
+          'AuthApi': 'Bearer ${userData.read('token')}'
+          // 'AuthApi': 'Bearer ${AuthData.token}'
+        },
+        body: jsonEncode(profileData),
+=======
       Response response = await _dio.post(
         'https://${AuthData.apiHost}/rest/users/update',
         data: profileData,
@@ -144,6 +193,7 @@ class ApiServices {
         options: dio.Options(
           headers: {'AuthApi': 'Bearer ${AuthData.token}'},
         ),
+>>>>>>> 95209db0a577d43c2a004d0f78d5a93b376ad6a9
       );
       return response.data;
     } on DioError catch (e) {

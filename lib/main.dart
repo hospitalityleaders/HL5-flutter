@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:holedo/layouts/page_scaffold.dart';
 import 'package:holedo/layouts/pages/content_page.dart';
 import 'package:holedo/models/models.dart';
-import 'package:provider/provider.dart';
 import 'package:routemaster/routemaster.dart';
 import 'includes/url_strategy.dart';
 
@@ -75,28 +74,33 @@ RouteMap _buildRouteMap(BuildContext context) {
               redirectTo: route.queryParameters['redirectTo'],
             ),
           ),
+      '/logout': (route) {
+        final appState = Provider.of<AppState>(context, listen: false);
+        if (appState.isLoggedIn) {
+          appState.username = null;
+          appState.profile = null;
+        }
+        return Redirect('/login', queryParameters: {'redirectTo': route.path});
+      },
       '/recruitments': (route) => NoAnimationPage(child: RecruitmentPage()),
       '/recruitments/:id': (route) =>
           NoAnimationPage(child: ProfilePage(id: route.pathParameters['id']!)),
       '/news': (route) => TabPage(
             child: NewsfrontPage(),
-            paths: [
-              'all',
-              'featured'
-            ], //Get.put(HoledoDatabase()).articlePaths,
+            paths: Get.put(HoledoDatabase()).articlePaths,
             pageBuilder: (child) => NoAnimationPage(child: child),
           ),
-      '/news/all': (route) => NoAnimationPage(
+      /*'/news/all': (route) => NoAnimationPage(
             child: NewsfrontListPage(mode: 'all'),
           ),
       '/news/featured': (route) => NoAnimationPage(
             child: NewsfrontListPage(mode: 'featured'),
-          ),
-      '/news/all/:category': (route) =>
+          ),*/
+      '/news/:category': (route) =>
           _isValidCategory(route.pathParameters['category'])
               ? NoAnimationPage(
                   child: NewsfrontListPage(
-                      mode: 'all',
+                      mode: route.pathParameters['category'] as String,
                       category: Get.put(HoledoDatabase())
                           .articleCategories
                           .firstWhere(

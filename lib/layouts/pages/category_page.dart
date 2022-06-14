@@ -4,7 +4,6 @@ import 'package:holedo/models/holedoapi/article.dart';
 
 import 'package:holedo/models/models.dart';
 import 'package:holedo/layouts/page_scaffold.dart';
-import 'package:provider/provider.dart';
 
 class CategoryPage extends StatefulWidget {
   final ArticleCategory category;
@@ -34,7 +33,9 @@ class _CategoryPageState extends State<CategoryPage> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
+    return PageScaffold(
+      title: "Category News",
+      body: FutureBuilder(
         future: futurecall,
         builder: (context, AsyncSnapshot<List<Article>> snapshot) {
           if (!snapshot.hasData) {
@@ -42,21 +43,21 @@ class _CategoryPageState extends State<CategoryPage> {
               child: CircularProgressIndicator(),
             );
           } else {
-            return PageScaffold(
-                title: "Category News",
-                body: AlignedGridView.count(
-                  crossAxisCount: 2,
-                  itemCount: snapshot.data!.length,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 16,
-                  itemBuilder: (context, index) {
-                    return NewsCard(
-                        article: snapshot.data![index], showReleaseDate: true);
-                  },
+            return AlignedGridView.count(
+              crossAxisCount: 2,
+              itemCount: snapshot.data!.length,
+              crossAxisSpacing: 16,
+              mainAxisSpacing: 16,
+              itemBuilder: (context, index) {
+                return NewsCard(
+                    article: snapshot.data![index], showReleaseDate: true);
+              },
 
-                  //TileBuilder: (index) => StaggeredTile.fit(1),
-                ));
+              //TileBuilder: (index) => StaggeredTile.fit(1),
+            );
           }
-        });
+        },
+      ),
+    );
   }
 }

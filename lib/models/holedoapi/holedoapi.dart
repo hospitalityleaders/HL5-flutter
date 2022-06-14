@@ -1,4 +1,7 @@
-import 'data.dart';
+export 'data.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:holedo/models/models.dart';
 
 class Holedoapi {
   bool? success;
@@ -25,4 +28,14 @@ class Holedoapi {
         'messages': messages,
         'data': data?.toJson(),
       };
+
+  Future<User> login(
+      {required String email,
+      required String password,
+      required BuildContext context}) async {
+    var res = await Get.put(HoledoDatabase().users)
+        .login(email: email, password: password, context: context);
+
+    return res;
+  }
 }

@@ -169,7 +169,7 @@ class SearchPage extends StatelessWidget {
             'Users',
             style: Theme.of(context).textTheme.headline5,
           ),
-          SizedBox(
+          Container(
             height: 350,
             child: Obx(() {
               if (usersSearch.isLoading.value) {
@@ -182,7 +182,7 @@ class SearchPage extends StatelessWidget {
                   );
                 else
                   return AlignedGridView.count(
-                    crossAxisCount: 2,
+                    crossAxisCount: 4,
                     itemCount: usersSearch.userList.length,
                     crossAxisSpacing: 16,
                     mainAxisSpacing: 16,

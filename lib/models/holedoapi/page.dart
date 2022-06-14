@@ -1,4 +1,4 @@
-class Page {
+class PageContent {
   int? id;
   int? pageStatusTypeId;
   String? title;
@@ -8,7 +8,7 @@ class Page {
   bool? featured;
   String? created;
 
-  Page({
+  PageContent({
     this.id,
     this.pageStatusTypeId,
     this.title,
@@ -19,7 +19,7 @@ class Page {
     this.created,
   });
 
-  factory Page.fromJson(Map<String, dynamic> json) => Page(
+  factory PageContent.fromJson(Map<String, dynamic> json) => PageContent(
         id: json['id'] as int?,
         pageStatusTypeId: json['page_status_type_id'] as int?,
         title: json['title'] as String?,
