@@ -3272,6 +3272,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:holedo/layouts/pages/news/update/widget/update_news_widget.dart';
 import 'package:holedo/screens/Authentication/login.dart';
 import 'package:holedo/screens/news/update/widget/update_news_widget.dart';
 import 'package:holedo/screens/profile-pages/profile/header.dart';
@@ -3282,13 +3283,11 @@ import '../../../../common/common_widget.dart';
 import '../../../../constant/colorPicker/color_picker.dart';
 import '../../../../constant/fontStyle/font_style.dart';
 import '../../../../constant/sizedbox.dart';
-import '../../../common/common_widget.dart';
-import '../../../constant/colorPicker/color_picker.dart';
-import '../../../constant/fontStyle/font_style.dart';
-import '../../../constant/sizedbox.dart';
-import '../../../controller/menu_controller.dart';
-import '../../../data/data.dart';
-import '../../../responsive/responsive.dart';
+import '../../../../data/data.dart';
+import '../../../../responsive/responsive.dart';
+
+
+import '../../profile-pages/profile/header.dart';
 import '../categories/news_signal.dart';
 
 class UpdateNews extends StatefulWidget {
@@ -3333,9 +3332,9 @@ class _UpdateNewsState extends State<UpdateNews>
             body: Obx(() {
               return SingleChildScrollView(
                 child: Column(
-                  children: [
+                  children: <Widget>[
                     Header(),
-                    _menuController.menuIndex.value == 0
+                    _menuController.menuIndex.value== 0
                         ? Column(
                             children: [
                               Container(

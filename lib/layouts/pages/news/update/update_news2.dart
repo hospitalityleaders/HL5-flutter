@@ -3,11 +3,12 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
-import '../../../common/common_widget.dart';
-import '../../../constant/colorPicker/color_picker.dart';
-import '../../../constant/sizedbox.dart';
-import '../../../data/data.dart';
-import '../../../responsive/responsive.dart';
+
+import '../../../../common/common_widget.dart';
+import '../../../../constant/colorPicker/color_picker.dart';
+import '../../../../constant/sizedbox.dart';
+import '../../../../data/data.dart';
+import '../../../../responsive/responsive.dart';
 import 'widget/update_news_widget.dart';
 
 class UpdateNewsSecond extends StatefulWidget {

@@ -4,10 +4,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/sizedbox.dart';
-import '../../../common/common_widget.dart';
-import '../../../constant/fontStyle/font_style.dart';
-import '../../../data/data.dart';
-import '../../../responsive/responsive.dart';
+
+import '../../../../common/common_widget.dart';
+import '../../../../constant/fontStyle/font_style.dart';
+import '../../../../responsive/responsive.dart';
+
 
 class NewsSingleLoggedInScreen extends StatefulWidget {
   static const String route = '/category_details';

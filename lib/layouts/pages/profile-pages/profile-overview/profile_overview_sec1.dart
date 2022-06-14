@@ -55,16 +55,16 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
       };
       print('usser: ${userData}');
       dynamic res = await _apiServices.updateUserProfile();
-      // if (res?.success) {
-      //   Navigator.pop(context);
-      // } else {
-      //   ScaffoldMessenger.of(context).showSnackBar(
-      //     SnackBar(
-      //       content: Text('Error: ${res?.messages}'),
-      //       backgroundColor: Colors.red.shade300,
-      //     ),
-      //   );
-      // }
+      if (res?.success as bool) {
+        Navigator.pop(context);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error: ${res?.messages}'),
+            backgroundColor: Colors.red.shade300,
+          ),
+        );
+      }
     }
     setState(() {
       isUpdating = false;

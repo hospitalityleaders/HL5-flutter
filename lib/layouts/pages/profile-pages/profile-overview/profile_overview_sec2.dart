@@ -193,50 +193,54 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                 ),
                 SS.sB(5),
                 SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      AnimatedContainer(
-                        height: isVisible ? 120 : 0,
-                        color: ColorPicker.kGreyLight2,
-                        duration: Duration(seconds: 1),
-                        alignment: isVisible
-                            ? Alignment.topCenter
-                            : Alignment.bottomCenter,
-                        curve: Curves.fastOutSlowIn,
-                        child: SingleChildScrollView(
-                          child: Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Text(
-                              description,
-                              style: FontTextStyle.kGreyLight516W400SSP,
+                  child: StatefulBuilder(
+                    builder: (context,setState) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          AnimatedContainer(
+                            height: isVisible ? 120 : 0,
+                            color: ColorPicker.kGreyLight2,
+                            duration: Duration(seconds: 1),
+                            alignment: isVisible
+                                ? Alignment.topCenter
+                                : Alignment.bottomCenter,
+                            curve: Curves.fastOutSlowIn,
+                            child: SingleChildScrollView(
+                              child: Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                  description,
+                                  style: FontTextStyle.kGreyLight516W400SSP,
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.all(5),
-                        color: ColorPicker.kGreyLight2,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            TextButton.icon(
-                              onPressed: () {
-                                setState(() {
-                                  isVisible = !isVisible;
-                                });
-                              },
-                              icon: Icon(
-                                isVisible ? Icons.remove : Icons.add,
-                                color: ColorPicker.kBlueLight1,
-                              ),
-                              label: Text(isVisible ? 'Close' : cardBtn,
-                                  style: FontTextStyle.kBlueLight114W400SSP),
+                          Container(
+                            padding: EdgeInsets.all(5),
+                            color: ColorPicker.kGreyLight2,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                TextButton.icon(
+                                  onPressed: () {
+                                    setState(() {
+                                      isVisible = !isVisible;
+                                    });
+                                  },
+                                  icon: Icon(
+                                    isVisible ? Icons.remove : Icons.add,
+                                    color: ColorPicker.kBlueLight1,
+                                  ),
+                                  label: Text(isVisible ? 'Close' : cardBtn,
+                                      style: FontTextStyle.kBlueLight114W400SSP),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                      ),
-                    ],
+                          ),
+                        ],
+                      );
+                    }
                   ),
                 ),
               ],
