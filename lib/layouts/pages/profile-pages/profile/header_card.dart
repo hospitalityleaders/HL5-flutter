@@ -7,6 +7,7 @@ import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/responsive/responsive.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../common/dropDownButton.dart';
+import '../../../../common/textfield_fieldname.dart';
 import '../../../../constant/colorPicker/color_picker.dart';
 import '../../../../constant/sizedbox.dart';
 import '../../../../services/holedo_api_services.dart';
@@ -36,42 +37,43 @@ class HeaderCard extends StatefulWidget {
 class _HeaderCardState extends State<HeaderCard> {
   ///common field
 
-  Widget buildFieldName(String fieldName, [String? reqField]) {
-    return Column(
-      children: [
-        RichText(
-          text: TextSpan(
-              text: '$fieldName',
-              style: FontTextStyle.kBlueDark114W700SSP,
-              children: [
-                TextSpan(
-                    text: reqField, style: FontTextStyle.kBlueLight114W400SSP),
-              ]),
-        ),
-        SS.sB(5)
-      ],
-    );
-  }
-
-  Widget buildTextField(
-      [String? hintText, TextEditingController? _controller]) {
-    return Column(
-      children: [
-        TextFormField(
-          controller: _controller,
-          decoration: InputDecoration(
-            hintText: hintText,
-            isDense: true,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(2),
-              borderSide: BorderSide(color: ColorPicker.kGreyLight9, width: 1),
-            ),
-          ),
-        ),
-        SS.sB(18),
-      ],
-    );
-  }
+  // Widget buildFieldName(String fieldName, [String? reqField]) {
+  //   return Column(
+  //     children: [
+  //       RichText(
+  //         text: TextSpan(
+  //             text: '$fieldName',
+  //             style: FontTextStyle.kBlueDark114W700SSP,
+  //             children: [
+  //               TextSpan(
+  //                   text: reqField, style: FontTextStyle.kBlueLight114W400SSP),
+  //             ]),
+  //       ),
+  //       SS.sB(5)
+  //     ],
+  //   );
+  // }
+  //
+  // Widget buildTextField(
+  //     [String? hintText, TextEditingController? _controller]) {
+  //   return Column(
+  //     children: [
+  //       TextFormField(
+  //         controller: _controller,
+  //         decoration: InputDecoration(
+  //           hintText: hintText,
+  //
+  //           border: OutlineInputBorder(
+  //             borderRadius: BorderRadius.circular(2),
+  //
+  //             borderSide: BorderSide(color: ColorPicker.kGreyLight9, width: 0),
+  //           ),
+  //         ),
+  //       ),
+  //       SS.sB(18),
+  //     ],
+  //   );
+  // }
 
   /// API to fetch and update data functionality Start
 
@@ -527,15 +529,15 @@ class _HeaderCardState extends State<HeaderCard> {
                                     crossAxisAlignment:
                                     CrossAxisAlignment.start,
                                     children: [
-                                      buildFieldName('Name', '*'),
-                                      buildTextField(
+                                      TextFieldAndFieldName.buildFieldName('Name', '*'),
+                                      TextFieldAndFieldName.buildTextField(
                                           'Name', _fNameController),
-                                      buildFieldName('Surname', '*'),
-                                      buildTextField(
+                                      TextFieldAndFieldName.buildFieldName('Surname', '*'),
+                                      TextFieldAndFieldName.buildTextField(
                                           'Surname', _lNameController),
-                                      buildFieldName(
+                                      TextFieldAndFieldName.buildFieldName(
                                           'Professional title' '?'),
-                                      buildTextField(
+                                      TextFieldAndFieldName.buildTextField(
                                           'Business development manager, recruiter and hotel specialist',
                                           _professionalTitleController),
                                       Row(
@@ -546,10 +548,10 @@ class _HeaderCardState extends State<HeaderCard> {
                                               CrossAxisAlignment
                                                   .start,
                                               children: [
-                                                buildFieldName(
+                                                TextFieldAndFieldName.buildFieldName(
                                                     'City / Area  / Region',
                                                     '*'),
-                                                buildTextField(
+                                                TextFieldAndFieldName.buildTextField(
                                                     '', _areaController)
                                               ],
                                             ),
@@ -564,7 +566,7 @@ class _HeaderCardState extends State<HeaderCard> {
                                               CrossAxisAlignment
                                                   .start,
                                               children: [
-                                                buildFieldName(
+                                                TextFieldAndFieldName.buildFieldName(
                                                     'Country', '*'),
                                                 DropDownButton(
                                                   menuList:
@@ -1043,7 +1045,7 @@ class _HeaderCardState extends State<HeaderCard> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      buildFieldName('Send to'),
+                      TextFieldAndFieldName.buildFieldName('Send to'),
                       Container(
                         decoration: BoxDecoration(
                             border: Border.all(color: ColorPicker.kGreyLight8)),
@@ -1061,7 +1063,7 @@ class _HeaderCardState extends State<HeaderCard> {
                         ),
                       ),
                       SS.sB(20),
-                      buildFieldName('Intro message'),
+                      TextFieldAndFieldName.buildFieldName('Intro message'),
                       Text(
                         'Send a message along with your connection request.',
                         style: FontTextStyle.kGreyLight514W400SSP,
@@ -1147,7 +1149,7 @@ class _HeaderCardState extends State<HeaderCard> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              buildFieldName('Reference recipient'),
+                              TextFieldAndFieldName.buildFieldName('Reference recipient'),
                               Container(
                                 decoration: BoxDecoration(
                                     border: Border.all(
@@ -1166,7 +1168,7 @@ class _HeaderCardState extends State<HeaderCard> {
                                 ),
                               ),
                               SS.sB(20),
-                              buildFieldName('Reference'),
+                              TextFieldAndFieldName.buildFieldName('Reference'),
                               Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
@@ -1332,7 +1334,7 @@ class _HeaderCardState extends State<HeaderCard> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      buildFieldName('Send to'),
+                      TextFieldAndFieldName.buildFieldName('Send to'),
                       Container(
                         decoration: BoxDecoration(
                             border: Border.all(color: ColorPicker.kGreyLight8)),
@@ -1350,7 +1352,7 @@ class _HeaderCardState extends State<HeaderCard> {
                         ),
                       ),
                       SS.sB(20),
-                      buildFieldName('Message'),
+                      TextFieldAndFieldName.buildFieldName('Message'),
                       TextField(
                         autocorrect: true,
                         minLines: 6,

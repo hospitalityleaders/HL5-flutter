@@ -13,10 +13,10 @@ class BuildWorkExpPopUp {
         padding: EdgeInsets.symmetric(vertical: 5, horizontal: 16),
         child: Container(
           width: Responsive.isDesktop(context)
-              ? SS.sW(context) * .50 as double
+              ? SS.sW(context) * .50
               : Responsive.isMobile(context)
-                  ? SS.sW(context) * .90 as double
-                  : SS.sW(context) * .60 as double,
+                  ? SS.sW(context) * .90
+                  : SS.sW(context) * .60,
           color: ColorPicker.kWhite,
           child: SingleChildScrollView(
             child: Column(
@@ -69,7 +69,7 @@ class BuildWorkExpPopUp {
                         child: Column(
                           children: [
                             Divider(
-                              height: SS.sH(context) * 0.01 as double,
+                              height: SS.sH(context) * 0.01,
                               color: ColorPicker.kGreyLight3,
                             ),
                             Padding(
@@ -78,19 +78,19 @@ class BuildWorkExpPopUp {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   TextFieldAndFieldName.buildFieldName(
-                                      'Title / position', '*') as Widget,
+                                      'Title / position', '*'),
                                   TextFieldAndFieldName.buildTextField(
-                                      'General manager') as Widget,
+                                      'General manager'),
                                   TextFieldAndFieldName.buildFieldName(
-                                      'Company name', '*') as Widget,
+                                      'Company name', '*'),
                                   TextFieldAndFieldName.buildTextField(
-                                      'Fairmont Zimbali Resort') as Widget,
+                                      'Fairmont Zimbali Resort'),
                                   TextFieldAndFieldName.buildFieldName(
-                                      'Company website') as Widget,
+                                      'Company website'),
                                   TextFieldAndFieldName.buildTextField(
-                                      'www.fairmontzimbali.com') as Widget,
+                                      'www.fairmontzimbali.com'),
                                   TextFieldAndFieldName.buildFieldName(
-                                      'Job description') as Widget,
+                                      'Job description'),
                                   Padding(
                                     padding: EdgeInsets.all(8.0),
                                     child: TextField(

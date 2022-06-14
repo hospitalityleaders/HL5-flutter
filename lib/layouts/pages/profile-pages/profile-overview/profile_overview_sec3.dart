@@ -309,7 +309,7 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
         builder: (BuildContext context) {
           return StatefulBuilder(builder: (BuildContext context, setState) {
             List<Widget> textField = List.generate(langIndex,
-                (int i) => TextFieldAndFieldName.buildTextField() as Widget);
+                (int i) => TextFieldAndFieldName.buildTextField());
             List<Widget> menuItem = List.generate(
                 langIndex,
                 (int i) => DropDownButton(
@@ -352,7 +352,7 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       TextFieldAndFieldName.buildFieldName(
-                                          'Language', '*') as Widget,
+                                          'Language', '*'),
                                       SS.sB(10, 0),
                                       Column(
                                         children: textField,
@@ -380,7 +380,7 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       TextFieldAndFieldName.buildFieldName(
-                                          'Proficiency', '*') as Widget,
+                                          'Proficiency', '*'),
                                       SS.sB(10, 0),
                                       Column(
                                         children: menuItem,
