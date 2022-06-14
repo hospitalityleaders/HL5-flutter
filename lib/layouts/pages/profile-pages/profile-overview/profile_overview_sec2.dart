@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:holedo/common/dropDownButton.dart';
@@ -54,6 +55,8 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
   bool showIcon = false;
   bool isHovering = false;
   bool isShowingPopUpCard = false;
+  bool isColor = false;
+  bool isColor1 = false;
 
   Widget buildProfileSec2Cards(
     sec2Key,
@@ -104,7 +107,6 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                                   onTap: () {
                                     setState(() {
                                       isShowingPopUpCard = !isShowingPopUpCard;
-                                      print(isShowingPopUpCard);
                                     });
                                   },
                                   onHover: (value) {
@@ -248,73 +250,97 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
         showIcon
             ? Positioned(
                 top: 50,
-                right: 10,
+                right: 12,
                 child: Visibility(
                   visible: isShowingPopUpCard,
                   child: Column(
+
                     children: [
                       Align(
-                        alignment: Alignment(.35, 0),
+                        alignment: Alignment(.35,0),
                         child: ClipPath(
                           clipper: ArrowClipper(),
                           child: Container(
                             height: 15,
                             width: 12,
                             decoration: BoxDecoration(
-                              color: ColorPicker.kGreyLight7.withOpacity(0.5),
+                              color: ColorPicker.kWhite,
                             ),
                           ),
                         ),
                       ),
-                      Align(
-                          alignment: Alignment(.25, .12),
-                          child: Container(
-                            color: ColorPicker.kWhite,
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        Icons.menu,
-                                        color: ColorPicker.kBlueLight1,
-                                        size: 10,
-                                      ),
-                                      SS.sB(0, 7.5),
-                                      Text(
-                                        'View in timeline',
-                                        style:
-                                            FontTextStyle.kBlueLight114W400SSP,
-                                      ),
-                                    ],
-                                  ),
+                      Card(
+                        elevation: 3,
+                        // decoration: BoxDecoration(
+                        //     color: ColorPicker.kWhite,
+                        //     border: Border.all(width: 0.1,color: ColorPicker.kWhite1),),
+                        child: Column(
+                          children: [
+                            InkWell(
+                              onTap: () {},
+                              onHover: (value) {
+                                setState(() {
+                                  isColor1 = value;
+                                });
+                              },
+                              child: Container(
+                                height: 38,
+                                width: SS.sW(context) * 0.15,
+                                color: isColor1
+                                    ? ColorPicker.kBlueLight2
+                                    : ColorPicker.kWhite,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    SS.sB(0, 11.5),
+                                    Icon(
+                                      Icons.menu,
+                                      color: ColorPicker.kBlueLight1,
+                                      size: 10,
+                                    ),
+                                    SS.sB(0, 7.5),
+                                    Text(
+                                      'View in timeline',
+                                      style: FontTextStyle.kBlueLight114W400SSP,
+                                    ),
+                                  ],
                                 ),
-                                Divider(
-                                  height: 0.5,
-                                  color: Colors.grey,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        Icons.menu,
-                                        color: ColorPicker.kBlueLight1,
-                                        size: 10,
-                                      ),
-                                      SS.sB(0, 7.5),
-                                      Text(
-                                        'View in timeline',
-                                        style:
-                                            FontTextStyle.kBlueLight114W400SSP,
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ],
+                              ),
                             ),
-                          ))
+                            InkWell(
+                              onTap: () {},
+                              onHover: (value) {
+                                setState(() {
+                                  isColor = value;
+                                });
+                              },
+                              child: Container(
+                                height: 38,
+                                width: SS.sW(context) * 0.15,
+                                color: isColor
+                                    ? ColorPicker.kBlueLight2
+                                    : ColorPicker.kWhite,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    SS.sB(0, 11.5),
+                                    Icon(
+                                      Icons.edit,
+                                      color: ColorPicker.kBlueLight1,
+                                      size: 10,
+                                    ),
+                                    SS.sB(0, 7.5),
+                                    Text(
+                                      'Edit work experience',
+                                      style: FontTextStyle.kBlueLight114W400SSP,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      )
                     ],
                   ),
                 ))

@@ -1,7 +1,5 @@
-import 'package:holedo/models/holedoapi/data.dart';
 import 'package:holedo/models/models.dart';
 import 'package:holedo/layouts/page_scaffold.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:holedo/utils/validator.dart';
 import 'package:routemaster/routemaster.dart';

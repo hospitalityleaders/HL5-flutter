@@ -24,32 +24,32 @@ class TextFieldAndFieldName {
     );
   }
 
-  static Widget buildTextField([String? hintText,TextEditingController? _controller]) {
+  static Widget buildTextField(
+      [String? hintText, TextEditingController? _controller]) {
     return Column(
       children: [
         Container(
-
+          alignment: Alignment.center,
+          color: ColorPicker.kGreyLight9,
           height: 36,
-          decoration: BoxDecoration(
-              color: ColorPicker.kGreyLight9,
-              borderRadius: BorderRadius.circular(2),
-              border: Border.all(
-                color: ColorPicker.kGreyLight7,
-                width: 0.2,
-              )),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4,vertical: 4),
-            child: TextFormField(
-              controller: _controller,
-              decoration: InputDecoration(
-                border: InputBorder.none,
-
-                hintText: hintText,
-                // border: OutlineInputBorder(
-                //
-                //     borderRadius: BorderRadius.circular(2),
-                //     borderSide:
-                //         BorderSide(color: ColorPicker.kGreyLight9, width:0.1, )),
+          // decoration: BoxDecoration(
+          //     color: ColorPicker.kGreyLight9,
+          //     borderRadius: BorderRadius.circular(2),
+          //     border: Border.all(
+          //       color: ColorPicker.kGreyLight7,
+          //       width: 0.2,
+          //     ),
+          // ),
+          child: TextFormField(
+            controller: _controller,
+            decoration: InputDecoration(
+              hintText: hintText,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(2),
+                borderSide: BorderSide(
+                  color: ColorPicker.kGreyLight9,
+                  width: 0.1,
+                ),
               ),
             ),
           ),
