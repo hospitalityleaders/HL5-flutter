@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:holedo/layouts/page_scaffold.dart';
 import 'package:holedo/layouts/pages/content_page.dart';
 import 'package:holedo/models/models.dart';
+import 'package:holedo/presentation/theme/light_theme.dart';
 import 'package:routemaster/routemaster.dart';
 import 'includes/url_strategy.dart';
 
@@ -228,16 +229,18 @@ class BookStoreApp extends StatelessWidget {
           profile: Get.put(HoledoDatabase()).getModel().user),
       child: MaterialApp.router(
         title: 'Holedo',
-        theme: ThemeData(
-          primaryColor: Color(0xFF131921),
-          elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ElevatedButton.styleFrom(
-              primary: Color(0xfffebd68),
-              onPrimary: Color(0xff333333),
-            ),
-          ),
-          platform: TargetPlatform.macOS,
-        ),
+        debugShowCheckedModeBanner: false,
+        theme: lightTheme,
+        // theme: ThemeData(
+        //   primaryColor: Color(0xFF131921),
+        //   elevatedButtonTheme: ElevatedButtonThemeData(
+        //     style: ElevatedButton.styleFrom(
+        //       primary: Color(0xfffebd68),
+        //       onPrimary: Color(0xff333333),
+        //     ),
+        //   ),
+        //   platform: TargetPlatform.macOS,
+        // ),
         routeInformationParser: RoutemasterParser(),
         routeInformationProvider: routeInformationProvider,
         routerDelegate: RoutemasterDelegate(

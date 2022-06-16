@@ -35,28 +35,32 @@ class _CategoryPageState extends State<CategoryPage> {
   Widget build(BuildContext context) {
     return PageScaffold(
       title: "Category News",
-      body: FutureBuilder(
-        future: futurecall,
-        builder: (context, AsyncSnapshot<List<Article>> snapshot) {
-          if (!snapshot.hasData) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          } else {
-            return AlignedGridView.count(
-              crossAxisCount: 2,
-              itemCount: snapshot.data!.length,
-              crossAxisSpacing: 16,
-              mainAxisSpacing: 16,
-              itemBuilder: (context, index) {
-                return NewsCard(
-                    article: snapshot.data![index], showReleaseDate: true);
-              },
+      body: Column(
+        children: [
+          FutureBuilder(
+            future: futurecall,
+            builder: (context, AsyncSnapshot<List<Article>> snapshot) {
+              if (!snapshot.hasData) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else {
+                return AlignedGridView.count(
+                  crossAxisCount: 2,
+                  itemCount: snapshot.data!.length,
+                  crossAxisSpacing: 16,
+                  mainAxisSpacing: 16,
+                  itemBuilder: (context, index) {
+                    return NewsCard(
+                        article: snapshot.data![index], showReleaseDate: true);
+                  },
 
-              //TileBuilder: (index) => StaggeredTile.fit(1),
-            );
-          }
-        },
+                  //TileBuilder: (index) => StaggeredTile.fit(1),
+                );
+              }
+            },
+          ),
+        ],
       ),
     );
   }

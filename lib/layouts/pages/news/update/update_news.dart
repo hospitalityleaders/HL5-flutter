@@ -3267,24 +3267,21 @@
 // }
 
 // latest code
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:holedo/screens/Authentication/login.dart';
-import 'package:holedo/screens/news/update/widget/update_news_widget.dart';
-import 'package:holedo/screens/profile-pages/profile/header.dart';
-import 'package:holedo/screens/profile-pages/profile/profile-page.dart';
-
+import 'package:holedo/common/common_widget.dart';
+import 'package:holedo/constant/colorPicker/color_picker.dart';
+import 'package:holedo/constant/fontStyle/font_style.dart';
+import 'package:holedo/constant/sizedbox.dart';
+import 'package:holedo/controller/menu_controller.dart';
+import 'package:holedo/data/data.dart';
+import 'package:holedo/layouts/pages/news/update/widget/update_news_widget.dart';
+import 'package:holedo/layouts/pages/profile-pages/profile/header.dart';
+import 'package:holedo/layouts/pages/profile_page.dart';
+import 'package:holedo/responsive/responsive.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
-import '../../../common/common_widget.dart';
-import '../../../constant/colorPicker/color_picker.dart';
-import '../../../constant/fontStyle/font_style.dart';
-import '../../../constant/sizedbox.dart';
-import '../../../controller/menu_controller.dart';
-import '../../../data/data.dart';
-import '../../../responsive/responsive.dart';
 import '../categories/news_signal.dart';
 
 class UpdateNews extends StatefulWidget {
@@ -3318,7 +3315,7 @@ class _UpdateNewsState extends State<UpdateNews>
 
   List drawerItem = ['Home', 'Profile', 'News', 'Jobs', 'Recruitment', 'Help'];
 
-  _buildTabContext(int lineCount) => Container(
+  Widget _buildTabContext(int lineCount) => Container(
           child: Center(
         child: CommonWidget.text('No Data'),
       ));
@@ -3331,448 +3328,435 @@ class _UpdateNewsState extends State<UpdateNews>
                 child: Column(
                   children: [
                     Header(),
-                    _menuController.menuIndex.value == 0
-                        ? Column(
-                            children: [
-                              Container(
-                                height: 147,
-                                color: ColorPicker.kPrimary,
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: Container(
-                                        color: ColorPicker.kPrimary,
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: Get.height * 0.07),
-                                        child: Column(
+                    if (_menuController.menuIndex.value == 0)
+                      Column(
+                        children: [
+                          Container(
+                            height: 147,
+                            color: ColorPicker.kPrimary,
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    color: ColorPicker.kPrimary,
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: Get.height * 0.07),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Row(
                                           crossAxisAlignment:
-                                              CrossAxisAlignment.end,
+                                              CrossAxisAlignment.center,
                                           mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                              MainAxisAlignment.end,
                                           children: [
-                                            Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.end,
-                                              children: [
-                                                Image.asset(
-                                                  'assets/icons/rightShield.png',
-                                                  height: 33,
-                                                ),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                CommonWidget.text(
-                                                  'AHL',
-                                                  style: FontTextStyle
-                                                      .kWhite33W600PR,
-                                                )
-                                              ],
+                                            Image.asset(
+                                              'assets/icons/rightShield.png',
+                                              height: 33,
                                             ),
                                             SizedBox(
-                                              height: 10,
+                                              width: 10,
                                             ),
                                             CommonWidget.text(
-                                              'MY GRADE',
-                                              style: FontTextStyle
-                                                  .kWhite16W600PR
-                                                  .copyWith(letterSpacing: 2.5),
+                                              'AHL',
+                                              style:
+                                                  FontTextStyle.kWhite33W600PR,
                                             )
                                           ],
                                         ),
-                                      ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        CommonWidget.text(
+                                          'MY GRADE',
+                                          style: FontTextStyle.kWhite16W600PR
+                                              .copyWith(letterSpacing: 2.5),
+                                        )
+                                      ],
                                     ),
-                                    VerticalDivider(
-                                      width: 2,
-                                      color: Colors.black,
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        color: ColorPicker.kPrimary,
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: Get.height * 0.07),
-                                        child: Column(
+                                  ),
+                                ),
+                                VerticalDivider(
+                                  width: 2,
+                                  color: Colors.black,
+                                ),
+                                Expanded(
+                                  child: Container(
+                                    color: ColorPicker.kPrimary,
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: Get.height * 0.07),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Row(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
-                                            Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                CommonWidget.text(
-                                                  '33% ',
-                                                  style: FontTextStyle
-                                                      .kBlueLight33W600PR,
-                                                ),
-                                                const SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Image.asset(
-                                                  'assets/icons/info.png',
-                                                  height: 33,
-                                                ),
-                                              ],
+                                            CommonWidget.text(
+                                              '33% ',
+                                              style: FontTextStyle
+                                                  .kBlueLight33W600PR,
                                             ),
                                             const SizedBox(
-                                              height: 10,
+                                              width: 10,
                                             ),
-                                            CommonWidget.text(
-                                              'TO NEXT GRADE',
-                                              style: FontTextStyle
-                                                  .kGreyDark16W600PR
-                                                  .copyWith(letterSpacing: 2.5),
-                                            )
+                                            Image.asset(
+                                              'assets/icons/info.png',
+                                              height: 33,
+                                            ),
                                           ],
                                         ),
-                                      ),
-                                    ),
-                                    VerticalDivider(
-                                      width: 2,
-                                      color: Colors.black,
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        color: ColorPicker.kPrimary,
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: Get.height * 0.07),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                Image.asset(
-                                                  'assets/icons/shield.png',
-                                                  height: 33,
-                                                ),
-                                                const SizedBox(
-                                                  width: 10,
-                                                ),
-                                                CommonWidget.text(
-                                                  'MHL',
-                                                  style: FontTextStyle
-                                                      .kGreyDark33W600PR,
-                                                )
-                                              ],
-                                            ),
-                                            const SizedBox(
-                                              height: 10,
-                                            ),
-                                            CommonWidget.text(
-                                              'NEXT GRADE',
-                                              style: FontTextStyle
-                                                  .kGreyDark16W600PR
-                                                  .copyWith(letterSpacing: 2.5),
-                                            )
-                                          ],
+                                        const SizedBox(
+                                          height: 10,
                                         ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                height: 87,
-                                width: Get.width,
-                                color: Colors.white,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Container(
-                                      width: 600,
-                                      color: Colors.white,
-                                      child: TabBar(
-                                        controller: _tabController,
-                                        onTap: (int value) {
-                                          _menuController.setTabIndex(value);
-                                        },
-                                        labelPadding:
-                                            const EdgeInsets.only(bottom: 15),
-                                        tabs: List.generate(
-                                          Data.tabItem.length,
-                                          (index) => CommonWidget.text(
-                                            Data.tabItem[index],
-                                            style:
-                                                FontTextStyle.kGreyDark16W600PR,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              IndexedStack(
-                                key: ValueKey<int>(_menuController
-                                    .tabIndex.value
-                                    .toInt()), // add this line
-                                index: _menuController.tabIndex.value.toInt(),
-                                children: <Widget>[
-                                  SingleChildScrollView(
-                                    scrollDirection: Axis.vertical,
-                                    child: Column(
-                                      children: [
-                                        Responsive.isDesktop(context)
-                                            ? SizedBox(
-                                                height: Get.height * 0.05)
-                                            : SizedBox(),
-                                        webView(),
+                                        CommonWidget.text(
+                                          'TO NEXT GRADE',
+                                          style: FontTextStyle.kGreyDark16W600PR
+                                              .copyWith(letterSpacing: 2.5),
+                                        )
                                       ],
                                     ),
                                   ),
-                                  _buildTabContext(200),
-                                  _buildTabContext(2),
-                                  _buildTabContext(200),
-                                  _buildTabContext(2)
-                                ],
-                              ),
-                            ],
-                          )
-
-                        //Profile page functionality
-
-                        : _menuController.menuIndex.value == 1
-                            ? ProfilePage()
-                            : _menuController.menuIndex.value == 2
-                                ? Column(
-                                    children: [
-                                      Container(
-                                        height: 147,
-                                        color: ColorPicker.kPrimary,
-                                        child: Row(
-                                          children: [
-                                            Expanded(
-                                              child: Container(
-                                                color: ColorPicker.kPrimary,
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal:
-                                                        Get.height * 0.07),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.end,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Row(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment.end,
-                                                      children: [
-                                                        Image.asset(
-                                                          'assets/icons/rightShield.png',
-                                                          height: 33,
-                                                        ),
-                                                        SizedBox(
-                                                          width: 10,
-                                                        ),
-                                                        CommonWidget.text(
-                                                          'AHL',
-                                                          style: FontTextStyle
-                                                              .kWhite33W600PR,
-                                                        )
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    CommonWidget.text(
-                                                      'MY GRADE',
-                                                      style: FontTextStyle
-                                                          .kWhite16W600PR
-                                                          .copyWith(
-                                                              letterSpacing:
-                                                                  2.5),
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                            VerticalDivider(
-                                              width: 2,
-                                              color: Colors.black,
-                                            ),
-                                            Expanded(
-                                              child: Container(
-                                                color: ColorPicker.kPrimary,
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal:
-                                                        Get.height * 0.07),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Row(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        CommonWidget.text(
-                                                          '33% ',
-                                                          style: FontTextStyle
-                                                              .kBlueLight33W600PR,
-                                                        ),
-                                                        const SizedBox(
-                                                          width: 10,
-                                                        ),
-                                                        Image.asset(
-                                                          'assets/icons/info.png',
-                                                          height: 33,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    CommonWidget.text(
-                                                      'TO NEXT GRADE',
-                                                      style: FontTextStyle
-                                                          .kGreyDark16W600PR
-                                                          .copyWith(
-                                                              letterSpacing:
-                                                                  2.5),
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                            VerticalDivider(
-                                              width: 2,
-                                              color: Colors.black,
-                                            ),
-                                            Expanded(
-                                              child: Container(
-                                                color: ColorPicker.kPrimary,
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal:
-                                                        Get.height * 0.07),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Row(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Image.asset(
-                                                          'assets/icons/shield.png',
-                                                          height: 33,
-                                                        ),
-                                                        const SizedBox(
-                                                          width: 10,
-                                                        ),
-                                                        CommonWidget.text(
-                                                          'MHL',
-                                                          style: FontTextStyle
-                                                              .kGreyDark33W600PR,
-                                                        )
-                                                      ],
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    CommonWidget.text(
-                                                      'NEXT GRADE',
-                                                      style: FontTextStyle
-                                                          .kGreyDark16W600PR
-                                                          .copyWith(
-                                                              letterSpacing:
-                                                                  2.5),
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 87,
-                                        width: Get.width,
-                                        color: Colors.white,
-                                        child: Column(
+                                ),
+                                VerticalDivider(
+                                  width: 2,
+                                  color: Colors.black,
+                                ),
+                                Expanded(
+                                  child: Container(
+                                    color: ColorPicker.kPrimary,
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: Get.height * 0.07),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
                                           mainAxisAlignment:
-                                              MainAxisAlignment.end,
+                                              MainAxisAlignment.start,
                                           children: [
-                                            Container(
-                                              width: 600,
-                                              color: Colors.white,
-                                              child: TabBar(
-                                                controller: _tabController,
-                                                labelPadding:
-                                                    const EdgeInsets.only(
-                                                        bottom: 15),
-                                                tabs: List.generate(
-                                                  Data.tabItem.length,
-                                                  (index) => CommonWidget.text(
-                                                    Data.tabItem[index],
-                                                    style: FontTextStyle
-                                                        .kGreyDark16W600PR,
-                                                  ),
-                                                ),
-                                              ),
+                                            Image.asset(
+                                              'assets/icons/shield.png',
+                                              height: 33,
                                             ),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            CommonWidget.text(
+                                              'MHL',
+                                              style: FontTextStyle
+                                                  .kGreyDark33W600PR,
+                                            )
                                           ],
                                         ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        CommonWidget.text(
+                                          'NEXT GRADE',
+                                          style: FontTextStyle.kGreyDark16W600PR
+                                              .copyWith(letterSpacing: 2.5),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            height: 87,
+                            width: Get.width,
+                            color: Colors.white,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Container(
+                                  width: 600,
+                                  color: Colors.white,
+                                  child: TabBar(
+                                    controller: _tabController,
+                                    onTap: (int value) {
+                                      _menuController.setTabIndex(value);
+                                    },
+                                    labelPadding:
+                                        const EdgeInsets.only(bottom: 15),
+                                    tabs: List.generate(
+                                      Data.tabItem.length,
+                                      (index) => CommonWidget.text(
+                                        Data.tabItem[index],
+                                        style: FontTextStyle.kGreyDark16W600PR,
                                       ),
-                                      IndexedStack(
-                                        // This key causes the AnimatedSwitcher to interpret this as a "new"
-                                        // child each time the count changes, so that it will begin its animation
-                                        // when the count changes.
-                                        key: ValueKey<int>(_tabController!
-                                            .index), // add this line
-                                        index: _tabController!.index,
-                                        children: <Widget>[
-                                          SingleChildScrollView(
-                                            scrollDirection: Axis.vertical,
-                                            child: Column(
-                                              children: [
-                                                Responsive.isDesktop(context)
-                                                    ? SizedBox(
-                                                        height:
-                                                            Get.height * 0.05)
-                                                    : SizedBox(),
-                                                webView(),
-                                              ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          IndexedStack(
+                            key: ValueKey<int>(_menuController.tabIndex.value
+                                .toInt()), // add this line
+                            index: _menuController.tabIndex.value.toInt(),
+                            children: <Widget>[
+                              SingleChildScrollView(
+                                scrollDirection: Axis.vertical,
+                                child: Column(
+                                  children: [
+                                    Responsive.isDesktop(context)
+                                        ? SizedBox(height: Get.height * 0.05)
+                                        : SizedBox(),
+                                    webView(),
+                                  ],
+                                ),
+                              ),
+                              _buildTabContext(200),
+                              _buildTabContext(2),
+                              _buildTabContext(200),
+                              _buildTabContext(2)
+                            ],
+                          ),
+                        ],
+                      )
+                    else
+                      _menuController.menuIndex.value == 1
+                          ? ProfilePage()
+                          : _menuController.menuIndex.value == 2
+                              ? Column(
+                                  children: [
+                                    Container(
+                                      height: 147,
+                                      color: ColorPicker.kPrimary,
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            child: Container(
+                                              color: ColorPicker.kPrimary,
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal:
+                                                      Get.height * 0.07),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.end,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.end,
+                                                    children: [
+                                                      Image.asset(
+                                                        'assets/icons/rightShield.png',
+                                                        height: 33,
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      CommonWidget.text(
+                                                        'AHL',
+                                                        style: FontTextStyle
+                                                            .kWhite33W600PR,
+                                                      )
+                                                    ],
+                                                  ),
+                                                  SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  CommonWidget.text(
+                                                    'MY GRADE',
+                                                    style: FontTextStyle
+                                                        .kWhite16W600PR
+                                                        .copyWith(
+                                                            letterSpacing: 2.5),
+                                                  )
+                                                ],
+                                              ),
                                             ),
                                           ),
-                                          _buildTabContext(200),
-                                          _buildTabContext(2),
-                                          _buildTabContext(200),
-                                          _buildTabContext(2)
+                                          VerticalDivider(
+                                            width: 2,
+                                            color: Colors.black,
+                                          ),
+                                          Expanded(
+                                            child: Container(
+                                              color: ColorPicker.kPrimary,
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal:
+                                                      Get.height * 0.07),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      CommonWidget.text(
+                                                        '33% ',
+                                                        style: FontTextStyle
+                                                            .kBlueLight33W600PR,
+                                                      ),
+                                                      const SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      Image.asset(
+                                                        'assets/icons/info.png',
+                                                        height: 33,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  CommonWidget.text(
+                                                    'TO NEXT GRADE',
+                                                    style: FontTextStyle
+                                                        .kGreyDark16W600PR
+                                                        .copyWith(
+                                                            letterSpacing: 2.5),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          VerticalDivider(
+                                            width: 2,
+                                            color: Colors.black,
+                                          ),
+                                          Expanded(
+                                            child: Container(
+                                              color: ColorPicker.kPrimary,
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal:
+                                                      Get.height * 0.07),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      Image.asset(
+                                                        'assets/icons/shield.png',
+                                                        height: 33,
+                                                      ),
+                                                      const SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      CommonWidget.text(
+                                                        'MHL',
+                                                        style: FontTextStyle
+                                                            .kGreyDark33W600PR,
+                                                      )
+                                                    ],
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  CommonWidget.text(
+                                                    'NEXT GRADE',
+                                                    style: FontTextStyle
+                                                        .kGreyDark16W600PR
+                                                        .copyWith(
+                                                            letterSpacing: 2.5),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          ),
                                         ],
                                       ),
-                                    ],
-                                  )
-                                : _menuController.menuIndex.value == 3
-                                    ? Center(child: Text('Jobs'))
-                                    : _menuController.menuIndex.value == 4
-                                        ? Center(child: Text('Recruitment'))
-                                        : Container(
-                                            child: Text('help'),
-                                          )
+                                    ),
+                                    Container(
+                                      height: 87,
+                                      width: Get.width,
+                                      color: Colors.white,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          Container(
+                                            width: 600,
+                                            color: Colors.white,
+                                            child: TabBar(
+                                              controller: _tabController,
+                                              labelPadding:
+                                                  const EdgeInsets.only(
+                                                      bottom: 15),
+                                              tabs: List.generate(
+                                                Data.tabItem.length,
+                                                (index) => CommonWidget.text(
+                                                  Data.tabItem[index],
+                                                  style: FontTextStyle
+                                                      .kGreyDark16W600PR,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    IndexedStack(
+                                      // This key causes the AnimatedSwitcher to interpret this as a "new"
+                                      // child each time the count changes, so that it will begin its animation
+                                      // when the count changes.
+                                      key: ValueKey<int>(_tabController!
+                                          .index), // add this line
+                                      index: _tabController!.index,
+                                      children: <Widget>[
+                                        SingleChildScrollView(
+                                          scrollDirection: Axis.vertical,
+                                          child: Column(
+                                            children: [
+                                              Responsive.isDesktop(context)
+                                                  ? SizedBox(
+                                                      height: Get.height * 0.05)
+                                                  : SizedBox(),
+                                              webView(),
+                                            ],
+                                          ),
+                                        ),
+                                        _buildTabContext(200),
+                                        _buildTabContext(2),
+                                        _buildTabContext(200),
+                                        _buildTabContext(2)
+                                      ],
+                                    ),
+                                  ],
+                                )
+                              : _menuController.menuIndex.value == 3
+                                  ? Center(child: Text('Jobs'))
+                                  : _menuController.menuIndex.value == 4
+                                      ? Center(child: Text('Recruitment'))
+                                      : Container(
+                                          child: Text('help'),
+                                        )
                   ],
                 ),
               );

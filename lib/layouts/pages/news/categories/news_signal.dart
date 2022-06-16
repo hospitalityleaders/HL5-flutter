@@ -1,9 +1,13 @@
-import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-
+import 'package:holedo/common/common_widget.dart';
+import 'package:holedo/constant/colorPicker/color_picker.dart';
+import 'package:holedo/constant/fontStyle/font_style.dart';
+import 'package:holedo/constant/sizedbox.dart';
+import 'package:holedo/layouts/pages/profile-pages/profile/header.dart';
+import 'package:holedo/responsive/responsive.dart';
 import '../../../../common/common_widget.dart';
 import '../../../../constant/colorPicker/color_picker.dart';
 import '../../../../constant/fontStyle/font_style.dart';
@@ -113,10 +117,10 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
     return GestureDetector(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (BuildContext) {
-          return routeName;
+          return routeName as Widget;
         }));
       },
-      child: Text(menuName, style: _fontStyle),
+      child: Text(menuName, style: _fontStyle as TextStyle),
     );
   }
 
