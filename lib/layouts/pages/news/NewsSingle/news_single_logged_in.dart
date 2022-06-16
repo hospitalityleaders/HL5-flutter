@@ -7,6 +7,10 @@ import 'package:holedo/common/common_widget.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/responsive/responsive.dart';
 
+import '../../../../common/common_widget.dart';
+import '../../../../constant/fontStyle/font_style.dart';
+import '../../../../responsive/responsive.dart';
+
 class NewsSingleLoggedInScreen extends StatefulWidget {
   static const String route = '/category_details';
   @override

@@ -1,7 +1,8 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:holedo/layouts/pages/profile-pages/profile/header_card.dart';
 import 'package:holedo/layouts/pages/profile-pages/timeline/timeline.dart';
-import 'package:holedo/models/models.dart';
+import 'package:holedo/models/holedoapi/user.dart';
 import '../../../../constant/colorPicker/color_picker.dart';
 import '../../../../constant/fontStyle/font_style.dart';
 import '../../../../constant/sizedbox.dart';
@@ -202,9 +203,6 @@ class _UserProfilePageState extends State<UserProfilePage>
 
   @override
   Widget build(BuildContext context) {
-    final appState = Provider.of<AppState>(context);
-    final bool isMine = appState.isLoginnedAndEditable(widget.userProfileData);
-    print('app ${isEditable}');
     return Responsive.isDesktop(context)
         ? Container(
             decoration: BoxDecoration(color: ColorPicker.kBG),
@@ -219,8 +217,8 @@ class _UserProfilePageState extends State<UserProfilePage>
                     hCardApiData: widget.userProfileData,
                   ),
                   Container(
-                    height: SS.sH(context) * 0.065,
-                    width: SS.sW(context),
+                    height: SS.sH(context) * 0.065 as double,
+                    width: SS.sW(context) as double,
                     decoration: BoxDecoration(
                       color: ColorPicker.kWhite,
                       border: Border(
@@ -229,7 +227,7 @@ class _UserProfilePageState extends State<UserProfilePage>
                     ),
                     child: Padding(
                       padding: EdgeInsets.symmetric(
-                          horizontal: SS.sW(context) * .080),
+                          horizontal: SS.sW(context) * .080 as double),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -325,13 +323,13 @@ class _UserProfilePageState extends State<UserProfilePage>
                               ),
                             ],
                           ),
-                          (isMine) ? buildEditButton() : Container(),
+                          buildEditButton(),
                         ],
                       ),
                     ),
                   ),
                   SizedBox(
-                    height: SS.sH(context) * 1.9,
+                    height: SS.sH(context) * 1.9 as double,
                     child: TabBarView(
                         controller: _tabController,
                         children: <Widget>[
@@ -454,11 +452,7 @@ class _UserProfilePageState extends State<UserProfilePage>
                                   ],
                                 ),
                               ),
-                              isExpanded
-                                  ? Container()
-                                  : isMine
-                                      ? buildEditButton()
-                                      : Container()
+                              isExpanded ? Container() : buildEditButton()
                             ],
                           );
                         },
@@ -476,7 +470,7 @@ class _UserProfilePageState extends State<UserProfilePage>
                                   buildMobileMenuDropDownButton('Articles'),
                                   buildMobileMenuDropDownButton('Activity'),
                                   buildMobileMenuDropDownButton('References'),
-                                  isMine ? buildEditButton() : Container()
+                                  buildEditButton()
                                 ],
                               ),
                             ),

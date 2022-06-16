@@ -55,16 +55,16 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
       };
       print('usser: ${userData}');
       dynamic res = await _apiServices.updateUserProfile();
-      if (res?.success as bool) {
-        Navigator.pop(context);
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Error: ${res?.messages}'),
-            backgroundColor: Colors.red.shade300,
-          ),
-        );
-      }
+      // if (res?.success) {
+      //   Navigator.pop(context);
+      // } else {
+      //   ScaffoldMessenger.of(context).showSnackBar(
+      //     SnackBar(
+      //       content: Text('Error: ${res?.messages}'),
+      //       backgroundColor: Colors.red.shade300,
+      //     ),
+      //   );
+      // }
     }
     setState(() {
       isUpdating = false;
@@ -193,10 +193,10 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
           child: Container(
             color: ColorPicker.kGreyLight3,
             width: Responsive.isDesktop(context)
-                ? SS.sW(context) * .50
+                ? SS.sW(context) * .50 as double
                 : Responsive.isMobile(context)
-                    ? SS.sW(context) * .90
-                    : SS.sW(context) * .60,
+                    ? SS.sW(context) * .90 as double
+                    : SS.sW(context) * .60 as double,
             child: SingleChildScrollView(
               child: Column(
                 children: [
@@ -287,17 +287,17 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
               child: Container(
                 color: ColorPicker.kGreyLight8,
                 width: Responsive.isDesktop(context)
-                    ? SS.sW(context) * .50
+                    ? SS.sW(context) * .50 as double
                     : Responsive.isMobile(context)
-                        ? SS.sW(context) * .90
-                        : SS.sW(context) * .60,
+                        ? SS.sW(context) * .90 as double
+                        : SS.sW(context) * .60 as double,
                 // height: 375,
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
                       PopUpHeadMenu.popUpHead('Expertise', context),
                       SizedBox(
-                        height: SS.sH(context) * .05,
+                        height: SS.sH(context) * .05 as double,
                       ),
                       Padding(
                         padding: EdgeInsets.all(16.0),
@@ -390,7 +390,8 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                                                         color: ColorPicker
                                                             .kBlueLight3)),
                                                 alignment: Alignment.center,
-                                                width: SS.sW(context) * .091,
+                                                width: SS.sW(context) * .091
+                                                    as double,
                                                 height: 36,
                                                 child: Text(
                                                   'Add to list',
@@ -551,7 +552,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      width: SS.sW(context),
+                      width: SS.sW(context) as double,
                       color: Colors.white,
                       child: Padding(
                         padding: EdgeInsets.only(

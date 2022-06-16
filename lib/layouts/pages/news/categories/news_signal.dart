@@ -14,6 +14,7 @@ import '../../../../constant/fontStyle/font_style.dart';
 import '../../../../constant/sizedbox.dart';
 import '../../../../responsive/responsive.dart';
 
+import '../../profile-pages/profile/header.dart';
 import '../NewsSingle/news_single_logged_in.dart';
 
 class NewsSingleScreen extends StatefulWidget {

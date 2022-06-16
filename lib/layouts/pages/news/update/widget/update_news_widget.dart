@@ -7,6 +7,11 @@ import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/data/data.dart';
 
+import '../../../../../common/common_widget.dart';
+import '../../../../../constant/colorPicker/color_picker.dart';
+import '../../../../../constant/fontStyle/font_style.dart';
+import '../../../../../data/data.dart';
+
 class HomeWidget {
   Container headlineBlock() {
     return Container(
