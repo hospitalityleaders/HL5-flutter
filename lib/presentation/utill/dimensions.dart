@@ -10,6 +10,7 @@ class Di {
   static const double FSOL = 24.0;
   static const double FSOTL = 32.0;
   static const double FSD1 = 48.0;
+  static const double FSD2 = 40.0;
 
   // Width Size
   static const double WSETS = 50.0;

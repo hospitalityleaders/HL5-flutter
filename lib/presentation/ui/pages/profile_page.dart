@@ -17,17 +17,14 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  static const String mobileBreakPoint = "Mobile";
-  static const String desktopBreakPoint = "Desktop";
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       builder: (context, child) => ResponsiveWrapper.builder(
         child,
         breakpoints: [
-          ResponsiveBreakpoint.autoScaleDown(450, name: MOBILE),
-          ResponsiveBreakpoint.autoScaleDown(1200, name: DESKTOP),
+          // ResponsiveBreakpoint.autoScaleDown(450, name: MOBILE),
+          // ResponsiveBreakpoint.autoScaleDown(1200, name: DESKTOP),
         ],
       ),
       debugShowCheckedModeBanner: false,
@@ -57,7 +54,7 @@ class _ProfilePageState extends State<ProfilePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlue,
+      // backgroundColor: Colors.lightBlue,
       body: ResponsiveWrapper.of(context).isSmallerThan(MOBILE)
           ? Center(
               child: Text(

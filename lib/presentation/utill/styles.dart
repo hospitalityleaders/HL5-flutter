@@ -12,6 +12,11 @@ class Styles {
     ),
   ];
 
+  static final BoxDecoration boxDecorationRounded = BoxDecoration(
+    color: Cr.whiteColor,
+    borderRadius: BorderRadius.circular(4),
+  );
+
   static const BoxDecoration boxDecoration = BoxDecoration(
     color: Cr.whiteColor,
   );
@@ -25,6 +30,13 @@ class Styles {
 const display1 = TextStyle(
   fontFamily: 'SourceSansPro',
   fontSize: Di.FSD1,
+  fontWeight: FontWeight.w400,
+  color: Cr.darkBlue1,
+);
+
+const display2 = TextStyle(
+  fontFamily: 'SourceSansPro',
+  fontSize: Di.FSD2,
   fontWeight: FontWeight.w400,
   color: Cr.darkBlue1,
 );

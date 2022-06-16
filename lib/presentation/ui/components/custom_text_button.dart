@@ -6,13 +6,15 @@ class CustomTextButton extends StatelessWidget {
   const CustomTextButton({
     Key? key,
     this.onPressed,
-    required this.text,
+    this.text,
     this.textFontSize,
     this.color,
     this.textStyle,
+    this.textWidget,
   }) : super(key: key);
   final void Function()? onPressed;
-  final String text;
+  final String? text;
+  final Widget? textWidget;
   final Color? color;
   final double? textFontSize;
   final TextStyle? textStyle;
@@ -21,13 +23,14 @@ class CustomTextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: onPressed ?? () {},
-      child: Text(
-        text,
-        style: (textStyle ?? bodySmallRegular).copyWith(
-          color: color ?? Cr.accentBlue1,
-          fontSize: textFontSize,
-        ),
-      ),
+      child: textWidget ??
+          Text(
+            text ?? "",
+            style: (textStyle ?? bodySmallRegular).copyWith(
+              color: color ?? Cr.accentBlue1,
+              fontSize: textFontSize,
+            ),
+          ),
     );
   }
 }

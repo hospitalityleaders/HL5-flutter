@@ -10,12 +10,22 @@ class CustomElevatedButton extends StatelessWidget {
     this.height,
     this.text,
     this.donotShowIcon = false,
+    this.child,
+    this.backgroundColor,
+    this.icon,
+    this.textColor,
+    this.borderColor,
   }) : super(key: key);
 
   final double? width;
   final double? height;
   final String? text;
   final bool donotShowIcon;
+  final Widget? child;
+  final Widget? icon;
+  final Color? backgroundColor;
+  final Color? textColor;
+  final Color? borderColor;
 
   @override
   Widget build(BuildContext context) {
@@ -26,32 +36,41 @@ class CustomElevatedButton extends StatelessWidget {
         style: ButtonStyle(
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
+              side: BorderSide(
+                color: borderColor ?? Colors.transparent,
+              ),
               borderRadius: BorderRadius.circular(Di.RSETS),
             ),
           ),
           splashFactory: NoSplash.splashFactory,
-          minimumSize: MaterialStateProperty.all(Size(23, 0)),
-          backgroundColor: MaterialStateProperty.all(Cr.accentBlue1),
+          // minimumSize: MaterialStateProperty.all(Size(23, 0)),
+          backgroundColor: MaterialStateProperty.all(
+            backgroundColor ?? Cr.accentBlue1,
+          ),
           shadowColor: MaterialStateProperty.all(Colors.transparent),
         ),
         onPressed: () {},
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            donotShowIcon
-                ? SizedBox()
-                : Icon(
-                    Icons.edit,
-                    color: Cr.whiteColor,
-                    size: Di.FSD,
+        child: child ??
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                donotShowIcon
+                    ? SizedBox()
+                    : icon ??
+                        Icon(
+                          Icons.edit,
+                          color: Cr.whiteColor,
+                          size: Di.FSD,
+                        ),
+                Di.SBWS,
+                Text(
+                  text ?? "Edit Profile",
+                  style: bodySmallRegular.copyWith(
+                    color: textColor ?? Cr.whiteColor,
                   ),
-            Di.SBWS,
-            Text(
-              text ?? "Edit Profile",
-              style: bodySmallRegular.copyWith(color: Cr.whiteColor),
+                ),
+              ],
             ),
-          ],
-        ),
       ),
     );
   }

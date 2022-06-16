@@ -7,6 +7,7 @@ class Cr {
 
   static const Color darkBlue3 = Color(0xff1D2645);
   static const Color darkBlue5 = Color(0xff2B375E);
+  static const Color darkBlue6 = Color(0xff384677);
   static const Color darkBlue8 = Color(0xff7A85A6);
   static const Color darkBlue9 = Color(0xff6C779E);
   static const Color underlineColor = Color(0xFFCCCCCC);
@@ -18,11 +19,14 @@ class Cr {
   static const Color backgroundColor = Color(0xffF7F8FA);
 
   static const Color accentBlue1 = Color(0xff32A3FD);
+  static const Color accentBlue2 = Color(0xff98D1FE);
   static const Color accentBlue3 = Color(0xffCCE8FE);
 
   static const Color green1 = Color(0xff7DC81B);
 
-// 7DC81B g
+// 7DC81B g.
+
+  static const Color grey1 = Color(0xffB5BDC2);
 
   static const Color darkGrey1 = Color(0xff7C8990);
   static const Color darkGrey2 = Color(0xff879399);

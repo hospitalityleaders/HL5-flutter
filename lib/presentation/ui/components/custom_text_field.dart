@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
-import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/styles.dart';
 
 import 'package:flutter/services.dart';
@@ -62,7 +61,7 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: width ?? Di.WSOTL,
+      width: width ?? 310,
       child: TextFormField(
         validator: validator,
         controller: controller,
@@ -85,6 +84,7 @@ class CustomTextField extends StatelessWidget {
         ),
         autovalidateMode: AutovalidateMode.onUserInteraction,
         decoration: InputDecoration(
+          filled: true,
           fillColor: Cr.darkBlue5,
           contentPadding: contentPadding,
           border: showBorder
