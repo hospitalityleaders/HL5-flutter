@@ -14,6 +14,7 @@ class PageOverviewSection extends StatelessWidget {
     return SizedBox(
       width: Di.getScreenSize(context).width,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ProfileOverviewFirstColumn(),

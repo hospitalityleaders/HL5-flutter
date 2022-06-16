@@ -10,22 +10,82 @@ import 'package:holedo/presentation/ui/pages/sections/timeline_section/timeline_
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/styles.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  static const String mobileBreakPoint = "Mobile";
+  static const String desktopBreakPoint = "Desktop";
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      builder: (context, child) => ResponsiveWrapper.builder(
+        child,
+        breakpoints: [
+          ResponsiveBreakpoint.autoScaleDown(450, name: MOBILE),
+          ResponsiveBreakpoint.autoScaleDown(1200, name: DESKTOP),
+        ],
+      ),
       debugShowCheckedModeBanner: false,
       home: ProfilePage(),
+      // ResponsiveValue<Widget>(
+      //   context,
+      //   defaultValue: ProfilePage(),
+      //   valueWhen: const [
+      //     Condition.smallerThan(
+      //       name: mobileBreakPoint,
+      //       value: Center(
+      //         child: Text("Mobile"),
+      //       ),
+      //     ),
+      //     Condition.smallerThan(
+      //       name: desktopBreakPoint,
+      //       value: Text("data"),
+      //     )
+      //   ],
+      // ).value
+      // ResponsiveVisibility(
+      //   visible: false,
+      //   visibleWhen: [
+      //     Condition.largerThan(name: MOBILE),
+      //   ],
+      //   child: ProfilePage(),
+
+      // ),
     );
   }
 }
+
+class MobileScreenScreen extends StatelessWidget {
+  const MobileScreenScreen({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('MobileScreenScreen'),
+      ),
+      body: Center(
+        child: Text('MobileScreenScreen'),
+      ),
+    );
+  }
+}
+
+// class MyApp extends StatelessWidget {
+//   const MyApp({Key? key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       home: ProfilePage(),
+//     );
+//   }
+// }
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -50,45 +110,52 @@ class _ProfilePageState extends State<ProfilePage>
     return Scaffold(
       // backgroundColor: Color(0xffF7F8FA),
       backgroundColor: Colors.lightBlue,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            CustomAppbar(),
-            Container(
-              height: 50,
-              width: Di.getScreenSize(context).width,
-              color: Cr.red3,
-              child: Center(
-                child: Text(
-                  "Your profile is only 25% complete. Complete it now to earn your first Hospitality Leaders grade.",
-                  textAlign: TextAlign.center,
-                  style: bodyLarge.copyWith(
-                    color: Cr.redTextColor,
+      body: ResponsiveWrapper.of(context).isSmallerThan(MOBILE)
+          ? Center(
+              child: Text(
+              "dskfjsldfs",
+              style: h2Bold,
+            ))
+          : Center(
+              child: ListView(
+                shrinkWrap: true,
+                children: [
+                  CustomAppbar(),
+                  Container(
+                    height: 50,
+                    width: Di.getScreenSize(context).width,
+                    color: Cr.red3,
+                    child: Center(
+                      child: Text(
+                        "Your profile is only 25% complete. Complete it now to earn your first Hospitality Leaders grade.",
+                        textAlign: TextAlign.center,
+                        style: bodyLarge.copyWith(
+                          color: Cr.redTextColor,
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-            ),
-            ProfileImageBanner(),
-            ProfileTabbar(tabController: _tabController),
-            Di.SBHEL,
-            SizedBox(
-              width: Di.getScreenSize(context).width * .8,
-              height: 5000,
-              child: TabBarView(
-                controller: _tabController,
-                children: <Widget>[
-                  PageOverviewSection(),
-                  TimelineSection(),
-                  ArticlesSection(),
-                  ActivitySection(),
-                  ReferenceSection(),
+                  ProfileImageBanner(),
+                  ProfileTabbar(tabController: _tabController),
+                  Di.SBHEL,
+                  SizedBox(
+                    // width: Di.getScreenSize(context).width,
+                    height: 1500,
+                    child: TabBarView(
+                      controller: _tabController,
+                      children: <Widget>[
+                        PageOverviewSection(),
+                        TimelineSection(),
+                        ArticlesSection(),
+                        ActivitySection(),
+                        ReferenceSection(),
+                      ],
+                    ),
+                  ),
+                  Di.SBHOTL,
                 ],
               ),
             ),
-            Di.SBHOTL,
-          ],
-        ),
-      ),
     );
   }
 }

@@ -538,6 +538,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                 : Container(),
           ],
         ),
+
         SS.sB(8, 0),
 
         /// Areas of expertise
