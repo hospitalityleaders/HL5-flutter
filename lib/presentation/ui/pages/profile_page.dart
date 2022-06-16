@@ -32,60 +32,9 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       home: ProfilePage(),
-      // ResponsiveValue<Widget>(
-      //   context,
-      //   defaultValue: ProfilePage(),
-      //   valueWhen: const [
-      //     Condition.smallerThan(
-      //       name: mobileBreakPoint,
-      //       value: Center(
-      //         child: Text("Mobile"),
-      //       ),
-      //     ),
-      //     Condition.smallerThan(
-      //       name: desktopBreakPoint,
-      //       value: Text("data"),
-      //     )
-      //   ],
-      // ).value
-      // ResponsiveVisibility(
-      //   visible: false,
-      //   visibleWhen: [
-      //     Condition.largerThan(name: MOBILE),
-      //   ],
-      //   child: ProfilePage(),
-
-      // ),
     );
   }
 }
-
-class MobileScreenScreen extends StatelessWidget {
-  const MobileScreenScreen({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('MobileScreenScreen'),
-      ),
-      body: Center(
-        child: Text('MobileScreenScreen'),
-      ),
-    );
-  }
-}
-
-// class MyApp extends StatelessWidget {
-//   const MyApp({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       home: ProfilePage(),
-//     );
-//   }
-// }
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -108,14 +57,14 @@ class _ProfilePageState extends State<ProfilePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Color(0xffF7F8FA),
       backgroundColor: Colors.lightBlue,
       body: ResponsiveWrapper.of(context).isSmallerThan(MOBILE)
           ? Center(
               child: Text(
-              "dskfjsldfs",
-              style: h2Bold,
-            ))
+                "Mobile View",
+                style: h2Bold.copyWith(fontSize: 100),
+              ),
+            )
           : Center(
               child: ListView(
                 shrinkWrap: true,

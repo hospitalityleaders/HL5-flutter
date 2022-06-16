@@ -10,7 +10,7 @@ class ProfileImageBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: Di.getScreenSize(context).width,
-      height: 491,
+      height: 490,
       child: Image.asset(
         "assets/images/t6.png",
         fit: BoxFit.fitWidth,
