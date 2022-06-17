@@ -34,17 +34,21 @@ class Cr {
   static const Color lightGrey2 = Color(0xffEDEFF1);
 
   static const Color redTextColor = Color(0xffFD3732);
+  static const Color red1 = Color(0xffFD3732);
   static const Color red3 = Color(0xffFECDCC);
+
+  static const Color transparent = Colors.transparent;
+
+  //
   //
 
-  // static const LinearGradient blueLinearGradient = LinearGradient(
-  //   begin: Alignment.topLeft,
-  //   end: Alignment.bottomRight,
-  //   stops: [0.0, 1.0],
-  //   colors: [
-  //     Cr.blueColor,
-  //     Cr.blueColor,
-  //   ],
-  // );
-
+  static const LinearGradient primaryLinearGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    stops: [0.0, 1.0],
+    colors: [
+      Cr.colorPrimary,
+      Cr.colorPrimary,
+    ],
+  );
 }

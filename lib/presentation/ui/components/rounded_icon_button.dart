@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
-import 'package:holedo/presentation/utill/dimensions.dart';
 
 class RoundeIconButton extends StatelessWidget {
   const RoundeIconButton({
@@ -8,23 +7,23 @@ class RoundeIconButton extends StatelessWidget {
     this.onPressed,
     required this.icon,
     this.circleSize,
+    this.backgroundColor,
   }) : super(key: key);
   final void Function()? onPressed;
   final Icon icon;
   final double? circleSize;
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      onPressed: onPressed ?? () {},
-      icon: Container(
-        width: circleSize ?? 25,
-        height: circleSize ?? 25,
+    return GestureDetector(
+      onTap: onPressed ?? () {},
+      child: Container(
+        width: circleSize ?? 60,
+        height: circleSize ?? 60,
         decoration: BoxDecoration(
-          color: Cr.whiteColor,
-          borderRadius: BorderRadius.circular(
-            Di.RSD,
-          ),
+          color: backgroundColor ?? Cr.whiteColor,
+          borderRadius: BorderRadius.circular(400),
         ),
         child: icon,
       ),

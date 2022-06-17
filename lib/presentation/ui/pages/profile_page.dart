@@ -3,6 +3,7 @@ import 'package:holedo/presentation/ui/components/custom_appbar.dart';
 import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_tabbar.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_image_banner.dart';
+import 'package:holedo/presentation/ui/pages/profile_mobile_view/profile_mobile_view_page.dart';
 import 'package:holedo/presentation/ui/pages/sections/activity_section/activity_section.dart';
 import 'package:holedo/presentation/ui/pages/sections/articles_section/articles_section.dart';
 import 'package:holedo/presentation/ui/pages/sections/page_overview/page_overview_section.dart';
@@ -24,8 +25,11 @@ class MyApp extends StatelessWidget {
       builder: (context, child) => ResponsiveWrapper.builder(
         child,
         breakpoints: [
-          // ResponsiveBreakpoint.autoScaleDown(450, name: MOBILE),
-          // ResponsiveBreakpoint.autoScaleDown(1200, name: DESKTOP),
+          // ResponsiveBreakpoint.autoScaleDown(320, name: MOBILE),
+          // ResponsiveBreakpoint.autoScale(450, name: MOBILE),
+
+          ResponsiveBreakpoint.autoScaleDown(450, name: MOBILE),
+          ResponsiveBreakpoint.autoScaleDown(1200, name: DESKTOP),
         ],
       ),
       debugShowCheckedModeBanner: false,
@@ -58,12 +62,7 @@ class _ProfilePageState extends State<ProfilePage>
       // backgroundColor: Colors.lightBlue,
       backgroundColor: Colors.white,
       body: ResponsiveWrapper.of(context).isSmallerThan(MOBILE)
-          ? Center(
-              child: Text(
-                "Mobile View",
-                style: h2Bold.copyWith(fontSize: 100),
-              ),
-            )
+          ? ProfileMobileViewPage()
           : Center(
               child: ListView(
                 shrinkWrap: true,

@@ -9,7 +9,10 @@ import 'package:holedo/presentation/utill/styles.dart';
 class ProfileWorkExperienceComponent extends StatelessWidget {
   const ProfileWorkExperienceComponent({
     Key? key,
+    this.isMobile = false,
   }) : super(key: key);
+
+  final bool isMobile;
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +22,13 @@ class ProfileWorkExperienceComponent extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Di.SBHETS,
-          ListTile(
-            title: Text(
-              "Work experience",
-              style: h2Regular,
+          Padding(
+            padding: EdgeInsets.only(left: isMobile ? Di.PSD : Di.PSS),
+            child: ListTile(
+              title: Text(
+                "Work experience",
+                style: h2Regular,
+              ),
             ),
           ),
           Divider(

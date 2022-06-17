@@ -62,6 +62,7 @@ class ConnectionsComponent extends StatelessWidget {
               width: 320,
               height: 35,
               child: TextWithBackground(
+                sizedBoxBetweenIconText: Di.SBWES,
                 text: "Grow your network",
                 iconData: Icons.person_add,
                 backgroundColor: Cr.accentBlue3,

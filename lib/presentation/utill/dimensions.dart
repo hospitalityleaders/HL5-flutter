@@ -40,7 +40,7 @@ class Di {
   static final SizedBox SBHD = SizedBox(height: PSD);
   static final SizedBox SBHL = SizedBox(height: PSL);
   static final SizedBox SBHEL = SizedBox(height: PSEL);
-  static final SizedBox SBHOV = SizedBox(height: PSOL);
+  static final SizedBox SBHOL = SizedBox(height: PSOL);
   static final SizedBox SBHOTL = SizedBox(height: PSOTL);
 
   // Radius Size

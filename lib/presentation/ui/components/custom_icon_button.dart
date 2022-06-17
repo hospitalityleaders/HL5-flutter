@@ -8,17 +8,19 @@ class CustomIconButton extends StatelessWidget {
     this.iconData,
     this.icon,
     this.showNotification = false,
+    this.size,
   }) : super(key: key);
 
   final IconData? iconData;
   final Widget? icon;
   final bool showNotification;
+  final double? size;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 45,
-      height: 45,
+      width: size ?? 45,
+      height: size ?? 45,
       child: Stack(
         children: [
           Center(

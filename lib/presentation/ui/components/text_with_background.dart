@@ -48,7 +48,7 @@ class TextWithBackground extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            (icon == null && icon == null)
+            (icon == null && iconData == null)
                 ? Di.ESB
                 : (icon ??
                     Icon(

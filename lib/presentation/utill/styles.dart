@@ -50,6 +50,13 @@ const display2 = TextStyle(
   color: Cr.darkBlue1,
 );
 
+const display3 = TextStyle(
+  fontFamily: 'SourceSansPro',
+  fontSize: 34,
+  fontWeight: FontWeight.w400,
+  color: Cr.darkBlue1,
+);
+
 // BodyLarge
 const bodyLarge = TextStyle(
   fontFamily: 'SourceSansPro',

@@ -54,6 +54,7 @@ class CustomElevatedButton extends StatelessWidget {
             (!donotShowIcon
                 ? Row(
                     mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       donotShowIcon
                           ? SizedBox()
