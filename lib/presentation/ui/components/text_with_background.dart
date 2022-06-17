@@ -16,6 +16,7 @@ class TextWithBackground extends StatelessWidget {
     this.textStyle,
     this.sizedBoxBetweenIconText,
     this.padding,
+    this.paddingHorizantal,
   }) : super(key: key);
 
   final String text;
@@ -24,6 +25,7 @@ class TextWithBackground extends StatelessWidget {
   final BoxBorder? border;
   final double? fontSize;
   final double? padding;
+  final double? paddingHorizantal;
   final IconData? iconData;
   final Icon? icon;
   final TextStyle? textStyle;
@@ -40,7 +42,7 @@ class TextWithBackground extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.symmetric(
           vertical: padding ?? 5,
-          horizontal: padding ?? 6,
+          horizontal: paddingHorizantal ?? padding ?? 6,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

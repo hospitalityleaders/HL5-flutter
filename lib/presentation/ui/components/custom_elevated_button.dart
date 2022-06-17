@@ -51,26 +51,33 @@ class CustomElevatedButton extends StatelessWidget {
         ),
         onPressed: () {},
         child: child ??
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                donotShowIcon
-                    ? SizedBox()
-                    : icon ??
-                        Icon(
-                          Icons.edit,
-                          color: Cr.whiteColor,
-                          size: Di.FSD,
+            (!donotShowIcon
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      donotShowIcon
+                          ? SizedBox()
+                          : icon ??
+                              Icon(
+                                Icons.edit,
+                                color: Cr.whiteColor,
+                                size: Di.FSD,
+                              ),
+                      Di.SBWS,
+                      Text(
+                        text ?? "Edit Profile",
+                        style: bodySmallRegular.copyWith(
+                          color: textColor ?? Cr.whiteColor,
                         ),
-                Di.SBWS,
-                Text(
-                  text ?? "Edit Profile",
-                  style: bodySmallRegular.copyWith(
-                    color: textColor ?? Cr.whiteColor,
-                  ),
-                ),
-              ],
-            ),
+                      ),
+                    ],
+                  )
+                : Text(
+                    text ?? "Edit Profile",
+                    style: bodySmallRegular.copyWith(
+                      color: textColor ?? Cr.whiteColor,
+                    ),
+                  )),
       ),
     );
   }

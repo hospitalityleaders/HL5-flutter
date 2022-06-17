@@ -30,6 +30,7 @@ class ProfileReferenceComponent extends StatelessWidget {
           _ProfileReferenceListTile(),
           Divider(thickness: 1),
           _ProfileReferenceListTile(),
+          Divider(thickness: 1),
         ],
       ),
     );
@@ -67,13 +68,10 @@ class _ProfileReferenceListTile extends StatelessWidget {
                 )
               ],
             ),
-            subtitle: Padding(
-              padding: const EdgeInsets.only(top: Di.PSES),
-              child: Text(
-                "General Manager, One & Only Hotel",
-                style: bodySmallRegular.copyWith(
-                  color: Cr.darkGrey1,
-                ),
+            subtitle: Text(
+              "General Manager, One & Only Hotel",
+              style: bodySmallRegular.copyWith(
+                color: Cr.darkGrey1,
               ),
             ),
           ),

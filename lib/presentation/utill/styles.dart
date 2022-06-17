@@ -12,6 +12,15 @@ class Styles {
     ),
   ];
 
+  static final BoxDecoration boxDecorationBorder = BoxDecoration(
+    color: Cr.whiteColor,
+    border: Border(
+      bottom: BorderSide(
+        width: 1.0,
+        color: Cr.darkGrey1,
+      ),
+    ),
+  );
   static final BoxDecoration boxDecorationRounded = BoxDecoration(
     color: Cr.whiteColor,
     borderRadius: BorderRadius.circular(4),
@@ -56,14 +65,14 @@ const bodySmallRegular = TextStyle(
 
 const h2Regular = TextStyle(
   fontFamily: 'SourceSansPro',
-  fontSize: Di.FSL,
+  fontSize: Di.FSEL,
   fontWeight: FontWeight.w400,
   color: Cr.darkBlue1,
 );
 
 const h2Bold = TextStyle(
   fontFamily: 'SourceSansPro',
-  fontSize: Di.FSL,
+  fontSize: Di.FSEL,
   fontWeight: FontWeight.bold,
   color: Cr.darkBlue1,
 );
@@ -86,7 +95,7 @@ const h5Bold = TextStyle(
 
 const dividerTextSmall = TextStyle(
   fontFamily: 'SourceSansPro',
-  fontSize: Di.FSD,
+  fontSize: Di.FSS,
   fontWeight: FontWeight.bold,
   color: Cr.darkBlue1,
 );

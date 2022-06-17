@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:holedo/presentation/ui/components/custom_appbar.dart';
+import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_tabbar.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_image_banner.dart';
 import 'package:holedo/presentation/ui/pages/sections/activity_section/activity_section.dart';
@@ -55,6 +56,7 @@ class _ProfilePageState extends State<ProfilePage>
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: Colors.lightBlue,
+      backgroundColor: Colors.white,
       body: ResponsiveWrapper.of(context).isSmallerThan(MOBILE)
           ? Center(
               child: Text(
@@ -71,14 +73,32 @@ class _ProfilePageState extends State<ProfilePage>
                     height: 50,
                     width: Di.getScreenSize(context).width,
                     color: Cr.red3,
-                    child: Center(
-                      child: Text(
-                        "Your profile is only 25% complete. Complete it now to earn your first Hospitality Leaders grade.",
-                        textAlign: TextAlign.center,
-                        style: bodyLarge.copyWith(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Di.ESB,
+                        Row(
+                          children: [
+                            Text(
+                              "Your profile is only 25% complete. Complete it now to earn your first Hospitality Leaders grade.   ",
+                              textAlign: TextAlign.center,
+                              style: bodyLarge.copyWith(
+                                color: Cr.redTextColor,
+                              ),
+                            ),
+                            CustomElevatedButton(
+                              width: 97,
+                              height: 32,
+                              backgroundColor: Cr.redTextColor,
+                              donotShowIcon: true,
+                            ),
+                          ],
+                        ),
+                        Icon(
+                          Icons.close,
                           color: Cr.redTextColor,
                         ),
-                      ),
+                      ],
                     ),
                   ),
                   ProfileImageBanner(),

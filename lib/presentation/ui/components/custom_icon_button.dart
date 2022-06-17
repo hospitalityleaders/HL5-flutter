@@ -5,12 +5,12 @@ import 'package:holedo/presentation/utill/dimensions.dart';
 class CustomIconButton extends StatelessWidget {
   const CustomIconButton({
     Key? key,
-    required this.iconData,
+    this.iconData,
     this.icon,
     this.showNotification = false,
   }) : super(key: key);
 
-  final IconData iconData;
+  final IconData? iconData;
   final Widget? icon;
   final bool showNotification;
 
@@ -37,6 +37,7 @@ class CustomIconButton extends StatelessWidget {
                     width: 17,
                     height: 17,
                     decoration: BoxDecoration(
+                      color: Cr.redTextColor,
                       borderRadius: BorderRadius.circular(Di.RSETS),
                     ),
                     child: Center(

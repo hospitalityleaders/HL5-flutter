@@ -21,10 +21,10 @@ class ProfileOverviewFirstColumn extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ProfileSummaryComponent(),
-          Di.SBHEL,
-          ProfileReferenceComponent(),
-          Di.SBHEL,
+          Di.SBHETS,
           AreasOfExpertiseComponents(),
+          Di.SBHETS,
+          ProfileReferenceComponent(),
         ],
       ),
     );
@@ -39,6 +39,7 @@ class AreasOfExpertiseComponents extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.symmetric(horizontal: Di.PSD),
       decoration: Styles.boxDecoration.copyWith(color: Cr.whiteColor),
       child: Column(
         children: [
@@ -143,6 +144,11 @@ class ProfileSummaryComponent extends StatelessWidget {
             ),
           ),
           Di.SBHD,
+          Divider(
+            thickness: .7,
+            color: Cr.darkGrey2,
+            height: 0,
+          ),
         ],
       ),
     );

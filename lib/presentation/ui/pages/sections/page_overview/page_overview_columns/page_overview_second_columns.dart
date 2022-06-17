@@ -197,7 +197,7 @@ class AchievementComponent extends StatelessWidget {
                     children: [
                       Di.SBHS,
                       CustomTextButton(
-                        text: "  + Course online",
+                        text: "  + More info",
                       ),
                       Di.SBHS,
                     ],

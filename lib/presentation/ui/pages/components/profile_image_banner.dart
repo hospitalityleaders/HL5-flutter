@@ -21,6 +21,10 @@ class ProfileImageBanner extends StatelessWidget {
             image: DecorationImage(
               image: AssetImage("assets/images/t6.png"),
               fit: BoxFit.cover,
+              colorFilter: ColorFilter.mode(
+                Colors.black.withOpacity(0.3),
+                BlendMode.darken,
+              ),
             ),
           ),
         ),
@@ -29,7 +33,7 @@ class ProfileImageBanner extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 80),
+              SizedBox(height: 50),
               Container(
                 width: 560,
                 height: 385,
@@ -236,7 +240,7 @@ class ProfileImageBanner extends StatelessWidget {
           ),
         ),
         Positioned.fill(
-          top: 40,
+          top: 10,
           child: Align(
             alignment: Alignment.topCenter,
             child: Container(

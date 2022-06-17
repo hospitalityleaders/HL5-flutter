@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:holedo/common/common_widget.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
@@ -163,15 +164,23 @@ class CustomAppbar extends StatelessWidget {
             color: Cr.darkBlue5,
           ),
           CustomIconButton(
-            iconData: Icons.mail_rounded,
+            icon: SvgPicture.asset(
+              Svgs.emailOpen,
+              color: Cr.darkBlue9,
+            ),
+            // iconData: Icons.mail_rounded,
             showNotification: true,
           ),
           VerticalDivider(
             thickness: 1.3,
             color: Cr.darkBlue5,
           ),
+
           CustomIconButton(
-            iconData: Icons.flag,
+            icon: SvgPicture.asset(
+              Svgs.flag,
+              color: Cr.darkBlue9,
+            ),
             showNotification: true,
           ),
 
@@ -190,6 +199,9 @@ class CustomAppbar extends StatelessWidget {
               Di.SBWES,
               TextWithBackground(
                 text: "352",
+                textColor: Cr.darkBlue9,
+                padding: 0,
+                paddingHorizantal: 4,
                 backgroundColor: Cr.darkBlue5,
               )
             ],

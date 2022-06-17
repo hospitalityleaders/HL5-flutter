@@ -17,7 +17,15 @@ class ProfileTabbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Cr.whiteColor,
+      decoration: BoxDecoration(
+        color: Cr.whiteColor,
+        border: Border(
+          bottom: BorderSide(
+            width: 1.0,
+            color: Cr.darkGrey1,
+          ),
+        ),
+      ),
       height: 50,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -41,71 +49,74 @@ class ProfileTabbar extends StatelessWidget {
               ),
             ],
           ),
-          Row(
-            children: [
-              TabBar(
-                labelColor: Cr.accentBlue1,
-                unselectedLabelColor: Cr.darkGrey2,
-                indicatorColor: Cr.accentBlue1,
-                indicatorPadding: EdgeInsets.symmetric(horizontal: 10),
-                controller: _tabController,
-                physics: NeverScrollableScrollPhysics(),
-                isScrollable: true,
-                automaticIndicatorColorAdjustment: true,
-                tabs: [
-                  Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Text(
-                      'Profile overview',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontFamily: 'SourceSansPro',
-                          fontSize: 14),
-                    ),
-                  ),
-                  Padding(
+          Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: Row(
+              children: [
+                TabBar(
+                  labelColor: Cr.accentBlue1,
+                  unselectedLabelColor: Cr.darkGrey2,
+                  indicatorColor: Cr.accentBlue1,
+                  indicatorPadding: EdgeInsets.symmetric(horizontal: 10),
+                  controller: _tabController,
+                  physics: NeverScrollableScrollPhysics(),
+                  isScrollable: true,
+                  automaticIndicatorColorAdjustment: true,
+                  tabs: [
+                    Padding(
                       padding: EdgeInsets.all(10.0),
                       child: Text(
-                        'Timeline',
+                        'Profile overview',
                         style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontFamily: 'SourceSansPro',
-                          fontSize: 14,
-                        ),
-                      )),
-                  Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Text(
-                      'Articles',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontFamily: 'SourceSansPro',
-                          fontSize: 14),
+                            fontWeight: FontWeight.w600,
+                            fontFamily: 'SourceSansPro',
+                            fontSize: 14),
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Text(
-                      'Activity',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontFamily: 'SourceSansPro',
-                          fontSize: 14),
+                    Padding(
+                        padding: EdgeInsets.all(10.0),
+                        child: Text(
+                          'Timeline',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontFamily: 'SourceSansPro',
+                            fontSize: 14,
+                          ),
+                        )),
+                    Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Text(
+                        'Articles',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontFamily: 'SourceSansPro',
+                            fontSize: 14),
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Text(
-                      'References',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontFamily: 'SourceSansPro',
-                          fontSize: 14),
+                    Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Text(
+                        'Activity',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontFamily: 'SourceSansPro',
+                            fontSize: 14),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                    Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Text(
+                        'References',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontFamily: 'SourceSansPro',
+                            fontSize: 14),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
           CustomElevatedButton(),
         ],
