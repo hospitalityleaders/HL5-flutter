@@ -295,7 +295,54 @@ class _UserProfilePageState extends State<UserProfilePage>
               child: TabBarView(
                 controller: _tabController,
                 children: <Widget>[
-                  PageOverviewSection(),
+                  PageOverviewSection(
+                    isEditable: isEditable,
+
+                    //section1 edit functionality
+                    profileOverviewSec1ProSummKey:
+                        profileOverviewSec1ProSummKey,
+                    profileOverviewSec1ProSumm_H: profileOverviewSec1ProSumm_H,
+                    profileOverviewSec1ProSumm_W: profileOverviewSec1ProSumm_W,
+                    profileOverviewSec1AreaOfExpKey:
+                        profileOverviewSec1AreaOfExpKey,
+                    profileOverviewSec1AreaOfExp_H:
+                        profileOverviewSec1AreaOfExp_H,
+                    profileOverviewSec1AreaOfExp_W:
+                        profileOverviewSec1AreaOfExp_W,
+                    profileOverviewSec1ReferencesKey:
+                        profileOverviewSec1ReferencesKey,
+                    profileOverviewSec1References_H:
+                        profileOverviewSec1References_H,
+                    profileOverviewSec1References_W:
+                        profileOverviewSec1References_W,
+
+                    //section2 edit functionality
+
+                    profileOverviewSec2WorkExpKey:
+                        profileOverviewSec2WorkExpKey,
+                    profileOverviewSec2WorkExp_H: profileOverviewSec2WorkExp_H,
+                    profileOverviewSec2WorkExp_W: profileOverviewSec2WorkExp_W,
+                    profileOverviewSec2EducationKey:
+                        profileOverviewSec2EducationKey,
+                    profileOverviewSec2Education_H:
+                        profileOverviewSec2Education_H,
+                    profileOverviewSec2Education_W:
+                        profileOverviewSec2Education_W,
+                    profileOverviewSec2AchievementKey:
+                        profileOverviewSec2AchievementKey,
+                    profileOverviewSec2Achievement_H:
+                        profileOverviewSec2Achievement_H,
+                    profileOverviewSec2Achievement_W:
+                        profileOverviewSec2Achievement_W,
+                    profileOverviewSec2LanguagesKey:
+                        profileOverviewSec2LanguagesKey,
+                    profileOverviewSec2Languages_H:
+                        profileOverviewSec2Languages_H,
+                    profileOverviewSec2Languages_W:
+                        profileOverviewSec2Languages_W,
+                    pOApiData: widget.userProfileData,
+                    editProfileBtn: buildEditButton,
+                  ),
                   TimelineSection(),
                   ArticlesSection(),
                   ActivitySection(),

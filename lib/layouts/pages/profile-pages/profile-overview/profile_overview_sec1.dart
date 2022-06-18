@@ -534,7 +534,8 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                           profileSummary:
                               widget.pOApiDataSec1.profileSummary.toString());
                     },
-                    showAddButton: false)
+                    showAddButton: false,
+                  )
                 : Container(),
           ],
         ),
