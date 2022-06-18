@@ -63,6 +63,10 @@ class _ProfileOverviewFirstColumnState
           ProfileSummaryComponent(
             profileSummary: widget.pOApiDataSec1.profileSummary.toString(),
             sec1IsEditable: widget.sec1IsEditable as bool,
+            profileOverviewSec1ProSumm_H: widget.profileOverviewSec1ProSumm_H,
+            profileOverviewSec1ProSumm_W: widget.profileOverviewSec1ProSumm_W,
+            buildProfileCardPopUp: buildProfileCardPopUp,
+            pOApiDataSec1: widget.pOApiDataSec1,
           ),
           Di.SBHETS,
           AreasOfExpertiseComponents(),
@@ -630,11 +634,19 @@ class ProfileSummaryComponent extends StatefulWidget {
     this.isMobile = false,
     this.profileSummary,
     this.sec1IsEditable,
+    this.profileOverviewSec1ProSumm_W,
+    this.profileOverviewSec1ProSumm_H,
+    this.buildProfileCardPopUp,
+    this.pOApiDataSec1,
   }) : super(key: key);
 
   final String? profileSummary;
   final bool isMobile;
   final bool? sec1IsEditable;
+  final profileOverviewSec1ProSumm_W;
+  final profileOverviewSec1ProSumm_H;
+  final buildProfileCardPopUp;
+  final pOApiDataSec1;
 
   @override
   State<ProfileSummaryComponent> createState() =>
@@ -707,20 +719,19 @@ class _ProfileSummaryComponentState extends State<ProfileSummaryComponent> {
             color: Cr.darkGrey2,
             height: 0,
           ),
-          if (widget.sec1IsEditable as bool)
-            ProfileEdit.buildProfileEdit(
-              width: 100,
-              height: 100,
-              popUpEdit: () {
-                // buildProfileCardPopUp(
-                //     id: widget.pOApiDataSec1.id.toString(),
-                //     profileSummary:
-                //         widget.pOApiDataSec1.profileSummary.toString());
-              },
-              showAddButton: false,
-            )
-          else
-            Container(),
+          widget.sec1IsEditable as bool
+              ? ProfileEdit.buildProfileEdit(
+                  width: widget.profileOverviewSec1ProSumm_W as double,
+                  height: widget.profileOverviewSec1ProSumm_H as double,
+                  popUpEdit: () {
+                    widget.buildProfileCardPopUp(
+                        id: widget.pOApiDataSec1.id.toString(),
+                        profileSummary:
+                            widget.pOApiDataSec1.profileSummary.toString());
+                  },
+                  showAddButton: false,
+                )
+              : Container(),
         ],
       ),
     );

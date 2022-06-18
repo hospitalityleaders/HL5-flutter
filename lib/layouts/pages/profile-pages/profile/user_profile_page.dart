@@ -10,7 +10,6 @@ import '../profile-edit/profile_edit.dart';
 // import '../profile-overview/profile_overview.dart';
 // import '../references/references.dart';
 
-import 'package:holedo/layouts/pages/profile-pages/profile/header_card.dart';
 import 'package:flutter/material.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/models/models.dart';
@@ -232,13 +231,6 @@ class _UserProfilePageState extends State<UserProfilePage>
           shrinkWrap: true,
           children: [
             CustomAppbar(),
-            HeaderCard(
-              isEditable: isEditable,
-              headerCardKey: headerCardKey,
-              headerCard_H: headerCard_H,
-              headerCard_W: headerCard_W,
-              hCardApiData: widget.userProfileData,
-            ),
             Container(
               height: 50,
               width: Di.getScreenSize(context).width,
@@ -297,7 +289,6 @@ class _UserProfilePageState extends State<UserProfilePage>
                 children: <Widget>[
                   PageOverviewSection(
                     isEditable: isEditable,
-
                     //section1 edit functionality
                     profileOverviewSec1ProSummKey:
                         profileOverviewSec1ProSummKey,
