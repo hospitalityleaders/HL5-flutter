@@ -4,9 +4,9 @@ const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 const RESOURCES = {
   "version.json": "793be19e5cd8b6c2aa8528aad64fff27",
-"index.html": "144ebbf4bb69f7e64ac6de2d24806bbb",
-"/": "144ebbf4bb69f7e64ac6de2d24806bbb",
-"main.dart.js": "fd97fc60457639f4fdb54cfd3bff1bb2",
+"index.html": "c9a4d15eeb18bfab7bfd604fcb5a0609",
+"/": "c9a4d15eeb18bfab7bfd604fcb5a0609",
+"main.dart.js": "90f431d574ba4d8f74c99fdf90876c15",
 "favicon.png": "5dcef449791fa27946b3d35ad8803796",
 "icons/Icon-192.png": "ac9a721a12bbc803b44f645561ecb1e1",
 "icons/Icon-maskable-192.png": "c457ef57daa1d16f64b27b786ec2ea3c",
@@ -216,11 +216,7 @@ const RESOURCES = {
 "assets/assets/fonts/SourceSansPro-Bold.ttf": "09ad953751e1109778ece9318df70540",
 "assets/assets/fonts/ProximaNovaFont.otf": "bf9f5d50c1b928ff21436517a1a95ad9",
 "assets/assets/fonts/SourceSansPro-Light.ttf": "e7208e0bdca1887f658b9ac66c988a95",
-"assets/assets/fonts/SourceSansPro-SemiBold.ttf": "c1b4f417cf21451e85a0baccbfd8edc8",
-"canvaskit/canvaskit.js": "c2b4e5f3d7a3d82aed024e7249a78487",
-"canvaskit/profiling/canvaskit.js": "ae2949af4efc61d28a4a80fffa1db900",
-"canvaskit/profiling/canvaskit.wasm": "95e736ab31147d1b2c7b25f11d4c32cd",
-"canvaskit/canvaskit.wasm": "4b83d89d9fecbea8ca46f2f760c5a9ba"
+"assets/assets/fonts/SourceSansPro-SemiBold.ttf": "c1b4f417cf21451e85a0baccbfd8edc8"
 };
 
 // The application shell files that are downloaded before a service worker can
