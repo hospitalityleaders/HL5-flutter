@@ -15,6 +15,7 @@ class CustomElevatedButton extends StatelessWidget {
     this.icon,
     this.textColor,
     this.borderColor,
+    this.onPressed,
   }) : super(key: key);
 
   final double? width;
@@ -26,6 +27,7 @@ class CustomElevatedButton extends StatelessWidget {
   final Color? backgroundColor;
   final Color? textColor;
   final Color? borderColor;
+  final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +51,10 @@ class CustomElevatedButton extends StatelessWidget {
           ),
           shadowColor: MaterialStateProperty.all(Colors.transparent),
         ),
-        onPressed: () {},
+        onPressed: onPressed,
+        // onPressed: () {
+
+        // },
         child: child ??
             (!donotShowIcon
                 ? Row(

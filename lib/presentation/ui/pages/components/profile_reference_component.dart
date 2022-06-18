@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:holedo/presentation/ui/components/blue_edit_stack.dart';
 import 'package:holedo/presentation/ui/components/custom_text_button.dart';
+import 'package:holedo/presentation/ui/components/edit_icon_buttton.dart';
 import 'package:holedo/presentation/ui/components/person_avatar.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
@@ -27,10 +29,20 @@ class ProfileReferenceComponent extends StatelessWidget {
             ),
           ),
           // Divider(thickness: 1),
-          _ProfileReferenceListTile(),
-          Divider(thickness: 1),
-          _ProfileReferenceListTile(),
-          Divider(thickness: 1),
+          Stack(
+            children: [
+              Column(
+                children: [
+                  _ProfileReferenceListTile(),
+                  Divider(thickness: 1),
+                  _ProfileReferenceListTile(),
+                  Divider(thickness: 1),
+                ],
+              ),
+              BlueEditStack(),
+              EditIconButton(),
+            ],
+          ),
         ],
       ),
     );

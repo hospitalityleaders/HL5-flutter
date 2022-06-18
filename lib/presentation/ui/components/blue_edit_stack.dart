@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:holedo/presentation/ui/components/rounded_icon_button.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
+import 'package:holedo/presentation/utill/dimensions.dart';
 
 class BlueEditStack extends StatelessWidget {
   const BlueEditStack({
     Key? key,
   }) : super(key: key);
 
+  // final double widg
+
   @override
   Widget build(BuildContext context) {
     return Positioned.fill(
       child: Align(
         alignment: Alignment.center,
-        child: RoundeIconButton(
-          backgroundColor: Cr.accentBlue1,
-          icon: Icon(
-            Icons.edit,
-            color: Cr.whiteColor,
-          ),
+        child: Container(
+          // width: 560,
+          // height: 385,
+          color: Cr.accentBlue2.withOpacity(.8),
+          padding: EdgeInsets.all(Di.PSD),
         ),
       ),
     );

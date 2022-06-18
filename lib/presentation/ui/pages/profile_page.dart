@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:holedo/models/models.dart';
+import 'package:holedo/presentation/providers/profile_provider.dart';
 import 'package:holedo/presentation/ui/components/custom_appbar.dart';
 import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_tabbar.dart';
@@ -21,19 +23,26 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      builder: (context, child) => ResponsiveWrapper.builder(
-        child,
-        breakpoints: [
-          // ResponsiveBreakpoint.autoScaleDown(320, name: MOBILE),
-          // ResponsiveBreakpoint.autoScale(450, name: MOBILE),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => ProfileProvider(),
+        ),
+      ],
+      child: MaterialApp(
+        builder: (context, child) => ResponsiveWrapper.builder(
+          child,
+          breakpoints: [
+            // ResponsiveBreakpoint.autoScaleDown(320, name: MOBILE),
+            // ResponsiveBreakpoint.autoScale(450, name: MOBILE),
 
-          ResponsiveBreakpoint.autoScaleDown(450, name: MOBILE),
-          ResponsiveBreakpoint.autoScaleDown(1200, name: DESKTOP),
-        ],
+            ResponsiveBreakpoint.autoScaleDown(450, name: MOBILE),
+            ResponsiveBreakpoint.autoScaleDown(1200, name: DESKTOP),
+          ],
+        ),
+        debugShowCheckedModeBanner: false,
+        home: ProfilePage(),
       ),
-      debugShowCheckedModeBanner: false,
-      home: ProfilePage(),
     );
   }
 }
@@ -49,6 +58,7 @@ class _ProfilePageState extends State<ProfilePage>
     with TickerProviderStateMixin {
   int tabBar = 0;
   late TabController _tabController;
+  bool isEditable = false;
 
   @override
   void initState() {
@@ -100,8 +110,17 @@ class _ProfilePageState extends State<ProfilePage>
                       ],
                     ),
                   ),
-                  ProfileImageBanner(),
-                  ProfileTabbar(tabController: _tabController),
+                  ProfileImageBanner(
+                    onEditButtonPressed: () {},
+                  ),
+                  ProfileTabbar(
+                    tabController: _tabController,
+                    onEditProfilePressed: () {
+                      setState(() {
+                        isEditable = !isEditable;
+                      });
+                    },
+                  ),
                   Di.SBHEL,
                   SizedBox(
                     // width: Di.getScreenSize(context).width,

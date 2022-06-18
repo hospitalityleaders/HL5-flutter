@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:holedo/presentation/ui/components/blue_edit_stack.dart';
+import 'package:holedo/models/models.dart';
+import 'package:holedo/presentation/providers/profile_provider.dart';
+import 'package:holedo/presentation/ui/components/edit_icon_buttton.dart';
 import 'package:holedo/presentation/ui/pages/mobile_desktop_comman_components/mobile_desktop_comman_components.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
@@ -8,10 +10,10 @@ import 'package:holedo/presentation/utill/styles.dart';
 class ProfileImageBanner extends StatelessWidget {
   const ProfileImageBanner({
     Key? key,
-    this.isEditable = true,
+    this.onEditButtonPressed,
   }) : super(key: key);
 
-  final bool isEditable;
+  final void Function()? onEditButtonPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +104,7 @@ class ProfileImageBanner extends StatelessWidget {
             ),
           ),
         ),
-        isEditable
+        Provider.of<ProfileProvider>(context).isProfileEditable
             ? Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -118,7 +120,9 @@ class ProfileImageBanner extends StatelessWidget {
                 ),
               )
             : Di.ESB,
-        BlueEditStack(),
+        Provider.of<ProfileProvider>(context).isProfileEditable
+            ? EditIconButton(onPressed: onEditButtonPressed)
+            : Di.ESB,
         //     Positioned.fill(
         //   top: 10,
         //   child: Align(

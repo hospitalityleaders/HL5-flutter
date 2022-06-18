@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:holedo/presentation/providers/profile_provider.dart';
 import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/presentation/ui/components/person_avatar.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/styles.dart';
+import 'package:provider/provider.dart';
 
 class ProfileTabbar extends StatelessWidget {
   const ProfileTabbar({
     Key? key,
     required TabController tabController,
+    this.onEditProfilePressed,
   })  : _tabController = tabController,
         super(key: key);
 
   final TabController _tabController;
+  final void Function()? onEditProfilePressed;
 
   @override
   Widget build(BuildContext context) {
+    final isEditable = Provider.of<ProfileProvider>(context).isProfileEditable;
     return Container(
       decoration: BoxDecoration(
         color: Cr.whiteColor,
@@ -118,7 +123,13 @@ class ProfileTabbar extends StatelessWidget {
               ],
             ),
           ),
-          CustomElevatedButton(),
+          CustomElevatedButton(
+            // onPressed: onEditProfilePressed,
+            onPressed: () {
+              Provider.of<ProfileProvider>(context, listen: false)
+                  .changeIsProfieEditableState(!isEditable);
+            },
+          ),
         ],
       ),
     );

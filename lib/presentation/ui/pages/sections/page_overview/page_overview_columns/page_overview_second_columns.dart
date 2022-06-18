@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:holedo/presentation/ui/components/blue_edit_stack.dart';
 import 'package:holedo/presentation/ui/components/custom_text_button.dart';
 import 'package:holedo/presentation/ui/components/container_with_icon.dart';
+import 'package:holedo/presentation/ui/components/edit_icon_buttton.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_workexperience.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
@@ -57,70 +59,81 @@ class LanguagesComponent extends StatelessWidget {
               style: h2Regular,
             ),
           ),
-          Divider(
-            thickness: 1,
-            height: 0,
-          ),
-          Di.SBHS,
-          Container(
-            width: 360,
-            decoration: Styles.boxDecoration.copyWith(color: Cr.whiteColor),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ListTile(
-                  leading: ContainerWithIcon(
-                    iconData: FontAwesomeIcons.buildingColumns,
-                    size: 50,
+          Stack(
+            children: [
+              Column(
+                children: [
+                  Divider(
+                    thickness: 1,
+                    height: 0,
                   ),
-                  trailing: SizedBox(),
-                  title: Text(
-                    "English",
-                    style: h4Bold.copyWith(
-                      fontSize: Di.FSD,
+                  Di.SBHS,
+                  Container(
+                    width: 360,
+                    decoration:
+                        Styles.boxDecoration.copyWith(color: Cr.whiteColor),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ListTile(
+                          leading: ContainerWithIcon(
+                            iconData: FontAwesomeIcons.buildingColumns,
+                            size: 50,
+                          ),
+                          trailing: SizedBox(),
+                          title: Text(
+                            "English",
+                            style: h4Bold.copyWith(
+                              fontSize: Di.FSD,
+                            ),
+                          ),
+                          subtitle: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: Di.PSETS + 1,
+                            ),
+                            child: Text(
+                              "Native and bilingual profiency",
+                              style: bodySmallRegular.copyWith(
+                                color: Cr.accentBlue1,
+                                fontSize: Di.FSS,
+                              ),
+                            ),
+                          ),
+                        ),
+                        ListTile(
+                          leading: ContainerWithIcon(
+                            iconData: FontAwesomeIcons.buildingColumns,
+                            size: 50,
+                          ),
+                          trailing: SizedBox(),
+                          title: Text(
+                            "Spanish",
+                            style: h4Bold.copyWith(
+                              fontSize: Di.FSD,
+                            ),
+                          ),
+                          subtitle: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: Di.PSETS,
+                            ),
+                            child: Text(
+                              "Native and bilingual profiency",
+                              style: bodySmallRegular.copyWith(
+                                color: Cr.accentBlue1,
+                                fontSize: Di.FSS,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Di.SBHD,
+                      ],
                     ),
                   ),
-                  subtitle: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: Di.PSETS + 1,
-                    ),
-                    child: Text(
-                      "Native and bilingual profiency",
-                      style: bodySmallRegular.copyWith(
-                        color: Cr.accentBlue1,
-                        fontSize: Di.FSS,
-                      ),
-                    ),
-                  ),
-                ),
-                ListTile(
-                  leading: ContainerWithIcon(
-                    iconData: FontAwesomeIcons.buildingColumns,
-                    size: 50,
-                  ),
-                  trailing: SizedBox(),
-                  title: Text(
-                    "Spanish",
-                    style: h4Bold.copyWith(
-                      fontSize: Di.FSD,
-                    ),
-                  ),
-                  subtitle: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: Di.PSETS,
-                    ),
-                    child: Text(
-                      "Native and bilingual profiency",
-                      style: bodySmallRegular.copyWith(
-                        color: Cr.accentBlue1,
-                        fontSize: Di.FSS,
-                      ),
-                    ),
-                  ),
-                ),
-                Di.SBHD,
-              ],
-            ),
+                ],
+              ),
+              BlueEditStack(),
+              EditIconButton(),
+            ],
           ),
         ],
       ),
@@ -147,64 +160,75 @@ class AchievementComponent extends StatelessWidget {
               style: h2Regular,
             ),
           ),
-          Divider(
-            thickness: 1,
-            height: 0,
-          ),
-          Di.SBHS,
-          Container(
-            width: 360,
-            decoration: Styles.boxDecoration.copyWith(color: Cr.whiteColor),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ListTile(
-                  leading: ContainerWithIcon(
-                    iconData: FontAwesomeIcons.buildingColumns,
-                    size: 50,
+          Stack(
+            children: [
+              Column(
+                children: [
+                  Divider(
+                    thickness: 1,
+                    height: 0,
                   ),
-                  trailing: SizedBox(),
-                  title: Text(
-                    "Marriott Hotel and Resorts employee of the year awards",
-                    style: h4Bold.copyWith(
-                      fontSize: Di.FSD,
+                  Di.SBHS,
+                  Container(
+                    width: 360,
+                    decoration:
+                        Styles.boxDecoration.copyWith(color: Cr.whiteColor),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ListTile(
+                          leading: ContainerWithIcon(
+                            iconData: FontAwesomeIcons.buildingColumns,
+                            size: 50,
+                          ),
+                          trailing: SizedBox(),
+                          title: Text(
+                            "Marriott Hotel and Resorts employee of the year awards",
+                            style: h4Bold.copyWith(
+                              fontSize: Di.FSD,
+                            ),
+                          ),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Di.SBHES,
+                              Text(
+                                "www.marriott.com/awards",
+                                style: bodySmallRegular.copyWith(
+                                  color: Cr.accentBlue1,
+                                  fontSize: Di.FSS,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Di.SBHD,
+                        Divider(
+                          thickness: 1,
+                          height: 0,
+                        ),
+                        Container(
+                          width: 360,
+                          color: Cr.lightGrey2,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Di.SBHS,
+                              CustomTextButton(
+                                text: "  + More info",
+                              ),
+                              Di.SBHS,
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Di.SBHES,
-                      Text(
-                        "www.marriott.com/awards",
-                        style: bodySmallRegular.copyWith(
-                          color: Cr.accentBlue1,
-                          fontSize: Di.FSS,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Di.SBHD,
-                Divider(
-                  thickness: 1,
-                  height: 0,
-                ),
-                Container(
-                  width: 360,
-                  color: Cr.lightGrey2,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Di.SBHS,
-                      CustomTextButton(
-                        text: "  + More info",
-                      ),
-                      Di.SBHS,
-                    ],
-                  ),
-                ),
-              ],
-            ),
+                ],
+              ),
+              BlueEditStack(),
+              EditIconButton(),
+            ],
           ),
         ],
       ),
@@ -231,71 +255,82 @@ class EducationComponent extends StatelessWidget {
               style: h2Regular,
             ),
           ),
-          Divider(
-            thickness: 1,
-            height: 0,
-          ),
-          Di.SBHS,
-          Container(
-            width: 360,
-            decoration: Styles.boxDecoration.copyWith(color: Cr.whiteColor),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ListTile(
-                  leading: ContainerWithIcon(
-                    iconData: FontAwesomeIcons.buildingColumns,
-                    size: 50,
+          Stack(
+            children: [
+              Column(
+                children: [
+                  Divider(
+                    thickness: 1,
+                    height: 0,
                   ),
-                  title: Text(
-                    "University of Cape Town",
-                    style: h4Bold.copyWith(
-                      fontSize: Di.FSD,
+                  Di.SBHS,
+                  Container(
+                    width: 360,
+                    decoration:
+                        Styles.boxDecoration.copyWith(color: Cr.whiteColor),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ListTile(
+                          leading: ContainerWithIcon(
+                            iconData: FontAwesomeIcons.buildingColumns,
+                            size: 50,
+                          ),
+                          title: Text(
+                            "University of Cape Town",
+                            style: h4Bold.copyWith(
+                              fontSize: Di.FSD,
+                            ),
+                          ),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(height: Di.PSETS + 1),
+                              Text(
+                                "Postgraduate Degree in Business Science",
+                                style: bodySmallRegular.copyWith(
+                                  color: Cr.accentBlue1,
+                                  fontSize: Di.FSS,
+                                ),
+                              ),
+                              SizedBox(height: Di.PSETS + 1),
+                              Text(
+                                "2010 - 2013",
+                                style: bodySmallRegular.copyWith(
+                                  color: Cr.darkGrey1,
+                                  fontSize: Di.FSS,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Di.SBHD,
+                        Divider(
+                          thickness: 1,
+                          height: 0,
+                        ),
+                        Container(
+                          width: 360,
+                          color: Cr.lightGrey2,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Di.SBHS,
+                              CustomTextButton(
+                                text: "  + Course online",
+                              ),
+                              Di.SBHS,
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(height: Di.PSETS + 1),
-                      Text(
-                        "Postgraduate Degree in Business Science",
-                        style: bodySmallRegular.copyWith(
-                          color: Cr.accentBlue1,
-                          fontSize: Di.FSS,
-                        ),
-                      ),
-                      SizedBox(height: Di.PSETS + 1),
-                      Text(
-                        "2010 - 2013",
-                        style: bodySmallRegular.copyWith(
-                          color: Cr.darkGrey1,
-                          fontSize: Di.FSS,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Di.SBHD,
-                Divider(
-                  thickness: 1,
-                  height: 0,
-                ),
-                Container(
-                  width: 360,
-                  color: Cr.lightGrey2,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Di.SBHS,
-                      CustomTextButton(
-                        text: "  + Course online",
-                      ),
-                      Di.SBHS,
-                    ],
-                  ),
-                ),
-              ],
-            ),
+                ],
+              ),
+              BlueEditStack(),
+              EditIconButton(),
+            ],
           ),
         ],
       ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:holedo/presentation/ui/components/blue_edit_stack.dart';
 import 'package:holedo/presentation/ui/components/custom_checkbox_with_title.dart';
+import 'package:holedo/presentation/ui/components/edit_icon_buttton.dart';
 import 'package:holedo/presentation/ui/components/text_with_background.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_reference_component.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
@@ -49,50 +51,60 @@ class AreasOfExpertiseComponents extends StatelessWidget {
               style: h2Regular,
             ),
           ),
-          Divider(
-            thickness: .7,
-            color: Cr.darkGrey2,
-          ),
-          Row(
-            children: [
-              Di.SBWS,
-              CustomCheckboxWithTitle(title: "Business management"),
-              Di.SBWS,
-              CustomCheckboxWithTitle(title: "Leadership"),
-            ],
-          ),
 
-          Row(
+          Stack(
             children: [
-              Di.SBWS,
-              CustomCheckboxWithTitle(title: "Leadership"),
-              Di.SBWS,
-              CustomCheckboxWithTitle(title: "Growth Hacking"),
-              Di.SBWS,
-              CustomCheckboxWithTitle(title: "Finance"),
-            ],
-          ),
-          Row(
-            children: [
-              Di.SBWD,
-              CustomCheckboxWithTitle(title: "Business management"),
-              Di.SBWS,
-              CustomCheckboxWithTitle(title: "Leadership"),
-            ],
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Di.SBWS,
-              CustomCheckboxWithTitle(title: "Finance"),
-              Di.SBWS,
-              CustomCheckboxWithTitle(title: "Acquisitions"),
-              Di.SBWS,
-              TextWithBackground(
-                text: " + Show all",
-                textColor: Cr.accentBlue1,
-                backgroundColor: Cr.accentBlue3,
+              Column(
+                children: [
+                  Divider(
+                    thickness: .7,
+                    color: Cr.darkGrey2,
+                  ),
+                  Row(
+                    children: [
+                      Di.SBWS,
+                      CustomCheckboxWithTitle(title: "Business management"),
+                      Di.SBWS,
+                      CustomCheckboxWithTitle(title: "Leadership"),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Di.SBWS,
+                      CustomCheckboxWithTitle(title: "Leadership"),
+                      Di.SBWS,
+                      CustomCheckboxWithTitle(title: "Growth Hacking"),
+                      Di.SBWS,
+                      CustomCheckboxWithTitle(title: "Finance"),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Di.SBWD,
+                      CustomCheckboxWithTitle(title: "Business management"),
+                      Di.SBWS,
+                      CustomCheckboxWithTitle(title: "Leadership"),
+                    ],
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Di.SBWS,
+                      CustomCheckboxWithTitle(title: "Finance"),
+                      Di.SBWS,
+                      CustomCheckboxWithTitle(title: "Acquisitions"),
+                      Di.SBWS,
+                      TextWithBackground(
+                        text: " + Show all",
+                        textColor: Cr.accentBlue1,
+                        backgroundColor: Cr.accentBlue3,
+                      ),
+                    ],
+                  ),
+                ],
               ),
+              BlueEditStack(),
+              EditIconButton(),
             ],
           ),
           // CustomCheckboxWithTitle(title: "Growth Hacking"),
@@ -145,15 +157,21 @@ class ProfileSummaryComponent extends StatelessWidget {
           // Di.SBHD,
           Divider(thickness: 1),
           Di.SBHD,
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: Di.PSD),
-            child: Text(
-              """Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+          Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: Di.PSD),
+                child: Text(
+                  """Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
 \nExcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
 \n\nNemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.""",
-              maxLines: isMobile ? 6 : null,
-              style: bodyLarge.copyWith(color: Cr.darkGrey1),
-            ),
+                  maxLines: isMobile ? 6 : null,
+                  style: bodyLarge.copyWith(color: Cr.darkGrey1),
+                ),
+              ),
+              BlueEditStack(),
+              EditIconButton(),
+            ],
           ),
           Di.SBHD,
           Divider(
