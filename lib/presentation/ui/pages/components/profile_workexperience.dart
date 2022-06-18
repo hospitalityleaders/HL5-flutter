@@ -13,10 +13,12 @@ class ProfileWorkExperienceComponent extends StatelessWidget {
   const ProfileWorkExperienceComponent({
     Key? key,
     this.isMobile = false,
+    this.onEditPressed,
   }) : super(key: key);
 
   final bool isMobile;
 
+  final void Function()? onEditPressed;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -135,7 +137,7 @@ class ProfileWorkExperienceComponent extends StatelessWidget {
                     )
                   : Di.ESB,
               Provider.of<ProfileProvider>(context).isProfileEditable
-                  ? EditIconButton(onPressed: () {})
+                  ? EditIconButton(onPressed: onEditPressed ?? () {})
                   : Di.ESB,
             ],
           ),

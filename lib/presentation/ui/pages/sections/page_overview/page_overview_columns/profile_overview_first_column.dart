@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:holedo/presentation/providers/profile_provider.dart';
 import 'package:holedo/presentation/ui/components/custom_checkbox_with_title.dart';
+import 'package:holedo/presentation/ui/components/custom_text_button.dart';
 import 'package:holedo/presentation/ui/components/edit_icon_buttton.dart';
+import 'package:holedo/presentation/ui/components/person_avatar.dart';
 import 'package:holedo/presentation/ui/components/text_with_background.dart';
-import 'package:holedo/presentation/ui/pages/components/profile_reference_component.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/styles.dart';
@@ -15,6 +16,121 @@ import 'package:holedo/common/popUpHeadMenu.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/constant/sizedbox.dart';
+
+class ProfileSummaryComponent extends StatefulWidget {
+  const ProfileSummaryComponent({
+    Key? key,
+    this.isMobile = false,
+    this.profileSummary,
+    this.sec1IsEditable,
+    this.profileOverviewSec1ProSumm_W,
+    this.profileOverviewSec1ProSumm_H,
+    this.buildProfileCardPopUp,
+    this.pOApiDataSec1,
+  }) : super(key: key);
+
+  final String? profileSummary;
+  final bool isMobile;
+  final bool? sec1IsEditable;
+  final profileOverviewSec1ProSumm_W;
+  final profileOverviewSec1ProSumm_H;
+  final buildProfileCardPopUp;
+  final pOApiDataSec1;
+
+  @override
+  State<ProfileSummaryComponent> createState() =>
+      _ProfileSummaryComponentState();
+}
+
+class _ProfileSummaryComponentState extends State<ProfileSummaryComponent> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(Di.PSD),
+      decoration: Styles.boxDecoration.copyWith(
+        color: Cr.whiteColor,
+        // gradient: LinearGradient(
+        //   colors: [
+        //     Cr.transparent,
+        //     Cr.whiteColor,
+        //   ],
+        // ),
+      ),
+      child: Column(
+        children: [
+          ListTile(
+            title: Text(
+              "Profile summary",
+              style: h2Regular,
+            ),
+          ),
+
+          // Di.SBHD,
+          Divider(thickness: 1),
+          Di.SBHD,
+          Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: Di.PSD),
+                child: Text(
+                  widget.profileSummary ??
+                      """Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+\nExcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+\n\nNemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.""",
+                  maxLines: widget.isMobile ? 6 : null,
+                  style: bodyLarge.copyWith(color: Cr.darkGrey1),
+                ),
+              ),
+              Provider.of<ProfileProvider>(context).isProfileEditable
+                  ? Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(height: 50),
+                          Container(
+                            width: 560,
+                            height: 385,
+                            color: Cr.accentBlue2.withOpacity(.8),
+                            padding: EdgeInsets.all(Di.PSD),
+                          ),
+                        ],
+                      ),
+                    )
+                  : Di.ESB,
+              Provider.of<ProfileProvider>(context).isProfileEditable
+                  ? EditIconButton(onPressed: () {
+                      widget.buildProfileCardPopUp(
+                          id: widget.pOApiDataSec1.id.toString(),
+                          profileSummary:
+                              widget.pOApiDataSec1.profileSummary.toString());
+                    })
+                  : Di.ESB,
+            ],
+          ),
+          Di.SBHD,
+          Divider(
+            thickness: .7,
+            color: Cr.darkGrey2,
+            height: 0,
+          ),
+          widget.sec1IsEditable as bool
+              ? ProfileEdit.buildProfileEdit(
+                  width: widget.profileOverviewSec1ProSumm_W as double,
+                  height: widget.profileOverviewSec1ProSumm_H as double,
+                  popUpEdit: () {
+                    widget.buildProfileCardPopUp(
+                        id: widget.pOApiDataSec1.id.toString(),
+                        profileSummary:
+                            widget.pOApiDataSec1.profileSummary.toString());
+                  },
+                  showAddButton: false,
+                )
+              : Container(),
+        ],
+      ),
+    );
+  }
+}
 
 class ProfileOverviewFirstColumn extends StatefulWidget {
   const ProfileOverviewFirstColumn({
@@ -69,9 +185,252 @@ class _ProfileOverviewFirstColumnState
             pOApiDataSec1: widget.pOApiDataSec1,
           ),
           Di.SBHETS,
-          AreasOfExpertiseComponents(),
+
+          // AreasOfExpertiseComponents(),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: Di.PSD),
+            decoration: Styles.boxDecoration.copyWith(color: Cr.whiteColor),
+            child: Column(
+              children: [
+                ListTile(
+                  title: Text(
+                    "Areas of expertise",
+                    style: h2Regular,
+                  ),
+                ),
+                Stack(
+                  children: [
+                    Column(
+                      children: [
+                        Divider(
+                          thickness: .7,
+                          color: Cr.darkGrey2,
+                        ),
+                        Row(
+                          children: [
+                            Di.SBWS,
+                            CustomCheckboxWithTitle(
+                                title: "Business management"),
+                            Di.SBWS,
+                            CustomCheckboxWithTitle(title: "Leadership"),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Di.SBWS,
+                            CustomCheckboxWithTitle(title: "Leadership"),
+                            Di.SBWS,
+                            CustomCheckboxWithTitle(title: "Growth Hacking"),
+                            Di.SBWS,
+                            CustomCheckboxWithTitle(title: "Finance"),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Di.SBWD,
+                            CustomCheckboxWithTitle(
+                                title: "Business management"),
+                            Di.SBWS,
+                            CustomCheckboxWithTitle(title: "Leadership"),
+                          ],
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Di.SBWS,
+                            CustomCheckboxWithTitle(title: "Finance"),
+                            Di.SBWS,
+                            CustomCheckboxWithTitle(title: "Acquisitions"),
+                            Di.SBWS,
+                            TextWithBackground(
+                              text: " + Show all",
+                              textColor: Cr.accentBlue1,
+                              backgroundColor: Cr.accentBlue3,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Provider.of<ProfileProvider>(context).isProfileEditable
+                        ? Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  width: 560,
+                                  height: 174,
+                                  color: Cr.accentBlue2.withOpacity(.8),
+                                  padding: EdgeInsets.all(Di.PSD),
+                                ),
+                              ],
+                            ),
+                          )
+                        : Di.ESB,
+                    Provider.of<ProfileProvider>(context).isProfileEditable
+                        ? EditIconButton(onPressed: () {
+                            buildAreaOfExpePopUp(context);
+                          })
+                        : Di.ESB,
+                  ],
+                ),
+                // CustomCheckboxWithTitle(title: "Growth Hacking"),
+                // CustomCheckboxWithTitle(title: "Finance"),
+                // CustomCheckboxWithTitle(title: "Acquisitions"),
+                // CustomCheckboxWithTitle(title: "Recruitment"),
+                // CustomCheckboxWithTitle(title: "Hotel groups"),
+                // CustomCheckboxWithTitle(title: "Consulting"),
+                // CustomCheckboxWithTitle(title: "Public speaking"),
+
+                // Training
+
+                Di.SBHD,
+              ],
+            ),
+          ),
+
           Di.SBHETS,
-          ProfileReferenceComponent(),
+          // ProfileReferenceComponent(),
+          Container(
+            decoration: Styles.boxDecoration.copyWith(color: Cr.whiteColor),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Di.SBHETS,
+                Card(
+                  child: ListTile(
+                    title: Text(
+                      "References",
+                      style: h2Regular,
+                    ),
+                  ),
+                ),
+                // Divider(thickness: 1),
+                Stack(
+                  children: [
+                    ListView(
+                      shrinkWrap: true,
+                      children: [
+                        Container(
+                          width: 360,
+                          padding: EdgeInsets.symmetric(horizontal: Di.PSS),
+                          decoration: Styles.boxDecoration
+                              .copyWith(color: Cr.whiteColor),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ListTile(
+                                leading: PersonAvatar(
+                                  avatarSize: Di.FSOTL + 10,
+                                ),
+                                title: Row(
+                                  children: [
+                                    Text(
+                                      "Sarah Lee",
+                                      style: h4Bold,
+                                    ),
+                                    Di.SBWES,
+                                    Text(
+                                      "MHL",
+                                      style: dividerTextSmall,
+                                    )
+                                  ],
+                                ),
+                                subtitle: Text(
+                                  "General Manager, One & Only Hotel",
+                                  style: bodySmallRegular.copyWith(
+                                    color: Cr.darkGrey1,
+                                  ),
+                                ),
+                              ),
+                              Di.SBHES,
+                              Container(
+                                height: Di.FSOTL + 10,
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: Di.PSD),
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      width: Di.FSOTL,
+                                      height: Di.FSOTL,
+                                      decoration: Styles.boxDecoration.copyWith(
+                                        color: Cr.accentBlue1,
+                                      ),
+                                      child: Icon(
+                                        Icons.format_quote,
+                                        color: Cr.whiteColor,
+                                      ),
+                                    ),
+                                    Di.SBWD,
+                                    Expanded(
+                                      // width: 100,
+                                      child: SizedBox(
+                                        height: Di.FSOTL + 6,
+                                        child: Text(
+                                          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+                                          style: bodyLarge.copyWith(
+                                            color: Cr.darkGrey1,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Di.SBHETS,
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: Di.PSD),
+                                child: Text(
+                                  "incididunt ut labore et dolore magna aliqua.",
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: bodyLarge.copyWith(
+                                    color: Cr.darkGrey1,
+                                  ),
+                                ),
+                              ),
+                              CustomTextButton(
+                                text: "  + Show more",
+                              ),
+                              Di.SBHD,
+                              Divider(thickness: 1),
+                            ],
+                          ),
+                        ),
+
+                        // _ProfileReferenceListTile(),
+                        // _ProfileReferenceListTile(),
+                        // Divider(thickness: 1),
+                      ],
+                    ),
+                    Provider.of<ProfileProvider>(context).isProfileEditable
+                        ? Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(height: 50),
+                                Container(
+                                  width: 560,
+                                  height: 370,
+                                  color: Cr.accentBlue2.withOpacity(.8),
+                                  padding: EdgeInsets.all(Di.PSD),
+                                ),
+                              ],
+                            ),
+                          )
+                        : Di.ESB,
+                    Provider.of<ProfileProvider>(context).isProfileEditable
+                        ? EditIconButton(
+                            onPressed: () {
+                              PopUpHeadMenu.buildReferencesCardPopUp(context);
+                            },
+                          )
+                        : Di.ESB,
+                  ],
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -539,7 +898,6 @@ class AreasOfExpertiseComponents extends StatelessWidget {
               style: h2Regular,
             ),
           ),
-
           Stack(
             children: [
               Column(
@@ -622,116 +980,6 @@ class AreasOfExpertiseComponents extends StatelessWidget {
           // Training
 
           Di.SBHD,
-        ],
-      ),
-    );
-  }
-}
-
-class ProfileSummaryComponent extends StatefulWidget {
-  const ProfileSummaryComponent({
-    Key? key,
-    this.isMobile = false,
-    this.profileSummary,
-    this.sec1IsEditable,
-    this.profileOverviewSec1ProSumm_W,
-    this.profileOverviewSec1ProSumm_H,
-    this.buildProfileCardPopUp,
-    this.pOApiDataSec1,
-  }) : super(key: key);
-
-  final String? profileSummary;
-  final bool isMobile;
-  final bool? sec1IsEditable;
-  final profileOverviewSec1ProSumm_W;
-  final profileOverviewSec1ProSumm_H;
-  final buildProfileCardPopUp;
-  final pOApiDataSec1;
-
-  @override
-  State<ProfileSummaryComponent> createState() =>
-      _ProfileSummaryComponentState();
-}
-
-class _ProfileSummaryComponentState extends State<ProfileSummaryComponent> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(Di.PSD),
-      decoration: Styles.boxDecoration.copyWith(
-        color: Cr.whiteColor,
-        // gradient: LinearGradient(
-        //   colors: [
-        //     Cr.transparent,
-        //     Cr.whiteColor,
-        //   ],
-        // ),
-      ),
-      child: Column(
-        children: [
-          ListTile(
-            title: Text(
-              "Profile summary",
-              style: h2Regular,
-            ),
-          ),
-
-          // Di.SBHD,
-          Divider(thickness: 1),
-          Di.SBHD,
-          Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: Di.PSD),
-                child: Text(
-                  widget.profileSummary ??
-                      """Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-\nExcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-\n\nNemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.""",
-                  maxLines: widget.isMobile ? 6 : null,
-                  style: bodyLarge.copyWith(color: Cr.darkGrey1),
-                ),
-              ),
-              Provider.of<ProfileProvider>(context).isProfileEditable
-                  ? Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(height: 50),
-                          Container(
-                            width: 560,
-                            height: 385,
-                            color: Cr.accentBlue2.withOpacity(.8),
-                            padding: EdgeInsets.all(Di.PSD),
-                          ),
-                        ],
-                      ),
-                    )
-                  : Di.ESB,
-              Provider.of<ProfileProvider>(context).isProfileEditable
-                  ? EditIconButton(onPressed: () {})
-                  : Di.ESB,
-            ],
-          ),
-          Di.SBHD,
-          Divider(
-            thickness: .7,
-            color: Cr.darkGrey2,
-            height: 0,
-          ),
-          widget.sec1IsEditable as bool
-              ? ProfileEdit.buildProfileEdit(
-                  width: widget.profileOverviewSec1ProSumm_W as double,
-                  height: widget.profileOverviewSec1ProSumm_H as double,
-                  popUpEdit: () {
-                    widget.buildProfileCardPopUp(
-                        id: widget.pOApiDataSec1.id.toString(),
-                        profileSummary:
-                            widget.pOApiDataSec1.profileSummary.toString());
-                  },
-                  showAddButton: false,
-                )
-              : Container(),
         ],
       ),
     );

@@ -886,6 +886,19 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        //  String cardName,
+        //   String cardTitle,
+        //   String cardSubTitle,
+        //   String cardDate,
+        //   String cardBtn,
+        //   String cardDetail,
+        //   IconData cardIcon,
+        //   popUpEditCards,
+        //   popUpAddCards,
+        //   bool isVisible,
+        //   String description,
+        //   bool showIcon,
+
         buildProfileSec2Cards(
           widget.profileOverviewSec2WorkExpKey,
           widget.profileOverviewSec2WorkExp_H,
