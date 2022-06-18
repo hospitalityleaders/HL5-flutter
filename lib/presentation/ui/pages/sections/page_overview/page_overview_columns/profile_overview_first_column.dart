@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:holedo/presentation/ui/components/blue_edit_stack.dart';
+import 'package:holedo/presentation/providers/profile_provider.dart';
 import 'package:holedo/presentation/ui/components/custom_checkbox_with_title.dart';
 import 'package:holedo/presentation/ui/components/edit_icon_buttton.dart';
 import 'package:holedo/presentation/ui/components/text_with_background.dart';
@@ -7,6 +7,7 @@ import 'package:holedo/presentation/ui/pages/components/profile_reference_compon
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/styles.dart';
+import 'package:provider/provider.dart';
 
 class ProfileOverviewFirstColumn extends StatelessWidget {
   const ProfileOverviewFirstColumn({
@@ -103,8 +104,24 @@ class AreasOfExpertiseComponents extends StatelessWidget {
                   ),
                 ],
               ),
-              BlueEditStack(),
-              EditIconButton(),
+              Provider.of<ProfileProvider>(context).isProfileEditable
+                  ? Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 560,
+                            height: 174,
+                            color: Cr.accentBlue2.withOpacity(.8),
+                            padding: EdgeInsets.all(Di.PSD),
+                          ),
+                        ],
+                      ),
+                    )
+                  : Di.ESB,
+              Provider.of<ProfileProvider>(context).isProfileEditable
+                  ? EditIconButton(onPressed: () {})
+                  : Di.ESB,
             ],
           ),
           // CustomCheckboxWithTitle(title: "Growth Hacking"),
@@ -169,8 +186,25 @@ class ProfileSummaryComponent extends StatelessWidget {
                   style: bodyLarge.copyWith(color: Cr.darkGrey1),
                 ),
               ),
-              BlueEditStack(),
-              EditIconButton(),
+              Provider.of<ProfileProvider>(context).isProfileEditable
+                  ? Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(height: 50),
+                          Container(
+                            width: 560,
+                            height: 385,
+                            color: Cr.accentBlue2.withOpacity(.8),
+                            padding: EdgeInsets.all(Di.PSD),
+                          ),
+                        ],
+                      ),
+                    )
+                  : Di.ESB,
+              Provider.of<ProfileProvider>(context).isProfileEditable
+                  ? EditIconButton(onPressed: () {})
+                  : Di.ESB,
             ],
           ),
           Di.SBHD,

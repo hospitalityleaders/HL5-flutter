@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:holedo/presentation/ui/components/blue_edit_stack.dart';
+import 'package:holedo/presentation/providers/profile_provider.dart';
 import 'package:holedo/presentation/ui/components/container_with_icon.dart';
 import 'package:holedo/presentation/ui/components/custom_text_button.dart';
 import 'package:holedo/presentation/ui/components/edit_icon_buttton.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/styles.dart';
+import 'package:provider/provider.dart';
 
 class ProfileWorkExperienceComponent extends StatelessWidget {
   const ProfileWorkExperienceComponent({
@@ -118,8 +119,24 @@ class ProfileWorkExperienceComponent extends StatelessWidget {
                   ),
                 ],
               ),
-              BlueEditStack(),
-              EditIconButton(),
+              Provider.of<ProfileProvider>(context).isProfileEditable
+                  ? Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 560,
+                            height: 290,
+                            color: Cr.accentBlue2.withOpacity(.8),
+                            padding: EdgeInsets.all(Di.PSD),
+                          ),
+                        ],
+                      ),
+                    )
+                  : Di.ESB,
+              Provider.of<ProfileProvider>(context).isProfileEditable
+                  ? EditIconButton(onPressed: () {})
+                  : Di.ESB,
             ],
           ),
         ],

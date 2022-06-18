@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ProfileProvider extends ChangeNotifier {
   bool isProfileEditable;
   ProfileProvider({
-    this.isProfileEditable = false,
+    this.isProfileEditable = true,
   });
 
   void changeIsProfieEditableState(bool isEditable) {

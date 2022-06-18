@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:holedo/presentation/ui/components/blue_edit_stack.dart';
+import 'package:holedo/presentation/providers/profile_provider.dart';
 import 'package:holedo/presentation/ui/components/custom_text_button.dart';
 import 'package:holedo/presentation/ui/components/edit_icon_buttton.dart';
 import 'package:holedo/presentation/ui/components/person_avatar.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/styles.dart';
+import 'package:provider/provider.dart';
 
 class ProfileReferenceComponent extends StatelessWidget {
   const ProfileReferenceComponent({
@@ -39,8 +40,25 @@ class ProfileReferenceComponent extends StatelessWidget {
                   Divider(thickness: 1),
                 ],
               ),
-              BlueEditStack(),
-              EditIconButton(),
+              Provider.of<ProfileProvider>(context).isProfileEditable
+                  ? Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(height: 50),
+                          Container(
+                            width: 560,
+                            height: 370,
+                            color: Cr.accentBlue2.withOpacity(.8),
+                            padding: EdgeInsets.all(Di.PSD),
+                          ),
+                        ],
+                      ),
+                    )
+                  : Di.ESB,
+              Provider.of<ProfileProvider>(context).isProfileEditable
+                  ? EditIconButton(onPressed: () {})
+                  : Di.ESB,
             ],
           ),
         ],

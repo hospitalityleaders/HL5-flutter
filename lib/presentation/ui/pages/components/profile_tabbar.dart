@@ -125,6 +125,18 @@ class ProfileTabbar extends StatelessWidget {
           ),
           CustomElevatedButton(
             // onPressed: onEditProfilePressed,
+
+            text: Provider.of<ProfileProvider>(context).isProfileEditable
+                ? "Done Editing"
+                : null,
+            backgroundColor:
+                Provider.of<ProfileProvider>(context).isProfileEditable
+                    ? Cr.green1
+                    : null,
+            icon: Icon(
+              Icons.check,
+              size: Di.FSD,
+            ),
             onPressed: () {
               Provider.of<ProfileProvider>(context, listen: false)
                   .changeIsProfieEditableState(!isEditable);

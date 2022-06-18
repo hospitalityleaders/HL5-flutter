@@ -73,6 +73,7 @@ class CustomElevatedButton extends StatelessWidget {
                       Text(
                         text ?? "Edit Profile",
                         style: bodySmallRegular.copyWith(
+                          fontSize: Di.FSD - 3,
                           color: textColor ?? Cr.whiteColor,
                         ),
                       ),
