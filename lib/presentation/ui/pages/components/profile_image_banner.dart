@@ -11,9 +11,15 @@ class ProfileImageBanner extends StatelessWidget {
   const ProfileImageBanner({
     Key? key,
     this.onEditButtonPressed,
+    this.userProfileData,
   }) : super(key: key);
 
   final void Function()? onEditButtonPressed;
+
+  // final String? fullName;
+  // final String? avatarUrl;
+  // final String? userTitleTypesId;
+  final User? userProfileData;
 
   @override
   Widget build(BuildContext context) {
@@ -49,10 +55,11 @@ class ProfileImageBanner extends StatelessWidget {
                     ContactCardMenuCommon(),
                     Di.SBHD,
                     Text(
-                      "Noberto Holden",
+                      userProfileData?.fullName ?? "Noberto Holden",
                       style: display1,
                     ),
                     Text(
+                      // userProfileData?.profileVideoDescription.toString() ??
                       "Business development manager, recruiter and hotel specialist.",
                       style: bodyLarge.copyWith(
                         color: Cr.darkGrey1,
@@ -97,7 +104,11 @@ class ProfileImageBanner extends StatelessWidget {
               height: 75,
               decoration: Styles.boxDecorationRounded.copyWith(
                 image: DecorationImage(
-                  image: AssetImage("assets/images/avatar.png"),
+                  image:
+                      // avatarUrl != null
+                      //     ?
+                      NetworkImage(userProfileData?.avatar?.toString() ?? ""),
+                  // : AssetImage("assets/images/avatar.png"),
                   fit: BoxFit.cover,
                 ),
               ),

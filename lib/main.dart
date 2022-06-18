@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:holedo/layouts/page_scaffold.dart';
 import 'package:holedo/layouts/pages/content_page.dart';
 import 'package:holedo/models/models.dart';
+import 'package:holedo/presentation/providers/profile_provider.dart';
 import 'package:holedo/presentation/theme/light_theme.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 import 'package:routemaster/routemaster.dart';
 import 'includes/url_strategy.dart';
 
@@ -223,12 +225,29 @@ class BookStoreApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => AppState(
-          username: Get.put(HoledoDatabase()).getModel().user?.fullName,
-          profile: Get.put(HoledoDatabase()).getModel().user),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => ProfileProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => AppState(
+              username: Get.put(HoledoDatabase()).getModel().user?.fullName,
+              profile: Get.put(HoledoDatabase()).getModel().user),
+        ),
+      ],
       child: MaterialApp.router(
         title: 'Holedo',
+        builder: (context, child) => ResponsiveWrapper.builder(
+          child,
+          breakpoints: [
+            // ResponsiveBreakpoint.autoScaleDown(320, name: MOBILE),
+            // ResponsiveBreakpoint.autoScale(450, name: MOBILE),
+
+            ResponsiveBreakpoint.autoScaleDown(450, name: MOBILE),
+            ResponsiveBreakpoint.autoScaleDown(1200, name: DESKTOP),
+          ],
+        ),
         debugShowCheckedModeBanner: false,
         theme: lightTheme,
         // theme: ThemeData(

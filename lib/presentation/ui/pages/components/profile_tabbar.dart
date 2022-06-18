@@ -12,12 +12,13 @@ class ProfileTabbar extends StatelessWidget {
     Key? key,
     required TabController tabController,
     this.onEditProfilePressed,
+    this.isMine = false,
   })  : _tabController = tabController,
         super(key: key);
 
   final TabController _tabController;
   final void Function()? onEditProfilePressed;
-
+  final bool isMine;
   @override
   Widget build(BuildContext context) {
     final isEditable = Provider.of<ProfileProvider>(context).isProfileEditable;
@@ -123,25 +124,26 @@ class ProfileTabbar extends StatelessWidget {
               ],
             ),
           ),
-          CustomElevatedButton(
-            // onPressed: onEditProfilePressed,
-
-            text: Provider.of<ProfileProvider>(context).isProfileEditable
-                ? "Done Editing"
-                : null,
-            backgroundColor:
-                Provider.of<ProfileProvider>(context).isProfileEditable
-                    ? Cr.green1
-                    : null,
-            icon: Icon(
-              Icons.check,
-              size: Di.FSD,
-            ),
-            onPressed: () {
-              Provider.of<ProfileProvider>(context, listen: false)
-                  .changeIsProfieEditableState(!isEditable);
-            },
-          ),
+          isMine
+              ? CustomElevatedButton(
+                  // onPressed: onEditProfilePressed,
+                  text: Provider.of<ProfileProvider>(context).isProfileEditable
+                      ? "Done Editing"
+                      : null,
+                  backgroundColor:
+                      Provider.of<ProfileProvider>(context).isProfileEditable
+                          ? Cr.green1
+                          : null,
+                  icon: Icon(
+                    Icons.check,
+                    size: Di.FSD,
+                  ),
+                  onPressed: () {
+                    Provider.of<ProfileProvider>(context, listen: false)
+                        .changeIsProfieEditableState(!isEditable);
+                  },
+                )
+              : Di.ESB,
         ],
       ),
     );

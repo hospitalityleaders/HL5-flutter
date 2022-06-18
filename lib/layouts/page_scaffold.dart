@@ -26,12 +26,14 @@ class PageScaffold extends StatefulWidget {
   final String title;
   final Widget body;
   final String? searchQuery;
+  final bool isNewDesign;
 
   PageScaffold({
     Key? key,
     required this.title,
     required this.body,
     this.searchQuery,
+    this.isNewDesign = false,
   }) : super(key: key);
 
   @override
@@ -115,51 +117,54 @@ class _PageScaffoldState extends State<PageScaffold> {
     final canGoBack = routemaster.history.canGoBack;
     final canGoForward = routemaster.history.canGoForward;
 
-    return LayoutBuilder(builder: (context, constraints) {
-      final bool isMobile = Responsive.isMobile(context);
-      final bool isTablet = Responsive.isTablet(context);
-      final bool isDesktop = Responsive.isDesktop(context);
-      maxWidth = constraints.maxWidth;
-      return Scaffold(
-        drawer: (!isDesktop)
-            ? Drawer(
-                child: Container(
-                  color: Color(0xFF232f3e),
-                  child: ListView(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Image(
-                          image: AssetImage('assets/icons/logo.png'),
-                          height: 55,
+    return widget.isNewDesign
+        ? widget.body
+        : LayoutBuilder(builder: (context, constraints) {
+            final bool isMobile = Responsive.isMobile(context);
+            final bool isTablet = Responsive.isTablet(context);
+            final bool isDesktop = Responsive.isDesktop(context);
+            maxWidth = constraints.maxWidth;
+            return Scaffold(
+              drawer: (!isDesktop)
+                  ? Drawer(
+                      child: Container(
+                        color: Color(0xFF232f3e),
+                        child: ListView(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Image(
+                                image: AssetImage('assets/icons/logo.png'),
+                                height: 55,
+                              ),
+                            ),
+                            SingleChildScrollView(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: _buildNavBarChildren(
+                                    inDrawer: true,
+                                    isLogin: appState.isLoggedIn),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      SingleChildScrollView(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: _buildNavBarChildren(
-                              inDrawer: true, isLogin: appState.isLoggedIn),
-                        ),
-                      ),
-                    ],
-                  ),
+                    )
+                  : null,
+              appBar: PreferredSize(
+                preferredSize: Size.fromHeight(46),
+                child: AppBar(
+                  backgroundColor: ColorPicker.kPrimaryLight1,
+                  automaticallyImplyLeading: (!isDesktop),
+                  title: _buildAppBar(context, constraints),
                 ),
-              )
-            : null,
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(46),
-          child: AppBar(
-            backgroundColor: ColorPicker.kPrimaryLight1,
-            automaticallyImplyLeading: (!isDesktop),
-            title: _buildAppBar(context, constraints),
-          ),
-        ),
-        body: Container(
-            decoration: BoxDecoration(
-              color: ColorPicker.kBG,
-            ),
-            child: widget
-                .body /* ListView(children: <Widget>[
+              ),
+              body: Container(
+                  decoration: BoxDecoration(
+                    color: ColorPicker.kBG,
+                  ),
+                  child: widget
+                      .body /* ListView(children: <Widget>[
             Container(
                 height: constraints.maxHeight,
                 child: Column(
@@ -174,9 +179,9 @@ class _PageScaffoldState extends State<PageScaffold> {
                 )),
             _buildFooter(isMobile),
           ]),*/
-            ),
-      );
-    });
+                  ),
+            );
+          });
   }
 
   Widget _buildFooter(bool isMobile) {
