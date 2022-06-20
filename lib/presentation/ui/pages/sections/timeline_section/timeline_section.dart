@@ -6,6 +6,7 @@ import 'package:holedo/presentation/ui/components/person_avatar.dart';
 import 'package:holedo/presentation/ui/pages/components/connection_component.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_completion_component.dart';
 import 'package:holedo/presentation/ui/pages/components/rights_component.dart';
+import 'package:holedo/presentation/ui/pages/sections/page_overview/page_overview_columns/page_overview_third_columns.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/ui/components/container_with_icon.dart';
@@ -65,6 +66,7 @@ class TimelineSection extends StatelessWidget {
                 ProfileCompletionComponent(),
                 Di.SBHEL,
                 ConnectionsComponent(),
+                ProfileAdsComponent(),
                 RightsComponent(),
               ],
             ),

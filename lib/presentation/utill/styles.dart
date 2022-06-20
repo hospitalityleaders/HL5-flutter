@@ -64,9 +64,22 @@ const bodyLarge = TextStyle(
   color: Cr.darkBlue1,
 );
 
+const bodyExtraSmall = TextStyle(
+  fontFamily: 'SourceSansPro',
+  fontSize: Di.FSS - 2,
+  color: Cr.darkBlue1,
+);
+
 const bodySmallRegular = TextStyle(
   fontFamily: 'SourceSansPro',
   fontSize: Di.FSD - 2,
+  color: Cr.darkBlue1,
+);
+
+const bodySmallSemibold = TextStyle(
+  fontFamily: 'SourceSansPro',
+  fontSize: Di.FSD - 2,
+  fontWeight: FontWeight.w600,
   color: Cr.darkBlue1,
 );
 
@@ -80,6 +93,13 @@ const h2Regular = TextStyle(
 const h2Bold = TextStyle(
   fontFamily: 'SourceSansPro',
   fontSize: Di.FSEL,
+  fontWeight: FontWeight.bold,
+  color: Cr.darkBlue1,
+);
+
+const h3Bold = TextStyle(
+  fontFamily: 'SourceSansPro',
+  fontSize: Di.FSL,
   fontWeight: FontWeight.bold,
   color: Cr.darkBlue1,
 );

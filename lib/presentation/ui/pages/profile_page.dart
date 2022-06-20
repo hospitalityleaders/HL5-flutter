@@ -9,7 +9,6 @@ import 'package:holedo/presentation/ui/pages/profile_mobile_view/profile_mobile_
 import 'package:holedo/presentation/ui/pages/sections/activity_section/activity_section.dart';
 import 'package:holedo/presentation/ui/pages/sections/articles_section/articles_section.dart';
 import 'package:holedo/presentation/ui/pages/sections/reference_section/reference_section.dart';
-import 'package:holedo/presentation/ui/pages/sections/timeline_section/timeline_section.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/styles.dart';
@@ -68,8 +67,8 @@ class _ProfilePageState extends State<ProfilePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlue,
-      // backgroundColor: Colors.white,
+      // backgroundColor: Colors.lightBlue,
+      backgroundColor: Colors.white,
       body: ResponsiveWrapper.of(context).isSmallerThan(MOBILE)
           ? ProfileMobileViewPage()
           : Center(
@@ -123,13 +122,15 @@ class _ProfilePageState extends State<ProfilePage>
                   Di.SBHEL,
                   SizedBox(
                     // width: Di.getScreenSize(context).width,
-                    height: 1500,
+                    height: 2000,
                     child: TabBarView(
                       controller: _tabController,
                       children: <Widget>[
-                        TimelineSection(),
+                        // TimelineSection(),
                         // PageOverviewSection(),
-                        TimelineSection(),
+                        // TimelineSection(),
+                        ArticlesSection(),
+                        ArticlesSection(),
                         ArticlesSection(),
                         ActivitySection(),
                         ReferenceSection(),
