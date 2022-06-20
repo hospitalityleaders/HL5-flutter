@@ -30,7 +30,7 @@ class Di {
   static final SizedBox SBWD = SizedBox(width: PSD);
   static final SizedBox SBWL = SizedBox(width: PSL);
   static final SizedBox SBWEL = SizedBox(width: PSEL);
-  static final SizedBox SBWOV = SizedBox(width: PSOL);
+  static final SizedBox SBWOL = SizedBox(width: PSOL);
   static final SizedBox SBWOTL = SizedBox(width: PSOTL);
 
   // SizedBox Height

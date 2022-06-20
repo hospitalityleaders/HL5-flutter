@@ -35,8 +35,8 @@ class MyApp extends StatelessWidget {
             // ResponsiveBreakpoint.autoScaleDown(320, name: MOBILE),
             // ResponsiveBreakpoint.autoScale(450, name: MOBILE),
 
-            ResponsiveBreakpoint.autoScaleDown(450, name: MOBILE),
-            ResponsiveBreakpoint.autoScaleDown(1200, name: DESKTOP),
+            // ResponsiveBreakpoint.autoScaleDown(450, name: MOBILE),
+            // ResponsiveBreakpoint.autoScaleDown(1200, name: DESKTOP),
           ],
         ),
         debugShowCheckedModeBanner: false,
@@ -68,8 +68,8 @@ class _ProfilePageState extends State<ProfilePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.lightBlue,
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.lightBlue,
+      // backgroundColor: Colors.white,
       body: ResponsiveWrapper.of(context).isSmallerThan(MOBILE)
           ? ProfileMobileViewPage()
           : Center(
@@ -127,6 +127,7 @@ class _ProfilePageState extends State<ProfilePage>
                     child: TabBarView(
                       controller: _tabController,
                       children: <Widget>[
+                        TimelineSection(),
                         // PageOverviewSection(),
                         TimelineSection(),
                         ArticlesSection(),
