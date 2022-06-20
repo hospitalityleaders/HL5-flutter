@@ -6,8 +6,6 @@ import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_tabbar.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_image_banner.dart';
 import 'package:holedo/presentation/ui/pages/profile_mobile_view/profile_mobile_view_page.dart';
-import 'package:holedo/presentation/ui/pages/sections/activity_section/activity_section.dart';
-import 'package:holedo/presentation/ui/pages/sections/articles_section/articles_section.dart';
 import 'package:holedo/presentation/ui/pages/sections/reference_section/reference_section.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
@@ -129,10 +127,14 @@ class _ProfilePageState extends State<ProfilePage>
                         // TimelineSection(),
                         // PageOverviewSection(),
                         // TimelineSection(),
-                        ArticlesSection(),
-                        ArticlesSection(),
-                        ArticlesSection(),
-                        ActivitySection(),
+                        // ArticlesSection(),
+                        // ArticlesSection(),
+                        // ArticlesSection(),
+                        // ActivitySection(),
+                        ReferenceSection(),
+                        ReferenceSection(),
+                        ReferenceSection(),
+                        ReferenceSection(),
                         ReferenceSection(),
                       ],
                     ),
