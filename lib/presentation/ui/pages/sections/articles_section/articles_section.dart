@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:holedo/presentation/ui/pages/components/connection_component.dart';
-import 'package:holedo/presentation/ui/pages/components/profile_completion_component.dart';
+import 'package:holedo/presentation/ui/pages/components/profile_article_timeline_component.dart';
 import 'package:holedo/presentation/ui/pages/components/rights_component.dart';
 import 'package:holedo/presentation/ui/pages/sections/page_overview/page_overview_columns/page_overview_third_columns.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
@@ -51,10 +51,10 @@ class ArticlesSection extends StatelessWidget {
           ),
           Di.SBWEL,
           SizedBox(
-            width: 360,
+            width: 365,
             child: Column(
               children: [
-                ProfileCompletionComponent(),
+                ProfileArticleTimelineComponent(),
                 Di.SBHEL,
                 ProfileArticleWidget(
                   showIsMemberOnly: true,

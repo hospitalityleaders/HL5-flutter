@@ -106,7 +106,7 @@ const h3Bold = TextStyle(
 
 const h4Bold = TextStyle(
   fontFamily: 'SourceSansPro',
-  fontSize: Di.FSL,
+  fontSize: Di.FSL - 2,
   fontWeight: FontWeight.bold,
   color: Cr.darkBlue1,
 );
@@ -118,11 +118,18 @@ const h5Bold = TextStyle(
   color: Cr.darkBlue1,
 );
 
-// Divider Text Small
+// Divider Text Small OR IMPORT YOUR DETAILS FROM
 
 const dividerTextSmall = TextStyle(
   fontFamily: 'SourceSansPro',
   fontSize: Di.FSS,
+  fontWeight: FontWeight.bold,
+  color: Cr.darkBlue1,
+);
+
+const dividerTextLarge = TextStyle(
+  fontFamily: 'SourceSansPro',
+  fontSize: Di.FSS + 1,
   fontWeight: FontWeight.bold,
   color: Cr.darkBlue1,
 );
