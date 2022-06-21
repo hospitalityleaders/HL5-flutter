@@ -20,7 +20,6 @@ import '../profile-edit/profile_edit.dart';
 import 'package:flutter/material.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/models/models.dart';
-import 'package:holedo/presentation/ui/components/custom_appbar.dart';
 import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_tabbar.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_image_banner.dart';
@@ -241,7 +240,7 @@ class _UserProfilePageState extends State<UserProfilePage>
         child: ListView(
           shrinkWrap: true,
           children: [
-            CustomAppbar(),
+            // CustomAppbar(),
             Container(
               height: 50,
               width: Di.getScreenSize(context).width,

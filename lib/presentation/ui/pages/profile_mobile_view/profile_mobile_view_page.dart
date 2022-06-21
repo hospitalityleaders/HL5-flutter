@@ -27,7 +27,6 @@ class ProfileMobileViewPage extends StatelessWidget {
         child: ListView(
           // shrinkWrap: true,
           children: [
-            ProfileMobileAppbar(),
             Container(
               height: 100,
               width: Di.getScreenSize(context).width,
@@ -284,11 +283,20 @@ class ProfileMobileViewPage extends StatelessWidget {
   }
 }
 
-class ProfileMobileAppbar extends StatelessWidget {
+class ProfileMobileAppbar extends StatefulWidget {
+  final TextEditingController searchController;
+  final void Function(String? searchText) onSearch;
   const ProfileMobileAppbar({
     Key? key,
+    required this.searchController,
+    required this.onSearch,
   }) : super(key: key);
 
+  @override
+  State<ProfileMobileAppbar> createState() => _ProfileMobileAppbarState();
+}
+
+class _ProfileMobileAppbarState extends State<ProfileMobileAppbar> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -304,58 +312,11 @@ class ProfileMobileAppbar extends StatelessWidget {
           ),
           Di.SBWD,
           AppbarTextField(
+            onSearchChange: widget.onSearch,
+            searchController: widget.searchController,
             width: 300,
             showPeopleButton: false,
           ),
-          // Container(
-          //   width: 300,
-          //   decoration: BoxDecoration(
-          //     color: ColorPicker.kWhite,
-          //     borderRadius: BorderRadius.circular(5),
-          //   ),
-          //   margin: EdgeInsets.all(2),
-          //   child: TextFormField(
-          //     // controller: _searchController,
-          //     // onChanged: (_) => _search(), // , onSubmitted: (_) => _search(),
-          //     cursorColor: ColorPicker.kWhite,
-          //     style: FontTextStyle.kWhite18W600PR,
-          //     decoration: InputDecoration(
-          //       contentPadding: EdgeInsets.all(4),
-          //       hintStyle: FontTextStyle.kPrimaryLightBlue16W400SSP,
-          //       filled: true,
-          //       fillColor: ColorPicker.kPrimaryLight,
-          //       hintText: "Search",
-          //       border: OutlineInputBorder(
-          //           borderSide: BorderSide(color: ColorPicker.kPrimary),
-          //           borderRadius: BorderRadius.circular(5)),
-          //       focusedBorder: OutlineInputBorder(
-          //           borderSide: BorderSide(color: ColorPicker.kPrimary),
-          //           borderRadius: BorderRadius.circular(5)),
-          //       enabledBorder: OutlineInputBorder(
-          //           borderSide: BorderSide(color: ColorPicker.kPrimary),
-          //           borderRadius: BorderRadius.circular(5)),
-          //       prefixIcon: Icon(
-          //         Icons.search,
-          //         color: ColorPicker.kPrimaryLightBlue,
-          //       ),
-          //       suffixIcon: Container(
-          //         margin: EdgeInsets.only(right: 5, bottom: 5, top: 5),
-          //         height: 40,
-          //         width: 87,
-          //         decoration: BoxDecoration(
-          //           color: ColorPicker.kPrimaryLight1,
-          //           borderRadius: BorderRadius.circular(5),
-          //         ),
-          //         child: Center(
-          //           child: CommonWidget.text(
-          //             'People',
-          //             style: FontTextStyle.kPrimaryLightBlue16W400SSP,
-          //           ),
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
           Di.SBWD,
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
