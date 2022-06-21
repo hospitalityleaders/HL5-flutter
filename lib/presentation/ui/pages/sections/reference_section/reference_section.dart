@@ -13,6 +13,27 @@ class ReferenceSection extends StatefulWidget {
 }
 
 class _ReferenceSectionState extends State<ReferenceSection> {
+  final GlobalKey _widgetKey = GlobalKey();
+
+  void _getScreenSize() {
+    final RenderBox renderBox =
+        _widgetKey.currentContext?.findRenderObject() as RenderBox;
+
+    final Size size = renderBox
+        .size; // or _widgetKey.currentContext?.size    print('Size: ${size.width}, ${size.height}');
+  }
+
+  @override
+  void didUpdateWidget(covariant ReferenceSection oldWidget) {
+    _getScreenSize();
+    super.didUpdateWidget(oldWidget);
+  }
+  // @override
+  // void didChangeDependencies() {
+  //   _getScreenSize();
+  //   super.didChangeDependencies();
+  // }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -21,8 +42,9 @@ class _ReferenceSectionState extends State<ReferenceSection> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Di.SBHOTL,
+          Di.SBWOTL,
           SizedBox(
+            key: _widgetKey,
             width: 360,
             // height: 220,
             child: Column(
@@ -41,7 +63,7 @@ class _ReferenceSectionState extends State<ReferenceSection> {
               ],
             ),
           ),
-          Di.SBHOTL,
+          Di.SBWOTL,
           SizedBox(
             width: 360,
             // height: 220,

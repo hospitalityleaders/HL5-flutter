@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:holedo/presentation/utill/styles.dart';
 
 class ActivitySection extends StatelessWidget {
   const ActivitySection({
@@ -9,7 +10,8 @@ class ActivitySection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Text(
-        "TabBarView",
+        "Activity Section",
+        style: display1,
       ),
     );
   }

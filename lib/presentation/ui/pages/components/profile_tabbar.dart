@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:holedo/models/models.dart';
 import 'package:holedo/presentation/providers/profile_provider.dart';
 import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/presentation/ui/components/person_avatar.dart';
@@ -10,15 +11,16 @@ import 'package:provider/provider.dart';
 class ProfileTabbar extends StatelessWidget {
   const ProfileTabbar({
     Key? key,
-    required TabController tabController,
+    required this.tabController,
     this.onEditProfilePressed,
     this.isMine = false,
-  })  : _tabController = tabController,
-        super(key: key);
+    this.onTap,
+  }) : super(key: key);
 
-  final TabController _tabController;
+  final TabController tabController;
   final void Function()? onEditProfilePressed;
   final bool isMine;
+  final void Function(int)? onTap;
   @override
   Widget build(BuildContext context) {
     final isEditable = Provider.of<ProfileProvider>(context).isProfileEditable;
@@ -60,11 +62,12 @@ class ProfileTabbar extends StatelessWidget {
             child: Row(
               children: [
                 TabBar(
+                  onTap: onTap,
                   labelColor: Cr.accentBlue1,
                   unselectedLabelColor: Cr.darkGrey2,
                   indicatorColor: Cr.accentBlue1,
                   indicatorPadding: EdgeInsets.symmetric(horizontal: 10),
-                  controller: _tabController,
+                  controller: tabController,
                   physics: NeverScrollableScrollPhysics(),
                   isScrollable: true,
                   automaticIndicatorColorAdjustment: true,

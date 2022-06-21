@@ -6,6 +6,13 @@
 // import '../../../../constant/colorPicker/color_picker.dart';
 // import '../../../../constant/fontStyle/font_style.dart';
 // import '../../../../constant/sizedbox.dart';
+
+import 'package:holedo/presentation/ui/pages/sections/activity_section/activity_section.dart';
+import 'package:holedo/presentation/ui/pages/sections/articles_section/articles_section.dart';
+import 'package:holedo/presentation/ui/pages/sections/page_overview/page_overview_section.dart';
+import 'package:holedo/presentation/ui/pages/sections/reference_section/reference_section.dart';
+import 'package:holedo/presentation/ui/pages/sections/timeline_section/timeline_section.dart';
+
 import '../profile-edit/profile_edit.dart';
 // import '../profile-overview/profile_overview.dart';
 // import '../references/references.dart';
@@ -18,11 +25,6 @@ import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_tabbar.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_image_banner.dart';
 import 'package:holedo/presentation/ui/pages/profile_mobile_view/profile_mobile_view_page.dart';
-import 'package:holedo/presentation/ui/pages/sections/activity_section/activity_section.dart';
-import 'package:holedo/presentation/ui/pages/sections/articles_section/articles_section.dart';
-import 'package:holedo/presentation/ui/pages/sections/page_overview/page_overview_section.dart';
-import 'package:holedo/presentation/ui/pages/sections/reference_section/reference_section.dart';
-import 'package:holedo/presentation/ui/pages/sections/timeline_section/timeline_section.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/styles.dart';
@@ -210,12 +212,21 @@ class _UserProfilePageState extends State<UserProfilePage>
   }
 
   int tabBar = 0;
-  TabController? _tabController;
+  late TabController _tabController;
+
+  int currentTabIndex = 0;
 
   @override
   void initState() {
-    _tabController = TabController(length: 5, vsync: this);
     super.initState();
+    _tabController = TabController(length: 5, vsync: this);
+    // _tabController.addListener(() {});
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
   }
 
   @override
@@ -272,8 +283,13 @@ class _UserProfilePageState extends State<UserProfilePage>
               //     widget.userProfileData.userTitleTypesId.toString(),
             ),
             ProfileTabbar(
+              onTap: (p0) {
+                setState(() {
+                  currentTabIndex = _tabController.index;
+                });
+              },
               isMine: isMine,
-              tabController: _tabController!,
+              tabController: _tabController,
               onEditProfilePressed: () {
                 setState(() {
                   isEditable = !isEditable;
@@ -282,11 +298,8 @@ class _UserProfilePageState extends State<UserProfilePage>
             ),
             Di.SBHEL,
             SizedBox(
-              // width: Di.getScreenSize(context).width,
-              height: 1500,
-              child: TabBarView(
-                controller: _tabController,
-                children: <Widget>[
+              child: Center(
+                child: [
                   PageOverviewSection(
                     isEditable: isEditable,
                     //section1 edit functionality
@@ -338,7 +351,7 @@ class _UserProfilePageState extends State<UserProfilePage>
                   ArticlesSection(),
                   ActivitySection(),
                   ReferenceSection(),
-                ],
+                ][currentTabIndex],
               ),
             ),
             Di.SBHOTL,

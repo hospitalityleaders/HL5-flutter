@@ -32,6 +32,7 @@ class Cr {
 
   static const Color darkGrey1 = Color(0xff7C8990);
   static const Color darkGrey2 = Color(0xff879399);
+  static const Color darkGrey3 = Color(0xffBDC4C7);
   static const Color darkGrey4 = Color(0xffDEE1E3);
 
   static const Color lightGrey2 = Color(0xffEDEFF1);
