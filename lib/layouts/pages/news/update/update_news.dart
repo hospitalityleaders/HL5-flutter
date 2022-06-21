@@ -3267,16 +3267,13 @@
 // }
 
 // latest code
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:holedo/controller/menu_controller.dart';
 import 'package:holedo/layouts/pages/news/update/widget/update_news_widget.dart';
-import 'package:holedo/screens/Authentication/login.dart';
-import 'package:holedo/screens/news/update/widget/update_news_widget.dart';
-import 'package:holedo/screens/profile-pages/profile/header.dart';
-import 'package:holedo/screens/profile-pages/profile/profile-page.dart';
+import 'package:holedo/layouts/pages/profile_page.dart';
 
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import '../../../../common/common_widget.dart';
@@ -3285,7 +3282,6 @@ import '../../../../constant/fontStyle/font_style.dart';
 import '../../../../constant/sizedbox.dart';
 import '../../../../data/data.dart';
 import '../../../../responsive/responsive.dart';
-
 
 import '../../profile-pages/profile/header.dart';
 import '../categories/news_signal.dart';
@@ -3321,7 +3317,7 @@ class _UpdateNewsState extends State<UpdateNews>
 
   List drawerItem = ['Home', 'Profile', 'News', 'Jobs', 'Recruitment', 'Help'];
 
-  _buildTabContext(int lineCount) => Container(
+  Widget _buildTabContext(int lineCount) => Container(
           child: Center(
         child: CommonWidget.text('No Data'),
       ));
@@ -3334,7 +3330,7 @@ class _UpdateNewsState extends State<UpdateNews>
                 child: Column(
                   children: <Widget>[
                     Header(),
-                    _menuController.menuIndex.value== 0
+                    _menuController.menuIndex.value == 0
                         ? Column(
                             children: [
                               Container(
@@ -3845,252 +3841,246 @@ class _UpdateNewsState extends State<UpdateNews>
                 ),
               ),
               body: Obx(() {
-                return _menuController.menuIndex.value == 0
-                    ? Column(
-                        children: [
-                          Container(
-                            height: 56,
-                            color: ColorPicker.kPrimary,
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                    color: ColorPicker.kPrimary,
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: Get.height * 0.01),
-                                    child: Column(
+                if (_menuController.menuIndex.value == 0) {
+                  return Column(
+                    children: [
+                      Container(
+                        height: 56,
+                        color: ColorPicker.kPrimary,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Container(
+                                color: ColorPicker.kPrimary,
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: Get.height * 0.01),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Row(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Image.asset(
-                                              'assets/icons/rightShield.png',
-                                              height: 18,
-                                            ),
-                                            SizedBox(
-                                              width: 10,
-                                            ),
-                                            CommonWidget.text(
-                                              'AHL',
-                                              style:
-                                                  FontTextStyle.kWhite20W600PR,
-                                            )
-                                          ],
+                                        Image.asset(
+                                          'assets/icons/rightShield.png',
+                                          height: 18,
                                         ),
                                         SizedBox(
-                                          height: 5,
+                                          width: 10,
                                         ),
                                         CommonWidget.text(
-                                          'MY GRADE',
-                                          style: FontTextStyle.kWhite10W600PR
-                                              .copyWith(letterSpacing: 2.5),
+                                          'AHL',
+                                          style: FontTextStyle.kWhite20W600PR,
                                         )
                                       ],
                                     ),
-                                  ),
-                                ),
-                                VerticalDivider(
-                                  width: 2,
-                                  color: Colors.black,
-                                ),
-                                Expanded(
-                                  child: Container(
-                                    color: ColorPicker.kPrimary,
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: Get.height * 0.01),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            CommonWidget.text(
-                                              '33% ',
-                                              style: FontTextStyle
-                                                  .kBlueLight20W600PR,
-                                            ),
-                                            const SizedBox(
-                                              width: 10,
-                                            ),
-                                            Image.asset(
-                                              'assets/icons/info.png',
-                                              height: 18,
-                                            ),
-                                          ],
-                                        ),
-                                        const SizedBox(
-                                          height: 5,
-                                        ),
-                                        CommonWidget.text(
-                                          'TO NEXT GRADE',
-                                          style: FontTextStyle.kGreyDark10W600PR
-                                              .copyWith(letterSpacing: 2.5),
-                                        )
-                                      ],
+                                    SizedBox(
+                                      height: 5,
                                     ),
-                                  ),
+                                    CommonWidget.text(
+                                      'MY GRADE',
+                                      style: FontTextStyle.kWhite10W600PR
+                                          .copyWith(letterSpacing: 2.5),
+                                    )
+                                  ],
                                 ),
-                                VerticalDivider(
-                                  width: 2,
-                                  color: Colors.black,
-                                ),
-                                Expanded(
-                                  child: Container(
-                                    color: ColorPicker.kPrimary,
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: Get.height * 0.01),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Image.asset(
-                                              'assets/icons/shield.png',
-                                              height: 18,
-                                            ),
-                                            const SizedBox(
-                                              width: 10,
-                                            ),
-                                            CommonWidget.text(
-                                              'MHL',
-                                              style: FontTextStyle
-                                                  .kGreyDark10W600PR,
-                                            )
-                                          ],
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        CommonWidget.text(
-                                          'NEXT GRADE',
-                                          style: FontTextStyle.kGreyDark10W600PR
-                                              .copyWith(letterSpacing: 2.5),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
-                          ),
-                          Container(
-                            height: 65,
-                            width: Get.width,
-                            color: Colors.white,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
+                            VerticalDivider(
+                              width: 2,
+                              color: Colors.black,
+                            ),
+                            Expanded(
+                              child: Container(
+                                color: ColorPicker.kPrimary,
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: Get.height * 0.01),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        CommonWidget.text(
+                                          '33% ',
+                                          style:
+                                              FontTextStyle.kBlueLight20W600PR,
+                                        ),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        Image.asset(
+                                          'assets/icons/info.png',
+                                          height: 18,
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    CommonWidget.text(
+                                      'TO NEXT GRADE',
+                                      style: FontTextStyle.kGreyDark10W600PR
+                                          .copyWith(letterSpacing: 2.5),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                            VerticalDivider(
+                              width: 2,
+                              color: Colors.black,
+                            ),
+                            Expanded(
+                              child: Container(
+                                color: ColorPicker.kPrimary,
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: Get.height * 0.01),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Image.asset(
+                                          'assets/icons/shield.png',
+                                          height: 18,
+                                        ),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        CommonWidget.text(
+                                          'MHL',
+                                          style:
+                                              FontTextStyle.kGreyDark10W600PR,
+                                        )
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    CommonWidget.text(
+                                      'NEXT GRADE',
+                                      style: FontTextStyle.kGreyDark10W600PR
+                                          .copyWith(letterSpacing: 2.5),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        height: 65,
+                        width: Get.width,
+                        color: Colors.white,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Container(
+                              width: 600,
+                              color: Colors.white,
+                              child: TabBar(
+                                controller: _tabController,
+                                labelPadding: const EdgeInsets.only(bottom: 15),
+                                tabs: List.generate(
+                                  Data.tabItem.length,
+                                  (index) => CommonWidget.text(
+                                    Data.tabItem[index],
+                                    style: Responsive.isTablet(context)
+                                        ? FontTextStyle.kGreyDark14W600PR
+                                        : FontTextStyle.kGreyDark10W600PR,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: TabBarView(
+                          controller: _tabController,
+                          children: [
+                            SingleChildScrollView(child: mobileView()),
+                            Center(child: Text('Travel')),
+                            Center(child: Text('Developments')),
+                            Center(child: Text('International')),
+                            Center(child: Text('Investment')),
+                          ],
+                        ),
+                      ),
+                    ],
+                  );
+                } else {
+                  return _menuController.menuIndex.value == 1
+                      ? ProfilePage()
+                      : _menuController.menuIndex.value == 2
+                          ? Column(
                               children: [
                                 Container(
-                                  width: 600,
+                                  height: 65,
+                                  width: Get.width,
                                   color: Colors.white,
-                                  child: TabBar(
-                                    controller: _tabController,
-                                    labelPadding:
-                                        const EdgeInsets.only(bottom: 15),
-                                    tabs: List.generate(
-                                      Data.tabItem.length,
-                                      (index) => CommonWidget.text(
-                                        Data.tabItem[index],
-                                        style: Responsive.isTablet(context)
-                                            ? FontTextStyle.kGreyDark14W600PR
-                                            : FontTextStyle.kGreyDark10W600PR,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            child: TabBarView(
-                              controller: _tabController,
-                              children: [
-                                SingleChildScrollView(child: mobileView()),
-                                Center(child: Text('Travel')),
-                                Center(child: Text('Developments')),
-                                Center(child: Text('International')),
-                                Center(child: Text('Investment')),
-                              ],
-                            ),
-                          ),
-                        ],
-                      )
-                    : _menuController.menuIndex.value == 1
-                        ? ProfilePage()
-                        : _menuController.menuIndex.value == 2
-                            ? Column(
-                                children: [
-                                  Container(
-                                    height: 65,
-                                    width: Get.width,
-                                    color: Colors.white,
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Container(
-                                          width: 600,
-                                          color: Colors.white,
-                                          child: TabBar(
-                                            controller: _tabController,
-                                            labelPadding: const EdgeInsets.only(
-                                                bottom: 15),
-                                            tabs: List.generate(
-                                              Data.tabItem.length,
-                                              (index) => CommonWidget.text(
-                                                Data.tabItem[index],
-                                                style:
-                                                    Responsive.isTablet(context)
-                                                        ? FontTextStyle
-                                                            .kGreyDark14W600PR
-                                                        : FontTextStyle
-                                                            .kGreyDark10W600PR,
-                                              ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Container(
+                                        width: 600,
+                                        color: Colors.white,
+                                        child: TabBar(
+                                          controller: _tabController,
+                                          labelPadding:
+                                              const EdgeInsets.only(bottom: 15),
+                                          tabs: List.generate(
+                                            Data.tabItem.length,
+                                            (index) => CommonWidget.text(
+                                              Data.tabItem[index],
+                                              style:
+                                                  Responsive.isTablet(context)
+                                                      ? FontTextStyle
+                                                          .kGreyDark14W600PR
+                                                      : FontTextStyle
+                                                          .kGreyDark10W600PR,
                                             ),
                                           ),
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
-                                  Expanded(
-                                    child: TabBarView(
-                                      controller: _tabController,
-                                      children: [
-                                        SingleChildScrollView(
-                                            child: mobileView()),
-                                        Center(child: Text('Travel')),
-                                        Center(child: Text('Developments')),
-                                        Center(child: Text('International')),
-                                        Center(child: Text('Investment')),
-                                      ],
-                                    ),
+                                ),
+                                Expanded(
+                                  child: TabBarView(
+                                    controller: _tabController,
+                                    children: [
+                                      SingleChildScrollView(
+                                          child: mobileView()),
+                                      Center(child: Text('Travel')),
+                                      Center(child: Text('Developments')),
+                                      Center(child: Text('International')),
+                                      Center(child: Text('Investment')),
+                                    ],
                                   ),
-                                ],
-                              )
-                            : _menuController.menuIndex.value == 3
-                                ? Center(child: Text('Jobs'))
-                                : _menuController.menuIndex.value == 4
-                                    ? Center(child: Text('Recruitment'))
-                                    : Center(child: Text('Help'));
+                                ),
+                              ],
+                            )
+                          : _menuController.menuIndex.value == 3
+                              ? Center(child: Text('Jobs'))
+                              : _menuController.menuIndex.value == 4
+                                  ? Center(child: Text('Recruitment'))
+                                  : Center(child: Text('Help'));
+                }
               }),
             ),
           );

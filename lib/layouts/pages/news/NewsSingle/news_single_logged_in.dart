@@ -1,14 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/sizedbox.dart';
+import 'package:holedo/common/common_widget.dart';
+import 'package:holedo/constant/fontStyle/font_style.dart';
+import 'package:holedo/responsive/responsive.dart';
 
 import '../../../../common/common_widget.dart';
 import '../../../../constant/fontStyle/font_style.dart';
 import '../../../../responsive/responsive.dart';
-
 
 class NewsSingleLoggedInScreen extends StatefulWidget {
   static const String route = '/category_details';
@@ -997,15 +998,16 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                 (index) => Row(
                                   children: [
                                     Image(
-                                      image: AssetImage(
-                                          likeCommentShare[index]['img']),
+                                      image: AssetImage(likeCommentShare[index]
+                                          ['img'] as String),
                                       height: 15,
                                       width: 16,
                                       fit: BoxFit.cover,
                                     ),
                                     SizedBox(width: 5),
                                     CommonWidget.text(
-                                      likeCommentShare[index]['title'],
+                                      likeCommentShare[index]['title']
+                                          as String,
                                       style: FontTextStyle.kBlueLight116W400SSP,
                                     ),
                                     SizedBox(width: 5),
@@ -1018,7 +1020,8 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                       ),
                                       child: Center(
                                         child: CommonWidget.text(
-                                          likeCommentShare[index]['total'],
+                                          likeCommentShare[index]['total']
+                                              as String,
                                           style:
                                               FontTextStyle.kBlueLight112W700PR,
                                         ),
@@ -2605,7 +2608,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                   image: AssetImage(
                                       '${buttonData[index]['img']}')),
                               decoration: BoxDecoration(
-                                color: buttonData[index]['color'],
+                                color: buttonData[index]['color'] as Color,
                                 borderRadius: BorderRadius.circular(2),
                               ),
                             ),

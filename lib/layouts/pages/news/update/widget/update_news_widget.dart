@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:holedo/common/common_widget.dart';
+import 'package:holedo/constant/colorPicker/color_picker.dart';
+import 'package:holedo/constant/fontStyle/font_style.dart';
+import 'package:holedo/data/data.dart';
 
 import '../../../../../common/common_widget.dart';
 import '../../../../../constant/colorPicker/color_picker.dart';
 import '../../../../../constant/fontStyle/font_style.dart';
 import '../../../../../data/data.dart';
-
-
 
 class HomeWidget {
   Container headlineBlock() {

@@ -490,54 +490,56 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
       children: [
         /// Profile Summary
 
-        Stack(
-          children: [
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Container(
-                key: widget.profileOverviewSec1ProSummKey as Key,
-                color: Colors.white,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(right: 20, left: 20, top: 13),
-                      child: Text(
-                        'Profile summary',
-                        style: FontTextStyle.kBlueDark120W400SSP,
-                      ),
-                    ),
-                    SS.sB(8, 0),
-                    Divider(
-                      height: 0.5,
-                      color: Color(0xffE5E5E5),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(right: 20, left: 20, top: 13),
-                      child: AutoSizeText(
-                          widget.pOApiDataSec1.profileSummary.toString(),
-                          minFontSize: 8,
-                          style: FontTextStyle.kGreyLight516W400SSP),
-                    ),
-                    SS.sB(13, 0),
-                  ],
-                ),
-              ),
-            ),
-            widget.sec1IsEditable as bool
-                ? ProfileEdit.buildProfileEdit(
-                    width: widget.profileOverviewSec1ProSumm_W as double,
-                    height: widget.profileOverviewSec1ProSumm_H as double,
-                    popUpEdit: () {
-                      buildProfileCardPopUp(
-                          id: widget.pOApiDataSec1.id.toString(),
-                          profileSummary:
-                              widget.pOApiDataSec1.profileSummary.toString());
-                    },
-                    showAddButton: false)
-                : Container(),
-          ],
-        ),
+        // Stack(
+        //   children: [
+        //     Padding(
+        //       padding: EdgeInsets.all(8.0),
+        //       child: Container(
+        //         key: widget.profileOverviewSec1ProSummKey as Key,
+        //         color: Colors.white,
+        //         child: Column(
+        //           crossAxisAlignment: CrossAxisAlignment.start,
+        //           children: [
+        //             Padding(
+        //               padding: EdgeInsets.only(right: 20, left: 20, top: 13),
+        //               child: Text(
+        //                 'Profile summary',
+        //                 style: FontTextStyle.kBlueDark120W400SSP,
+        //               ),
+        //             ),
+        //             SS.sB(8, 0),
+        //             Divider(
+        //               height: 0.5,
+        //               color: Color(0xffE5E5E5),
+        //             ),
+        //             Padding(
+        //               padding: EdgeInsets.only(right: 20, left: 20, top: 13),
+        //               child: AutoSizeText(
+        //                   widget.pOApiDataSec1.profileSummary.toString(),
+        //                   minFontSize: 8,
+        //                   style: FontTextStyle.kGreyLight516W400SSP),
+        //             ),
+        //             SS.sB(13, 0),
+        //           ],
+        //         ),
+        //       ),
+        //     ),
+        //     widget.sec1IsEditable as bool
+        //         ? ProfileEdit.buildProfileEdit(
+        //             width: widget.profileOverviewSec1ProSumm_W as double,
+        //             height: widget.profileOverviewSec1ProSumm_H as double,
+        //             popUpEdit: () {
+        //               buildProfileCardPopUp(
+        //                   id: widget.pOApiDataSec1.id.toString(),
+        //                   profileSummary:
+        //                       widget.pOApiDataSec1.profileSummary.toString());
+        //             },
+        //             showAddButton: false,
+        //           )
+        //         : Container(),
+        //   ],
+        // ),
+
         SS.sB(8, 0),
 
         /// Areas of expertise

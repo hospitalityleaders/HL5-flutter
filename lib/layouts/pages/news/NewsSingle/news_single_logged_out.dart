@@ -1,13 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
+import 'package:holedo/common/common_widget.dart';
+import 'package:holedo/constant/fontStyle/font_style.dart';
+import 'package:holedo/constant/sizedbox.dart';
+import 'package:holedo/responsive/responsive.dart';
 
 import '../../../../common/common_widget.dart';
 import '../../../../constant/fontStyle/font_style.dart';
 import '../../../../constant/sizedbox.dart';
 import '../../../../responsive/responsive.dart';
-
 
 class NewsSingleLoggedOutScreen extends StatefulWidget {
   @override

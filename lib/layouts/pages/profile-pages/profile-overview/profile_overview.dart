@@ -94,21 +94,21 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                     profileOverviewSec1ProSummKey:
                         widget.profileOverviewSec1ProSummKey,
                     profileOverviewSec1ProSumm_H:
-                        widget.profileOverviewSec1ProSumm_H ,
+                        widget.profileOverviewSec1ProSumm_H,
                     profileOverviewSec1ProSumm_W:
-                        widget.profileOverviewSec1ProSumm_W ,
+                        widget.profileOverviewSec1ProSumm_W,
                     profileOverviewSec1AreaOfExpKey:
                         widget.profileOverviewSec1AreaOfExpKey,
                     profileOverviewSec1AreaOfExp_H:
-                        widget.profileOverviewSec1AreaOfExp_H ,
+                        widget.profileOverviewSec1AreaOfExp_H,
                     profileOverviewSec1AreaOfExp_W:
                         widget.profileOverviewSec1AreaOfExp_W,
                     profileOverviewSec1ReferencesKey:
                         widget.profileOverviewSec1ReferencesKey,
                     profileOverviewSec1References_H:
-                        widget.profileOverviewSec1References_H ,
+                        widget.profileOverviewSec1References_H,
                     profileOverviewSec1References_W:
-                        widget.profileOverviewSec1References_W ,
+                        widget.profileOverviewSec1References_W,
                     pOApiDataSec1: widget.pOApiData,
                   ),
                 ),
