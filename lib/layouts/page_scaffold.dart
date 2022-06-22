@@ -124,6 +124,8 @@ class _PageScaffoldState extends State<PageScaffold> {
     final routemaster = Routemaster.of(context);
     final canGoBack = routemaster.history.canGoBack;
     final canGoForward = routemaster.history.canGoForward;
+    final GlobalKey<ScaffoldState> _scaffoldKey =
+        new GlobalKey<ScaffoldState>();
 
     return widget.isNewDesign
         ? widget.body
@@ -133,7 +135,8 @@ class _PageScaffoldState extends State<PageScaffold> {
             final bool isDesktop = Responsive.isDesktop(context);
             maxWidth = constraints.maxWidth;
             return Scaffold(
-              drawer: (!isDesktop)
+              key: _scaffoldKey,
+              endDrawer: isMobilePhone(context)
                   ? Drawer(
                       child: Container(
                         color: Color(0xFF232f3e),
@@ -163,6 +166,7 @@ class _PageScaffoldState extends State<PageScaffold> {
                 preferredSize: Size.fromHeight(45),
                 child: isMobilePhone(context)
                     ? ProfileMobileAppbar(
+                        onTap: () => _scaffoldKey.currentState?.openEndDrawer(),
                         searchController: _searchController,
                         onSearch: (searchText) {
                           _search();

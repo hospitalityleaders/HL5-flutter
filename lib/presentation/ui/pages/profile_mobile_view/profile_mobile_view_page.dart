@@ -286,10 +286,13 @@ class ProfileMobileViewPage extends StatelessWidget {
 class ProfileMobileAppbar extends StatefulWidget {
   final TextEditingController searchController;
   final void Function(String? searchText) onSearch;
+  final void Function()? onTap;
+
   const ProfileMobileAppbar({
     Key? key,
     required this.searchController,
     required this.onSearch,
+    this.onTap,
   }) : super(key: key);
 
   @override
@@ -321,26 +324,29 @@ class _ProfileMobileAppbarState extends State<ProfileMobileAppbar> {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              CustomIconButton(
-                showNotification: true,
-                icon: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      Icons.menu,
-                      color: Cr.darkBlue9,
-                    ),
-                    Text(
-                      "MENU",
-                      style: TextStyle(
-                        fontSize: 9,
-                        fontFamily: "SourceSansPro",
-                        fontWeight: FontWeight.bold,
+              GestureDetector(
+                onTap: widget.onTap,
+                child: CustomIconButton(
+                  showNotification: true,
+                  icon: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        Icons.menu,
                         color: Cr.darkBlue9,
                       ),
-                    )
-                  ],
+                      Text(
+                        "MENU",
+                        style: TextStyle(
+                          fontSize: 9,
+                          fontFamily: "SourceSansPro",
+                          fontWeight: FontWeight.bold,
+                          color: Cr.darkBlue9,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
               // iconData: Icons.mail_rounded,

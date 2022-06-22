@@ -85,15 +85,16 @@ class HoledoDatabase extends GetxController {
       inNav: true,
       inDrawer: true,
     ),
+
     MenuNavItem(
-      title: 'News',
-      path: '/news',
+      title: 'Profile',
+      path: '/profile',
       inNav: true,
       inDrawer: true,
     ),
     MenuNavItem(
-      title: 'Profile',
-      path: '/profile',
+      title: 'News',
+      path: '/news',
       inNav: true,
       inDrawer: true,
     ),
@@ -115,20 +116,20 @@ class HoledoDatabase extends GetxController {
       inNav: true,
       inDrawer: true,
     ),
-    MenuNavItem(
-      title: 'Logout',
-      path: '/logout',
-      inNav: false,
-      inDrawer: true,
-      loginOnly: true,
-    ),
-    MenuNavItem(
-      title: 'Login',
-      path: '/login',
-      inNav: false,
-      inDrawer: true,
-      loginOnly: false,
-    ),
+    // MenuNavItem(
+    //   title: 'Logout',
+    //   path: '/logout',
+    //   inNav: false,
+    //   inDrawer: true,
+    //   loginOnly: true,
+    // ),
+    // MenuNavItem(
+    //   title: 'Login',
+    //   path: '/login',
+    //   inNav: false,
+    //   inDrawer: true,
+    //   loginOnly: false,
+    // ),
   ];
 
   void snackBarMessage(BuildContext context, type, message) {
