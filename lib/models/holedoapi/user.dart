@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:holedo/models/holedoapi/data.dart';
-import 'package:holedo/models/models.dart';
 import 'package:routemaster/routemaster.dart';
 
+import 'package:holedo/models/models.dart';
+
 import 'achievement.dart';
-import 'company.dart';
 import 'company_role.dart';
 import 'country.dart';
 import 'current_membership_grade.dart';
@@ -549,5 +548,10 @@ class User {
   void toProfile(BuildContext context) {
     var redirect = '/profile/${this.slug}';
     Routemaster.of(context).push(redirect);
+  }
+
+  @override
+  String toString() {
+    return 'User(id: $id, companyId: $companyId, roleId: $roleId, companyRoleId: $companyRoleId, countryId: $countryId, userTitleTypesId: $userTitleTypesId, currencyId: $currencyId, contactNumberTypesId: $contactNumberTypesId, maritalStatusId: $maritalStatusId, genderId: $genderId, currentMembershipGradeId: $currentMembershipGradeId, nextMembershipGradeId: $nextMembershipGradeId, slug: $slug, firstName: $firstName, lastName: $lastName, email: $email, emailVisibility: $emailVisibility, dateOfBirth: $dateOfBirth, avatar: $avatar, banner: $banner, professionalTitle: $professionalTitle, area: $area, contactNumber: $contactNumber, contactNumberVisibility: $contactNumberVisibility, contactableWhatsapp: $contactableWhatsapp, contactableSms: $contactableSms, website: $website, websiteVisibility: $websiteVisibility, skype: $skype, skypeVisibility: $skypeVisibility, facebook: $facebook, facebookVisibility: $facebookVisibility, twitter: $twitter, twitterVisibility: $twitterVisibility, google: $google, googleVisibility: $googleVisibility, xing: $xing, xingVisibility: $xingVisibility, linkedin: $linkedin, linkedinVisibility: $linkedinVisibility, proxycurlWhodis: $proxycurlWhodis, allowRecruiterAccess: $allowRecruiterAccess, address1: $address1, address2: $address2, addressPostalCode: $addressPostalCode, addressArea: $addressArea, workPermits: $workPermits, relocate: $relocate, nextJob: $nextJob, salaryExpectation: $salaryExpectation, profileSummary: $profileSummary, active: $active, profileVideoTitle: $profileVideoTitle, profileVideoDescription: $profileVideoDescription, profileVideoUrl: $profileVideoUrl, membershipGradeLeaderPoints: $membershipGradeLeaderPoints, membershipGradeNeededLeaderPoints: $membershipGradeNeededLeaderPoints, membershipGradePercentAccomplished: $membershipGradePercentAccomplished, membershipGradeEligibility: $membershipGradeEligibility, matrixUid: $matrixUid, matrixRoomSync: $matrixRoomSync, allowApiLogin: $allowApiLogin, savedSearches: $savedSearches, nextMembershipGrade: $nextMembershipGrade, currentMembershipGrade: $currentMembershipGrade, languages: $languages, badges: $badges, awards: $awards, recommendees: $recommendees, recommenders: $recommenders, requestedConnections: $requestedConnections, pendingConnections: $pendingConnections, approvedConnections: $approvedConnections, connectees: $connectees, connectors: $connectors, userNationalities: $userNationalities, userDesiredLocations: $userDesiredLocations, requestReferences: $requestReferences, requestedReferences: $requestedReferences, givenReferences: $givenReferences, receivedReferences: $receivedReferences, testimonials: $testimonials, recommendations: $recommendations, posts: $posts, likes: $likes, jobApplications: $jobApplications, invites: $invites, gender: $gender, maritalStatus: $maritalStatus, userTags: $userTags, achievements: $achievements, expertise: $expertise, comments: $comments, articles: $articles, contactNumberType: $contactNumberType, currency: $currency, companyRole: $companyRole, experiences: $experiences, currentExperience: $currentExperience, educations: $educations, userLanguagesProficiencies: $userLanguagesProficiencies, country: $country, company: $company, role: $role, embedSrc: $embedSrc, fullName: $fullName, expertiseString: $expertiseString, activeStatus: $activeStatus, avatarCdn: $avatarCdn, holedoUrl: $holedoUrl, token: $token)';
   }
 }

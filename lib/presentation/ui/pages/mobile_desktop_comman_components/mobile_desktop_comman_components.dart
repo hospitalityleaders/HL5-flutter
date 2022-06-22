@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:holedo/models/holedoapi/holedoapi.dart';
 import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_image_banner.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
@@ -68,12 +69,18 @@ class StatsComman extends StatelessWidget {
   const StatsComman({
     Key? key,
     this.isMobile = false,
+    required this.userProfileData,
   }) : super(key: key);
 
   final bool isMobile;
+  final User? userProfileData;
+
+// membership_grade_leader_points
 
   @override
   Widget build(BuildContext context) {
+    final int membershipGradeLeaderPoints =
+        userProfileData?.membershipGradeLeaderPoints ?? 0;
     return SizedBox(
       height: 55,
       width: isMobile ? 400 : 470,
@@ -99,7 +106,9 @@ class StatsComman extends StatelessWidget {
           Column(
             children: [
               Text(
-                "14k",
+                membershipGradeLeaderPoints >= 1000
+                    ? (membershipGradeLeaderPoints / 1000).toString() + "K"
+                    : membershipGradeLeaderPoints.toString(),
                 style: h2Regular.copyWith(
                   color: Cr.accentBlue1,
                 ),

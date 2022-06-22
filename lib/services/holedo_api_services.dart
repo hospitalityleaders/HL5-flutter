@@ -1,17 +1,9 @@
-
-import 'dart:convert';
-import 'package:dio/dio.dart';
 import 'package:get/get.dart' as Store;
-import 'package:get_storage/get_storage.dart';
-import 'package:holedo/controller/auth_controller.dart';
-
-import 'package:http/http.dart' as http;
 
 //import 'package:get_storage/get_storage.dart';
 //import 'package:holedo/controller/auth_controller.dart';
 import 'package:holedo/models/holedoapi/article.dart';
 import 'package:holedo/models/holedoapi/job.dart';
-import 'package:holedo/models/holedoapi/user.dart';
 import 'package:holedo/models/models.dart';
 //import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart' as dio;
@@ -19,7 +11,6 @@ import 'package:dio_http_cache/dio_http_cache.dart';
 
 //import 'package:dio/dio.dart';
 final baseUrl = 'https://${Get.put(HoledoDatabase()).apiHost}/rest';
-
 
 class ApiServices {
   dio.Dio _dio = dio.Dio();

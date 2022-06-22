@@ -30,7 +30,8 @@ class ProfileImageBanner extends StatelessWidget {
           height: 500,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/images/t6.png"),
+              image:
+                  AssetImage(userProfileData?.banner ?? "assets/images/t6.png"),
               fit: BoxFit.cover,
               colorFilter: ColorFilter.mode(
                 Colors.black.withOpacity(0.3),
@@ -59,8 +60,8 @@ class ProfileImageBanner extends StatelessWidget {
                       style: display1,
                     ),
                     Text(
-                      // userProfileData?.profileVideoDescription.toString() ??
-                      "Business development manager, recruiter and hotel specialist.",
+                      userProfileData?.professionalTitle.toString() ??
+                          "Business development manager, recruiter and hotel specialist.",
                       style: bodyLarge.copyWith(
                         color: Cr.darkGrey1,
                       ),
@@ -76,7 +77,7 @@ class ProfileImageBanner extends StatelessWidget {
                           size: 12,
                         ),
                         Text(
-                          " Cape Town, South Africa",
+                          userProfileData?.area ?? " Cape Town, South Africa",
                           style: bodySmallRegular.copyWith(
                             color: Cr.darkGrey1,
                           ),
@@ -88,7 +89,9 @@ class ProfileImageBanner extends StatelessWidget {
                     Di.SBHES,
                     WriteReferenceRecommandButtonComman(),
                     Di.SBHOTL,
-                    StatsComman(),
+                    StatsComman(
+                      userProfileData: userProfileData,
+                    ),
                   ],
                 ),
               ),

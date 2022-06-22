@@ -284,7 +284,9 @@ class UsersController extends GetxController {
       var user = new User();
 
       api = await _api.POST(
-          target: '/users/login', data: {'email': email, 'password': password});
+        target: '/users/login',
+        data: {'email': email, 'password': password},
+      );
 
       if (api.success == true) {
         print('login: ${api.data!.user!.email.toString()}');
@@ -323,12 +325,13 @@ class UsersController extends GetxController {
     Get.find<HoledoDatabase>().setModel(model);
   }
 
-  Future<User> getProfileData(
-      {String? slug,
-      String? id,
-      String? token,
-      required BuildContext context,
-      bool? isLoggined = false}) async {
+  Future<User> getProfileData({
+    String? slug,
+    String? id,
+    String? token,
+    required BuildContext context,
+    bool? isLoggined = false,
+  }) async {
     try {
       isLoading(true);
       var user = new User();

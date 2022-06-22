@@ -158,19 +158,19 @@ class ProfileMobileViewPage extends StatelessWidget {
                                 ),
                               ),
                               Di.SBHS,
-                              Container(
-                                padding: EdgeInsets.only(bottom: Di.PSS),
-                                decoration: BoxDecoration(
-                                  color: Cr.whiteColor,
-                                  border: Border(
-                                    bottom: BorderSide(
-                                      width: 0.5,
-                                      color: Cr.darkGrey1,
-                                    ),
-                                  ),
-                                ),
-                                child: StatsComman(isMobile: true),
-                              ),
+                              // Container(
+                              //   padding: EdgeInsets.only(bottom: Di.PSS),
+                              //   decoration: BoxDecoration(
+                              //     color: Cr.whiteColor,
+                              //     border: Border(
+                              //       bottom: BorderSide(
+                              //         width: 0.5,
+                              //         color: Cr.darkGrey1,
+                              //       ),
+                              //     ),
+                              //   ),
+                              //   child: StatsComman(isMobile: true),
+                              // ),
                               Di.SBHD,
                               Container(
                                 padding: EdgeInsets.only(
