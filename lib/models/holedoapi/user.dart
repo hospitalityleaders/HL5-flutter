@@ -542,6 +542,8 @@ class User {
     //var data = profile.toJson() as Map<String, dynamic>;
     //var newElements = [];
     //print('this ${this.toJson()}');
+    // this.id = profile.id;
+    // this.slug = profile.slug;
     this.id = profile.id;
     this.slug = profile.slug;
     //this.token = profile.token;

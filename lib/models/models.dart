@@ -401,7 +401,7 @@ class UsersController extends GetxController {
       isLoading(true);
       var token = this.getToken(user.slug);
       var userJson = user.toJson();
-      // userJson.removeWhere((k, v) => v == null || v.toString().length == 0);
+      userJson.removeWhere((k, v) => v == null || v.toString().length == 0);
       var update = await _api.POST(
         target: '/users/update/',
         data: userJson,

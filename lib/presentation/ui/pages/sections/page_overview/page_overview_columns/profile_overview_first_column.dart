@@ -6,6 +6,8 @@ import 'package:holedo/presentation/ui/components/custom_text_button.dart';
 import 'package:holedo/presentation/ui/components/edit_icon_buttton.dart';
 import 'package:holedo/presentation/ui/components/person_avatar.dart';
 import 'package:holedo/presentation/ui/components/text_with_background.dart';
+import 'package:holedo/presentation/ui/pages/profile_dialogs/profile_summary_dialog_widget.dart';
+import 'package:holedo/presentation/ui/pages/profile_dialogs/show_custom_dialog.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/styles.dart';
@@ -20,10 +22,10 @@ class ProfileSummaryComponent extends StatefulWidget {
   const ProfileSummaryComponent({
     Key? key,
     this.isMobile = false,
-    this.profileSummary,
+    required this.userProfileData,
   }) : super(key: key);
 
-  final String? profileSummary;
+  final User userProfileData;
   final bool isMobile;
   @override
   State<ProfileSummaryComponent> createState() =>
@@ -37,12 +39,6 @@ class _ProfileSummaryComponentState extends State<ProfileSummaryComponent> {
       padding: EdgeInsets.all(Di.PSD),
       decoration: Styles.boxDecoration.copyWith(
         color: Cr.whiteColor,
-        // gradient: LinearGradient(
-        //   colors: [
-        //     Cr.transparent,
-        //     Cr.whiteColor,
-        //   ],
-        // ),
       ),
       child: Column(
         children: [
@@ -62,7 +58,7 @@ class _ProfileSummaryComponentState extends State<ProfileSummaryComponent> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: Di.PSD),
                 child: Text(
-                  widget.profileSummary ??
+                  widget.userProfileData.profileSummary ??
                       """Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
 \nExcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
 \n\nNemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.""",
@@ -86,14 +82,18 @@ class _ProfileSummaryComponentState extends State<ProfileSummaryComponent> {
                       ),
                     )
                   : Di.ESB,
-              // Provider.of<ProfileProvider>(context).isProfileEditable
-              //     ? EditIconButton(onPressed: () {
-              //         widget.buildProfileCardPopUp(
-              //             id: widget.pOApiDataSec1.id.toString(),
-              //             profileSummary:
-              //                 widget.pOApiDataSec1.profileSummary.toString());
-              //       })
-              //     : Di.ESB,
+              Provider.of<ProfileProvider>(context).isProfileEditable
+                  ? EditIconButton(
+                      onPressed: () {
+                        showCustomDialog(
+                          context,
+                          ProfileSummaryDialogWidget(
+                            userProfileData: widget.userProfileData,
+                          ),
+                        );
+                      },
+                    )
+                  : Di.ESB,
             ],
           ),
           Di.SBHD,
@@ -105,7 +105,7 @@ class _ProfileSummaryComponentState extends State<ProfileSummaryComponent> {
           // widget.sec1IsEditable as bool
           //     ? ProfileEdit.buildProfileEdit(
           //         width: widget.profileOverviewSec1ProSumm_W as double,
-          //         height: widget.profileOverviewSec1ProSumm_H as double,
+          //         height: widget.profileOverviewSec1ProSumm_ as double,
           //         popUpEdit: () {
           //           widget.buildProfileCardPopUp(
           //               id: widget.pOApiDataSec1.id.toString(),
@@ -148,20 +148,9 @@ class _ProfileOverviewFirstColumnState
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ProfileSummaryComponent(
-            // buildProfileCardPopUp: buildProfileCardPopUp ,
-            profileSummary: widget.userProfileData.profileSummary,
+            userProfileData: widget.userProfileData,
           ),
-          ElevatedButton(
-            onPressed: () async {
-              // final UsersController controller = Get.put(HoledoDatabase().users)
-              await Get.put(HoledoDatabase().users).save(
-                widget.userProfileData.copyWith(
-                  profileSummary: "This is new description",
-                ),
-              );
-            },
-            child: Text("Update summary"),
-          ),
+
           Di.SBHETS,
           Container(
             padding: EdgeInsets.symmetric(horizontal: Di.PSD),

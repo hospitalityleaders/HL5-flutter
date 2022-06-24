@@ -12,6 +12,15 @@ class Styles {
     ),
   ];
 
+  static final List<BoxShadow> defaultBoxShadow = [
+    BoxShadow(
+      color: Cr.grey1,
+      offset: Offset(
+        0,
+        1,
+      ), // changes position of shadow
+    ),
+  ];
   static final BoxDecoration boxDecorationBorder = BoxDecoration(
     color: Cr.whiteColor,
     border: Border(
@@ -72,6 +81,7 @@ const bodyExtraSmall = TextStyle(
 
 const bodySmallRegular = TextStyle(
   fontFamily: 'SourceSansPro',
+  fontWeight: FontWeight.w400,
   fontSize: Di.FSD - 2,
   color: Cr.darkBlue1,
 );

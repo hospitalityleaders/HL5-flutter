@@ -256,7 +256,7 @@ class ProfileMobileViewPage extends StatelessWidget {
               child: ProfileCompletionComponent(),
             ),
             Di.SBHS,
-            ProfileSummaryComponent(isMobile: true),
+            // ProfileSummaryComponent(isMobile: true, userProfileData: null,),
             Di.SBHD,
             ProfileWorkExperienceComponent(isMobile: true),
             Di.SBHD,

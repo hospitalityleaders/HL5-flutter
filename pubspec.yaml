@@ -82,17 +82,17 @@ flutter:
     - family: SourceSansPro
       fonts:
         - asset: assets/fonts/SourceSansPro-Light.ttf
-          weight: 200
+          weight: 300
         - asset: assets/fonts/SourceSansPro-Regular.ttf
           weight: 400
         - asset: assets/fonts/SourceSansPro-SemiBold.ttf
-          weight: 500
-        # - asset: assets/fonts/SourceSansPro-Medium.ttf
-        #   weight: 600
-        - asset: assets/fonts/SourceSansPro-Bold.ttf
           weight: 600
+        # - asset: assets/fonts/SourceSansPro-Medium.ttf
+        #   weight: 500
+        - asset: assets/fonts/SourceSansPro-Bold.ttf
+          weight: 700
         # - asset: assets/fonts/SourceSansPro-ExtraBold.ttf
-        #   weight: 900
+        #   weight: 800
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
