@@ -5,6 +5,8 @@ import 'package:holedo/presentation/ui/components/appbar_textfield.dart';
 import 'package:holedo/presentation/ui/components/custom_icon_button.dart';
 import 'package:holedo/presentation/ui/components/custom_text_button.dart';
 import 'package:holedo/presentation/ui/components/person_avatar.dart';
+import 'package:holedo/presentation/ui/components/submenus.dart';
+
 import 'package:holedo/presentation/ui/components/text_with_background.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
@@ -99,23 +101,7 @@ class _CustomAppbarState extends State<CustomAppbar> {
             color: Cr.darkBlue5,
           ),
 
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                Icons.person_add,
-                color: Cr.darkBlue9,
-              ),
-              Di.SBWES,
-              TextWithBackground(
-                text: "352",
-                textColor: Cr.darkBlue9,
-                padding: 0,
-                paddingHorizantal: 4,
-                backgroundColor: Cr.darkBlue5,
-              )
-            ],
-          ),
+          ConnectionRequestWidget(),
           VerticalDivider(
             thickness: 1.3,
             color: Cr.darkBlue5,
@@ -127,10 +113,40 @@ class _CustomAppbarState extends State<CustomAppbar> {
             thickness: 1.3,
             color: Cr.darkBlue5,
           ),
-
           // Recruitment
         ],
       ),
+    );
+  }
+}
+
+class ConnectionRequestWidget extends StatelessWidget {
+  const ConnectionRequestWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        MouseRegion(
+          opaque: true,
+          onHover: (_) => showProfileConnectionRequest(context),
+          child: Icon(
+            Icons.person_add,
+            color: Cr.darkBlue9,
+          ),
+        ),
+        Di.SBWES,
+        TextWithBackground(
+          text: "352",
+          textColor: Cr.darkBlue9,
+          padding: 0,
+          paddingHorizantal: 4,
+          backgroundColor: Cr.darkBlue5,
+        )
+      ],
     );
   }
 }

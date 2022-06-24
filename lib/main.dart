@@ -241,11 +241,17 @@ class BookStoreApp extends StatelessWidget {
         builder: (context, child) => ResponsiveWrapper.builder(
           child,
           breakpoints: [
-            // ResponsiveBreakpoint.autoScaleDown(320, name: MOBILE),
-            // ResponsiveBreakpoint.autoScale(450, name: MOBILE),
+            // ResponsiveBreakpoint.autoScaleDown(350, name: MOBILE),
+            // ResponsiveBreakpoint.resize(350, name: MOBILE),
+            // // ResponsiveBreakpoint.resize(600, name: MOBILE),
+            // // ResponsiveBreakpoint.resize(800, name: TABLET),
+            // ResponsiveBreakpoint.resize(350, name: TABLET),
+            // ResponsiveBreakpoint.resize(800, name: DESKTOP),
+            // // ResponsiveBreakpoint.resize(1300, name: DESKTOP),
+            // ResponsiveBreakpoint.tag(1300, name: DESKTOP),
 
-            ResponsiveBreakpoint.autoScaleDown(450, name: MOBILE),
-            ResponsiveBreakpoint.autoScaleDown(1200, name: DESKTOP),
+            // ResponsiveBreakpoint.resize(450, name: MOBILE),
+            // ResponsiveBreakpoint.resize(1200, name: DESKTOP),
           ],
         ),
         debugShowCheckedModeBanner: false,

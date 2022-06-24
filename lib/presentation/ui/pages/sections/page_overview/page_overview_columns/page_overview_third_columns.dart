@@ -16,20 +16,33 @@ class ProfileOverviewThirdColumn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 360,
-      child: Column(
-        children: [
-          ProfileCompletionComponent(),
-          Di.SBHEL,
-          ConnectionsComponent(),
-          Di.SBHEL,
-          // profile overview timeline component
-          TimelineComponent(),
-          // ProfileAdsComponent(),
-          // Di.SBHS,
-          RightsComponent(),
-        ],
+    return Flexible(
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          maxWidth: 360,
+          minWidth: 280,
+        ),
+        child: Container(
+          // width: double.infinity,
+          // // width: 360,
+          // constraints: BoxConstraints(
+          //   maxWidth: 360,
+          //   minWidth: 280,
+          // ),
+          child: Column(
+            children: [
+              ProfileCompletionComponent(),
+              Di.SBHEL,
+              ConnectionsComponent(),
+              Di.SBHEL,
+              // profile overview timeline component
+              TimelineComponent(),
+              // ProfileAdsComponent(),
+              // Di.SBHS,
+              RightsComponent(),
+            ],
+          ),
+        ),
       ),
     );
   }

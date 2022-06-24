@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:holedo/models/holedoapi/holedoapi.dart';
+import 'package:holedo/models/models.dart';
 import 'package:holedo/presentation/providers/profile_provider.dart';
 import 'package:holedo/presentation/ui/components/custom_checkbox_with_title.dart';
 import 'package:holedo/presentation/ui/components/custom_text_button.dart';
@@ -11,7 +11,6 @@ import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/styles.dart';
 import 'package:holedo/responsive/responsive.dart';
 import 'package:holedo/services/holedo_api_services.dart';
-import 'package:provider/provider.dart';
 import 'package:holedo/common/popUpHeadMenu.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
@@ -56,6 +55,7 @@ class _ProfileSummaryComponentState extends State<ProfileSummaryComponent> {
 
           // Di.SBHD,
           Divider(thickness: 1),
+
           Di.SBHD,
           Stack(
             children: [
@@ -151,9 +151,18 @@ class _ProfileOverviewFirstColumnState
             // buildProfileCardPopUp: buildProfileCardPopUp ,
             profileSummary: widget.userProfileData.profileSummary,
           ),
+          ElevatedButton(
+            onPressed: () async {
+              // final UsersController controller = Get.put(HoledoDatabase().users)
+              await Get.put(HoledoDatabase().users).save(
+                widget.userProfileData.copyWith(
+                  profileSummary: "This is new description",
+                ),
+              );
+            },
+            child: Text("Update summary"),
+          ),
           Di.SBHETS,
-
-          // AreasOfExpertiseComponents(),
           Container(
             padding: EdgeInsets.symmetric(horizontal: Di.PSD),
             decoration: Styles.boxDecoration.copyWith(color: Cr.whiteColor),
@@ -165,6 +174,7 @@ class _ProfileOverviewFirstColumnState
                     style: h2Regular,
                   ),
                 ),
+
                 Stack(
                   children: [
                     Column(
@@ -173,6 +183,23 @@ class _ProfileOverviewFirstColumnState
                           thickness: .7,
                           color: Cr.darkGrey2,
                         ),
+                        // widget.userProfileData.expertise != null
+                        //     ? Wrap(
+                        //         children: List<Widget>.generate(
+                        //           widget.userProfileData.expertise!.length,
+                        //           (int idx) {
+                        //             return
+                        //                 //  Di.SBWS,
+                        //                 CustomCheckboxWithTitle(
+                        //               title: (widget.userProfileData
+                        //                           .expertise![idx] as Expertise)
+                        //                       .title ??
+                        //                   "Leadership",
+                        //             );
+                        //           },
+                        //         ).toList(),
+                        //       )
+                        //     : Di.ESB,
                         Row(
                           children: [
                             Di.SBWS,

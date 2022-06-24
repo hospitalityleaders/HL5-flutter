@@ -36,6 +36,7 @@ dependencies:
   dio_http_cache: ^0.3.0
   flutter_html: ^3.0.0-alpha.3
   responsive_framework: ^0.1.9
+  popover: ^0.2.6+3
 
 dev_dependencies:
   integration_test:

@@ -57,7 +57,7 @@ class ProfileImageBanner extends StatelessWidget {
                     Di.SBHD,
                     Text(
                       userProfileData?.fullName ?? "Noberto Holden",
-                      style: display1,
+                      style: display2,
                     ),
                     Text(
                       userProfileData?.professionalTitle.toString() ??
