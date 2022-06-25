@@ -1,5 +1,68 @@
 import 'achievement_type.dart';
 
+// class Expertise {
+//   Expertise({
+//     this.id,
+//     this.title,
+//     this.featured,
+//     this.created,
+//     this.modified,
+//     this.joinData,
+//   });
+
+//   final int? id;
+//   final String? title;
+//   final int? featured;
+//   final DateTime? created;
+//   final DateTime? modified;
+//   final ExpertiseJoinData? joinData;
+
+//   factory Expertise.fromJson(Map<String, dynamic> json) => Expertise(
+//         id: json["id"] as int?,
+//         title: json["title"] as String?,
+//         featured: json["featured"] as int?,
+//         created: DateTime.parse(json["created"] as String),
+//         modified: DateTime.parse(json["modified"] as String),
+//         joinData: ExpertiseJoinData.fromJson(
+//           json["_joinData"] as Map<String, dynamic>,
+//         ),
+//       );
+
+//   Map<String, dynamic> toJson() => {
+//         "id": id,
+//         "title": title,
+//         "featured": featured,
+//         "created": created?.toIso8601String(),
+//         "modified": modified?.toIso8601String(),
+//         "_joinData": joinData?.toJson(),
+//       };
+// }
+
+class ExpertiseJoinData {
+  ExpertiseJoinData({
+    this.id,
+    this.userId,
+    this.expertiseId,
+  });
+
+  final int? id;
+  final int? userId;
+  final int? expertiseId;
+
+  factory ExpertiseJoinData.fromJson(Map<String, dynamic> json) =>
+      ExpertiseJoinData(
+        id: json["id"] as int,
+        userId: json["user_id"] as int,
+        expertiseId: json["expertise_id"] as int,
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "user_id": userId,
+        "expertise_id": expertiseId,
+      };
+}
+
 class Achievement {
   int? id;
   int? userId;

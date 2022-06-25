@@ -16,6 +16,8 @@ class CustomElevatedButton extends StatelessWidget {
     this.textColor,
     this.borderColor,
     this.onPressed,
+    this.padding,
+    this.makeWidthNull = false,
   }) : super(key: key);
 
   final double? width;
@@ -28,12 +30,14 @@ class CustomElevatedButton extends StatelessWidget {
   final Color? textColor;
   final Color? borderColor;
   final void Function()? onPressed;
+  final double? padding;
+  final bool makeWidthNull;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: height ?? 40,
-      width: width ?? 130,
+      width: makeWidthNull ? null : width ?? 130,
       child: ElevatedButton(
         style: ButtonStyle(
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(

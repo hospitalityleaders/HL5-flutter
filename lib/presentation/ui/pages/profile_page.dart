@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:holedo/models/models.dart';
 import 'package:holedo/presentation/providers/profile_provider.dart';
-import 'package:holedo/presentation/ui/components/custom_appbar.dart';
 import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_tabbar.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_image_banner.dart';
@@ -75,7 +74,7 @@ class _ProfilePageState extends State<ProfilePage>
               child: ListView(
                 shrinkWrap: true,
                 children: [
-                  CustomAppbar(),
+                  // CustomAppbar(),
                   Container(
                     height: 50,
                     width: Di.getScreenSize(context).width,
@@ -94,7 +93,7 @@ class _ProfilePageState extends State<ProfilePage>
                               ),
                             ),
                             CustomElevatedButton(
-                              width: 97,
+                              width: 100,
                               height: 32,
                               backgroundColor: Cr.redTextColor,
                               donotShowIcon: true,

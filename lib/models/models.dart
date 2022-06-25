@@ -85,15 +85,16 @@ class HoledoDatabase extends GetxController {
       inNav: true,
       inDrawer: true,
     ),
+
     MenuNavItem(
-      title: 'News',
-      path: '/news',
+      title: 'Profile',
+      path: '/profile',
       inNav: true,
       inDrawer: true,
     ),
     MenuNavItem(
-      title: 'Profile',
-      path: '/profile',
+      title: 'News',
+      path: '/news',
       inNav: true,
       inDrawer: true,
     ),
@@ -115,20 +116,20 @@ class HoledoDatabase extends GetxController {
       inNav: true,
       inDrawer: true,
     ),
-    MenuNavItem(
-      title: 'Logout',
-      path: '/logout',
-      inNav: false,
-      inDrawer: true,
-      loginOnly: true,
-    ),
-    MenuNavItem(
-      title: 'Login',
-      path: '/login',
-      inNav: false,
-      inDrawer: true,
-      loginOnly: false,
-    ),
+    // MenuNavItem(
+    //   title: 'Logout',
+    //   path: '/logout',
+    //   inNav: false,
+    //   inDrawer: true,
+    //   loginOnly: true,
+    // ),
+    // MenuNavItem(
+    //   title: 'Login',
+    //   path: '/login',
+    //   inNav: false,
+    //   inDrawer: true,
+    //   loginOnly: false,
+    // ),
   ];
 
   void snackBarMessage(BuildContext context, type, message) {
@@ -282,8 +283,13 @@ class UsersController extends GetxController {
       final model = DB.getModel();
       var user = new User();
 
-      api = await _api.POST(
-          target: '/users/login', data: {'email': email, 'password': password});
+      api = await _api.POST(target: '/users/login', data: {
+        'email': email,
+        'password': password
+      }, headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      });
 
       if (api.success == true) {
         print('login: ${api.data!.user!.email.toString()}');
@@ -322,12 +328,13 @@ class UsersController extends GetxController {
     Get.find<HoledoDatabase>().setModel(model);
   }
 
-  Future<User> getProfileData(
-      {String? slug,
-      String? id,
-      String? token,
-      required BuildContext context,
-      bool? isLoggined = false}) async {
+  Future<User> getProfileData({
+    String? slug,
+    String? id,
+    String? token,
+    required BuildContext context,
+    bool? isLoggined = false,
+  }) async {
     try {
       isLoading(true);
       var user = new User();
@@ -335,7 +342,7 @@ class UsersController extends GetxController {
       var params = {'id': id, 'slug': slug, 'token': token};
       params.removeWhere((k, v) => v == null);
 
-      var response = await _api.GET(target: '/users/get/', data: params);
+      var response = await _api.GET(target: '/users/profile/', data: params);
       //print('log: ${response.data}');
       user = response.data?.user as User;
       print('log: ${user.firstName}');
@@ -399,9 +406,12 @@ class UsersController extends GetxController {
       var userJson = user.toJson();
       userJson.removeWhere((k, v) => v == null || v.toString().length == 0);
       var update = await _api.POST(
-          target: '/users/update/', data: userJson, token: token);
+        target: '/users/update/',
+        data: userJson,
+        token: token,
+      );
       // ignore: unnecessary_null_comparison
-      if (update != null) {
+      if (update.data != null) {
         var response =
             await _api.GET(target: '/users/get/', data: {'slug': user.slug});
         //print('log: ${response.data}');
@@ -411,6 +421,7 @@ class UsersController extends GetxController {
         user.token = token;
         saveUserToModel(user, token);
       }
+      // isLoading(false);
       return user;
     } finally {
       isLoading(false);

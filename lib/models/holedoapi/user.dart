@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:holedo/models/holedoapi/data.dart';
-import 'package:holedo/models/models.dart';
 import 'package:routemaster/routemaster.dart';
 
+import 'package:holedo/models/holedoapi/expertise.dart';
+import 'package:holedo/models/models.dart';
+
 import 'achievement.dart';
-import 'company.dart';
 import 'company_role.dart';
 import 'country.dart';
 import 'current_membership_grade.dart';
@@ -113,7 +113,7 @@ class User {
   dynamic maritalStatus;
   List<UserTag>? userTags;
   List<Achievement>? achievements;
-  List<dynamic>? expertise;
+  List<Expertise>? expertise;
   List<dynamic>? comments;
   List<dynamic>? articles;
   dynamic contactNumberType;
@@ -364,7 +364,9 @@ class User {
             .toList(),
         expertise: json['expertise'] == null
             ? null
-            : json['expertise'] as List<dynamic>?,
+            : (json['expertise'] as List<dynamic>?)
+                ?.map((e) => Expertise.fromJson(e as Map<String, dynamic>))
+                .toList(),
         comments: json['comments'] == null
             ? null
             : json['comments'] as List<dynamic>?,
@@ -512,7 +514,7 @@ class User {
         'marital_status': maritalStatus,
         'user_tags': userTags?.map((e) => e.toJson()).toList(),
         'achievements': achievements?.map((e) => e.toJson()).toList(),
-        'expertise': expertise,
+        'expertise': expertise?.map((e) => e.toJson()).toList(),
         'comments': comments,
         'articles': articles,
         'contact_number_type': contactNumberType,
@@ -540,6 +542,8 @@ class User {
     //var data = profile.toJson() as Map<String, dynamic>;
     //var newElements = [];
     //print('this ${this.toJson()}');
+    // this.id = profile.id;
+    // this.slug = profile.slug;
     this.id = profile.id;
     this.slug = profile.slug;
     //this.token = profile.token;
@@ -549,5 +553,243 @@ class User {
   void toProfile(BuildContext context) {
     var redirect = '/profile/${this.slug}';
     Routemaster.of(context).push(redirect);
+  }
+
+  User copyWith({
+    int? id,
+    int? companyId,
+    int? roleId,
+    int? companyRoleId,
+    int? countryId,
+    int? userTitleTypesId,
+    dynamic? currencyId,
+    dynamic? contactNumberTypesId,
+    dynamic? maritalStatusId,
+    dynamic? genderId,
+    int? currentMembershipGradeId,
+    int? nextMembershipGradeId,
+    String? slug,
+    String? firstName,
+    String? lastName,
+    String? email,
+    int? emailVisibility,
+    dynamic? dateOfBirth,
+    String? avatar,
+    String? banner,
+    String? professionalTitle,
+    String? area,
+    String? contactNumber,
+    bool? contactNumberVisibility,
+    int? contactableWhatsapp,
+    int? contactableSms,
+    dynamic? website,
+    bool? websiteVisibility,
+    dynamic? skype,
+    bool? skypeVisibility,
+    String? facebook,
+    bool? facebookVisibility,
+    String? twitter,
+    bool? twitterVisibility,
+    String? google,
+    bool? googleVisibility,
+    String? xing,
+    bool? xingVisibility,
+    String? linkedin,
+    bool? linkedinVisibility,
+    dynamic? proxycurlWhodis,
+    bool? allowRecruiterAccess,
+    dynamic? address1,
+    dynamic? address2,
+    dynamic? addressPostalCode,
+    dynamic? addressArea,
+    dynamic? workPermits,
+    bool? relocate,
+    dynamic? nextJob,
+    dynamic? salaryExpectation,
+    String? profileSummary,
+    bool? active,
+    String? profileVideoTitle,
+    String? profileVideoDescription,
+    String? profileVideoUrl,
+    int? membershipGradeLeaderPoints,
+    int? membershipGradeNeededLeaderPoints,
+    int? membershipGradePercentAccomplished,
+    bool? membershipGradeEligibility,
+    dynamic? matrixUid,
+    dynamic? matrixRoomSync,
+    bool? allowApiLogin,
+    List<dynamic>? savedSearches,
+    NextMembershipGrade? nextMembershipGrade,
+    CurrentMembershipGrade? currentMembershipGrade,
+    List<dynamic>? languages,
+    List<dynamic>? badges,
+    List<dynamic>? awards,
+    List<dynamic>? recommendees,
+    List<dynamic>? recommenders,
+    List<dynamic>? requestedConnections,
+    List<dynamic>? pendingConnections,
+    List<dynamic>? approvedConnections,
+    List<dynamic>? connectees,
+    List<dynamic>? connectors,
+    List<dynamic>? userNationalities,
+    List<dynamic>? userDesiredLocations,
+    List<dynamic>? requestReferences,
+    List<dynamic>? requestedReferences,
+    List<dynamic>? givenReferences,
+    List<dynamic>? receivedReferences,
+    List<dynamic>? testimonials,
+    List<dynamic>? recommendations,
+    List<dynamic>? posts,
+    List<dynamic>? likes,
+    List<dynamic>? jobApplications,
+    List<dynamic>? invites,
+    dynamic? gender,
+    dynamic? maritalStatus,
+    List<UserTag>? userTags,
+    List<Achievement>? achievements,
+    List<Expertise>? expertise,
+    List<dynamic>? comments,
+    List<dynamic>? articles,
+    dynamic? contactNumberType,
+    dynamic? currency,
+    CompanyRole? companyRole,
+    List<Experience>? experiences,
+    dynamic? currentExperience,
+    List<Education>? educations,
+    List<dynamic>? userLanguagesProficiencies,
+    Country? country,
+    Company? company,
+    Role? role,
+    String? embedSrc,
+    String? fullName,
+    String? expertiseString,
+    String? activeStatus,
+    String? avatarCdn,
+    String? holedoUrl,
+    String? token,
+  }) {
+    return User(
+      id: id ?? this.id,
+      companyId: companyId ?? this.companyId,
+      roleId: roleId ?? this.roleId,
+      companyRoleId: companyRoleId ?? this.companyRoleId,
+      countryId: countryId ?? this.countryId,
+      userTitleTypesId: userTitleTypesId ?? this.userTitleTypesId,
+      currencyId: currencyId ?? this.currencyId,
+      contactNumberTypesId: contactNumberTypesId ?? this.contactNumberTypesId,
+      maritalStatusId: maritalStatusId ?? this.maritalStatusId,
+      genderId: genderId ?? this.genderId,
+      currentMembershipGradeId:
+          currentMembershipGradeId ?? this.currentMembershipGradeId,
+      nextMembershipGradeId:
+          nextMembershipGradeId ?? this.nextMembershipGradeId,
+      slug: slug ?? this.slug,
+      firstName: firstName ?? this.firstName,
+      lastName: lastName ?? this.lastName,
+      email: email ?? this.email,
+      emailVisibility: emailVisibility ?? this.emailVisibility,
+      dateOfBirth: dateOfBirth ?? this.dateOfBirth,
+      avatar: avatar ?? this.avatar,
+      banner: banner ?? this.banner,
+      professionalTitle: professionalTitle ?? this.professionalTitle,
+      area: area ?? this.area,
+      contactNumber: contactNumber ?? this.contactNumber,
+      contactNumberVisibility:
+          contactNumberVisibility ?? this.contactNumberVisibility,
+      contactableWhatsapp: contactableWhatsapp ?? this.contactableWhatsapp,
+      contactableSms: contactableSms ?? this.contactableSms,
+      website: website ?? this.website,
+      websiteVisibility: websiteVisibility ?? this.websiteVisibility,
+      skype: skype ?? this.skype,
+      skypeVisibility: skypeVisibility ?? this.skypeVisibility,
+      facebook: facebook ?? this.facebook,
+      facebookVisibility: facebookVisibility ?? this.facebookVisibility,
+      twitter: twitter ?? this.twitter,
+      twitterVisibility: twitterVisibility ?? this.twitterVisibility,
+      google: google ?? this.google,
+      googleVisibility: googleVisibility ?? this.googleVisibility,
+      xing: xing ?? this.xing,
+      xingVisibility: xingVisibility ?? this.xingVisibility,
+      linkedin: linkedin ?? this.linkedin,
+      linkedinVisibility: linkedinVisibility ?? this.linkedinVisibility,
+      proxycurlWhodis: proxycurlWhodis ?? this.proxycurlWhodis,
+      allowRecruiterAccess: allowRecruiterAccess ?? this.allowRecruiterAccess,
+      address1: address1 ?? this.address1,
+      address2: address2 ?? this.address2,
+      addressPostalCode: addressPostalCode ?? this.addressPostalCode,
+      addressArea: addressArea ?? this.addressArea,
+      workPermits: workPermits ?? this.workPermits,
+      relocate: relocate ?? this.relocate,
+      nextJob: nextJob ?? this.nextJob,
+      salaryExpectation: salaryExpectation ?? this.salaryExpectation,
+      profileSummary: profileSummary ?? this.profileSummary,
+      active: active ?? this.active,
+      profileVideoTitle: profileVideoTitle ?? this.profileVideoTitle,
+      profileVideoDescription:
+          profileVideoDescription ?? this.profileVideoDescription,
+      profileVideoUrl: profileVideoUrl ?? this.profileVideoUrl,
+      membershipGradeLeaderPoints:
+          membershipGradeLeaderPoints ?? this.membershipGradeLeaderPoints,
+      membershipGradeNeededLeaderPoints: membershipGradeNeededLeaderPoints ??
+          this.membershipGradeNeededLeaderPoints,
+      membershipGradePercentAccomplished: membershipGradePercentAccomplished ??
+          this.membershipGradePercentAccomplished,
+      membershipGradeEligibility:
+          membershipGradeEligibility ?? this.membershipGradeEligibility,
+      matrixUid: matrixUid ?? this.matrixUid,
+      matrixRoomSync: matrixRoomSync ?? this.matrixRoomSync,
+      allowApiLogin: allowApiLogin ?? this.allowApiLogin,
+      savedSearches: savedSearches ?? this.savedSearches,
+      nextMembershipGrade: nextMembershipGrade ?? this.nextMembershipGrade,
+      currentMembershipGrade:
+          currentMembershipGrade ?? this.currentMembershipGrade,
+      languages: languages ?? this.languages,
+      badges: badges ?? this.badges,
+      awards: awards ?? this.awards,
+      recommendees: recommendees ?? this.recommendees,
+      recommenders: recommenders ?? this.recommenders,
+      requestedConnections: requestedConnections ?? this.requestedConnections,
+      pendingConnections: pendingConnections ?? this.pendingConnections,
+      approvedConnections: approvedConnections ?? this.approvedConnections,
+      connectees: connectees ?? this.connectees,
+      connectors: connectors ?? this.connectors,
+      userNationalities: userNationalities ?? this.userNationalities,
+      userDesiredLocations: userDesiredLocations ?? this.userDesiredLocations,
+      requestReferences: requestReferences ?? this.requestReferences,
+      requestedReferences: requestedReferences ?? this.requestedReferences,
+      givenReferences: givenReferences ?? this.givenReferences,
+      receivedReferences: receivedReferences ?? this.receivedReferences,
+      testimonials: testimonials ?? this.testimonials,
+      recommendations: recommendations ?? this.recommendations,
+      posts: posts ?? this.posts,
+      likes: likes ?? this.likes,
+      jobApplications: jobApplications ?? this.jobApplications,
+      invites: invites ?? this.invites,
+      gender: gender ?? this.gender,
+      maritalStatus: maritalStatus ?? this.maritalStatus,
+      userTags: userTags ?? this.userTags,
+      achievements: achievements ?? this.achievements,
+      expertise: expertise ?? this.expertise,
+      comments: comments ?? this.comments,
+      articles: articles ?? this.articles,
+      contactNumberType: contactNumberType ?? this.contactNumberType,
+      currency: currency ?? this.currency,
+      companyRole: companyRole ?? this.companyRole,
+      experiences: experiences ?? this.experiences,
+      currentExperience: currentExperience ?? this.currentExperience,
+      educations: educations ?? this.educations,
+      userLanguagesProficiencies:
+          userLanguagesProficiencies ?? this.userLanguagesProficiencies,
+      country: country ?? this.country,
+      company: company ?? this.company,
+      role: role ?? this.role,
+      embedSrc: embedSrc ?? this.embedSrc,
+      fullName: fullName ?? this.fullName,
+      expertiseString: expertiseString ?? this.expertiseString,
+      activeStatus: activeStatus ?? this.activeStatus,
+      avatarCdn: avatarCdn ?? this.avatarCdn,
+      holedoUrl: holedoUrl ?? this.holedoUrl,
+      token: token ?? this.token,
+    );
   }
 }

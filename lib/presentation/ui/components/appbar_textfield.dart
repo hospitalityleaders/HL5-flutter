@@ -8,11 +8,14 @@ class AppbarTextField extends StatelessWidget {
     Key? key,
     this.width,
     this.showPeopleButton = true,
+    this.onSearchChange,
+    this.searchController,
   }) : super(key: key);
 
   final double? width;
+  final void Function(String)? onSearchChange;
   final bool showPeopleButton;
-
+  final TextEditingController? searchController;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,8 +26,9 @@ class AppbarTextField extends StatelessWidget {
       ),
       margin: EdgeInsets.all(2),
       child: TextFormField(
-        // controller: _searchController,
-        // onChanged: (_) => _search(), // , onSubmitted: (_) => _search(),
+        controller: searchController,
+        onChanged: onSearchChange,
+        //// , onSubmitted: (_) => _search(),
         cursorColor: ColorPicker.kWhite,
         style: FontTextStyle.kWhite18W600PR,
         decoration: InputDecoration(

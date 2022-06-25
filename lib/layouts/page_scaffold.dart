@@ -2,6 +2,14 @@ import 'package:holedo/layouts/cards/holedo_cards.dart';
 import 'package:holedo/models/models.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:holedo/presentation/ui/components/appbar_textfield.dart';
+import 'package:holedo/presentation/ui/components/custom_appbar.dart';
+import 'package:holedo/presentation/ui/pages/profile_mobile_view/profile_mobile_view_page.dart';
+import 'package:holedo/presentation/utill/color_resources.dart';
+import 'package:holedo/presentation/utill/dimensions.dart';
+import 'package:holedo/presentation/utill/images.dart';
+import 'package:holedo/presentation/utill/responsive.dart';
+import 'package:holedo/presentation/utill/styles.dart';
 import 'package:holedo/responsive/responsive.dart';
 import 'package:routemaster/routemaster.dart';
 export 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -116,6 +124,8 @@ class _PageScaffoldState extends State<PageScaffold> {
     final routemaster = Routemaster.of(context);
     final canGoBack = routemaster.history.canGoBack;
     final canGoForward = routemaster.history.canGoForward;
+    final GlobalKey<ScaffoldState> _scaffoldKey =
+        new GlobalKey<ScaffoldState>();
 
     return widget.isNewDesign
         ? widget.body
@@ -125,7 +135,8 @@ class _PageScaffoldState extends State<PageScaffold> {
             final bool isDesktop = Responsive.isDesktop(context);
             maxWidth = constraints.maxWidth;
             return Scaffold(
-              drawer: (!isDesktop)
+              key: _scaffoldKey,
+              endDrawer: isMobilePhone(context)
                   ? Drawer(
                       child: Container(
                         color: Color(0xFF232f3e),
@@ -152,13 +163,38 @@ class _PageScaffoldState extends State<PageScaffold> {
                     )
                   : null,
               appBar: PreferredSize(
-                preferredSize: Size.fromHeight(46),
-                child: AppBar(
-                  backgroundColor: ColorPicker.kPrimaryLight1,
-                  automaticallyImplyLeading: (!isDesktop),
-                  title: _buildAppBar(context, constraints),
-                ),
+                preferredSize: Size.fromHeight(45),
+                child: isMobilePhone(context)
+                    ? ProfileMobileAppbar(
+                        onTap: () => _scaffoldKey.currentState?.openEndDrawer(),
+                        searchController: _searchController,
+                        onSearch: (searchText) {
+                          _search();
+                        },
+                      )
+                    : CustomAppbar(
+                        searchController: _searchController,
+                        onSearch: (searchText) {
+                          _search();
+                        },
+                      ),
               ),
+              // appBar: PreferredSize(
+              //   preferredSize: Size.fromHeight(46),
+              //   child: AppBar(
+              //     backgroundColor: ColorPicker.kPrimaryLight1,
+              //     automaticallyImplyLeading: (!isDesktop),
+              //     title: BuildAppbar(
+              //       context: context,
+              //       constraints: constraints,
+              //       searchController: _searchController,
+              //       onSearch: (searchText) {
+              //         _search();
+              //       },
+              //     ),
+              //     // title: _buildAppBar(context, constraints),
+              //   ),
+              // ),
               body: Container(
                   decoration: BoxDecoration(
                     color: ColorPicker.kBG,
@@ -295,9 +331,7 @@ class _PageScaffoldState extends State<PageScaffold> {
   Widget _buildAppBar(BuildContext context, BoxConstraints constraints) {
     final appState = Provider.of<AppState>(context);
     final bool isMobile = Responsive.isMobile(context);
-    final bool isTablet = Responsive.isTablet(context);
     final bool isDesktop = Responsive.isDesktop(context);
-    final maxWidth = constraints.minWidth;
 
     return Container(
         height: 46,
@@ -344,8 +378,9 @@ class _PageScaffoldState extends State<PageScaffold> {
                         borderSide: BorderSide(color: ColorPicker.kPrimary),
                         borderRadius: BorderRadius.circular(5)),
                     enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: ColorPicker.kPrimary),
-                        borderRadius: BorderRadius.circular(5)),
+                      borderSide: BorderSide(color: ColorPicker.kPrimary),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
                     prefixIcon: Icon(
                       Icons.search,
                       color: ColorPicker.kPrimaryLightBlue,
@@ -378,7 +413,9 @@ class _PageScaffoldState extends State<PageScaffold> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: _buildNavBarChildren(
-                      inDrawer: false, isLogin: appState.isLoggedIn),
+                    inDrawer: false,
+                    isLogin: appState.isLoggedIn,
+                  ),
                 ),
               ),
             if (isDesktop)
@@ -562,8 +599,10 @@ class _PageScaffoldState extends State<PageScaffold> {
     return menuItems;
   }
 
-  List<Widget> _buildNavBarChildren(
-      {required bool inDrawer, required bool isLogin}) {
+  List<Widget> _buildNavBarChildren({
+    required bool inDrawer,
+    required bool isLogin,
+  }) {
     final menuItems = Get.put(HoledoDatabase()).menuItems;
 
     return [
@@ -582,6 +621,245 @@ class _PageScaffoldState extends State<PageScaffold> {
               inDrawer: inDrawer,
             )
     ];
+  }
+}
+
+class BuildAppbar extends StatelessWidget {
+  final TextEditingController? searchController;
+  final BuildContext context;
+  final BoxConstraints constraints;
+
+  final void Function(String)? onSearch;
+  const BuildAppbar({
+    Key? key,
+    required this.searchController,
+    required this.context,
+    required this.constraints,
+    this.onSearch,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final appState = Provider.of<AppState>(context);
+    final bool isMobile = Responsive.isMobile(context);
+    final menuItems = Get.put(HoledoDatabase()).menuItems;
+    final bool isDesktop = Responsive.isDesktop(context);
+    bool inDrawer = false;
+
+    return Container(
+        color: Cr.colorPrimary,
+        height: 45,
+        child: Row(
+          // mainAxisSize: MainAxisSize.max,
+          // mainAxisAlignment: !isDesktop
+          //     ? MainAxisAlignment.spaceBetween
+          //     : MainAxisAlignment.center,
+          children: [
+            //Padding(
+            //   padding: const EdgeInsets.all(4.0),
+            //   child: Image(
+            //     image: AssetImage(isMobile
+            //         ? 'assets/icons/logo.png'
+            //         : 'assets/icons/logo1.png'),
+            //   ),
+            // ),
+            Image.asset(
+              Images.logo1,
+              width: Di.FSOTL + 10,
+            ),
+            Di.SBWD,
+            AppbarTextField(
+              searchController: searchController,
+              onSearchChange: onSearch,
+            ),
+            Di.SBWD,
+            // CustomTextButton(
+            //   text: "Home",
+            //   color: Cr.whiteColor,
+            // ),
+
+            if (!isMobilePhone(context)) // navigation
+              Row(
+                children: menuItems.map((item) {
+                  if (item.loginOnly == null ||
+                      (item.loginOnly == appState.isLoggedIn)) if (inDrawer ==
+                          true &&
+                      item.inDrawer == true)
+                    return NavigationLink(
+                      title: item.title!,
+                      path: item.path!,
+                      inDrawer: inDrawer,
+                    );
+                  else if (inDrawer == false && item.inNav == true)
+                    return NavigationLink(
+                      title: item.title!,
+                      path: item.path!,
+                      inDrawer: inDrawer,
+                    );
+                  return SizedBox();
+                }).toList(),
+              ),
+
+            Container(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  if (appState.isLoggedIn && !isMobile)
+                    Container(
+                      width: (isDesktop ? 55 : Get.width * 0.07),
+                      decoration: BoxDecoration(
+                          border: Border(
+                              left: BorderSide(
+                                  color: ColorPicker.kPrimaryLight, width: 3),
+                              right: BorderSide(
+                                  color: ColorPicker.kPrimaryLight, width: 3))),
+                      child: NavigationBox(
+                        inDrawer: false,
+                        body: Center(
+                            child: Stack(
+                          clipBehavior: Clip.none,
+                          children: [
+                            Icon(
+                              Icons.email,
+                              color: ColorPicker.kPrimaryLightBlue,
+                            ),
+                            Positioned(
+                              right: -5,
+                              top: -5,
+                              child: Container(
+                                height: 16,
+                                width: 16,
+                                decoration: BoxDecoration(
+                                  color: ColorPicker.kRed,
+                                  borderRadius: BorderRadius.circular(3),
+                                ),
+                                child: Center(
+                                  child: CommonWidget.text(
+                                    '2',
+                                    style: FontTextStyle.kWhite12W700SSP,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        )),
+                      ),
+                    ),
+                  if (appState.isLoggedIn && !isMobile)
+                    Container(
+                      width: (isDesktop ? 55 : Get.width * 0.07),
+                      decoration: BoxDecoration(
+                          border: Border(
+                              right: BorderSide(
+                                  color: ColorPicker.kPrimaryLight, width: 3))),
+                      child: NavigationBox(
+                        inDrawer: false,
+                        body: Center(
+                            child: Stack(
+                          clipBehavior: Clip.none,
+                          children: [
+                            Icon(
+                              Icons.flag,
+                              color: ColorPicker.kPrimaryLightBlue,
+                            ),
+                            Positioned(
+                              right: -5,
+                              top: -5,
+                              child: Container(
+                                height: 16,
+                                width: 16,
+                                decoration: BoxDecoration(
+                                  color: ColorPicker.kRed,
+                                  borderRadius: BorderRadius.circular(3),
+                                ),
+                                child: Center(
+                                  child: CommonWidget.text(
+                                    '2',
+                                    style: FontTextStyle.kWhite12W700SSP,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        )),
+                      ),
+                    ),
+                  if (appState.isLoggedIn && !isMobile)
+                    Container(
+                      width: (isDesktop ? 75 : Get.width * 0.07),
+                      decoration: BoxDecoration(
+                          border: Border(
+                              right: BorderSide(
+                                  color: ColorPicker.kPrimaryLight, width: 3))),
+                      child: NavigationBox(
+                        inDrawer: false,
+                        body: Center(
+                            child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.person_add,
+                              color: ColorPicker.kPrimaryLightBlue,
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Container(
+                              height: 20,
+                              width: 30,
+                              decoration: BoxDecoration(
+                                color: Color(0xff546088),
+                                borderRadius: BorderRadius.circular(3),
+                              ),
+                              child: Center(
+                                child: CommonWidget.text('3',
+                                    style:
+                                        FontTextStyle.kPrimaryLight10W700SSP),
+                              ),
+                            ),
+                          ],
+                        )),
+                      ),
+                    ),
+                  NavigationBox(
+                    title: appState.isLoggedIn ? '' : 'Login',
+                    path: appState.isLoggedIn
+                        ? '/profile/${appState.profile!.slug}'
+                        : '/login',
+                    inDrawer: false,
+                    body: Container(
+                      padding: EdgeInsets.all(2),
+                      width: 30,
+                      child: Center(
+                        child: Container(
+                          height: 30,
+                          width: 30,
+                          child: (appState.isLoggedIn &&
+                                  appState.profile?.avatarCdn != null)
+                              ? CircleAvatar(
+                                  radius: 30,
+                                  backgroundImage: NetworkImage(
+                                      appState.profile!.avatarCdn.toString()),
+                                )
+                              : Icon(
+                                  CupertinoIcons.profile_circled,
+                                  size: 26,
+                                  color: Colors.grey,
+                                ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            // _userNavMenu(context, constraints),
+
+            /**/
+          ],
+        ));
   }
 }
 
@@ -696,16 +974,17 @@ class _NavigationLink extends State<NavigationLink> {
             isHover = value;
           });
         },
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(12, 5, 12, 5),
-          child: Text(
-            widget.title,
-            style: isCurrent
-                ? FontTextStyle.kWhite16W400SSP
-                : isHover
-                    ? FontTextStyle.kWhite16W400SSP
-                    : FontTextStyle.kPrimaryLightBlue16W400SSP,
+        child: Text(
+          widget.title,
+          style: (bodySmallRegular).copyWith(
+            color: Cr.whiteColor,
+            //  Cr.accentBlue1,
           ),
+          // isCurrent
+          //     ? FontTextStyle.kWhite16W400SSP
+          //     : isHover
+          //         ? FontTextStyle.kWhite16W400SSP
+          //         : FontTextStyle.kPrimaryLightBlue16W400SSP,
         ),
       ),
     );

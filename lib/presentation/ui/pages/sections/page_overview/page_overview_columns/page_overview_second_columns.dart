@@ -64,8 +64,10 @@ class _ProfileOverviewSecondColumnState
     extends State<ProfileOverviewSecondColumn> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 360,
+    return Container(
+      constraints: BoxConstraints(minWidth: 100, maxWidth: 360),
+
+      // width: 360,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,

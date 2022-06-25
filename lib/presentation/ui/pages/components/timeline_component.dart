@@ -1,52 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
-import 'package:holedo/presentation/ui/pages/components/connection_component.dart';
-import 'package:holedo/presentation/ui/pages/components/profile_completion_component.dart';
-import 'package:holedo/presentation/ui/pages/components/rights_component.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/images.dart';
 import 'package:holedo/presentation/utill/styles.dart';
-
-class ProfileOverviewThirdColumn extends StatelessWidget {
-  const ProfileOverviewThirdColumn({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Flexible(
-      child: ConstrainedBox(
-        constraints: BoxConstraints(
-          maxWidth: 360,
-          minWidth: 280,
-        ),
-        child: Container(
-          // width: double.infinity,
-          // // width: 360,
-          // constraints: BoxConstraints(
-          //   maxWidth: 360,
-          //   minWidth: 280,
-          // ),
-          child: Column(
-            children: [
-              ProfileCompletionComponent(),
-              Di.SBHEL,
-              ConnectionsComponent(),
-              Di.SBHEL,
-              // profile overview timeline component
-              TimelineComponent(),
-              // ProfileAdsComponent(),
-              // Di.SBHS,
-              RightsComponent(),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
 
 class TimelineComponent extends StatelessWidget {
   const TimelineComponent({
@@ -192,26 +150,6 @@ class TimelineComponent extends StatelessWidget {
         ],
       ),
       // width: 360,
-    );
-  }
-}
-
-class ProfileAdsComponent extends StatelessWidget {
-  const ProfileAdsComponent({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: Styles.boxDecoration.copyWith(color: Cr.whiteColor),
-      padding: const EdgeInsets.all(Di.PSD),
-      child: Center(
-        child: Image.asset(
-          "assets/images/profileAdsBanner.png",
-          fit: BoxFit.cover,
-        ),
-      ),
     );
   }
 }

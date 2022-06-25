@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:holedo/presentation/utill/color_resources.dart';
 
 class Di {
   // Font Size can be also used for icon size
@@ -58,6 +59,11 @@ class Di {
   static const double PSOTL = 35.0;
 
   static final Divider DD = Divider(thickness: 1);
+  static final Divider DD2 = Divider(
+    thickness: .7,
+    color: Cr.darkGrey2,
+    height: 0,
+  );
 
   static const int MESSAGE_INPUT_LENGTH = 250;
   static const double NOTIFICATION_IMAGE_SIZE = 70.0;

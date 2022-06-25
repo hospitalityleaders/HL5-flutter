@@ -12,6 +12,67 @@ class Styles {
     ),
   ];
 
+  static final List<BoxShadow> defaultBoxShadow = [
+    BoxShadow(
+      color: Cr.grey1,
+      offset: Offset(
+        0,
+        1,
+      ), // changes position of shadow
+    ),
+  ];
+
+  static final InputDecoration popUpDialogTextFieldInputDecoration =
+      InputDecoration(
+    isDense: true,
+    contentPadding: const EdgeInsets.symmetric(
+      vertical: 13.0,
+      horizontal: 10,
+    ),
+
+    // border: InputBorder.none,
+    border: OutlineInputBorder(
+      borderSide: BorderSide(
+        width: 1,
+        color: Cr.darkGrey4,
+        style: BorderStyle.solid,
+      ),
+      borderRadius: BorderRadius.circular(2),
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderSide: BorderSide(
+        width: 1,
+        color: Cr.darkGrey4,
+        style: BorderStyle.solid,
+      ),
+      borderRadius: BorderRadius.circular(2),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderSide: BorderSide(
+        width: 1,
+        color: Cr.accentBlue1,
+        style: BorderStyle.solid,
+      ),
+      borderRadius: BorderRadius.circular(2),
+    ),
+    disabledBorder: OutlineInputBorder(
+      borderSide: BorderSide(
+        width: 1,
+        color: Cr.darkGrey4,
+        style: BorderStyle.solid,
+      ),
+      borderRadius: BorderRadius.circular(2),
+    ),
+    errorBorder: OutlineInputBorder(
+      borderSide: BorderSide(
+        width: 1,
+        color: Cr.darkGrey4,
+        style: BorderStyle.solid,
+      ),
+      borderRadius: BorderRadius.circular(2),
+    ),
+  );
+
   static final BoxDecoration boxDecorationBorder = BoxDecoration(
     color: Cr.whiteColor,
     border: Border(
@@ -72,6 +133,7 @@ const bodyExtraSmall = TextStyle(
 
 const bodySmallRegular = TextStyle(
   fontFamily: 'SourceSansPro',
+  fontWeight: FontWeight.w400,
   fontSize: Di.FSD - 2,
   color: Cr.darkBlue1,
 );

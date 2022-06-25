@@ -7,6 +7,8 @@
 // import '../../../../constant/fontStyle/font_style.dart';
 // import '../../../../constant/sizedbox.dart';
 
+import 'package:holedo/presentation/providers/profile_provider.dart';
+import 'package:holedo/presentation/ui/components/custom_loading.dart';
 import 'package:holedo/presentation/ui/pages/sections/activity_section/activity_section.dart';
 import 'package:holedo/presentation/ui/pages/sections/articles_section/articles_section.dart';
 import 'package:holedo/presentation/ui/pages/sections/page_overview/page_overview_section.dart';
@@ -20,7 +22,6 @@ import '../profile-edit/profile_edit.dart';
 import 'package:flutter/material.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/models/models.dart';
-import 'package:holedo/presentation/ui/components/custom_appbar.dart';
 import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_tabbar.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_image_banner.dart';
@@ -231,135 +232,96 @@ class _UserProfilePageState extends State<UserProfilePage>
 
   @override
   Widget build(BuildContext context) {
+    print("userProfileData: is  ${widget.userProfileData.toString()} ");
     final appState = Provider.of<AppState>(context);
     final bool isMine = appState.isLoginnedAndEditable(widget.userProfileData);
     print('app ${isEditable}');
-    if (ResponsiveWrapper.of(context).isSmallerThan(MOBILE)) {
-      return ProfileMobileViewPage();
-    } else {
-      return Center(
-        child: ListView(
-          shrinkWrap: true,
-          children: [
-            CustomAppbar(),
-            Container(
-              height: 50,
-              width: Di.getScreenSize(context).width,
-              color: Cr.red3,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Di.ESB,
-                  Row(
+    return Stack(
+      children: [
+        if (ResponsiveWrapper.of(context).isSmallerThan(MOBILE))
+          ProfileMobileViewPage()
+        else
+          Center(
+            child: ListView(
+              shrinkWrap: true,
+              children: [
+                Container(
+                  height: 50,
+                  width: Di.getScreenSize(context).width,
+                  color: Cr.red3,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Text(
-                        "Your profile is only 25% complete. Complete it now to earn your first Hospitality Leaders grade.   ",
-                        textAlign: TextAlign.center,
-                        style: bodyLarge.copyWith(
-                          color: Cr.redTextColor,
-                        ),
+                      Di.ESB,
+                      Row(
+                        children: [
+                          Text(
+                            "Your profile is only 25% complete. Complete it now to earn your first Hospitality Leaders grade.   ",
+                            textAlign: TextAlign.center,
+                            style: bodyLarge.copyWith(
+                              color: Cr.redTextColor,
+                            ),
+                          ),
+                          CustomElevatedButton(
+                            width: 97,
+                            height: 32,
+                            backgroundColor: Cr.redTextColor,
+                            donotShowIcon: true,
+                          ),
+                        ],
                       ),
-                      CustomElevatedButton(
-                        width: 97,
-                        height: 32,
-                        backgroundColor: Cr.redTextColor,
-                        donotShowIcon: true,
+                      Icon(
+                        Icons.close,
+                        color: Cr.redTextColor,
                       ),
                     ],
                   ),
-                  Icon(
-                    Icons.close,
-                    color: Cr.redTextColor,
-                  ),
-                ],
-              ),
+                ),
+                ProfileImageBanner(
+                  userProfileData: widget.userProfileData,
+                  onEditButtonPressed: () {},
+                  // avatarUrl: widget.userProfileData.avatar.toString(),
+                  // fullName: widget.userProfileData.fullName.toString(),
+                  // userTitleTypesId:
+                  //     widget.userProfileData.userTitleTypesId.toString(),
+                ),
+                ProfileTabbar(
+                  onTap: (p0) {
+                    setState(() {
+                      currentTabIndex = _tabController.index;
+                    });
+                  },
+                  isMine: isMine,
+                  tabController: _tabController,
+                  onEditProfilePressed: () {
+                    setState(() {
+                      isEditable = !isEditable;
+                    });
+                  },
+                ),
+                Di.SBHEL,
+                Center(
+                  child: [
+                    PageOverviewSection(
+                      isEditable: isEditable,
+                      userProfileData: widget.userProfileData,
+                      editProfileBtn: buildEditButton,
+                    ),
+                    TimelineSection(),
+                    ArticlesSection(),
+                    ActivitySection(),
+                    ReferenceSection(),
+                  ][currentTabIndex],
+                ),
+                Di.SBHOTL,
+              ],
             ),
-            ProfileImageBanner(
-              userProfileData: widget.userProfileData,
-              onEditButtonPressed: () {},
-              // avatarUrl: widget.userProfileData.avatar.toString(),
-              // fullName: widget.userProfileData.fullName.toString(),
-              // userTitleTypesId:
-              //     widget.userProfileData.userTitleTypesId.toString(),
-            ),
-            ProfileTabbar(
-              onTap: (p0) {
-                setState(() {
-                  currentTabIndex = _tabController.index;
-                });
-              },
-              isMine: isMine,
-              tabController: _tabController,
-              onEditProfilePressed: () {
-                setState(() {
-                  isEditable = !isEditable;
-                });
-              },
-            ),
-            Di.SBHEL,
-            SizedBox(
-              child: Center(
-                child: [
-                  PageOverviewSection(
-                    isEditable: isEditable,
-                    //section1 edit functionality
-                    profileOverviewSec1ProSummKey:
-                        profileOverviewSec1ProSummKey,
-                    profileOverviewSec1ProSumm_H: profileOverviewSec1ProSumm_H,
-                    profileOverviewSec1ProSumm_W: profileOverviewSec1ProSumm_W,
-                    profileOverviewSec1AreaOfExpKey:
-                        profileOverviewSec1AreaOfExpKey,
-                    profileOverviewSec1AreaOfExp_H:
-                        profileOverviewSec1AreaOfExp_H,
-                    profileOverviewSec1AreaOfExp_W:
-                        profileOverviewSec1AreaOfExp_W,
-                    profileOverviewSec1ReferencesKey:
-                        profileOverviewSec1ReferencesKey,
-                    profileOverviewSec1References_H:
-                        profileOverviewSec1References_H,
-                    profileOverviewSec1References_W:
-                        profileOverviewSec1References_W,
-
-                    //section2 edit functionality
-
-                    profileOverviewSec2WorkExpKey:
-                        profileOverviewSec2WorkExpKey,
-                    profileOverviewSec2WorkExp_H: profileOverviewSec2WorkExp_H,
-                    profileOverviewSec2WorkExp_W: profileOverviewSec2WorkExp_W,
-                    profileOverviewSec2EducationKey:
-                        profileOverviewSec2EducationKey,
-                    profileOverviewSec2Education_H:
-                        profileOverviewSec2Education_H,
-                    profileOverviewSec2Education_W:
-                        profileOverviewSec2Education_W,
-                    profileOverviewSec2AchievementKey:
-                        profileOverviewSec2AchievementKey,
-                    profileOverviewSec2Achievement_H:
-                        profileOverviewSec2Achievement_H,
-                    profileOverviewSec2Achievement_W:
-                        profileOverviewSec2Achievement_W,
-                    profileOverviewSec2LanguagesKey:
-                        profileOverviewSec2LanguagesKey,
-                    profileOverviewSec2Languages_H:
-                        profileOverviewSec2Languages_H,
-                    profileOverviewSec2Languages_W:
-                        profileOverviewSec2Languages_W,
-                    pOApiData: widget.userProfileData,
-                    editProfileBtn: buildEditButton,
-                  ),
-                  TimelineSection(),
-                  ArticlesSection(),
-                  ActivitySection(),
-                  ReferenceSection(),
-                ][currentTabIndex],
-              ),
-            ),
-            Di.SBHOTL,
-          ],
-        ),
-      );
-    }
-
+          ),
+        Provider.of<ProfileProvider>(context).showProfileLoading
+            ? CustomLoading()
+            : Di.ESB,
+      ],
+    );
     // Responsive.isDesktop(context)
     //     ? Container(
     //         decoration: BoxDecoration(color: ColorPicker.kBG),

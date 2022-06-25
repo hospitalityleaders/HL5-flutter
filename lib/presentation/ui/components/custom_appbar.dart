@@ -1,21 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:holedo/models/models.dart';
 import 'package:holedo/presentation/ui/components/appbar_textfield.dart';
 import 'package:holedo/presentation/ui/components/custom_icon_button.dart';
 import 'package:holedo/presentation/ui/components/custom_text_button.dart';
 import 'package:holedo/presentation/ui/components/person_avatar.dart';
+import 'package:holedo/presentation/ui/components/submenus.dart';
+
 import 'package:holedo/presentation/ui/components/text_with_background.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/images.dart';
+import 'package:routemaster/routemaster.dart';
 
-class CustomAppbar extends StatelessWidget {
+class CustomAppbar extends StatefulWidget {
   const CustomAppbar({
     Key? key,
+    required this.searchController,
+    required this.onSearch,
   }) : super(key: key);
 
+  final TextEditingController searchController;
+  final void Function(String? searchText) onSearch;
+
+  @override
+  State<CustomAppbar> createState() => _CustomAppbarState();
+}
+
+class _CustomAppbarState extends State<CustomAppbar> {
   @override
   Widget build(BuildContext context) {
+    final appState = Provider.of<AppState>(context);
+    final menuItems = Get.put(HoledoDatabase()).menuItems;
+    // final isCurrent = currentPath.startsWith(widget.path);
+
     return Container(
       color: Cr.colorPrimary,
       height: 45,
@@ -27,86 +45,30 @@ class CustomAppbar extends StatelessWidget {
             width: Di.FSOTL + 10,
           ),
           Di.SBWD,
-          AppbarTextField(),
-
-          // CustomTextField(
-          //   width: 320,
-          //   prefixIcon: Icon(
-          //     Icons.search,
-          //     color: Cr.darkBlue8,
-          //   ),
-          //   hintText: "Search",
-          //   hintStyle: defaultRegular.copyWith(
-          //     color: Cr.darkBlue8,
-          //   ),
-          //   suffixIcon: Align(
-          //     alignment: Alignment.centerRight,
-          //     child: Padding(
-          //       padding: const EdgeInsets.symmetric(
-          //         horizontal: Di.PSES,
-          //       ),
-          //       child: CustomElevatedButton(
-          //         width: 100,
-          //         height: 34,
-          //         // backgroundColor: Cr.darkBlue6,
-          //         backgroundColor: Cr.darkBlue6,
-          //         child: Row(
-          //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //           // mainAxisSize: MainAxisSize.min,
-          //           children: [
-          //             Text(
-          //               "People",
-          //               style: bodySmallRegular.copyWith(
-          //                 color: Cr.darkBlue8,
-          //               ),
-          //             ),
-          //             Icon(
-          //               Icons.abc,
-          //             ),
-          //             // SvgPicture.asset(
-          //             //   "assets/svgicons/menuDown.svg",
-          //             //   color: Cr.darkBlue8,
-          //             // ),
-          //           ],
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
-
-          // SvgPicture.asset(
-          //   "assets/svgicons/menu-down.svg",
-          //   color: Cr.darkBlue8,
-          // ),
-
+          AppbarTextField(
+            onSearchChange: widget.onSearch,
+            searchController: widget.searchController,
+          ),
           Di.SBWD,
-          CustomTextButton(
-            text: "Home",
-            color: Cr.whiteColor,
+          ListView.builder(
+            shrinkWrap: true,
+            scrollDirection: Axis.horizontal,
+            itemCount: menuItems.length,
+            itemBuilder: (BuildContext context, int index) {
+              final isCurrentPath = RouteData.of(context)
+                  .fullPath
+                  .startsWith(menuItems[index].path!);
+
+              return CustomTextButton(
+                onPressed: () {
+                  Routemaster.of(context).push(menuItems[index].path!);
+                },
+                text: menuItems[index].title,
+                color: isCurrentPath ? Cr.whiteColor : Cr.darkBlue9,
+              );
+            },
           ),
 
-          CustomTextButton(
-            text: "Profile",
-            color: Cr.darkBlue8,
-          ),
-          CustomTextButton(
-            text: "News",
-            color: Cr.darkBlue8,
-          ),
-          CustomTextButton(
-            text: "Jobs",
-            color: Cr.darkBlue8,
-          ),
-
-          CustomTextButton(
-            text: "Recruitment",
-            color: Cr.darkBlue8,
-          ),
-
-          CustomTextButton(
-            text: "Help",
-            color: Cr.darkBlue8,
-          ),
           Di.SBWL,
 
           VerticalDivider(
@@ -139,23 +101,7 @@ class CustomAppbar extends StatelessWidget {
             color: Cr.darkBlue5,
           ),
 
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                Icons.person_add,
-                color: Cr.darkBlue9,
-              ),
-              Di.SBWES,
-              TextWithBackground(
-                text: "352",
-                textColor: Cr.darkBlue9,
-                padding: 0,
-                paddingHorizantal: 4,
-                backgroundColor: Cr.darkBlue5,
-              )
-            ],
-          ),
+          ConnectionRequestWidget(),
           VerticalDivider(
             thickness: 1.3,
             color: Cr.darkBlue5,
@@ -167,10 +113,40 @@ class CustomAppbar extends StatelessWidget {
             thickness: 1.3,
             color: Cr.darkBlue5,
           ),
-
           // Recruitment
         ],
       ),
+    );
+  }
+}
+
+class ConnectionRequestWidget extends StatelessWidget {
+  const ConnectionRequestWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        MouseRegion(
+          opaque: true,
+          onHover: (_) => showProfileConnectionRequest(context),
+          child: Icon(
+            Icons.person_add,
+            color: Cr.darkBlue9,
+          ),
+        ),
+        Di.SBWES,
+        TextWithBackground(
+          text: "352",
+          textColor: Cr.darkBlue9,
+          padding: 0,
+          paddingHorizantal: 4,
+          backgroundColor: Cr.darkBlue5,
+        )
+      ],
     );
   }
 }
