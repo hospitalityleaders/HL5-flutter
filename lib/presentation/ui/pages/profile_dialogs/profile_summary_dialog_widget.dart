@@ -140,11 +140,11 @@ class _ProfileSummaryDialogWidgetState
                               borderColor: Cr.accentBlue2,
                               makeWidthNull: true,
                               onPressed: () async {
+                                Nav.pop(context);
                                 await new User(
                                   profileSummary:
                                       _profileSummaryController.text,
                                 ).save(widget.userProfileData);
-                                Nav.pop(context);
                               },
                               child: Text(
                                 "Save",

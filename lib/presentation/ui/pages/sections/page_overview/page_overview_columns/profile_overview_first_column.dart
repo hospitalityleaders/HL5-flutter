@@ -48,73 +48,50 @@ class _ProfileSummaryComponentState extends State<ProfileSummaryComponent> {
               style: h2Regular,
             ),
           ),
-
-          // Di.SBHD,
-          Divider(thickness: 1),
-
-          Di.SBHD,
-          Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: Di.PSD),
-                child: Text(
-                  widget.userProfileData.profileSummary ??
-                      """Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-\nExcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-\n\nNemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.""",
-                  maxLines: widget.isMobile ? 6 : null,
-                  style: bodyLarge.copyWith(color: Cr.darkGrey1),
-                ),
-              ),
-              Provider.of<ProfileProvider>(context).isProfileEditable
-                  ? Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(height: 50),
-                          Container(
-                            width: 560,
-                            height: 385,
-                            color: Cr.accentBlue2.withOpacity(.8),
-                            padding: EdgeInsets.all(Di.PSD),
-                          ),
-                        ],
-                      ),
-                    )
-                  : Di.ESB,
-              Provider.of<ProfileProvider>(context).isProfileEditable
-                  ? EditIconButton(
-                      onPressed: () {
-                        showCustomDialog(
-                          context,
-                          ProfileSummaryDialogWidget(
-                            userProfileData: widget.userProfileData,
-                          ),
-                        );
-                      },
-                    )
-                  : Di.ESB,
-            ],
-          ),
-          Di.SBHD,
           Divider(
-            thickness: .7,
-            color: Cr.darkGrey2,
+            thickness: 1,
             height: 0,
           ),
-          // widget.sec1IsEditable as bool
-          //     ? ProfileEdit.buildProfileEdit(
-          //         width: widget.profileOverviewSec1ProSumm_W as double,
-          //         height: widget.profileOverviewSec1ProSumm_ as double,
-          //         popUpEdit: () {
-          //           widget.buildProfileCardPopUp(
-          //               id: widget.pOApiDataSec1.id.toString(),
-          //               profileSummary:
-          //                   widget.pOApiDataSec1.profileSummary.toString());
-          //         },
-          //         showAddButton: false,
-          //       )
-          //     : Container(),
+          IntrinsicHeight(
+            child: Stack(
+              children: [
+                Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: Di.PSD,
+                        vertical: Di.PSEL,
+                      ),
+                      child: Text(
+                        widget.userProfileData.profileSummary ?? "",
+                        maxLines: widget.isMobile ? 6 : null,
+                        style: bodyLarge.copyWith(color: Cr.darkGrey1),
+                      ),
+                    ),
+                    Di.DD2,
+                  ],
+                ),
+                Provider.of<ProfileProvider>(context).isProfileEditable
+                    ? Container(
+                        width: 560,
+                        color: Cr.accentBlue2.withOpacity(.8),
+                      )
+                    : Di.ESB,
+                Provider.of<ProfileProvider>(context).isProfileEditable
+                    ? EditIconButton(
+                        onPressed: () {
+                          showCustomDialog(
+                            context,
+                            ProfileSummaryDialogWidget(
+                              userProfileData: widget.userProfileData,
+                            ),
+                          );
+                        },
+                      )
+                    : Di.ESB,
+              ],
+            ),
+          ),
         ],
       ),
     );

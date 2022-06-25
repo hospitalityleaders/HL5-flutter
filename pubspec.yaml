@@ -37,6 +37,7 @@ dependencies:
   flutter_html: ^3.0.0-alpha.3
   responsive_framework: ^0.1.9
   popover: ^0.2.6+3
+  flutter_spinkit: ^5.1.0
 
 dev_dependencies:
   integration_test:

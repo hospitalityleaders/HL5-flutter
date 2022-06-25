@@ -408,7 +408,7 @@ class UsersController extends GetxController {
         token: token,
       );
       // ignore: unnecessary_null_comparison
-      if (update != null) {
+      if (update.data != null) {
         var response =
             await _api.GET(target: '/users/get/', data: {'slug': user.slug});
         //print('log: ${response.data}');
@@ -418,6 +418,7 @@ class UsersController extends GetxController {
         user.token = token;
         saveUserToModel(user, token);
       }
+      // isLoading(false);
       return user;
     } finally {
       isLoading(false);

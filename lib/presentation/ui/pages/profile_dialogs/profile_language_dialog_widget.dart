@@ -1,78 +1,17 @@
-import 'package:flutter/material.dart';
-
-import 'package:holedo/presentation/utill/color_resources.dart';
-import 'package:holedo/presentation/utill/dimensions.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
 
 import 'package:holedo/models/holedoapi/holedoapi.dart';
+import 'package:holedo/presentation/utill/color_resources.dart';
+import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/images.dart';
 import 'package:holedo/presentation/utill/nav.dart';
 import 'package:holedo/presentation/utill/styles.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      builder: (context, child) => ResponsiveWrapper.builder(
-        child,
-        breakpoints: [
-          // ResponsiveBreakpoint.resize(450, name: MOBILE),
-          // ResponsiveBreakpoint.resize(1200, name: DESKTOP),
-        ],
-      ),
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: ProfilePopupDialogScreen(),
-    );
-  }
-}
-
-class ProfilePopupDialogScreen extends StatelessWidget {
-  const ProfilePopupDialogScreen({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Cr.accentBlue1,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ProfileExpertiseDialogWidget(
-              userProfileData: User(),
-            ),
-            Di.SBHOL,
-            // CustomElevatedButton(
-            //   width: 200,
-            //   text: "Languages",
-            //   onPressed: () {
-            //     showCustomDialog(
-            //       context,
-            //       ProfileExpertiseDialogWidget(
-            //         userProfileData: User(),
-            //       ),
-            //     );
-            //   },
-            // ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class ProfileExpertiseDialogWidget extends StatefulWidget {
-  const ProfileExpertiseDialogWidget({
+class ProfileLanguagesDialogWidget extends StatefulWidget {
+  const ProfileLanguagesDialogWidget({
     Key? key,
     required this.userProfileData,
   }) : super(key: key);
@@ -80,12 +19,12 @@ class ProfileExpertiseDialogWidget extends StatefulWidget {
   final User userProfileData;
 
   @override
-  State<ProfileExpertiseDialogWidget> createState() =>
-      _ProfileExpertiseDialogWidgetState();
+  State<ProfileLanguagesDialogWidget> createState() =>
+      _ProfileLanguagesDialogWidgetState();
 }
 
-class _ProfileExpertiseDialogWidgetState
-    extends State<ProfileExpertiseDialogWidget> {
+class _ProfileLanguagesDialogWidgetState
+    extends State<ProfileLanguagesDialogWidget> {
   final _formKey = GlobalKey<FormState>();
   List<String> newTextField = [""];
   String? selectedValue;
@@ -140,55 +79,83 @@ class _ProfileExpertiseDialogWidgetState
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
-                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(
-                        "What are your areas of expertise",
-                        style: h5Bold,
+                      SizedBox(
+                        width: 185,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              "Language",
+                              style: h5Bold,
+                            ),
+                            Di.SBWES,
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Icon(
+                                  Icons.star,
+                                  color: Cr.accentBlue1,
+                                  size: 8,
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                      Di.SBWES,
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                      SizedBox(width: 18),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(
-                            Icons.help,
-                            color: Cr.accentBlue1,
-                            size: 12,
-                          )
+                          Text(
+                            "Proficiency",
+                            style: h5Bold,
+                          ),
+                          Di.SBWES,
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Icon(
+                                Icons.star,
+                                color: Cr.accentBlue1,
+                                size: 8,
+                              )
+                            ],
+                          ),
                         ],
                       ),
                     ],
                   ),
                   Di.SBHES,
-                  Row(
+                  Column(
                     children: [
-                      Expanded(
-                        child: TextFormField(
-                          style: bodySmallRegular.copyWith(
-                            color: Cr.darkGrey1,
-                          ),
-                          decoration:
-                              Styles.popUpDialogTextFieldInputDecoration,
+                      ...getNewTextFormFields(),
+                    ],
+                  ),
+                  Di.SBHS,
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        newTextField.add('');
+                      });
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SvgPicture.asset(
+                          Svgs.plus,
+                          color: Cr.accentBlue1,
+                          width: 14,
                         ),
-                      ),
-                      Di.SBWES,
-                      CustomElevatedButton(
-                        borderColor: Cr.accentBlue2,
-                        makeWidthNull: true,
-                        // onPressed: () => Nav.pop(context),
-                        child: Text(
-                          "Add to lists",
+                        Text(
+                          "  Add another",
                           style: bodySmallRegular.copyWith(
                             color: Cr.accentBlue1,
                           ),
                         ),
-                        height: 36,
-                        donotShowIcon: true,
-                        backgroundColor: Cr.accentBlue3,
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                  Di.SBHS,
                   SizedBox(
                     height: 54,
                     width: double.infinity,
