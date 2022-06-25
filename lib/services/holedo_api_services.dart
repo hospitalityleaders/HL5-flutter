@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:get/get.dart' as Store;
 
 //import 'package:get_storage/get_storage.dart';
@@ -30,7 +32,7 @@ class ApiServices {
       var header = headers == null
           ? <String, dynamic>{
               'AuthApi': 'Bearer ${token}',
-              'Content-Type': 'application/json; charset=UTF-8',
+              'Content-Type': 'application/json',
               'Accept': 'application/json',
             }
           : headers;
@@ -44,9 +46,9 @@ class ApiServices {
       );
       print('POST URL: ${target}');
       print('POST headers: ${header.toString()}');
-      print('POST data: ${data.toString()}');
+      print('POST data:${data.toString()} ');
       //print('POST respomse: ${response}');
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 && response.data != null) {
         model = Holedoapi.fromJson(response.data as Map<String, dynamic>);
       }
       return model;
@@ -63,22 +65,27 @@ class ApiServices {
     try {
       var model = new Holedoapi();
       token = token == null ? Get.put(HoledoDatabase()).apiKey : token;
-      print('GET URL: ${baseUrl}${target} param: ${data}');
+      headers == null
+          ? <String, dynamic>{
+              'AuthApi': 'Bearer ${token}',
+              'Content-Type': 'application/json; charset=UTF-8',
+              'Accept': 'application/json',
+            }
+          : headers;
       dio.Response response = await _dio.get(
         '${baseUrl}${target}',
         options: dio.Options(
-          headers: headers == null
-              ? <String, dynamic>{
-                  'AuthApi': 'Bearer ${token}',
-                  'Content-Type': 'application/json; charset=UTF-8',
-                  'Accept': 'application/json',
-                }
-              : headers,
+          headers: headers,
         ),
         queryParameters: data,
       );
-
-      if (response.statusCode == 200) {
+      print('GET URL: ${target}');
+      print('GET headers: ${headers.toString()}');
+      print('GET data: ${data.toString()}');
+      if (response.statusCode == 200 && response.data != null) {
+        if (response.data.runtimeType == 'String') {
+          response.data = jsonDecode(response.data.toString());
+        }
         model = Holedoapi.fromJson(response.data as Map<String, dynamic>);
       }
       return model;

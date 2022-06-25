@@ -283,10 +283,13 @@ class UsersController extends GetxController {
       final model = DB.getModel();
       var user = new User();
 
-      api = await _api.POST(
-        target: '/users/login',
-        data: {'email': email, 'password': password},
-      );
+      api = await _api.POST(target: '/users/login', data: {
+        'email': email,
+        'password': password
+      }, headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      });
 
       if (api.success == true) {
         print('login: ${api.data!.user!.email.toString()}');
@@ -339,7 +342,7 @@ class UsersController extends GetxController {
       var params = {'id': id, 'slug': slug, 'token': token};
       params.removeWhere((k, v) => v == null);
 
-      var response = await _api.GET(target: '/users/get/', data: params);
+      var response = await _api.GET(target: '/users/profile/', data: params);
       //print('log: ${response.data}');
       user = response.data?.user as User;
       print('log: ${user.firstName}');
