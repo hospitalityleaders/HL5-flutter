@@ -13,7 +13,7 @@ void main() async {
 
   await Get.put(HoledoDatabase()).init();
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(BookStoreApp());
+  runApp(HoledoApp());
 }
 
 bool _isValidCategory(String? category) {
@@ -211,12 +211,12 @@ class NoAnimationPage<T> extends TransitionPage<T> {
         );
 }
 
-class BookStoreApp extends StatelessWidget {
+class HoledoApp extends StatelessWidget {
   final String? username;
   final bool siteBlockedWithoutLogin;
   final RouteInformationProvider? routeInformationProvider;
 
-  BookStoreApp({
+  HoledoApp({
     Key? key,
     this.username,
     this.siteBlockedWithoutLogin = false,
@@ -243,15 +243,15 @@ class BookStoreApp extends StatelessWidget {
           breakpoints: [
             // ResponsiveBreakpoint.autoScaleDown(350, name: MOBILE),
             // ResponsiveBreakpoint.resize(350, name: MOBILE),
-            // // ResponsiveBreakpoint.resize(600, name: MOBILE),
-            // // ResponsiveBreakpoint.resize(800, name: TABLET),
+            ResponsiveBreakpoint.resize(600, name: MOBILE),
+            ResponsiveBreakpoint.resize(1000, name: TABLET),
             // ResponsiveBreakpoint.resize(350, name: TABLET),
             // ResponsiveBreakpoint.resize(800, name: DESKTOP),
             // // ResponsiveBreakpoint.resize(1300, name: DESKTOP),
             // ResponsiveBreakpoint.tag(1300, name: DESKTOP),
 
             // ResponsiveBreakpoint.resize(450, name: MOBILE),
-            // ResponsiveBreakpoint.resize(1200, name: DESKTOP),
+            ResponsiveBreakpoint.resize(1200, name: DESKTOP),
           ],
         ),
         debugShowCheckedModeBanner: false,
