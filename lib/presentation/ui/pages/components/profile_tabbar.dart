@@ -27,12 +27,7 @@ class ProfileTabbar extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: Cr.whiteColor,
-        border: Border(
-          bottom: BorderSide(
-            width: 1.0,
-            color: Cr.darkGrey1,
-          ),
-        ),
+        boxShadow: Styles.defaultBoxShadow,
       ),
       height: 50,
       child: Row(

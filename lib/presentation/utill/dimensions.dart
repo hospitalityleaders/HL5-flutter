@@ -33,6 +33,7 @@ class Di {
   static final SizedBox SBWEL = SizedBox(width: PSEL);
   static final SizedBox SBWOL = SizedBox(width: PSOL);
   static final SizedBox SBWOTL = SizedBox(width: PSOTL);
+  static SizedBox SBCW(double width) => SizedBox(width: width);
 
   // SizedBox Height
   static final SizedBox SBHETS = SizedBox(height: PSETS);
@@ -43,6 +44,7 @@ class Di {
   static final SizedBox SBHEL = SizedBox(height: PSEL);
   static final SizedBox SBHOL = SizedBox(height: PSOL);
   static final SizedBox SBHOTL = SizedBox(height: PSOTL);
+  static SizedBox SBCH(double height) => SizedBox(height: height);
 
   // Radius Size
   static const double RSETS = 4.0;
@@ -62,6 +64,11 @@ class Di {
   static final Divider DD2 = Divider(
     thickness: .7,
     color: Cr.darkGrey2,
+  );
+
+  static final Divider DWZH = Divider(
+    thickness: 1,
+    height: 0,
   );
 
   static const int MESSAGE_INPUT_LENGTH = 250;

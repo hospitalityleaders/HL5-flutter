@@ -15,8 +15,8 @@ class Svgs {
   static const String checkCircle = 'assets/svgicons/check-circle.svg';
   static const String close = 'assets/svgicons/close.svg';
   static const String plus = 'assets/svgicons/plus.svg';
-  // static const String logo1 = 'assets/svgicons/logo1.svg';
-  // static const String logo1 = 'assets/svgicons/logo1.svg';
+  static const String delete = 'assets/svgicons/delete.svg';
+  static const String helpCircle = 'assets/svgicons/help-circle.svg';
   // static const String logo1 = 'assets/svgicons/logo1.svg';
 }
 // email-open

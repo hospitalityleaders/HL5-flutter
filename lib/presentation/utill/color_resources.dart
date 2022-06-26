@@ -4,7 +4,6 @@ class Cr {
   // Theme Color
   static const Color colorPrimary = Color(0xff384677);
   static const Color darkBlue1 = Color(0xff272E41);
-
   static const Color darkBlue2 = Color(0xff1D2645);
   static const Color darkBlue3 = Color(0xff1D2645);
   static const Color darkBlue5 = Color(0xff2B375E);
@@ -12,6 +11,7 @@ class Cr {
   static const Color darkBlue7 = Color(0xff546088);
   static const Color darkBlue8 = Color(0xff7A85A6);
   static const Color darkBlue9 = Color(0xff6C779E);
+
   static const Color underlineColor = Color(0xFFCCCCCC);
   static const Color whiteColor = Colors.white;
   static const Color greyColor = Color(0xff7D90AA);
@@ -29,6 +29,7 @@ class Cr {
 // 7DC81B g.
 
   static const Color grey1 = Color(0xffB5BDC2);
+  static const Color grey2 = Color(0xffDADEE0);
 
   static const Color darkGrey1 = Color(0xff7C8990);
   static const Color darkGrey2 = Color(0xff879399);
@@ -45,13 +46,14 @@ class Cr {
   static const Color transparent = Colors.transparent;
 
   //344F8D
-  //04595B
-  //
 
   static const Color facebook = Color(0xff344F8D);
   static const Color google = Color(0xffD63B30);
   static const Color xing = Color(0xff04595B);
 
+  //
+
+  // linear gradient
   static const LinearGradient primaryLinearGradient = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,

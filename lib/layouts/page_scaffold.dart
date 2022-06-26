@@ -135,6 +135,7 @@ class _PageScaffoldState extends State<PageScaffold> {
             final bool isDesktop = Responsive.isDesktop(context);
             maxWidth = constraints.maxWidth;
             return Scaffold(
+              backgroundColor: Cr.backgroundColor,
               key: _scaffoldKey,
               endDrawer: isMobilePhone(context)
                   ? Drawer(
@@ -197,7 +198,7 @@ class _PageScaffoldState extends State<PageScaffold> {
               // ),
               body: Container(
                   decoration: BoxDecoration(
-                    color: ColorPicker.kBG,
+                    color: Cr.backgroundColor,
                   ),
                   child: widget
                       .body /* ListView(children: <Widget>[

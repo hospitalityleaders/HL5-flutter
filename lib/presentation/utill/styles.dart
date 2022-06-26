@@ -3,22 +3,11 @@ import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 
 class Styles {
-  static final List<BoxShadow> boxShadow = [
-    BoxShadow(
-      color: Colors.black.withOpacity(0.1),
-      spreadRadius: 1,
-      blurRadius: 7,
-      offset: const Offset(0, 3), // changes position of shadow
-    ),
-  ];
-
   static final List<BoxShadow> defaultBoxShadow = [
     BoxShadow(
-      color: Cr.grey1,
-      offset: Offset(
-        0,
-        1,
-      ), // changes position of shadow
+      color: Cr.darkGrey3,
+      spreadRadius: -1,
+      offset: const Offset(0, 2), // changes position of shadow
     ),
   ];
 
@@ -73,6 +62,59 @@ class Styles {
     ),
   );
 
+  static InputDecoration popUpDialogTextFieldInputDecorationFunction([
+    Color? borderColor,
+  ]) =>
+      InputDecoration(
+        isDense: true,
+        contentPadding: const EdgeInsets.symmetric(
+          vertical: 13.0,
+          horizontal: 10,
+        ),
+
+        // border: InputBorder.none,
+        border: OutlineInputBorder(
+          borderSide: BorderSide(
+            width: 1,
+            color: Cr.darkGrey4,
+            style: BorderStyle.solid,
+          ),
+          borderRadius: BorderRadius.circular(2),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            width: 1,
+            color: Cr.darkGrey4,
+            style: BorderStyle.solid,
+          ),
+          borderRadius: BorderRadius.circular(2),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            width: 1,
+            color: Cr.accentBlue1,
+            style: BorderStyle.solid,
+          ),
+          borderRadius: BorderRadius.circular(2),
+        ),
+        disabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            width: 1,
+            color: Cr.darkGrey4,
+            style: BorderStyle.solid,
+          ),
+          borderRadius: BorderRadius.circular(2),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            width: 1,
+            color: Cr.darkGrey4,
+            style: BorderStyle.solid,
+          ),
+          borderRadius: BorderRadius.circular(2),
+        ),
+      );
+
   static final BoxDecoration boxDecorationBorder = BoxDecoration(
     color: Cr.whiteColor,
     border: Border(
@@ -92,7 +134,7 @@ class Styles {
   );
   static final BoxDecoration boxDecorationWithShadow = BoxDecoration(
     color: Cr.whiteColor,
-    boxShadow: Styles.boxShadow,
+    boxShadow: Styles.defaultBoxShadow,
   );
 }
 
@@ -136,6 +178,7 @@ const bodySmallRegular = TextStyle(
   fontWeight: FontWeight.w400,
   fontSize: Di.FSD - 2,
   color: Cr.darkBlue1,
+  height: 1.42,
 );
 
 const bodySmallSemibold = TextStyle(
@@ -171,6 +214,7 @@ const h4Bold = TextStyle(
   fontSize: Di.FSL - 2,
   fontWeight: FontWeight.bold,
   color: Cr.darkBlue1,
+  height: 1.25,
 );
 
 const h5Bold = TextStyle(
@@ -178,6 +222,7 @@ const h5Bold = TextStyle(
   fontSize: Di.FSD - 2,
   fontWeight: FontWeight.bold,
   color: Cr.darkBlue1,
+  height: 1.29,
 );
 
 // Divider Text Small OR IMPORT YOUR DETAILS FROM

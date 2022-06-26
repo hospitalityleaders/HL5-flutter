@@ -36,9 +36,10 @@ class _ProfileSummaryComponentState extends State<ProfileSummaryComponent> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(Di.PSD),
+      margin: EdgeInsets.only(bottom: Di.PSD),
       decoration: Styles.boxDecoration.copyWith(
         color: Cr.whiteColor,
+        boxShadow: Styles.defaultBoxShadow,
       ),
       child: Column(
         children: [
@@ -48,28 +49,20 @@ class _ProfileSummaryComponentState extends State<ProfileSummaryComponent> {
               style: h2Regular,
             ),
           ),
-          Divider(
-            thickness: 1,
-            height: 0,
-          ),
+          Di.DWZH,
+          Di.SBHD,
           IntrinsicHeight(
             child: Stack(
               children: [
-                Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: Di.PSD,
-                        vertical: Di.PSEL,
-                      ),
-                      child: Text(
-                        widget.userProfileData.profileSummary ?? "",
-                        maxLines: widget.isMobile ? 6 : null,
-                        style: bodyLarge.copyWith(color: Cr.darkGrey1),
-                      ),
-                    ),
-                    Di.DD2,
-                  ],
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: Di.PSD,
+                  ),
+                  child: Text(
+                    widget.userProfileData.profileSummary ?? "",
+                    maxLines: widget.isMobile ? 6 : null,
+                    style: bodyLarge.copyWith(color: Cr.darkGrey1),
+                  ),
                 ),
                 Provider.of<ProfileProvider>(context).isProfileEditable
                     ? Container(

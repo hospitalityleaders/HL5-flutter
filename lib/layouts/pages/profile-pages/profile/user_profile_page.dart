@@ -1,12 +1,3 @@
-// import 'package:flutter/material.dart';
-// import 'package:holedo/layouts/pages/profile-pages/profile/header_card.dart';
-// import 'package:holedo/layouts/pages/profile-pages/timeline/timeline.dart';
-// import 'package:holedo/models/models.dart';
-// import 'package:holedo/responsive/responsive.dart';
-// import '../../../../constant/colorPicker/color_picker.dart';
-// import '../../../../constant/fontStyle/font_style.dart';
-// import '../../../../constant/sizedbox.dart';
-
 import 'package:holedo/presentation/providers/profile_provider.dart';
 import 'package:holedo/presentation/ui/components/custom_loading.dart';
 import 'package:holedo/presentation/ui/pages/sections/activity_section/activity_section.dart';
@@ -14,11 +5,7 @@ import 'package:holedo/presentation/ui/pages/sections/articles_section/articles_
 import 'package:holedo/presentation/ui/pages/sections/page_overview/page_overview_section.dart';
 import 'package:holedo/presentation/ui/pages/sections/reference_section/reference_section.dart';
 import 'package:holedo/presentation/ui/pages/sections/timeline_section/timeline_section.dart';
-
 import '../profile-edit/profile_edit.dart';
-// import '../profile-overview/profile_overview.dart';
-// import '../references/references.dart';
-
 import 'package:flutter/material.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/models/models.dart';
@@ -286,7 +273,7 @@ class _UserProfilePageState extends State<UserProfilePage>
                   //     widget.userProfileData.userTitleTypesId.toString(),
                 ),
                 ProfileTabbar(
-                  onTap: (p0) {
+                  onTap: (value) {
                     setState(() {
                       currentTabIndex = _tabController.index;
                     });
