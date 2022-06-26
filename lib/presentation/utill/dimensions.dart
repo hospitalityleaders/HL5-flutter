@@ -62,7 +62,6 @@ class Di {
   static final Divider DD2 = Divider(
     thickness: .7,
     color: Cr.darkGrey2,
-    height: 0,
   );
 
   static const int MESSAGE_INPUT_LENGTH = 250;
