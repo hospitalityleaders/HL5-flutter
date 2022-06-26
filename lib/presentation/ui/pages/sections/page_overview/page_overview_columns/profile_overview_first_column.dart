@@ -127,7 +127,6 @@ class _ProfileOverviewFirstColumnState
           ProfileSummaryComponent(
             userProfileData: widget.userProfileData,
           ),
-
           Di.SBHETS,
           Container(
             padding: EdgeInsets.symmetric(horizontal: Di.PSD),
