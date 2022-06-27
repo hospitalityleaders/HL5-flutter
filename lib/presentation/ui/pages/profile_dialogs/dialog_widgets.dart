@@ -1,7 +1,9 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
+import 'package:holedo/presentation/utill/images.dart';
 import 'package:holedo/presentation/utill/nav.dart';
 import 'package:holedo/presentation/utill/styles.dart';
 
@@ -21,6 +23,21 @@ class StarIcon extends StatelessWidget {
           size: 8,
         )
       ],
+    );
+  }
+}
+
+class HelpIconDialog extends StatelessWidget {
+  const HelpIconDialog({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SvgPicture.asset(
+      Svgs.helpCircle,
+      color: Cr.accentBlue1,
+      width: 10,
     );
   }
 }
@@ -146,12 +163,14 @@ class DialogDropDownTextField extends StatelessWidget {
     required this.dataList,
     required this.hintText,
     this.disable = false,
+    this.prefixIcon,
   }) : super(key: key);
 
   final double? width;
   final List<String> dataList;
   final String hintText;
   final bool disable;
+  final Widget? prefixIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -163,6 +182,7 @@ class DialogDropDownTextField extends StatelessWidget {
         child: DropdownButtonFormField2(
           decoration: Styles.popUpDialogTextFieldInputDecorationFunction(
             disable ? Cr.lightGrey2 : null,
+            prefixIcon,
           ),
           isExpanded: true,
           hint: Text(
@@ -208,6 +228,93 @@ class DialogDropDownTextField extends StatelessWidget {
           //   selectedValue = value.toString();
           // },
         ),
+      ),
+    );
+  }
+}
+
+class CustomMinusIcon extends StatelessWidget {
+  const CustomMinusIcon({
+    Key? key,
+    this.widthHeight,
+    this.minusWidth,
+  }) : super(key: key);
+
+  final double? widthHeight;
+  final double? minusWidth;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: widthHeight ?? 16,
+      height: widthHeight ?? 16,
+      child: Center(
+        child: Container(
+          width: minusWidth ?? 9.5,
+          height: 1.5,
+          color: Cr.accentBlue1,
+        ),
+      ),
+    );
+  }
+}
+
+class DialogMultiLineTextField extends StatelessWidget {
+  const DialogMultiLineTextField({
+    Key? key,
+    this.textEditingController,
+    this.width,
+    this.hintText,
+  }) : super(key: key);
+
+  final TextEditingController? textEditingController;
+  final double? width;
+  final String? hintText;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: width ?? 555,
+      child: TextFormField(
+        // controller: textEditingController,
+        style: bodySmallRegular.copyWith(
+          color: Cr.darkGrey1,
+        ),
+        maxLines: 100,
+        minLines: 5,
+        decoration: Styles.popUpDialogTextFieldInputDecoration.copyWith(
+          // hintText: hintText,
+          hintStyle: bodySmallRegular.copyWith(color: Cr.darkGrey4),
+        ),
+      ),
+    );
+  }
+}
+
+class CheckboxDialog extends StatelessWidget {
+  const CheckboxDialog({
+    Key? key,
+    required this.value,
+    required this.onChanged,
+  }) : super(key: key);
+  final bool value;
+  final void Function(bool?) onChanged;
+  @override
+  Widget build(BuildContext context) {
+    return Theme(
+      data: ThemeData.light().copyWith(
+        checkboxTheme: CheckboxThemeData(
+          side: MaterialStateBorderSide.resolveWith((_) => const BorderSide(
+                width: 1,
+                color: Cr.darkGrey4,
+              )),
+          fillColor: MaterialStateProperty.all(Colors.white),
+          checkColor: MaterialStateProperty.all(Cr.accentBlue1),
+        ),
+      ),
+      child: Checkbox(
+        value: value,
+        onChanged: onChanged,
       ),
     );
   }

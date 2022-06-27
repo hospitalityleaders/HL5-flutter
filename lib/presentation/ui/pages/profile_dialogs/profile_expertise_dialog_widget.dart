@@ -78,6 +78,7 @@ class _ProfileExpertiseDialogWidgetState
               padding: EdgeInsets.all(Di.PSL),
               margin: EdgeInsets.all(Di.PSL),
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(

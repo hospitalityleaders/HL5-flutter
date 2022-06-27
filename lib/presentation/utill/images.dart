@@ -1,9 +1,13 @@
 class Images {
   static const String image = 'assets/icons/imageAddess.png';
   static const String logo1 = 'assets/icons/logo1.png';
+  static const String profilePic = 'assets/images/profilePic.png';
+  // static const String profilePic = 'assets/icons/profilePic.png';
+  // static const String profilePic = 'assets/icons/profilePic.png';
+  // static const String profilePic = 'assets/icons/profilePic.png';
+  // static const String profilePic = 'assets/icons/profilePic.png';
+  // static const String profilePic = 'assets/icons/profilePic.png';
 }
-
-// email-open.svg
 
 class Svgs {
   static const String emailOpen = 'assets/svgicons/email-open.svg';

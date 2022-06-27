@@ -64,6 +64,7 @@ class Styles {
 
   static InputDecoration popUpDialogTextFieldInputDecorationFunction([
     Color? borderColor,
+    Widget? prefixIcon,
   ]) =>
       InputDecoration(
         isDense: true,
@@ -71,6 +72,7 @@ class Styles {
           vertical: 13.0,
           horizontal: 10,
         ),
+        prefixIcon: prefixIcon,
 
         // border: InputBorder.none,
         border: OutlineInputBorder(
@@ -165,6 +167,7 @@ const bodyLarge = TextStyle(
   fontFamily: 'SourceSansPro',
   fontSize: Di.FSD,
   color: Cr.darkBlue1,
+  height: 1.375,
 );
 
 const bodyExtraSmall = TextStyle(
