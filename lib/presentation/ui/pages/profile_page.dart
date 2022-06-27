@@ -4,8 +4,9 @@ import 'package:holedo/presentation/providers/profile_provider.dart';
 import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_tabbar.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_image_banner.dart';
-import 'package:holedo/presentation/ui/pages/profile_mobile_view/profile_mobile_view_page.dart';
+import 'package:holedo/presentation/ui/pages/sections/activity_section/activity_section.dart';
 import 'package:holedo/presentation/ui/pages/sections/articles_section/articles_section.dart';
+import 'package:holedo/presentation/ui/pages/sections/page_overview/page_overview_section.dart';
 import 'package:holedo/presentation/ui/pages/sections/reference_section/reference_section.dart';
 import 'package:holedo/presentation/ui/pages/sections/timeline_section/timeline_section.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
@@ -30,8 +31,9 @@ class MyApp extends StatelessWidget {
         builder: (context, child) => ResponsiveWrapper.builder(
           child,
           breakpoints: [
-            // ResponsiveBreakpoint.autoScaleDown(320, name: MOBILE),
-            // ResponsiveBreakpoint.autoScale(450, name: MOBILE),
+            ResponsiveBreakpoint.resize(650, name: MOBILE),
+            ResponsiveBreakpoint.autoScale(950, name: TABLET),
+            ResponsiveBreakpoint.resize(1200, name: DESKTOP),
 
             // ResponsiveBreakpoint.autoScaleDown(450, name: MOBILE),
             // ResponsiveBreakpoint.autoScaleDown(1200, name: DESKTOP),
@@ -68,79 +70,84 @@ class _ProfilePageState extends State<ProfilePage>
     return Scaffold(
       // backgroundColor: Colors.lightBlue,
       backgroundColor: Colors.white,
-      body: ResponsiveWrapper.of(context).isSmallerThan(MOBILE)
-          ? ProfileMobileViewPage()
-          : Center(
-              child: ListView(
-                shrinkWrap: true,
+      body:
+          // ResponsiveWrapper.of(context).isSmallerThan(MOBILE)
+          //     ? ProfileMobileViewPage(
+          //       userProfileData: widget,
+          //     )
+          //     :
+          Center(
+        child: ListView(
+          shrinkWrap: true,
+          children: [
+            // CustomAppbar(),
+            Container(
+              height: 50,
+              width: Di.getScreenSize(context).width,
+              color: Cr.red3,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  // CustomAppbar(),
-                  Container(
-                    height: 50,
-                    width: Di.getScreenSize(context).width,
-                    color: Cr.red3,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Di.ESB,
-                        Row(
-                          children: [
-                            Text(
-                              "Your profile is only 25% complete. Complete it now to earn your first Hospitality Leaders grade.   ",
-                              textAlign: TextAlign.center,
-                              style: bodyLarge.copyWith(
-                                color: Cr.redTextColor,
-                              ),
-                            ),
-                            CustomElevatedButton(
-                              width: 100,
-                              height: 32,
-                              backgroundColor: Cr.redTextColor,
-                              donotShowIcon: true,
-                            ),
-                          ],
-                        ),
-                        Icon(
-                          Icons.close,
+                  Di.ESB,
+                  Row(
+                    children: [
+                      Text(
+                        "Your profile is only 25% complete. Complete it now to earn your first Hospitality Leaders grade.   ",
+                        textAlign: TextAlign.center,
+                        style: bodyLarge.copyWith(
                           color: Cr.redTextColor,
                         ),
-                      ],
-                    ),
+                      ),
+                      CustomElevatedButton(
+                        width: 100,
+                        height: 32,
+                        backgroundColor: Cr.redTextColor,
+                        donotShowIcon: true,
+                      ),
+                    ],
                   ),
-                  ProfileImageBanner(
-                    onEditButtonPressed: () {},
+                  Icon(
+                    Icons.close,
+                    color: Cr.redTextColor,
                   ),
-                  ProfileTabbar(
-                    tabController: _tabController,
-                    onEditProfilePressed: () {
-                      setState(() {
-                        isEditable = !isEditable;
-                      });
-                    },
-                  ),
-                  Di.SBHEL,
-                  SizedBox(
-                    // width: Di.getScreenSize(context).width,
-                    height: 2000,
-                    child: TabBarView(
-                      // physics: NeverScrollableScrollPhysics,
-                      controller: _tabController,
-                      children: <Widget>[
-                        // PageOverviewSection(
-                        //   isEditable: false,
-                        // ),
-                        TimelineSection(),
-                        TimelineSection(),
-                        ArticlesSection(),
-                        ArticlesSection(),
-                        ReferenceSection(),
-                      ],
-                    ),
-                  ),
-                  Di.SBHOTL,
                 ],
               ),
             ),
+            ProfileImageBanner(
+              userProfileData: User(),
+              onEditButtonPressed: () {},
+            ),
+            ProfileTabbar(
+              tabController: _tabController,
+              onEditProfilePressed: () {
+                setState(() {
+                  isEditable = !isEditable;
+                });
+              },
+            ),
+            Di.SBHEL,
+            SizedBox(
+              // width: Di.getScreenSize(context).width,
+              height: 2000,
+              child: TabBarView(
+                // physics: NeverScrollableScrollPhysics,
+                controller: _tabController,
+                children: <Widget>[
+                  PageOverviewSection(
+                    isEditable: false,
+                    userProfileData: User(),
+                  ),
+                  TimelineSection(),
+                  ArticlesSection(),
+                  ActivitySection(),
+                  ReferenceSection(),
+                ],
+              ),
+            ),
+            Di.SBHOTL,
+          ],
+        ),
+      ),
     );
   }
 }

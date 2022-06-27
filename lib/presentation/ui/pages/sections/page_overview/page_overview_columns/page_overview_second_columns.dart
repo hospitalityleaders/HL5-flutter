@@ -8,11 +8,15 @@ import 'package:holedo/common/textfield_fieldname.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/sizedbox.dart';
 import 'package:holedo/layouts/pages/profile-pages/profile-edit/profile_edit.dart';
+import 'package:holedo/models/holedoapi/holedoapi.dart';
 import 'package:holedo/presentation/providers/profile_provider.dart';
 import 'package:holedo/presentation/ui/components/custom_text_button.dart';
 import 'package:holedo/presentation/ui/components/container_with_icon.dart';
 import 'package:holedo/presentation/ui/components/edit_icon_buttton.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_workexperience.dart';
+import 'package:holedo/presentation/ui/pages/profile_dialogs/profile_featured_image_dialog.dart';
+import 'package:holedo/presentation/ui/pages/profile_dialogs/profile_language_dialog_widget.dart';
+import 'package:holedo/presentation/ui/pages/profile_dialogs/show_custom_dialog.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/styles.dart';
@@ -25,34 +29,13 @@ class ProfileOverviewSecondColumn extends StatefulWidget {
   const ProfileOverviewSecondColumn({
     Key? key,
     this.sec2IsEditable,
-    this.profileOverviewSec2WorkExpKey,
-    this.profileOverviewSec2WorkExp_H,
-    this.profileOverviewSec2WorkExp_W,
-    this.profileOverviewSec2EducationKey,
-    this.profileOverviewSec2Education_H,
-    this.profileOverviewSec2Education_W,
-    this.profileOverviewSec2AchievementKey,
-    this.profileOverviewSec2Achievement_H,
-    this.profileOverviewSec2Achievement_W,
-    this.profileOverviewSec2LanguagesKey,
-    this.profileOverviewSec2Languages_H,
-    this.profileOverviewSec2Languages_W,
     this.pOApiDataSec2,
+    required this.userProfileData,
   }) : super(key: key);
+  final User userProfileData;
 
   final sec2IsEditable;
-  final profileOverviewSec2WorkExpKey;
-  final profileOverviewSec2WorkExp_H;
-  final profileOverviewSec2WorkExp_W;
-  final profileOverviewSec2EducationKey;
-  final profileOverviewSec2Education_H;
-  final profileOverviewSec2Education_W;
-  final profileOverviewSec2AchievementKey;
-  final profileOverviewSec2Achievement_H;
-  final profileOverviewSec2Achievement_W;
-  final profileOverviewSec2LanguagesKey;
-  final profileOverviewSec2Languages_H;
-  final profileOverviewSec2Languages_W;
+
   final pOApiDataSec2;
 
   @override
@@ -66,27 +49,34 @@ class _ProfileOverviewSecondColumnState
   Widget build(BuildContext context) {
     return Container(
       constraints: BoxConstraints(minWidth: 100, maxWidth: 360),
-
       // width: 360,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          FeaturedVideoComponent(),
+          FeaturedVideoComponent(
+            userProfileData: widget.userProfileData,
+          ),
           Di.SBHEL,
           ProfileWorkExperienceComponent(
+            userProfileData: widget.userProfileData,
             onEditPressed: buildWorkExpPopUp,
           ),
           Di.SBHEL,
-          EducationComponent(onEditPressed: buildEducationPopUp),
+          EducationComponent(
+            onEditPressed: buildEducationPopUp,
+            userProfileData: widget.userProfileData,
+          ),
           Di.SBHEL,
           AchievementComponent(
             onEditPressed: buildAchivementPopUp,
+            userProfileData: widget.userProfileData,
           ),
           Di.SBHEL,
           LanguagesComponent(
             onEditPressed: () => buildLanguagePopUp(langIndex),
+            userProfileData: widget.userProfileData,
           ),
           Di.SBHEL,
         ],
@@ -118,265 +108,271 @@ class _ProfileOverviewSecondColumnState
     String description,
     bool showIcon,
   ) {
-    return Stack(
-      children: [
-        Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Container(
-            key: sec2Key as Key,
-            color: ColorPicker.kWhite,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.only(left: 20, top: 13),
-                        child: Text(cardName,
-                            style: FontTextStyle.kBlueDark120W400SSP),
+    return IntrinsicHeight(
+      child: Stack(
+        children: [
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Container(
+              key: sec2Key as Key,
+              color: ColorPicker.kWhite,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 20, top: 13),
+                          child: Text(cardName,
+                              style: FontTextStyle.kBlueDark120W400SSP),
+                        ),
                       ),
-                    ),
-                    Expanded(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          showIcon
-                              ? InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      isShowingPopUpCard = !isShowingPopUpCard;
-                                      print(isShowingPopUpCard);
-                                    });
-                                  },
-                                  onHover: (value) {
-                                    setState(() {
-                                      isHovering = value;
-                                    });
-                                  },
-                                  child: Padding(
-                                    padding:
-                                        EdgeInsets.only(top: 13, right: 20),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius: isHovering
-                                              ? BorderRadius.circular(3)
-                                              : BorderRadius.circular(0),
-                                          border: isHovering
-                                              ? Border.all(
-                                                  width: 1, color: Colors.grey)
-                                              : Border.all(
-                                                  width: 0,
-                                                  color: Colors.transparent)),
-                                      child: Icon(
-                                        Icons.arrow_drop_down_sharp,
-                                        color: ColorPicker.kBlueDark1,
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            showIcon
+                                ? InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        isShowingPopUpCard =
+                                            !isShowingPopUpCard;
+                                        print(isShowingPopUpCard);
+                                      });
+                                    },
+                                    onHover: (value) {
+                                      setState(() {
+                                        isHovering = value;
+                                      });
+                                    },
+                                    child: Padding(
+                                      padding:
+                                          EdgeInsets.only(top: 13, right: 20),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            borderRadius: isHovering
+                                                ? BorderRadius.circular(3)
+                                                : BorderRadius.circular(0),
+                                            border: isHovering
+                                                ? Border.all(
+                                                    width: 1,
+                                                    color: Colors.grey)
+                                                : Border.all(
+                                                    width: 0,
+                                                    color: Colors.transparent)),
+                                        child: Icon(
+                                          Icons.arrow_drop_down_sharp,
+                                          color: ColorPicker.kBlueDark1,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                )
-                              : Container(),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                SS.sB(8),
-                Divider(
-                  height: .5,
-                  color: Color(0xFFE5E5E5),
-                ),
-                SS.sB(10),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        children: [
-                          Container(
-                            alignment: Alignment.center,
-                            height: 50,
-                            width: 50,
-                            color: ColorPicker.kBlueLight1,
-                            child: Icon(
-                              cardIcon,
-                              color: ColorPicker.kWhite,
-                              size: 16.67,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      flex: 3,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(cardTitle,
-                              style: FontTextStyle.kBlueDark116W700SSP),
-                          SS.sB(5),
-                          GestureDetector(
-                              child: Text(
-                                cardSubTitle,
-                                style: FontTextStyle.kBlueLight114W400SSP,
-                              ),
-                              onTap: () {}),
-                          SS.sB(5),
-                          Text(
-                            cardDate,
-                            style: FontTextStyle.kGreyLight5146W400SSP,
-                          ),
-                          SS.sB(5),
-                        ],
-                      ),
-                    ),
-                    SS.sB(0, 6),
-                  ],
-                ),
-                SS.sB(5),
-                SingleChildScrollView(
-                  child: StatefulBuilder(builder: (context, setState) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        AnimatedContainer(
-                          height: isVisible ? 120 : 0,
-                          color: ColorPicker.kGreyLight2,
-                          duration: Duration(seconds: 1),
-                          alignment: isVisible
-                              ? Alignment.topCenter
-                              : Alignment.bottomCenter,
-                          curve: Curves.fastOutSlowIn,
-                          child: SingleChildScrollView(
-                            child: Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Text(
-                                description,
-                                style: FontTextStyle.kGreyLight516W400SSP,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.all(5),
-                          color: ColorPicker.kGreyLight2,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              TextButton.icon(
-                                onPressed: () {
-                                  setState(() {
-                                    isVisible = !isVisible;
-                                  });
-                                },
-                                icon: Icon(
-                                  isVisible ? Icons.remove : Icons.add,
-                                  color: ColorPicker.kBlueLight1,
-                                ),
-                                label: Text(isVisible ? 'Close' : cardBtn,
-                                    style: FontTextStyle.kBlueLight114W400SSP),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    );
-                  }),
-                ),
-              ],
-            ),
-          ),
-        ),
-        showIcon
-            ? Positioned(
-                top: 50,
-                right: 10,
-                child: Visibility(
-                  visible: isShowingPopUpCard,
-                  child: Column(
-                    children: [
-                      Align(
-                        alignment: Alignment(.35, 0),
-                        child: ClipPath(
-                          clipper: ArrowClipper(),
-                          child: Container(
-                            height: 15,
-                            width: 12,
-                            decoration: BoxDecoration(
-                              color: ColorPicker.kGreyLight7.withOpacity(0.5),
-                            ),
-                          ),
+                                  )
+                                : Container(),
+                          ],
                         ),
                       ),
-                      Align(
-                          alignment: Alignment(.25, .12),
-                          child: Container(
-                            color: ColorPicker.kWhite,
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        Icons.menu,
-                                        color: ColorPicker.kBlueLight1,
-                                        size: 10,
-                                      ),
-                                      SS.sB(0, 7.5),
-                                      Text(
-                                        'View in timeline',
-                                        style:
-                                            FontTextStyle.kBlueLight114W400SSP,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Divider(
-                                  height: 0.5,
-                                  color: Colors.grey,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        Icons.menu,
-                                        color: ColorPicker.kBlueLight1,
-                                        size: 10,
-                                      ),
-                                      SS.sB(0, 7.5),
-                                      Text(
-                                        'View in timeline',
-                                        style:
-                                            FontTextStyle.kBlueLight114W400SSP,
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          ))
                     ],
                   ),
-                ))
-            : Container(),
-        if (widget.sec2IsEditable as bool)
-          ProfileEdit.buildProfileEdit(
+                  SS.sB(8),
+                  Divider(
+                    height: .5,
+                    color: Color(0xFFE5E5E5),
+                  ),
+                  SS.sB(10),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          children: [
+                            Container(
+                              alignment: Alignment.center,
+                              height: 50,
+                              width: 50,
+                              color: ColorPicker.kBlueLight1,
+                              child: Icon(
+                                cardIcon,
+                                color: ColorPicker.kWhite,
+                                size: 16.67,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        flex: 3,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(cardTitle,
+                                style: FontTextStyle.kBlueDark116W700SSP),
+                            SS.sB(5),
+                            GestureDetector(
+                                child: Text(
+                                  cardSubTitle,
+                                  style: FontTextStyle.kBlueLight114W400SSP,
+                                ),
+                                onTap: () {}),
+                            SS.sB(5),
+                            Text(
+                              cardDate,
+                              style: FontTextStyle.kGreyLight5146W400SSP,
+                            ),
+                            SS.sB(5),
+                          ],
+                        ),
+                      ),
+                      SS.sB(0, 6),
+                    ],
+                  ),
+                  SS.sB(5),
+                  SingleChildScrollView(
+                    child: StatefulBuilder(builder: (context, setState) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          AnimatedContainer(
+                            height: isVisible ? 120 : 0,
+                            color: ColorPicker.kGreyLight2,
+                            duration: Duration(seconds: 1),
+                            alignment: isVisible
+                                ? Alignment.topCenter
+                                : Alignment.bottomCenter,
+                            curve: Curves.fastOutSlowIn,
+                            child: SingleChildScrollView(
+                              child: Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                  description,
+                                  style: FontTextStyle.kGreyLight516W400SSP,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.all(5),
+                            color: ColorPicker.kGreyLight2,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                TextButton.icon(
+                                  onPressed: () {
+                                    setState(() {
+                                      isVisible = !isVisible;
+                                    });
+                                  },
+                                  icon: Icon(
+                                    isVisible ? Icons.remove : Icons.add,
+                                    color: ColorPicker.kBlueLight1,
+                                  ),
+                                  label: Text(isVisible ? 'Close' : cardBtn,
+                                      style:
+                                          FontTextStyle.kBlueLight114W400SSP),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      );
+                    }),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          showIcon
+              ? Positioned(
+                  top: 50,
+                  right: 10,
+                  child: Visibility(
+                    visible: isShowingPopUpCard,
+                    child: Column(
+                      children: [
+                        Align(
+                          alignment: Alignment(.35, 0),
+                          child: ClipPath(
+                            clipper: ArrowClipper(),
+                            child: Container(
+                              height: 15,
+                              width: 12,
+                              decoration: BoxDecoration(
+                                color: ColorPicker.kGreyLight7.withOpacity(0.5),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Align(
+                            alignment: Alignment(.25, .12),
+                            child: Container(
+                              color: ColorPicker.kWhite,
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      children: [
+                                        Icon(
+                                          Icons.menu,
+                                          color: ColorPicker.kBlueLight1,
+                                          size: 10,
+                                        ),
+                                        SS.sB(0, 7.5),
+                                        Text(
+                                          'View in timeline',
+                                          style: FontTextStyle
+                                              .kBlueLight114W400SSP,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Divider(
+                                    height: 0.5,
+                                    color: Colors.grey,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      children: [
+                                        Icon(
+                                          Icons.menu,
+                                          color: ColorPicker.kBlueLight1,
+                                          size: 10,
+                                        ),
+                                        SS.sB(0, 7.5),
+                                        Text(
+                                          'View in timeline',
+                                          style: FontTextStyle
+                                              .kBlueLight114W400SSP,
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ))
+                      ],
+                    ),
+                  ))
+              : Container(),
+          if (widget.sec2IsEditable as bool)
+            ProfileEdit.buildProfileEdit(
               width: sec2_W as double,
-              height: sec2_H as double,
+              height: 100,
               popUpEdit: () {
                 popUpEditCards();
               },
               showAddButton: true,
               popUpAdd: () {
                 popUpAddCards();
-              })
-        else
-          Container(),
-      ],
+              },
+            )
+          else
+            SizedBox(),
+        ],
+      ),
     );
   }
 
@@ -932,7 +928,9 @@ class LanguagesComponent extends StatelessWidget {
   const LanguagesComponent({
     Key? key,
     this.onEditPressed,
+    required this.userProfileData,
   }) : super(key: key);
+  final User userProfileData;
 
   final void Function()? onEditPressed;
 
@@ -950,97 +948,100 @@ class LanguagesComponent extends StatelessWidget {
               style: h2Regular,
             ),
           ),
-          Stack(
-            children: [
-              Column(
-                children: [
-                  Divider(
-                    thickness: 1,
-                    height: 0,
-                  ),
-                  Di.SBHS,
-                  Container(
-                    width: 360,
-                    decoration:
-                        Styles.boxDecoration.copyWith(color: Cr.whiteColor),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ListTile(
-                          leading: ContainerWithIcon(
-                            iconData: FontAwesomeIcons.buildingColumns,
-                            size: 50,
-                          ),
-                          trailing: SizedBox(),
-                          title: Text(
-                            "English",
-                            style: h4Bold.copyWith(
-                              fontSize: Di.FSD,
-                            ),
-                          ),
-                          subtitle: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              vertical: Di.PSETS + 1,
-                            ),
-                            child: Text(
-                              "Native and bilingual profiency",
-                              style: bodySmallRegular.copyWith(
-                                color: Cr.accentBlue1,
-                                fontSize: Di.FSS,
-                              ),
-                            ),
-                          ),
-                        ),
-                        ListTile(
-                          leading: ContainerWithIcon(
-                            iconData: FontAwesomeIcons.buildingColumns,
-                            size: 50,
-                          ),
-                          trailing: SizedBox(),
-                          title: Text(
-                            "Spanish",
-                            style: h4Bold.copyWith(
-                              fontSize: Di.FSD,
-                            ),
-                          ),
-                          subtitle: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              vertical: Di.PSETS,
-                            ),
-                            child: Text(
-                              "Native and bilingual profiency",
-                              style: bodySmallRegular.copyWith(
-                                color: Cr.accentBlue1,
-                                fontSize: Di.FSS,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Di.SBHD,
-                      ],
+          IntrinsicHeight(
+            child: Stack(
+              children: [
+                Column(
+                  children: [
+                    Divider(
+                      thickness: 1,
+                      height: 0,
                     ),
-                  ),
-                ],
-              ),
-              Provider.of<ProfileProvider>(context).isProfileEditable
-                  ? Center(
+                    Di.SBHS,
+                    Container(
+                      width: 360,
+                      decoration:
+                          Styles.boxDecoration.copyWith(color: Cr.whiteColor),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            width: 560,
-                            height: 135,
-                            color: Cr.accentBlue2.withOpacity(.8),
-                            padding: EdgeInsets.all(Di.PSD),
+                          ListTile(
+                            leading: ContainerWithIcon(
+                              iconData: FontAwesomeIcons.buildingColumns,
+                              size: 50,
+                            ),
+                            trailing: SizedBox(),
+                            title: Text(
+                              "English",
+                              style: h4Bold.copyWith(
+                                fontSize: Di.FSD,
+                              ),
+                            ),
+                            subtitle: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: Di.PSETS + 1,
+                              ),
+                              child: Text(
+                                "Native and bilingual profiency",
+                                style: bodySmallRegular.copyWith(
+                                  color: Cr.accentBlue1,
+                                  fontSize: Di.FSS,
+                                ),
+                              ),
+                            ),
                           ),
+                          ListTile(
+                            leading: ContainerWithIcon(
+                              iconData: FontAwesomeIcons.buildingColumns,
+                              size: 50,
+                            ),
+                            trailing: SizedBox(),
+                            title: Text(
+                              "Spanish",
+                              style: h4Bold.copyWith(
+                                fontSize: Di.FSD,
+                              ),
+                            ),
+                            subtitle: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: Di.PSETS,
+                              ),
+                              child: Text(
+                                "Native and bilingual profiency",
+                                style: bodySmallRegular.copyWith(
+                                  color: Cr.accentBlue1,
+                                  fontSize: Di.FSS,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Di.SBHD,
                         ],
                       ),
-                    )
-                  : Di.ESB,
-              Provider.of<ProfileProvider>(context).isProfileEditable
-                  ? EditIconButton(onPressed: onEditPressed)
-                  : Di.ESB,
-            ],
+                    ),
+                  ],
+                ),
+                Provider.of<ProfileProvider>(context).isProfileEditable
+                    ? Container(
+                        width: 560,
+                        color: Cr.accentBlue2.withOpacity(.8),
+                        padding: EdgeInsets.all(Di.PSD),
+                      )
+                    : Di.ESB,
+                Provider.of<ProfileProvider>(context).isProfileEditable
+                    ? EditIconButton(
+                        onPressed: () {
+                          showCustomDialog(
+                            context,
+                            ProfileLanguagesDialogWidget(
+                                userProfileData: userProfileData),
+                          );
+                        },
+                        // onPressed: onEditPressed,
+                      )
+                    : Di.ESB,
+              ],
+            ),
           ),
         ],
       ),
@@ -1052,7 +1053,9 @@ class AchievementComponent extends StatelessWidget {
   const AchievementComponent({
     Key? key,
     this.onEditPressed,
+    required this.userProfileData,
   }) : super(key: key);
+  final User userProfileData;
 
   final void Function()? onEditPressed;
 
@@ -1152,7 +1155,12 @@ class AchievementComponent extends StatelessWidget {
                     )
                   : Di.ESB,
               Provider.of<ProfileProvider>(context).isProfileEditable
-                  ? EditIconButton(onPressed: onEditPressed)
+                  ? EditIconButton(
+                      onPressed: () {
+                        // showCustomDialog(context, ProfileDialog);
+                      },
+                      // onPressed: onEditPressed,
+                    )
                   : Di.ESB,
             ],
           ),
@@ -1162,13 +1170,20 @@ class AchievementComponent extends StatelessWidget {
   }
 }
 
-class EducationComponent extends StatelessWidget {
+class EducationComponent extends StatefulWidget {
   const EducationComponent({
     Key? key,
     this.onEditPressed,
+    required this.userProfileData,
   }) : super(key: key);
+  final User userProfileData;
   final void Function()? onEditPressed;
 
+  @override
+  State<EducationComponent> createState() => _EducationComponentState();
+}
+
+class _EducationComponentState extends State<EducationComponent> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -1183,98 +1198,105 @@ class EducationComponent extends StatelessWidget {
               style: h2Regular,
             ),
           ),
-          Stack(
-            children: [
-              Column(
-                children: [
-                  Divider(
-                    thickness: 1,
-                    height: 0,
-                  ),
-                  Di.SBHS,
-                  Container(
-                    width: 360,
-                    decoration:
-                        Styles.boxDecoration.copyWith(color: Cr.whiteColor),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ListTile(
-                          leading: ContainerWithIcon(
-                            iconData: FontAwesomeIcons.buildingColumns,
-                            size: 50,
-                          ),
-                          title: Text(
-                            "University of Cape Town",
-                            style: h4Bold.copyWith(
-                              fontSize: Di.FSD,
+          IntrinsicHeight(
+            child: Stack(
+              children: [
+                Column(
+                  children: [
+                    Divider(
+                      thickness: 1,
+                      height: 0,
+                    ),
+                    Di.SBHS,
+                    Container(
+                      width: 360,
+                      decoration: Styles.boxDecoration.copyWith(
+                        color: Cr.whiteColor,
+                        boxShadow: Styles.defaultBoxShadow,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          ListTile(
+                            leading: ContainerWithIcon(
+                              iconData: FontAwesomeIcons.buildingColumns,
+                              size: 50,
+                            ),
+                            title: Text(
+                              "University of Cape Town",
+                              style: h4Bold.copyWith(
+                                fontSize: Di.FSD,
+                              ),
+                            ),
+                            subtitle: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Postgraduate Degree in Business Science",
+                                  style: bodySmallRegular.copyWith(
+                                    color: Cr.accentBlue1,
+                                    fontSize: Di.FSS,
+                                  ),
+                                ),
+                                SizedBox(height: Di.PSETS),
+                                Text(
+                                  "2010 - 2013",
+                                  style: bodySmallRegular.copyWith(
+                                    color: Cr.darkGrey1,
+                                    fontSize: Di.FSS,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          subtitle: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(height: Di.PSETS + 1),
-                              Text(
-                                "Postgraduate Degree in Business Science",
-                                style: bodySmallRegular.copyWith(
-                                  color: Cr.accentBlue1,
-                                  fontSize: Di.FSS,
-                                ),
-                              ),
-                              SizedBox(height: Di.PSETS + 1),
-                              Text(
-                                "2010 - 2013",
-                                style: bodySmallRegular.copyWith(
-                                  color: Cr.darkGrey1,
-                                  fontSize: Di.FSS,
-                                ),
-                              ),
-                            ],
+                          Di.SBHD,
+                          Divider(
+                            thickness: 1,
+                            height: 0,
                           ),
-                        ),
-                        Di.SBHD,
-                        Divider(
-                          thickness: 1,
-                          height: 0,
-                        ),
-                        Container(
-                          width: 360,
-                          color: Cr.lightGrey2,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Di.SBHS,
-                              CustomTextButton(
-                                text: "  + Course online",
-                              ),
-                              Di.SBHS,
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              Provider.of<ProfileProvider>(context).isProfileEditable
-                  ? Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
                           Container(
-                            width: 560,
-                            height: 135,
-                            color: Cr.accentBlue2.withOpacity(.8),
-                            padding: EdgeInsets.all(Di.PSD),
+                            width: 360,
+                            color: Cr.lightGrey2,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Di.SBHS,
+                                CustomTextButton(
+                                  text: "  + Course online",
+                                ),
+                                Di.SBHS,
+                              ],
+                            ),
                           ),
                         ],
                       ),
-                    )
-                  : Di.ESB,
-              Provider.of<ProfileProvider>(context).isProfileEditable
-                  ? EditIconButton(onPressed: onEditPressed)
-                  : Di.ESB,
-            ],
+                    ),
+                  ],
+                ),
+                Provider.of<ProfileProvider>(context).isProfileEditable
+                    ? Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 560,
+                              color: Cr.accentBlue2.withOpacity(.8),
+                              padding: EdgeInsets.all(Di.PSD),
+                            ),
+                          ],
+                        ),
+                      )
+                    : Di.ESB,
+                Provider.of<ProfileProvider>(context).isProfileEditable
+                    ? EditIconButton(
+                        // onPressed: widget.onEditPressed,
+                        onPressed: () {
+                          // showCustomDialog(context, ProfileDial)
+                        },
+                      )
+                    : Di.ESB,
+              ],
+            ),
           ),
         ],
       ),
@@ -1285,7 +1307,9 @@ class EducationComponent extends StatelessWidget {
 class FeaturedVideoComponent extends StatelessWidget {
   const FeaturedVideoComponent({
     Key? key,
+    required this.userProfileData,
   }) : super(key: key);
+  final User userProfileData;
 
   @override
   Widget build(BuildContext context) {
@@ -1303,60 +1327,91 @@ class FeaturedVideoComponent extends StatelessWidget {
 
           // Di.SBHD,
           Divider(thickness: 1),
-          Di.SBHD,
-          Stack(
-            children: [
-              SizedBox(
-                height: 180,
-                width: 360,
-                child: Image.asset(
-                  "assets/images/videoThumbnail.png",
-                  fit: BoxFit.cover,
+          IntrinsicHeight(
+            child: Stack(
+              children: [
+                Column(
+                  children: [
+                    Di.SBHD,
+                    IntrinsicHeight(
+                      child: Stack(
+                        children: [
+                          SizedBox(
+                            height: 180,
+                            width: 360,
+                            child: Image.asset(
+                              "assets/images/videoThumbnail.png",
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          Positioned.fill(
+                            child: Align(
+                              alignment: Alignment.center,
+                              child:
+                                  // Container(
+                                  //   width: 100,
+                                  //   height: 100,
+                                  //   color: Cr.accentBlue1,
+                                  // ),
+                                  SvgPicture.asset(
+                                "assets/icons/smallPlayerIcon.svg",
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Di.SBHL,
+                    Text(
+                      "Chef TV: Inside the kitchen of Noberto Holden",
+                      style: h4Bold,
+                    ),
+                    Di.SBHL,
+                    RichText(
+                      text: TextSpan(
+                        style: bodySmallRegular.copyWith(
+                          color: Cr.darkGrey1,
+                        ),
+                        children: <TextSpan>[
+                          TextSpan(
+                            text:
+                                "Noberto's career has revolved around causing corporate transformation projects designed to optimize the use of resources enha...",
+                          ),
+                          TextSpan(
+                            text: "show more",
+                            style: TextStyle(
+                              color: Cr.accentBlue1,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Di.SBHD,
+                  ],
                 ),
-              ),
-              Positioned.fill(
-                child: Align(
-                  alignment: Alignment.center,
-                  child:
-                      // Container(
-                      //   width: 100,
-                      //   height: 100,
-                      //   color: Cr.accentBlue1,
-                      // ),
-                      SvgPicture.asset(
-                    "assets/icons/smallPlayerIcon.svg",
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Di.SBHL,
-
-          Text(
-            "Chef TV: Inside the kitchen of Noberto Holden",
-            style: h4Bold,
-          ),
-          Di.SBHL,
-          RichText(
-            text: TextSpan(
-              style: bodySmallRegular.copyWith(
-                color: Cr.darkGrey1,
-              ),
-              children: <TextSpan>[
-                TextSpan(
-                  text:
-                      "Noberto's career has revolved around causing corporate transformation projects designed to optimize the use of resources enha...",
-                ),
-                TextSpan(
-                  text: "show more",
-                  style: TextStyle(
-                    color: Cr.accentBlue1,
-                  ),
-                ),
+                Provider.of<ProfileProvider>(context).isProfileEditable
+                    ? Container(
+                        width: 560,
+                        color: Cr.accentBlue2.withOpacity(.8),
+                        padding: EdgeInsets.all(Di.PSD),
+                      )
+                    : Di.ESB,
+                Provider.of<ProfileProvider>(context).isProfileEditable
+                    ? EditIconButton(
+                        onPressed: () {
+                          // buildReferencesCard(img, title, userId, subTitle, description)
+                          showCustomDialog(
+                            context,
+                            ProfileFeaturedVideoDialogWidget(
+                              userProfileData: userProfileData,
+                            ),
+                          );
+                        },
+                      )
+                    : Di.ESB,
               ],
             ),
           ),
-          Di.SBHD,
         ],
       ),
     );

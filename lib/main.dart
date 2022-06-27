@@ -241,8 +241,11 @@ class HoledoApp extends StatelessWidget {
         builder: (context, child) => ResponsiveWrapper.builder(
           child,
           breakpoints: [
+            ResponsiveBreakpoint.autoScaleDown(450, name: "SmallMobile"),
+            ResponsiveBreakpoint.resize(460, name: "Mobile"),
             ResponsiveBreakpoint.resize(650, name: MOBILE),
-            ResponsiveBreakpoint.resize(1200, name: DESKTOP),
+            ResponsiveBreakpoint.resize(1000, name: TABLET),
+            ResponsiveBreakpoint.resize(1300, name: DESKTOP),
           ],
         ),
         debugShowCheckedModeBanner: false,

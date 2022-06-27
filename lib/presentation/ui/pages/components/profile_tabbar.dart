@@ -132,10 +132,12 @@ class ProfileTabbar extends StatelessWidget {
                       Provider.of<ProfileProvider>(context).isProfileEditable
                           ? Cr.green1
                           : null,
-                  icon: Icon(
-                    Icons.check,
-                    size: Di.FSD,
-                  ),
+                  icon: Provider.of<ProfileProvider>(context).isProfileEditable
+                      ? Icon(
+                          Icons.check,
+                          size: Di.FSD,
+                        )
+                      : null,
                   onPressed: () {
                     Provider.of<ProfileProvider>(context, listen: false)
                         .changeIsProfieEditableState(!isEditable);

@@ -45,6 +45,7 @@ class _ProfileSummaryDialogWidgetState
       color: Cr.darkGrey4,
       width: 655,
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           DialogTitleWidget(
             title: "Profile summary",
@@ -61,7 +62,9 @@ class _ProfileSummaryDialogWidgetState
                   children: [
                     DialogLabelTextFormField(customLabel: "Summary"),
                     Di.SBHES,
-                    DialogMultiLineTextField(),
+                    DialogMultiLineTextField(
+                      textEditingController: _profileSummaryController,
+                    ),
                   ],
                 ),
                 Di.SBCH(28),
@@ -87,11 +90,10 @@ class _ProfileSummaryDialogWidgetState
                       borderColor: Cr.accentBlue2,
                       makeWidthNull: true,
                       onPressed: () async {
-                        // Nav.pop(context);
-                        // await new User(
-                        //   profileSummary:
-                        //       _profileSummaryController.text,
-                        // ).save(widget.userProfileData);
+                        Nav.pop(context);
+                        await new User(
+                          profileSummary: _profileSummaryController.text,
+                        ).save(widget.userProfileData);
                       },
                       child: Text(
                         "Save",

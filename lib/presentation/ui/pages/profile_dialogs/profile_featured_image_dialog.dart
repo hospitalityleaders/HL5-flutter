@@ -9,8 +9,8 @@ import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/nav.dart';
 import 'package:holedo/presentation/utill/styles.dart';
 
-class ProfileFeaturedImageDialogWidget extends StatefulWidget {
-  const ProfileFeaturedImageDialogWidget({
+class ProfileFeaturedVideoDialogWidget extends StatefulWidget {
+  const ProfileFeaturedVideoDialogWidget({
     Key? key,
     required this.userProfileData,
   }) : super(key: key);
@@ -18,36 +18,30 @@ class ProfileFeaturedImageDialogWidget extends StatefulWidget {
   final User userProfileData;
 
   @override
-  State<ProfileFeaturedImageDialogWidget> createState() =>
+  State<ProfileFeaturedVideoDialogWidget> createState() =>
       _ProfileWriteReferenceDialogWidgetState();
 }
 
 class _ProfileWriteReferenceDialogWidgetState
-    extends State<ProfileFeaturedImageDialogWidget> {
+    extends State<ProfileFeaturedVideoDialogWidget> {
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 200),
-      child: Center(
-        child: SingleChildScrollView(
-          // behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
-          child: Container(
-            color: Cr.darkGrey4,
-            width: 655,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                DialogTitleWidget(
-                  title: "Featured video",
-                ),
-                Di.SBHL,
-                CoverDialogExpandedTile(isExpanded: true),
-                Di.SBHD,
-              ],
+    return SingleChildScrollView(
+      child: Container(
+        color: Cr.darkGrey4,
+        width: 655,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            DialogTitleWidget(
+              title: "Featured video",
             ),
-          ),
+            Di.SBHL,
+            CoverDialogExpandedTile(isExpanded: true),
+            Di.SBHD,
+          ],
         ),
       ),
     );

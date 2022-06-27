@@ -165,7 +165,7 @@ class _PageScaffoldState extends State<PageScaffold> {
                   : null,
               appBar: PreferredSize(
                 preferredSize: Size.fromHeight(45),
-                child: isMobilePhone(context)
+                child: (isTableOrMobile(context))
                     ? ProfileMobileAppbar(
                         onTap: () => _scaffoldKey.currentState?.openEndDrawer(),
                         searchController: _searchController,
@@ -198,7 +198,7 @@ class _PageScaffoldState extends State<PageScaffold> {
               // ),
               body: Container(
                   decoration: BoxDecoration(
-                    color: Cr.backgroundColor,
+                    color: ColorPicker.kBG,
                   ),
                   child: widget
                       .body /* ListView(children: <Widget>[

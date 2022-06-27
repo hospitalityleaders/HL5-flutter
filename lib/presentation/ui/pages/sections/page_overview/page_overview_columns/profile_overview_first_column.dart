@@ -6,6 +6,8 @@ import 'package:holedo/presentation/ui/components/custom_text_button.dart';
 import 'package:holedo/presentation/ui/components/edit_icon_buttton.dart';
 import 'package:holedo/presentation/ui/components/person_avatar.dart';
 import 'package:holedo/presentation/ui/components/text_with_background.dart';
+import 'package:holedo/presentation/ui/pages/profile_dialogs/profile_expertise_dialog_widget.dart';
+import 'package:holedo/presentation/ui/pages/profile_dialogs/profile_my_reference_dialog_widget.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/profile_summary_dialog_widget.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/show_custom_dialog.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
@@ -17,79 +19,6 @@ import 'package:holedo/common/popUpHeadMenu.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/constant/sizedbox.dart';
-
-class ProfileSummaryComponent extends StatefulWidget {
-  const ProfileSummaryComponent({
-    Key? key,
-    this.isMobile = false,
-    required this.userProfileData,
-  }) : super(key: key);
-
-  final User userProfileData;
-  final bool isMobile;
-  @override
-  State<ProfileSummaryComponent> createState() =>
-      _ProfileSummaryComponentState();
-}
-
-class _ProfileSummaryComponentState extends State<ProfileSummaryComponent> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(bottom: Di.PSD),
-      decoration: Styles.boxDecoration.copyWith(
-        color: Cr.whiteColor,
-        boxShadow: Styles.defaultBoxShadow,
-      ),
-      child: Column(
-        children: [
-          ListTile(
-            title: Text(
-              "Profile summary",
-              style: h2Regular,
-            ),
-          ),
-          Di.DWZH,
-          Di.SBHD,
-          IntrinsicHeight(
-            child: Stack(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: Di.PSD,
-                  ),
-                  child: Text(
-                    widget.userProfileData.profileSummary ?? "",
-                    maxLines: widget.isMobile ? 6 : null,
-                    style: bodyLarge.copyWith(color: Cr.darkGrey1),
-                  ),
-                ),
-                Provider.of<ProfileProvider>(context).isProfileEditable
-                    ? Container(
-                        width: 560,
-                        color: Cr.accentBlue2.withOpacity(.8),
-                      )
-                    : Di.ESB,
-                Provider.of<ProfileProvider>(context).isProfileEditable
-                    ? EditIconButton(
-                        onPressed: () {
-                          showCustomDialog(
-                            context,
-                            ProfileSummaryDialogWidget(
-                              userProfileData: widget.userProfileData,
-                            ),
-                          );
-                        },
-                      )
-                    : Di.ESB,
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
 
 class ProfileOverviewFirstColumn extends StatefulWidget {
   const ProfileOverviewFirstColumn({
@@ -133,108 +62,60 @@ class _ProfileOverviewFirstColumnState
                   ),
                 ),
 
-                Stack(
-                  children: [
-                    Column(
-                      children: [
-                        Divider(
-                          thickness: .7,
-                          color: Cr.darkGrey2,
-                        ),
-                        // widget.userProfileData.expertise != null
-                        //     ? Wrap(
-                        //         children: List<Widget>.generate(
-                        //           widget.userProfileData.expertise!.length,
-                        //           (int idx) {
-                        //             return
-                        //                 //  Di.SBWS,
-                        //                 CustomCheckboxWithTitle(
-                        //               title: (widget.userProfileData
-                        //                           .expertise![idx] as Expertise)
-                        //                       .title ??
-                        //                   "Leadership",
-                        //             );
-                        //           },
-                        //         ).toList(),
-                        //       )
-                        //     : Di.ESB,
-                        Row(
-                          children: [
-                            Di.SBWS,
-                            CustomCheckboxWithTitle(
-                                title: "Business management"),
-                            Di.SBWS,
-                            CustomCheckboxWithTitle(title: "Leadership"),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Di.SBWS,
-                            CustomCheckboxWithTitle(title: "Leadership"),
-                            Di.SBWS,
-                            CustomCheckboxWithTitle(title: "Growth Hacking"),
-                            Di.SBWS,
-                            CustomCheckboxWithTitle(title: "Finance"),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Di.SBWD,
-                            CustomCheckboxWithTitle(
-                                title: "Business management"),
-                            Di.SBWS,
-                            CustomCheckboxWithTitle(title: "Leadership"),
-                          ],
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Di.SBWS,
-                            CustomCheckboxWithTitle(title: "Finance"),
-                            Di.SBWS,
-                            CustomCheckboxWithTitle(title: "Acquisitions"),
-                            Di.SBWS,
-                            TextWithBackground(
-                              text: " + Show all",
-                              textColor: Cr.accentBlue1,
-                              backgroundColor: Cr.accentBlue3,
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    Provider.of<ProfileProvider>(context).isProfileEditable
-                        ? Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  width: 560,
-                                  height: 174,
-                                  color: Cr.accentBlue2.withOpacity(.8),
-                                  padding: EdgeInsets.all(Di.PSD),
+                IntrinsicHeight(
+                  child: Stack(
+                    children: [
+                      Column(
+                        children: [
+                          Divider(
+                            thickness: .7,
+                            color: Cr.darkGrey2,
+                          ),
+                          widget.userProfileData.expertise != null
+                              ? Wrap(
+                                  children: List<Widget>.generate(
+                                    widget.userProfileData.expertise!.length,
+                                    (int idx) {
+                                      return
+                                          //  Di.SBWS,
+                                          CustomCheckboxWithTitle(
+                                        title: (widget.userProfileData
+                                                    .expertise![idx])
+                                                .title ??
+                                            "Leadership",
+                                      );
+                                    },
+                                  ).toList(),
+                                )
+                              : Di.ESB,
+                        ],
+                      ),
+                      Provider.of<ProfileProvider>(context).isProfileEditable
+                          ? Container(
+                              width: 560,
+                              height:
+                                  widget.userProfileData.expertise!.length < 3
+                                      ? 100
+                                      : null,
+                              color: Cr.accentBlue2.withOpacity(.8),
+                              padding: EdgeInsets.all(Di.PSD),
+                            )
+                          : Di.ESB,
+                      Provider.of<ProfileProvider>(context).isProfileEditable
+                          ? EditIconButton(onPressed: () {
+                              showCustomDialog(
+                                context,
+                                ProfileExpertiseDialogWidget(
+                                  userProfileData: widget.userProfileData,
                                 ),
-                              ],
-                            ),
-                          )
-                        : Di.ESB,
-                    Provider.of<ProfileProvider>(context).isProfileEditable
-                        ? EditIconButton(onPressed: () {
-                            buildAreaOfExpePopUp(context);
-                          })
-                        : Di.ESB,
-                  ],
+                              );
+                              // buildAreaOfExpePopUp(context);
+                            })
+                          : Di.ESB,
+                    ],
+                  ),
                 ),
-                // CustomCheckboxWithTitle(title: "Growth Hacking"),
-                // CustomCheckboxWithTitle(title: "Finance"),
-                // CustomCheckboxWithTitle(title: "Acquisitions"),
-                // CustomCheckboxWithTitle(title: "Recruitment"),
-                // CustomCheckboxWithTitle(title: "Hotel groups"),
-                // CustomCheckboxWithTitle(title: "Consulting"),
-                // CustomCheckboxWithTitle(title: "Public speaking"),
-
                 // Training
-
                 Di.SBHD,
               ],
             ),
@@ -257,128 +138,127 @@ class _ProfileOverviewFirstColumnState
                   ),
                 ),
                 // Divider(thickness: 1),
-                Stack(
-                  children: [
-                    ListView(
-                      shrinkWrap: true,
-                      children: [
-                        Container(
-                          width: 360,
-                          padding: EdgeInsets.symmetric(horizontal: Di.PSS),
-                          decoration: Styles.boxDecoration
-                              .copyWith(color: Cr.whiteColor),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ListTile(
-                                leading: PersonAvatar(
-                                  avatarSize: Di.FSOTL + 10,
-                                ),
-                                title: Row(
-                                  children: [
-                                    Text(
-                                      "Sarah Lee",
-                                      style: h4Bold,
+                IntrinsicHeight(
+                  child: Stack(
+                    children: [
+                      Column(
+                        children: [
+                          Container(
+                            width: 360,
+                            padding: EdgeInsets.symmetric(horizontal: Di.PSS),
+                            decoration: Styles.boxDecoration
+                                .copyWith(color: Cr.whiteColor),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ListTile(
+                                  leading: PersonAvatar(
+                                    avatarSize: Di.FSOTL + 10,
+                                  ),
+                                  title: Row(
+                                    children: [
+                                      Text(
+                                        "Sarah Lee",
+                                        style: h4Bold,
+                                      ),
+                                      Di.SBWES,
+                                      Text(
+                                        "MHL",
+                                        style: dividerTextSmall,
+                                      )
+                                    ],
+                                  ),
+                                  subtitle: Text(
+                                    "General Manager, One & Only Hotel",
+                                    style: bodySmallRegular.copyWith(
+                                      color: Cr.darkGrey1,
                                     ),
-                                    Di.SBWES,
-                                    Text(
-                                      "MHL",
-                                      style: dividerTextSmall,
-                                    )
-                                  ],
-                                ),
-                                subtitle: Text(
-                                  "General Manager, One & Only Hotel",
-                                  style: bodySmallRegular.copyWith(
-                                    color: Cr.darkGrey1,
                                   ),
                                 ),
-                              ),
-                              Di.SBHES,
-                              Container(
-                                height: Di.FSOTL + 10,
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: Di.PSD),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      width: Di.FSOTL,
-                                      height: Di.FSOTL,
-                                      decoration: Styles.boxDecoration.copyWith(
-                                        color: Cr.accentBlue1,
+                                Di.SBHES,
+                                Container(
+                                  height: Di.FSOTL + 10,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: Di.PSD),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: Di.FSOTL,
+                                        height: Di.FSOTL,
+                                        decoration:
+                                            Styles.boxDecoration.copyWith(
+                                          color: Cr.accentBlue1,
+                                        ),
+                                        child: Icon(
+                                          Icons.format_quote,
+                                          color: Cr.whiteColor,
+                                        ),
                                       ),
-                                      child: Icon(
-                                        Icons.format_quote,
-                                        color: Cr.whiteColor,
-                                      ),
-                                    ),
-                                    Di.SBWD,
-                                    Expanded(
-                                      // width: 100,
-                                      child: SizedBox(
-                                        height: Di.FSOTL + 6,
-                                        child: Text(
-                                          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-                                          style: bodyLarge.copyWith(
-                                            color: Cr.darkGrey1,
+                                      Di.SBWD,
+                                      Expanded(
+                                        // width: 100,
+                                        child: SizedBox(
+                                          height: Di.FSOTL + 6,
+                                          child: Text(
+                                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+                                            style: bodyLarge.copyWith(
+                                              color: Cr.darkGrey1,
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Di.SBHETS,
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: Di.PSD),
-                                child: Text(
-                                  "incididunt ut labore et dolore magna aliqua.",
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: bodyLarge.copyWith(
-                                    color: Cr.darkGrey1,
+                                    ],
                                   ),
                                 ),
-                              ),
-                              CustomTextButton(
-                                text: "  + Show more",
-                              ),
-                              Di.SBHD,
-                              Divider(thickness: 1),
-                            ],
-                          ),
-                        ),
-
-                        // _ProfileReferenceListTile(),
-                        // _ProfileReferenceListTile(),
-                        // Divider(thickness: 1),
-                      ],
-                    ),
-                    Provider.of<ProfileProvider>(context).isProfileEditable
-                        ? Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SizedBox(height: 50),
-                                Container(
-                                  width: 560,
-                                  height: 370,
-                                  color: Cr.accentBlue2.withOpacity(.8),
-                                  padding: EdgeInsets.all(Di.PSD),
+                                Di.SBHETS,
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: Di.PSD),
+                                  child: Text(
+                                    "incididunt ut labore et dolore magna aliqua.",
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: bodyLarge.copyWith(
+                                      color: Cr.darkGrey1,
+                                    ),
+                                  ),
                                 ),
+                                CustomTextButton(
+                                  text: "  + Show more",
+                                ),
+                                Di.SBHD,
+                                Divider(thickness: 1),
                               ],
                             ),
-                          )
-                        : Di.ESB,
-                    Provider.of<ProfileProvider>(context).isProfileEditable
-                        ? EditIconButton(
-                            onPressed: () {
-                              PopUpHeadMenu.buildReferencesCardPopUp(context);
-                            },
-                          )
-                        : Di.ESB,
-                  ],
+                          ),
+
+                          // _ProfileReferenceListTile(),
+                          // _ProfileReferenceListTile(),
+                          // Divider(thickness: 1),
+                        ],
+                      ),
+                      Provider.of<ProfileProvider>(context).isProfileEditable
+                          ? Container(
+                              width: 560,
+                              color: Cr.accentBlue2.withOpacity(.8),
+                              padding: EdgeInsets.all(Di.PSD),
+                            )
+                          : Di.ESB,
+                      Provider.of<ProfileProvider>(context).isProfileEditable
+                          ? EditIconButton(
+                              onPressed: () {
+                                // buildReferencesCard(img, title, userId, subTitle, description)
+                                showCustomDialog(
+                                  context,
+                                  ProfileMyReferenceDialogWidget(
+                                    userProfileData: widget.userProfileData,
+                                  ),
+                                );
+                              },
+                            )
+                          : Di.ESB,
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -830,6 +710,79 @@ class _ProfileOverviewFirstColumnState
 
   ///profile section1 pop up functionality End
 
+}
+
+class ProfileSummaryComponent extends StatefulWidget {
+  const ProfileSummaryComponent({
+    Key? key,
+    this.isMobile = false,
+    required this.userProfileData,
+  }) : super(key: key);
+
+  final User userProfileData;
+  final bool isMobile;
+  @override
+  State<ProfileSummaryComponent> createState() =>
+      _ProfileSummaryComponentState();
+}
+
+class _ProfileSummaryComponentState extends State<ProfileSummaryComponent> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(bottom: Di.PSD),
+      decoration: Styles.boxDecoration.copyWith(
+        color: Cr.whiteColor,
+        boxShadow: Styles.defaultBoxShadow,
+      ),
+      child: Column(
+        children: [
+          ListTile(
+            title: Text(
+              "Profile summary",
+              style: h2Regular,
+            ),
+          ),
+          Di.DWZH,
+          Di.SBHD,
+          IntrinsicHeight(
+            child: Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: Di.PSD,
+                  ),
+                  child: Text(
+                    widget.userProfileData.profileSummary ?? "",
+                    maxLines: widget.isMobile ? 6 : null,
+                    style: bodyLarge.copyWith(color: Cr.darkGrey1),
+                  ),
+                ),
+                Provider.of<ProfileProvider>(context).isProfileEditable
+                    ? Container(
+                        width: 560,
+                        color: Cr.accentBlue2.withOpacity(.8),
+                      )
+                    : Di.ESB,
+                Provider.of<ProfileProvider>(context).isProfileEditable
+                    ? EditIconButton(
+                        onPressed: () {
+                          showCustomDialog(
+                            context,
+                            ProfileSummaryDialogWidget(
+                              userProfileData: widget.userProfileData,
+                            ),
+                          );
+                        },
+                      )
+                    : Di.ESB,
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 class AreasOfExpertiseComponents extends StatelessWidget {

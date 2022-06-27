@@ -185,54 +185,48 @@ class _ProfileWriteReferenceDialogWidgetState
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 200),
-      child: Center(
-        child: SingleChildScrollView(
-          // behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
-          child: Container(
-            color: Cr.darkGrey4,
-            width: 655,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                DialogTitleWidget(
-                  title: "Write a reference",
+    return SingleChildScrollView(
+      child: Container(
+        color: Cr.darkGrey4,
+        width: 655,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            DialogTitleWidget(
+              title: "Write a reference",
+            ),
+            Di.SBHL,
+            Center(
+              child: Container(
+                width: 60,
+                height: 60,
+                decoration: BoxDecoration(
+                  color: Cr.green1,
+                  borderRadius: BorderRadius.circular(30),
                 ),
-                Di.SBHL,
-                Center(
-                  child: Container(
-                    width: 60,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      color: Cr.green1,
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: Center(
-                      child: SvgPicture.asset(
-                        Svgs.plus,
-                        color: Cr.whiteColor,
-                        width: 30,
-                      ),
-                    ),
+                child: Center(
+                  child: SvgPicture.asset(
+                    Svgs.plus,
+                    color: Cr.whiteColor,
+                    width: 30,
                   ),
                 ),
-                Di.SBHL,
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: Di.PSL),
-                  width: 615,
-                  child: DialogExpandedTile(),
-                ),
-                Di.SBHETS,
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: Di.PSL),
-                  width: 615,
-                  child: DialogExpandedTile(),
-                ),
-                Di.SBHD,
-              ],
+              ),
             ),
-          ),
+            Di.SBHL,
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: Di.PSL),
+              width: 615,
+              child: DialogExpandedTile(),
+            ),
+            Di.SBHETS,
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: Di.PSL),
+              width: 615,
+              child: DialogExpandedTile(),
+            ),
+            Di.SBHD,
+          ],
         ),
       ),
     );

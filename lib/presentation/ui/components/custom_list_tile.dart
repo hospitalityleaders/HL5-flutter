@@ -4,6 +4,7 @@ import 'package:holedo/presentation/ui/components/text_with_background.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/styles.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class CustomListTile extends StatelessWidget {
   const CustomListTile({
@@ -28,7 +29,7 @@ class CustomListTile extends StatelessWidget {
                   ),
                   Di.SBWS,
                   Text(
-                    "Add your work experience",
+                    "Add your work ${(ResponsiveWrapper.of(context).screenWidth < 1120 && ResponsiveWrapper.of(context).isTablet) ? "\n" : ""} experience",
                     style: bodyLarge.copyWith(
                       color: Cr.accentBlue1,
                     ),

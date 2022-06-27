@@ -57,7 +57,7 @@ class _ProfileExpertiseDialogWidgetState
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Languages",
+                        "Expertise",
                         style: h2Regular,
                       ),
                       GestureDetector(

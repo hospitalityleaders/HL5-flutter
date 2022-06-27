@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:holedo/presentation/ui/components/profile_reference_single_compoenet.dart';
-import 'package:holedo/presentation/ui/pages/sections/page_overview/page_overview_columns/page_overview_third_columns.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 
 class ReferenceSection extends StatefulWidget {
@@ -87,7 +86,7 @@ class _ReferenceSectionState extends State<ReferenceSection> {
             ),
           ),
           Di.SBWEL,
-          ProfileOverviewThirdColumn(),
+          // ProfileOverviewThirdColumn(userProfileData: widget.us,),
           Di.SBWEL,
         ],
       ),

@@ -26,42 +26,34 @@ class _ProfileWriteReferenceDialogWidgetState
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 200),
-      child: Center(
-        child: SingleChildScrollView(
-          // behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
-          child: Container(
-            color: Cr.darkGrey4,
-            width: 655,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                DialogTitleWidget(
-                  title: "My reference",
+    return Container(
+      color: Cr.darkGrey4,
+      width: 655,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          DialogTitleWidget(
+            title: "My reference",
+          ),
+          Di.SBHL,
+          Center(
+            child: SizedBox(
+              width: 615,
+              child: Text(
+                "Select from your references below which ones you would like to display on your profile overview. You can display up to two references to show on your profile overview.",
+                textAlign: TextAlign.center,
+                style: bodyLarge.copyWith(
+                  height: 1.375,
+                  color: Cr.darkGrey1,
                 ),
-                Di.SBHL,
-                Center(
-                  child: SizedBox(
-                    width: 615,
-                    child: Text(
-                      "Select from your references below which ones you would like to display on your profile overview. You can display up to two references to show on your profile overview.",
-                      textAlign: TextAlign.center,
-                      style: bodyLarge.copyWith(
-                        height: 1.375,
-                        color: Cr.darkGrey1,
-                      ),
-                    ),
-                  ),
-                ),
-                Di.SBHL,
-                DialogExpandedTile(isExpanded: true),
-                DialogExpandedTile(),
-                Di.SBHD,
-              ],
+              ),
             ),
           ),
-        ),
+          Di.SBHL,
+          DialogExpandedTile(isExpanded: true),
+          DialogExpandedTile(),
+          Di.SBHD,
+        ],
       ),
     );
   }

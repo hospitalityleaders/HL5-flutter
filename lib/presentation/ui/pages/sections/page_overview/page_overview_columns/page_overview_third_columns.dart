@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:holedo/models/holedoapi/holedoapi.dart';
 import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/presentation/ui/pages/components/connection_component.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_completion_component.dart';
@@ -9,39 +10,40 @@ import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/images.dart';
 import 'package:holedo/presentation/utill/styles.dart';
 
-class ProfileOverviewThirdColumn extends StatelessWidget {
+class ProfileOverviewThirdColumn extends StatefulWidget {
   const ProfileOverviewThirdColumn({
     Key? key,
+    required this.userProfileData,
   }) : super(key: key);
+  final User userProfileData;
 
   @override
+  State<ProfileOverviewThirdColumn> createState() =>
+      _ProfileOverviewThirdColumnState();
+}
+
+class _ProfileOverviewThirdColumnState
+    extends State<ProfileOverviewThirdColumn> {
+  @override
   Widget build(BuildContext context) {
-    return Flexible(
-      child: ConstrainedBox(
-        constraints: BoxConstraints(
-          maxWidth: 360,
-          minWidth: 280,
-        ),
-        child: Container(
-          // width: double.infinity,
-          // // width: 360,
-          // constraints: BoxConstraints(
-          //   maxWidth: 360,
-          //   minWidth: 280,
-          // ),
-          child: Column(
-            children: [
-              ProfileCompletionComponent(),
-              Di.SBHEL,
-              ConnectionsComponent(),
-              Di.SBHEL,
-              // profile overview timeline component
-              TimelineComponent(),
-              // ProfileAdsComponent(),
-              // Di.SBHS,
-              RightsComponent(),
-            ],
-          ),
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        maxWidth: 360,
+        minWidth: 280,
+      ),
+      child: Container(
+        child: Column(
+          children: [
+            ProfileCompletionComponent(),
+            Di.SBHEL,
+            ConnectionsComponent(),
+            Di.SBHEL,
+            // profile overview timeline component
+            TimelineComponent(),
+            // ProfileAdsComponent(),
+            // Di.SBHS,
+            RightsComponent(),
+          ],
         ),
       ),
     );

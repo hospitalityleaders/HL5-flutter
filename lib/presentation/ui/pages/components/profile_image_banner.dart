@@ -3,6 +3,8 @@ import 'package:holedo/models/models.dart';
 import 'package:holedo/presentation/providers/profile_provider.dart';
 import 'package:holedo/presentation/ui/components/edit_icon_buttton.dart';
 import 'package:holedo/presentation/ui/pages/mobile_desktop_comman_components/mobile_desktop_comman_components.dart';
+import 'package:holedo/presentation/ui/pages/profile_dialogs/profile_edit_dialog_widget.dart';
+import 'package:holedo/presentation/ui/pages/profile_dialogs/show_custom_dialog.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/styles.dart';
@@ -11,15 +13,12 @@ class ProfileImageBanner extends StatelessWidget {
   const ProfileImageBanner({
     Key? key,
     this.onEditButtonPressed,
-    this.userProfileData,
+    required this.userProfileData,
   }) : super(key: key);
 
   final void Function()? onEditButtonPressed;
 
-  // final String? fullName;
-  // final String? avatarUrl;
-  // final String? userTitleTypesId;
-  final User? userProfileData;
+  final User userProfileData;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +30,7 @@ class ProfileImageBanner extends StatelessWidget {
           decoration: BoxDecoration(
             image: DecorationImage(
               image:
-                  AssetImage(userProfileData?.banner ?? "assets/images/t6.png"),
+                  AssetImage(userProfileData.banner ?? "assets/images/t6.png"),
               fit: BoxFit.cover,
               colorFilter: ColorFilter.mode(
                 Colors.black.withOpacity(0.3),
@@ -56,12 +55,13 @@ class ProfileImageBanner extends StatelessWidget {
                     ContactCardMenuCommon(),
                     Di.SBHD,
                     Text(
-                      userProfileData?.fullName ?? "Noberto Holden",
+                      userProfileData.fullName ?? "Noberto Holden",
                       style: display2,
                     ),
                     Text(
-                      userProfileData?.professionalTitle.toString() ??
-                          "Business development manager, recruiter and hotel specialist.",
+                      userProfileData.professionalTitle.toString(),
+                      // ??
+                      //     "Business development manager, recruiter and hotel specialist.",
                       style: bodyLarge.copyWith(
                         color: Cr.darkGrey1,
                       ),
@@ -77,7 +77,7 @@ class ProfileImageBanner extends StatelessWidget {
                           size: 12,
                         ),
                         Text(
-                          userProfileData?.area ?? " Cape Town, South Africa",
+                          userProfileData.area ?? " Cape Town, South Africa",
                           style: bodySmallRegular.copyWith(
                             color: Cr.darkGrey1,
                           ),
@@ -87,7 +87,9 @@ class ProfileImageBanner extends StatelessWidget {
                     Di.SBHL,
                     SendConnectionRequestComman(),
                     Di.SBHES,
-                    WriteReferenceRecommandButtonComman(),
+                    WriteReferenceRecommandButtonComman(
+                      userProfileData: userProfileData,
+                    ),
                     Di.SBHOTL,
                     StatsComman(
                       userProfileData: userProfileData,
@@ -110,7 +112,7 @@ class ProfileImageBanner extends StatelessWidget {
                   image:
                       // avatarUrl != null
                       //     ?
-                      NetworkImage(userProfileData?.avatar?.toString() ?? ""),
+                      NetworkImage(userProfileData.avatar?.toString() ?? ""),
                   // : AssetImage("assets/images/avatar.png"),
                   fit: BoxFit.cover,
                 ),
@@ -135,7 +137,20 @@ class ProfileImageBanner extends StatelessWidget {
               )
             : Di.ESB,
         Provider.of<ProfileProvider>(context).isProfileEditable
-            ? EditIconButton(onPressed: onEditButtonPressed)
+            ? EditIconButton(
+                onPressed: () {
+                  showCustomDialog(
+                    context,
+                    Container(
+                      // margin: const EdgeInsets.symmetric(vertical: 100),
+                      child: ProfileEditDialogWidget(
+                        userProfileData: userProfileData,
+                      ),
+                    ),
+                  );
+                },
+                // onPressed: onEditButtonPressed,
+              )
             : Di.ESB,
         //     Positioned.fill(
         //   top: 10,

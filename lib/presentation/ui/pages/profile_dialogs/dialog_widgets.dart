@@ -276,7 +276,7 @@ class DialogMultiLineTextField extends StatelessWidget {
     return SizedBox(
       width: width ?? 555,
       child: TextFormField(
-        // controller: textEditingController,
+        controller: textEditingController,
         style: bodySmallRegular.copyWith(
           color: Cr.darkGrey1,
         ),

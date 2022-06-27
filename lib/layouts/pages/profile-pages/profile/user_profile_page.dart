@@ -5,6 +5,7 @@ import 'package:holedo/presentation/ui/pages/sections/articles_section/articles_
 import 'package:holedo/presentation/ui/pages/sections/page_overview/page_overview_section.dart';
 import 'package:holedo/presentation/ui/pages/sections/reference_section/reference_section.dart';
 import 'package:holedo/presentation/ui/pages/sections/timeline_section/timeline_section.dart';
+import 'package:holedo/presentation/utill/responsive.dart';
 import '../profile-edit/profile_edit.dart';
 import 'package:flutter/material.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
@@ -16,7 +17,6 @@ import 'package:holedo/presentation/ui/pages/profile_mobile_view/profile_mobile_
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/styles.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 
 class GlobalKeys {
   static final refKey = GlobalKey();
@@ -225,52 +225,28 @@ class _UserProfilePageState extends State<UserProfilePage>
     print('app ${isEditable}');
     return Stack(
       children: [
-        if (ResponsiveWrapper.of(context).isSmallerThan(MOBILE))
-          ProfileMobileViewPage()
+        // if (ResponsiveWrapper.of(context).isSmallerThan(MOBILE))
+        if (isTableOrMobile(context))
+          ProfileMobileViewPage(
+            userProfileData: widget.userProfileData,
+          )
+        // else if (ResponsiveWrapper.of(context).isSmallerThan(TABLET))
+        //   Container(
+        //     color: Cr.green1,
+        //     child: Text(
+        //       "Tablet View",
+        //       style: h2Bold,
+        //     ),
+        //   )
         else
           Center(
             child: ListView(
               shrinkWrap: true,
               children: [
-                Container(
-                  height: 50,
-                  width: Di.getScreenSize(context).width,
-                  color: Cr.red3,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Di.ESB,
-                      Row(
-                        children: [
-                          Text(
-                            "Your profile is only 25% complete. Complete it now to earn your first Hospitality Leaders grade.   ",
-                            textAlign: TextAlign.center,
-                            style: bodyLarge.copyWith(
-                              color: Cr.redTextColor,
-                            ),
-                          ),
-                          CustomElevatedButton(
-                            width: 97,
-                            height: 32,
-                            backgroundColor: Cr.redTextColor,
-                            donotShowIcon: true,
-                          ),
-                        ],
-                      ),
-                      Icon(
-                        Icons.close,
-                        color: Cr.redTextColor,
-                      ),
-                    ],
-                  ),
-                ),
+                AppbarNotification(),
                 ProfileImageBanner(
                   userProfileData: widget.userProfileData,
                   onEditButtonPressed: () {},
-                  // avatarUrl: widget.userProfileData.avatar.toString(),
-                  // fullName: widget.userProfileData.fullName.toString(),
-                  // userTitleTypesId:
-                  //     widget.userProfileData.userTitleTypesId.toString(),
                 ),
                 ProfileTabbar(
                   onTap: (value) {
@@ -304,6 +280,7 @@ class _UserProfilePageState extends State<UserProfilePage>
               ],
             ),
           ),
+
         Provider.of<ProfileProvider>(context).showProfileLoading
             ? CustomLoading()
             : Di.ESB,
@@ -641,5 +618,47 @@ class _UserProfilePageState extends State<UserProfilePage>
     //           ],
     //         ),
     //       );
+  }
+}
+
+class AppbarNotification extends StatelessWidget {
+  const AppbarNotification({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 50,
+      width: Di.getScreenSize(context).width,
+      color: Cr.red3,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Di.ESB,
+          Row(
+            children: [
+              Text(
+                "Your profile is only 25% complete. Complete it now to earn your first Hospitality Leaders grade.   ",
+                textAlign: TextAlign.center,
+                style: bodyLarge.copyWith(
+                  color: Cr.redTextColor,
+                ),
+              ),
+              CustomElevatedButton(
+                width: 97,
+                height: 32,
+                backgroundColor: Cr.redTextColor,
+                donotShowIcon: true,
+              ),
+            ],
+          ),
+          Icon(
+            Icons.close,
+            color: Cr.redTextColor,
+          ),
+        ],
+      ),
+    );
   }
 }

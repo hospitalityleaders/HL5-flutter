@@ -3,6 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:holedo/models/holedoapi/holedoapi.dart';
 import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_image_banner.dart';
+import 'package:holedo/presentation/ui/pages/profile_dialogs/profile_write_reference_dialog_widget.dart';
+import 'package:holedo/presentation/ui/pages/profile_dialogs/show_custom_dialog.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/styles.dart';
@@ -163,7 +165,9 @@ class StatsComman extends StatelessWidget {
 class WriteReferenceRecommandButtonComman extends StatelessWidget {
   const WriteReferenceRecommandButtonComman({
     Key? key,
+    required this.userProfileData,
   }) : super(key: key);
+  final User userProfileData;
 
   @override
   Widget build(BuildContext context) {
@@ -171,6 +175,14 @@ class WriteReferenceRecommandButtonComman extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         CustomElevatedButton(
+          onPressed: () {
+            showCustomDialog(
+              context,
+              ProfileWriteReferenceDialogWidget(
+                userProfileData: userProfileData,
+              ),
+            );
+          },
           width: 140,
           height: 35,
           backgroundColor: Cr.accentBlue3,
