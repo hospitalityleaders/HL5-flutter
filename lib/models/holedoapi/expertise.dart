@@ -36,4 +36,22 @@ class Expertise {
         'modified': modified,
         '_joinData': joinData?.toJson(),
       };
+
+  Expertise copyWith({
+    int? id,
+    String? title,
+    int? featured,
+    String? created,
+    String? modified,
+    JoinData? joinData,
+  }) {
+    return Expertise(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      featured: featured ?? this.featured,
+      created: created ?? this.created,
+      modified: modified ?? this.modified,
+      joinData: joinData ?? this.joinData,
+    );
+  }
 }

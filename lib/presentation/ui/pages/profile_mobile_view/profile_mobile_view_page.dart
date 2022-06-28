@@ -40,308 +40,295 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
     final bool isTablt = isTablet(context);
 
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            if (isTablt)
-              Di.getScreenSize(context).width > 800
-                  ? AppbarNotification()
-                  : Container(
-                      height: 100,
-                      width: Di.getScreenSize(context).width,
-                      color: Cr.red3,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Di.SBWS,
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Container(
-                                width: 380,
-                                child: Text(
-                                  "Your profile is only 25% complete. Complete it now to earn your first Hospitality Leaders grade.   ",
-                                  textAlign: TextAlign.center,
-                                  style: bodySmallRegular.copyWith(
-                                    color: Cr.red1,
-                                  ),
+      body: ListView(
+        children: [
+          if (isTablt)
+            Di.getScreenSize(context).width > 800
+                ? AppbarNotification()
+                : Container(
+                    height: 100,
+                    width: Di.getScreenSize(context).width,
+                    color: Cr.red3,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Di.SBWS,
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                              width: 380,
+                              child: Text(
+                                "Your profile is only 25% complete. Complete it now to earn your first Hospitality Leaders grade.   ",
+                                textAlign: TextAlign.center,
+                                style: bodySmallRegular.copyWith(
+                                  color: Cr.red1,
                                 ),
                               ),
-                              CustomElevatedButton(
-                                width: 97,
-                                height: 32,
-                                backgroundColor: Cr.redTextColor,
-                                donotShowIcon: true,
-                              ),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              Di.SBHS,
-                              Icon(
-                                Icons.close,
-                                color: Cr.redTextColor,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                            ),
+                            CustomElevatedButton(
+                              width: 97,
+                              height: 32,
+                              backgroundColor: Cr.redTextColor,
+                              donotShowIcon: true,
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Di.SBHS,
+                            Icon(
+                              Icons.close,
+                              color: Cr.redTextColor,
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-            if (isTablt)
-              ProfileImageBanner(
-                userProfileData: widget.userProfileData,
-                onEditButtonPressed: () {},
-              ),
-            Container(
-              margin: EdgeInsets.only(
-                left: isTablt ? 30 : 0,
-                right: isTablt ? 30 : 0,
-              ),
-              child: Expanded(
-                child: ListView(
-                  shrinkWrap: true,
-                  children: [
-                    if (isMobilePhn)
-                      SingleChildScrollView(
-                        child: SizedBox(
-                          height: 680,
-                          child: Stack(
-                            children: [
-                              Container(
-                                height: 76,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage("assets/images/t6.png"),
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
+                  ),
+          if (isTablt)
+            ProfileImageBanner(
+              userProfileData: widget.userProfileData,
+              onEditButtonPressed: () {},
+            ),
+          Container(
+            margin: EdgeInsets.only(
+              left: isTablt ? 30 : 0,
+              right: isTablt ? 30 : 0,
+            ),
+            child: ListView(
+              physics: ClampingScrollPhysics(),
+              shrinkWrap: true,
+              children: [
+                if (isMobilePhn)
+                  SizedBox(
+                    // height: 680,
+                    child: Stack(
+                      children: [
+                        Container(
+                          height: 76,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage("assets/images/t6.png"),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        Positioned.fill(
+                          top: 55,
+                          // left: Di.getScreenSize(context).width * .02,
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Container(
+                              width: Di.getScreenSize(context).width * .96,
+                              decoration: BoxDecoration(
+                                color: Cr.whiteColor,
                               ),
-                              Positioned.fill(
-                                top: 55,
-                                // left: Di.getScreenSize(context).width * .02,
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: Container(
-                                    width:
-                                        Di.getScreenSize(context).width * .96,
-                                    decoration: BoxDecoration(
-                                      color: Cr.whiteColor,
+                              child: Column(
+                                children: [
+                                  Di.SBHOTL,
+                                  Text(
+                                    "Noberto Holden",
+                                    style: display3,
+                                  ),
+                                  Di.SBHETS,
+                                  OutlinedButton(
+                                    onPressed: () {},
+                                    child: Text(
+                                      "AHL",
+                                      style: bodySmallRegular.copyWith(
+                                        color: Cr.darkGrey1,
+                                      ),
                                     ),
-                                    child: Column(
+                                  ),
+                                  Di.SBHS,
+                                  SizedBox(
+                                    width: 320,
+                                    child: Text(
+                                      "Business development manager, recruiter and hotel specialist.",
+                                      textAlign: TextAlign.center,
+                                      style: bodyLarge.copyWith(
+                                        color: Cr.darkGrey1,
+                                      ),
+                                    ),
+                                  ),
+                                  Di.SBHS,
+                                  SizedBox(
+                                    width: 320,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        Di.SBHOTL,
+                                        Icon(
+                                          Icons.location_on,
+                                          size: 16,
+                                          color: Cr.darkGrey1,
+                                        ),
                                         Text(
-                                          "Noberto Holden",
-                                          style: display3,
-                                        ),
-                                        Di.SBHETS,
-                                        OutlinedButton(
-                                          onPressed: () {},
-                                          child: Text(
-                                            "AHL",
-                                            style: bodySmallRegular.copyWith(
-                                              color: Cr.darkGrey1,
-                                            ),
-                                          ),
-                                        ),
-                                        Di.SBHS,
-                                        SizedBox(
-                                          width: 320,
-                                          child: Text(
-                                            "Business development manager, recruiter and hotel specialist.",
-                                            textAlign: TextAlign.center,
-                                            style: bodyLarge.copyWith(
-                                              color: Cr.darkGrey1,
-                                            ),
-                                          ),
-                                        ),
-                                        Di.SBHS,
-                                        SizedBox(
-                                          width: 320,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              Icon(
-                                                Icons.location_on,
-                                                size: 16,
-                                                color: Cr.darkGrey1,
-                                              ),
-                                              Text(
-                                                " Cape Town, South Africa",
-                                                textAlign: TextAlign.center,
-                                                style: bodyLarge.copyWith(
-                                                  color: Cr.darkGrey1,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Di.SBHD,
-                                        ContactCardMenuCommon(
-                                          isMobile: true,
-                                        ),
-                                        Di.SBHOL,
-                                        SendConnectionRequestComman(),
-                                        Di.SBHES,
-                                        WriteReferenceRecommandButtonComman(
-                                          userProfileData:
-                                              widget.userProfileData,
-                                        ),
-                                        Di.SBHD,
-                                        SizedBox(
-                                          child: Image.asset(
-                                            "assets/images/badge.png",
-                                            width: 50,
-                                          ),
-                                        ),
-                                        Di.SBHS,
-                                        // Container(
-                                        //   padding: EdgeInsets.only(bottom: Di.PSS),
-                                        //   decoration: BoxDecoration(
-                                        //     color: Cr.whiteColor,
-                                        //     border: Border(
-                                        //       bottom: BorderSide(
-                                        //         width: 0.5,
-                                        //         color: Cr.darkGrey1,
-                                        //       ),
-                                        //     ),
-                                        //   ),
-                                        //   child: StatsComman(isMobile: true),
-                                        // ),
-                                        Di.SBHD,
-                                        Container(
-                                          padding: EdgeInsets.only(
-                                            bottom: Di.PSS,
-                                            // left: Di.PSD,
-                                            // right: Di.PSD,
-                                          ),
-                                          decoration: BoxDecoration(
-                                            color: Cr.whiteColor,
-                                            border: Border(
-                                              bottom: BorderSide(
-                                                width: 2,
-                                                color: Cr.grey1,
-                                              ),
-                                            ),
-                                          ),
-                                          height: 100,
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            // mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              Row(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceEvenly,
-                                                children: [
-                                                  Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    children: [
-                                                      PersonAvatar(),
-                                                      Di.SBWD,
-                                                      Text(
-                                                        "Noberto Holden",
-                                                        style: h4Bold,
-                                                        // de
-                                                      ),
-                                                      Di.SBWS,
-                                                      Text(
-                                                        "MHL",
-                                                        style: dividerTextSmall,
-                                                        // de
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                              Di.SBHD,
-                                              CustomElevatedButton(
-                                                width: 280,
-                                              ),
-                                            ],
+                                          " Cape Town, South Africa",
+                                          textAlign: TextAlign.center,
+                                          style: bodyLarge.copyWith(
+                                            color: Cr.darkGrey1,
                                           ),
                                         ),
                                       ],
                                     ),
                                   ),
-                                ),
-                              ),
-                              Positioned.fill(
-                                top: 10,
-                                child: Align(
-                                  alignment: Alignment.topCenter,
-                                  child: Container(
-                                    width: 75,
-                                    height: 75,
-                                    decoration:
-                                        Styles.boxDecorationRounded.copyWith(
-                                      image: DecorationImage(
-                                        image: AssetImage(
-                                            "assets/images/avatar.png"),
-                                        fit: BoxFit.cover,
-                                      ),
+                                  Di.SBHD,
+                                  ContactCardMenuCommon(
+                                    isMobile: true,
+                                  ),
+                                  Di.SBHOL,
+                                  SendConnectionRequestComman(),
+                                  Di.SBHES,
+                                  WriteReferenceRecommandButtonComman(
+                                    userProfileData: widget.userProfileData,
+                                  ),
+                                  Di.SBHD,
+                                  SizedBox(
+                                    child: Image.asset(
+                                      "assets/images/badge.png",
+                                      width: 50,
                                     ),
                                   ),
-                                ),
+                                  Di.SBHS,
+                                  // Container(
+                                  //   padding: EdgeInsets.only(bottom: Di.PSS),
+                                  //   decoration: BoxDecoration(
+                                  //     color: Cr.whiteColor,
+                                  //     border: Border(
+                                  //       bottom: BorderSide(
+                                  //         width: 0.5,
+                                  //         color: Cr.darkGrey1,
+                                  //       ),
+                                  //     ),
+                                  //   ),
+                                  //   child: StatsComman(isMobile: true),
+                                  // ),
+                                  Di.SBHD,
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                      bottom: Di.PSS,
+                                      // left: Di.PSD,
+                                      // right: Di.PSD,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Cr.whiteColor,
+                                      border: Border(
+                                        bottom: BorderSide(
+                                          width: 2,
+                                          color: Cr.grey1,
+                                        ),
+                                      ),
+                                    ),
+                                    height: 100,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      // mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                PersonAvatar(),
+                                                Di.SBWD,
+                                                Text(
+                                                  "Noberto Holden",
+                                                  style: h4Bold,
+                                                  // de
+                                                ),
+                                                Di.SBWS,
+                                                Text(
+                                                  "MHL",
+                                                  style: dividerTextSmall,
+                                                  // de
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                        Di.SBHD,
+                                        CustomElevatedButton(
+                                          width: 280,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
                         ),
-                      ),
-                    if (isMobilePhn)
-                      Padding(
-                        padding:
-                            const EdgeInsets.symmetric(horizontal: Di.PSES),
-                        child: ProfileCompletionComponent(),
-                      ),
-                    Di.SBHS,
-                    ProfileSummaryComponent(
-                      isMobile: true,
-                      userProfileData: widget.userProfileData,
+                        Positioned.fill(
+                          top: 10,
+                          child: Align(
+                            alignment: Alignment.topCenter,
+                            child: Container(
+                              width: 75,
+                              height: 75,
+                              decoration: Styles.boxDecorationRounded.copyWith(
+                                image: DecorationImage(
+                                  image: AssetImage("assets/images/avatar.png"),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    Di.SBHD,
-                    ProfileWorkExperienceComponent(
-                      userProfileData: widget.userProfileData,
-                      isMobile: isMobilePhn,
-                      isTablet: isTablt,
-                    ),
-                    Di.SBHD,
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                      child: FeaturedVideoComponent(
-                        userProfileData: widget.userProfileData,
-                      ),
-                    ),
-                    AreasOfExpertiseComponents(),
-                    ProfileReferenceComponent(),
-                    EducationComponent(
-                      userProfileData: widget.userProfileData,
-                    ),
-                    AchievementComponent(
-                      userProfileData: widget.userProfileData,
-                    ),
-                    LanguagesComponent(
-                      userProfileData: widget.userProfileData,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                      child: ConnectionsComponent(),
-                    ),
-                    TimelineComponent(),
-                    RightsComponent(),
-                    Di.SBHOTL,
-                  ],
+                  ),
+                if (isMobilePhn)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: Di.PSES),
+                    child: ProfileCompletionComponent(),
+                  ),
+                Di.SBHS,
+                ProfileSummaryComponent(
+                  isMobile: true,
                 ),
-              ),
+                Di.SBHD,
+                ProfileWorkExperienceComponent(
+                  userProfileData: widget.userProfileData,
+                  isMobile: isMobilePhn,
+                  isTablet: isTablt,
+                ),
+                Di.SBHD,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                  child: FeaturedVideoComponent(
+                    userProfileData: widget.userProfileData,
+                  ),
+                ),
+                AreasOfExpertiseComponents(),
+                ProfileReferenceComponent(),
+                EducationComponent(
+                  userProfileData: widget.userProfileData,
+                ),
+                AchievementComponent(
+                  userProfileData: widget.userProfileData,
+                ),
+                LanguagesComponent(
+                  userProfileData: widget.userProfileData,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: ConnectionsComponent(),
+                ),
+                TimelineComponent(),
+                RightsComponent(),
+                Di.SBHOTL,
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

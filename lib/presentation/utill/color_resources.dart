@@ -25,6 +25,7 @@ class Cr {
   static const Color accentBlue3 = Color(0xffCCE8FE);
 
   static const Color green1 = Color(0xff7DC81B);
+  static const Color green3 = Color(0xffDEF1C6);
 
 // 7DC81B g.
 

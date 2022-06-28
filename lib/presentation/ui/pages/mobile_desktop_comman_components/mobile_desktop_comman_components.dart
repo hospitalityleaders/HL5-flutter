@@ -62,6 +62,7 @@ class SendConnectionRequestComman extends StatelessWidget {
       text: "SEND CONNECTION REQUEST",
       icon: Icon(
         Icons.person_add,
+        color: Cr.whiteColor,
       ),
     );
   }

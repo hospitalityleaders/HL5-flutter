@@ -6,10 +6,11 @@ class EditIconButton extends StatelessWidget {
   const EditIconButton({
     Key? key,
     this.onPressed,
+    this.iconData,
   }) : super(key: key);
 
   final void Function()? onPressed;
-
+  final IconData? iconData;
   @override
   Widget build(BuildContext context) {
     return Positioned.fill(
@@ -19,7 +20,7 @@ class EditIconButton extends StatelessWidget {
           onPressed: onPressed,
           backgroundColor: Cr.accentBlue1,
           icon: Icon(
-            Icons.edit,
+            iconData ?? Icons.edit,
             color: Cr.whiteColor,
           ),
         ),
