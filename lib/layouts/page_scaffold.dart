@@ -141,7 +141,7 @@ class _PageScaffoldState extends State<PageScaffold> {
             return Scaffold(
               backgroundColor: Cr.backgroundColor,
               key: _scaffoldKey,
-              endDrawer: isMobilePhone(context)
+              endDrawer: isTableOrMobile(context)
                   ? Drawer(
                       child: Center(
                         child: Container(
