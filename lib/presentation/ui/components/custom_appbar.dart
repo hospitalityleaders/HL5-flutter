@@ -4,7 +4,6 @@ import 'package:holedo/models/models.dart';
 import 'package:holedo/presentation/ui/components/appbar_textfield.dart';
 import 'package:holedo/presentation/ui/components/custom_icon_button.dart';
 import 'package:holedo/presentation/ui/components/custom_text_button.dart';
-import 'package:holedo/presentation/ui/components/person_avatar.dart';
 import 'package:holedo/presentation/ui/components/submenus.dart';
 
 import 'package:holedo/presentation/ui/components/text_with_background.dart';
@@ -86,35 +85,22 @@ class _CustomAppbarState extends State<CustomAppbar> {
                 thickness: 1.3,
                 color: Cr.darkBlue5,
               ),
-              CustomIconButton(
-                icon: SvgPicture.asset(
-                  Svgs.emailOpen,
-                  color: Cr.darkBlue9,
-                ),
-                // iconData: Icons.mail_rounded,
-                showNotification: true,
-              ),
+              AppbarEmailButton(),
               VerticalDivider(
                 thickness: 1.3,
                 color: Cr.darkBlue5,
               ),
-              CustomIconButton(
-                icon: SvgPicture.asset(
-                  Svgs.flag,
-                  color: Cr.darkBlue9,
-                ),
-                showNotification: true,
-              ),
+              AppbarNotificationsButton(),
               VerticalDivider(
                 thickness: 1.3,
                 color: Cr.darkBlue5,
               ),
-              ConnectionRequestWidget(),
+              AppbarConnectionRequestButton(),
               VerticalDivider(
                 thickness: 1.3,
                 color: Cr.darkBlue5,
               ),
-              PersonAvatar(),
+              _ProfileWithSubMenu(),
               VerticalDivider(
                 thickness: 1.3,
                 color: Cr.darkBlue5,
@@ -129,8 +115,67 @@ class _CustomAppbarState extends State<CustomAppbar> {
   }
 }
 
-class ConnectionRequestWidget extends StatelessWidget {
-  const ConnectionRequestWidget({
+class AppbarNotificationsButton extends StatelessWidget {
+  const AppbarNotificationsButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomIconButton(
+      icon: SvgPicture.asset(
+        Svgs.flag,
+        color: Cr.darkBlue9,
+      ),
+      showNotification: true,
+    );
+  }
+}
+
+class AppbarEmailButton extends StatelessWidget {
+  const AppbarEmailButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomIconButton(
+      icon: SvgPicture.asset(
+        Svgs.emailOpen,
+        color: Cr.darkBlue9,
+      ),
+      // iconData: Icons.mail_rounded,
+      showNotification: true,
+    );
+  }
+}
+
+class _ProfileWithSubMenu extends StatelessWidget {
+  const _ProfileWithSubMenu({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      opaque: true,
+      onHover: (_) => showProfileHoverSubmenu(context),
+      child: Container(
+        width: 28,
+        height: 28,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/avatar.png"),
+            fit: BoxFit.fill,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class AppbarConnectionRequestButton extends StatelessWidget {
+  const AppbarConnectionRequestButton({
     Key? key,
   }) : super(key: key);
 

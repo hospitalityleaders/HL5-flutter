@@ -4,8 +4,8 @@ import 'package:holedo/presentation/ui/components/edit_icon_buttton.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:provider/provider.dart';
 
-class EditAddButtonSheet extends StatelessWidget {
-  const EditAddButtonSheet(
+class EditAddButtonOfSheet extends StatelessWidget {
+  const EditAddButtonOfSheet(
     this.context, {
     Key? key,
     required this.onEditPressed,
@@ -18,20 +18,23 @@ class EditAddButtonSheet extends StatelessWidget {
   Widget build(_) {
     if (Provider.of<ProfileProvider>(context).isProfileEditable)
       return Center(
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            EditIconButton(
-              onPressed: onEditPressed,
-            ),
-            if (onAddPressed != null) ...[
-              Di.SBWS,
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: Di.PSL),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
               EditIconButton(
-                iconData: Icons.add,
-                onPressed: onAddPressed,
+                onPressed: onEditPressed,
               ),
-            ]
-          ],
+              if (onAddPressed != null) ...[
+                Di.SBWS,
+                EditIconButton(
+                  iconData: Icons.add,
+                  onPressed: onAddPressed,
+                ),
+              ]
+            ],
+          ),
         ),
       );
     else

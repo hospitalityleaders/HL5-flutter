@@ -42,7 +42,7 @@ class _ProfileEditDialogWidgetState extends State<ProfileEditDialogWidget> {
               title: "My Profile",
             ),
             Di.SBHL,
-            // ProfilePictureDialogExpandedTile(isExpanded: true),
+            // _ProfilePictureDialogExpandedTile(isExpanded: true),
             // Di.SBHS,
             // ProfileDetailsExpandedTile(isExpanded: true),
             // Di.SBHS,
@@ -487,20 +487,20 @@ class PrivacyDropDown extends StatelessWidget {
   }
 }
 
-class ProfilePictureDialogExpandedTile extends StatefulWidget {
+class _ProfilePictureDialogExpandedTile extends StatefulWidget {
   final bool isExpanded;
-  const ProfilePictureDialogExpandedTile({
+  const _ProfilePictureDialogExpandedTile({
     Key? key,
     this.isExpanded = false,
   }) : super(key: key);
 
   @override
-  State<ProfilePictureDialogExpandedTile> createState() =>
-      _ProfilePictureDialogExpandedTileState();
+  State<_ProfilePictureDialogExpandedTile> createState() =>
+      __ProfilePictureDialogExpandedTileState();
 }
 
-class _ProfilePictureDialogExpandedTileState
-    extends State<ProfilePictureDialogExpandedTile> {
+class __ProfilePictureDialogExpandedTileState
+    extends State<_ProfilePictureDialogExpandedTile> {
   String? selectedValue;
   bool currentlyWorkHere = false;
 

@@ -16,8 +16,13 @@ class ProfileReferenceSingleComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 360,
-      padding: EdgeInsets.symmetric(horizontal: Di.PSS),
-      decoration: Styles.boxDecoration.copyWith(color: Cr.whiteColor),
+      padding: EdgeInsets.symmetric(
+        horizontal: Di.PSS,
+      ),
+      margin: EdgeInsets.only(
+        bottom: Di.PSL,
+      ),
+      decoration: Styles.boxDecorationWithShadow.copyWith(color: Cr.whiteColor),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -70,9 +75,8 @@ class ProfileReferenceSingleComponent extends StatelessWidget {
                 ),
                 Di.SBWD,
                 Expanded(
-                  // width: 100,
                   child: SizedBox(
-                    height: Di.FSOTL + 6,
+                    height: 40,
                     child: Text(
                       description ??
                           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
@@ -100,7 +104,6 @@ class ProfileReferenceSingleComponent extends StatelessWidget {
           CustomTextButton(
             text: "  + Show more",
           ),
-          Di.DD,
           Di.SBHD,
         ],
       ),

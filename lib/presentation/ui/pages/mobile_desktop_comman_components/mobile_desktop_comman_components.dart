@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:holedo/models/holedoapi/holedoapi.dart';
+import 'package:holedo/presentation/ui/components/contact_card_dialog_widget.dart';
 import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
-import 'package:holedo/presentation/ui/pages/components/profile_image_banner.dart';
+import 'package:holedo/presentation/ui/components/custom_outlined_button.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/profile_write_reference_dialog_widget.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/show_custom_dialog.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
@@ -24,6 +25,12 @@ class ContactCardMenuCommon extends StatelessWidget {
           isMobile ? MainAxisAlignment.center : MainAxisAlignment.spaceBetween,
       children: [
         CustomOutlinedButton(
+          onPressed: () {
+            showCustomDialog(
+              context,
+              ContactCardDialogWidget(),
+            );
+          },
           text: "Contact card",
           icon: SvgPicture.asset(
             "assets/svgicons/card-account-phone.svg",
@@ -76,14 +83,14 @@ class StatsComman extends StatelessWidget {
   }) : super(key: key);
 
   final bool isMobile;
-  final User? userProfileData;
+  final User userProfileData;
 
 // membership_grade_leader_points
 
   @override
   Widget build(BuildContext context) {
     final int membershipGradeLeaderPoints =
-        userProfileData?.membershipGradeLeaderPoints ?? 0;
+        userProfileData.membershipGradeLeaderPoints ?? 0;
     return SizedBox(
       height: 55,
       width: isMobile ? 400 : 470,
@@ -93,7 +100,9 @@ class StatsComman extends StatelessWidget {
           Column(
             children: [
               Text(
-                "250+",
+                userProfileData.approvedConnections != null
+                    ? "${userProfileData.approvedConnections!.length.toString() + (userProfileData.approvedConnections!.length > 250 ? "+" : "")}"
+                    : "0",
                 style: h2Regular.copyWith(
                   color: Cr.accentBlue1,
                 ),
@@ -128,7 +137,9 @@ class StatsComman extends StatelessWidget {
           Column(
             children: [
               Text(
-                "3",
+                userProfileData.receivedReferences != null
+                    ? userProfileData.receivedReferences!.length.toString()
+                    : "",
                 style: h2Regular.copyWith(
                   color: Cr.accentBlue1,
                 ),
@@ -144,7 +155,9 @@ class StatsComman extends StatelessWidget {
           Column(
             children: [
               Text(
-                "312",
+                userProfileData.recommendations != null
+                    ? userProfileData.recommendations!.length.toString()
+                    : "0",
                 style: h2Regular.copyWith(
                   color: Cr.accentBlue1,
                 ),

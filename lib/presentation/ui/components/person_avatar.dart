@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:holedo/presentation/ui/components/submenus.dart';
-import 'package:holedo/presentation/utill/dimensions.dart';
 
 class PersonAvatar extends StatelessWidget {
   const PersonAvatar({
@@ -12,17 +10,14 @@ class PersonAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      opaque: true,
-      onHover: (_) => showProfileHoverSubmenu(context),
-      child: Container(
-        width: avatarSize ?? Di.WSETS - 22,
-        height: avatarSize ?? Di.WSETS - 22,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/avatar.png"),
-            fit: BoxFit.fill,
-          ),
+    return Container(
+      width: avatarSize ?? 28,
+      height: avatarSize ?? 28,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          // image: NetworkImage(DbData.getUserProfileData.avatar ?? ""),
+          image: AssetImage("assets/images/profile.png"),
+          fit: BoxFit.fill,
         ),
       ),
     );

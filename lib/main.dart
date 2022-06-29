@@ -246,6 +246,7 @@ class HoledoApp extends StatelessWidget {
             ResponsiveBreakpoint.resize(650, name: MOBILE),
             ResponsiveBreakpoint.resize(1000, name: TABLET),
             ResponsiveBreakpoint.resize(1300, name: DESKTOP),
+            ResponsiveBreakpoint.autoScale(1301, name: "Desktop"),
           ],
         ),
         debugShowCheckedModeBanner: false,

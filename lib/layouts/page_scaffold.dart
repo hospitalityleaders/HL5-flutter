@@ -4,10 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:holedo/presentation/ui/components/appbar_textfield.dart';
 import 'package:holedo/presentation/ui/components/custom_appbar.dart';
+import 'package:holedo/presentation/ui/components/custom_icon_button.dart';
 import 'package:holedo/presentation/ui/pages/profile_mobile_view/profile_mobile_view_page.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/images.dart';
+import 'package:holedo/presentation/utill/nav.dart';
 import 'package:holedo/presentation/utill/responsive.dart';
 import 'package:holedo/presentation/utill/styles.dart';
 import 'package:holedo/responsive/responsive.dart';
@@ -120,12 +122,14 @@ class _PageScaffoldState extends State<PageScaffold> {
   @override
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context);
-
     final routemaster = Routemaster.of(context);
     final canGoBack = routemaster.history.canGoBack;
     final canGoForward = routemaster.history.canGoForward;
     final GlobalKey<ScaffoldState> _scaffoldKey =
         new GlobalKey<ScaffoldState>();
+    final menuItems = Get.put(HoledoDatabase()).menuItems;
+
+    bool inDrawer = true;
 
     return widget.isNewDesign
         ? widget.body
@@ -139,26 +143,101 @@ class _PageScaffoldState extends State<PageScaffold> {
               key: _scaffoldKey,
               endDrawer: isMobilePhone(context)
                   ? Drawer(
-                      child: Container(
-                        color: Color(0xFF232f3e),
-                        child: ListView(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Image(
-                                image: AssetImage('assets/icons/logo.png'),
-                                height: 55,
+                      child: Center(
+                        child: Container(
+                          padding: EdgeInsets.only(top: Di.PSS),
+                          color: Cr.colorPrimary,
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  AppbarEmailButton(),
+                                  // VerticalDivider(
+                                  //   thickness: 3.3,
+                                  //   color: Cr.darkBlue5,
+                                  // ),
+                                  AppbarNotificationsButton(),
+                                  AppbarConnectionRequestButton(),
+                                  CustomIconButton(
+                                    onTap: () {
+                                      Nav.pop(context);
+                                    },
+                                    icon: Icon(
+                                      Icons.close,
+                                      color: Cr.darkBlue9,
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
-                            SingleChildScrollView(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: _buildNavBarChildren(
-                                    inDrawer: true,
-                                    isLogin: appState.isLoggedIn),
+                              Divider(
+                                thickness: 1.2,
+                                color: Cr.darkBlue5,
                               ),
-                            ),
-                          ],
+                              SingleChildScrollView(
+                                child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      for (var item in menuItems)
+                                        if (item.loginOnly == null ||
+                                            (item.loginOnly ==
+                                                appState.isLoggedIn))
+                                          if (inDrawer == true &&
+                                              item.inDrawer == true) ...[
+                                            Padding(
+                                              padding: EdgeInsets.only(
+                                                left: Di.PSL,
+                                                bottom: Di.PSD,
+                                              ),
+                                              child: ListTile(
+                                                title: Text(
+                                                  item.title!,
+                                                  style: TextStyle(
+                                                    // fontSize: 18,
+                                                    color: Cr.whiteColor,
+                                                  ),
+                                                ),
+                                                onTap: () {
+                                                  Routemaster.of(context)
+                                                      .push(item.path!);
+                                                },
+                                              ),
+                                            ),
+                                            Divider(
+                                              thickness: 1.2,
+                                              color: Cr.darkBlue5,
+                                            ),
+                                          ] else if (inDrawer == false &&
+                                              item.inNav == true)
+                                            Padding(
+                                              padding:
+                                                  EdgeInsets.only(left: Di.PSL),
+                                              child: ListTile(
+                                                title: Text(
+                                                  item.title!,
+                                                  style:
+                                                      defaultRegular.copyWith(
+                                                    color: Cr.whiteColor,
+                                                  ),
+                                                ),
+                                                onTap: () {
+                                                  Routemaster.of(context)
+                                                      .push(item.path!);
+                                                },
+                                              ),
+                                            )
+                                    ]
+
+                                    // _buildNavBarChildren(
+                                    //     inDrawer: true,
+                                    //     isLogin: appState.isLoggedIn),
+
+                                    ),
+                              ),
+                              Di.ESB,
+                            ],
+                          ),
                         ),
                       ),
                     )
@@ -605,7 +684,6 @@ class _PageScaffoldState extends State<PageScaffold> {
     required bool isLogin,
   }) {
     final menuItems = Get.put(HoledoDatabase()).menuItems;
-
     return [
       for (var item in menuItems)
         if (item.loginOnly == null || (item.loginOnly == isLogin))

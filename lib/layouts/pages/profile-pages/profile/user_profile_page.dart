@@ -201,8 +201,8 @@ class _UserProfilePageState extends State<UserProfilePage>
 
   int tabBar = 0;
   late TabController _tabController;
-
   int currentTabIndex = 0;
+  bool showNotifications = true;
 
   @override
   void initState() {
@@ -243,7 +243,16 @@ class _UserProfilePageState extends State<UserProfilePage>
             child: ListView(
               shrinkWrap: true,
               children: [
-                AppbarNotification(),
+                if (showNotifications)
+                  AppbarNotification(
+                    onClosePressed: () {
+                      setState(
+                        () {
+                          showNotifications = false;
+                        },
+                      );
+                    },
+                  ),
                 ProfileImageBanner(
                   userProfileData: widget.userProfileData,
                   onEditButtonPressed: () {},
@@ -624,7 +633,10 @@ class _UserProfilePageState extends State<UserProfilePage>
 class AppbarNotification extends StatelessWidget {
   const AppbarNotification({
     Key? key,
+    this.onClosePressed,
   }) : super(key: key);
+
+  final void Function()? onClosePressed;
 
   @override
   Widget build(BuildContext context) {
@@ -653,9 +665,12 @@ class AppbarNotification extends StatelessWidget {
               ),
             ],
           ),
-          Icon(
-            Icons.close,
-            color: Cr.redTextColor,
+          GestureDetector(
+            onTap: onClosePressed,
+            child: Icon(
+              Icons.close,
+              color: Cr.redTextColor,
+            ),
           ),
         ],
       ),

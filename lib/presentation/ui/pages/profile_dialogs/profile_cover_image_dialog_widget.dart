@@ -26,26 +26,24 @@ class _ProfileWriteReferenceDialogWidgetState
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 200),
-      child: Center(
-        child: SingleChildScrollView(
-          // behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
-          child: Container(
-            color: Cr.darkGrey4,
-            width: 655,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                DialogTitleWidget(
-                  title: "Cover image",
-                ),
-                Di.SBHL,
-                ProfileCoverImageDialogExpandedTile(isExpanded: true),
-                Di.SBHD,
-              ],
+    // return Container(
+    //   width: 100,
+    //   height: 200,
+    // );
+    return Container(
+      color: Cr.darkGrey4,
+      width: 655,
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            DialogTitleWidget(
+              title: "Cover image",
             ),
-          ),
+            Di.SBHL,
+            ProfileCoverImageDialogExpandedTile(isExpanded: true),
+            Di.SBHD,
+          ],
         ),
       ),
     );

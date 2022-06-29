@@ -131,6 +131,11 @@ class Styles {
     borderRadius: BorderRadius.circular(4),
   );
 
+  static final BoxDecoration boxDecorationCircle = BoxDecoration(
+    color: Cr.whiteColor,
+    shape: BoxShape.circle,
+  );
+
   static const BoxDecoration boxDecoration = BoxDecoration(
     color: Cr.whiteColor,
   );
@@ -196,6 +201,7 @@ const h2Regular = TextStyle(
   fontSize: Di.FSEL,
   fontWeight: FontWeight.w400,
   color: Cr.darkBlue1,
+  height: 1.2,
 );
 
 const h2Bold = TextStyle(

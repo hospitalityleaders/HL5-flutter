@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:holedo/db_data.dart';
 import 'package:holedo/layouts/pages/profile-pages/profile/user_profile_page.dart';
 import 'package:holedo/models/holedoapi/user.dart';
 import 'package:holedo/presentation/ui/components/appbar_textfield.dart';
@@ -38,6 +39,7 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
   Widget build(BuildContext context) {
     final bool isMobilePhn = isMobilePhone(context);
     final bool isTablt = isTablet(context);
+    final User getUserProfileData = DbData.getUserProfileData;
 
     return Scaffold(
       body: ListView(
@@ -102,7 +104,7 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
               children: [
                 if (isMobilePhn)
                   SizedBox(
-                    // height: 680,
+                    height: 600,
                     child: Stack(
                       children: [
                         Container(
@@ -116,7 +118,6 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                         ),
                         Positioned.fill(
                           top: 55,
-                          // left: Di.getScreenSize(context).width * .02,
                           child: Align(
                             alignment: Alignment.center,
                             child: Container(
@@ -128,14 +129,16 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                                 children: [
                                   Di.SBHOTL,
                                   Text(
-                                    "Noberto Holden",
+                                    getUserProfileData.fullName ?? "",
                                     style: display3,
                                   ),
                                   Di.SBHETS,
                                   OutlinedButton(
                                     onPressed: () {},
                                     child: Text(
-                                      "AHL",
+                                      getUserProfileData
+                                              .currentMembershipGrade!.title ??
+                                          "",
                                       style: bodySmallRegular.copyWith(
                                         color: Cr.darkGrey1,
                                       ),
@@ -145,7 +148,8 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                                   SizedBox(
                                     width: 320,
                                     child: Text(
-                                      "Business development manager, recruiter and hotel specialist.",
+                                      widget.userProfileData.professionalTitle
+                                          .toString(),
                                       textAlign: TextAlign.center,
                                       style: bodyLarge.copyWith(
                                         color: Cr.darkGrey1,
@@ -166,7 +170,8 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                                           color: Cr.darkGrey1,
                                         ),
                                         Text(
-                                          " Cape Town, South Africa",
+                                          widget.userProfileData.area ?? "",
+                                          // " Cape Town, South Africa",
                                           textAlign: TextAlign.center,
                                           style: bodyLarge.copyWith(
                                             color: Cr.darkGrey1,
@@ -240,7 +245,9 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                                                 PersonAvatar(),
                                                 Di.SBWD,
                                                 Text(
-                                                  "Noberto Holden",
+                                                  widget.userProfileData
+                                                          .fullName ??
+                                                      '',
                                                   style: h4Bold,
                                                   // de
                                                 ),
@@ -252,9 +259,29 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                                                 ),
                                               ],
                                             ),
+                                            Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Icon(
+                                                  Icons.menu,
+                                                  color: Cr.accentBlue1,
+                                                ),
+                                                Text(
+                                                  "Menu",
+                                                  style: TextStyle(
+                                                    fontSize: 9,
+                                                    color: Cr.accentBlue1,
+                                                    fontFamily: 'SourceSansPro',
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                )
+                                              ],
+                                            )
                                           ],
                                         ),
-                                        Di.SBHD,
+                                        Di.SBHES,
                                         CustomElevatedButton(
                                           width: 280,
                                         ),
@@ -285,46 +312,55 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                       ],
                     ),
                   ),
-                if (isMobilePhn)
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: Di.PSES),
-                    child: ProfileCompletionComponent(),
-                  ),
-                Di.SBHS,
-                ProfileSummaryComponent(
-                  isMobile: true,
-                ),
-                Di.SBHD,
-                ProfileWorkExperienceComponent(
-                  userProfileData: widget.userProfileData,
-                  isMobile: isMobilePhn,
-                  isTablet: isTablt,
-                ),
-                Di.SBHD,
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                  child: FeaturedVideoComponent(
-                    userProfileData: widget.userProfileData,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: Di.PSS,
+                  ),
+                  child: Column(
+                    children: [
+                      if (isMobilePhn) ProfileCompletionComponent(),
+                      Di.SBHS,
+                      ProfileSummaryComponent(
+                        isMobile: true,
+                      ),
+
+                      ProfileWorkExperienceComponent(
+                        userProfileData: widget.userProfileData,
+                        isMobile: isMobilePhn,
+                        isTablet: isTablt,
+                      ),
+                      Di.SBHS,
+                      FeaturedVideoComponent(
+                        isMobile: true,
+                        userProfileData: widget.userProfileData,
+                      ),
+                      Di.SBHS,
+                      AreasOfExpertiseComponents(),
+                      Di.SBHS,
+                      ProfileReferenceComponent(),
+                      Di.SBHS,
+                      EducationComponent(
+                        isMobile: true,
+                        userProfileData: widget.userProfileData,
+                      ),
+                      Di.SBHS,
+                      AchievementComponent(
+                        isMobile: true,
+                        userProfileData: widget.userProfileData,
+                      ),
+                      //TODO:
+                      // LanguagesComponent(
+                      //   userProfileData: widget.userProfileData,
+                      // ),
+                      ConnectionsComponent(),
+                      TimelineComponent(),
+                      RightsComponent(
+                        isMobile: true,
+                      ),
+                      Di.SBHOTL,
+                    ],
                   ),
                 ),
-                AreasOfExpertiseComponents(),
-                ProfileReferenceComponent(),
-                EducationComponent(
-                  userProfileData: widget.userProfileData,
-                ),
-                AchievementComponent(
-                  userProfileData: widget.userProfileData,
-                ),
-                LanguagesComponent(
-                  userProfileData: widget.userProfileData,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: ConnectionsComponent(),
-                ),
-                TimelineComponent(),
-                RightsComponent(),
-                Di.SBHOTL,
               ],
             ),
           ),
@@ -402,7 +438,7 @@ class _ProfileMobileAppbarState extends State<ProfileMobileAppbar> {
                       thickness: 1.3,
                       color: Cr.darkBlue5,
                     ),
-                    ConnectionRequestWidget(),
+                    AppbarConnectionRequestButton(),
                     VerticalDivider(
                       thickness: 1.3,
                       color: Cr.darkBlue5,

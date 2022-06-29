@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:holedo/models/models.dart';
 import 'package:holedo/presentation/providers/profile_provider.dart';
 import 'package:holedo/presentation/ui/components/edit_icon_buttton.dart';
+import 'package:holedo/presentation/ui/components/person_avatar.dart';
 import 'package:holedo/presentation/ui/pages/mobile_desktop_comman_components/mobile_desktop_comman_components.dart';
+import 'package:holedo/presentation/ui/pages/profile_dialogs/profile_cover_image_dialog_widget.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/profile_edit_dialog_widget.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/show_custom_dialog.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
@@ -29,8 +31,10 @@ class ProfileImageBanner extends StatelessWidget {
           height: 500,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image:
-                  AssetImage(userProfileData.banner ?? "assets/images/t6.png"),
+              image: NetworkImage(
+                userProfileData.banner ??
+                    "https://images.pexels.com/photos/313782/pexels-photo-313782.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+              ),
               fit: BoxFit.cover,
               colorFilter: ColorFilter.mode(
                 Colors.black.withOpacity(0.3),
@@ -55,7 +59,7 @@ class ProfileImageBanner extends StatelessWidget {
                     ContactCardMenuCommon(),
                     Di.SBHD,
                     Text(
-                      userProfileData.fullName ?? "Noberto Holden",
+                      userProfileData.fullName ?? "",
                       style: display2,
                     ),
                     Text(
@@ -77,7 +81,7 @@ class ProfileImageBanner extends StatelessWidget {
                           size: 12,
                         ),
                         Text(
-                          userProfileData.area ?? " Cape Town, South Africa",
+                          userProfileData.area ?? "",
                           style: bodySmallRegular.copyWith(
                             color: Cr.darkGrey1,
                           ),
@@ -104,22 +108,27 @@ class ProfileImageBanner extends StatelessWidget {
           top: 10,
           child: Align(
             alignment: Alignment.topCenter,
-            child: Container(
-              width: 75,
-              height: 75,
-              decoration: Styles.boxDecorationRounded.copyWith(
-                image: DecorationImage(
-                  image:
-                      // avatarUrl != null
-                      //     ?
-                      NetworkImage(userProfileData.avatar?.toString() ?? ""),
-                  // : AssetImage("assets/images/avatar.png"),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
+            child: PersonAvatar(avatarSize: 75),
           ),
         ),
+        if (Provider.of<ProfileProvider>(context).isProfileEditable)
+          Positioned(
+            bottom: 10,
+            right: 10,
+            child: FloatingActionButton(
+              backgroundColor: Cr.accentBlue1,
+              child: Icon(Icons.camera_alt),
+              onPressed: () {
+                showCustomDialog(
+                  context,
+                  ProfileCoverImageDialogWidget(
+                    userProfileData: userProfileData,
+                  ),
+                );
+              },
+            ),
+          ),
+
         Provider.of<ProfileProvider>(context).isProfileEditable
             ? Center(
                 child: Column(
@@ -164,39 +173,30 @@ class ProfileImageBanner extends StatelessWidget {
   }
 }
 
-class CustomOutlinedButton extends StatelessWidget {
-  const CustomOutlinedButton({
-    Key? key,
-    this.text,
-    this.icon,
-    this.textWidget,
-  }) : super(key: key);
+// class ProfileAvatar extends StatelessWidget {
+//   const ProfileAvatar({
+//     Key? key,
+//     this.doubleWidthHeight,
+//   }) : super(key: key);
 
-  final String? text;
-  final Widget? textWidget;
-  final Widget? icon;
+//   final double? doubleWidthHeight;
 
-  @override
-  Widget build(BuildContext context) {
-    return OutlinedButton(
-      onPressed: () {},
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          icon != null ? icon! : Di.ESB,
-          Di.SBWES,
-          textWidget ??
-              Text(
-                text ?? "",
-                style: bodySmallRegular.copyWith(
-                  color: Cr.darkGrey1,
-                ),
-              ),
-        ],
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       width: doubleWidthHeight ?? 75,
+//       height: doubleWidthHeight ?? 75,
+//       decoration: Styles.boxDecorationRounded.copyWith(
+//         image: DecorationImage(
+//           image:
+//               NetworkImage(DbData.getUserProfileData.avatar?.toString() ?? ""),
+//           fit: BoxFit.cover,
+//         ),
+//       ),
+//     );
+//   }
+// }
+
 
 // "assets/svgicons/card-account-phone.svg",
             // "Contact card",

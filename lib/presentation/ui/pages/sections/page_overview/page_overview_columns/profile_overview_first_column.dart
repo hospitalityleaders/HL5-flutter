@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:holedo/db_data.dart';
 import 'package:holedo/models/models.dart';
-import 'package:holedo/presentation/providers/profile_provider.dart';
 import 'package:holedo/presentation/ui/components/custom_checkbox_with_title.dart';
-import 'package:holedo/presentation/ui/components/custom_text_button.dart';
-import 'package:holedo/presentation/ui/components/edit_icon_buttton.dart';
-import 'package:holedo/presentation/ui/components/person_avatar.dart';
-import 'package:holedo/presentation/ui/pages/components/edit_add_buttons_sheet.dart';
-import 'package:holedo/presentation/ui/pages/components/edit_card_sheet.dart';
+import 'package:holedo/presentation/ui/pages/components/edit_add_buttons_of_sheet.dart';
+import 'package:holedo/presentation/ui/pages/components/edit_blue_card_sheet.dart';
+import 'package:holedo/presentation/ui/pages/components/profile_reference_component.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/profile_expertise_dialog_widget.dart';
-import 'package:holedo/presentation/ui/pages/profile_dialogs/profile_my_reference_dialog_widget.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/profile_summary_dialog_widget.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/show_custom_dialog.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
@@ -52,147 +48,7 @@ class _ProfileOverviewFirstColumnState
           Di.SBHETS,
           AreasOfExpertiseComponents(),
           Di.SBHL,
-          // ProfileReferenceComponent(),
-          Container(
-            decoration: Styles.boxDecoration.copyWith(color: Cr.whiteColor),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Di.SBHETS,
-                Card(
-                  child: ListTile(
-                    title: Text(
-                      "References",
-                      style: h2Regular,
-                    ),
-                  ),
-                ),
-                // Divider(thickness: 1),
-                IntrinsicHeight(
-                  child: Stack(
-                    children: [
-                      Column(
-                        children: [
-                          Container(
-                            width: 360,
-                            padding: EdgeInsets.symmetric(horizontal: Di.PSS),
-                            decoration: Styles.boxDecoration
-                                .copyWith(color: Cr.whiteColor),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                ListTile(
-                                  leading: PersonAvatar(
-                                    avatarSize: Di.FSOTL + 10,
-                                  ),
-                                  title: Row(
-                                    children: [
-                                      Text(
-                                        "Sarah Lee",
-                                        style: h4Bold,
-                                      ),
-                                      Di.SBWES,
-                                      Text(
-                                        "MHL",
-                                        style: dividerTextSmall,
-                                      )
-                                    ],
-                                  ),
-                                  subtitle: Text(
-                                    "General Manager, One & Only Hotel",
-                                    style: bodySmallRegular.copyWith(
-                                      color: Cr.darkGrey1,
-                                    ),
-                                  ),
-                                ),
-                                Di.SBHES,
-                                Container(
-                                  height: Di.FSOTL + 10,
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: Di.PSD),
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        width: Di.FSOTL,
-                                        height: Di.FSOTL,
-                                        decoration:
-                                            Styles.boxDecoration.copyWith(
-                                          color: Cr.accentBlue1,
-                                        ),
-                                        child: Icon(
-                                          Icons.format_quote,
-                                          color: Cr.whiteColor,
-                                        ),
-                                      ),
-                                      Di.SBWD,
-                                      Expanded(
-                                        // width: 100,
-                                        child: SizedBox(
-                                          height: Di.FSOTL + 6,
-                                          child: Text(
-                                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-                                            style: bodyLarge.copyWith(
-                                              color: Cr.darkGrey1,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Di.SBHETS,
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: Di.PSD),
-                                  child: Text(
-                                    "incididunt ut labore et dolore magna aliqua.",
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: bodyLarge.copyWith(
-                                      color: Cr.darkGrey1,
-                                    ),
-                                  ),
-                                ),
-                                CustomTextButton(
-                                  text: "  + Show more",
-                                ),
-                                Di.SBHD,
-                                Divider(thickness: 1),
-                              ],
-                            ),
-                          ),
-
-                          // _ProfileReferenceListTile(),
-                          // _ProfileReferenceListTile(),
-                          // Divider(thickness: 1),
-                        ],
-                      ),
-                      Provider.of<ProfileProvider>(context).isProfileEditable
-                          ? Container(
-                              width: 560,
-                              color: Cr.accentBlue2.withOpacity(.8),
-                              padding: EdgeInsets.all(Di.PSD),
-                            )
-                          : Di.ESB,
-                      Provider.of<ProfileProvider>(context).isProfileEditable
-                          ? EditIconButton(
-                              onPressed: () {
-                                // buildReferencesCard(img, title, userId, subTitle, description)
-                                showCustomDialog(
-                                  context,
-                                  ProfileMyReferenceDialogWidget(
-                                    userProfileData: widget.userProfileData,
-                                  ),
-                                );
-                              },
-                            )
-                          : Di.ESB,
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
+          ProfileReferenceComponent(),
         ],
       ),
     );
@@ -657,6 +513,8 @@ class ProfileSummaryComponent extends StatefulWidget {
 class _ProfileSummaryComponentState extends State<ProfileSummaryComponent> {
   @override
   Widget build(BuildContext context) {
+    final String? profileSummary = DbData.getUserProfileData.profileSummary;
+
     return Container(
       margin: EdgeInsets.only(bottom: Di.PSD),
       decoration: Styles.boxDecoration.copyWith(
@@ -672,39 +530,50 @@ class _ProfileSummaryComponentState extends State<ProfileSummaryComponent> {
             ),
           ),
           Di.DWZH,
-          Di.SBHD,
           IntrinsicHeight(
             child: Stack(
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: Di.PSD,
+                  padding: const EdgeInsets.only(
+                    left: Di.PSD,
+                    right: Di.PSD,
+                    top: Di.PSD,
                   ),
                   child: Text(
-                    DbData.getUserProfileData.profileSummary ?? "",
+                    profileSummary ?? "",
                     // widget.userProfileData.profileSummary ?? "",
                     maxLines: widget.isMobile ? 6 : null,
                     style: bodyLarge.copyWith(color: Cr.darkGrey1),
                   ),
                 ),
-                Provider.of<ProfileProvider>(context).isProfileEditable
-                    ? Container(
-                        width: 560,
-                        color: Cr.accentBlue2.withOpacity(.8),
-                      )
-                    : Di.ESB,
-                Provider.of<ProfileProvider>(context).isProfileEditable
-                    ? EditIconButton(
-                        onPressed: () {
-                          showCustomDialog(
-                            context,
-                            ProfileSummaryDialogWidget(
-                              userProfileData: DbData.getUserProfileData,
-                            ),
-                          );
-                        },
-                      )
-                    : Di.ESB,
+                EditBlueCardSheet(
+                  context,
+                  dataIsNull: profileSummary == null,
+                  greenCardText:
+                      "Add a written profile summary about your professional career, skills, work experience and achievements. Promote yourself and get recognised by other people.",
+                  greenCardTip:
+                      "People with detailed profile summaries are 95% more likely to be viewed and connected with.",
+                  onAddPressed: () {
+                    showCustomDialog(
+                      context,
+                      ProfileSummaryDialogWidget(
+                        userProfileData: DbData.getUserProfileData,
+                      ),
+                    );
+                  },
+                ),
+                if (profileSummary != null)
+                  EditAddButtonOfSheet(
+                    context,
+                    onEditPressed: () {
+                      showCustomDialog(
+                        context,
+                        ProfileSummaryDialogWidget(
+                          userProfileData: DbData.getUserProfileData,
+                        ),
+                      );
+                    },
+                  ),
               ],
             ),
           ),
@@ -721,6 +590,7 @@ class AreasOfExpertiseComponents extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final expertise = DbData.getUserProfileData.expertise;
     return Container(
       decoration: Styles.boxDecorationWithShadow.copyWith(color: Cr.whiteColor),
       child: Column(
@@ -742,48 +612,65 @@ class AreasOfExpertiseComponents extends StatelessWidget {
                     children: [
                       Di.SBHD,
                       DbData.getUserProfileData.expertise != null
-                          ? Wrap(
-                              children: List<Widget>.generate(
-                                DbData.getUserProfileData.expertise!.length,
-                                (int idx) {
-                                  return
-                                      //  Di.SBWS,
-                                      CustomCheckboxWithTitle(
-                                    title: (DbData.getUserProfileData
-                                                .expertise![idx])
-                                            .title ??
-                                        "",
-                                  );
-                                },
-                              ).toList(),
+                          ? Align(
+                              alignment: Alignment.centerLeft,
+                              child: Wrap(
+                                children: List<Widget>.generate(
+                                  DbData.getUserProfileData.expertise!.length,
+                                  (int idx) {
+                                    return
+                                        //  Di.SBWS,
+                                        CustomCheckboxWithTitle(
+                                      title: (DbData.getUserProfileData
+                                                  .expertise![idx])
+                                              .title ??
+                                          "",
+                                    );
+                                  },
+                                ).toList(),
+                              ),
                             )
                           : Di.ESB,
+                      Di.SBHD,
                     ],
                   ),
                 ),
-                EditCardSheet(context),
-                EditAddButtonSheet(
+                // EditBlueCardSheet(context),
+                EditBlueCardSheet(
                   context,
-                  onEditPressed: () {
-                    showCustomDialog(
-                      context,
-                      ProfileExpertiseDialogWidget(),
-                    );
-                    // buildAreaOfExpePopUp(context);
-                  },
+                  dataIsNull: expertise == null,
+                  // dataIsNull: expertise == null,
+                  greenCardText:
+                      "List your skill set and areas of focus for other connections and potential employers to view.",
                   onAddPressed: () {
                     showCustomDialog(
                       context,
                       ProfileExpertiseDialogWidget(),
                     );
-                    // buildAreaOfExpePopUp(context);
                   },
-                )
+                ),
+                if (expertise != null)
+                  EditAddButtonOfSheet(
+                    context,
+                    onEditPressed: () {
+                      showCustomDialog(
+                        context,
+                        ProfileExpertiseDialogWidget(),
+                      );
+                      // buildAreaOfExpePopUp(context);
+                    },
+                    onAddPressed: () {
+                      showCustomDialog(
+                        context,
+                        ProfileExpertiseDialogWidget(),
+                      );
+                      // buildAreaOfExpePopUp(context);
+                    },
+                  ),
               ],
             ),
           ),
           // Training
-          Di.SBHD,
         ],
       ),
     );

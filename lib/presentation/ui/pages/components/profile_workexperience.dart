@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:holedo/db_data.dart';
+import 'package:holedo/models/holedoapi/experience.dart';
 import 'package:holedo/models/holedoapi/holedoapi.dart';
-import 'package:holedo/presentation/providers/profile_provider.dart';
 import 'package:holedo/presentation/ui/components/container_with_icon.dart';
 import 'package:holedo/presentation/ui/components/custom_text_button.dart';
-import 'package:holedo/presentation/ui/components/edit_icon_buttton.dart';
+import 'package:holedo/presentation/ui/pages/components/edit_add_buttons_of_sheet.dart';
+import 'package:holedo/presentation/ui/pages/components/edit_blue_card_sheet.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/styles.dart';
-import 'package:provider/provider.dart';
 
 class ProfileWorkExperienceComponent extends StatelessWidget {
   const ProfileWorkExperienceComponent({
@@ -26,6 +27,8 @@ class ProfileWorkExperienceComponent extends StatelessWidget {
   final void Function()? onEditPressed;
   @override
   Widget build(BuildContext context) {
+    final List<Experience>? experience = DbData.getUserProfileData.experiences;
+    final bool hasData = experience != null ? experience.isNotEmpty : false;
     return Container(
       decoration: Styles.boxDecoration.copyWith(color: Cr.whiteColor),
       child: Column(
@@ -41,111 +44,129 @@ class ProfileWorkExperienceComponent extends StatelessWidget {
               ),
             ),
           ),
-          IntrinsicHeight(
-            child: Stack(
-              children: [
-                Column(
-                  children: [
-                    Divider(
-                      thickness: 1,
-                      height: 0,
-                    ),
-                    Di.SBHS,
-                    Container(
-                      width: isTablet ? double.infinity : 360,
-                      decoration:
-                          Styles.boxDecoration.copyWith(color: Cr.whiteColor),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          ListTile(
-                            leading: ContainerWithIcon(
-                              iconData: FontAwesomeIcons.buildingColumns,
-                              size: 50,
-                            ),
-                            title: Text(
-                              "Food and Beverage Manager",
-                              style: h4Bold.copyWith(
-                                fontSize: Di.FSD,
-                              ),
-                            ),
-                            subtitle: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+          SizedBox(
+            child: IntrinsicHeight(
+              child: Stack(
+                children: [
+                  if (hasData)
+                    Column(
+                      children: experience
+                          .map(
+                            (singleExperience) => Column(
                               children: [
-                                Text(
-                                  "Marriott Hotels)",
-                                  style: bodySmallRegular.copyWith(
-                                    color: Cr.accentBlue1,
-                                    fontSize: Di.FSS,
-                                  ),
-                                ),
-                                Text(
-                                  "February 2013 – 2014 (1 year 6 months)",
-                                  style: bodySmallRegular.copyWith(
-                                    color: Cr.darkGrey1,
-                                    fontSize: Di.FSS,
+                                Di.DWZH,
+                                Di.SBHS,
+                                Container(
+                                  width: (isTablet || isMobile)
+                                      ? double.infinity
+                                      : 360,
+                                  decoration: Styles.boxDecoration
+                                      .copyWith(color: Cr.whiteColor),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      ListTile(
+                                        leading: ContainerWithIcon(
+                                          iconData:
+                                              FontAwesomeIcons.buildingColumns,
+                                          size: 50,
+                                        ),
+                                        title: Text(
+                                          singleExperience.title ?? "",
+                                          // "Food and Beverage Manager",
+                                          style: h4Bold.copyWith(
+                                            fontSize: Di.FSD,
+                                          ),
+                                        ),
+                                        subtitle: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              singleExperience.companyName ??
+                                                  "",
+                                              // "Marriott Hotels)",
+                                              style: bodySmallRegular.copyWith(
+                                                color: Cr.accentBlue1,
+                                                fontSize: Di.FSS,
+                                              ),
+                                            ),
+                                            Text(
+                                              singleExperience.workDuration ??
+                                                  "",
+                                              // "February 2013 – 2014 (1 year 6 months)",
+                                              style: bodySmallRegular.copyWith(
+                                                color: Cr.darkGrey1,
+                                                fontSize: Di.FSS,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Di.SBHD,
+                                      Di.DWZH,
+                                      Container(
+                                        width: double.infinity,
+                                        color: Cr.lightGrey2,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Di.SBHD,
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: Di.PSD),
+                                              child: Text(
+                                                singleExperience.description ??
+                                                    "",
+                                                // "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                                                maxLines: 5,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: bodyLarge.copyWith(
+                                                  color: Cr.darkGrey1,
+                                                ),
+                                              ),
+                                            ),
+                                            Di.SBHS,
+                                            CustomTextButton(
+                                              text: "  - Close",
+                                            ),
+                                            Di.SBHS,
+                                          ],
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ],
                             ),
-                          ),
-                          Di.SBHD,
-                          Divider(
-                            thickness: 1,
-                            height: 0,
-                          ),
-                          Container(
-                            color: Cr.lightGrey2,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Di.SBHD,
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: Di.PSD),
-                                  child: Text(
-                                    "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                                    maxLines: 5,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: bodyLarge.copyWith(
-                                      color: Cr.darkGrey1,
-                                    ),
-                                  ),
-                                ),
-                                Di.SBHS,
-                                CustomTextButton(
-                                  text: "  - Close",
-                                ),
-                                Di.SBHS,
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+                          )
+                          .toList(),
                     ),
-                  ],
-                ),
-                Provider.of<ProfileProvider>(context).isProfileEditable
-                    ? Container(
-                        width: 560,
-                        color: Cr.accentBlue2.withOpacity(.8),
-                        padding: EdgeInsets.all(Di.PSD),
-                      )
-                    : Di.ESB,
-                Provider.of<ProfileProvider>(context).isProfileEditable
-                    ? EditIconButton(
-                        onPressed: onEditPressed ??
-                            () {
-                              // showCustomDialog(
-                              //   context,
-                              //   Profi(
-                              //     userProfileData: userProfileData,
-                              //   ),
-                              // );
-                            },
-                      )
-                    : Di.ESB,
-              ],
+                  EditBlueCardSheet(
+                    context,
+                    dataIsNull: !hasData,
+                    greenCardText:
+                        "Add your current and previous work experiences to your profile. Add as many as you like to highlight your work experience and skills.",
+                    greenCardTip:
+                        "Work experience is often the number one factor for employers and recruiters when looking to hire new candidates.",
+                  ),
+                  if (hasData)
+                    EditAddButtonOfSheet(
+                      context,
+                      onEditPressed: () {
+                        // showCustomDialog(
+                        //   context,
+                        //   Profi(
+                        //     userProfileData: userProfileData,
+                        //   ),
+                        // );
+                      },
+                    ),
+                ],
+              ),
             ),
           ),
         ],

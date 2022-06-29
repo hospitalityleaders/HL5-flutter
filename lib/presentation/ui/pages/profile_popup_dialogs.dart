@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:holedo/models/holedoapi/holedoapi.dart';
-import 'package:holedo/presentation/ui/pages/profile_dialogs/profile_edit_dialog_widget.dart';
+import 'package:holedo/presentation/ui/components/contact_card_dialog_widget.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 
@@ -32,16 +31,9 @@ class ProfilePopupDialogScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                // height: 800,
-                child: ProfileEditDialogWidget(
-                  userProfileData: User(),
-                ),
+                child: ContactCardDialogWidget(),
               ),
-              Container(
-                width: 200,
-                height: 200,
-                color: Cr.google,
-              ),
+
               Di.SBHOL,
               // CustomElevatedButton(
               //   width: 200,

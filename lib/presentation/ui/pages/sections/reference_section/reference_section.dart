@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:holedo/db_data.dart';
 import 'package:holedo/presentation/ui/components/profile_reference_single_compoenet.dart';
+import 'package:holedo/presentation/ui/pages/sections/page_overview/page_overview_columns/page_overview_third_columns.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 
 class ReferenceSection extends StatefulWidget {
@@ -41,7 +43,7 @@ class _ReferenceSectionState extends State<ReferenceSection> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Di.SBWOTL,
+          Di.SBCW(70),
           SizedBox(
             key: _widgetKey,
             width: 360,
@@ -62,7 +64,7 @@ class _ReferenceSectionState extends State<ReferenceSection> {
               ],
             ),
           ),
-          Di.SBWOTL,
+          Di.SBWEL,
           SizedBox(
             width: 360,
             // height: 220,
@@ -86,8 +88,10 @@ class _ReferenceSectionState extends State<ReferenceSection> {
             ),
           ),
           Di.SBWEL,
-          // ProfileOverviewThirdColumn(userProfileData: widget.us,),
-          Di.SBWEL,
+          ProfileOverviewThirdColumn(
+            userProfileData: DbData.getUserProfileData,
+          ),
+          Di.SBCW(70),
         ],
       ),
     );

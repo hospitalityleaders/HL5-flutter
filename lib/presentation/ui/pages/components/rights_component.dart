@@ -7,12 +7,14 @@ import 'package:holedo/presentation/utill/styles.dart';
 class RightsComponent extends StatelessWidget {
   const RightsComponent({
     Key? key,
+    this.isMobile = false,
   }) : super(key: key);
+  final bool isMobile;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 360,
+      width: isMobile ? null : 360,
       decoration: Styles.boxDecoration.copyWith(color: Cr.whiteColor),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -27,24 +29,27 @@ class RightsComponent extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: Di.PSL),
-            child: SizedBox(
-              width: 120,
-              height: 20,
-              child: TextWithBackground(
-                sizedBoxBetweenIconText: Di.SBWES,
-                textStyle: h5Bold.copyWith(
-                  color: Cr.darkGrey1,
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: Di.PSL),
+              child: SizedBox(
+                width: isMobile ? null : 120,
+                height: 20,
+                child: TextWithBackground(
+                  sizedBoxBetweenIconText: Di.SBWES,
+                  textStyle: h5Bold.copyWith(
+                    color: Cr.darkGrey1,
+                  ),
+                  padding: 0,
+                  text: "Privacy Policy",
+                  icon: Icon(
+                    Icons.info_outline_rounded,
+                    color: Cr.green1,
+                    size: 15,
+                  ),
+                  backgroundColor: Cr.whiteColor,
                 ),
-                padding: 0,
-                text: "Privacy Policy",
-                icon: Icon(
-                  Icons.info_outline_rounded,
-                  color: Cr.green1,
-                  size: 15,
-                ),
-                backgroundColor: Cr.whiteColor,
               ),
             ),
           ),

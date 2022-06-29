@@ -7,22 +7,25 @@ import 'package:holedo/common/popUpHeadMenu.dart';
 import 'package:holedo/common/textfield_fieldname.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/sizedbox.dart';
+import 'package:holedo/db_data.dart';
 import 'package:holedo/layouts/pages/profile-pages/profile-edit/profile_edit.dart';
+import 'package:holedo/models/holedoapi/achievement.dart';
+import 'package:holedo/models/holedoapi/education.dart';
 import 'package:holedo/models/holedoapi/holedoapi.dart';
-import 'package:holedo/presentation/providers/profile_provider.dart';
 import 'package:holedo/presentation/ui/components/custom_text_button.dart';
 import 'package:holedo/presentation/ui/components/container_with_icon.dart';
-import 'package:holedo/presentation/ui/components/edit_icon_buttton.dart';
+import 'package:holedo/presentation/ui/pages/components/edit_add_buttons_of_sheet.dart';
+import 'package:holedo/presentation/ui/pages/components/edit_blue_card_sheet.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_workexperience.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/profile_featured_image_dialog.dart';
-import 'package:holedo/presentation/ui/pages/profile_dialogs/profile_language_dialog_widget.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/show_custom_dialog.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/styles.dart';
 import 'package:holedo/responsive/responsive.dart';
-import 'package:provider/provider.dart';
 import 'package:holedo/common/dropDownButton.dart';
+import 'package:video_player/video_player.dart';
+import 'package:video_player_web/video_player_web.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
 
 class ProfileOverviewSecondColumn extends StatefulWidget {
@@ -45,6 +48,7 @@ class ProfileOverviewSecondColumn extends StatefulWidget {
 
 class _ProfileOverviewSecondColumnState
     extends State<ProfileOverviewSecondColumn> {
+  late VideoPlayerPlugin videoPlayerPlugin;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -73,11 +77,11 @@ class _ProfileOverviewSecondColumnState
             onEditPressed: buildAchivementPopUp,
             userProfileData: widget.userProfileData,
           ),
-          Di.SBHEL,
-          LanguagesComponent(
-            onEditPressed: () => buildLanguagePopUp(langIndex),
-            userProfileData: widget.userProfileData,
-          ),
+          // Di.SBHEL,
+          // LanguagesComponent(
+          //   onEditPressed: () => buildLanguagePopUp(langIndex),
+          //   userProfileData: widget.userProfileData,
+          // ),
           Di.SBHEL,
         ],
       ),
@@ -924,143 +928,130 @@ class _ProfileOverviewSecondColumnState
   ];
 }
 
-class LanguagesComponent extends StatelessWidget {
-  const LanguagesComponent({
-    Key? key,
-    this.onEditPressed,
-    required this.userProfileData,
-  }) : super(key: key);
-  final User userProfileData;
+// class LanguagesComponent extends StatelessWidget {
+//   const LanguagesComponent({
+//     Key? key,
+//     this.onEditPressed,
+//     required this.userProfileData,
+//   }) : super(key: key);
+//   final User userProfileData;
 
-  final void Function()? onEditPressed;
+//   final void Function()? onEditPressed;
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: Styles.boxDecoration.copyWith(color: Cr.whiteColor),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Di.SBHETS,
-          ListTile(
-            title: Text(
-              "Languages",
-              style: h2Regular,
-            ),
-          ),
-          IntrinsicHeight(
-            child: Stack(
-              children: [
-                Column(
-                  children: [
-                    Divider(
-                      thickness: 1,
-                      height: 0,
-                    ),
-                    Di.SBHS,
-                    Container(
-                      width: 360,
-                      decoration:
-                          Styles.boxDecoration.copyWith(color: Cr.whiteColor),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          ListTile(
-                            leading: ContainerWithIcon(
-                              iconData: FontAwesomeIcons.buildingColumns,
-                              size: 50,
-                            ),
-                            trailing: SizedBox(),
-                            title: Text(
-                              "English",
-                              style: h4Bold.copyWith(
-                                fontSize: Di.FSD,
-                              ),
-                            ),
-                            subtitle: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: Di.PSETS + 1,
-                              ),
-                              child: Text(
-                                "Native and bilingual profiency",
-                                style: bodySmallRegular.copyWith(
-                                  color: Cr.accentBlue1,
-                                  fontSize: Di.FSS,
-                                ),
-                              ),
-                            ),
-                          ),
-                          ListTile(
-                            leading: ContainerWithIcon(
-                              iconData: FontAwesomeIcons.buildingColumns,
-                              size: 50,
-                            ),
-                            trailing: SizedBox(),
-                            title: Text(
-                              "Spanish",
-                              style: h4Bold.copyWith(
-                                fontSize: Di.FSD,
-                              ),
-                            ),
-                            subtitle: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: Di.PSETS,
-                              ),
-                              child: Text(
-                                "Native and bilingual profiency",
-                                style: bodySmallRegular.copyWith(
-                                  color: Cr.accentBlue1,
-                                  fontSize: Di.FSS,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Di.SBHD,
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                Provider.of<ProfileProvider>(context).isProfileEditable
-                    ? Container(
-                        width: 560,
-                        color: Cr.accentBlue2.withOpacity(.8),
-                        padding: EdgeInsets.all(Di.PSD),
-                      )
-                    : Di.ESB,
-                Provider.of<ProfileProvider>(context).isProfileEditable
-                    ? EditIconButton(
-                        onPressed: () {
-                          showCustomDialog(
-                            context,
-                            ProfileLanguagesDialogWidget(
-                                userProfileData: userProfileData),
-                          );
-                        },
-                        // onPressed: onEditPressed,
-                      )
-                    : Di.ESB,
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     final List<Language>? languages = DbData.getUserProfileData.languages;
+//     final bool hasData = languages != null ? languages.isNotEmpty : false;
+
+//     return Container(
+//       decoration: Styles.boxDecoration.copyWith(color: Cr.whiteColor),
+//       child: Column(
+//         mainAxisSize: MainAxisSize.min,
+//         children: [
+//           Di.SBHETS,
+//           ListTile(
+//             title: Text(
+//               "Languages",
+//               style: h2Regular,
+//             ),
+//           ),
+//           IntrinsicHeight(
+//             child: Stack(
+//               children: [
+//                 if (hasData)
+//                   Column(
+//                     children: languages
+//                         .map(
+//                           (singleLanguage) => Column(
+//                             children: [
+//                               Di.DWZH,
+//                               Di.SBHS,
+//                               Container(
+//                                 width: 360,
+//                                 decoration: Styles.boxDecoration
+//                                     .copyWith(color: Cr.whiteColor),
+//                                 child: Column(
+//                                   crossAxisAlignment: CrossAxisAlignment.start,
+//                                   children: [
+//                                     ListTile(
+//                                       leading: ContainerWithIcon(
+//                                         iconData:
+//                                             FontAwesomeIcons.buildingColumns,
+//                                         size: 50,
+//                                       ),
+//                                       trailing: SizedBox(),
+//                                       title: Text(
+//                                         singleLanguage.title ?? "",
+//                                         // "English",
+//                                         style: h4Bold.copyWith(
+//                                           fontSize: Di.FSD,
+//                                         ),
+//                                       ),
+//                                       subtitle: Padding(
+//                                         padding: const EdgeInsets.symmetric(
+//                                           vertical: Di.PSETS + 1,
+//                                         ),
+//                                         child: Text(
+//                                           "Native and bilingual profiency",
+//                                           style: bodySmallRegular.copyWith(
+//                                             color: Cr.accentBlue1,
+//                                             fontSize: Di.FSS,
+//                                           ),
+//                                         ),
+//                                       ),
+//                                     ),
+//                                     Di.SBHD,
+//                                   ],
+//                                 ),
+//                               ),
+//                             ],
+//                           ),
+//                         )
+//                         .toList(),
+//                   ),
+//                 EditBlueCardSheet(
+//                   context,
+//                   dataIsNull: !hasData,
+//                   greenCardText:
+//                       "Show which languages you are fluent and professionally capable of.",
+//                 ),
+//                 if (hasData)
+//                   EditAddButtonOfSheet(
+//                     context,
+//                     onEditPressed: () {
+//                       showCustomDialog(
+//                         context,
+//                         ProfileLanguagesDialogWidget(
+//                             userProfileData: userProfileData),
+//                       );
+//                     },
+//                   ),
+//               ],
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
 class AchievementComponent extends StatelessWidget {
   const AchievementComponent({
     Key? key,
     this.onEditPressed,
     required this.userProfileData,
+    this.isMobile = false,
   }) : super(key: key);
   final User userProfileData;
-
+  final bool isMobile;
   final void Function()? onEditPressed;
 
   @override
   Widget build(BuildContext context) {
+    final List<Achievement>? achievement =
+        DbData.getUserProfileData.achievements;
+    final bool hasData = achievement != null ? achievement.isNotEmpty : false;
+
     return Container(
       decoration: Styles.boxDecoration.copyWith(color: Cr.whiteColor),
       child: Column(
@@ -1073,96 +1064,98 @@ class AchievementComponent extends StatelessWidget {
               style: h2Regular,
             ),
           ),
-          Stack(
-            children: [
-              Column(
-                children: [
-                  Divider(
-                    thickness: 1,
-                    height: 0,
-                  ),
-                  Di.SBHS,
-                  Container(
-                    width: 360,
-                    decoration:
-                        Styles.boxDecoration.copyWith(color: Cr.whiteColor),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ListTile(
-                          leading: ContainerWithIcon(
-                            iconData: FontAwesomeIcons.buildingColumns,
-                            size: 50,
-                          ),
-                          trailing: SizedBox(),
-                          title: Text(
-                            "Marriott Hotel and Resorts employee of the year awards",
-                            style: h4Bold.copyWith(
-                              fontSize: Di.FSD,
-                            ),
-                          ),
-                          subtitle: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+          IntrinsicHeight(
+            child: Stack(
+              children: [
+                if (hasData)
+                  Column(
+                    children: achievement
+                        .map(
+                          (singleAchievement) => Column(
                             children: [
-                              Di.SBHES,
-                              Text(
-                                "www.marriott.com/awards",
-                                style: bodySmallRegular.copyWith(
-                                  color: Cr.accentBlue1,
-                                  fontSize: Di.FSS,
+                              Di.DWZH,
+                              Di.SBHS,
+                              Container(
+                                width: isMobile ? null : 360,
+                                decoration: Styles.boxDecoration
+                                    .copyWith(color: Cr.whiteColor),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    ListTile(
+                                      leading: ContainerWithIcon(
+                                        iconData:
+                                            FontAwesomeIcons.buildingColumns,
+                                        size: 50,
+                                      ),
+                                      trailing: SizedBox(),
+                                      title: Text(
+                                        singleAchievement.title ?? "",
+                                        // "Marriott Hotel and Resorts employee of the year awards",
+                                        style: h4Bold.copyWith(
+                                          fontSize: Di.FSD,
+                                        ),
+                                      ),
+                                      subtitle: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Di.SBHES,
+                                          Text(
+                                            singleAchievement.website ??
+                                                "No website added",
+                                            // "www.marriott.com/awards",
+                                            style: bodySmallRegular.copyWith(
+                                              color: Cr.accentBlue1,
+                                              fontSize: Di.FSS,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Di.SBHD,
+                                    Divider(
+                                      thickness: 1,
+                                      height: 0,
+                                    ),
+                                    Container(
+                                      width: isMobile ? null : 360,
+                                      color: Cr.lightGrey2,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Di.SBHS,
+                                          CustomTextButton(
+                                            text: "  + More info",
+                                          ),
+                                          Di.SBHS,
+                                        ],
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
                           ),
-                        ),
-                        Di.SBHD,
-                        Divider(
-                          thickness: 1,
-                          height: 0,
-                        ),
-                        Container(
-                          width: 360,
-                          color: Cr.lightGrey2,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Di.SBHS,
-                              CustomTextButton(
-                                text: "  + More info",
-                              ),
-                              Di.SBHS,
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                        )
+                        .toList(),
                   ),
-                ],
-              ),
-              Provider.of<ProfileProvider>(context).isProfileEditable
-                  ? Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: 360,
-                            height: 135,
-                            color: Cr.accentBlue2.withOpacity(.8),
-                            padding: EdgeInsets.all(Di.PSD),
-                          ),
-                        ],
-                      ),
-                    )
-                  : Di.ESB,
-              Provider.of<ProfileProvider>(context).isProfileEditable
-                  ? EditIconButton(
-                      onPressed: () {
-                        // showCustomDialog(context, ProfileDialog);
-                      },
-                      // onPressed: onEditPressed,
-                    )
-                  : Di.ESB,
-            ],
+                EditBlueCardSheet(
+                  context,
+                  dataIsNull: !hasData,
+                  greenCardText:
+                      "Add the educational institutions you attended, the qualifications you achieved and the courses completed.",
+                ),
+                if (hasData)
+                  EditAddButtonOfSheet(
+                    context,
+                    onEditPressed: () {
+                      // showCustomDialog(context, ProfileDialog);
+                    },
+                  ),
+              ],
+            ),
           ),
         ],
       ),
@@ -1175,9 +1168,11 @@ class EducationComponent extends StatefulWidget {
     Key? key,
     this.onEditPressed,
     required this.userProfileData,
+    this.isMobile = false,
   }) : super(key: key);
   final User userProfileData;
   final void Function()? onEditPressed;
+  final bool isMobile;
 
   @override
   State<EducationComponent> createState() => _EducationComponentState();
@@ -1186,10 +1181,11 @@ class EducationComponent extends StatefulWidget {
 class _EducationComponentState extends State<EducationComponent> {
   @override
   Widget build(BuildContext context) {
+    final List<Education>? education = DbData.getUserProfileData.educations;
+    final bool hasData = education != null ? education.isNotEmpty : false;
     return Container(
-      decoration: Styles.boxDecoration.copyWith(color: Cr.whiteColor),
+      decoration: Styles.boxDecorationWithShadow.copyWith(color: Cr.whiteColor),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
         children: [
           Di.SBHETS,
           ListTile(
@@ -1198,103 +1194,102 @@ class _EducationComponentState extends State<EducationComponent> {
               style: h2Regular,
             ),
           ),
+          Di.DWZH,
           IntrinsicHeight(
             child: Stack(
               children: [
-                Column(
-                  children: [
-                    Divider(
-                      thickness: 1,
-                      height: 0,
-                    ),
-                    Di.SBHS,
-                    Container(
-                      width: 360,
-                      decoration: Styles.boxDecoration.copyWith(
-                        color: Cr.whiteColor,
-                        boxShadow: Styles.defaultBoxShadow,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          ListTile(
-                            leading: ContainerWithIcon(
-                              iconData: FontAwesomeIcons.buildingColumns,
-                              size: 50,
+                if (hasData)
+                  Column(
+                    children: education
+                        .map(
+                          (singleEductaion) => Container(
+                            width: widget.isMobile ? null : 360,
+                            decoration: Styles.boxDecoration.copyWith(
+                              color: Cr.whiteColor,
+                              boxShadow: Styles.defaultBoxShadow,
                             ),
-                            title: Text(
-                              "University of Cape Town",
-                              style: h4Bold.copyWith(
-                                fontSize: Di.FSD,
-                              ),
-                            ),
-                            subtitle: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Postgraduate Degree in Business Science",
-                                  style: bodySmallRegular.copyWith(
-                                    color: Cr.accentBlue1,
-                                    fontSize: Di.FSS,
-                                  ),
-                                ),
-                                SizedBox(height: Di.PSETS),
-                                Text(
-                                  "2010 - 2013",
-                                  style: bodySmallRegular.copyWith(
-                                    color: Cr.darkGrey1,
-                                    fontSize: Di.FSS,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Di.SBHD,
-                          Divider(
-                            thickness: 1,
-                            height: 0,
-                          ),
-                          Container(
-                            width: 360,
-                            color: Cr.lightGrey2,
                             child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                Di.SBHS,
-                                CustomTextButton(
-                                  text: "  + Course online",
+                                ListTile(
+                                  leading: ContainerWithIcon(
+                                    iconData: FontAwesomeIcons.buildingColumns,
+                                    size: 50,
+                                  ),
+                                  title: Text(
+                                    singleEductaion.institution ?? "",
+                                    style: h4Bold.copyWith(
+                                      fontSize: Di.FSD,
+                                    ),
+                                  ),
+                                  subtitle: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        singleEductaion.title ?? "",
+                                        style: bodySmallRegular.copyWith(
+                                          color: Cr.accentBlue1,
+                                          fontSize: Di.FSS,
+                                        ),
+                                      ),
+                                      SizedBox(height: Di.PSETS),
+                                      Text(
+                                        singleEductaion.studyDuration ?? "",
+                                        // "2010 - 2013",
+                                        style: bodySmallRegular.copyWith(
+                                          color: Cr.darkGrey1,
+                                          fontSize: Di.FSS,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                Di.SBHS,
+                                Di.SBHD,
+                                Divider(
+                                  thickness: 1,
+                                  height: 0,
+                                ),
+                                Container(
+                                  width: widget.isMobile ? null : 360,
+                                  color: Cr.lightGrey2,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Di.SBHS,
+                                      CustomTextButton(
+                                        text: "  + Course online",
+                                      ),
+                                      Di.SBHS,
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                  ],
+                        )
+                        .toList(),
+                  ),
+                EditBlueCardSheet(
+                  context,
+                  dataIsNull: !hasData,
+                  greenCardText:
+                      "Add the educational institutions you attended, the qualifications you achieved and the courses completed. ",
                 ),
-                Provider.of<ProfileProvider>(context).isProfileEditable
-                    ? Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 560,
-                              color: Cr.accentBlue2.withOpacity(.8),
-                              padding: EdgeInsets.all(Di.PSD),
-                            ),
-                          ],
-                        ),
-                      )
-                    : Di.ESB,
-                Provider.of<ProfileProvider>(context).isProfileEditable
-                    ? EditIconButton(
-                        // onPressed: widget.onEditPressed,
-                        onPressed: () {
-                          // showCustomDialog(context, ProfileDial)
-                        },
-                      )
-                    : Di.ESB,
+                if (hasData)
+                  EditAddButtonOfSheet(
+                    context,
+                    onEditPressed: () {
+                      // buildReferencesCard(img, title, userId, subTitle, description)
+                      // showCustomDialog(
+                      //   context,
+                      //   ProfileMyReferenceDialogWidget(
+                      //     userProfileData: DbData.getUserProfileData,
+                      //   ),
+                      // );
+                    },
+                  ),
               ],
             ),
           ),
@@ -1304,17 +1299,41 @@ class _EducationComponentState extends State<EducationComponent> {
   }
 }
 
-class FeaturedVideoComponent extends StatelessWidget {
+class FeaturedVideoComponent extends StatefulWidget {
   const FeaturedVideoComponent({
     Key? key,
     required this.userProfileData,
+    this.isMobile = false,
   }) : super(key: key);
   final User userProfileData;
+  final bool isMobile;
+  @override
+  State<FeaturedVideoComponent> createState() => _FeaturedVideoComponentState();
+}
+
+class _FeaturedVideoComponentState extends State<FeaturedVideoComponent> {
+  late VideoPlayerController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = VideoPlayerController.network(widget
+            .userProfileData.profileVideoUrl ??
+        'https://assets.mixkit.co/videos/preview/mixkit-people-pouring-a-warm-drink-around-a-campfire-513-large.mp4')
+      ..initialize().then((_) {
+        setState(() {});
+      });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(Di.PSD),
       decoration: Styles.boxDecoration.copyWith(color: Cr.whiteColor),
       child: Column(
         children: [
@@ -1326,89 +1345,111 @@ class FeaturedVideoComponent extends StatelessWidget {
           ),
 
           // Di.SBHD,
-          Divider(thickness: 1),
+          Di.DWZH,
           IntrinsicHeight(
             child: Stack(
               children: [
-                Column(
-                  children: [
-                    Di.SBHD,
-                    IntrinsicHeight(
-                      child: Stack(
-                        children: [
-                          SizedBox(
-                            height: 180,
-                            width: 360,
-                            child: Image.asset(
-                              "assets/images/videoThumbnail.png",
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          Positioned.fill(
-                            child: Align(
-                              alignment: Alignment.center,
-                              child:
-                                  // Container(
-                                  //   width: 100,
-                                  //   height: 100,
-                                  //   color: Cr.accentBlue1,
-                                  // ),
-                                  SvgPicture.asset(
-                                "assets/icons/smallPlayerIcon.svg",
+                Padding(
+                  padding: EdgeInsets.all(Di.PSD),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      IntrinsicHeight(
+                        child: Stack(
+                          children: [
+                            _controller.value.isInitialized
+                                ? SizedBox(
+                                    height: widget.isMobile ? null : 180,
+                                    width: widget.isMobile ? null : 325,
+                                    child: AspectRatio(
+                                      aspectRatio:
+                                          _controller.value.aspectRatio,
+                                      child: VideoPlayer(_controller),
+                                    ),
+                                  )
+                                : Di.ESB,
+                            SizedBox(
+                              height: widget.isMobile ? null : 180,
+                              width: widget.isMobile ? null : 325,
+                              child: Center(
+                                child: FloatingActionButton(
+                                  backgroundColor: Cr.accentBlue1,
+                                  onPressed: () {
+                                    setState(() {
+                                      _controller.value.isPlaying
+                                          ? _controller.pause()
+                                          : _controller.play();
+                                    });
+                                  },
+                                  child: Icon(
+                                    _controller.value.isPlaying
+                                        ? Icons.pause
+                                        : Icons.play_arrow,
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Di.SBHL,
-                    Text(
-                      "Chef TV: Inside the kitchen of Noberto Holden",
-                      style: h4Bold,
-                    ),
-                    Di.SBHL,
-                    RichText(
-                      text: TextSpan(
-                        style: bodySmallRegular.copyWith(
-                          color: Cr.darkGrey1,
+                            Positioned.fill(
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: SvgPicture.asset(
+                                  "assets/icons/smallPlayerIcon.svg",
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        children: <TextSpan>[
-                          TextSpan(
-                            text:
-                                "Noberto's career has revolved around causing corporate transformation projects designed to optimize the use of resources enha...",
-                          ),
-                          TextSpan(
-                            text: "show more",
-                            style: TextStyle(
-                              color: Cr.accentBlue1,
-                            ),
-                          ),
-                        ],
                       ),
-                    ),
-                    Di.SBHD,
-                  ],
-                ),
-                Provider.of<ProfileProvider>(context).isProfileEditable
-                    ? Container(
-                        width: 560,
-                        color: Cr.accentBlue2.withOpacity(.8),
-                        padding: EdgeInsets.all(Di.PSD),
-                      )
-                    : Di.ESB,
-                Provider.of<ProfileProvider>(context).isProfileEditable
-                    ? EditIconButton(
-                        onPressed: () {
-                          // buildReferencesCard(img, title, userId, subTitle, description)
-                          showCustomDialog(
-                            context,
-                            ProfileFeaturedVideoDialogWidget(
-                              userProfileData: userProfileData,
+                      Di.SBHL,
+                      Text(
+                        widget.userProfileData.profileVideoTitle ??
+                            "Chef TV: Inside the kitchen of Noberto Holden",
+                        style: h4Bold,
+                      ),
+                      Di.SBHL,
+                      if (widget.userProfileData.profileVideoDescription !=
+                          null)
+                        RichText(
+                          text: TextSpan(
+                            style: bodySmallRegular.copyWith(
+                              color: Cr.darkGrey1,
                             ),
-                          );
-                        },
-                      )
-                    : Di.ESB,
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: widget.userProfileData
+                                        .profileVideoDescription ??
+                                    "",
+                                // "Noberto's career has revolved around causing corporate transformation projects designed to optimize the use of resources enha...",
+                              ),
+                              TextSpan(
+                                text: "show more",
+                                style: TextStyle(
+                                  color: Cr.accentBlue1,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      Di.SBHD,
+                    ],
+                  ),
+                ),
+                EditBlueCardSheet(
+                  context,
+                  greenCardText: "Upload your featured video here",
+                ),
+                EditAddButtonOfSheet(
+                  context,
+                  onEditPressed: () {
+                    // buildReferencesCard(img, title, userId, subTitle, description)
+                    showCustomDialog(
+                      context,
+                      ProfileFeaturedVideoDialogWidget(
+                        userProfileData: widget.userProfileData,
+                      ),
+                    );
+                  },
+                )
               ],
             ),
           ),
