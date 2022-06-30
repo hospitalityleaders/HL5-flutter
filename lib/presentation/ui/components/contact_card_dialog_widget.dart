@@ -67,25 +67,25 @@ class ContactCardDialogWidget extends StatelessWidget {
             padding: EdgeInsets.all(Di.PSL),
             child: Column(
               children: [
-                _ContactCardListTile(
+                ProfileCardListTile(
                   text: "noberto@gmail.com",
                   iconData: Icons.email,
                 ),
-                _ContactCardListTile(
+                ProfileCardListTile(
                   text: "+27 72 987 5467",
                   iconData: Icons.phone,
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      _IconContactCard(
+                      ProfileSquareCard(
                         Icons.phone,
                         showBlue: true,
                       ),
-                      _IconContactCard(
+                      ProfileSquareCard(
                         Icons.whatsapp,
                         showBlue: true,
                       ),
-                      _IconContactCard(
+                      ProfileSquareCard(
                         FontAwesomeIcons.solidMessage,
                         showBlue: true,
                         icon: Center(
@@ -100,11 +100,11 @@ class ContactCardDialogWidget extends StatelessWidget {
                     ],
                   ),
                 ),
-                _ContactCardListTile(
+                ProfileCardListTile(
                   text: "Noberto.Holden",
                   iconData: FontAwesomeIcons.skype,
                 ),
-                _ContactCardListTile(
+                ProfileCardListTile(
                   text: "www.nobertoholden.com",
                   icon: SvgPicture.asset(
                     Svgs.link,
@@ -119,19 +119,19 @@ class ContactCardDialogWidget extends StatelessWidget {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              _IconContactCard(
+              ProfileSquareCard(
                 Icons.facebook,
               ),
-              _IconContactCard(
+              ProfileSquareCard(
                 FontAwesomeIcons.twitter,
               ),
-              _IconContactCard(
+              ProfileSquareCard(
                 FontAwesomeIcons.googlePlusG,
               ),
-              _IconContactCard(
+              ProfileSquareCard(
                 FontAwesomeIcons.linkedin,
               ),
-              _IconContactCard(
+              ProfileSquareCard(
                 FontAwesomeIcons.xing,
               ),
             ],
@@ -143,8 +143,8 @@ class ContactCardDialogWidget extends StatelessWidget {
   }
 }
 
-class _IconContactCard extends StatelessWidget {
-  const _IconContactCard(
+class ProfileSquareCard extends StatelessWidget {
+  const ProfileSquareCard(
     this.iconData, {
     Key? key,
     this.showBlue = false,
@@ -181,25 +181,29 @@ class _IconContactCard extends StatelessWidget {
   }
 }
 
-class _ContactCardListTile extends StatelessWidget {
-  const _ContactCardListTile({
+class ProfileCardListTile extends StatelessWidget {
+  const ProfileCardListTile({
     Key? key,
     required this.text,
     this.iconData,
     this.icon,
     this.trailing,
+    this.removePadding = false,
   }) : super(key: key);
   final String text;
   final IconData? iconData;
   final Widget? icon;
   final Widget? trailing;
+  final bool removePadding;
 
   @override
   Widget build(BuildContext context) {
     return OnHover(
       builder: (bool isHovered) {
         return Container(
-          padding: const EdgeInsets.symmetric(vertical: 14, horizontal: Di.PSL),
+          padding: removePadding
+              ? EdgeInsets.zero
+              : EdgeInsets.symmetric(vertical: 14, horizontal: Di.PSL),
           color: isHovered ? Cr.accentBlue3 : Cr.whiteColor,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,

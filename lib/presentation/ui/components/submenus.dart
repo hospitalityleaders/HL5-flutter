@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:holedo/presentation/ui/components/onhover.dart';
 import 'package:holedo/presentation/ui/components/text_with_background.dart';
+import 'package:holedo/presentation/ui/pages/mobile_desktop_comman_components/mobile_desktop_comman_components.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/nav.dart';
@@ -160,6 +161,23 @@ class ConnectionRequestAppbarComponent extends StatelessWidget {
   }
 }
 
+Future<Object?> showMoreProfileCardSubmenu(BuildContext context) {
+  return showPopover(
+    backgroundColor: Cr.whiteColor,
+    context: context,
+    barrierDismissible: true,
+    bodyBuilder: (context) => MouseRegion(
+      onExit: (_) => Nav.pop(context),
+      child: MoreProfileCardSubMenu(),
+    ),
+    direction: PopoverDirection.bottom,
+    height: 100,
+    width: 250,
+    arrowHeight: 10,
+    arrowWidth: 10,
+  );
+}
+
 Future<Object?> showProfileHoverSubmenu(BuildContext context) {
   return showPopover(
     backgroundColor: Cr.colorPrimary,
@@ -171,16 +189,16 @@ Future<Object?> showProfileHoverSubmenu(BuildContext context) {
         padding: const EdgeInsets.symmetric(vertical: Di.PSES),
         child: ListView(
           children: [
-            SubMenuWidget(
+            _SubMenuWidget(
               text: "View profile",
             ),
-            SubMenuWidget(
+            _SubMenuWidget(
               text: "Account settings",
             ),
-            SubMenuWidget(
+            _SubMenuWidget(
               text: "Privacy settings",
             ),
-            SubMenuWidget(
+            _SubMenuWidget(
               text: "Log out",
             ),
           ],
@@ -188,15 +206,15 @@ Future<Object?> showProfileHoverSubmenu(BuildContext context) {
       ),
     ),
     direction: PopoverDirection.bottom,
-    height: 200,
+    height: null,
     width: 160,
     arrowHeight: 10,
     arrowWidth: 10,
   );
 }
 
-class SubMenuWidget extends StatelessWidget {
-  const SubMenuWidget({
+class _SubMenuWidget extends StatelessWidget {
+  const _SubMenuWidget({
     Key? key,
     required this.text,
   }) : super(key: key);
@@ -209,13 +227,16 @@ class SubMenuWidget extends StatelessWidget {
         return Container(
           color: isHovered ? Colors.white.withOpacity(.07) : Cr.colorPrimary,
           child: ListTile(
-            title: Text(
-              text,
-              style: TextStyle(
-                color: Cr.whiteColor,
-                fontWeight: isHovered ? FontWeight.w500 : null,
-              ),
-            ),
+            title: Text(text,
+                style: defaultRegular.copyWith(
+                  color: Cr.grey1,
+                  fontWeight: isHovered ? FontWeight.w500 : null,
+                )
+                //  TextStyle(
+                //   color: Cr.grey1,
+                //   fontWeight: isHovered ? FontWeight.w500 : null,
+                // ),
+                ),
           ),
         );
       },

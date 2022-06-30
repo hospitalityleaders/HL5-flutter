@@ -37,6 +37,7 @@ class MobileProfileArticleSection extends StatelessWidget {
       ),
       child: Column(
         children: [
+          Di.SBHL,
           Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: Di.PSD,

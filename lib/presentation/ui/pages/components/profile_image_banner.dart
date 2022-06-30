@@ -145,6 +145,7 @@ class ProfileImageBanner extends StatelessWidget {
                 ),
               )
             : Di.ESB,
+
         Provider.of<ProfileProvider>(context).isProfileEditable
             ? EditIconButton(
                 onPressed: () {
@@ -197,7 +198,6 @@ class ProfileImageBanner extends StatelessWidget {
 //   }
 // }
 
-
 // "assets/svgicons/card-account-phone.svg",
-            // "Contact card",
-// 
+// "Contact card",
+//

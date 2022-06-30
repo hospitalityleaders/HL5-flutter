@@ -37,38 +37,8 @@ class ProfileMobileViewPage extends StatefulWidget {
 }
 
 class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
-  // late AnimationController _controller;
-  // late Animation<Offset> _offsetFloat;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _controller = AnimationController(
-  //     vsync: this,
-  //     duration: const Duration(milliseconds: 350),
-  //   );
-
-  //   _offsetFloat = Tween(begin: Offset(0.0, -0.03), end: Offset.zero).animate(
-  //     CurvedAnimation(
-  //       parent: _controller,
-  //       curve: Curves.fastOutSlowIn,
-  //     ),
-  //   );
-
-  //   _offsetFloat.addListener(() {
-  //     setState(() {});
-  //   });
-
-  //   _controller.forward();
-  // }
-
-  // @override
-  // void dispose() {
-  //   _controller.dispose();
-  //   super.dispose();
-  // }
-
   bool showMenu = false;
+  bool showCardSubMenu = false;
 
   @override
   Widget build(BuildContext context) {
@@ -142,7 +112,13 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
               children: [
                 if (isMobilePhn)
                   SizedBox(
-                    height: showMenu ? 930 : 640,
+                    height: showMenu
+                        ? showCardSubMenu
+                            ? 1070
+                            : 950
+                        : showCardSubMenu
+                            ? 810
+                            : 700,
                     child: Stack(
                       children: [
                         Container(
@@ -225,8 +201,17 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                                   ),
                                   Di.SBHD,
                                   ContactCardMenuCommon(
+                                    onPressed: () {
+                                      setState(() {
+                                        showCardSubMenu = !showCardSubMenu;
+                                      });
+                                    },
                                     isMobile: true,
                                   ),
+                                  if (showCardSubMenu) ...[
+                                    Di.SBHS,
+                                    MoreProfileCardSubMenu(),
+                                  ],
                                   Di.SBHOL,
                                   SendConnectionRequestComman(
                                     width: double.infinity,
@@ -243,6 +228,10 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                                       "assets/images/badge.png",
                                       width: 50,
                                     ),
+                                  ),
+                                  StatsComman(
+                                    isMobile: true,
+                                    userProfileData: DbData.getUserProfileData,
                                   ),
                                   Di.SBHS,
                                   // Container(

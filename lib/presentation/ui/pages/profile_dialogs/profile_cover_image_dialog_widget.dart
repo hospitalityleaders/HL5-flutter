@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_expanded_tile/flutter_expanded_tile.dart';
-
+import 'package:holedo/db_data.dart';
 import 'package:holedo/models/holedoapi/holedoapi.dart';
+import 'package:holedo/presentation/functions/image_upload_functions.dart';
+import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/dialog_widgets.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
+import 'package:holedo/presentation/utill/nav.dart';
 import 'package:holedo/presentation/utill/styles.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ProfileCoverImageDialogWidget extends StatefulWidget {
   const ProfileCoverImageDialogWidget({
@@ -84,6 +88,7 @@ class _ProfileCoverImageDialogExpandedTileState
 
   @override
   Widget build(BuildContext context) {
+    final userProfileData = DbData.getUserProfileData;
     return Container(
       margin: EdgeInsets.symmetric(horizontal: Di.PSL),
       color: Cr.whiteColor,
@@ -154,13 +159,7 @@ class _ProfileCoverImageDialogExpandedTileState
                 ),
               ),
               Di.SBHL,
-              Container(
-                height: 55,
-                color: Cr.accentBlue1,
-                margin: EdgeInsets.symmetric(
-                  horizontal: Di.PSL,
-                ),
-              ),
+              UploadWidgetButton(),
               Container(
                 margin: EdgeInsets.symmetric(
                   horizontal: Di.PSL,
@@ -200,6 +199,74 @@ class _ProfileCoverImageDialogExpandedTileState
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class UploadWidgetButton extends StatefulWidget {
+  const UploadWidgetButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<UploadWidgetButton> createState() => _UploadWidgetButtonState();
+}
+
+class _UploadWidgetButtonState extends State<UploadWidgetButton> {
+  XFile? image;
+  String errorMessage = "";
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(
+        horizontal: Di.PSL,
+      ),
+      child: Row(
+        children: [
+          CustomElevatedButton(
+            onPressed: () async {
+              final XFile? pickedImage =
+                  await ImageUploadFunctions.pickImageFromGallery();
+              if (pickedImage != null)
+                setState(() {
+                  image = pickedImage;
+                  errorMessage = "";
+                });
+            },
+            child: Text(
+              "Choose",
+            ),
+          ),
+          Text(
+            image == null ? errorMessage : image!.name,
+          ),
+          CustomElevatedButton(
+            onPressed: () async {
+              if (image != null) {
+                dialogCircularProgressIndicator(context);
+                final String? imageUrl =
+                    await ImageUploadFunctions.uploadImageToCloudinary(image!);
+                if (imageUrl != null) {
+                  Nav.pop(context);
+                  Nav.pop(context);
+                } else {
+                  setState(() {
+                    errorMessage = "Failed to upload image";
+                  });
+                }
+              } else {
+                setState(() {
+                  errorMessage = "Please choose image";
+                });
+              }
+            },
+            child: Text(
+              "Upload",
+            ),
+          ),
+        ],
       ),
     );
   }

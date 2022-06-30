@@ -46,8 +46,10 @@ List<Item> generateItems(int numberOfItems) {
 class UserProfilePage extends StatefulWidget {
   final User userProfileData;
 
-  const UserProfilePage({Key? key, required this.userProfileData})
-      : super(key: key);
+  const UserProfilePage({
+    Key? key,
+    required this.userProfileData,
+  }) : super(key: key);
 
   @override
   State<UserProfilePage> createState() => _UserProfilePageState();

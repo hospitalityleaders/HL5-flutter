@@ -39,7 +39,7 @@ class _ProfileWriteReferenceDialogWidgetState
               title: "Featured video",
             ),
             Di.SBHL,
-            CoverDialogExpandedTile(isExpanded: true),
+            _CoverDialogExpandedTile(isExpanded: true),
             Di.SBHD,
           ],
         ),
@@ -48,19 +48,19 @@ class _ProfileWriteReferenceDialogWidgetState
   }
 }
 
-class CoverDialogExpandedTile extends StatefulWidget {
+class _CoverDialogExpandedTile extends StatefulWidget {
   final bool isExpanded;
-  const CoverDialogExpandedTile({
+  const _CoverDialogExpandedTile({
     Key? key,
     this.isExpanded = false,
   }) : super(key: key);
 
   @override
-  State<CoverDialogExpandedTile> createState() =>
-      _CoverDialogExpandedTileState();
+  State<_CoverDialogExpandedTile> createState() =>
+      __CoverDialogExpandedTileState();
 }
 
-class _CoverDialogExpandedTileState extends State<CoverDialogExpandedTile> {
+class __CoverDialogExpandedTileState extends State<_CoverDialogExpandedTile> {
   String? selectedValue;
   bool currentlyWorkHere = false;
 
@@ -156,15 +156,21 @@ class _CoverDialogExpandedTileState extends State<CoverDialogExpandedTile> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Di.SBHL,
-                    DialogLabelTextFormField(customLabel: "Video link"),
+                    DialogLabelTextFormField(
+                      customLabel: "Video link",
+                    ),
                     Di.SBHES,
                     DialogTextFieldForm(),
                     Di.SBCH(18),
-                    DialogLabelTextFormField(customLabel: "Video title"),
+                    DialogLabelTextFormField(
+                      customLabel: "Video title",
+                    ),
                     Di.SBHES,
                     DialogTextFieldForm(),
                     Di.SBCH(18),
-                    DialogLabelTextFormField(customLabel: "Video description"),
+                    DialogLabelTextFormField(
+                      customLabel: "Video description",
+                    ),
                     Di.SBHES,
                     DialogMultiLineTextField(
                       width: 575,

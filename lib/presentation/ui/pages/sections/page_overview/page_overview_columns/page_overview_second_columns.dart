@@ -17,7 +17,7 @@ import 'package:holedo/presentation/ui/components/container_with_icon.dart';
 import 'package:holedo/presentation/ui/pages/components/edit_add_buttons_of_sheet.dart';
 import 'package:holedo/presentation/ui/pages/components/edit_blue_card_sheet.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_workexperience.dart';
-import 'package:holedo/presentation/ui/pages/profile_dialogs/profile_featured_image_dialog.dart';
+import 'package:holedo/presentation/ui/pages/profile_dialogs/profile_featured_video_dialog.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/show_custom_dialog.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';

@@ -4,6 +4,7 @@ import 'package:holedo/models/holedoapi/holedoapi.dart';
 import 'package:holedo/presentation/ui/components/contact_card_dialog_widget.dart';
 import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/presentation/ui/components/custom_outlined_button.dart';
+import 'package:holedo/presentation/ui/components/submenus.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/profile_write_reference_dialog_widget.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/show_custom_dialog.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
@@ -14,9 +15,10 @@ class ContactCardMenuCommon extends StatelessWidget {
   const ContactCardMenuCommon({
     Key? key,
     this.isMobile = false,
+    this.onPressed,
   }) : super(key: key);
-
   final bool isMobile;
+  final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +42,7 @@ class ContactCardMenuCommon extends StatelessWidget {
         ),
         isMobile ? Di.SBWS : Di.ESB,
         CustomOutlinedButton(
+          onPressed: onPressed ?? () => showMoreProfileCardSubmenu(context),
           icon: Icon(
             Icons.menu,
             size: 12,
@@ -76,6 +79,31 @@ class SendConnectionRequestComman extends StatelessWidget {
   }
 }
 
+class MoreProfileCardSubMenu extends StatelessWidget {
+  const MoreProfileCardSubMenu({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      shrinkWrap: true,
+      children: [
+        ProfileCardListTile(
+          // removePadding: true,
+          iconData: Icons.email,
+          text: 'Share profile via email',
+        ),
+        ProfileCardListTile(
+          // removePadding: true,
+          iconData: Icons.close,
+          text: 'Cancel connecttion',
+        ),
+      ],
+    );
+  }
+}
+
 class StatsComman extends StatelessWidget {
   const StatsComman({
     Key? key,
@@ -92,6 +120,15 @@ class StatsComman extends StatelessWidget {
   Widget build(BuildContext context) {
     final int membershipGradeLeaderPoints =
         userProfileData.membershipGradeLeaderPoints ?? 0;
+
+    final statsTextStyle = isMobile
+        ? bodyExtraSmall.copyWith(
+            color: Cr.grey1,
+          )
+        : dividerTextSmall.copyWith(
+            color: Cr.grey1,
+          );
+
     return SizedBox(
       height: 55,
       width: isMobile ? 400 : 470,
@@ -110,9 +147,7 @@ class StatsComman extends StatelessWidget {
               ),
               Text(
                 "CONNECTIONS",
-                style: dividerTextSmall.copyWith(
-                  color: Cr.grey1,
-                ),
+                style: statsTextStyle,
               ),
             ],
           ),
@@ -128,9 +163,7 @@ class StatsComman extends StatelessWidget {
               ),
               Text(
                 "Leader Points".toUpperCase(),
-                style: dividerTextSmall.copyWith(
-                  color: Cr.grey1,
-                ),
+                style: statsTextStyle,
               ),
             ],
           ),
@@ -147,9 +180,7 @@ class StatsComman extends StatelessWidget {
               ),
               Text(
                 "REFERENCES",
-                style: dividerTextSmall.copyWith(
-                  color: Cr.grey1,
-                ),
+                style: statsTextStyle,
               ),
             ],
           ),
@@ -165,9 +196,7 @@ class StatsComman extends StatelessWidget {
               ),
               Text(
                 "RECOMMENDATIONS",
-                style: dividerTextSmall.copyWith(
-                  color: Cr.grey1,
-                ),
+                style: statsTextStyle,
               ),
             ],
           ),

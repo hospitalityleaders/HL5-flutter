@@ -109,12 +109,19 @@ class _ProfileOverviewFirstColumnState
   }
 
   ///references card
-  Widget buildReferencesCard(String img, String title, String userId,
-      String subTitle, String description) {
+  Widget buildReferencesCard(
+    String img,
+    String title,
+    String userId,
+    String subTitle,
+    String description,
+  ) {
     return Container(
+      width: 200,
       padding: EdgeInsets.all(6),
       color: ColorPicker.kWhite,
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ListTile(
@@ -290,7 +297,14 @@ class _ProfileOverviewFirstColumnState
 
   List chipList = ['Business'];
 
-  Future<String?> buildAreaOfExpePopUp(BuildContext context) {
+  ///Area of exper pop up end
+
+  ///profile section1 pop up functionality End
+
+}
+
+class OldPopUpDialogs {
+  static Future<String?> buildAreaOfExpePopUp(BuildContext context) {
     return showDialog<String>(
       context: context,
       builder: (BuildContext context) {
@@ -359,7 +373,7 @@ class _ProfileOverviewFirstColumnState
                                               SizedBox(
                                                 height: 36,
                                                 child: TextField(
-                                                  controller: _controller,
+                                                  // controller: _controller,
                                                   decoration: InputDecoration(
                                                     border: OutlineInputBorder(
                                                       borderRadius:
@@ -376,16 +390,16 @@ class _ProfileOverviewFirstColumnState
                                           flex: 1,
                                           child: InkWell(
                                             onTap: () {
-                                              setState(
-                                                () {
-                                                  if (_controller.text != '') {
-                                                    chipList
-                                                        .add(_controller.text);
-                                                  } else {
-                                                    null;
-                                                  }
-                                                },
-                                              );
+                                              // setState(
+                                              //   () {
+                                              //     if (_controller.text != '') {
+                                              //       chipList
+                                              //           .add(_controller.text);
+                                              //     } else {
+                                              //       null;
+                                              //     }
+                                              //   },
+                                              // );
                                             },
                                             onHover: (value) {},
                                             child: Padding(
@@ -426,40 +440,40 @@ class _ProfileOverviewFirstColumnState
                               color: ColorPicker.kGreyLight9,
                               child: Column(
                                 children: [
-                                  Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: SingleChildScrollView(
-                                      child: Wrap(
-                                        spacing: 3.0,
-                                        runSpacing: 5.0,
-                                        children: [
-                                          for (var i in chipList)
-                                            Chip(
-                                              backgroundColor: Colors.white,
-                                              elevation: 0.5,
-                                              shadowColor: Colors.black,
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: 15, horizontal: 5),
-                                              shape: RoundedRectangleBorder(),
-                                              label: Text(i.toString()),
-                                              deleteIcon: Icon(
-                                                Icons.close,
-                                                color: ColorPicker.kBlueLight1,
-                                                size: 10,
-                                              ),
-                                              onDeleted: () {
-                                                setState(
-                                                  () {
-                                                    chipList.removeAt(
-                                                        chipList.indexOf(i));
-                                                  },
-                                                );
-                                              },
-                                            ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
+                                  // Padding(
+                                  //   padding: EdgeInsets.all(8.0),
+                                  //   child: SingleChildScrollView(
+                                  //     child: Wrap(
+                                  //       spacing: 3.0,
+                                  //       runSpacing: 5.0,
+                                  //       children: [
+                                  //         for (var i in chipList)
+                                  //           Chip(
+                                  //             backgroundColor: Colors.white,
+                                  //             elevation: 0.5,
+                                  //             shadowColor: Colors.black,
+                                  //             padding: EdgeInsets.symmetric(
+                                  //                 vertical: 15, horizontal: 5),
+                                  //             shape: RoundedRectangleBorder(),
+                                  //             label: Text(i.toString()),
+                                  //             deleteIcon: Icon(
+                                  //               Icons.close,
+                                  //               color: ColorPicker.kBlueLight1,
+                                  //               size: 10,
+                                  //             ),
+                                  //             onDeleted: () {
+                                  //               setState(
+                                  //                 () {
+                                  //                   chipList.removeAt(
+                                  //                       chipList.indexOf(i));
+                                  //                 },
+                                  //               );
+                                  //             },
+                                  //           ),
+                                  //       ],
+                                  //     ),
+                                  //   ),
+                                  // ),
                                   Padding(
                                     padding: EdgeInsets.all(20),
                                     child: Row(
@@ -491,11 +505,6 @@ class _ProfileOverviewFirstColumnState
       },
     );
   }
-
-  ///Area of exper pop up end
-
-  ///profile section1 pop up functionality End
-
 }
 
 class ProfileSummaryComponent extends StatefulWidget {
@@ -607,9 +616,10 @@ class AreasOfExpertiseComponents extends StatelessWidget {
           IntrinsicHeight(
             child: Stack(
               children: [
-                Padding(
+                Container(
                   padding: EdgeInsets.symmetric(horizontal: Di.PSD),
                   child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       Di.SBHD,
                       DbData.getUserProfileData.expertise != null
@@ -636,7 +646,6 @@ class AreasOfExpertiseComponents extends StatelessWidget {
                     ],
                   ),
                 ),
-                // EditBlueCardSheet(context),
                 EditBlueCardSheet(
                   context,
                   dataIsNull: expertise == null,
@@ -658,7 +667,6 @@ class AreasOfExpertiseComponents extends StatelessWidget {
                         context,
                         ProfileExpertiseDialogWidget(),
                       );
-                      // buildAreaOfExpePopUp(context);
                     },
                     onAddPressed: () {
                       showCustomDialog(

@@ -1,11 +1,23 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:holedo/presentation/ui/pages/profile_dialogs/show_custom_dialog.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/images.dart';
 import 'package:holedo/presentation/utill/nav.dart';
 import 'package:holedo/presentation/utill/styles.dart';
+
+void dialogCircularProgressIndicator(BuildContext context) {
+  showCustomDialog(
+    context,
+    Container(
+      width: 50,
+      height: 50,
+      child: CircularProgressIndicator(),
+    ),
+  );
+}
 
 class StarIcon extends StatelessWidget {
   const StarIcon({
