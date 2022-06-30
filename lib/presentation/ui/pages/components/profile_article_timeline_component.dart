@@ -10,8 +10,9 @@ import 'package:holedo/presentation/utill/styles.dart';
 class ProfileArticleTimelineComponent extends StatelessWidget {
   const ProfileArticleTimelineComponent({
     Key? key,
+    this.isMobile = false,
   }) : super(key: key);
-
+  final bool isMobile;
   @override
   Widget build(BuildContext context) {
     return Container(

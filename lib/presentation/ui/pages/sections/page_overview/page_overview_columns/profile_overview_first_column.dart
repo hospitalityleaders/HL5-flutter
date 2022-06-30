@@ -522,6 +522,7 @@ class _ProfileSummaryComponentState extends State<ProfileSummaryComponent> {
         boxShadow: Styles.defaultBoxShadow,
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ListTile(
             title: Text(

@@ -44,52 +44,58 @@ class _ReferenceSectionState extends State<ReferenceSection> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Di.SBCW(70),
-          SizedBox(
-            key: _widgetKey,
-            width: 360,
-            // height: 220,
-            child: Column(
-              children: [
-                ProfileReferenceSingleComponent(),
-                ProfileReferenceSingleComponent(),
-                ProfileReferenceSingleComponent(),
-                ProfileReferenceSingleComponent(),
-                ProfileReferenceSingleComponent(),
-                ProfileReferenceSingleComponent(),
-                ProfileReferenceSingleComponent(),
-                ProfileReferenceSingleComponent(),
-                ProfileReferenceSingleComponent(),
-                ProfileReferenceSingleComponent(),
-                // Di.DD,
-              ],
+          Flexible(
+            child: SizedBox(
+              key: _widgetKey,
+              width: 360,
+              // height: 220,
+              child: Column(
+                children: [
+                  ProfileReferenceSingleComponent(),
+                  ProfileReferenceSingleComponent(),
+                  ProfileReferenceSingleComponent(),
+                  ProfileReferenceSingleComponent(),
+                  ProfileReferenceSingleComponent(),
+                  ProfileReferenceSingleComponent(),
+                  ProfileReferenceSingleComponent(),
+                  ProfileReferenceSingleComponent(),
+                  ProfileReferenceSingleComponent(),
+                  ProfileReferenceSingleComponent(),
+                  // Di.DD,
+                ],
+              ),
             ),
           ),
           Di.SBWEL,
-          SizedBox(
-            width: 360,
-            // height: 220,
-            child: Column(
-              children: [
-                ProfileReferenceSingleComponent(),
-                ProfileReferenceSingleComponent(
-                  description:
-                      "exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                ),
-                ProfileReferenceSingleComponent(),
-                ProfileReferenceSingleComponent(),
-                ProfileReferenceSingleComponent(),
-                ProfileReferenceSingleComponent(),
-                ProfileReferenceSingleComponent(),
-                ProfileReferenceSingleComponent(),
-                ProfileReferenceSingleComponent(),
-                ProfileReferenceSingleComponent(),
-                // Di.DD,
-              ],
+          Flexible(
+            child: SizedBox(
+              width: 360,
+              // height: 220,
+              child: Column(
+                children: [
+                  ProfileReferenceSingleComponent(),
+                  ProfileReferenceSingleComponent(
+                    description:
+                        "exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                  ),
+                  ProfileReferenceSingleComponent(),
+                  ProfileReferenceSingleComponent(),
+                  ProfileReferenceSingleComponent(),
+                  ProfileReferenceSingleComponent(),
+                  ProfileReferenceSingleComponent(),
+                  ProfileReferenceSingleComponent(),
+                  ProfileReferenceSingleComponent(),
+                  ProfileReferenceSingleComponent(),
+                  // Di.DD,
+                ],
+              ),
             ),
           ),
           Di.SBWEL,
-          ProfileOverviewThirdColumn(
-            userProfileData: DbData.getUserProfileData,
+          Flexible(
+            child: ProfileOverviewThirdColumn(
+              userProfileData: DbData.getUserProfileData,
+            ),
           ),
           Di.SBCW(70),
         ],

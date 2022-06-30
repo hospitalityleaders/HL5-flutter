@@ -33,7 +33,6 @@ class ProfilePopupDialogScreen extends StatelessWidget {
               SizedBox(
                 child: ContactCardDialogWidget(),
               ),
-
               Di.SBHOL,
               // CustomElevatedButton(
               //   width: 200,

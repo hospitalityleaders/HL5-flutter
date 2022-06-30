@@ -24,47 +24,53 @@ class ArticlesSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Di.SBHOTL,
-          SizedBox(
-            width: 360,
-            // height: 220,
-            child: Column(
-              children: [
-                ProfileArticleWidget(),
-                ProfileArticleWidget(),
-                ProfileArticleWidget(),
-                ProfileArticleWidget(),
-              ],
+          Flexible(
+            child: SizedBox(
+              width: 360,
+              // height: 220,
+              child: Column(
+                children: [
+                  ProfileArticleWidget(),
+                  ProfileArticleWidget(),
+                  ProfileArticleWidget(),
+                  ProfileArticleWidget(),
+                ],
+              ),
             ),
           ),
           Di.SBWEL,
-          SizedBox(
-            width: 360,
-            // height: 220,
-            child: Column(
-              children: [
-                ProfileArticleWidget(),
-                ProfileArticleWidget(),
-                ProfileArticleWidget(),
-                ProfileArticleWidget(),
-              ],
+          Flexible(
+            child: SizedBox(
+              width: 360,
+              // height: 220,
+              child: Column(
+                children: [
+                  ProfileArticleWidget(),
+                  ProfileArticleWidget(),
+                  ProfileArticleWidget(),
+                  ProfileArticleWidget(),
+                ],
+              ),
             ),
           ),
           Di.SBWEL,
-          SizedBox(
-            width: 365,
-            child: Column(
-              children: [
-                ProfileArticleTimelineComponent(),
-                Di.SBHEL,
-                ProfileArticleWidget(
-                  showIsMemberOnly: true,
-                ),
-                ProfileArticleWidget(),
-                Di.SBHEL,
-                ConnectionsComponent(),
-                ProfileAdsComponent(),
-                RightsComponent(),
-              ],
+          Flexible(
+            child: SizedBox(
+              width: 365,
+              child: Column(
+                children: [
+                  ProfileArticleTimelineComponent(),
+                  Di.SBHEL,
+                  ProfileArticleWidget(
+                    showIsMemberOnly: true,
+                  ),
+                  ProfileArticleWidget(),
+                  Di.SBHEL,
+                  ConnectionsComponent(),
+                  ProfileAdsComponent(),
+                  RightsComponent(),
+                ],
+              ),
             ),
           ),
           Di.SBWEL,
@@ -78,14 +84,16 @@ class ProfileArticleWidget extends StatelessWidget {
   const ProfileArticleWidget({
     Key? key,
     this.showIsMemberOnly = false,
+    this.isMobile = false,
   }) : super(key: key);
 
+  final bool isMobile;
   final bool showIsMemberOnly;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 360,
+      width: isMobile ? null : 360,
       height: showIsMemberOnly ? 332 : 305,
       color: Cr.whiteColor,
       margin: EdgeInsets.symmetric(vertical: Di.PSS),

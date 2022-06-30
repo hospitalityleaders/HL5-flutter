@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:holedo/presentation/ui/components/appbar_textfield.dart';
 import 'package:holedo/presentation/ui/components/custom_appbar.dart';
 import 'package:holedo/presentation/ui/components/custom_icon_button.dart';
-import 'package:holedo/presentation/ui/pages/profile_mobile_view/profile_mobile_view_page.dart';
+import 'package:holedo/presentation/ui/pages/mobile_view_section/mobile_profile_overview_section.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/images.dart';
@@ -144,99 +144,102 @@ class _PageScaffoldState extends State<PageScaffold> {
               endDrawer: isTableOrMobile(context)
                   ? Drawer(
                       child: Center(
-                        child: Container(
-                          padding: EdgeInsets.only(top: Di.PSS),
-                          color: Cr.colorPrimary,
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  AppbarEmailButton(),
-                                  // VerticalDivider(
-                                  //   thickness: 3.3,
-                                  //   color: Cr.darkBlue5,
-                                  // ),
-                                  AppbarNotificationsButton(),
-                                  AppbarConnectionRequestButton(),
-                                  CustomIconButton(
-                                    onTap: () {
-                                      Nav.pop(context);
-                                    },
-                                    icon: Icon(
-                                      Icons.close,
-                                      color: Cr.darkBlue9,
+                        child: SingleChildScrollView(
+                          child: Container(
+                            padding: EdgeInsets.only(top: Di.PSS),
+                            color: Cr.colorPrimary,
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    AppbarEmailButton(),
+                                    // VerticalDivider(
+                                    //   thickness: 3.3,
+                                    //   color: Cr.darkBlue5,
+                                    // ),
+                                    AppbarNotificationsButton(),
+                                    AppbarConnectionRequestButton(),
+                                    CustomIconButton(
+                                      onTap: () {
+                                        Nav.pop(context);
+                                      },
+                                      icon: Icon(
+                                        Icons.close,
+                                        color: Cr.darkBlue9,
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              Divider(
-                                thickness: 1.2,
-                                color: Cr.darkBlue5,
-                              ),
-                              SingleChildScrollView(
-                                child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      for (var item in menuItems)
-                                        if (item.loginOnly == null ||
-                                            (item.loginOnly ==
-                                                appState.isLoggedIn))
-                                          if (inDrawer == true &&
-                                              item.inDrawer == true) ...[
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                left: Di.PSL,
-                                                bottom: Di.PSD,
-                                              ),
-                                              child: ListTile(
-                                                title: Text(
-                                                  item.title!,
-                                                  style: TextStyle(
-                                                    // fontSize: 18,
-                                                    color: Cr.whiteColor,
-                                                  ),
+                                  ],
+                                ),
+                                Divider(
+                                  thickness: 1.2,
+                                  color: Cr.darkBlue5,
+                                ),
+                                SingleChildScrollView(
+                                  child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        for (var item in menuItems)
+                                          if (item.loginOnly == null ||
+                                              (item.loginOnly ==
+                                                  appState.isLoggedIn))
+                                            if (inDrawer == true &&
+                                                item.inDrawer == true) ...[
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                  left: Di.PSL,
+                                                  bottom: Di.PSD,
                                                 ),
-                                                onTap: () {
-                                                  Routemaster.of(context)
-                                                      .push(item.path!);
-                                                },
-                                              ),
-                                            ),
-                                            Divider(
-                                              thickness: 1.2,
-                                              color: Cr.darkBlue5,
-                                            ),
-                                          ] else if (inDrawer == false &&
-                                              item.inNav == true)
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(left: Di.PSL),
-                                              child: ListTile(
-                                                title: Text(
-                                                  item.title!,
-                                                  style:
-                                                      defaultRegular.copyWith(
-                                                    color: Cr.whiteColor,
+                                                child: ListTile(
+                                                  title: Text(
+                                                    item.title!,
+                                                    style: TextStyle(
+                                                      // fontSize: 18,
+                                                      color: Cr.whiteColor,
+                                                    ),
                                                   ),
+                                                  onTap: () {
+                                                    Routemaster.of(context)
+                                                        .push(item.path!);
+                                                  },
                                                 ),
-                                                onTap: () {
-                                                  Routemaster.of(context)
-                                                      .push(item.path!);
-                                                },
                                               ),
-                                            )
-                                    ]
+                                              Divider(
+                                                thickness: 1.2,
+                                                color: Cr.darkBlue5,
+                                              ),
+                                            ] else if (inDrawer == false &&
+                                                item.inNav == true)
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    left: Di.PSL),
+                                                child: ListTile(
+                                                  title: Text(
+                                                    item.title!,
+                                                    style:
+                                                        defaultRegular.copyWith(
+                                                      color: Cr.whiteColor,
+                                                    ),
+                                                  ),
+                                                  onTap: () {
+                                                    Routemaster.of(context)
+                                                        .push(item.path!);
+                                                  },
+                                                ),
+                                              )
+                                      ]
 
-                                    // _buildNavBarChildren(
-                                    //     inDrawer: true,
-                                    //     isLogin: appState.isLoggedIn),
+                                      // _buildNavBarChildren(
+                                      //     inDrawer: true,
+                                      //     isLogin: appState.isLoggedIn),
 
-                                    ),
-                              ),
-                              Di.ESB,
-                            ],
+                                      ),
+                                ),
+                                Di.ESB,
+                              ],
+                            ),
                           ),
                         ),
                       ),

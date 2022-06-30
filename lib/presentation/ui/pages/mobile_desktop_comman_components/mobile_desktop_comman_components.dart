@@ -59,12 +59,13 @@ class ContactCardMenuCommon extends StatelessWidget {
 class SendConnectionRequestComman extends StatelessWidget {
   const SendConnectionRequestComman({
     Key? key,
+    this.width,
   }) : super(key: key);
-
+  final double? width;
   @override
   Widget build(BuildContext context) {
     return CustomElevatedButton(
-      width: 285,
+      width: width ?? 285,
       height: 55,
       text: "SEND CONNECTION REQUEST",
       icon: Icon(
@@ -180,9 +181,10 @@ class WriteReferenceRecommandButtonComman extends StatelessWidget {
   const WriteReferenceRecommandButtonComman({
     Key? key,
     required this.userProfileData,
+    this.width,
   }) : super(key: key);
   final User userProfileData;
-
+  final double? width;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -197,7 +199,7 @@ class WriteReferenceRecommandButtonComman extends StatelessWidget {
               ),
             );
           },
-          width: 140,
+          width: width ?? 140,
           height: 35,
           backgroundColor: Cr.accentBlue3,
           child: Row(
@@ -220,7 +222,7 @@ class WriteReferenceRecommandButtonComman extends StatelessWidget {
         ),
         Di.SBWES,
         CustomElevatedButton(
-          width: 140,
+          width: width ?? 140,
           height: 35,
           backgroundColor: Cr.accentBlue3,
           child: Row(

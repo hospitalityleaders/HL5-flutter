@@ -46,12 +46,14 @@ class _CustomAppbarState extends State<CustomAppbar> {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
+              isSmallerThanDesltop ? Di.SBWES : Di.SBWD,
               Image.asset(
                 Images.logo1,
-                width: Di.FSOTL + 10,
+                width: 40,
               ),
-              isSmallerThanDesltop ? Di.ESB : Di.SBWD,
+              isSmallerThanDesltop ? Di.SBWES : Di.SBWD,
               AppbarTextField(
+                width: isSmallerThanDesltop ? 300 : null,
                 onSearchChange: widget.onSearch,
                 searchController: widget.searchController,
               ),

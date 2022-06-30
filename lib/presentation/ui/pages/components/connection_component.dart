@@ -7,7 +7,10 @@ import 'package:holedo/presentation/utill/styles.dart';
 class ConnectionsComponent extends StatelessWidget {
   const ConnectionsComponent({
     Key? key,
+    this.isMobile = false,
   }) : super(key: key);
+
+  final bool isMobile;
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +34,10 @@ class ConnectionsComponent extends StatelessWidget {
           Di.SBHS,
           Center(
             child: Container(
+              padding: EdgeInsets.symmetric(horizontal: isMobile ? Di.PSL : 0),
               height: 100,
-              width: 324,
-              color: Cr.greyColor,
+              width: isMobile ? double.infinity : 324,
+              color: Cr.whiteColor,
               child: Image.asset(
                 "assets/images/profileConnectionBanner.png",
                 fit: BoxFit.cover,
@@ -59,7 +63,7 @@ class ConnectionsComponent extends StatelessWidget {
           Di.SBHS,
           Center(
             child: SizedBox(
-              width: 320,
+              width: isMobile ? Di.getScreenSize(context).width - 52 : 320,
               height: 35,
               child: TextWithBackground(
                 sizedBoxBetweenIconText: Di.SBWES,

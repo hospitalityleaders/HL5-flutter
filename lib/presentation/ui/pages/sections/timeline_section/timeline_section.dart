@@ -25,56 +25,74 @@ class TimelineSection extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Di.SBHOTL,
-          SizedBox(
-            // width: 550,
-            width: 620,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TimeLineWidget(
-                  jobDescriptionInHtml:
-                      "<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>",
-                ),
-                TimeLineWidget(),
-                TimeLineWidget(
-                  jobDescriptionInHtml: """<div>
-          
-                                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                        <h4>Course outline</h4>
-                                        <ul>
-                                          <li>Macro Economics</li>
-                                          <li>International Monetary Economics</li>
-                                          <li>Advanced Time Series Econometrics</li>
-                                          <li>Extended Essay in Money and Banking</li>
-                                        </ul>
-                                        <!--You can pretty much put any html in here!-->
-                                      </div>""",
-                ),
-                TimeLineWidget(
-                  jobDescriptionInHtml:
-                      "<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>",
-                  showComments: true,
-                ),
-              ],
-            ),
-          ),
-          Di.SBWEL,
-          SizedBox(
-            width: 360,
-            child: Column(
-              children: [
-                ProfileCompletionComponent(),
-                Di.SBHEL,
-                ConnectionsComponent(),
-                ProfileAdsComponent(),
-                RightsComponent(),
-              ],
+          TimelineSectionComponent(),
+          Flexible(
+            child: SizedBox(
+              width: 360,
+              child: Column(
+                children: [
+                  ProfileCompletionComponent(),
+                  Di.SBHEL,
+                  ConnectionsComponent(),
+                  ProfileAdsComponent(),
+                  RightsComponent(),
+                ],
+              ),
             ),
           ),
           Di.SBWEL,
         ],
       ),
+    );
+  }
+}
+
+class TimelineSectionComponent extends StatelessWidget {
+  const TimelineSectionComponent({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Di.SBHOTL,
+        SizedBox(
+          // width: 550,
+          width: 620,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TimeLineWidget(
+                jobDescriptionInHtml:
+                    "<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>",
+              ),
+              TimeLineWidget(),
+              TimeLineWidget(
+                jobDescriptionInHtml: """<div>
+        
+                                      <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                      <h4>Course outline</h4>
+                                      <ul>
+                                        <li>Macro Economics</li>
+                                        <li>International Monetary Economics</li>
+                                        <li>Advanced Time Series Econometrics</li>
+                                        <li>Extended Essay in Money and Banking</li>
+                                      </ul>
+                                      <!--You can pretty much put any html in here!-->
+                                    </div>""",
+              ),
+              TimeLineWidget(
+                jobDescriptionInHtml:
+                    "<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>",
+                showComments: true,
+              ),
+            ],
+          ),
+        ),
+        Di.SBWEL,
+      ],
     );
   }
 }
@@ -489,80 +507,3 @@ class CreatePath extends StatelessWidget {
     );
   }
 }
-
-
-
-// class CreatePath extends StatelessWidget {
-//   const CreatePath({
-//     Key? key,
-//     required this.date,
-//     required this.orderStatus,
-//     required this.orderDescription,
-//   }) : super(key: key);
-
-//   final String date;
-//   final String orderStatus;
-//   final String orderDescription;
-//   @override
-//   Widget build(BuildContext context) {
-//     return Stack(
-//       children: [
-//         Container(
-//           margin: EdgeInsets.only(top: 0),
-//           width: 16,
-//           height: 16,
-//           decoration: new BoxDecoration(
-//             shape: BoxShape
-//                 .circle, // You can use like this way or like the below line
-//             //borderRadius: new BorderRadius.circular(30.0),
-//             color: Colors.grey[400],
-//           ),
-//         ),
-//         IntrinsicHeight(
-//           child: Row(
-//             children: <Widget>[
-//               Container(
-//                 margin: EdgeInsets.only(left: 7.5, right: 7.5),
-//                 child: Container(
-//                   width: 1,
-//                   color: Colors.grey[400],
-//                 ),
-//               ),
-//               Expanded(
-//                 child: Container(
-//                   margin: EdgeInsets.only(left: 32, right: 32),
-//                   child: Column(
-//                     crossAxisAlignment: CrossAxisAlignment.start,
-//                     children: [
-//                       Text(orderStatus,
-//                           style: TextStyle(
-//                             fontWeight: FontWeight.bold,
-//                             color: Colors.black,
-//                           )),
-//                       SizedBox(
-//                         height: 4,
-//                       ),
-//                       Text(date,
-//                           style:
-//                               TextStyle(color: Colors.grey[400], fontSize: 11)),
-//                       SizedBox(
-//                         height: 8,
-//                       ),
-//                       Text(orderDescription,
-//                           style: TextStyle(
-//                             color: Cr.darkBlue1,
-//                           )),
-//                       SizedBox(
-//                         height: 24,
-//                       )
-//                     ],
-//                   ),
-//                 ),
-//               ),
-//             ],
-//           ),
-//         )
-//       ],
-//     );
-//   }
-// }

@@ -9,13 +9,16 @@ class ProfileReferenceSingleComponent extends StatelessWidget {
   const ProfileReferenceSingleComponent({
     Key? key,
     this.description,
+    this.isMobile = false,
   }) : super(key: key);
 
   final String? description;
+  final bool isMobile;
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 360,
+      width: isMobile ? null : 360,
       padding: EdgeInsets.symmetric(
         horizontal: Di.PSS,
       ),

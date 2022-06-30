@@ -1,45 +1,83 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:holedo/db_data.dart';
 import 'package:holedo/layouts/pages/profile-pages/profile/user_profile_page.dart';
-import 'package:holedo/models/holedoapi/user.dart';
-import 'package:holedo/presentation/ui/components/appbar_textfield.dart';
-import 'package:holedo/presentation/ui/components/custom_appbar.dart';
+import 'package:holedo/models/models.dart';
+import 'package:holedo/presentation/providers/profile_provider.dart';
 import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
-import 'package:holedo/presentation/ui/components/custom_icon_button.dart';
 import 'package:holedo/presentation/ui/components/person_avatar.dart';
-import 'package:holedo/presentation/ui/pages/components/connection_component.dart';
-import 'package:holedo/presentation/ui/pages/components/profile_completion_component.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_image_banner.dart';
-import 'package:holedo/presentation/ui/pages/components/profile_reference_component.dart';
-import 'package:holedo/presentation/ui/pages/components/profile_workexperience.dart';
-import 'package:holedo/presentation/ui/pages/components/rights_component.dart';
+import 'package:holedo/presentation/ui/pages/components/profile_tabbar.dart';
 import 'package:holedo/presentation/ui/pages/mobile_desktop_comman_components/mobile_desktop_comman_components.dart';
-import 'package:holedo/presentation/ui/pages/sections/page_overview/page_overview_columns/page_overview_second_columns.dart';
-import 'package:holedo/presentation/ui/pages/sections/page_overview/page_overview_columns/page_overview_third_columns.dart';
-import 'package:holedo/presentation/ui/pages/sections/page_overview/page_overview_columns/profile_overview_first_column.dart';
+import 'package:holedo/presentation/ui/pages/mobile_view_section/mobile_profile_article_section.dart';
+import 'package:holedo/presentation/ui/pages/mobile_view_section/mobile_profile_overview_section.dart';
+import 'package:holedo/presentation/ui/pages/mobile_view_section/mobile_profile_reference_section.dart';
+import 'package:holedo/presentation/ui/pages/mobile_view_section/mobile_profile_timeline_section.dart';
+import 'package:holedo/presentation/ui/pages/mobile_view_section/mobile_profile_video_section.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/responsive.dart';
 import 'package:holedo/presentation/utill/styles.dart';
 
-import 'package:holedo/presentation/utill/images.dart';
-
 class ProfileMobileViewPage extends StatefulWidget {
-  const ProfileMobileViewPage({Key? key, required this.userProfileData})
-      : super(key: key);
+  const ProfileMobileViewPage({
+    Key? key,
+    required this.userProfileData,
+    required this.currentTabIndex,
+    required this.changeCurrentIndex,
+    required this.tabController,
+    required this.onTabBarTap,
+  }) : super(key: key);
   final User userProfileData;
-
+  final void Function(int newIndex) changeCurrentIndex;
+  final int currentTabIndex;
+  final TabController tabController;
+  final void Function(int) onTabBarTap;
   @override
   State<ProfileMobileViewPage> createState() => _ProfileMobileViewPageState();
 }
 
 class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
+  // late AnimationController _controller;
+  // late Animation<Offset> _offsetFloat;
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _controller = AnimationController(
+  //     vsync: this,
+  //     duration: const Duration(milliseconds: 350),
+  //   );
+
+  //   _offsetFloat = Tween(begin: Offset(0.0, -0.03), end: Offset.zero).animate(
+  //     CurvedAnimation(
+  //       parent: _controller,
+  //       curve: Curves.fastOutSlowIn,
+  //     ),
+  //   );
+
+  //   _offsetFloat.addListener(() {
+  //     setState(() {});
+  //   });
+
+  //   _controller.forward();
+  // }
+
+  // @override
+  // void dispose() {
+  //   _controller.dispose();
+  //   super.dispose();
+  // }
+
+  bool showMenu = false;
+
   @override
   Widget build(BuildContext context) {
     final bool isMobilePhn = isMobilePhone(context);
     final bool isTablt = isTablet(context);
     final User getUserProfileData = DbData.getUserProfileData;
+    final isEditable = Provider.of<ProfileProvider>(context).isProfileEditable;
+    final appState = Provider.of<AppState>(context);
+    final bool isMine = appState.isLoginnedAndEditable(widget.userProfileData);
 
     return Scaffold(
       body: ListView(
@@ -104,7 +142,7 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
               children: [
                 if (isMobilePhn)
                   SizedBox(
-                    height: 600,
+                    height: showMenu ? 930 : 640,
                     child: Stack(
                       children: [
                         Container(
@@ -121,18 +159,23 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                           child: Align(
                             alignment: Alignment.center,
                             child: Container(
+                              padding: EdgeInsets.only(
+                                left: Di.PSL,
+                                right: Di.PSL,
+                              ),
                               width: Di.getScreenSize(context).width * .96,
                               decoration: BoxDecoration(
                                 color: Cr.whiteColor,
                               ),
                               child: Column(
+                                // crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Di.SBHOTL,
+                                  Di.SBCH(50),
                                   Text(
                                     getUserProfileData.fullName ?? "",
                                     style: display3,
                                   ),
-                                  Di.SBHETS,
+                                  Di.SBHD,
                                   OutlinedButton(
                                     onPressed: () {},
                                     child: Text(
@@ -144,7 +187,7 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                                       ),
                                     ),
                                   ),
-                                  Di.SBHS,
+                                  Di.SBHD,
                                   SizedBox(
                                     width: 320,
                                     child: Text(
@@ -156,7 +199,7 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                                       ),
                                     ),
                                   ),
-                                  Di.SBHS,
+                                  Di.SBHD,
                                   SizedBox(
                                     width: 320,
                                     child: Row(
@@ -185,9 +228,13 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                                     isMobile: true,
                                   ),
                                   Di.SBHOL,
-                                  SendConnectionRequestComman(),
+                                  SendConnectionRequestComman(
+                                    width: double.infinity,
+                                  ),
                                   Di.SBHES,
                                   WriteReferenceRecommandButtonComman(
+                                    width:
+                                        Di.getScreenSize(context).width * .43,
                                     userProfileData: widget.userProfileData,
                                   ),
                                   Di.SBHD,
@@ -215,8 +262,8 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                                   Container(
                                     padding: EdgeInsets.only(
                                       bottom: Di.PSS,
-                                      // left: Di.PSD,
-                                      // right: Di.PSD,
+                                      // left: Di.PSL,
+                                      // right: Di.PSL,
                                     ),
                                     decoration: BoxDecoration(
                                       color: Cr.whiteColor,
@@ -227,17 +274,17 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                                         ),
                                       ),
                                     ),
-                                    height: 100,
+                                    height: showMenu ? 365 : 100,
                                     child: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
                                       // mainAxisSize: MainAxisSize.min,
                                       children: [
                                         Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
+                                          // crossAxisAlignment:
+                                          //     CrossAxisAlignment.center,
                                           mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Row(
                                               mainAxisSize: MainAxisSize.min,
@@ -259,32 +306,107 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                                                 ),
                                               ],
                                             ),
-                                            Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                Icon(
-                                                  Icons.menu,
-                                                  color: Cr.accentBlue1,
-                                                ),
-                                                Text(
-                                                  "Menu",
-                                                  style: TextStyle(
-                                                    fontSize: 9,
-                                                    color: Cr.accentBlue1,
-                                                    fontFamily: 'SourceSansPro',
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                )
-                                              ],
-                                            )
+                                            InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  showMenu = !showMenu;
+                                                });
+                                              },
+                                              child: showMenu
+                                                  ? Icon(
+                                                      Icons.close,
+                                                      color: Cr.accentBlue1,
+                                                    )
+                                                  : Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      children: [
+                                                        Icon(
+                                                          Icons.menu,
+                                                          color: Cr.accentBlue1,
+                                                        ),
+                                                        Text(
+                                                          "Menu",
+                                                          style: TextStyle(
+                                                            fontSize: 9,
+                                                            color:
+                                                                Cr.accentBlue1,
+                                                            fontFamily:
+                                                                'SourceSansPro',
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                            ),
                                           ],
                                         ),
+                                        if (showMenu)
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              TabButtonProfileMobile(
+                                                title: "Provile overview",
+                                                isActive:
+                                                    widget.currentTabIndex == 0,
+                                                onTap: () {
+                                                  widget.changeCurrentIndex(0);
+                                                },
+                                              ),
+                                              TabButtonProfileMobile(
+                                                title: "Timeline",
+                                                isActive:
+                                                    widget.currentTabIndex == 1,
+                                                onTap: () {
+                                                  widget.changeCurrentIndex(1);
+                                                },
+                                              ),
+                                              TabButtonProfileMobile(
+                                                title: "Articles",
+                                                isActive:
+                                                    widget.currentTabIndex == 2,
+                                                onTap: () {
+                                                  widget.changeCurrentIndex(2);
+                                                },
+                                              ),
+                                              TabButtonProfileMobile(
+                                                title: "Activity",
+                                                isActive:
+                                                    widget.currentTabIndex == 3,
+                                                onTap: () {
+                                                  widget.changeCurrentIndex(3);
+                                                },
+                                              ),
+                                              TabButtonProfileMobile(
+                                                title: "References",
+                                                isActive:
+                                                    widget.currentTabIndex == 4,
+                                                onTap: () {
+                                                  widget.changeCurrentIndex(4);
+                                                },
+                                              ),
+                                              TabButtonProfileMobile(
+                                                title: "Video",
+                                                isActive:
+                                                    widget.currentTabIndex == 5,
+                                                onTap: () {
+                                                  widget.changeCurrentIndex(5);
+                                                },
+                                              ),
+                                            ],
+                                          ),
                                         Di.SBHES,
-                                        CustomElevatedButton(
-                                          width: 280,
-                                        ),
+                                        isMine
+                                            ? EditProfileButton(
+                                                width: double.infinity,
+                                                isEditable: isEditable,
+                                              )
+                                            : Di.ESB,
                                       ],
                                     ),
                                   ),
@@ -312,176 +434,47 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                       ],
                     ),
                   ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: Di.PSS,
+                if (isTablt)
+                  ProfileTabbar(
+                    onTap: widget.onTabBarTap,
+                    isMine: isMine,
+                    tabController: widget.tabController,
                   ),
-                  child: Column(
-                    children: [
-                      if (isMobilePhn) ProfileCompletionComponent(),
-                      Di.SBHS,
-                      ProfileSummaryComponent(
-                        isMobile: true,
-                      ),
-
-                      ProfileWorkExperienceComponent(
-                        userProfileData: widget.userProfileData,
-                        isMobile: isMobilePhn,
-                        isTablet: isTablt,
-                      ),
-                      Di.SBHS,
-                      FeaturedVideoComponent(
-                        isMobile: true,
-                        userProfileData: widget.userProfileData,
-                      ),
-                      Di.SBHS,
-                      AreasOfExpertiseComponents(),
-                      Di.SBHS,
-                      ProfileReferenceComponent(),
-                      Di.SBHS,
-                      EducationComponent(
-                        isMobile: true,
-                        userProfileData: widget.userProfileData,
-                      ),
-                      Di.SBHS,
-                      AchievementComponent(
-                        isMobile: true,
-                        userProfileData: widget.userProfileData,
-                      ),
-                      //TODO:
-                      // LanguagesComponent(
-                      //   userProfileData: widget.userProfileData,
-                      // ),
-                      ConnectionsComponent(),
-                      TimelineComponent(),
-                      RightsComponent(
-                        isMobile: true,
-                      ),
-                      Di.SBHOTL,
-                    ],
+                [
+                  MobileProfileOverviewSection(
+                    isMobilePhn: isMobilePhn,
+                    isTablt: isTablt,
                   ),
-                ),
+                  MobileProfileTimelineSection(
+                    isMobilePhn: isMobilePhn,
+                    isTablt: isTablt,
+                    showComments: false,
+                  ),
+                  MobileProfileArticleSection(
+                    isMobilePhn: isMobilePhn,
+                    isTablt: isTablt,
+                    showComments: false,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(Di.PSOTL),
+                    child: Center(
+                      child: Text(
+                        "Activity",
+                        style: display1,
+                      ),
+                    ),
+                  ),
+                  MobileProfileReferenceSection(
+                    isMobilePhn: isMobilePhn,
+                    isTablt: isTablt,
+                  ),
+                  MobileProfileVideoSection(
+                    isMobilePhn: isMobilePhn,
+                    isTablt: isTablt,
+                  ),
+                ][widget.currentTabIndex],
               ],
             ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class ProfileMobileAppbar extends StatefulWidget {
-  final TextEditingController searchController;
-  final void Function(String? searchText) onSearch;
-  final void Function()? onTap;
-
-  const ProfileMobileAppbar({
-    Key? key,
-    required this.searchController,
-    required this.onSearch,
-    this.onTap,
-  }) : super(key: key);
-
-  @override
-  State<ProfileMobileAppbar> createState() => _ProfileMobileAppbarState();
-}
-
-class _ProfileMobileAppbarState extends State<ProfileMobileAppbar> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Cr.colorPrimary,
-      height: 50,
-      padding: EdgeInsets.symmetric(horizontal: Di.PSS),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Image.asset(
-            Images.logo1,
-            width: Di.FSOTL + 10,
-          ),
-          Di.SBWD,
-          AppbarTextField(
-            onSearchChange: widget.onSearch,
-            searchController: widget.searchController,
-            width: isTablet(context) ? 250 : 300,
-            showPeopleButton: false,
-          ),
-          isTablet(context)
-              ? Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    VerticalDivider(
-                      thickness: 1.3,
-                      color: Cr.darkBlue5,
-                    ),
-                    CustomIconButton(
-                      icon: SvgPicture.asset(
-                        Svgs.emailOpen,
-                        color: Cr.darkBlue9,
-                      ),
-                      // iconData: Icons.mail_rounded,
-                      showNotification: true,
-                    ),
-                    VerticalDivider(
-                      thickness: 1.3,
-                      color: Cr.darkBlue5,
-                    ),
-                    CustomIconButton(
-                      icon: SvgPicture.asset(
-                        Svgs.flag,
-                        color: Cr.darkBlue9,
-                      ),
-                      showNotification: true,
-                    ),
-                    VerticalDivider(
-                      thickness: 1.3,
-                      color: Cr.darkBlue5,
-                    ),
-                    AppbarConnectionRequestButton(),
-                    VerticalDivider(
-                      thickness: 1.3,
-                      color: Cr.darkBlue5,
-                    ),
-                    PersonAvatar(),
-                    VerticalDivider(
-                      thickness: 1.3,
-                      color: Cr.darkBlue5,
-                    ),
-                  ],
-                )
-              : Di.ESB,
-          Di.SBWD,
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              GestureDetector(
-                onTap: widget.onTap,
-                child: CustomIconButton(
-                  showNotification: true,
-                  icon: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        Icons.menu,
-                        color: Cr.darkBlue9,
-                      ),
-                      Text(
-                        "MENU",
-                        style: TextStyle(
-                          fontSize: 9,
-                          fontFamily: "SourceSansPro",
-                          fontWeight: FontWeight.bold,
-                          color: Cr.darkBlue9,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              // iconData: Icons.mail_rounded,
-            ],
           ),
         ],
       ),

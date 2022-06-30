@@ -204,6 +204,15 @@ class _UserProfilePageState extends State<UserProfilePage>
   int currentTabIndex = 0;
   bool showNotifications = true;
 
+  void changeCurrentIndex(int newIndex) {
+    newIndex == 5
+        ? _tabController.animateTo(0)
+        : _tabController.animateTo(newIndex);
+    setState(() {
+      currentTabIndex = newIndex;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -217,6 +226,12 @@ class _UserProfilePageState extends State<UserProfilePage>
     super.dispose();
   }
 
+  void onTabBarTap(int value) {
+    setState(() {
+      currentTabIndex = _tabController.index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     print("userProfileData: is  ${widget.userProfileData.toString()} ");
@@ -228,7 +243,11 @@ class _UserProfilePageState extends State<UserProfilePage>
         // if (ResponsiveWrapper.of(context).isSmallerThan(MOBILE))
         if (isTableOrMobile(context))
           ProfileMobileViewPage(
+            currentTabIndex: currentTabIndex,
+            changeCurrentIndex: changeCurrentIndex,
             userProfileData: widget.userProfileData,
+            tabController: _tabController,
+            onTabBarTap: onTabBarTap,
           )
         // else if (ResponsiveWrapper.of(context).isSmallerThan(TABLET))
         //   Container(
@@ -258,18 +277,9 @@ class _UserProfilePageState extends State<UserProfilePage>
                   onEditButtonPressed: () {},
                 ),
                 ProfileTabbar(
-                  onTap: (value) {
-                    setState(() {
-                      currentTabIndex = _tabController.index;
-                    });
-                  },
+                  onTap: onTabBarTap,
                   isMine: isMine,
                   tabController: _tabController,
-                  onEditProfilePressed: () {
-                    setState(() {
-                      isEditable = !isEditable;
-                    });
-                  },
                 ),
                 Di.SBHEL,
                 Center(
@@ -283,7 +293,7 @@ class _UserProfilePageState extends State<UserProfilePage>
                     ArticlesSection(),
                     ActivitySection(),
                     ReferenceSection(),
-                  ][currentTabIndex],
+                  ][_tabController.index],
                 ),
                 Di.SBHOTL,
               ],
