@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:holedo/main.dart';
 import 'package:holedo/models/holedoapi/article.dart';
 import 'package:holedo/models/models.dart';
 import 'package:holedo/layouts/page_scaffold.dart';
@@ -79,30 +78,6 @@ class NewsPage extends StatelessWidget {
             );
         },
       ),
-    );
-  }
-}
-
-class NewsPageASD extends StatelessWidget {
-  final String? id;
-  final String? slug;
-  const NewsPageASD({Key? key, this.id, this.slug}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    print('slug:?? ${slug}');
-
-    final featuredNews = holedoDatabase.news.fetchArticles(context: context);
-    final tabs = Get.put(HoledoDatabase())
-        .articleCategories
-        .where((category) => category.menuItem == true);
-
-    print('articles: ${featuredNews.toString()}');
-
-    print('categoriess: ${tabs.toString()}');
-    return PageScaffold(
-      title: 'ASDASDe',
-      body: Text('slug:?? ${slug} '),
     );
   }
 }

@@ -108,8 +108,7 @@ RouteMap _buildRouteMap(BuildContext context) {
                           .articleCategories
                           .firstWhere(
                             (e) => e.slug == route.pathParameters['category'],
-                          )),
-                )
+                          )))
               : NotFound(),
       '/category/:category': (route) =>
           _isValidCategory(route.pathParameters['category'])
@@ -122,6 +121,10 @@ RouteMap _buildRouteMap(BuildContext context) {
                   ),
                 )
               : NotFound(),
+      '/testpage': (route) => NoAnimationPage(
+          child: NewsPageASD(slug: route.pathParameters['slug'])),
+      '/testpage/:slug': (route) => NoAnimationPage(
+          child: NewsPageASD(slug: route.pathParameters['slug'])),
       '/article/:category/:slug': (route) =>
           NoAnimationPage(child: NewsPage(slug: route.pathParameters['slug'])),
       '/news2/:category/:id': (route) => _isValidCategory(

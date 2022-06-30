@@ -209,11 +209,8 @@ class NewsfrontListPage extends StatelessWidget {
   final String mode;
   final ArticleCategory? category;
 
-  const NewsfrontListPage({
-    Key? key,
-    required this.mode,
-    this.category,
-  }) : super(key: key);
+  const NewsfrontListPage({Key? key, required this.mode, this.category})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     //final articles = HoledoDatabase().articles(slug: mode);
@@ -221,30 +218,28 @@ class NewsfrontListPage extends StatelessWidget {
     //newsController.fetchArticles(category: mode);
     final bool isMobile = Responsive.isMobile(context);
 
-    return FutureBuilder(
-      future: Get.put(HoledoDatabase().news).fetchArticles(
-          context: context, type: mode, category: category?.slug),
-      builder: (context, AsyncSnapshot<List<Article>> snapshot) {
-        if (!snapshot.hasData) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        } else
-          return CustomScrollView(
-            slivers: <Widget>[
-              SliverAlignedGrid.count(
-                crossAxisCount: 1,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
-                itemCount: snapshot.data!.length,
-                itemBuilder: (context, index) {
-                  return NewsSingleCard(
-                      article: snapshot.data![index], showReleaseDate: true);
-                },
-              ),
-            ],
-          );
-      },
+    return Container(
+      child: FutureBuilder(
+        future: Get.put(HoledoDatabase().news).fetchArticles(
+            context: context, type: mode, category: category?.slug),
+        builder: (context, AsyncSnapshot<List<Article>> snapshot) {
+          if (!snapshot.hasData) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else
+            return SliverAlignedGrid.count(
+              crossAxisCount: 1,
+              crossAxisSpacing: 16,
+              mainAxisSpacing: 16,
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context, index) {
+                return NewsSingleCard(
+                    article: snapshot.data![index], showReleaseDate: true);
+              },
+            );
+        },
+      ),
     );
   }
 
