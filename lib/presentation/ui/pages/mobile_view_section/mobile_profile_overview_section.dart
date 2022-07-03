@@ -7,6 +7,7 @@ import 'package:holedo/presentation/ui/components/custom_icon_button.dart';
 import 'package:holedo/presentation/ui/components/person_avatar.dart';
 import 'package:holedo/presentation/ui/pages/components/connection_component.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_completion_component.dart';
+import 'package:holedo/presentation/ui/pages/components/profile_eduction_component.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_reference_component.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_workexperience.dart';
 import 'package:holedo/presentation/ui/pages/components/rights_component.dart';
@@ -33,7 +34,8 @@ class MobileProfileOverviewSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userProfileData = DbData.getUserProfileData;
-    return Padding(
+    return Container(
+      color: Cr.backgroundColor,
       padding: const EdgeInsets.symmetric(
         horizontal: Di.PSS,
       ),

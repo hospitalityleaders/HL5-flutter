@@ -2,22 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_expanded_tile/flutter_expanded_tile.dart';
 import 'package:holedo/db_data.dart';
 import 'package:holedo/models/holedoapi/holedoapi.dart';
-import 'package:holedo/presentation/functions/image_upload_functions.dart';
-import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
+import 'package:holedo/presentation/ui/pages/components/upload_button_widget.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/dialog_widgets.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
-import 'package:holedo/presentation/utill/nav.dart';
 import 'package:holedo/presentation/utill/styles.dart';
-import 'package:image_picker/image_picker.dart';
 
 class ProfileCoverImageDialogWidget extends StatefulWidget {
   const ProfileCoverImageDialogWidget({
     Key? key,
-    required this.userProfileData,
+    // required this.userProfileData,
   }) : super(key: key);
 
-  final User userProfileData;
+  // final User userProfileData;
 
   @override
   State<ProfileCoverImageDialogWidget> createState() =>
@@ -70,6 +67,7 @@ class _ProfileCoverImageDialogExpandedTileState
     extends State<ProfileCoverImageDialogExpandedTile> {
   String? selectedValue;
   bool currentlyWorkHere = false;
+  Image? pickedImage;
 
   late ExpandedTileController expandedTileController;
   @override
@@ -153,13 +151,27 @@ class _ProfileCoverImageDialogExpandedTileState
               Container(
                 width: double.infinity,
                 height: 240,
-                child: Image.network(
-                  "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2744&q=80",
-                  fit: BoxFit.cover,
-                ),
+                child: pickedImage != null
+                    ? pickedImage
+                    : Image.network(
+                        userProfileData.banner ?? "",
+                        fit: BoxFit.cover,
+                      ),
               ),
               Di.SBHL,
-              UploadWidgetButton(),
+              UploadButtonWidget(
+                folder: "banners",
+                uploadedImgCallback: (String imgUrl) async {
+                  await new User(
+                    banner: imgUrl,
+                  ).save(userProfileData);
+                },
+                pickedImgCallback: (Image image) {
+                  setState(() {
+                    pickedImage = image;
+                  });
+                },
+              ),
               Container(
                 margin: EdgeInsets.symmetric(
                   horizontal: Di.PSL,
@@ -187,7 +199,7 @@ class _ProfileCoverImageDialogExpandedTileState
                       ),
                       Di.SBCW(3),
                       Text(
-                        "Hide reference",
+                        "Delete photo",
                         style: bodySmallRegular.copyWith(
                           color: Cr.red1,
                         ),
@@ -199,74 +211,6 @@ class _ProfileCoverImageDialogExpandedTileState
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class UploadWidgetButton extends StatefulWidget {
-  const UploadWidgetButton({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  State<UploadWidgetButton> createState() => _UploadWidgetButtonState();
-}
-
-class _UploadWidgetButtonState extends State<UploadWidgetButton> {
-  XFile? image;
-  String errorMessage = "";
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(
-        horizontal: Di.PSL,
-      ),
-      child: Row(
-        children: [
-          CustomElevatedButton(
-            onPressed: () async {
-              final XFile? pickedImage =
-                  await ImageUploadFunctions.pickImageFromGallery();
-              if (pickedImage != null)
-                setState(() {
-                  image = pickedImage;
-                  errorMessage = "";
-                });
-            },
-            child: Text(
-              "Choose",
-            ),
-          ),
-          Text(
-            image == null ? errorMessage : image!.name,
-          ),
-          CustomElevatedButton(
-            onPressed: () async {
-              if (image != null) {
-                dialogCircularProgressIndicator(context);
-                final String? imageUrl =
-                    await ImageUploadFunctions.uploadImageToCloudinary(image!);
-                if (imageUrl != null) {
-                  Nav.pop(context);
-                  Nav.pop(context);
-                } else {
-                  setState(() {
-                    errorMessage = "Failed to upload image";
-                  });
-                }
-              } else {
-                setState(() {
-                  errorMessage = "Please choose image";
-                });
-              }
-            },
-            child: Text(
-              "Upload",
-            ),
-          ),
-        ],
       ),
     );
   }

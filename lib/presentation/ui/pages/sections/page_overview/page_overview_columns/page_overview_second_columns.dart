@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:holedo/common/build_work_exp_pop_up.dart';
 import 'package:holedo/common/clipper.dart';
@@ -10,12 +9,12 @@ import 'package:holedo/constant/sizedbox.dart';
 import 'package:holedo/db_data.dart';
 import 'package:holedo/layouts/pages/profile-pages/profile-edit/profile_edit.dart';
 import 'package:holedo/models/holedoapi/achievement.dart';
-import 'package:holedo/models/holedoapi/education.dart';
 import 'package:holedo/models/holedoapi/holedoapi.dart';
 import 'package:holedo/presentation/ui/components/custom_text_button.dart';
 import 'package:holedo/presentation/ui/components/container_with_icon.dart';
 import 'package:holedo/presentation/ui/pages/components/edit_add_buttons_of_sheet.dart';
 import 'package:holedo/presentation/ui/pages/components/edit_blue_card_sheet.dart';
+import 'package:holedo/presentation/ui/pages/components/profile_eduction_component.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_workexperience.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/profile_featured_video_dialog.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/show_custom_dialog.dart';
@@ -1163,142 +1162,6 @@ class AchievementComponent extends StatelessWidget {
   }
 }
 
-class EducationComponent extends StatefulWidget {
-  const EducationComponent({
-    Key? key,
-    this.onEditPressed,
-    required this.userProfileData,
-    this.isMobile = false,
-  }) : super(key: key);
-  final User userProfileData;
-  final void Function()? onEditPressed;
-  final bool isMobile;
-
-  @override
-  State<EducationComponent> createState() => _EducationComponentState();
-}
-
-class _EducationComponentState extends State<EducationComponent> {
-  @override
-  Widget build(BuildContext context) {
-    final List<Education>? education = DbData.getUserProfileData.educations;
-    final bool hasData = education != null ? education.isNotEmpty : false;
-    return Container(
-      decoration: Styles.boxDecorationWithShadow.copyWith(color: Cr.whiteColor),
-      child: Column(
-        children: [
-          Di.SBHETS,
-          ListTile(
-            title: Text(
-              "Education",
-              style: h2Regular,
-            ),
-          ),
-          Di.DWZH,
-          IntrinsicHeight(
-            child: Stack(
-              children: [
-                if (hasData)
-                  Column(
-                    children: education
-                        .map(
-                          (singleEductaion) => Container(
-                            width: widget.isMobile ? null : 360,
-                            decoration: Styles.boxDecoration.copyWith(
-                              color: Cr.whiteColor,
-                              boxShadow: Styles.defaultBoxShadow,
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                ListTile(
-                                  leading: ContainerWithIcon(
-                                    iconData: FontAwesomeIcons.buildingColumns,
-                                    size: 50,
-                                  ),
-                                  title: Text(
-                                    singleEductaion.institution ?? "",
-                                    style: h4Bold.copyWith(
-                                      fontSize: Di.FSD,
-                                    ),
-                                  ),
-                                  subtitle: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        singleEductaion.title ?? "",
-                                        style: bodySmallRegular.copyWith(
-                                          color: Cr.accentBlue1,
-                                          fontSize: Di.FSS,
-                                        ),
-                                      ),
-                                      SizedBox(height: Di.PSETS),
-                                      Text(
-                                        singleEductaion.studyDuration ?? "",
-                                        // "2010 - 2013",
-                                        style: bodySmallRegular.copyWith(
-                                          color: Cr.darkGrey1,
-                                          fontSize: Di.FSS,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Di.SBHD,
-                                Divider(
-                                  thickness: 1,
-                                  height: 0,
-                                ),
-                                Container(
-                                  width: widget.isMobile ? null : 360,
-                                  color: Cr.lightGrey2,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Di.SBHS,
-                                      CustomTextButton(
-                                        text: "  + Course online",
-                                      ),
-                                      Di.SBHS,
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        )
-                        .toList(),
-                  ),
-                EditBlueCardSheet(
-                  context,
-                  dataIsNull: !hasData,
-                  greenCardText:
-                      "Add the educational institutions you attended, the qualifications you achieved and the courses completed. ",
-                ),
-                if (hasData)
-                  EditAddButtonOfSheet(
-                    context,
-                    onEditPressed: () {
-                      // buildReferencesCard(img, title, userId, subTitle, description)
-                      // showCustomDialog(
-                      //   context,
-                      //   ProfileMyReferenceDialogWidget(
-                      //     userProfileData: DbData.getUserProfileData,
-                      //   ),
-                      // );
-                    },
-                  ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class FeaturedVideoComponent extends StatefulWidget {
   const FeaturedVideoComponent({
     Key? key,
@@ -1386,14 +1249,6 @@ class _FeaturedVideoComponentState extends State<FeaturedVideoComponent> {
                                         ? Icons.pause
                                         : Icons.play_arrow,
                                   ),
-                                ),
-                              ),
-                            ),
-                            Positioned.fill(
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: SvgPicture.asset(
-                                  "assets/icons/smallPlayerIcon.svg",
                                 ),
                               ),
                             ),

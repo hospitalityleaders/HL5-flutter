@@ -125,7 +125,8 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                           height: 76,
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                              image: AssetImage("assets/images/t6.png"),
+                              image: NetworkImage(
+                                  widget.userProfileData.banner ?? ""),
                               fit: BoxFit.cover,
                             ),
                           ),

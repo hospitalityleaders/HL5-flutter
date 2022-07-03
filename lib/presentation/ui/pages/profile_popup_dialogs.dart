@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:holedo/presentation/ui/components/contact_card_dialog_widget.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 
@@ -19,8 +18,16 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class ProfilePopupDialogScreen extends StatelessWidget {
+class ProfilePopupDialogScreen extends StatefulWidget {
   const ProfilePopupDialogScreen({Key? key}) : super(key: key);
+
+  @override
+  State<ProfilePopupDialogScreen> createState() =>
+      _ProfilePopupDialogScreenState();
+}
+
+class _ProfilePopupDialogScreenState extends State<ProfilePopupDialogScreen> {
+  Image? image;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,24 +35,22 @@ class ProfilePopupDialogScreen extends StatelessWidget {
       body: Center(
         child: SingleChildScrollView(
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
-                child: ContactCardDialogWidget(),
-              ),
+              // if (image != null) image!,
+
               Di.SBHOL,
-              // CustomElevatedButton(
-              //   width: 200,
-              //   text: "Languages",
-              //   onPressed: () {
-              //     showCustomDialog(
-              //       context,
-              //       ProfileWriteReferenceDialogWidget(
-              //         userProfileData: User(),
-              //       ),
-              //     );
+              // UploadWidgetButton(
+              //   uploadedImgCallback: (image) async {
+              //     print("image is $image");
               //   },
-              // ),
+              //   pickedImgCallback: (Image pickedImage) async {
+              //     setState(() {
+              //       image = pickedImage;
+              //     });
+              //   },
+              // )
             ],
           ),
         ),

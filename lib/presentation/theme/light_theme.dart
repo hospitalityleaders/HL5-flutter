@@ -10,7 +10,7 @@ ThemeData lightTheme = ThemeData(
   // focusColor: Cr.focusColor,
   // hintColor: Cr.hintColor,
   appBarTheme: const AppBarTheme(
-    backgroundColor: Cr.colorPrimary,
+    backgroundColor: Cr.backgroundColor,
   ),
   textButtonTheme: TextButtonThemeData(
     style: TextButton.styleFrom(

@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_expanded_tile/flutter_expanded_tile.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:holedo/db_data.dart';
+import 'package:holedo/models/holedoapi/country.dart';
 
 import 'package:holedo/models/holedoapi/holedoapi.dart';
+import 'package:holedo/presentation/functions/image_upload_functions.dart';
 import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
+import 'package:holedo/presentation/ui/pages/components/upload_button_widget.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/dialog_widgets.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
@@ -71,6 +75,7 @@ class _ContactDetailsExpandedTileState
     extends State<ContactDetailsExpandedTile> {
   String? selectedValue;
   bool currentlyWorkHere = false;
+  List<String> newContactNumberField = ["", "", ""];
 
   late ExpandedTileController expandedTileController;
   @override
@@ -145,11 +150,12 @@ class _ContactDetailsExpandedTileState
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Di.DWZH,
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Di.SBCH(18),
                   Container(
-                    width: 575,
                     padding: EdgeInsets.all(Di.PSL),
                     decoration: BoxDecoration(
                       border: Border.all(
@@ -186,64 +192,14 @@ class _ContactDetailsExpandedTileState
                       color: Cr.darkGrey1,
                     ),
                   ),
-                  Di.SBHES,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      DialogDropDownTextField(
-                        width: 122,
-                        hintText: 'Mobile',
-                        dataList: [
-                          "Mobile",
-                          "Telephone",
-                        ],
-                      ),
-                      SizedBox(
-                        width: 285,
-                        child: DialogTextFieldForm(
-                          hintText: "123456789",
-                        ),
-                      ),
-                      PrivacyDropDown(),
-                    ],
-                  ),
-                  Di.SBCH(7),
-                  Row(
-                    children: [
-                      CheckboxDialog(
-                        onChanged: (value) {
-                          setState(() {
-                            currentlyWorkHere = !currentlyWorkHere;
-                          });
-                        },
-                        value: currentlyWorkHere,
-                      ),
-                      Text(
-                        "I am contactable via whatsapp",
-                        style: bodySmallRegular.copyWith(
-                          color: Cr.darkGrey1,
-                        ),
-                      ),
-                      Di.SBCW(24),
-                      CheckboxDialog(
-                        onChanged: (value) {
-                          setState(() {
-                            currentlyWorkHere = !currentlyWorkHere;
-                          });
-                        },
-                        value: currentlyWorkHere,
-                      ),
-                      Text(
-                        "I am contactable via sms",
-                        style: bodySmallRegular.copyWith(
-                          color: Cr.darkGrey1,
-                        ),
-                      )
-                    ],
-                  ),
+                  ...getNewContactPhoneFields(),
                   Di.SBCH(8),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      setState(() {
+                        newContactNumberField.add('');
+                      });
+                    },
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -262,203 +218,372 @@ class _ContactDetailsExpandedTileState
                     ),
                   ),
                   Di.SBCH(18),
-                  DialogTextFieldForm(),
-                  Di.SBCH(18),
-                  DialogLabelTextFormField(customLabel: "Surname"),
+                  DialogLabelTextFormField(
+                    customLabel: "Email address",
+                    isImportant: false,
+                  ),
                   Di.SBHES,
-                  DialogTextFieldForm(),
+                  _TextFieldWithPrivacy(),
                   Di.SBCH(18),
                   DialogLabelTextFormField(
-                    customLabel: "Professional title",
-                    icon: HelpIconDialog(),
-                  ),
-                  Text(
-                    "This is a short and clear sentence which describes what you do. \nE.g. General Manager and Hotel Executive, or Head Chef and Book Author.",
-                    style: bodySmallRegular.copyWith(
-                      color: Cr.darkGrey1,
-                    ),
+                    customLabel: "Website link",
+                    isImportant: false,
                   ),
                   Di.SBHES,
-                  DialogTextFieldForm(),
+                  _TextFieldWithPrivacy(),
                   Di.SBCH(18),
-                  Row(
-                    children: [
-                      DialogLabelTextFormField(
-                        customLabel: "City / Area  / Region",
-                        width: 250,
-                      ),
-                      SizedBox(width: 18),
-                      DialogLabelTextFormField(
-                        customLabel: "Country",
-                        width: 250,
-                      ),
-                    ],
+                  DialogLabelTextFormField(
+                    customLabel: "Skype",
+                    isImportant: false,
                   ),
                   Di.SBHES,
-                  Row(
-                    children: [
-                      DialogTextFieldForm(
-                        width: 250,
-                      ),
-                      SizedBox(width: 18),
-                      DialogDropDownTextField(
-                        hintText: 'Select Country',
-                        dataList: [
-                          "United state",
-                          "Pakistan",
-                          "South Africa",
-                        ],
-                      ),
-                    ],
-                  ),
+                  _TextFieldWithPrivacy(),
                   Di.SBCH(18),
-                  DialogLabelTextFormField(customLabel: "Time period"),
-                  Di.SBHES,
-                  Row(
-                    children: [
-                      DialogDropDownTextField(
-                        width: 122,
-                        hintText: 'Select Month',
-                        dataList: [
-                          "Jaun",
-                          "Feb",
-                          "March",
-                        ],
-                      ),
-                      Di.SBWES,
-                      DialogDropDownTextField(
-                        width: 70,
-                        hintText: 'Year',
-                        dataList: [
-                          "2020",
-                          "2021",
-                          "2022",
-                        ],
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: Di.PSS),
-                        child: Container(
-                          width: 9,
-                          height: 1.5,
-                          color: Cr.accentBlue1,
-                        ),
-                      ),
-                      DialogDropDownTextField(
-                        disable: currentlyWorkHere,
-                        width: 122,
-                        hintText: 'Select Month',
-                        dataList: [
-                          "Jaun",
-                          "Feb",
-                          "March",
-                        ],
-                      ),
-                      Di.SBWES,
-                      DialogDropDownTextField(
-                        disable: currentlyWorkHere,
-                        width: 70,
-                        hintText: 'Year',
-                        dataList: [
-                          "2020",
-                          "2021",
-                          "2022",
-                        ],
-                      ),
-                    ],
+                  DialogLabelTextFormField(
+                    customLabel: "Social profiles",
+                    isImportant: false,
                   ),
-                  Di.SBCH(7),
-                  Row(
-                    children: [
-                      Di.SBCW(220),
-                      CheckboxDialog(
-                        onChanged: (value) {
-                          setState(() {
-                            currentlyWorkHere = !currentlyWorkHere;
-                          });
-                        },
-                        value: currentlyWorkHere,
-                      ),
-                      Text(
-                        "I currently work here",
-                        style: bodySmallRegular.copyWith(
-                          color: Cr.darkGrey1,
-                        ),
-                      )
-                    ],
-                  ),
-                  Di.SBCH(18),
-                ],
-              ),
-              Di.SBCH(28),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
+                  ...getNewSocialProfilesFields(),
+                  Di.SBCH(8),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      setState(() {
+                        newContactNumberField.add('');
+                      });
+                    },
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         SvgPicture.asset(
-                          Svgs.delete,
-                          color: Cr.red1,
+                          Svgs.plus,
+                          color: Cr.accentBlue1,
                           width: 14,
                         ),
-                        Di.SBWETS,
                         Text(
-                          "Delete",
+                          "  Add another",
                           style: bodySmallRegular.copyWith(
-                            color: Cr.red1,
+                            color: Cr.accentBlue1,
                           ),
                         ),
                       ],
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      CustomElevatedButton(
-                        borderColor: Cr.accentBlue2,
-                        makeWidthNull: true,
-                        onPressed: () => Nav.pop(context),
-                        child: Text(
-                          "Cancel",
-                          style: bodySmallRegular.copyWith(
-                            color: Cr.accentBlue1,
-                          ),
-                        ),
-                        height: 36,
-                        donotShowIcon: true,
-                        backgroundColor: Cr.accentBlue3,
-                      ),
-                      Di.SBWES,
-                      CustomElevatedButton(
-                        borderColor: Cr.accentBlue2,
-                        makeWidthNull: true,
-                        onPressed: () async {
-                          // Nav.pop(context);
-                          // await new User(
-                          //   profileSummary:
-                          //       _profileSummaryController.text,
-                          // ).save(widget.userProfileData);
-                        },
-                        child: Text(
-                          "Save",
-                          style: bodySmallRegular.copyWith(
-                            color: Cr.whiteColor,
-                          ),
-                        ),
-                        height: 36,
-                        donotShowIcon: true,
-                        backgroundColor: Cr.accentBlue1,
-                      ),
-                    ],
-                  ),
                 ],
-              )
+              ),
+              Di.SBCH(18),
+              Align(
+                alignment: Alignment.centerRight,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    CustomElevatedButton(
+                      borderColor: Cr.accentBlue2,
+                      makeWidthNull: true,
+                      onPressed: () => Nav.pop(context),
+                      child: Text(
+                        "Cancel",
+                        style: bodySmallRegular.copyWith(
+                          color: Cr.accentBlue1,
+                        ),
+                      ),
+                      height: 36,
+                      donotShowIcon: true,
+                      backgroundColor: Cr.accentBlue3,
+                    ),
+                    Di.SBWES,
+                    CustomElevatedButton(
+                      borderColor: Cr.accentBlue2,
+                      makeWidthNull: true,
+                      onPressed: () async {
+                        // Nav.pop(context);
+                        // await new User(
+                        //   profileSummary:
+                        //       _profileSummaryController.text,
+                        // ).save(widget.userProfileData);
+                      },
+                      child: Text(
+                        "Save",
+                        style: bodySmallRegular.copyWith(
+                          color: Cr.whiteColor,
+                        ),
+                      ),
+                      height: 36,
+                      donotShowIcon: true,
+                      backgroundColor: Cr.accentBlue1,
+                    ),
+                  ],
+                ),
+              ),
+              Di.SBHL,
             ],
           ),
         ),
       ),
+    );
+  }
+
+  List<Widget> getNewContactPhoneFields() {
+    var textField = <Widget>[];
+    for (var i = 0; i < newContactNumberField.length; i++) {
+      textField.add(
+        _ContactNumberField(
+          onCloseTap: () {
+            setState(() {
+              newContactNumberField.removeAt(i);
+            });
+          },
+        ),
+      );
+    }
+    return textField;
+  }
+
+  List<Widget> getNewSocialProfilesFields() {
+    var textField = <Widget>[];
+    for (var i = 0; i < newContactNumberField.length; i++) {
+      textField.add(
+        _SocialProfileField(
+          selectedSocialMediaIndex: i,
+          onCloseTap: () {
+            setState(() {
+              newContactNumberField.removeAt(i);
+            });
+          },
+        ),
+      );
+    }
+    return textField;
+  }
+}
+
+class _SocialProfileField extends StatefulWidget {
+  const _SocialProfileField({
+    Key? key,
+    this.onCloseTap,
+    this.selectedSocialMediaIndex,
+  }) : super(key: key);
+  final int? selectedSocialMediaIndex;
+  final void Function()? onCloseTap;
+
+  @override
+  State<_SocialProfileField> createState() => __SocialProfileFieldState();
+}
+
+class __SocialProfileFieldState extends State<_SocialProfileField> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Di.SBHES,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            DialogDropDownTextField(
+              selectedSocialMediaIndex: widget.selectedSocialMediaIndex,
+              width: 132,
+              iconDataList: [
+                Icons.facebook,
+                FontAwesomeIcons.twitter,
+                FontAwesomeIcons.google,
+              ],
+              hintText: 'Choose',
+              dataList: [
+                "Facebook",
+                "Twitter",
+                "Google",
+              ],
+            ),
+            Di.SBCW(12),
+            Expanded(
+              child: DialogTextFieldForm(
+                hintText: "Profile Url",
+              ),
+            ),
+            Di.SBCW(12),
+            PrivacyDropDown(),
+            Di.SBCW(12),
+            Material(
+              child: InkWell(
+                onTap: widget.onCloseTap,
+                child: Container(
+                  height: 30,
+                  width: 30,
+                  child: Icon(
+                    Icons.close,
+                    color: Cr.accentBlue1,
+                    size: 14,
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _TextFieldWithPrivacy extends StatefulWidget {
+  const _TextFieldWithPrivacy({
+    Key? key,
+    this.onCloseTap,
+    this.textEditingController,
+    this.width,
+    this.hintText,
+  }) : super(key: key);
+
+  final void Function()? onCloseTap;
+  final TextEditingController? textEditingController;
+  final double? width;
+  final String? hintText;
+
+  @override
+  State<_TextFieldWithPrivacy> createState() => __TextFieldWithPrivacyState();
+}
+
+class __TextFieldWithPrivacyState extends State<_TextFieldWithPrivacy> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Di.SBHES,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            // DialogDropDownTextField(
+            //   width: 122,
+            //   hintText: 'Mobile',
+            //   dataList: [
+            //     "Mobile",
+            //     "Telephone",
+            //   ],
+            // ),
+            Expanded(
+              child: DialogTextFieldForm(
+                textEditingController: widget.textEditingController,
+                width: widget.width,
+                hintText: widget.hintText,
+              ),
+            ),
+            Di.SBCW(12),
+            PrivacyDropDown(),
+            Di.SBCW(12),
+            Material(
+              child: InkWell(
+                onTap: widget.onCloseTap,
+                child: Container(
+                  height: 30,
+                  width: 30,
+                  child: Icon(
+                    Icons.close,
+                    color: Cr.accentBlue1,
+                    size: 14,
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+        Di.SBCH(7),
+      ],
+    );
+  }
+}
+
+class _ContactNumberField extends StatefulWidget {
+  const _ContactNumberField({
+    Key? key,
+    this.onCloseTap,
+  }) : super(key: key);
+  final void Function()? onCloseTap;
+
+  @override
+  State<_ContactNumberField> createState() => __ContactNumberFieldState();
+}
+
+class __ContactNumberFieldState extends State<_ContactNumberField> {
+  bool contactableViaWhatsapp = false;
+  bool contactableViaSms = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Di.SBHES,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            DialogDropDownTextField(
+              width: 122,
+              hintText: 'Mobile',
+              dataList: [
+                "Mobile",
+                "Telephone",
+              ],
+            ),
+            Di.SBCW(12),
+            Expanded(
+              child: DialogTextFieldForm(
+                hintText: "123456789",
+              ),
+            ),
+            Di.SBCW(12),
+            PrivacyDropDown(),
+            Di.SBCW(12),
+            Material(
+              child: InkWell(
+                onTap: widget.onCloseTap,
+                child: Container(
+                  height: 30,
+                  width: 30,
+                  child: Icon(
+                    Icons.close,
+                    color: Cr.accentBlue1,
+                    size: 14,
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+        Di.SBCH(7),
+        Row(
+          children: [
+            CheckboxDialog(
+              onChanged: (value) {
+                setState(() {
+                  contactableViaWhatsapp = !contactableViaWhatsapp;
+                });
+              },
+              value: contactableViaWhatsapp,
+            ),
+            Text(
+              "I am contactable via whatsapp",
+              style: bodySmallRegular.copyWith(
+                color: Cr.darkGrey1,
+              ),
+            ),
+            Di.SBCW(24),
+            CheckboxDialog(
+              onChanged: (value) {
+                setState(() {
+                  contactableViaSms = !contactableViaSms;
+                });
+              },
+              value: contactableViaSms,
+            ),
+            Text(
+              "I am contactable via sms",
+              style: bodySmallRegular.copyWith(
+                color: Cr.darkGrey1,
+              ),
+            )
+          ],
+        ),
+      ],
     );
   }
 }
@@ -471,13 +596,26 @@ class PrivacyDropDown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DialogDropDownTextField(
+      selectedSocialMediaIndex: 0,
       width: 125,
       hintText: 'Public',
-      prefixIcon: Icon(
-        FontAwesomeIcons.earthAmericas,
-        color: Cr.darkGrey1,
-        size: 10,
-      ),
+      iconsList: [
+        SvgPicture.asset(
+          Svgs.web,
+          color: Cr.darkGrey1,
+          width: 15,
+        ),
+        SvgPicture.asset(
+          Svgs.web,
+          color: Cr.darkGrey1,
+          width: 15,
+        ),
+        SvgPicture.asset(
+          Svgs.web,
+          color: Cr.darkGrey1,
+          width: 15,
+        ),
+      ],
       dataList: [
         "Public",
         "Private",
@@ -503,8 +641,9 @@ class __ProfilePictureDialogExpandedTileState
     extends State<_ProfilePictureDialogExpandedTile> {
   String? selectedValue;
   bool currentlyWorkHere = false;
-
   late ExpandedTileController expandedTileController;
+  Image? pickedImage;
+
   @override
   void initState() {
     expandedTileController = ExpandedTileController(
@@ -521,6 +660,8 @@ class __ProfilePictureDialogExpandedTileState
 
   @override
   Widget build(BuildContext context) {
+    final userProfileData = DbData.getUserProfileData;
+
     return Container(
       margin: EdgeInsets.symmetric(horizontal: Di.PSL),
       color: Cr.whiteColor,
@@ -583,16 +724,30 @@ class __ProfilePictureDialogExpandedTileState
                   SizedBox(
                     width: 150,
                     height: 150,
-                    child: Image.asset(Images.profilePic),
+                    child: pickedImage ??
+                        (userProfileData.avatar != null
+                            ? Image.network(userProfileData.avatar!)
+                            : SvgPicture.asset(Svgs.avatarPlaceholder)),
                   ),
                   Di.SBWL,
                   SizedBox(
                     width: 405,
                     child: Column(
                       children: [
-                        Container(
-                          height: 55,
-                          color: Cr.accentBlue1,
+                        UploadButtonWidget(
+                          setErrorMessage: pickedImage == null ? "" : null,
+                          margin: EdgeInsets.zero,
+                          folder: "avatar",
+                          uploadedImgCallback: (String imgUrl) async {
+                            await User(
+                              avatar: imgUrl,
+                            ).save(userProfileData);
+                          },
+                          pickedImgCallback: (Image image) {
+                            setState(() {
+                              pickedImage = image;
+                            });
+                          },
                         ),
                         Di.SBHS,
                         Text(
@@ -608,6 +763,28 @@ class __ProfilePictureDialogExpandedTileState
               ),
               Di.SBCH(6),
               GestureDetector(
+                onTap: () async {
+                  showCircularProgressIndicator(context);
+                  if (pickedImage == null && userProfileData.avatar == null) {
+                    // Csd.customErrorDialog(
+                    //   context,
+                    //   "There is no image for deletion",
+                    // );
+                  } else if (pickedImage != null) {
+                    setState(() {
+                      pickedImage = null;
+                    });
+                    // Csd.customSuccessrDialog(context, "Avatar is deleted");
+                  } else if (userProfileData.avatar != null) {
+                    await ImageUploadFunctions()
+                        .deleteImageFromCloudnary(userProfileData.avatar!);
+                    await User(
+                      avatar: null,
+                    ).save(userProfileData);
+                    // Csd.customSuccessrDialog(context, "Avatar is deleted");
+                  }
+                  Nav.pop(context);
+                },
                 child: Row(
                   children: [
                     Icon(
@@ -667,6 +844,7 @@ class _ProfileDetailsExpandedTileState
 
   @override
   Widget build(BuildContext context) {
+    final userProfileData = DbData.getUserProfileData;
     return Container(
       margin: EdgeInsets.symmetric(horizontal: Di.PSL),
       color: Cr.whiteColor,
@@ -786,108 +964,12 @@ class _ProfileDetailsExpandedTileState
                       ),
                     ],
                   ),
-                  Di.SBCH(18),
-                  DialogLabelTextFormField(customLabel: "Time period"),
-                  Di.SBHES,
-                  Row(
-                    children: [
-                      DialogDropDownTextField(
-                        width: 122,
-                        hintText: 'Select Month',
-                        dataList: [
-                          "Jaun",
-                          "Feb",
-                          "March",
-                        ],
-                      ),
-                      Di.SBWES,
-                      DialogDropDownTextField(
-                        width: 70,
-                        hintText: 'Year',
-                        dataList: [
-                          "2020",
-                          "2021",
-                          "2022",
-                        ],
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: Di.PSS),
-                        child: Container(
-                          width: 9,
-                          height: 1.5,
-                          color: Cr.accentBlue1,
-                        ),
-                      ),
-                      DialogDropDownTextField(
-                        disable: currentlyWorkHere,
-                        width: 122,
-                        hintText: 'Select Month',
-                        dataList: [
-                          "Jaun",
-                          "Feb",
-                          "March",
-                        ],
-                      ),
-                      Di.SBWES,
-                      DialogDropDownTextField(
-                        disable: currentlyWorkHere,
-                        width: 70,
-                        hintText: 'Year',
-                        dataList: [
-                          "2020",
-                          "2021",
-                          "2022",
-                        ],
-                      ),
-                    ],
-                  ),
-                  Di.SBCH(7),
-                  Row(
-                    children: [
-                      Di.SBCW(220),
-                      CheckboxDialog(
-                        onChanged: (value) {
-                          setState(() {
-                            currentlyWorkHere = !currentlyWorkHere;
-                          });
-                        },
-                        value: currentlyWorkHere,
-                      ),
-                      Text(
-                        "I currently work here",
-                        style: bodySmallRegular.copyWith(
-                          color: Cr.darkGrey1,
-                        ),
-                      )
-                    ],
-                  ),
-                  Di.SBCH(18),
                 ],
               ),
               Di.SBCH(28),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  GestureDetector(
-                    onTap: () {},
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        SvgPicture.asset(
-                          Svgs.delete,
-                          color: Cr.red1,
-                          width: 14,
-                        ),
-                        Di.SBWETS,
-                        Text(
-                          "Delete",
-                          style: bodySmallRegular.copyWith(
-                            color: Cr.red1,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -911,10 +993,15 @@ class _ProfileDetailsExpandedTileState
                         makeWidthNull: true,
                         onPressed: () async {
                           // Nav.pop(context);
-                          // await new User(
-                          //   profileSummary:
-                          //       _profileSummaryController.text,
-                          // ).save(widget.userProfileData);
+                          await User(
+                              fullName: "Kalimullah",
+                              professionalTitle: "flutter app developer",
+                              lastName: "Khan",
+                              area: "Sargodha",
+                              country: Country(
+                                id: 123,
+                                title: "Pakistan",
+                              )).save(userProfileData);
                         },
                         child: Text(
                           "Save",
@@ -929,7 +1016,8 @@ class _ProfileDetailsExpandedTileState
                     ],
                   ),
                 ],
-              )
+              ),
+              Di.SBHL,
             ],
           ),
         ),

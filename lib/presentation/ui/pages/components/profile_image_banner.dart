@@ -121,9 +121,7 @@ class ProfileImageBanner extends StatelessWidget {
               onPressed: () {
                 showCustomDialog(
                   context,
-                  ProfileCoverImageDialogWidget(
-                    userProfileData: userProfileData,
-                  ),
+                  ProfileCoverImageDialogWidget(),
                 );
               },
             ),

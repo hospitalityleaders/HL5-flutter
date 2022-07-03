@@ -18,7 +18,7 @@ class Cr {
   static const Color greyLightColor = Colors.white10;
   static const Color greyLightTwoColor = Color(0xffD1D8E1);
   static const Color greyDark = Color(0xff979797);
-  static const Color backgroundColor = Color(0xffF7F8FA);
+  static const Color backgroundColor = Color(0xffE5E5E5);
 
   static const Color accentBlue1 = Color(0xff32A3FD);
   static const Color accentBlue2 = Color(0xff98D1FE);

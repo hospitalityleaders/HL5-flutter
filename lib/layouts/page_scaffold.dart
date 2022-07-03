@@ -26,7 +26,6 @@ export 'package:holedo/layouts/pages/newsfront_page.dart';
 export 'package:holedo/layouts/pages/news_page.dart';
 export 'package:holedo/layouts/pages/jobsfront_page.dart';
 export 'package:holedo/layouts/pages/jobs_page.dart';
-
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/constant/sizedbox.dart';
@@ -154,10 +153,6 @@ class _PageScaffoldState extends State<PageScaffold> {
                                     MainAxisAlignment.spaceAround,
                                 children: [
                                   AppbarEmailButton(),
-                                  // VerticalDivider(
-                                  //   thickness: 3.3,
-                                  //   color: Cr.darkBlue5,
-                                  // ),
                                   AppbarNotificationsButton(),
                                   AppbarConnectionRequestButton(),
                                   CustomIconButton(

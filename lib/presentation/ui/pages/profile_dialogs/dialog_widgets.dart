@@ -8,14 +8,20 @@ import 'package:holedo/presentation/utill/images.dart';
 import 'package:holedo/presentation/utill/nav.dart';
 import 'package:holedo/presentation/utill/styles.dart';
 
-void dialogCircularProgressIndicator(BuildContext context) {
+void showCircularProgressIndicator(
+  BuildContext context, {
+  bool barrierDismissible = true,
+}) {
   showCustomDialog(
     context,
     Container(
-      width: 50,
-      height: 50,
-      child: CircularProgressIndicator(),
+      width: 100,
+      height: 100,
+      child: Center(
+        child: CircularProgressIndicator(),
+      ),
     ),
+    barrierDismissible: barrierDismissible,
   );
 }
 
@@ -26,15 +32,10 @@ class StarIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Icon(
-          Icons.star,
-          color: Cr.accentBlue1,
-          size: 8,
-        )
-      ],
+    return Icon(
+      Icons.star,
+      color: Cr.accentBlue1,
+      size: 8,
     );
   }
 }
@@ -168,7 +169,7 @@ class DialogLabelTextFormField extends StatelessWidget {
   }
 }
 
-class DialogDropDownTextField extends StatelessWidget {
+class DialogDropDownTextField extends StatefulWidget {
   const DialogDropDownTextField({
     Key? key,
     this.width,
@@ -176,36 +177,54 @@ class DialogDropDownTextField extends StatelessWidget {
     required this.hintText,
     this.disable = false,
     this.prefixIcon,
+    this.iconDataList,
+    this.iconsList,
+    this.selectedSocialMediaIndex,
   }) : super(key: key);
 
   final double? width;
   final List<String> dataList;
+  final List<IconData>? iconDataList;
+  final List<Widget>? iconsList;
   final String hintText;
   final bool disable;
   final Widget? prefixIcon;
+  final int? selectedSocialMediaIndex;
 
+  @override
+  State<DialogDropDownTextField> createState() =>
+      _DialogDropDownTextFieldState();
+}
+
+class _DialogDropDownTextFieldState extends State<DialogDropDownTextField> {
   @override
   Widget build(BuildContext context) {
     return IgnorePointer(
-      ignoring: disable,
+      ignoring: widget.disable,
       child: SizedBox(
-        width: width ?? 250,
-        height: 36,
+        width: widget.width ?? 250,
+        height: 37,
         child: DropdownButtonFormField2(
+          value: widget.selectedSocialMediaIndex != null
+              ? widget.dataList[widget.selectedSocialMediaIndex!]
+              : null,
           decoration: Styles.popUpDialogTextFieldInputDecorationFunction(
-            disable ? Cr.lightGrey2 : null,
-            prefixIcon,
+            widget.disable ? Cr.lightGrey2 : null,
+            widget.prefixIcon,
           ),
           isExpanded: true,
-          hint: Text(
-            hintText,
-            style: bodySmallRegular.copyWith(
-              color: disable ? Cr.grey2 : Cr.darkGrey1,
+          hint: Center(
+            child: Text(
+              widget.hintText,
+              textAlign: TextAlign.center,
+              style: bodySmallRegular.copyWith(
+                color: widget.disable ? Cr.grey2 : Cr.darkGrey1,
+              ),
             ),
           ),
           icon: Icon(
             Icons.arrow_drop_down,
-            color: disable ? Cr.grey2 : Cr.darkGrey1,
+            color: widget.disable ? Cr.grey2 : Cr.darkGrey1,
           ),
           iconSize: 20,
 
@@ -216,14 +235,31 @@ class DialogDropDownTextField extends StatelessWidget {
             borderRadius: BorderRadius.circular(4),
           ),
 
-          items: dataList
+          items: widget.dataList
               .map((item) => DropdownMenuItem<String>(
                     value: item,
-                    child: Text(
-                      item,
-                      style: bodySmallRegular.copyWith(
-                        color: disable ? Cr.grey2 : Cr.darkGrey1,
-                      ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        if (widget.iconsList != null)
+                          widget.iconsList![widget.dataList.indexOf(item)]
+                        else if (widget.iconDataList != null
+                            ? widget.iconDataList!.length ==
+                                widget.dataList.length
+                            : false)
+                          Icon(
+                            widget.iconDataList![widget.dataList.indexOf(item)],
+                            color: Cr.darkGrey1,
+                            size: 15,
+                          ),
+                        Di.SBWS,
+                        Text(
+                          item,
+                          style: bodySmallRegular.copyWith(
+                            color: widget.disable ? Cr.grey2 : Cr.darkGrey1,
+                          ),
+                        ),
+                      ],
                     ),
                   ))
               .toList(),

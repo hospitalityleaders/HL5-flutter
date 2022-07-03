@@ -25,7 +25,6 @@ class ProfileLanguagesDialogWidget extends StatefulWidget {
 
 class _ProfileLanguagesDialogWidgetState
     extends State<ProfileLanguagesDialogWidget> {
-  final _formKey = GlobalKey<FormState>();
   List<String> newTextField = [""];
   String? selectedValue;
 
@@ -127,11 +126,7 @@ class _ProfileLanguagesDialogWidgetState
                     ],
                   ),
                   Di.SBHES,
-                  Column(
-                    children: [
-                      ...getNewTextFormFields(),
-                    ],
-                  ),
+                  ...getNewTextFormFields(),
                   Di.SBHS,
                   GestureDetector(
                     onTap: () {

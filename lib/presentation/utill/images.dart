@@ -22,6 +22,13 @@ class Svgs {
   static const String delete = 'assets/svgicons/delete.svg';
   static const String helpCircle = 'assets/svgicons/help-circle.svg';
   static const String link = 'assets/svgicons/link.svg';
+  static const String menuAboveArrow = 'assets/svgicons/menuAboveArrow.svg';
+  static const String eyeOff = 'assets/svgicons/eye-off.svg';
+  static const String avatarPlaceholder =
+      'assets/svgicons/avatarPlaceholder.svg';
+  static const String smallPlayerIcon = 'assets/svgicons/smallPlayerIcon.svg';
+  static const String web = 'assets/svgicons/web.svg';
+  // static const String logo1 = 'assets/svgicons/logo1.svg';
   // static const String logo1 = 'assets/svgicons/logo1.svg';
   // static const String logo1 = 'assets/svgicons/logo1.svg';
   // static const String logo1 = 'assets/svgicons/logo1.svg';

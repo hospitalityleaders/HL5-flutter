@@ -40,6 +40,9 @@ class CustomElevatedButton extends StatelessWidget {
       width: makeWidthNull ? null : width ?? 130,
       child: ElevatedButton(
         style: ButtonStyle(
+          padding: padding == null
+              ? null
+              : MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(padding!)),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
               side: BorderSide(
