@@ -4,9 +4,9 @@ import 'package:holedo/db_data.dart';
 import 'package:holedo/models/holedoapi/experience.dart';
 import 'package:holedo/models/holedoapi/holedoapi.dart';
 import 'package:holedo/presentation/ui/components/container_with_icon.dart';
+import 'package:holedo/presentation/ui/components/expanded_collapse_widget.dart';
 import 'package:holedo/presentation/ui/pages/components/edit_add_buttons_of_sheet.dart';
 import 'package:holedo/presentation/ui/pages/components/edit_blue_card_sheet.dart';
-import 'package:holedo/presentation/ui/pages/profile_dialogs/scale_animation.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/styles.dart';
@@ -44,7 +44,6 @@ class _ProfileWorkExperienceComponentState
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Di.SBHETS,
           Container(
             color: Cr.whiteColor,
             padding: EdgeInsets.only(left: widget.isMobile ? Di.PSD : Di.PSS),
@@ -68,6 +67,8 @@ class _ProfileWorkExperienceComponentState
                               singleExperience: singleExperience,
                               isTablet: widget.isTablet,
                               isMobile: widget.isMobile,
+                              isLast: experience.indexOf(singleExperience) ==
+                                  (experience.length - 1),
                             ),
                           )
                           .toList(),
@@ -108,11 +109,13 @@ class _SingleExperienceWidget extends StatefulWidget {
     required this.singleExperience,
     required this.isTablet,
     required this.isMobile,
+    this.isLast = false,
   }) : super(key: key);
 
   final Experience singleExperience;
   final bool isTablet;
   final bool isMobile;
+  final bool isLast;
 
   @override
   State<_SingleExperienceWidget> createState() =>
@@ -125,7 +128,7 @@ class _SingleExperienceWidgetState extends State<_SingleExperienceWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(bottom: Di.PSS),
+      padding: EdgeInsets.only(bottom: widget.isLast ? 0 : Di.PSS),
       child: Container(
         width: (widget.isTablet || widget.isMobile) ? double.infinity : 360,
         decoration: Styles.boxDecoration.copyWith(color: Cr.whiteColor),
@@ -169,80 +172,97 @@ class _SingleExperienceWidgetState extends State<_SingleExperienceWidget> {
             ),
             Di.SBHD,
             Di.DWZH,
-            Container(
-              width: double.infinity,
-              color: Cr.lightGrey2,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ExpandedSection(
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        top: 12,
-                        left: Di.PSD,
-                        right: Di.PSD,
-                      ),
-                      child: Text(
-                        // singleExperience
-                        //         .description ??
-                        "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                        maxLines: 5,
-                        overflow: TextOverflow.ellipsis,
-                        style: bodyLarge.copyWith(
-                          color: Cr.darkGrey1,
-                        ),
-                      ),
-                    ),
-                    expand: showMore,
-                  ),
-                  Container(
-                    height: 40,
-                    width: double.infinity,
-                    color: Cr.lightGrey2,
-                    padding: EdgeInsets.only(left: Di.PSL),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: AnimatedCrossFade(
-                        firstChild: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              showMore = !showMore;
-                            });
-                          },
-                          child: Text(
-                            r"  + Show more",
-                            style: (bodySmallRegular).copyWith(
-                              color: Cr.accentBlue1,
-                            ),
-                          ),
-                        ),
-                        secondChild: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              showMore = !showMore;
-                            });
-                          },
-                          child: Text(
-                            r"  - Close",
-                            style: (bodySmallRegular).copyWith(
-                              color: Cr.accentBlue1,
-                            ),
-                          ),
-                        ),
-                        crossFadeState: showMore
-                            ? CrossFadeState.showSecond
-                            : CrossFadeState.showFirst,
-                        duration: Duration(milliseconds: 200),
-                      ),
-                    ),
-                  ),
-                  // Di.SBHS,
-                ],
-              ),
-            ),
+            if (widget.singleExperience.description != null)
+              ExpandedCollapseWidget(
+                description: widget.singleExperience.description!,
+                isMobile: widget.isMobile,
+                isTablet: widget.isTablet,
+              )
+            // ExpandedCollapseWidget(),
           ],
         ),
       ),
     );
   }
 }
+
+// class ExpandedCollapseWidget extends StatelessWidget {
+//   const ExpandedCollapseWidget({
+//     Key? key,
+//   }) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       width: double.infinity,
+//       color: Cr.lightGrey2,
+//       child: Column(
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         children: [
+//           ExpandedSection(
+//             child: Padding(
+//               padding: const EdgeInsets.only(
+//                 top: 12,
+//                 left: Di.PSD,
+//                 right: Di.PSD,
+//               ),
+//               child: Text(
+//                 // singleExperience
+//                 //         .description ??
+//                 "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+//                 maxLines: 5,
+//                 overflow: TextOverflow.ellipsis,
+//                 style: bodyLarge.copyWith(
+//                   color: Cr.darkGrey1,
+//                 ),
+//               ),
+//             ),
+//             expand: showMore,
+//           ),
+//           Container(
+//             height: 40,
+//             width: double.infinity,
+//             color: Cr.lightGrey2,
+//             padding: EdgeInsets.only(left: Di.PSL),
+//             child: Align(
+//               alignment: Alignment.centerLeft,
+//               child: AnimatedCrossFade(
+//                 firstChild: GestureDetector(
+//                   onTap: () {
+//                     setState(() {
+//                       showMore = !showMore;
+//                     });
+//                   },
+//                   child: Text(
+//                     r"  + Show more",
+//                     style: (bodySmallRegular).copyWith(
+//                       color: Cr.accentBlue1,
+//                     ),
+//                   ),
+//                 ),
+//                 secondChild: GestureDetector(
+//                   onTap: () {
+//                     setState(() {
+//                       showMore = !showMore;
+//                     });
+//                   },
+//                   child: Text(
+//                     r"  - Close",
+//                     style: (bodySmallRegular).copyWith(
+//                       color: Cr.accentBlue1,
+//                     ),
+//                   ),
+//                 ),
+//                 crossFadeState: showMore
+//                     ? CrossFadeState.showSecond
+//                     : CrossFadeState.showFirst,
+//                 duration: Duration(milliseconds: 200),
+//               ),
+//             ),
+//           ),
+//           // Di.SBHS,
+//         ],
+//       ),
+//     );
+//   }
+// }

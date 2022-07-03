@@ -50,6 +50,7 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
     final bool isMine = appState.isLoginnedAndEditable(widget.userProfileData);
 
     return Scaffold(
+      backgroundColor: Cr.backgroundColor,
       body: ListView(
         children: [
           if (isTablt)
@@ -101,6 +102,12 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
               userProfileData: widget.userProfileData,
               onEditButtonPressed: () {},
             ),
+          if (isTablt)
+            ProfileTabbar(
+              onTap: widget.onTabBarTap,
+              isMine: isMine,
+              tabController: widget.tabController,
+            ),
           Container(
             margin: EdgeInsets.only(
               left: isTablt ? 30 : 0,
@@ -111,14 +118,15 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
               shrinkWrap: true,
               children: [
                 if (isMobilePhn)
-                  SizedBox(
+                  Container(
+                    // decoration: Styles.boxDecorationWithShadow.copyWith(),
                     height: showMenu
                         ? showCardSubMenu
                             ? 1070
                             : 950
                         : showCardSubMenu
-                            ? 810
-                            : 700,
+                            ? 790
+                            : 680,
                     child: Stack(
                       children: [
                         Container(
@@ -141,9 +149,7 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                                 right: Di.PSL,
                               ),
                               width: Di.getScreenSize(context).width * .96,
-                              decoration: BoxDecoration(
-                                color: Cr.whiteColor,
-                              ),
+                              decoration: Styles.boxDecorationWithShadow,
                               child: Column(
                                 // crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -219,6 +225,7 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                                   ),
                                   Di.SBHES,
                                   WriteReferenceRecommandButtonComman(
+                                    isMobile: true,
                                     width:
                                         Di.getScreenSize(context).width * .43,
                                     userProfileData: widget.userProfileData,
@@ -252,17 +259,15 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                                   Container(
                                     padding: EdgeInsets.only(
                                       bottom: Di.PSS,
-                                      // left: Di.PSL,
-                                      // right: Di.PSL,
                                     ),
                                     decoration: BoxDecoration(
                                       color: Cr.whiteColor,
-                                      border: Border(
-                                        bottom: BorderSide(
-                                          width: 2,
-                                          color: Cr.grey1,
-                                        ),
-                                      ),
+                                      // border: Border(
+                                      //   bottom: BorderSide(
+                                      //     width: 2,
+                                      //     color: Cr.grey1,
+                                      //   ),
+                                      // ),
                                     ),
                                     height: showMenu ? 365 : 100,
                                     child: Column(
@@ -424,12 +429,7 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                       ],
                     ),
                   ),
-                if (isTablt)
-                  ProfileTabbar(
-                    onTap: widget.onTabBarTap,
-                    isMine: isMine,
-                    tabController: widget.tabController,
-                  ),
+                Di.SBHS,
                 [
                   MobileProfileOverviewSection(
                     isMobilePhn: isMobilePhn,

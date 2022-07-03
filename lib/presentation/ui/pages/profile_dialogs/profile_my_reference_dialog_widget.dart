@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:holedo/models/holedoapi/holedoapi.dart';
-import 'package:holedo/presentation/ui/components/custom_text_button.dart';
+import 'package:holedo/presentation/ui/components/expanded_collapse_widget.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/dialog_widgets.dart';
-import 'package:holedo/presentation/ui/pages/profile_dialogs/scale_animation.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/styles.dart';
@@ -170,75 +169,71 @@ class _DialogExpandedTileState extends State<DialogExpandedTile> {
               ),
             ),
           ),
-          Container(
-            width: double.infinity,
-            color: Cr.lightGrey2,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Di.SBCH(12),
-                ExpandedSection(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: Di.PSD),
-                    child: Text(
-                      // singleExperience
-                      //         .description ??
-                      "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                      maxLines: 5,
-                      overflow: TextOverflow.ellipsis,
-                      style: bodyLarge.copyWith(
-                        color: Cr.darkGrey1,
-                      ),
-                    ),
-                  ),
-                  expand: showMore,
-                ),
-                Container(
-                  height: 40,
-                  width: double.infinity,
-                  color: Cr.lightGrey2,
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: AnimatedCrossFade(
-                      firstChild: CustomTextButton(
-                        color: Cr.whiteColor,
-                        onPressed: () {
-                          setState(() {
-                            showMore = !showMore;
-                          });
-                        },
-                        textWidget: Text(
-                          "  + Show more",
-                          style: (bodySmallRegular).copyWith(
-                            color: Cr.accentBlue1,
-                          ),
-                        ),
-                      ),
-                      secondChild: CustomTextButton(
-                        color: Cr.whiteColor,
-                        onPressed: () {
-                          setState(() {
-                            showMore = !showMore;
-                          });
-                        },
-                        textWidget: Text(
-                          "  - Close",
-                          style: (bodySmallRegular).copyWith(
-                            color: Cr.accentBlue1,
-                          ),
-                        ),
-                      ),
-                      crossFadeState: showMore
-                          ? CrossFadeState.showSecond
-                          : CrossFadeState.showFirst,
-                      duration: Duration(milliseconds: 200),
-                    ),
-                  ),
-                ),
-                Di.SBHS,
-              ],
-            ),
+          ExpandedCollapseWidget(
+            showText: r"  + Show reference",
+            hideText: r"  - Hide reference",
+            description:
+                "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
           ),
+
+          // ExpandedSection(
+          //   child: Padding(
+          //     padding: const EdgeInsets.symmetric(horizontal: Di.PSD),
+          //     child: Text(
+          //       // singleExperience
+          //       //         .description ??
+          //       "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+          //       maxLines: 5,
+          //       overflow: TextOverflow.ellipsis,
+          //       style: bodyLarge.copyWith(
+          //         color: Cr.darkGrey1,
+          //       ),
+          //     ),
+          //   ),
+          //   expand: showMore,
+          // ),
+          // Container(
+          //   height: 40,
+          //   width: double.infinity,
+          //   color: Cr.lightGrey2,
+          //   child: Align(
+          //     alignment: Alignment.centerLeft,
+          //     child: AnimatedCrossFade(
+          //       firstChild: CustomTextButton(
+          //         color: Cr.whiteColor,
+          //         onPressed: () {
+          //           setState(() {
+          //             showMore = !showMore;
+          //           });
+          //         },
+          //         textWidget: Text(
+          //           "  + Show more",
+          //           style: (bodySmallRegular).copyWith(
+          //             color: Cr.accentBlue1,
+          //           ),
+          //         ),
+          //       ),
+          //       secondChild: CustomTextButton(
+          //         color: Cr.whiteColor,
+          //         onPressed: () {
+          //           setState(() {
+          //             showMore = !showMore;
+          //           });
+          //         },
+          //         textWidget: Text(
+          //           "  - Close",
+          //           style: (bodySmallRegular).copyWith(
+          //             color: Cr.accentBlue1,
+          //           ),
+          //         ),
+          //       ),
+          //       crossFadeState: showMore
+          //           ? CrossFadeState.showSecond
+          //           : CrossFadeState.showFirst,
+          //       duration: Duration(milliseconds: 200),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );

@@ -10,8 +10,8 @@ import 'package:holedo/db_data.dart';
 import 'package:holedo/layouts/pages/profile-pages/profile-edit/profile_edit.dart';
 import 'package:holedo/models/holedoapi/achievement.dart';
 import 'package:holedo/models/holedoapi/holedoapi.dart';
-import 'package:holedo/presentation/ui/components/custom_text_button.dart';
 import 'package:holedo/presentation/ui/components/container_with_icon.dart';
+import 'package:holedo/presentation/ui/components/expanded_collapse_widget.dart';
 import 'package:holedo/presentation/ui/pages/components/edit_add_buttons_of_sheet.dart';
 import 'package:holedo/presentation/ui/pages/components/edit_blue_card_sheet.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_eduction_component.dart';
@@ -61,17 +61,17 @@ class _ProfileOverviewSecondColumnState
           FeaturedVideoComponent(
             userProfileData: widget.userProfileData,
           ),
-          Di.SBHEL,
+          Di.SBHL,
           ProfileWorkExperienceComponent(
             userProfileData: widget.userProfileData,
             onEditPressed: buildWorkExpPopUp,
           ),
-          Di.SBHEL,
+          Di.SBHL,
           EducationComponent(
             onEditPressed: buildEducationPopUp,
             userProfileData: widget.userProfileData,
           ),
-          Di.SBHEL,
+          Di.SBHL,
           AchievementComponent(
             onEditPressed: buildAchivementPopUp,
             userProfileData: widget.userProfileData,
@@ -1052,15 +1052,18 @@ class AchievementComponent extends StatelessWidget {
     final bool hasData = achievement != null ? achievement.isNotEmpty : false;
 
     return Container(
-      decoration: Styles.boxDecoration.copyWith(color: Cr.whiteColor),
+      // decoration: Styles.boxDecoration.copyWith(color: Cr.backgroundColor),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Di.SBHETS,
-          ListTile(
-            title: Text(
-              "Achievement",
-              style: h2Regular,
+          Container(
+            color: Cr.whiteColor,
+            child: ListTile(
+              title: Text(
+                "Achievement",
+                style: h2Regular,
+              ),
             ),
           ),
           IntrinsicHeight(
@@ -1070,72 +1073,62 @@ class AchievementComponent extends StatelessWidget {
                   Column(
                     children: achievement
                         .map(
-                          (singleAchievement) => Column(
-                            children: [
-                              Di.DWZH,
-                              Di.SBHS,
-                              Container(
-                                width: isMobile ? null : 360,
-                                decoration: Styles.boxDecoration
-                                    .copyWith(color: Cr.whiteColor),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    ListTile(
-                                      leading: ContainerWithIcon(
-                                        iconData:
-                                            FontAwesomeIcons.buildingColumns,
-                                        size: 50,
+                          (singleAchievement) => Container(
+                            width: isMobile ? null : 360,
+                            margin: EdgeInsets.only(
+                                bottom:
+                                    achievement.indexOf(singleAchievement) ==
+                                            (achievement.length - 1)
+                                        ? 0
+                                        : Di.PSS),
+                            decoration: Styles.boxDecoration
+                                .copyWith(color: Cr.backgroundColor),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  color: Cr.whiteColor,
+                                  child: ListTile(
+                                    leading: ContainerWithIcon(
+                                      iconData:
+                                          FontAwesomeIcons.buildingColumns,
+                                      size: 50,
+                                    ),
+                                    trailing: SizedBox(),
+                                    title: Text(
+                                      singleAchievement.title ?? "",
+                                      // "Marriott Hotel and Resorts employee of the year awards",
+                                      style: h4Bold.copyWith(
+                                        fontSize: Di.FSD,
                                       ),
-                                      trailing: SizedBox(),
-                                      title: Text(
-                                        singleAchievement.title ?? "",
-                                        // "Marriott Hotel and Resorts employee of the year awards",
-                                        style: h4Bold.copyWith(
-                                          fontSize: Di.FSD,
+                                    ),
+                                    subtitle: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Di.SBHES,
+                                        Text(
+                                          singleAchievement.website ??
+                                              "No website added",
+                                          // "www.marriott.com/awards",
+                                          style: bodySmallRegular.copyWith(
+                                            color: Cr.accentBlue1,
+                                            fontSize: Di.FSS,
+                                          ),
                                         ),
-                                      ),
-                                      subtitle: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Di.SBHES,
-                                          Text(
-                                            singleAchievement.website ??
-                                                "No website added",
-                                            // "www.marriott.com/awards",
-                                            style: bodySmallRegular.copyWith(
-                                              color: Cr.accentBlue1,
-                                              fontSize: Di.FSS,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                                      ],
                                     ),
-                                    Di.SBHD,
-                                    Divider(
-                                      thickness: 1,
-                                      height: 0,
-                                    ),
-                                    Container(
-                                      width: isMobile ? null : 360,
-                                      color: Cr.lightGrey2,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Di.SBHS,
-                                          CustomTextButton(
-                                            text: "  + More info",
-                                          ),
-                                          Di.SBHS,
-                                        ],
-                                      ),
-                                    ),
-                                  ],
+                                  ),
                                 ),
-                              ),
-                            ],
+                                Di.DWZH,
+                                ExpandedCollapseWidget(
+                                  description:
+                                      ", when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but a",
+                                  isTablet: false,
+                                  isMobile: isMobile,
+                                )
+                              ],
+                            ),
                           ),
                         )
                         .toList(),
@@ -1213,57 +1206,55 @@ class _FeaturedVideoComponentState extends State<FeaturedVideoComponent> {
             child: Stack(
               children: [
                 Padding(
-                  padding: EdgeInsets.all(Di.PSD),
+                  padding: EdgeInsets.all(Di.PSL),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      IntrinsicHeight(
-                        child: Stack(
-                          children: [
-                            _controller.value.isInitialized
-                                ? SizedBox(
-                                    height: widget.isMobile ? null : 180,
-                                    width: widget.isMobile ? null : 325,
-                                    child: AspectRatio(
-                                      aspectRatio:
-                                          _controller.value.aspectRatio,
-                                      child: VideoPlayer(_controller),
-                                    ),
-                                  )
-                                : Di.ESB,
-                            SizedBox(
-                              height: widget.isMobile ? null : 180,
-                              width: widget.isMobile ? null : 325,
-                              child: Center(
-                                child: FloatingActionButton(
-                                  backgroundColor: Cr.accentBlue1,
-                                  onPressed: () {
-                                    setState(() {
-                                      _controller.value.isPlaying
-                                          ? _controller.pause()
-                                          : _controller.play();
-                                    });
-                                  },
-                                  child: Icon(
-                                    _controller.value.isPlaying
-                                        ? Icons.pause
-                                        : Icons.play_arrow,
+                      Stack(
+                        children: [
+                          _controller.value.isInitialized
+                              ? SizedBox(
+                                  height: widget.isMobile ? null : 180,
+                                  width: widget.isMobile ? null : 325,
+                                  child: AspectRatio(
+                                    aspectRatio: _controller.value.aspectRatio,
+                                    child: VideoPlayer(_controller),
                                   ),
+                                )
+                              : Di.ESB,
+                          SizedBox(
+                            height: widget.isMobile ? null : 180,
+                            width: widget.isMobile ? null : 325,
+                            child: Center(
+                              child: FloatingActionButton(
+                                backgroundColor: Cr.accentBlue1,
+                                onPressed: () {
+                                  setState(() {
+                                    _controller.value.isPlaying
+                                        ? _controller.pause()
+                                        : _controller.play();
+                                  });
+                                },
+                                child: Icon(
+                                  _controller.value.isPlaying
+                                      ? Icons.pause
+                                      : Icons.play_arrow,
                                 ),
                               ),
                             ),
-                          ],
+                          ),
+                        ],
+                      ),
+                      if (widget.userProfileData.profileVideoTitle != null) ...[
+                        Di.SBHL,
+                        Text(
+                          widget.userProfileData.profileVideoTitle!,
+                          style: h4Bold,
                         ),
-                      ),
-                      Di.SBHL,
-                      Text(
-                        widget.userProfileData.profileVideoTitle ??
-                            "Chef TV: Inside the kitchen of Noberto Holden",
-                        style: h4Bold,
-                      ),
-                      Di.SBHL,
+                      ],
                       if (widget.userProfileData.profileVideoDescription !=
-                          null)
+                          null) ...[
+                        Di.SBHL,
                         RichText(
                           text: TextSpan(
                             style: bodySmallRegular.copyWith(
@@ -1285,7 +1276,7 @@ class _FeaturedVideoComponentState extends State<FeaturedVideoComponent> {
                             ],
                           ),
                         ),
-                      Di.SBHD,
+                      ],
                     ],
                   ),
                 ),

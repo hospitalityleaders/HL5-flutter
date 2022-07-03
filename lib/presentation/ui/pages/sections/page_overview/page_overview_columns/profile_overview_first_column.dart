@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:holedo/db_data.dart';
 import 'package:holedo/models/models.dart';
 import 'package:holedo/presentation/ui/components/custom_checkbox_with_title.dart';
+import 'package:holedo/presentation/ui/components/expanded_collapse_widget.dart';
 import 'package:holedo/presentation/ui/pages/components/edit_add_buttons_of_sheet.dart';
 import 'package:holedo/presentation/ui/pages/components/edit_blue_card_sheet.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_reference_component.dart';
@@ -10,6 +11,7 @@ import 'package:holedo/presentation/ui/pages/profile_dialogs/profile_summary_dia
 import 'package:holedo/presentation/ui/pages/profile_dialogs/show_custom_dialog.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
+import 'package:holedo/presentation/utill/responsive.dart';
 import 'package:holedo/presentation/utill/styles.dart';
 import 'package:holedo/responsive/responsive.dart';
 import 'package:holedo/services/holedo_api_services.dart';
@@ -523,6 +525,7 @@ class _ProfileSummaryComponentState extends State<ProfileSummaryComponent> {
   @override
   Widget build(BuildContext context) {
     final String? profileSummary = DbData.getUserProfileData.profileSummary;
+    final isMobilePhn = isMobilePhone(context);
 
     return Container(
       margin: EdgeInsets.only(bottom: Di.PSD),
@@ -543,19 +546,24 @@ class _ProfileSummaryComponentState extends State<ProfileSummaryComponent> {
           IntrinsicHeight(
             child: Stack(
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: Di.PSD,
-                    right: Di.PSD,
-                    top: Di.PSD,
-                  ),
-                  child: Text(
-                    profileSummary ?? "",
-                    // widget.userProfileData.profileSummary ?? "",
-                    maxLines: widget.isMobile ? 6 : null,
-                    style: bodyLarge.copyWith(color: Cr.darkGrey1),
-                  ),
-                ),
+                isMobilePhn
+                    ? ExpandedCollapseWidget(
+                        description: profileSummary ?? "",
+                        isMobile: widget.isMobile,
+                      )
+                    : Padding(
+                        padding: EdgeInsets.only(
+                          left: Di.PSD,
+                          right: Di.PSD,
+                          top: Di.PSD,
+                          bottom: widget.isMobile ? Di.PSD : 0,
+                        ),
+                        child: Text(
+                          profileSummary ?? "",
+                          maxLines: widget.isMobile ? 6 : null,
+                          style: bodyLarge.copyWith(color: Cr.darkGrey1),
+                        ),
+                      ),
                 EditBlueCardSheet(
                   context,
                   dataIsNull: profileSummary == null,

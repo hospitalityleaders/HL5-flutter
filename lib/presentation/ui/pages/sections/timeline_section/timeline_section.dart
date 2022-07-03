@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:holedo/presentation/ui/components/custom_text_button.dart';
 import 'package:holedo/presentation/ui/components/person_avatar.dart';
 import 'package:holedo/presentation/ui/pages/components/connection_component.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_completion_component.dart';
 import 'package:holedo/presentation/ui/pages/components/rights_component.dart';
+import 'package:holedo/presentation/ui/pages/profile_dialogs/expanded_section.dart';
 import 'package:holedo/presentation/ui/pages/sections/page_overview/page_overview_columns/page_overview_third_columns.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
@@ -26,6 +26,7 @@ class TimelineSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TimelineSectionComponent(),
+          Di.SBCW(24),
           Flexible(
             child: SizedBox(
               width: 360,
@@ -57,7 +58,6 @@ class TimelineSectionComponent extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Di.SBHOTL,
         SizedBox(
           // width: 550,
           width: 620,
@@ -97,12 +97,19 @@ class TimelineSectionComponent extends StatelessWidget {
   }
 }
 
-class TimeLineWidget extends StatelessWidget {
+class TimeLineWidget extends StatefulWidget {
   const TimeLineWidget(
       {Key? key, this.jobDescriptionInHtml, this.showComments = false})
       : super(key: key);
   final bool showComments;
   final String? jobDescriptionInHtml;
+
+  @override
+  State<TimeLineWidget> createState() => _TimeLineWidgetState();
+}
+
+class _TimeLineWidgetState extends State<TimeLineWidget> {
+  bool showMore = false;
 
   @override
   Widget build(BuildContext context) {
@@ -195,72 +202,92 @@ class TimeLineWidget extends StatelessWidget {
                     ],
                   ),
                 ),
-                jobDescriptionInHtml != null
-                    ? Container(
-                        // height: 123,
-                        width: 550,
-                        color: Cr.lightGrey2,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          // crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              width: 518,
-                              // height: 66,
-                              child: Html(
-                                data: jobDescriptionInHtml,
-                                style: {
-                                  "h4": Style(
-                                    color: Cr.darkGrey1,
-                                  ),
-                                  "p": Style(
-                                    color: Cr.darkGrey1,
-                                    backgroundColor: Cr.lightGrey2,
-                                  ),
-                                  "li": Style(
-                                    color: Cr.darkGrey1,
-                                    backgroundColor: Cr.lightGrey2,
-                                  ),
-                                },
-                              ),
-                              // child: Text(
-                              //   jobDescriptionInHtml!,
-                              //   style: bodyLarge.copyWith(
-                              //     color: Cr.darkGrey1,
-                              //   ),
-                              // ),
+                if (widget.jobDescriptionInHtml != null)
+                  ExpandedSection(
+                    expand: showMore,
+                    child: Container(
+                      width: 550,
+                      color: Cr.lightGrey2,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        // crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: 518,
+                            // height: 66,
+                            child: Html(
+                              data: widget.jobDescriptionInHtml,
+                              style: {
+                                "h4": Style(
+                                  color: Cr.darkGrey1,
+                                ),
+                                "p": Style(
+                                  color: Cr.darkGrey1,
+                                  backgroundColor: Cr.lightGrey2,
+                                ),
+                                "li": Style(
+                                  color: Cr.darkGrey1,
+                                  backgroundColor: Cr.lightGrey2,
+                                ),
+                              },
                             ),
-                            Di.SBHES,
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: CustomTextButton(
-                                text: "  - Close",
-                              ),
-                            ),
-                            SizedBox(
-                              height: Di.PSS,
-                            ),
-                          ],
-                        ),
-                      )
-                    : Container(
-                        width: double.infinity,
-                        height: 40,
-                        color: Cr.lightGrey2,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: Di.PSL,
-                            vertical: Di.PSS,
+                            // child: Text(
+                            //   jobDescriptionInHtml!,
+                            //   style: bodyLarge.copyWith(
+                            //     color: Cr.darkGrey1,
+                            //   ),
+                            // ),
                           ),
+                          Di.SBHES,
+                        ],
+                      ),
+                    ),
+                  ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: Di.PSL),
+                  child: Container(
+                    height: 40,
+                    width: double.infinity,
+                    color: Cr.lightGrey2,
+                    padding: EdgeInsets.only(left: Di.PSL),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: AnimatedCrossFade(
+                        firstChild: GestureDetector(
+                          onTap: () async {
+                            setState(() {
+                              showMore = !showMore;
+                            });
+                          },
                           child: Text(
-                            "  + Job Description",
-                            style: bodySmallRegular.copyWith(
+                            r"  + Job Description",
+                            style: (bodySmallRegular).copyWith(
                               color: Cr.accentBlue1,
                             ),
                           ),
                         ),
+                        secondChild: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              showMore = !showMore;
+                            });
+                          },
+                          child: Text(
+                            r"  - Close",
+                            style: (bodySmallRegular).copyWith(
+                              color: Cr.accentBlue1,
+                            ),
+                          ),
+                        ),
+                        crossFadeState: showMore
+                            ? CrossFadeState.showSecond
+                            : CrossFadeState.showFirst,
+                        duration: Duration(milliseconds: 200),
                       ),
-                showComments
+                    ),
+                  ),
+                ),
+                widget.showComments
                     ? Container(
                         height: 120,
                         color: Cr.whiteColor,

@@ -75,7 +75,8 @@ class _ContactDetailsExpandedTileState
     extends State<ContactDetailsExpandedTile> {
   String? selectedValue;
   bool currentlyWorkHere = false;
-  List<String> newContactNumberField = ["", "", ""];
+  List<String> contactNumberList = [""];
+  List<String> socialProfilesList = ["", "", ""];
 
   late ExpandedTileController expandedTileController;
   @override
@@ -197,7 +198,7 @@ class _ContactDetailsExpandedTileState
                   GestureDetector(
                     onTap: () {
                       setState(() {
-                        newContactNumberField.add('');
+                        contactNumberList.add('');
                       });
                     },
                     child: Row(
@@ -248,7 +249,7 @@ class _ContactDetailsExpandedTileState
                   GestureDetector(
                     onTap: () {
                       setState(() {
-                        newContactNumberField.add('');
+                        socialProfilesList.add('');
                       });
                     },
                     child: Row(
@@ -324,12 +325,12 @@ class _ContactDetailsExpandedTileState
 
   List<Widget> getNewContactPhoneFields() {
     var textField = <Widget>[];
-    for (var i = 0; i < newContactNumberField.length; i++) {
+    for (var i = 0; i < contactNumberList.length; i++) {
       textField.add(
         _ContactNumberField(
           onCloseTap: () {
             setState(() {
-              newContactNumberField.removeAt(i);
+              contactNumberList.removeAt(i);
             });
           },
         ),
@@ -340,13 +341,13 @@ class _ContactDetailsExpandedTileState
 
   List<Widget> getNewSocialProfilesFields() {
     var textField = <Widget>[];
-    for (var i = 0; i < newContactNumberField.length; i++) {
+    for (var i = 0; i < socialProfilesList.length; i++) {
       textField.add(
         _SocialProfileField(
-          selectedSocialMediaIndex: i,
+          selectedSocialMediaIndex: i % 3,
           onCloseTap: () {
             setState(() {
-              newContactNumberField.removeAt(i);
+              socialProfilesList.removeAt(i);
             });
           },
         ),

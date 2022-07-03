@@ -211,13 +211,16 @@ class WriteReferenceRecommandButtonComman extends StatelessWidget {
     Key? key,
     required this.userProfileData,
     this.width,
+    this.isMobile = false,
   }) : super(key: key);
   final User userProfileData;
   final double? width;
+  final bool isMobile;
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment:
+          isMobile ? MainAxisAlignment.spaceBetween : MainAxisAlignment.center,
       children: [
         CustomElevatedButton(
           onPressed: () {

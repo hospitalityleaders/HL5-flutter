@@ -3,7 +3,6 @@ import 'package:holedo/db_data.dart';
 import 'package:holedo/presentation/ui/pages/components/connection_component.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_completion_component.dart';
 import 'package:holedo/presentation/ui/pages/components/rights_component.dart';
-import 'package:holedo/presentation/ui/pages/sections/page_overview/page_overview_columns/page_overview_second_columns.dart';
 import 'package:holedo/presentation/ui/pages/sections/page_overview/page_overview_columns/page_overview_third_columns.dart';
 import 'package:holedo/presentation/ui/pages/sections/timeline_section/timeline_section.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
@@ -40,13 +39,13 @@ class MobileProfileTimelineSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (isMobilePhn) ProfileCompletionComponent(),
-          Di.SBHS,
-          TimelineSectionComponent(),
+          isMobilePhn
+              ? _MobileTimelineSection(
+                  jobDescriptionInHtml: jobDescriptionInHtml,
+                  showComments: showComments,
+                )
+              : TimelineSectionComponent(),
           Di.SBHD,
-          AchievementComponent(
-            isMobile: true,
-            userProfileData: userProfileData,
-          ),
           if (isTablt) ProfileCompletionComponent(),
           ConnectionsComponent(
             isMobile: true,
@@ -57,6 +56,105 @@ class MobileProfileTimelineSection extends StatelessWidget {
           ),
           Di.SBHOTL,
         ],
+      ),
+    );
+  }
+}
+
+class _MobileTimelineSection extends StatelessWidget {
+  const _MobileTimelineSection({
+    Key? key,
+    required this.jobDescriptionInHtml,
+    required this.showComments,
+  }) : super(key: key);
+
+  final String? jobDescriptionInHtml;
+  final bool showComments;
+
+  @override
+  Widget build(BuildContext context) {
+    // return _ProfileMobileTimelineTile(
+    //   jobDescriptionInHtml: jobDescriptionInHtml,
+    //   showComments: showComments,
+    // );
+    return Column(
+      children: [
+        _MobileTimelinePath(
+          year: '2013',
+        ),
+        _ProfileMobileTimelineTile(
+          jobDescriptionInHtml: jobDescriptionInHtml,
+          showComments: showComments,
+        ),
+        _ProfileMobileTimelineTile(
+          jobDescriptionInHtml: jobDescriptionInHtml,
+          showComments: showComments,
+        ),
+        _ProfileMobileTimelineTile(
+          jobDescriptionInHtml: jobDescriptionInHtml,
+          showComments: showComments,
+        ),
+        _MobileTimelinePath(
+          year: '2011',
+        ),
+      ],
+    );
+  }
+}
+
+class _MobileTimelinePath extends StatelessWidget {
+  const _MobileTimelinePath({
+    Key? key,
+    required this.year,
+  }) : super(key: key);
+  final String year;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: Di.PSS),
+      child: SizedBox(
+        height: 53,
+        child: Stack(
+          children: [
+            Positioned(
+              left: 30,
+              child: Container(
+                width: 3,
+                height: 53,
+                color: Cr.darkGrey3,
+              ),
+            ),
+            Positioned(
+              left: 48,
+              top: 18.5,
+              child: Text(
+                year,
+                style: dividerTextSmall.copyWith(
+                  color: Cr.darkGrey1,
+                ),
+              ),
+            ),
+            Positioned(
+              left: 24,
+              top: 18,
+              child: Container(
+                width: 16,
+                height: 16,
+                decoration: new BoxDecoration(
+                  border: Border.all(
+                    color: Cr.darkGrey3,
+                    width: 3.5,
+                  ),
+                  shape: BoxShape
+                      .circle, // You can use like this way or like the below line
+                  //borderRadius: new BorderRadius.circular(30.0),
+                  color: Cr.darkGrey4,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -76,50 +174,8 @@ class _ProfileMobileTimelineTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
-          height: 53,
-          child: Stack(
-            children: [
-              Positioned(
-                left: 30,
-                child: Container(
-                  width: 3,
-                  height: 53,
-                  color: Cr.darkGrey3,
-                ),
-              ),
-              Positioned(
-                left: 48,
-                top: 18.5,
-                child: Text(
-                  "2013",
-                  style: dividerTextSmall.copyWith(
-                    color: Cr.darkGrey1,
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 24,
-                top: 18,
-                child: Container(
-                  width: 16,
-                  height: 16,
-                  decoration: new BoxDecoration(
-                    border: Border.all(
-                      color: Cr.darkGrey3,
-                      width: 3.5,
-                    ),
-                    shape: BoxShape
-                        .circle, // You can use like this way or like the below line
-                    //borderRadius: new BorderRadius.circular(30.0),
-                    color: Cr.darkGrey4,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
         // CreatePath(date: date, orderStatus: orderStatus, orderDescription: orderDescription)
+        Di.SBHS,
         Container(
           height: 96,
           color: Cr.whiteColor,

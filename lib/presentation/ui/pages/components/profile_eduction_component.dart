@@ -4,9 +4,9 @@ import 'package:holedo/db_data.dart';
 import 'package:holedo/models/holedoapi/education.dart';
 import 'package:holedo/models/holedoapi/holedoapi.dart';
 import 'package:holedo/presentation/ui/components/container_with_icon.dart';
+import 'package:holedo/presentation/ui/components/expanded_collapse_widget.dart';
 import 'package:holedo/presentation/ui/pages/components/edit_add_buttons_of_sheet.dart';
 import 'package:holedo/presentation/ui/pages/components/edit_blue_card_sheet.dart';
-import 'package:holedo/presentation/ui/pages/profile_dialogs/scale_animation.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/styles.dart';
@@ -36,11 +36,9 @@ class _EducationComponentState extends State<EducationComponent> {
     bool showMore = false;
 
     return Container(
-      decoration:
-          Styles.boxDecorationWithShadow.copyWith(color: Cr.backgroundColor),
+      color: Cr.backgroundColor,
       child: Column(
         children: [
-          Di.SBHETS,
           Container(
             color: Cr.whiteColor,
             child: ListTile(
@@ -59,7 +57,11 @@ class _EducationComponentState extends State<EducationComponent> {
                     children: education
                         .map(
                           (singleEductaion) => Container(
-                            margin: EdgeInsets.only(bottom: Di.PSS),
+                            margin: EdgeInsets.only(
+                                bottom: education.indexOf(singleEductaion) ==
+                                        (education.length - 1)
+                                    ? 0
+                                    : Di.PSS),
                             width: widget.isMobile ? null : 360,
                             decoration: Styles.boxDecoration.copyWith(
                               color: Cr.whiteColor,
@@ -103,13 +105,15 @@ class _EducationComponentState extends State<EducationComponent> {
                                     ],
                                   ),
                                 ),
-                                Di.SBHD,
-                                Di.DWZH,
-                                _SingleEducationWidget(
-                                  singleEducation: singleEductaion,
-                                  isTablet: widget.isTablet,
-                                  isMobile: widget.isMobile,
-                                ),
+                                if (singleEductaion.description != null) ...[
+                                  Di.SBHD,
+                                  Di.DWZH,
+                                  ExpandedCollapseWidget(
+                                    description: singleEductaion.description!,
+                                    isTablet: widget.isTablet,
+                                    isMobile: widget.isMobile,
+                                  )
+                                ],
                               ],
                             ),
                           ),
@@ -138,103 +142,6 @@ class _EducationComponentState extends State<EducationComponent> {
               ],
             ),
           ),
-        ],
-      ),
-    );
-  }
-}
-
-class _SingleEducationWidget extends StatefulWidget {
-  const _SingleEducationWidget({
-    Key? key,
-    required this.singleEducation,
-    required this.isTablet,
-    required this.isMobile,
-  }) : super(key: key);
-
-  final Education singleEducation;
-  final bool isTablet;
-  final bool isMobile;
-
-  @override
-  State<_SingleEducationWidget> createState() => _SingleEducationWidgetState();
-}
-
-class _SingleEducationWidgetState extends State<_SingleEducationWidget> {
-  bool showMore = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      color: Cr.lightGrey2,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Di.SBCH(12),
-          ExpandedSection(
-            child: Padding(
-              padding: const EdgeInsets.only(
-                top: 12,
-                left: Di.PSD,
-                right: Di.PSD,
-              ),
-              child: Text(
-                // singleEducation
-                //         .description ??
-                "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                maxLines: 5,
-                overflow: TextOverflow.ellipsis,
-                style: bodyLarge.copyWith(
-                  color: Cr.darkGrey1,
-                ),
-              ),
-            ),
-            expand: showMore,
-          ),
-          Container(
-            height: 40,
-            width: double.infinity,
-            color: Cr.lightGrey2,
-            padding: EdgeInsets.only(left: Di.PSL),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: AnimatedCrossFade(
-                firstChild: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      showMore = !showMore;
-                    });
-                  },
-                  child: Text(
-                    r"  + Show more",
-                    style: (bodySmallRegular).copyWith(
-                      color: Cr.accentBlue1,
-                    ),
-                  ),
-                ),
-                secondChild: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      showMore = !showMore;
-                    });
-                  },
-                  child: Text(
-                    r"  - Close",
-                    style: (bodySmallRegular).copyWith(
-                      color: Cr.accentBlue1,
-                    ),
-                  ),
-                ),
-                crossFadeState: showMore
-                    ? CrossFadeState.showSecond
-                    : CrossFadeState.showFirst,
-                duration: Duration(milliseconds: 200),
-              ),
-            ),
-          ),
-
-          // Di.SBHS,
         ],
       ),
     );
