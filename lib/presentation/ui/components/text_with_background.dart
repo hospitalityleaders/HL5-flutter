@@ -17,6 +17,7 @@ class TextWithBackground extends StatelessWidget {
     this.sizedBoxBetweenIconText,
     this.padding,
     this.paddingHorizantal,
+    this.decoration,
   }) : super(key: key);
 
   final String text;
@@ -27,18 +28,20 @@ class TextWithBackground extends StatelessWidget {
   final double? padding;
   final double? paddingHorizantal;
   final IconData? iconData;
-  final Icon? icon;
+  final Widget? icon;
   final TextStyle? textStyle;
   final SizedBox? sizedBoxBetweenIconText;
+  final Decoration? decoration;
 
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(4),
-        color: backgroundColor,
-        border: border,
-      ),
+      decoration: decoration ??
+          BoxDecoration(
+            borderRadius: BorderRadius.circular(4),
+            color: backgroundColor,
+            border: border,
+          ),
       child: Padding(
         padding: EdgeInsets.symmetric(
           vertical: padding ?? 5,

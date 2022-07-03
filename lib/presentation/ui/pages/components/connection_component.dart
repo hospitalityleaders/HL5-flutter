@@ -27,11 +27,8 @@ class ConnectionsComponent extends StatelessWidget {
               style: h2Regular,
             ),
           ),
-          Divider(
-            thickness: 1,
-            height: 0,
-          ),
-          Di.SBHS,
+          Di.DWZH,
+          Di.SBCH(18),
           Center(
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: isMobile ? Di.PSL : 0),
@@ -44,7 +41,7 @@ class ConnectionsComponent extends StatelessWidget {
               ),
             ),
           ),
-          Di.SBHD,
+          Di.SBCH(14),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: Di.PSL),
             child: Text(

@@ -87,34 +87,17 @@ class _ProfileReferenceSingleComponentState
                     color: Cr.darkGrey1,
                   ),
                 ),
-                trailing: TapOutsideDetectorWidget(
+                trailing: CustomTapCanvasDropdown(
+                  onTappedInside: () {
+                    setState(() {
+                      showSubMenu = !showSubMenu;
+                    });
+                  },
                   onTappedOutside: () {
                     setState(() {
                       showSubMenu = false;
                     });
                   },
-                  onTappedInside: () {
-                    setState(() {
-                      showSubMenu = true;
-                    });
-                  },
-                  child: Container(
-                    width: 20,
-                    height: 20,
-                    decoration: BoxDecoration(
-                      color: Cr.whiteColor,
-                      borderRadius: BorderRadius.circular(2),
-                      border: Border.all(
-                        width: 1,
-                        color: Cr.grey2,
-                      ),
-                    ),
-                    child: Icon(
-                      Icons.keyboard_arrow_down,
-                      color: Cr.darkGrey1,
-                      size: 18,
-                    ),
-                  ),
                 ),
               ),
               Di.SBHES,
@@ -325,9 +308,63 @@ class _ProfileReferenceSingleComponentState
           Positioned(
             right: 17,
             top: 40,
-            child: ReferenceMenu(),
+            child: CustomSubMenu(
+              customSubMenuItems: [
+                CustomSubmenuItem(
+                  icon: SvgPicture.asset(
+                    Svgs.eyeOff,
+                    width: 16,
+                    color: Cr.darkGrey1,
+                  ),
+                  text: "Hide from my profile",
+                ),
+                CustomSubmenuItem(
+                  iconData: Icons.delete,
+                  text: "Delete",
+                ),
+              ],
+            ),
           ),
       ],
+    );
+  }
+}
+
+/// This dropdown is using tap_canvas libaray,
+/// to make it working wrape the
+/// whole screen(The area in which you want it to dimeiss after clicking there)
+///  with `TapCanvas`
+class CustomTapCanvasDropdown extends StatelessWidget {
+  const CustomTapCanvasDropdown({
+    Key? key,
+    required this.onTappedOutside,
+    required this.onTappedInside,
+  }) : super(key: key);
+  final void Function() onTappedOutside;
+  final void Function() onTappedInside;
+
+  @override
+  Widget build(BuildContext context) {
+    return TapOutsideDetectorWidget(
+      onTappedOutside: onTappedOutside,
+      onTappedInside: onTappedInside,
+      child: Container(
+        width: 20,
+        height: 20,
+        decoration: BoxDecoration(
+          color: Cr.whiteColor,
+          borderRadius: BorderRadius.circular(2),
+          border: Border.all(
+            width: 1,
+            color: Cr.grey2,
+          ),
+        ),
+        child: Icon(
+          Icons.keyboard_arrow_down,
+          color: Cr.darkGrey1,
+          size: 18,
+        ),
+      ),
     );
   }
 }
@@ -410,10 +447,12 @@ class DemoPageState extends State<DemoPage> {
       );
 }
 
-class ReferenceMenu extends StatelessWidget {
-  const ReferenceMenu({
+class CustomSubMenu extends StatelessWidget {
+  const CustomSubMenu({
     Key? key,
+    required this.customSubMenuItems,
   }) : super(key: key);
+  final List<CustomSubmenuItem> customSubMenuItems;
 
   @override
   Widget build(BuildContext context) {
@@ -427,40 +466,35 @@ class ReferenceMenu extends StatelessWidget {
             Svgs.menuAboveArrow,
           ),
         ),
-        _CustomSubmenuItem(
-          icon: SvgPicture.asset(
-            Svgs.eyeOff,
-            width: 16,
-            color: Cr.darkGrey1,
-          ),
-          text: "Hide from my profile",
-        ),
-        _CustomSubmenuItem(
-          iconData: Icons.delete,
-          text: "Delete",
-        ),
+        ...customSubMenuItems,
       ],
     );
   }
 }
 
-class _CustomSubmenuItem extends StatelessWidget {
-  const _CustomSubmenuItem({
+class CustomSubmenuItem extends StatelessWidget {
+  const CustomSubmenuItem({
     Key? key,
     required this.text,
     this.iconData,
     this.icon,
+    this.textIconColor,
+    this.textStyle,
+    this.width,
   }) : super(key: key);
   final String text;
   final IconData? iconData;
   final Widget? icon;
+  final Color? textIconColor;
+  final TextStyle? textStyle;
+  final double? width;
 
   @override
   Widget build(BuildContext context) {
     return OnHover(builder: (bool isHovered) {
       return Container(
         color: isHovered ? Cr.accentBlue3 : Cr.whiteColor,
-        width: 180,
+        width: width ?? 180,
         height: 38,
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -472,16 +506,17 @@ class _CustomSubmenuItem extends StatelessWidget {
                   (iconData != null
                       ? Icon(
                           iconData,
-                          color: Cr.darkGrey1,
+                          color: textIconColor ?? Cr.darkGrey1,
                           size: 14,
                         )
                       : Di.ESB),
               Di.SBCW(6.5),
               Text(
                 text,
-                style: bodySmallSemibold.copyWith(
-                  color: Cr.darkGrey1,
-                ),
+                style: textStyle ??
+                    bodySmallSemibold.copyWith(
+                      color: textIconColor ?? Cr.darkGrey1,
+                    ),
               )
             ],
           ),

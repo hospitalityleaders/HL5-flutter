@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/expanded_section.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
+import 'package:holedo/presentation/utill/images.dart';
 import 'package:holedo/presentation/utill/styles.dart';
 
 class ExpandedCollapseWidget extends StatefulWidget {
@@ -72,11 +74,21 @@ class ExpandedCollapseWidgetState extends State<ExpandedCollapseWidget> {
                       showMore = !showMore;
                     });
                   },
-                  child: Text(
-                    widget.showText ?? r"  + Show more",
-                    style: (bodySmallRegular).copyWith(
-                      color: Cr.accentBlue1,
-                    ),
+                  child: Row(
+                    children: [
+                      SvgPicture.asset(
+                        Svgs.plus,
+                        color: Cr.accentBlue1,
+                        width: 12,
+                      ),
+                      Di.SBCW(6),
+                      Text(
+                        widget.showText ?? "Show more",
+                        style: (bodySmallRegular).copyWith(
+                          color: Cr.accentBlue1,
+                        ),
+                      )
+                    ],
                   ),
                 ),
                 secondChild: GestureDetector(
@@ -85,11 +97,21 @@ class ExpandedCollapseWidgetState extends State<ExpandedCollapseWidget> {
                       showMore = !showMore;
                     });
                   },
-                  child: Text(
-                    widget.hideText ?? r"  - Close",
-                    style: (bodySmallRegular).copyWith(
-                      color: Cr.accentBlue1,
-                    ),
+                  child: Row(
+                    children: [
+                      SvgPicture.asset(
+                        Svgs.minus,
+                        color: Cr.accentBlue1,
+                        width: 12,
+                      ),
+                      Di.SBCW(6),
+                      Text(
+                        widget.hideText ?? "Close",
+                        style: (bodySmallRegular).copyWith(
+                          color: Cr.accentBlue1,
+                        ),
+                      )
+                    ],
                   ),
                 ),
                 crossFadeState: showMore

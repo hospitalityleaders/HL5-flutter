@@ -28,6 +28,11 @@ class Svgs {
       'assets/svgicons/avatarPlaceholder.svg';
   static const String smallPlayerIcon = 'assets/svgicons/smallPlayerIcon.svg';
   static const String web = 'assets/svgicons/web.svg';
+  static const String pencil = 'assets/svgicons/pencil.svg';
+  static const String minus = 'assets/svgicons/minus.svg';
+  static const String informationVariant =
+      'assets/svgicons/information-variant.svg';
+  // static const String logo1 = 'assets/svgicons/logo1.svg';
   // static const String logo1 = 'assets/svgicons/logo1.svg';
   // static const String logo1 = 'assets/svgicons/logo1.svg';
   // static const String logo1 = 'assets/svgicons/logo1.svg';

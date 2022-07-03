@@ -1052,7 +1052,7 @@ class AchievementComponent extends StatelessWidget {
     final bool hasData = achievement != null ? achievement.isNotEmpty : false;
 
     return Container(
-      // decoration: Styles.boxDecoration.copyWith(color: Cr.backgroundColor),
+      decoration: Styles.boxDecoration,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -1066,6 +1066,7 @@ class AchievementComponent extends StatelessWidget {
               ),
             ),
           ),
+          Di.DWZH,
           IntrinsicHeight(
             child: Stack(
               children: [
@@ -1122,6 +1123,7 @@ class AchievementComponent extends StatelessWidget {
                                 ),
                                 Di.DWZH,
                                 ExpandedCollapseWidget(
+                                  showText: "More info",
                                   description:
                                       ", when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but a",
                                   isTablet: false,

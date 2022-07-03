@@ -38,10 +38,9 @@ class _ProfileOverviewThirdColumnState
             Di.SBHEL,
             ConnectionsComponent(),
             Di.SBHEL,
-            // profile overview timeline component
             TimelineComponent(),
             // ProfileAdsComponent(),
-            // Di.SBHS,
+            Di.SBHL,
             RightsComponent(),
           ],
         ),
@@ -58,17 +57,14 @@ class TimelineComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: Styles.boxDecorationBorder.copyWith(color: Cr.whiteColor),
-      padding: const EdgeInsets.all(Di.PSD),
+      decoration: Styles.boxDecoration.copyWith(color: Color(0xff0D9BDC)),
+      // padding: const EdgeInsets.all(Di.PSD),
       height: 305,
       child: Stack(
         children: [
-          Container(
-            color: Color(0xff0D9BDC),
-          ),
           Positioned(
             left: -38,
-            top: -15,
+            top: -13,
             child: Container(
               width: 150,
               height: 150,
@@ -76,58 +72,54 @@ class TimelineComponent extends StatelessWidget {
                 color: Color(0xff0E92CF),
                 borderRadius: BorderRadius.circular(199),
               ),
-            ),
-          ),
-          Positioned(
-            left: 12,
-            top: 30,
-            child: Container(
-              width: 65,
-              height: 65,
-              decoration: BoxDecoration(
-                color: Color(0xff0D9BDC),
-                borderRadius: BorderRadius.circular(199),
+              child: Center(
+                child: Container(
+                  width: 65,
+                  height: 65,
+                  decoration: BoxDecoration(
+                    color: Color(0xff0D9BDC),
+                    borderRadius: BorderRadius.circular(199),
+                  ),
+                ),
               ),
             ),
           ),
           Positioned(
-            left: 34,
+            left: 30,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
-                  height: Di.PSD + 3,
-                ),
+                Di.SBHL,
                 Container(
-                  width: 2.5,
-                  height: 27,
+                  width: 2,
+                  height: 25,
                   decoration: Styles.boxDecorationRounded.copyWith(
                     color: Cr.accentBlue2,
                   ),
                 ),
-                Di.SBHES,
+                Di.SBCH(7),
                 SvgPicture.asset(
                   Svgs.domain,
                   color: Cr.accentBlue2,
-                  width: 18,
+                  width: 16,
                 ),
-                Di.SBHES,
+                Di.SBCH(7),
                 Container(
-                  width: 2.5,
-                  height: 100,
+                  width: 2,
+                  height: 130,
                   decoration: Styles.boxDecorationRounded.copyWith(
                     color: Cr.accentBlue2,
                   ),
                 ),
-                Di.SBHES,
+                Di.SBCH(7),
                 SvgPicture.asset(
                   Svgs.school,
                   color: Cr.accentBlue2,
-                  width: 18,
+                  width: 16,
                 ),
-                Di.SBHES,
+                Di.SBCH(7),
                 Container(
-                  width: 2.5,
+                  width: 2,
                   height: 43,
                   decoration: Styles.boxDecorationRounded.copyWith(
                     color: Cr.accentBlue2,
@@ -137,17 +129,15 @@ class TimelineComponent extends StatelessWidget {
             ),
           ),
           Positioned(
+            top: 55,
             left: 83,
             child: SizedBox(
-              height: 240,
+              // height: 240,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
-                    height: Di.PSD + 3,
-                  ),
                   Text(
                     "TIMELINE",
                     style: dividerTextSmall.copyWith(

@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:holedo/db_data.dart';
 import 'package:holedo/models/holedoapi/experience.dart';
 import 'package:holedo/models/holedoapi/holedoapi.dart';
 import 'package:holedo/presentation/ui/components/container_with_icon.dart';
 import 'package:holedo/presentation/ui/components/expanded_collapse_widget.dart';
+import 'package:holedo/presentation/ui/components/profile_reference_single_compoenet.dart';
 import 'package:holedo/presentation/ui/pages/components/edit_add_buttons_of_sheet.dart';
 import 'package:holedo/presentation/ui/pages/components/edit_blue_card_sheet.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
+import 'package:holedo/presentation/utill/images.dart';
 import 'package:holedo/presentation/utill/styles.dart';
 
 class ProfileWorkExperienceComponent extends StatefulWidget {
@@ -34,71 +37,120 @@ class ProfileWorkExperienceComponent extends StatefulWidget {
 class _ProfileWorkExperienceComponentState
     extends State<ProfileWorkExperienceComponent> {
   bool showMore = false;
+  bool showSubMenu = false;
 
   @override
   Widget build(BuildContext context) {
     final List<Experience>? experience = DbData.getUserProfileData.experiences;
     final bool hasData = experience != null ? experience.isNotEmpty : false;
-    return Container(
-      decoration: Styles.boxDecoration.copyWith(color: Cr.backgroundColor),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            color: Cr.whiteColor,
-            padding: EdgeInsets.only(left: widget.isMobile ? Di.PSD : Di.PSS),
-            child: ListTile(
-              title: Text(
-                "Work experience",
-                style: h2Regular,
+    return Stack(
+      children: [
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              color: Cr.whiteColor,
+              padding: EdgeInsets.only(left: widget.isMobile ? Di.PSD : Di.PSS),
+              child: ListTile(
+                title: Text(
+                  "Work experience",
+                  style: h2Regular,
+                ),
+                trailing: CustomTapCanvasDropdown(
+                  onTappedInside: () {
+                    setState(() {
+                      showSubMenu = !showSubMenu;
+                    });
+                  },
+                  onTappedOutside: () {
+                    setState(() {
+                      showSubMenu = false;
+                    });
+                  },
+                ),
               ),
             ),
-          ),
-          Di.DWZH,
-          SizedBox(
-            child: IntrinsicHeight(
-              child: Stack(
-                children: [
-                  if (hasData)
-                    Column(
-                      children: experience
-                          .map(
-                            (singleExperience) => _SingleExperienceWidget(
-                              singleExperience: singleExperience,
-                              isTablet: widget.isTablet,
-                              isMobile: widget.isMobile,
-                              isLast: experience.indexOf(singleExperience) ==
-                                  (experience.length - 1),
-                            ),
-                          )
-                          .toList(),
-                    ),
-                  EditBlueCardSheet(
-                    context,
-                    dataIsNull: !hasData,
-                    greenCardText:
-                        "Add your current and previous work experiences to your profile. Add as many as you like to highlight your work experience and skills.",
-                    greenCardTip:
-                        "Work experience is often the number one factor for employers and recruiters when looking to hire new candidates.",
-                  ),
-                  if (hasData)
-                    EditAddButtonOfSheet(
+            Di.DWZH,
+            SizedBox(
+              child: IntrinsicHeight(
+                child: Stack(
+                  children: [
+                    if (hasData)
+                      Column(
+                        children: experience
+                            .map(
+                              (singleExperience) => _SingleExperienceWidget(
+                                singleExperience: singleExperience,
+                                isTablet: widget.isTablet,
+                                isMobile: widget.isMobile,
+                                isLast: experience.indexOf(singleExperience) ==
+                                    (experience.length - 1),
+                              ),
+                            )
+                            .toList(),
+                      ),
+                    EditBlueCardSheet(
                       context,
-                      onEditPressed: () {
-                        // showCustomDialog(
-                        //   context,
-                        //   Profi(
-                        //     userProfileData: userProfileData,
-                        //   ),
-                        // );
-                      },
+                      dataIsNull: !hasData,
+                      greenCardText:
+                          "Add your current and previous work experiences to your profile. Add as many as you like to highlight your work experience and skills.",
+                      greenCardTip:
+                          "Work experience is often the number one factor for employers and recruiters when looking to hire new candidates.",
                     ),
-                ],
+                    if (hasData)
+                      EditAddButtonOfSheet(
+                        context,
+                        onEditPressed: () {
+                          // showCustomDialog(
+                          //   context,
+                          //   Profi(
+                          //     userProfileData: userProfileData,
+                          //   ),
+                          // );
+                        },
+                      ),
+                  ],
+                ),
               ),
             ),
+          ],
+        ),
+        if (showSubMenu)
+          Positioned(
+            right: 10,
+            top: 30,
+            child: CustomSubMenu(
+              customSubMenuItems: [
+                CustomSubmenuItem(
+                  width: 245,
+                  textIconColor: Cr.accentBlue1,
+                  textStyle: bodySmallRegular.copyWith(
+                    color: Cr.accentBlue1,
+                  ),
+                  icon: SvgPicture.asset(
+                    Svgs.menu,
+                    width: 16,
+                    color: Cr.accentBlue1,
+                  ),
+                  text: "View in timeline",
+                ),
+                CustomSubmenuItem(
+                  width: 245,
+                  textIconColor: Cr.accentBlue1,
+                  textStyle: bodySmallRegular.copyWith(
+                    color: Cr.accentBlue1,
+                  ),
+                  icon: SvgPicture.asset(
+                    Svgs.pencil,
+                    width: 16,
+                    color: Cr.accentBlue1,
+                  ),
+                  text: "Edit work experience",
+                ),
+              ],
+            ),
           ),
-        ],
-      ),
+      ],
     );
   }
 }

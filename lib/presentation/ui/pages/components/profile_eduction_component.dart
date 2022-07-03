@@ -109,6 +109,7 @@ class _EducationComponentState extends State<EducationComponent> {
                                   Di.SBHD,
                                   Di.DWZH,
                                   ExpandedCollapseWidget(
+                                    showText: "Course online",
                                     description: singleEductaion.description!,
                                     isTablet: widget.isTablet,
                                     isMobile: widget.isMobile,

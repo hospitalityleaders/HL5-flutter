@@ -136,8 +136,9 @@ class Styles {
     shape: BoxShape.circle,
   );
 
-  static const BoxDecoration boxDecoration = BoxDecoration(
+  static final BoxDecoration boxDecoration = BoxDecoration(
     color: Cr.whiteColor,
+    boxShadow: Styles.defaultBoxShadow,
   );
   static final BoxDecoration boxDecorationWithShadow = BoxDecoration(
     color: Cr.whiteColor,
