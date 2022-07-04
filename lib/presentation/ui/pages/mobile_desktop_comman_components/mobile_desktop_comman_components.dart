@@ -5,7 +5,7 @@ import 'package:holedo/presentation/ui/components/contact_card_dialog_widget.dar
 import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/presentation/ui/components/custom_outlined_button.dart';
 import 'package:holedo/presentation/ui/components/submenus.dart';
-import 'package:holedo/presentation/ui/pages/profile_dialogs/profile_write_reference_dialog_widget.dart';
+import 'package:holedo/presentation/ui/pages/profile_dialogs/profile_work_experience_dialog_widget.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/show_custom_dialog.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
@@ -226,7 +226,7 @@ class WriteReferenceRecommandButtonComman extends StatelessWidget {
           onPressed: () {
             showCustomDialog(
               context,
-              ProfileWriteReferenceDialogWidget(
+              ProfileWorkExperienceDialogWidget(
                 userProfileData: userProfileData,
               ),
             );

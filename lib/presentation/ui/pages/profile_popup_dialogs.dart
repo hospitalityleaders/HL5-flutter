@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:holedo/models/holedoapi/holedoapi.dart';
+import 'package:holedo/presentation/ui/pages/profile_dialogs/profile_work_experience_dialog_widget.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
-import 'package:holedo/presentation/utill/dimensions.dart';
 
 void main() {
   runApp(const MyApp());
@@ -38,19 +39,9 @@ class _ProfilePopupDialogScreenState extends State<ProfilePopupDialogScreen> {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // if (image != null) image!,
-
-              Di.SBHOL,
-              // UploadWidgetButton(
-              //   uploadedImgCallback: (image) async {
-              //     print("image is $image");
-              //   },
-              //   pickedImgCallback: (Image pickedImage) async {
-              //     setState(() {
-              //       image = pickedImage;
-              //     });
-              //   },
-              // )
+              ProfileWorkExperienceDialogWidget(
+                userProfileData: User(),
+              ),
             ],
           ),
         ),
