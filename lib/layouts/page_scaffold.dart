@@ -2,6 +2,7 @@ import 'package:holedo/models/models.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:holedo/presentation/popups/profile_connection_request_popup.dart';
+import 'package:holedo/presentation/popups/profile_submenu_popup.dart';
 import 'package:holedo/presentation/providers/profile_provider.dart';
 import 'package:holedo/presentation/ui/components/appbar_textfield.dart';
 import 'package:holedo/presentation/ui/components/custom_appbar.dart';
@@ -196,18 +197,33 @@ class _PageScaffoldState extends State<PageScaffold> {
                           ),
                           Consumer<ProfileProvider>(
                             builder: (context, profileProviderValue, child) {
-                              return !(
-                                      // profileProviderValue
-                                      // .showConectionRequestPopo ||
-                                      profileProviderValue
-                                          .showConectionRequestPopo2)
+                              return !(profileProviderValue
+                                      .showConectionRequestPopo)
                                   ? Di.ESB
                                   : Positioned(
                                       right:
                                           Di.getScreenSize(context).width < 1301
-                                              ? 52
-                                              : 173,
+                                              ? 65
+                                              : 195,
                                       child: ProfileConnectionRequestPopup(),
+                                    );
+                            },
+                          ),
+                          Consumer<ProfileProvider>(
+                            builder: (context, profileProviderValue, child) {
+                              return !(profileProviderValue.showProfileSubMenus)
+                                  ? Di.ESB
+                                  : Positioned(
+                                      right:
+                                          Di.getScreenSize(context).width < 1301
+                                              ? 5
+                                              : 130,
+                                      // child: Container(
+                                      //   width: 100,
+                                      //   height: 400,
+                                      //   color: Cr.accentBlue1,
+                                      // ),
+                                      child: ProfileSubMenuPopup(),
                                     );
                             },
                           ),

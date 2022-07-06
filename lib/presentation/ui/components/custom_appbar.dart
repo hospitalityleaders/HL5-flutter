@@ -149,25 +149,38 @@ class _ProfileWithSubMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {},
-      // onHover: (hover) async {
-      //   Provider.of<ProfileProvider>(context, listen: false)
-      //       .changeProfileSubMenusState(hover);
-      // },
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: Di.PSS),
-        child: Container(
-          width: 26,
-          height: 26,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("assets/images/avatar.png"),
-              fit: BoxFit.fill,
+    return Row(
+      children: [
+        ProfileSideHover(),
+        Column(
+          children: [
+            ProfileSideHover(
+              isInHorizantal: true,
             ),
-          ),
+            InkWell(
+              onTap: () {},
+              onHover: (hover) async {
+                Provider.of<ProfileProvider>(context, listen: false)
+                    .changeSubMenusPopupState(hover);
+              },
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: Di.PSS),
+                child: Container(
+                  width: 26,
+                  height: 26,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("assets/images/avatar.png"),
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                ),
+              ),
+            )
+          ],
         ),
-      ),
+        ProfileSideHover(),
+      ],
     );
   }
 }
@@ -234,6 +247,32 @@ class SizedboxWithHover extends StatelessWidget {
       onHover: (hover) {
         Provider.of<ProfileProvider>(context, listen: false)
             .changeConectionRequestPopup2State(false);
+      },
+      child: isInHorizantal
+          ? Container(
+              height: 10,
+            )
+          : Container(
+              width: 10,
+            ),
+    );
+  }
+}
+
+class ProfileSideHover extends StatelessWidget {
+  const ProfileSideHover({
+    Key? key,
+    this.isInHorizantal = false,
+  }) : super(key: key);
+  final bool isInHorizantal;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {},
+      onHover: (hover) {
+        Provider.of<ProfileProvider>(context, listen: false)
+            .changeSubMenusPopup2State(false);
       },
       child: isInHorizantal
           ? Container(

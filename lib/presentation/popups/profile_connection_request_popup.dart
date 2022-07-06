@@ -27,16 +27,7 @@ class ProfileConnectionRequestPopup extends StatelessWidget {
         child: ListView(
           shrinkWrap: true,
           children: [
-            Align(
-              alignment: Alignment.centerRight,
-              child: Padding(
-                padding: const EdgeInsets.only(right: Di.PSD),
-                child: SvgPicture.asset(
-                  Svgs.menuAboveArrow,
-                  color: Cr.colorPrimary,
-                ),
-              ),
-            ),
+            PopupArrow(),
             Container(
               width: 200,
               color: Cr.colorPrimary,
@@ -108,6 +99,26 @@ class ProfileConnectionRequestPopup extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class PopupArrow extends StatelessWidget {
+  const PopupArrow({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.centerRight,
+      child: Padding(
+        padding: const EdgeInsets.only(right: Di.PSD),
+        child: SvgPicture.asset(
+          Svgs.menuAboveArrow,
+          color: Cr.colorPrimary,
         ),
       ),
     );
