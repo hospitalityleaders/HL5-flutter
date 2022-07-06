@@ -239,7 +239,7 @@ class HoledoApp extends StatelessWidget {
       child: MaterialApp.router(
         title: 'Holedo',
         builder: (context, child) => ResponsiveWrapper.builder(
-          child,
+          ClampingScrollWrapper.builder(context, child!),
           breakpoints: [
             ResponsiveBreakpoint.autoScaleDown(450, name: "SmallMobile"),
             ResponsiveBreakpoint.resize(460, name: "Mobile"),

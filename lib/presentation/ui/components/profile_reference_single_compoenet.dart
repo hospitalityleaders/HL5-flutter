@@ -87,7 +87,7 @@ class _ProfileReferenceSingleComponentState
                     color: Cr.darkGrey1,
                   ),
                 ),
-                trailing: CustomTapCanvasDropdown(
+                trailing: WorkExperienceDropdown(
                   onTappedInside: () {
                     setState(() {
                       showSubMenu = !showSubMenu;
@@ -334,8 +334,8 @@ class _ProfileReferenceSingleComponentState
 /// to make it working wrape the
 /// whole screen(The area in which you want it to dimeiss after clicking there)
 ///  with `TapCanvas`
-class CustomTapCanvasDropdown extends StatelessWidget {
-  const CustomTapCanvasDropdown({
+class WorkExperienceDropdown extends StatelessWidget {
+  const WorkExperienceDropdown({
     Key? key,
     required this.onTappedOutside,
     required this.onTappedInside,

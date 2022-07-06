@@ -1,18 +1,18 @@
-import 'package:holedo/layouts/cards/holedo_cards.dart';
 import 'package:holedo/models/models.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:holedo/presentation/popups/profile_connection_request_popup.dart';
+import 'package:holedo/presentation/providers/profile_provider.dart';
 import 'package:holedo/presentation/ui/components/appbar_textfield.dart';
 import 'package:holedo/presentation/ui/components/custom_appbar.dart';
-import 'package:holedo/presentation/ui/components/custom_icon_button.dart';
-import 'package:holedo/presentation/ui/pages/mobile_view_section/mobile_profile_overview_section.dart';
+import 'package:holedo/presentation/ui/flutter_slider_drawer/slider.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/images.dart';
-import 'package:holedo/presentation/utill/nav.dart';
 import 'package:holedo/presentation/utill/responsive.dart';
 import 'package:holedo/presentation/utill/styles.dart';
 import 'package:holedo/responsive/responsive.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 import 'package:routemaster/routemaster.dart';
 export 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 export 'package:holedo/layouts/cards/holedo_cards.dart';
@@ -52,6 +52,8 @@ class PageScaffold extends StatefulWidget {
 class _PageScaffoldState extends State<PageScaffold> {
   final TextEditingController _searchController = TextEditingController();
   late double maxWidth;
+  bool showADialog = false;
+
   @override
   void dispose() {
     _searchController.dispose();
@@ -124,175 +126,96 @@ class _PageScaffoldState extends State<PageScaffold> {
     final routemaster = Routemaster.of(context);
     final canGoBack = routemaster.history.canGoBack;
     final canGoForward = routemaster.history.canGoForward;
+
+    final menuItems = Get.put(HoledoDatabase()).menuItems;
+    final isSmallerThanDesltop =
+        ResponsiveWrapper.of(context).isSmallerThan(DESKTOP);
     final GlobalKey<ScaffoldState> _scaffoldKey =
         new GlobalKey<ScaffoldState>();
-    final menuItems = Get.put(HoledoDatabase()).menuItems;
-
     bool inDrawer = true;
 
     return widget.isNewDesign
         ? widget.body
-        : LayoutBuilder(builder: (context, constraints) {
-            final bool isMobile = Responsive.isMobile(context);
-            final bool isTablet = Responsive.isTablet(context);
-            final bool isDesktop = Responsive.isDesktop(context);
-            maxWidth = constraints.maxWidth;
-            return Scaffold(
-              backgroundColor: Cr.backgroundColor,
-              key: _scaffoldKey,
-              endDrawer: isTableOrMobile(context)
-                  ? Drawer(
-                      child: Container(
-                        padding: EdgeInsets.only(top: Di.PSS),
-                        color: Cr.colorPrimary,
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  AppbarEmailButton(),
-                                  AppbarNotificationsButton(),
-                                  AppbarConnectionRequestButton(),
-                                  CustomIconButton(
-                                    onTap: () {
-                                      Nav.pop(context);
-                                    },
-                                    icon: Icon(
-                                      Icons.close,
-                                      color: Cr.darkBlue9,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Divider(
-                                thickness: 1.2,
-                                color: Cr.darkBlue5,
-                              ),
-                              SingleChildScrollView(
-                                child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      for (var item in menuItems)
-                                        if (item.loginOnly == null ||
-                                            (item.loginOnly ==
-                                                appState.isLoggedIn))
-                                          if (inDrawer == true &&
-                                              item.inDrawer == true) ...[
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                left: Di.PSL,
-                                                bottom: Di.PSD,
-                                              ),
-                                              child: ListTile(
-                                                title: Text(
-                                                  item.title!,
-                                                  style: TextStyle(
-                                                    // fontSize: 18,
-                                                    color: Cr.whiteColor,
-                                                  ),
-                                                ),
-                                                onTap: () {
-                                                  Routemaster.of(context)
-                                                      .push(item.path!);
-                                                },
-                                              ),
-                                            ),
-                                            Divider(
-                                              thickness: 1.2,
-                                              color: Cr.darkBlue5,
-                                            ),
-                                          ] else if (inDrawer == false &&
-                                              item.inNav == true)
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(left: Di.PSL),
-                                              child: ListTile(
-                                                title: Text(
-                                                  item.title!,
-                                                  style:
-                                                      defaultRegular.copyWith(
-                                                    color: Cr.whiteColor,
-                                                  ),
-                                                ),
-                                                onTap: () {
-                                                  Routemaster.of(context)
-                                                      .push(item.path!);
-                                                },
-                                              ),
-                                            )
-                                    ]
-
-                                    // _buildNavBarChildren(
-                                    //     inDrawer: true,
-                                    //     isLogin: appState.isLoggedIn),
-
-                                    ),
-                              ),
-                              Di.ESB,
-                            ],
+        : LayoutBuilder(
+            builder: (context, constraints) {
+              maxWidth = constraints.maxWidth;
+              return Scaffold(
+                backgroundColor: Cr.backgroundColor,
+                key: _scaffoldKey,
+                appBar: (isTableOrMobile(context))
+                    ? null
+                    : AppBar(
+                        toolbarHeight: 45,
+                        flexibleSpace: SizedBox(
+                          child: CustomAppbar(
+                            searchController: _searchController,
+                            onSearch: (searchText) {
+                              _search();
+                            },
                           ),
                         ),
                       ),
-                    )
-                  : null,
-              appBar: PreferredSize(
-                preferredSize: Size.fromHeight(45),
-                child: (isTableOrMobile(context))
-                    ? ProfileMobileAppbar(
-                        onTap: () => _scaffoldKey.currentState?.openEndDrawer(),
-                        searchController: _searchController,
-                        onSearch: (searchText) {
-                          _search();
-                        },
-                      )
-                    : CustomAppbar(
-                        searchController: _searchController,
-                        onSearch: (searchText) {
-                          _search();
-                        },
-                      ),
-              ),
-              // appBar: PreferredSize(
-              //   preferredSize: Size.fromHeight(46),
-              //   child: AppBar(
-              //     backgroundColor: ColorPicker.kPrimaryLight1,
-              //     automaticallyImplyLeading: (!isDesktop),
-              //     title: BuildAppbar(
-              //       context: context,
-              //       constraints: constraints,
-              //       searchController: _searchController,
-              //       onSearch: (searchText) {
-              //         _search();
-              //       },
-              //     ),
-              //     // title: _buildAppBar(context, constraints),
-              //   ),
-              // ),
-              body: Container(
-                  decoration: BoxDecoration(
-                    color: ColorPicker.kBG,
-                  ),
-                  child: widget
-                      .body /* ListView(children: <Widget>[
-            Container(
-                height: constraints.maxHeight,
-                child: Column(
-                  children: [
-                    Expanded(
+                body: isTableOrMobile(context)
+                    ? SliderDrawer(
+                        // appBar: ProfileMobileAppbar(
+                        //   searchController: _searchController,
+                        //   onSearch: (onSearch) {},
+                        // ),
+                        splashColor: Cr.colorPrimary,
                         child: Container(
-                      child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 0),
-                          child: widget.body),
-                    )),
-                  ],
-                )),
+                            decoration: BoxDecoration(
+                              color: ColorPicker.kBG,
+                            ),
+                            child: widget.body
+
+                            /* ListView(children: <Widget>[
+            Container(
+                      height: constraints.maxHeight,
+                      child: Column(
+                        children: [
+                          Expanded(
+                              child: Container(
+                            child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 0),
+                                child: widget.body),
+                          )),
+                        ],
+                      )),
             _buildFooter(isMobile),
           ]),*/
-                  ),
-            );
-          });
+
+                            ),
+                      )
+                    : Stack(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              color: ColorPicker.kBG,
+                            ),
+                            child: widget.body,
+                          ),
+                          Consumer<ProfileProvider>(
+                            builder: (context, profileProviderValue, child) {
+                              return !(profileProviderValue
+                                          .showConectionRequestPopo ||
+                                      profileProviderValue
+                                          .showConectionRequestPopo2)
+                                  ? Di.ESB
+                                  : Positioned(
+                                      right:
+                                          Di.getScreenSize(context).width < 1301
+                                              ? 52
+                                              : 173,
+                                      top: -1,
+                                      child: ProfileConnectionRequestPopup(),
+                                    );
+                            },
+                          ),
+                        ],
+                      ),
+              );
+            },
+          );
   }
 
   Widget _buildFooter(bool isMobile) {

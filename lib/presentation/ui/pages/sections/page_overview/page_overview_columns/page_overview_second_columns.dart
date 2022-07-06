@@ -16,6 +16,7 @@ import 'package:holedo/presentation/ui/pages/components/edit_add_buttons_of_shee
 import 'package:holedo/presentation/ui/pages/components/edit_blue_card_sheet.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_eduction_component.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_workexperience.dart';
+import 'package:holedo/presentation/ui/pages/profile_dialogs/profile_achievement_dialog_widget.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/profile_featured_video_dialog.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/show_custom_dialog.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
@@ -62,6 +63,7 @@ class _ProfileOverviewSecondColumnState
             userProfileData: widget.userProfileData,
           ),
           Di.SBHL,
+
           ProfileWorkExperienceComponent(
             userProfileData: widget.userProfileData,
             onEditPressed: buildWorkExpPopUp,
@@ -1145,7 +1147,13 @@ class AchievementComponent extends StatelessWidget {
                   EditAddButtonOfSheet(
                     context,
                     onEditPressed: () {
-                      // showCustomDialog(context, ProfileDialog);
+                      showCustomDialog(
+                        context,
+                        ProfileAchievementDialogWidget(
+                          achievements:
+                              userProfileData.achievements ?? <Achievement>[],
+                        ),
+                      );
                     },
                   ),
               ],

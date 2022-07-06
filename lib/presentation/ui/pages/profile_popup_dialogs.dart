@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:holedo/models/holedoapi/holedoapi.dart';
-import 'package:holedo/presentation/ui/pages/profile_dialogs/profile_work_experience_dialog_widget.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
+import 'package:holedo/presentation/utill/dimensions.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: ProfilePopupDialogScreen(),
+      home: MyStatefulWidget(),
     );
   }
 }
@@ -39,12 +38,35 @@ class _ProfilePopupDialogScreenState extends State<ProfilePopupDialogScreen> {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ProfileWorkExperienceDialogWidget(
-                userProfileData: User(),
-              ),
+              MyStatefulWidget(),
+              // ProfileWorkExperienceDialogWidget(
+              //   userProfileData: User(),
+              // ),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class MyStatefulWidget extends StatefulWidget {
+  const MyStatefulWidget({Key? key}) : super(key: key);
+
+  @override
+  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
+}
+
+class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+  String _selectedMenu = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        children: [
+          Di.SBHOTL,
+        ],
       ),
     );
   }

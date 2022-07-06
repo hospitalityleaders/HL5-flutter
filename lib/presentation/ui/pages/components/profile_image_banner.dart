@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:holedo/models/models.dart';
 import 'package:holedo/presentation/providers/profile_provider.dart';
-import 'package:holedo/presentation/ui/components/edit_icon_buttton.dart';
 import 'package:holedo/presentation/ui/components/person_avatar.dart';
+import 'package:holedo/presentation/ui/components/rounded_icon_button.dart';
 import 'package:holedo/presentation/ui/pages/mobile_desktop_comman_components/mobile_desktop_comman_components.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/profile_cover_image_dialog_widget.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/profile_edit_dialog_widget.dart';
@@ -145,19 +145,28 @@ class ProfileImageBanner extends StatelessWidget {
             : Di.ESB,
 
         Provider.of<ProfileProvider>(context).isProfileEditable
-            ? EditIconButton(
-                onPressed: () {
-                  showCustomDialog(
-                    context,
-                    Container(
-                      // margin: const EdgeInsets.symmetric(vertical: 100),
-                      child: ProfileEditDialogWidget(
-                        userProfileData: userProfileData,
-                      ),
+            ? Positioned.fill(
+                child: Align(
+                  alignment: Alignment.center,
+                  child: RoundeIconButton(
+                    onPressed: () {
+                      showCustomDialog(
+                        context,
+                        Container(
+                          // margin: const EdgeInsets.symmetric(vertical: 100),
+                          child: ProfileEditDialogWidget(
+                            userProfileData: userProfileData,
+                          ),
+                        ),
+                      );
+                    },
+                    backgroundColor: Cr.accentBlue1,
+                    icon: Icon(
+                      Icons.edit,
+                      color: Cr.whiteColor,
                     ),
-                  );
-                },
-                // onPressed: onEditButtonPressed,
+                  ),
+                ),
               )
             : Di.ESB,
         //     Positioned.fill(

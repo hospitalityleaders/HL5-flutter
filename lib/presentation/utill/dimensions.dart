@@ -71,6 +71,15 @@ class Di {
     height: 0,
   );
 
+  static final Divider DHDT = Divider(
+    thickness: 2,
+    height: 0,
+  );
+  static final VerticalDivider DVZW = VerticalDivider(
+    thickness: 2,
+    width: 0,
+  );
+
   static const int MESSAGE_INPUT_LENGTH = 250;
   static const double NOTIFICATION_IMAGE_SIZE = 70.0;
   static const double WEB_SCREEN_WIDTH = 1170.0;

@@ -689,6 +689,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.0"
+  should_rebuild:
+    dependency: "direct main"
+    description:
+      name: should_rebuild
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
   simple_animations:
     dependency: transitive
     description:

@@ -31,7 +31,9 @@ class _ProfilePageState extends State<ProfilePage> {
         } else
           return PageScaffold(
             title: snapshot.data!.fullName.toString(),
-            body: UserProfilePage(userProfileData: snapshot.data!),
+            body: UserProfilePage(
+              userProfileData: snapshot.data!,
+            ),
           );
       },
     );

@@ -90,15 +90,15 @@ class MobileProfileOverviewSection extends StatelessWidget {
 }
 
 class ProfileMobileAppbar extends StatefulWidget {
-  final TextEditingController searchController;
+  final TextEditingController? searchController;
   final void Function(String? searchText) onSearch;
-  final void Function()? onTap;
+  final void Function()? onMenuTap;
 
   const ProfileMobileAppbar({
     Key? key,
-    required this.searchController,
+    this.searchController,
     required this.onSearch,
-    this.onTap,
+    this.onMenuTap,
   }) : super(key: key);
 
   @override
@@ -175,7 +175,7 @@ class _ProfileMobileAppbarState extends State<ProfileMobileAppbar> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               GestureDetector(
-                onTap: widget.onTap,
+                onTap: widget.onMenuTap,
                 child: CustomIconButton(
                   showNotification: true,
                   icon: Column(

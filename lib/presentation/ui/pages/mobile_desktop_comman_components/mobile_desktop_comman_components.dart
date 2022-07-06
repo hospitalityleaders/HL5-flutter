@@ -227,7 +227,7 @@ class WriteReferenceRecommandButtonComman extends StatelessWidget {
             showCustomDialog(
               context,
               ProfileWorkExperienceDialogWidget(
-                userProfileData: userProfileData,
+                experience: userProfileData.experiences ?? [],
               ),
             );
           },

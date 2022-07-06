@@ -46,6 +46,7 @@ dependencies:
   cached_network_image: ^3.2.1
   awesome_dialog: ^2.2.1
   animated: ^2.0.0
+  should_rebuild: ^1.0.1
 
 dev_dependencies:
   integration_test:

@@ -612,6 +612,7 @@ class AreasOfExpertiseComponents extends StatelessWidget {
     return Container(
       decoration: Styles.boxDecorationWithShadow.copyWith(color: Cr.whiteColor),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           ListTile(
             title: Text(

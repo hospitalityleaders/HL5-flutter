@@ -23,6 +23,8 @@ class EditBlueCardSheet extends StatelessWidget {
   @override
   Widget build(_) {
     if (Provider.of<ProfileProvider>(context).isProfileEditable) {
+      // return SizedBox();
+
       return dataIsNull
           ? Container(
               color: Cr.green3,

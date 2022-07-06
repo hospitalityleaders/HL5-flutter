@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:holedo/models/holedoapi/experience.dart';
+import 'package:holedo/models/holedoapi/education.dart';
 import 'package:holedo/presentation/extensions/datetime_extension.dart';
 
 import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
@@ -12,25 +12,25 @@ import 'package:holedo/presentation/utill/images.dart';
 import 'package:holedo/presentation/utill/nav.dart';
 import 'package:holedo/presentation/utill/styles.dart';
 
-class ProfileWorkExperienceDialogWidget extends StatefulWidget {
-  const ProfileWorkExperienceDialogWidget({
+class ProfileEducationDialogWidget extends StatefulWidget {
+  const ProfileEducationDialogWidget({
     Key? key,
-    required this.experience,
+    required this.educations,
   }) : super(key: key);
 
-  final List<Experience> experience;
+  final List<Education> educations;
 
   @override
-  State<ProfileWorkExperienceDialogWidget> createState() =>
-      _ProfileWorkExperienceDialogWidgetState();
+  State<ProfileEducationDialogWidget> createState() =>
+      _ProfileEducationDialogWidgetState();
 }
 
-class _ProfileWorkExperienceDialogWidgetState
-    extends State<ProfileWorkExperienceDialogWidget> {
-  late List<Experience> experiences;
+class _ProfileEducationDialogWidgetState
+    extends State<ProfileEducationDialogWidget> {
+  late List<Education> educations;
   @override
   void initState() {
-    experiences = widget.experience;
+    educations = widget.educations;
     super.initState();
   }
 
@@ -46,16 +46,16 @@ class _ProfileWorkExperienceDialogWidgetState
           mainAxisSize: MainAxisSize.min,
           children: [
             DialogTitleWidget(
-              title: "Work Experience",
+              title: "Education",
             ),
             Di.SBHL,
             addingToProfile
                 ? Container(
                     padding: EdgeInsets.only(bottom: Di.PSS),
                     margin: EdgeInsets.symmetric(horizontal: Di.PSL),
-                    child: _SingleWorkExperience(
+                    child: _SingleEducation(
                       isExpanded: true,
-                      experience: Experience(),
+                      educations: Education(),
                     ),
                   )
                 : Center(
@@ -86,14 +86,14 @@ class _ProfileWorkExperienceDialogWidgetState
             Di.SBHL,
             ListView.builder(
               shrinkWrap: true,
-              itemCount: experiences.length,
+              itemCount: educations.length,
               itemBuilder: (BuildContext context, int index) {
                 return Container(
                   padding: EdgeInsets.only(bottom: Di.PSS),
                   margin: EdgeInsets.symmetric(horizontal: Di.PSL),
                   width: 615,
-                  child: _SingleWorkExperience(
-                    experience: experiences[index],
+                  child: _SingleEducation(
+                    educations: educations[index],
                   ),
                 );
               },
@@ -106,76 +106,58 @@ class _ProfileWorkExperienceDialogWidgetState
   }
 }
 
-class _SingleWorkExperience extends StatefulWidget {
-  const _SingleWorkExperience({
+class _SingleEducation extends StatefulWidget {
+  const _SingleEducation({
     Key? key,
-    this.experience,
+    this.educations,
     this.isExpanded = false,
   }) : super(key: key);
-  final Experience? experience;
+  final Education? educations;
   final bool isExpanded;
 
   @override
-  State<_SingleWorkExperience> createState() => __SingleWorkExperienceState();
+  State<_SingleEducation> createState() => __SingleEducationState();
 }
 
-class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
-  late final TextEditingController _titlePositionController;
-  late final TextEditingController _companyNameController;
-  late final TextEditingController _companyWebsiteController;
-  late final TextEditingController _cityController;
-  late final TextEditingController _jobDescriptionController;
-  late final TextEditingController _salaryController;
+class __SingleEducationState extends State<_SingleEducation> {
+  late final TextEditingController _educationalInstituteController;
+  late final TextEditingController _qualificationTitleController;
+  late final TextEditingController _descriptionController;
   final _formKey = GlobalKey<FormState>();
-  late Experience experience;
-  // Job description
+  late Education education;
+  List<String> qualificationList = [""];
+  String? selectedValue;
+  bool currentlyWorkHere = false;
+  late bool isExpanded;
 
   @override
   void initState() {
     isExpanded = widget.isExpanded;
-    experience = widget.experience ?? Experience();
-    _titlePositionController = TextEditingController(text: experience.title)
-      ..addListener(() {
-        setState(() {});
-      });
-    _companyNameController = TextEditingController(text: experience.companyName)
-      ..addListener(() {
-        setState(() {});
-      });
-    _companyWebsiteController = TextEditingController(
-        text: experience.companyWebsite != null
-            ? experience.companyWebsite.toString()
-            : "")
-      ..addListener(() {
-        setState(() {});
-      });
-    _cityController = TextEditingController(text: experience.area)
-      ..addListener(() {
-        setState(() {});
-      });
-    _jobDescriptionController =
-        TextEditingController(text: experience.description);
-    _salaryController =
-        TextEditingController(text: experience.salary.toString());
+    education = widget.educations ?? Education();
+    _educationalInstituteController =
+        TextEditingController(text: education.institution)
+          ..addListener(() {
+            setState(() {});
+          });
+
+    _qualificationTitleController =
+        TextEditingController(text: education.qualification?.title)
+          ..addListener(() {
+            setState(() {});
+          });
+
+    _descriptionController = TextEditingController(text: education.description);
     super.initState();
   }
 
   @override
   void dispose() {
-    _titlePositionController.dispose();
-    _companyNameController.dispose();
-    _companyWebsiteController.dispose();
-    _cityController.dispose();
-    _jobDescriptionController.dispose();
-    _salaryController.dispose();
+    _educationalInstituteController.dispose();
+    _qualificationTitleController.dispose();
+    _descriptionController.dispose();
 
     super.dispose();
   }
-
-  List<String> newTextField = [""];
-  String? selectedValue;
-  bool currentlyWorkHere = false;
-  late bool isExpanded;
 
   @override
   Widget build(BuildContext context) {
@@ -184,43 +166,26 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            _titlePositionController.text,
+            _educationalInstituteController.text,
             style: h4Bold,
           ),
           Text(
-            _companyNameController.text +
-                (_cityController.text.length > 0
-                    ? " · ${_cityController.text}"
-                    : ""),
+            _qualificationTitleController.text,
             style: bodySmallRegular.copyWith(
               color: Cr.accentBlue1,
-              fontWeight: _companyWebsiteController.text.length > 0
-                  ? FontWeight.bold
-                  : null,
             ),
           ),
           Text(
-            ((experience.fromDate != null)
-                ? "${experience.fromDate!.getMonthInString} ${experience.fromDate!.year}" +
-                    ((experience.toDate != null)
-                        ? " - ${experience.toDate!.getMonthInString} ${experience.toDate!.year} (${experience.toDate!.month - experience.fromDate!.month} months)"
+            ((education.durationFromDate != null)
+                ? "${education.durationFromDate!.getMonthInString} ${education.durationFromDate!.year}" +
+                    ((education.durationToDate != null)
+                        ? " - ${education.durationToDate!.getMonthInString} ${education.durationToDate!.year} (${education.durationToDate!.month - education.durationFromDate!.month} months)"
                         : "")
                 : ""),
             style: bodySmallRegular.copyWith(
               color: Cr.darkGrey1,
             ),
-          )
-          // Text(
-          //   ((startMonth != null && startYear != null)
-          //       ? "$startMonth $startYear" +
-          //           ((endMonth != null && endYear != null)
-          //               ? " – $endMonth $endYear"
-          //               : "")
-          //       : ""),
-          //   style: bodySmallRegular.copyWith(
-          //     color: Cr.darkGrey1,
-          //   ),
-          // )
+          ),
         ],
       ),
       onTap: () {
@@ -258,62 +223,11 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 DialogLabelTextFormField(
-                  customLabel: "Title / position",
+                  customLabel: "Educational institution",
                 ),
                 Di.SBHES,
                 DialogTextFieldForm(
-                  textEditingController: _titlePositionController,
-                ),
-                Di.SBCH(18),
-                DialogLabelTextFormField(
-                  customLabel: "Company name",
-                ),
-                Di.SBHES,
-                DialogTextFieldForm(
-                  textEditingController: _companyNameController,
-                ),
-                Di.SBCH(18),
-                DialogLabelTextFormField(
-                  isImportant: false,
-                  customLabel: "Company website",
-                ),
-                Di.SBHES,
-                DialogTextFieldForm(
-                  hintText: "www.website.com",
-                  textEditingController: _companyWebsiteController,
-                ),
-                Di.SBCH(18),
-                Row(
-                  children: [
-                    DialogLabelTextFormField(
-                      customLabel: "City / Area  / Region",
-                      width: 250,
-                    ),
-                    SizedBox(width: 18),
-                    DialogLabelTextFormField(
-                      customLabel: "Country",
-                      width: 250,
-                    ),
-                  ],
-                ),
-                Di.SBHES,
-                Row(
-                  children: [
-                    DialogTextFieldForm(
-                      textEditingController: _cityController,
-                      width: 250,
-                    ),
-                    SizedBox(width: 18),
-                    DialogDropDownTextField(
-                      alignHintTextStart: true,
-                      hintText: 'Select Country',
-                      dataList: [
-                        "United state",
-                        "Pakistan",
-                        "South Africa",
-                      ],
-                    ),
-                  ],
+                  textEditingController: _educationalInstituteController,
                 ),
                 Di.SBCH(18),
                 DialogLabelTextFormField(customLabel: "Time period"),
@@ -321,7 +235,7 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
                 Row(
                   children: [
                     DialogDropDownTextField(
-                      // initialValue: experience.fromDate?.getMonthInString,
+                      // initialValue: experience.durationFromDate?.getMonthInString,
                       alignHintTextStart: true,
                       // onChanged: (value) {
                       //   setState(() {
@@ -338,7 +252,7 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
                     ),
                     Di.SBWES,
                     DialogDropDownTextField(
-                      // initialValue: experience.fromDate?.getMonthInString,
+                      // initialValue: experience.durationFromDate?.getMonthInString,
                       onChanged: (value) {
                         // setState(() {
                         //   startYear = value;
@@ -361,7 +275,7 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
                       ),
                     ),
                     DialogDropDownTextField(
-                      // initialValue: experience.fromDate?.getMonthInString,
+                      // initialValue: experience.durationFromDate?.getMonthInString,
                       onChanged: (value) {
                         // setState(() {
                         //   endMonth = value;
@@ -378,7 +292,7 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
                     ),
                     Di.SBWES,
                     DialogDropDownTextField(
-                      // initialValue: experience.fromDate?.getMonthInString,
+                      // initialValue: experience.durationFromDate?.getMonthInString,
                       onChanged: (value) {
                         // setState(() {
                         //   endYear = value;
@@ -395,105 +309,54 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
                     ),
                   ],
                 ),
-                Di.SBCH(7),
-                Row(
-                  children: [
-                    Di.SBCW(220),
-                    CheckboxDialog(
-                      onChanged: (value) {
-                        setState(() {
-                          currentlyWorkHere = !currentlyWorkHere;
-                        });
-                      },
-                      value: currentlyWorkHere,
-                    ),
-                    Text(
-                      "I currently work here",
-                      style: bodySmallRegular.copyWith(
-                        color: Cr.darkGrey1,
-                      ),
-                    )
-                  ],
-                ),
                 Di.SBCH(18),
                 DialogLabelTextFormField(
-                  customLabel: "Salary per annum",
-                  icon: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      SvgPicture.asset(
-                        Svgs.helpCircle,
-                        color: Cr.accentBlue1,
-                        width: 10,
-                      ),
-                    ],
-                  ),
-                ),
-                Text(
-                  "This is for data report purposes only and will always be anonymously displayed",
-                  style: bodySmallRegular.copyWith(
-                    color: Cr.darkGrey1,
-                  ),
+                  isImportant: false,
+                  customLabel: "Qualification title",
                 ),
                 Di.SBHES,
-                Row(
-                  children: [
-                    DialogDropDownTextField(
-                      width: 140,
-                      hintText: 'Select Currency',
-                      dataList: [
-                        "Jaun",
-                        "Feb",
-                        "March",
-                      ],
-                    ),
-                    Di.SBWES,
-                    DialogTextFieldForm(
-                      textInputType: TextInputType.number,
-                      width: 110,
-                      hintText: "Amount",
-                    ),
-                  ],
+                DialogTextFieldForm(
+                  textEditingController: _qualificationTitleController,
                 ),
                 Di.SBCH(18),
                 DialogLabelTextFormField(
-                  customLabel: "Leave days per annum",
-                  icon: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      SvgPicture.asset(
-                        Svgs.helpCircle,
-                        color: Cr.accentBlue1,
-                        width: 10,
-                      ),
-                    ],
-                  ),
-                ),
-                Text(
-                  "This is for data report purposes only and will always be anonymously displayed",
-                  style: bodySmallRegular.copyWith(
-                    color: Cr.darkGrey1,
-                  ),
-                ),
-                Di.SBHES,
-                DialogDropDownTextField(
-                  width: 100,
-                  hintText: '10+ days',
-                  dataList: [
-                    "Jaun",
-                    "Feb",
-                    "March",
-                  ],
-                ),
-                Di.SBCH(18),
-                DialogLabelTextFormField(
-                  customLabel: "Job description",
+                  customLabel: "Description",
                   isImportant: false,
                 ),
                 Di.SBHES,
                 DialogMultiLineTextField(
                   width: 575,
-                )
+                ),
+                DialogLabelTextFormField(
+                  customLabel: "Course outline",
+                  isImportant: false,
+                ),
+                Di.SBHES,
+                ...getNewContactPhoneFields(),
+                Di.SBHS,
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      qualificationList.add('');
+                    });
+                  },
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SvgPicture.asset(
+                        Svgs.plus,
+                        color: Cr.accentBlue1,
+                        width: 14,
+                      ),
+                      Text(
+                        "  Add another",
+                        style: bodySmallRegular.copyWith(
+                          color: Cr.accentBlue1,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
             Di.SBCH(28),
@@ -503,7 +366,7 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
                 GestureDetector(
                   onTap: () {
                     setState(() {
-                      newTextField.add('');
+                      qualificationList.add('');
                     });
                   },
                   child: Row(
@@ -569,6 +432,70 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
           ],
         ),
       ),
+    );
+  }
+
+  List<Widget> getNewContactPhoneFields() {
+    var textField = <Widget>[];
+    for (var i = 0; i < qualificationList.length; i++) {
+      textField.add(
+        _QualificationField(
+          onCloseTap: () {
+            setState(() {
+              qualificationList.removeAt(i);
+            });
+          },
+        ),
+      );
+    }
+    return textField;
+  }
+}
+
+class _QualificationField extends StatefulWidget {
+  const _QualificationField({
+    Key? key,
+    this.onCloseTap,
+  }) : super(key: key);
+  final void Function()? onCloseTap;
+
+  @override
+  State<_QualificationField> createState() => __QualificationFieldState();
+}
+
+class __QualificationFieldState extends State<_QualificationField> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Di.SBHES,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: DialogTextFieldForm(
+                hintText: "Course name",
+              ),
+            ),
+            Di.SBCW(12),
+            Material(
+              child: InkWell(
+                onTap: widget.onCloseTap,
+                child: Container(
+                  height: 30,
+                  width: 30,
+                  child: Icon(
+                    Icons.close,
+                    color: Cr.accentBlue1,
+                    size: 14,
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+      ],
     );
   }
 }

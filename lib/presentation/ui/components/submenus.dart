@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:holedo/presentation/ui/components/onhover.dart';
 import 'package:holedo/presentation/ui/components/text_with_background.dart';
 import 'package:holedo/presentation/ui/pages/mobile_desktop_comman_components/mobile_desktop_comman_components.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
@@ -8,7 +7,7 @@ import 'package:holedo/presentation/utill/nav.dart';
 import 'package:holedo/presentation/utill/styles.dart';
 import 'package:popover/popover.dart';
 
-Future<Object?> showProfileConnectionRequest(BuildContext context) {
+Future<void> showProfileConnectionRequest(BuildContext context) {
   return showPopover(
     context: context,
     backgroundColor: Cr.colorPrimary,
@@ -178,68 +177,69 @@ Future<Object?> showMoreProfileCardSubmenu(BuildContext context) {
   );
 }
 
-Future<Object?> showProfileHoverSubmenu(BuildContext context) {
-  return showPopover(
-    backgroundColor: Cr.colorPrimary,
-    context: context,
-    barrierDismissible: true,
-    bodyBuilder: (context) => MouseRegion(
-      onExit: (_) => Nav.pop(context),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: Di.PSES),
-        child: ListView(
-          children: [
-            _SubMenuWidget(
-              text: "View profile",
-            ),
-            _SubMenuWidget(
-              text: "Account settings",
-            ),
-            _SubMenuWidget(
-              text: "Privacy settings",
-            ),
-            _SubMenuWidget(
-              text: "Log out",
-            ),
-          ],
-        ),
-      ),
-    ),
-    direction: PopoverDirection.bottom,
-    height: null,
-    width: 160,
-    arrowHeight: 10,
-    arrowWidth: 10,
-  );
-}
+// Future<Object?> showProfileHoverSubmenu(BuildContext context) {
+//   return showPopover(
+//     backgroundColor: Cr.colorPrimary,
+//     context: context,
+//     barrierDismissible: true,
+//     bodyBuilder: (context) => MouseRegion(
+//       onExit: (_) => Nav.pop(context),
+//       child:
+//       Padding(
+//         padding: const EdgeInsets.symmetric(vertical: Di.PSES),
+//         child: ListView(
+//           children: [
+//             _SubMenuWidget(
+//               text: "View profile",
+//             ),
+//             _SubMenuWidget(
+//               text: "Account settings",
+//             ),
+//             _SubMenuWidget(
+//               text: "Privacy settings",
+//             ),
+//             _SubMenuWidget(
+//               text: "Log out",
+//             ),
+//           ],
+//         ),
+//       ),
+//     ),
+//     direction: PopoverDirection.bottom,
+//     height: null,
+//     width: 160,
+//     arrowHeight: 10,
+//     arrowWidth: 10,
+//   );
+// }
 
-class _SubMenuWidget extends StatelessWidget {
-  const _SubMenuWidget({
-    Key? key,
-    required this.text,
-  }) : super(key: key);
-  final String text;
+// class _SubMenuWidget extends StatelessWidget {
+//   const _SubMenuWidget({
+//     Key? key,
+//     required this.text,
+//   }) : super(key: key);
+//   final String text;
 
-  @override
-  Widget build(BuildContext context) {
-    return OnHover(
-      builder: (bool isHovered) {
-        return Container(
-          color: isHovered ? Colors.white.withOpacity(.07) : Cr.colorPrimary,
-          child: ListTile(
-            title: Text(text,
-                style: defaultRegular.copyWith(
-                  color: Cr.grey1,
-                  fontWeight: isHovered ? FontWeight.w500 : null,
-                )
-                //  TextStyle(
-                //   color: Cr.grey1,
-                //   fontWeight: isHovered ? FontWeight.w500 : null,
-                // ),
-                ),
-          ),
-        );
-      },
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return OnHover(
+//       builder: (bool isHovered) {
+//         return Container(
+//           color: isHovered ? Colors.white.withOpacity(.07) : Cr.colorPrimary,
+//           child: ListTile(
+//             title: Text(text,
+//                 style: defaultRegular.copyWith(
+//                   color: Cr.grey1,
+//                   fontWeight: isHovered ? FontWeight.w500 : null,
+//                 )
+//                 //  TextStyle(
+//                 //   color: Cr.grey1,
+//                 //   fontWeight: isHovered ? FontWeight.w500 : null,
+//                 // ),
+//                 ),
+//           ),
+//         );
+//       },
+//     );
+//   }
+// }

@@ -331,7 +331,7 @@ class ApiServices {
   Future<Holedoapi> getSettings() async {
     try {
       var data = new Holedoapi();
-      var url = "${baseUrl}" + "/site-settings/?type=2";
+      var url = "${baseUrl}" + "/site-settings/v2?type=2";
       //_dio.interceptors.add(DioCacheManager(CacheConfig(baseUrl: "http://www.google.com")).interceptor);
       dio.Response response = await _dio.get(url);
       print('URL: ${url}');

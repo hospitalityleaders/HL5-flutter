@@ -9,6 +9,8 @@ import 'package:holedo/presentation/ui/components/expanded_collapse_widget.dart'
 import 'package:holedo/presentation/ui/components/profile_reference_single_compoenet.dart';
 import 'package:holedo/presentation/ui/pages/components/edit_add_buttons_of_sheet.dart';
 import 'package:holedo/presentation/ui/pages/components/edit_blue_card_sheet.dart';
+import 'package:holedo/presentation/ui/pages/profile_dialogs/profile_work_experience_dialog_widget.dart';
+import 'package:holedo/presentation/ui/pages/profile_dialogs/show_custom_dialog.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/images.dart';
@@ -56,7 +58,7 @@ class _ProfileWorkExperienceComponentState
                   "Work experience",
                   style: h2Regular,
                 ),
-                trailing: CustomTapCanvasDropdown(
+                trailing: WorkExperienceDropdown(
                   onTappedInside: () {
                     setState(() {
                       showSubMenu = !showSubMenu;
@@ -101,12 +103,12 @@ class _ProfileWorkExperienceComponentState
                       EditAddButtonOfSheet(
                         context,
                         onEditPressed: () {
-                          // showCustomDialog(
-                          //   context,
-                          //   Profi(
-                          //     userProfileData: userProfileData,
-                          //   ),
-                          // );
+                          showCustomDialog(
+                            context,
+                            ProfileWorkExperienceDialogWidget(
+                              experience: experience,
+                            ),
+                          );
                         },
                       ),
                   ],

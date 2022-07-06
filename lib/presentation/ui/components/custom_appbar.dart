@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:holedo/models/models.dart';
+import 'package:holedo/presentation/providers/profile_provider.dart';
 import 'package:holedo/presentation/ui/components/appbar_textfield.dart';
 import 'package:holedo/presentation/ui/components/custom_icon_button.dart';
 import 'package:holedo/presentation/ui/components/custom_text_button.dart';
-import 'package:holedo/presentation/ui/components/submenus.dart';
 
 import 'package:holedo/presentation/ui/components/text_with_background.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
@@ -38,6 +38,7 @@ class _CustomAppbarState extends State<CustomAppbar> {
     return Container(
       color: Cr.colorPrimary,
       height: 45,
+      width: Di.getScreenSize(context).width,
       child: Row(
         mainAxisAlignment: isSmallerThanDesltop
             ? MainAxisAlignment.spaceBetween
@@ -83,30 +84,15 @@ class _CustomAppbarState extends State<CustomAppbar> {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              VerticalDivider(
-                thickness: 1.3,
-                color: Cr.darkBlue5,
-              ),
+              Di.DVZW,
               AppbarEmailButton(),
-              VerticalDivider(
-                thickness: 1.3,
-                color: Cr.darkBlue5,
-              ),
+              Di.DVZW,
               AppbarNotificationsButton(),
-              VerticalDivider(
-                thickness: 1.3,
-                color: Cr.darkBlue5,
-              ),
+              Di.DVZW,
               AppbarConnectionRequestButton(),
-              VerticalDivider(
-                thickness: 1.3,
-                color: Cr.darkBlue5,
-              ),
-              _ProfileWithSubMenu(),
-              VerticalDivider(
-                thickness: 1.3,
-                color: Cr.darkBlue5,
-              ),
+              // Di.DVZW,
+              // _ProfileWithSubMenu(),
+              // Di.DVZW,
             ],
           ),
 
@@ -120,7 +106,9 @@ class _CustomAppbarState extends State<CustomAppbar> {
 class AppbarNotificationsButton extends StatelessWidget {
   const AppbarNotificationsButton({
     Key? key,
+    this.isDrawer = false,
   }) : super(key: key);
+  final bool isDrawer;
 
   @override
   Widget build(BuildContext context) {
@@ -137,7 +125,9 @@ class AppbarNotificationsButton extends StatelessWidget {
 class AppbarEmailButton extends StatelessWidget {
   const AppbarEmailButton({
     Key? key,
+    this.isDrawer = false,
   }) : super(key: key);
+  final bool isDrawer;
 
   @override
   Widget build(BuildContext context) {
@@ -145,8 +135,8 @@ class AppbarEmailButton extends StatelessWidget {
       icon: SvgPicture.asset(
         Svgs.emailOpen,
         color: Cr.darkBlue9,
+        width: isDrawer ? 20 : null,
       ),
-      // iconData: Icons.mail_rounded,
       showNotification: true,
     );
   }
@@ -159,16 +149,27 @@ class _ProfileWithSubMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      opaque: true,
-      onHover: (_) => showProfileHoverSubmenu(context),
-      child: Container(
-        width: 28,
-        height: 28,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/avatar.png"),
-            fit: BoxFit.fill,
+    return InkWell(
+      onTap: () {},
+      onHover: (hover) async {
+        if (hover)
+          Provider.of<ProfileProvider>(context, listen: false)
+              .changeProfileSubMenusState(true);
+        else {
+          Provider.of<ProfileProvider>(context, listen: false)
+              .changeConectionRequestPopupState(false);
+        }
+      },
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: Di.PSS),
+        child: Container(
+          width: 26,
+          height: 26,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/avatar.png"),
+              fit: BoxFit.fill,
+            ),
           ),
         ),
       ),
@@ -179,30 +180,44 @@ class _ProfileWithSubMenu extends StatelessWidget {
 class AppbarConnectionRequestButton extends StatelessWidget {
   const AppbarConnectionRequestButton({
     Key? key,
+    this.isDrawer = false,
   }) : super(key: key);
-
+  final bool isDrawer;
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        MouseRegion(
-          opaque: true,
-          onHover: (_) => showProfileConnectionRequest(context),
-          child: Icon(
-            Icons.person_add,
-            color: Cr.darkBlue9,
-          ),
+    return InkWell(
+      onTap: () {},
+      onHover: (hover) async {
+        if (hover)
+          Provider.of<ProfileProvider>(context, listen: false)
+              .changeConectionRequestPopupState(true);
+        else {
+          await Future.delayed(Duration(milliseconds: 300));
+          Provider.of<ProfileProvider>(context, listen: false)
+              .changeConectionRequestPopupState(false);
+        }
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: Di.PSS),
+        height: double.infinity,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              Icons.person_add,
+              color: Cr.darkBlue9,
+            ),
+            Di.SBWES,
+            TextWithBackground(
+              text: "352",
+              textColor: Cr.darkBlue9,
+              padding: 0,
+              paddingHorizantal: 4,
+              backgroundColor: Cr.darkBlue5,
+            )
+          ],
         ),
-        Di.SBWES,
-        TextWithBackground(
-          text: "352",
-          textColor: Cr.darkBlue9,
-          padding: 0,
-          paddingHorizantal: 4,
-          backgroundColor: Cr.darkBlue5,
-        )
-      ],
+      ),
     );
   }
 }

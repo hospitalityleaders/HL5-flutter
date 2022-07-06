@@ -7,6 +7,8 @@ import 'package:holedo/presentation/ui/components/container_with_icon.dart';
 import 'package:holedo/presentation/ui/components/expanded_collapse_widget.dart';
 import 'package:holedo/presentation/ui/pages/components/edit_add_buttons_of_sheet.dart';
 import 'package:holedo/presentation/ui/pages/components/edit_blue_card_sheet.dart';
+import 'package:holedo/presentation/ui/pages/profile_dialogs/profile_education_dialog_widget.dart';
+import 'package:holedo/presentation/ui/pages/profile_dialogs/show_custom_dialog.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/styles.dart';
@@ -131,13 +133,13 @@ class _EducationComponentState extends State<EducationComponent> {
                   EditAddButtonOfSheet(
                     context,
                     onEditPressed: () {
-                      // buildReferencesCard(img, title, userId, subTitle, description)
-                      // showCustomDialog(
-                      //   context,
-                      //   ProfileMyReferenceDialogWidget(
-                      //     userProfileData: DbData.getUserProfileData,
-                      //   ),
-                      // );
+                      showCustomDialog(
+                        context,
+                        ProfileEducationDialogWidget(
+                          educations: DbData.getUserProfileData.educations ??
+                              <Education>[],
+                        ),
+                      );
                     },
                   ),
               ],

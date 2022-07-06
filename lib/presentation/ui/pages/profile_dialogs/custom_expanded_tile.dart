@@ -35,18 +35,13 @@ class CustomExpandedTileController extends ChangeNotifier {
 }
 
 class CustomExpandedTileThemeData {
-  ////? Header
   final Color? headerColor;
   final Color? headerSplashColor;
   final EdgeInsetsGeometry? headerPadding;
   final double? headerRadius;
-  // leading
   final EdgeInsetsGeometry? leadingPadding;
-  // title
   final EdgeInsetsGeometry? titlePadding;
-  // trailing
   final EdgeInsetsGeometry? trailingPadding;
-  ////? Content
   final Color? contentBackgroundColor;
   final EdgeInsetsGeometry? contentPadding;
   final double? contentRadius;
@@ -97,38 +92,28 @@ class CustomExpandedTile extends StatefulWidget {
   }) : super(key: key);
 
   CustomExpandedTile copyWith({
-    final Widget? leading, // default is none
-// Title
-    final Widget? title, // required
-// Trailing
-    final Widget? trailing, // default is chevron icon
-    final double? trailingRotation, // default is 90
-////? Content
-    final Widget? content, // required
-    final double? contentSeperator, // default is 6.0
-////? Misc
+    final Widget? leading,
+    final Widget? title,
+    final Widget? trailing,
+    final double? trailingRotation,
+    final Widget? content,
+    final double? contentSeperator,
     final bool? enabled,
-    final CustomExpandedTileThemeData? theme, // default themedata
-    final CustomExpandedTileController? controller, // required
-    final Curve? expansionAnimationCurve, // default is ease
-    final Duration? expansionDuration, // default is 200ms
+    final CustomExpandedTileThemeData? theme,
+    final CustomExpandedTileController? controller,
+    final Curve? expansionAnimationCurve,
+    final Duration? expansionDuration,
     final VoidCallback? onTap,
     final VoidCallback? onLongTap,
   }) {
     return CustomExpandedTile(
       key: key,
-////? Header
-// Leading
       leading: leading ?? this.leading,
-// Title
       title: title ?? this.title,
-// Trailing
       trailing: trailing ?? this.trailing,
       trailingRotation: trailingRotation ?? this.trailingRotation,
-////? Content
       content: content ?? this.content,
       contentSeperator: contentSeperator ?? this.contentSeperator,
-////? Misc
       enabled: enabled ?? this.enabled,
       controller: controller ?? this.controller,
       theme: theme ?? this.theme,
@@ -165,7 +150,7 @@ class _CustomExpandedTileState extends State<CustomExpandedTile>
 
   @override
   void dispose() {
-    // tileController.dispose();
+    tileController.dispose();
     super.dispose();
   }
 
@@ -262,205 +247,5 @@ class _CustomExpandedTileState extends State<CustomExpandedTile>
         ),
       ],
     );
-  }
-}
-
-enum TileListConstructor {
-  builder,
-  seperated,
-}
-
-typedef CustomExpandedTileBuilder = CustomExpandedTile Function(
-    BuildContext context, int index, CustomExpandedTileController controller);
-
-/// An extension of the listview returning a list of [CustomExpandedTile] widgets which are
-/// Expansion tile similar to the list tile supports leading widget,
-/// Trailing widget and programatic control with content expansion animation.
-///
-///
-/// This ListView also supports seperate controllers for each tile with seperate programatic controls.
-///
-///
-/// Available constructors right now: [ExpandedListTile.builder()] , [ExpandedListTile.seperated()]
-///
-///
-/// P.S : Supplied Controllers are overlooked in the [CustomExpandedTileList] builder widget, supply a new or initialized controller, it doesn't matter!
-///
-/// {@tool snippet}
-///
-/// ```dart
-/// CustomExpandedTileList.builder(
-///  itemCount: 7,
-///  maxOpened: 2,
-///   itemBuilder: (context, index, controller) {
-///     return CustomExpandedTile(
-///       controller:controller,
-///       onTap: (){
-///       },
-///       onLongTap: (){
-///       },
-///       theme: CustomExpandedTileThemeData(),
-///       title:
-///       content:
-///       ...
-///   }
-/// )
-///
-/// ```
-/// {@end-tool}
-class CustomExpandedTileList extends StatefulWidget {
-  final bool reverse;
-  final bool shrinkWrap;
-  final ScrollPhysics? physics;
-  final EdgeInsetsGeometry? padding;
-  final CustomExpandedTileBuilder itemBuilder;
-  final IndexedWidgetBuilder? seperatorBuilder;
-  final int itemCount;
-  final String? restorationId;
-  final int maxOpened;
-  final TileListConstructor _constructor;
-
-  const CustomExpandedTileList.builder({
-    Key? key,
-    required this.itemCount,
-    required this.itemBuilder,
-    this.padding,
-    this.physics,
-    this.restorationId,
-    this.reverse = false,
-    this.shrinkWrap = true,
-    this.maxOpened = 1,
-  })  : assert(itemCount != 0),
-        assert(maxOpened != 0),
-        _constructor = TileListConstructor.builder,
-        seperatorBuilder = null,
-        super(key: key);
-
-  const CustomExpandedTileList.seperated({
-    Key? key,
-    required this.itemCount,
-    required this.itemBuilder,
-    required this.seperatorBuilder,
-    this.padding,
-    this.physics,
-    this.restorationId,
-    this.reverse = false,
-    this.shrinkWrap = true,
-    this.maxOpened = 1,
-  })  : assert(itemCount != 0),
-        assert(maxOpened != 0),
-        _constructor = TileListConstructor.seperated,
-        super(key: key);
-
-  @override
-  _CustomExpandedTileListState createState() => _CustomExpandedTileListState();
-}
-
-class _CustomExpandedTileListState extends State<CustomExpandedTileList> {
-  late List<CustomExpandedTileController> tileControllers;
-  late List<CustomExpandedTileController> openedTilesControllers;
-  late ScrollController scrollController;
-  @override
-  void initState() {
-    super.initState();
-    scrollController = ScrollController();
-    tileControllers = List.generate(
-      widget.itemCount,
-      (index) => CustomExpandedTileController(key: index),
-    );
-    openedTilesControllers = [];
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return widget._constructor == TileListConstructor.builder
-        ? ListView.builder(
-            shrinkWrap: widget.shrinkWrap,
-            controller: scrollController,
-            itemCount: widget.itemCount,
-            reverse: widget.reverse,
-            physics: widget.physics,
-            padding: widget.padding,
-            itemBuilder: (context, index) {
-              return widget
-                  .itemBuilder(
-                    context,
-                    index,
-                    tileControllers[index],
-                  )
-                  .copyWith(
-                      controller: tileControllers[index],
-                      onTap: !widget
-                              .itemBuilder(
-                                context,
-                                index,
-                                tileControllers[index],
-                              )
-                              .enabled
-                          ? () {}
-                          : () {
-                              int openedTiles = openedTilesControllers.length;
-                              if (tileControllers[index].isExpanded) {
-                                if (openedTiles == widget.maxOpened) {
-                                  openedTilesControllers.last.collapse();
-                                  openedTilesControllers
-                                      .remove(openedTilesControllers.last);
-                                }
-                                openedTilesControllers
-                                    .add(tileControllers[index]);
-                              } else {
-                                openedTilesControllers
-                                    .remove(tileControllers[index]);
-                              }
-                            });
-            },
-          )
-        : ListView.separated(
-            shrinkWrap: widget.shrinkWrap,
-            controller: scrollController,
-            itemCount: widget.itemCount,
-            reverse: widget.reverse,
-            physics: widget.physics,
-            padding: widget.padding,
-            separatorBuilder: (context, index) {
-              return widget.seperatorBuilder!(
-                context,
-                index,
-              );
-            },
-            itemBuilder: (context, index) {
-              return widget
-                  .itemBuilder(
-                    context,
-                    index,
-                    tileControllers[index],
-                  )
-                  .copyWith(
-                      controller: tileControllers[index],
-                      onTap: !widget
-                              .itemBuilder(
-                                context,
-                                index,
-                                tileControllers[index],
-                              )
-                              .enabled
-                          ? () {}
-                          : () {
-                              int openedTiles = openedTilesControllers.length;
-                              if (tileControllers[index].isExpanded) {
-                                if (openedTiles == widget.maxOpened) {
-                                  openedTilesControllers.last.collapse();
-                                  openedTilesControllers
-                                      .remove(openedTilesControllers.last);
-                                }
-                                openedTilesControllers
-                                    .add(tileControllers[index]);
-                              } else {
-                                openedTilesControllers
-                                    .remove(tileControllers[index]);
-                              }
-                            });
-            },
-          );
   }
 }

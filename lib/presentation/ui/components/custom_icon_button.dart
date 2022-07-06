@@ -10,6 +10,7 @@ class CustomIconButton extends StatelessWidget {
     this.showNotification = false,
     this.size,
     this.onTap,
+    this.onHover,
   }) : super(key: key);
 
   final IconData? iconData;
@@ -17,11 +18,13 @@ class CustomIconButton extends StatelessWidget {
   final bool showNotification;
   final double? size;
   final void Function()? onTap;
+  final void Function(bool)? onHover;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: onTap,
+      onHover: onHover,
       child: SizedBox(
         width: size ?? 45,
         height: size ?? 45,

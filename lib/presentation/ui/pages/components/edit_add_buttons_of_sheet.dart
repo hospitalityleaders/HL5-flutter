@@ -16,24 +16,27 @@ class EditAddButtonOfSheet extends StatelessWidget {
   final void Function()? onAddPressed;
   @override
   Widget build(_) {
+    // return Di.ESB;
     if (Provider.of<ProfileProvider>(context).isProfileEditable)
       return Center(
-        child: Padding(
-          padding: EdgeInsets.symmetric(vertical: Di.PSL),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              EditIconButton(
-                onPressed: onEditPressed,
-              ),
-              if (onAddPressed != null) ...[
-                Di.SBWS,
+        child: SizedBox(
+          width: 200,
+          height: 100,
+          child: Center(
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
                 EditIconButton(
-                  iconData: Icons.add,
-                  onPressed: onAddPressed,
+                  onPressed: onEditPressed,
                 ),
-              ]
-            ],
+                if (onAddPressed != null) Di.SBWS,
+                if (onAddPressed != null)
+                  EditIconButton(
+                    iconData: Icons.add,
+                    onPressed: onAddPressed,
+                  ),
+              ],
+            ),
           ),
         ),
       );

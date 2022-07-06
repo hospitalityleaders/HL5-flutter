@@ -107,17 +107,19 @@ class DialogTextFieldForm extends StatelessWidget {
     this.textEditingController,
     this.width,
     this.hintText,
+    this.textInputType,
   }) : super(key: key);
 
   final TextEditingController? textEditingController;
   final double? width;
   final String? hintText;
-
+  final TextInputType? textInputType;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: width,
       child: TextFormField(
+        keyboardType: textInputType,
         controller: textEditingController,
         style: bodySmallRegular.copyWith(
           color: Cr.darkGrey1,
@@ -144,7 +146,6 @@ class DialogLabelTextFormField extends StatelessWidget {
   final double? width;
   final bool isImportant;
   final Widget? icon;
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -180,6 +181,9 @@ class DialogDropDownTextField extends StatefulWidget {
     this.iconDataList,
     this.iconsList,
     this.selectedSocialMediaIndex,
+    this.onChanged,
+    this.alignHintTextStart = false,
+    this.initialValue,
   }) : super(key: key);
 
   final double? width;
@@ -189,7 +193,10 @@ class DialogDropDownTextField extends StatefulWidget {
   final String hintText;
   final bool disable;
   final Widget? prefixIcon;
+  final void Function(String? value)? onChanged;
   final int? selectedSocialMediaIndex;
+  final bool alignHintTextStart;
+  final String? initialValue;
 
   @override
   State<DialogDropDownTextField> createState() =>
@@ -205,23 +212,31 @@ class _DialogDropDownTextFieldState extends State<DialogDropDownTextField> {
         width: widget.width ?? 250,
         height: 37,
         child: DropdownButtonFormField2(
-          value: widget.selectedSocialMediaIndex != null
-              ? widget.dataList[widget.selectedSocialMediaIndex!]
-              : null,
+          value: widget.initialValue ??
+              (widget.selectedSocialMediaIndex != null
+                  ? widget.dataList[widget.selectedSocialMediaIndex!]
+                  : null),
           decoration: Styles.popUpDialogTextFieldInputDecorationFunction(
             widget.disable ? Cr.lightGrey2 : null,
             widget.prefixIcon,
           ),
           isExpanded: true,
-          hint: Center(
-            child: Text(
-              widget.hintText,
-              textAlign: TextAlign.center,
-              style: bodySmallRegular.copyWith(
-                color: widget.disable ? Cr.grey2 : Cr.darkGrey1,
-              ),
-            ),
-          ),
+          hint: widget.alignHintTextStart
+              ? Text(
+                  widget.hintText,
+                  style: bodySmallRegular.copyWith(
+                    color: widget.disable ? Cr.grey2 : Cr.darkGrey1,
+                  ),
+                )
+              : Center(
+                  child: Text(
+                    widget.hintText,
+                    textAlign: TextAlign.center,
+                    style: bodySmallRegular.copyWith(
+                      color: widget.disable ? Cr.grey2 : Cr.darkGrey1,
+                    ),
+                  ),
+                ),
           icon: Icon(
             Icons.arrow_drop_down,
             color: widget.disable ? Cr.grey2 : Cr.darkGrey1,
@@ -234,7 +249,6 @@ class _DialogDropDownTextFieldState extends State<DialogDropDownTextField> {
           dropdownDecoration: BoxDecoration(
             borderRadius: BorderRadius.circular(4),
           ),
-
           items: widget.dataList
               .map((item) => DropdownMenuItem<String>(
                     value: item,
@@ -246,13 +260,14 @@ class _DialogDropDownTextFieldState extends State<DialogDropDownTextField> {
                         else if (widget.iconDataList != null
                             ? widget.iconDataList!.length ==
                                 widget.dataList.length
-                            : false)
+                            : false) ...[
+                          Di.SBWS,
                           Icon(
                             widget.iconDataList![widget.dataList.indexOf(item)],
                             color: Cr.darkGrey1,
                             size: 15,
                           ),
-                        Di.SBWS,
+                        ],
                         Text(
                           item,
                           style: bodySmallRegular.copyWith(
@@ -269,9 +284,7 @@ class _DialogDropDownTextFieldState extends State<DialogDropDownTextField> {
             }
             return null;
           },
-          onChanged: (value) {
-            //Do something when changing the item if you want.
-          },
+          onChanged: widget.onChanged ?? (value) {},
           // onSaved: (value) {
           //   selectedValue = value.toString();
           // },
