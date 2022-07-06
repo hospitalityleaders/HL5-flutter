@@ -196,8 +196,9 @@ class _PageScaffoldState extends State<PageScaffold> {
                           ),
                           Consumer<ProfileProvider>(
                             builder: (context, profileProviderValue, child) {
-                              return !(profileProviderValue
-                                          .showConectionRequestPopo ||
+                              return !(
+                                      // profileProviderValue
+                                      // .showConectionRequestPopo ||
                                       profileProviderValue
                                           .showConectionRequestPopo2)
                                   ? Di.ESB
@@ -206,7 +207,6 @@ class _PageScaffoldState extends State<PageScaffold> {
                                           Di.getScreenSize(context).width < 1301
                                               ? 52
                                               : 173,
-                                      top: -1,
                                       child: ProfileConnectionRequestPopup(),
                                     );
                             },

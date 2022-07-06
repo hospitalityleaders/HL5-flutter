@@ -90,9 +90,9 @@ class _CustomAppbarState extends State<CustomAppbar> {
               AppbarNotificationsButton(),
               Di.DVZW,
               AppbarConnectionRequestButton(),
-              // Di.DVZW,
-              // _ProfileWithSubMenu(),
-              // Di.DVZW,
+              Di.DVZW,
+              _ProfileWithSubMenu(),
+              Di.DVZW,
             ],
           ),
 
@@ -151,15 +151,10 @@ class _ProfileWithSubMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {},
-      onHover: (hover) async {
-        if (hover)
-          Provider.of<ProfileProvider>(context, listen: false)
-              .changeProfileSubMenusState(true);
-        else {
-          Provider.of<ProfileProvider>(context, listen: false)
-              .changeConectionRequestPopupState(false);
-        }
-      },
+      // onHover: (hover) async {
+      //   Provider.of<ProfileProvider>(context, listen: false)
+      //       .changeProfileSubMenusState(hover);
+      // },
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: Di.PSS),
         child: Container(
@@ -185,39 +180,68 @@ class AppbarConnectionRequestButton extends StatelessWidget {
   final bool isDrawer;
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {},
-      onHover: (hover) async {
-        if (hover)
-          Provider.of<ProfileProvider>(context, listen: false)
-              .changeConectionRequestPopupState(true);
-        else {
-          await Future.delayed(Duration(milliseconds: 300));
-          Provider.of<ProfileProvider>(context, listen: false)
-              .changeConectionRequestPopupState(false);
-        }
-      },
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: Di.PSS),
-        height: double.infinity,
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
+    return Row(
+      children: [
+        SizedboxWithHover(),
+        Column(
           children: [
-            Icon(
-              Icons.person_add,
-              color: Cr.darkBlue9,
+            SizedboxWithHover(
+              isInHorizantal: true,
             ),
-            Di.SBWES,
-            TextWithBackground(
-              text: "352",
-              textColor: Cr.darkBlue9,
-              padding: 0,
-              paddingHorizantal: 4,
-              backgroundColor: Cr.darkBlue5,
-            )
+            InkWell(
+              onTap: () {},
+              onHover: (hover) async {
+                Provider.of<ProfileProvider>(context, listen: false)
+                    .changeConectionRequestPopupState(hover);
+              },
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Icons.person_add,
+                    color: Cr.darkBlue9,
+                  ),
+                  Di.SBWES,
+                  TextWithBackground(
+                    text: "352",
+                    textColor: Cr.darkBlue9,
+                    padding: 0,
+                    paddingHorizantal: 4,
+                    backgroundColor: Cr.darkBlue5,
+                  )
+                ],
+              ),
+            ),
           ],
         ),
-      ),
+        SizedboxWithHover(),
+      ],
+    );
+  }
+}
+
+class SizedboxWithHover extends StatelessWidget {
+  const SizedboxWithHover({
+    Key? key,
+    this.isInHorizantal = false,
+  }) : super(key: key);
+  final bool isInHorizantal;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {},
+      onHover: (hover) {
+        Provider.of<ProfileProvider>(context, listen: false)
+            .changeConectionRequestPopup2State(false);
+      },
+      child: isInHorizantal
+          ? Container(
+              height: 10,
+            )
+          : Container(
+              width: 10,
+            ),
     );
   }
 }
