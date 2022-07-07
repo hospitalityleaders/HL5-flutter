@@ -1415,7 +1415,7 @@ class _NewsSignalScreenState extends State<NewsCategory>
                             .where((category) => category.menuItem == true))
                           NavigationBox(
                             title: category.title.toString(),
-                            path: '/news/${category.slug}',
+                            path: '/news1/${category.slug}',
                             inDrawer: false,
                           ),
                       ],
