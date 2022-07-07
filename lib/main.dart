@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:holedo/layouts/page_scaffold.dart';
 import 'package:holedo/layouts/pages/content_page.dart';
 import 'package:holedo/models/models.dart';
+import 'package:holedo/news_section/News/NewsHome/news_home.dart';
+import 'package:holedo/news_section/News/NewsSingle/jobs_no_jobs.dart';
+import 'package:holedo/news_section/News/NewsSingle/news_single_logged_out.dart';
 import 'package:holedo/presentation/providers/profile_provider.dart';
 import 'package:holedo/presentation/theme/light_theme.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:routemaster/routemaster.dart';
 import 'includes/url_strategy.dart';
+import 'news_section/News/NewsCategory/news_category.dart';
 
 void main() async {
   usePathUrlStrategy();
-
   await Get.put(HoledoDatabase()).init();
   WidgetsFlutterBinding.ensureInitialized();
   runApp(BookStoreApp());
@@ -88,8 +91,18 @@ RouteMap _buildRouteMap(BuildContext context) {
       '/recruitments': (route) => NoAnimationPage(child: RecruitmentPage()),
       '/recruitments/:id': (route) =>
           NoAnimationPage(child: ProfilePage(id: route.pathParameters['id']!)),
+      '/news': (route) => NoAnimationPage(child: NewsHome()),
       '/news': (route) => TabPage(
-            child: NewsfrontPage(),
+            // child: NewsfrontPage(),
+            child: NewsHome(),
+
+            paths: Get.put(HoledoDatabase()).articlePaths,
+            pageBuilder: (child) => NoAnimationPage(child: child),
+          ),
+      '/news1': (route) => TabPage(
+            child: NewsCategory(),
+            // child: NewsHome(),
+            // child: NewsCategory(),
             paths: Get.put(HoledoDatabase()).articlePaths,
             pageBuilder: (child) => NoAnimationPage(child: child),
           ),
@@ -99,7 +112,7 @@ RouteMap _buildRouteMap(BuildContext context) {
       '/news/featured': (route) => NoAnimationPage(
             child: NewsfrontListPage(mode: 'featured'),
           ),*/
-      '/news/:category': (route) =>
+      '/news1/:category': (route) =>
           _isValidCategory(route.pathParameters['category'])
               ? NoAnimationPage(
                   child: NewsfrontListPage(
@@ -236,17 +249,17 @@ class BookStoreApp extends StatelessWidget {
               profile: Get.put(HoledoDatabase()).getModel().user),
         ),
       ],
-      child: MaterialApp.router(
+      child: GetMaterialApp.router(
         title: 'Holedo',
         builder: (context, child) => ResponsiveWrapper.builder(
           child,
-          breakpoints: [
-            // ResponsiveBreakpoint.autoScaleDown(320, name: MOBILE),
-            // ResponsiveBreakpoint.autoScale(450, name: MOBILE),
-
-            ResponsiveBreakpoint.autoScaleDown(450, name: MOBILE),
-            ResponsiveBreakpoint.autoScaleDown(1200, name: DESKTOP),
-          ],
+          // breakpoints: [
+          //   // ResponsiveBreakpoint.autoScaleDown(320, name: MOBILE),
+          //   // ResponsiveBreakpoint.autoScale(450, name: MOBILE),
+          //
+          //   ResponsiveBreakpoint.autoScaleDown(450, name: MOBILE),
+          //   ResponsiveBreakpoint.autoScaleDown(1200, name: DESKTOP),
+          // ],
         ),
         debugShowCheckedModeBanner: false,
         theme: lightTheme,

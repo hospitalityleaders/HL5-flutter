@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' as Store;
@@ -19,7 +18,6 @@ import 'package:dio_http_cache/dio_http_cache.dart';
 
 //import 'package:dio/dio.dart';
 final baseUrl = 'https://${Get.put(HoledoDatabase()).apiHost}/rest';
-
 
 class ApiServices {
   dio.Dio _dio = dio.Dio();
@@ -65,6 +63,39 @@ class ApiServices {
   }
 
   Future<Holedoapi> GET(
+      {String? target,
+      Map<String, dynamic>? data,
+      Map<String, dynamic>? headers,
+      String? token}) async {
+    try {
+      var model = new Holedoapi();
+      token = token == null ? Get.put(HoledoDatabase()).apiKey : token;
+      print('GET URL: ${baseUrl}${target} param: ${data}');
+      dio.Response response = await _dio.get(
+        '${baseUrl}${target}',
+        options: dio.Options(
+          headers: headers == null
+              ? <String, dynamic>{
+                  'AuthApi': 'Bearer ${token}',
+                  'Content-Type': 'application/json; charset=UTF-8',
+                  'Accept': 'application/json',
+                }
+              : headers,
+        ),
+        queryParameters: data,
+      );
+
+      if (response.statusCode == 200) {
+        model = Holedoapi.fromJson(response.data as Map<String, dynamic>);
+      }
+      return model;
+    } catch (e) {
+      print('e: ${e.toString()}');
+      throw Exception();
+    }
+  }
+
+  Future<Holedoapi> GET1(
       {String? target,
       Map<String, dynamic>? data,
       Map<String, dynamic>? headers,

@@ -36,6 +36,10 @@ dependencies:
   dio_http_cache: ^0.3.0
   flutter_html: ^3.0.0-alpha.3
   responsive_framework: ^0.1.9
+  #Added later
+  fluro: ^2.0.3
+  jiffy: ^5.0.0
+  loadmore: ^2.0.1
 
 dev_dependencies:
   integration_test:

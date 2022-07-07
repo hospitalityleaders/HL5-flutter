@@ -5,16 +5,6 @@ class Data {
     'Membership Grades',
     'Recruitment'
   ];
-  static List items = [
-    'Home',
-    'Profile',
-    'News',
-    'Jobs',
-    'Recruitment',
-    'Help',
-    // 'Newscategory',
-    // 'Newssingleloggedinscreen',
-  ];
 
   static List<String> bedecketItem = [
     'Wind',
@@ -22,6 +12,17 @@ class Data {
     'Visibility',
     'Sunrise',
     'Sunset'
+  ];
+
+  static List items = [
+    'Home',
+    'Profile',
+    'News',
+    'Jobs',
+    'Recruitment',
+    'Help',
+    'Newscategory',
+    'Newssingleloggedinscreen',
   ];
 
   static List<String> bedecketValue = [
@@ -88,6 +89,7 @@ class Data {
       'text': "Boutique Hotels",
     },
   ];
+
   static List<String> drawerItem = [
     'Home',
     'Profile',
@@ -95,7 +97,7 @@ class Data {
     'Jobs',
     'Recruitment',
     'Help',
-    // 'Newscategory',
-    // 'Newssingleloggedinscreen',
+    'Newscategory',
+    'Newssingleloggedinscreen',
   ];
 }

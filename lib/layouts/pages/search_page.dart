@@ -45,7 +45,10 @@ class SearchPage extends StatelessWidget {
         category.title!.toLowerCase().contains(query.toLowerCase()));
 
     final newsSearch = Get.put(HoledoDatabase().news);
-    newsSearch.fetchArticles(context: context, keyword: query.toLowerCase());
+    newsSearch.fetchArticles(
+      context: context,
+      keyword: query.toLowerCase(),
+    );
 
     final jobsSearch = Get.put(HoledoDatabase().jobs);
     jobsSearch.fetchJobs(context: context, keyword: query.toLowerCase());

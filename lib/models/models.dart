@@ -426,6 +426,7 @@ class NewsController extends GetxController {
   var page = 1;
   var limit = 10;
   final ApiServices _api = ApiServices();
+
   //@override
   //void onInit() {
   //fetch();
@@ -457,6 +458,49 @@ class NewsController extends GetxController {
       String? type,
       int? limit,
       int? page,
+      required BuildContext context}) async {
+    try {
+      isLoading(true);
+      var params = {
+        'category': category,
+        'type': type,
+        'keyword': keyword,
+        'limit': limit == null ? this.limit : limit,
+        'page': page == null ? this.page : page
+      };
+      params.removeWhere((k, v) => v == null);
+
+      print('context: ${context} type: ${type} cat: ${category}');
+      var response = await _api.GET(target: '/articles/index', data: params);
+
+      if (response.success == true) {
+        var list = response.data!.articles as List<Article>;
+        dataList.value = list;
+
+        //print('log: ${list}');
+        for (final data in list) {
+          //articleList.add(data);
+          // print('c ${data.id} ${(articleList.any((e) => e.id == data.id))}');
+
+          if ((articleList.any((e) => e.id == data.id)) != true) {
+            // print('adding ${data.id}');
+            articleList.add(data);
+          }
+        }
+        print('localcache: count: ${articleList.length}');
+      }
+      return dataList.value as List<Article>;
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  Future<List<Article>> fetchArticles1(
+      {String? category,
+      String? keyword,
+      String? type,
+      required int? limit,
+      required int? page,
       required BuildContext context}) async {
     try {
       isLoading(true);

@@ -104,7 +104,133 @@ class NewsSingleCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isMobile = Responsive.isMobile(context);
-    return Padding(
+    return Responsive.isDesktop(context)
+        ? Padding(
+            padding: const EdgeInsets.all(0),
+            child: InkWell(
+              onTap: () {
+                Routemaster.of(context).push(pathBuilder != null
+                    ? pathBuilder!(article.slug as String)
+                    : '/article/${article.articleCategories?.first.slug}/${article.slug}');
+              },
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    height: (isMobile ? (Get.width * .40) * .48 : 500 * .70),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage(article.bannerImage.toString()),
+                        fit: BoxFit.cover,
+                        alignment: Alignment.center,
+                        repeat: ImageRepeat.noRepeat,
+                      ),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(0),
+                    ),
+                  ),
+                  SizedBox(height: 4),
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.all(10),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            article.articleCategories!.first.title.toString(),
+                            style: TextStyle(fontSize: 12),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            article.title.toString(),
+                            style: isMobile
+                                ? FontTextStyle.kBlackPure20W400PR
+                                : FontTextStyle.kBlackPure30W400PR,
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            'By: ${article.user!.fullName.toString()} • ${_formatter.format(article.created as DateTime)} ',
+                            style: FontTextStyle.kBlueDark114W400SSP,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )
+        : Padding(
+            padding: const EdgeInsets.all(0),
+            child: InkWell(
+              onTap: () {
+                Routemaster.of(context).push(pathBuilder != null
+                    ? pathBuilder!(article.slug as String)
+                    : '/article/${article.articleCategories?.first.slug}/${article.slug}');
+              },
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    height: 80,
+                    // height: Get.width * 0.8,
+                    // width: Get.width,
+                    // height: (isMobile ? (Get.width * .40) * .48 : 500 * .70),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage(article.bannerImage.toString()),
+                        fit: BoxFit.cover,
+                        alignment: Alignment.center,
+                        repeat: ImageRepeat.noRepeat,
+                      ),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(0),
+                    ),
+                  ),
+                  SizedBox(height: 4),
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.all(10),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            article.articleCategories!.first.title.toString(),
+                            style: TextStyle(fontSize: 12),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            article.title.toString(),
+                            style: isMobile
+                                ? FontTextStyle.kBlackPure20W400PR
+                                : FontTextStyle.kBlackPure30W400PR,
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            'By: ${article.user!.fullName.toString()} • ${_formatter.format(article.created as DateTime)} ',
+                            style: FontTextStyle.kBlueDark114W400SSP,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+    /*   return Padding(
       padding: const EdgeInsets.all(0),
       child: InkWell(
         onTap: () {
@@ -112,61 +238,59 @@ class NewsSingleCard extends StatelessWidget {
               ? pathBuilder!(article.slug as String)
               : '/article/${article.articleCategories?.first.slug}/${article.slug}');
         },
-        child: Container(
-          height: (isMobile ? Get.width * .40 : 500),
-          color: ColorPicker.kWhite,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                height: (isMobile ? (Get.width * .40) * .48 : 500 * .70),
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage(article.bannerImage.toString()),
-                    fit: BoxFit.cover,
-                    alignment: Alignment.center,
-                    repeat: ImageRepeat.noRepeat,
-                  ),
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(0),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: (isMobile ? (Get.width * .40) * .48 : 500 * .70),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: NetworkImage(article.bannerImage.toString()),
+                  fit: BoxFit.cover,
+                  alignment: Alignment.center,
+                  repeat: ImageRepeat.noRepeat,
+                ),
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(0),
+              ),
+            ),
+            SizedBox(height: 4),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.all(15),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      article.articleCategories!.first.title.toString(),
+                      style: TextStyle(fontSize: 12),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      article.title.toString(),
+                      style: isMobile
+                          ? FontTextStyle.kBlackPure20W400PR
+                          : FontTextStyle.kBlackPure30W400PR,
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      'By: ${article.user!.fullName.toString()} • ${_formatter.format(article.created as DateTime)} ',
+                      style: FontTextStyle.kBlueDark114W400SSP,
+                    ),
+                  ],
                 ),
               ),
-              SizedBox(height: 4),
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsets.all(15),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        article.articleCategories!.first.title.toString(),
-                        style: TextStyle(fontSize: 12),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        article.title.toString(),
-                        style: isMobile
-                            ? FontTextStyle.kBlackPure20W400PR
-                            : FontTextStyle.kBlackPure30W400PR,
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        'By: ${article.user!.fullName.toString()} • ${_formatter.format(article.created as DateTime)} ',
-                        style: FontTextStyle.kBlueDark114W400SSP,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
-    );
+    );*/
   }
 }
 

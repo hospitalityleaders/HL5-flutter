@@ -25,9 +25,11 @@ class _CategoryPageState extends State<CategoryPage> {
   void initState() {
     super.initState();
 
-    futurecall = Provider.of<AppState>(context, listen: false)
-        .news
-        .fetchArticles(context: context, category: widget.category.slug);
+    futurecall =
+        Provider.of<AppState>(context, listen: false).news.fetchArticles(
+              context: context,
+              category: widget.category.slug,
+            );
     print('init data: ${futurecall}');
   }
 

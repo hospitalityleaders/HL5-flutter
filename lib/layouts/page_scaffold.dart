@@ -2,6 +2,8 @@ import 'package:holedo/layouts/cards/holedo_cards.dart';
 import 'package:holedo/models/models.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:holedo/news_section/common_widget.dart';
+import 'package:holedo/news_section/header.dart';
 import 'package:holedo/responsive/responsive.dart';
 import 'package:routemaster/routemaster.dart';
 export 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -20,7 +22,6 @@ export 'package:holedo/layouts/pages/jobs_page.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/constant/sizedbox.dart';
-import 'package:holedo/common/common_widget.dart';
 
 class PageScaffold extends StatefulWidget {
   final String title;
@@ -116,8 +117,78 @@ class _PageScaffoldState extends State<PageScaffold> {
     final routemaster = Routemaster.of(context);
     final canGoBack = routemaster.history.canGoBack;
     final canGoForward = routemaster.history.canGoForward;
+    GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+    return Responsive.isDesktop(context)
+        ? Material(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Header(page: 'Home'),
+                  Container(
+                      height: Get.height,
+                      decoration: BoxDecoration(
+                        color: ColorPicker.kBG,
+                      ),
+                      child: widget.body)
+                ],
+              ),
+            ),
+          )
+        : Scaffold(
+            key: _scaffoldKey,
+            // appBar: CommonWidget.tabletAppBarLogIn(
+            //   onTap: () {
+            //     _scaffoldKey.currentState!.openEndDrawer();
+            //   },
+            // ),
+            endDrawer: CommonWidget.drawer(context),
+            // drawer: (!isDesktop)
+            //     ? Drawer(
+            //         child: Container(
+            //           color: Color(0xFF232f3e),
+            //           child: ListView(
+            //             children: [
+            //               Padding(
+            //                 padding: const EdgeInsets.all(10.0),
+            //                 child: Image(
+            //                   image: AssetImage('assets/icons/logo.png'),
+            //                   height: 55,
+            //                 ),
+            //               ),
+            //               SingleChildScrollView(
+            //                 child: Column(
+            //                   mainAxisAlignment: MainAxisAlignment.start,
+            //                   children: _buildNavBarChildren(
+            //                       inDrawer: true,
+            //                       isLogin: appState.isLoggedIn),
+            //                 ),
+            //               ),
+            //             ],
+            //           ),
+            //         ),
+            //       )
+            //     : null,
 
-    return widget.isNewDesign
+            appBar: CommonWidget.tabletAppBarLogIn(
+              onTap: () {
+                _scaffoldKey.currentState!.openEndDrawer();
+              },
+              context: context,
+            ),
+            // appBar: PreferredSize(
+            //   preferredSize: Size.fromHeight(46),
+            //   child: AppBar(
+            //     backgroundColor: ColorPicker.kPrimaryLight1,
+            //     automaticallyImplyLeading: (!isDesktop),
+            //     title: _buildAppBar(context, constraints),
+            //   ),
+            // ),
+            body: Container(
+                decoration: BoxDecoration(
+                  color: ColorPicker.kBG,
+                ),
+                child: widget.body));
+    /* return widget.isNewDesign
         ? widget.body
         : LayoutBuilder(builder: (context, constraints) {
             final bool isMobile = Responsive.isMobile(context);
@@ -125,46 +196,59 @@ class _PageScaffoldState extends State<PageScaffold> {
             final bool isDesktop = Responsive.isDesktop(context);
             maxWidth = constraints.maxWidth;
             return Scaffold(
-              drawer: (!isDesktop)
-                  ? Drawer(
-                      child: Container(
-                        color: Color(0xFF232f3e),
-                        child: ListView(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Image(
-                                image: AssetImage('assets/icons/logo.png'),
-                                height: 55,
-                              ),
-                            ),
-                            SingleChildScrollView(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: _buildNavBarChildren(
-                                    inDrawer: true,
-                                    isLogin: appState.isLoggedIn),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    )
-                  : null,
-              appBar: PreferredSize(
-                preferredSize: Size.fromHeight(46),
-                child: AppBar(
-                  backgroundColor: ColorPicker.kPrimaryLight1,
-                  automaticallyImplyLeading: (!isDesktop),
-                  title: _buildAppBar(context, constraints),
-                ),
+              key: _scaffoldKey,
+              // appBar: CommonWidget.tabletAppBarLogIn(
+              //   onTap: () {
+              //     _scaffoldKey.currentState!.openEndDrawer();
+              //   },
+              // ),
+              endDrawer: CommonWidget.drawer(),
+              // drawer: (!isDesktop)
+              //     ? Drawer(
+              //         child: Container(
+              //           color: Color(0xFF232f3e),
+              //           child: ListView(
+              //             children: [
+              //               Padding(
+              //                 padding: const EdgeInsets.all(10.0),
+              //                 child: Image(
+              //                   image: AssetImage('assets/icons/logo.png'),
+              //                   height: 55,
+              //                 ),
+              //               ),
+              //               SingleChildScrollView(
+              //                 child: Column(
+              //                   mainAxisAlignment: MainAxisAlignment.start,
+              //                   children: _buildNavBarChildren(
+              //                       inDrawer: true,
+              //                       isLogin: appState.isLoggedIn),
+              //                 ),
+              //               ),
+              //             ],
+              //           ),
+              //         ),
+              //       )
+              //     : null,
+
+              appBar: CommonWidget.tabletAppBarLogIn(
+                onTap: () {
+                  _scaffoldKey.currentState!.openEndDrawer();
+                },
               ),
+              // appBar: PreferredSize(
+              //   preferredSize: Size.fromHeight(46),
+              //   child: AppBar(
+              //     backgroundColor: ColorPicker.kPrimaryLight1,
+              //     automaticallyImplyLeading: (!isDesktop),
+              //     title: _buildAppBar(context, constraints),
+              //   ),
+              // ),
               body: Container(
                   decoration: BoxDecoration(
                     color: ColorPicker.kBG,
                   ),
                   child: widget
-                      .body /* ListView(children: <Widget>[
+                      .body */ /* ListView(children: <Widget>[
             Container(
                 height: constraints.maxHeight,
                 child: Column(
@@ -178,10 +262,10 @@ class _PageScaffoldState extends State<PageScaffold> {
                   ],
                 )),
             _buildFooter(isMobile),
-          ]),*/
+          ]),
                   ),
             );
-          });
+          });*/
   }
 
   Widget _buildFooter(bool isMobile) {
