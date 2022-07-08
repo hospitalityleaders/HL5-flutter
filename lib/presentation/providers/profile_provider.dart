@@ -7,7 +7,7 @@ class ProfileProvider extends ChangeNotifier {
   bool showProfileSubMenus;
   ProfileProvider({
     this.showConectionRequestPopo = false,
-    this.showProfileSubMenus = true,
+    this.showProfileSubMenus = false,
     this.isProfileEditable = false,
     this.showProfileLoading = false,
   });
@@ -39,6 +39,10 @@ class ProfileProvider extends ChangeNotifier {
 
   void changeSubMenusPopup2State(bool showPopup) {
     showProfileSubMenus = showPopup;
+    notifyListeners();
+  }
+
+  void profileNotifyListeners() {
     notifyListeners();
   }
 

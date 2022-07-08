@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:holedo/db_data.dart';
+import 'package:holedo/models/models.dart';
 
 class PersonAvatar extends StatelessWidget {
   const PersonAvatar({
@@ -10,15 +12,20 @@ class PersonAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isLogin = Provider.of<AppState>(context).isLoggedIn;
     return Container(
       width: avatarSize ?? 28,
       height: avatarSize ?? 28,
       decoration: BoxDecoration(
-        image: DecorationImage(
-          // image: NetworkImage(DbData.getUserProfileData.avatar ?? ""),
-          image: AssetImage("assets/images/profile.png"),
-          fit: BoxFit.fill,
-        ),
+        image: isLogin
+            ? DecorationImage(
+                image: NetworkImage(DbData.getUserProfileData.avatar ?? ""),
+                fit: BoxFit.fill,
+              )
+            : DecorationImage(
+                image: AssetImage("assetName"),
+                fit: BoxFit.fill,
+              ),
       ),
     );
   }

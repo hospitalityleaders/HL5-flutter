@@ -108,17 +108,20 @@ class DialogTextFieldForm extends StatelessWidget {
     this.width,
     this.hintText,
     this.textInputType,
+    this.validator,
   }) : super(key: key);
 
   final TextEditingController? textEditingController;
   final double? width;
   final String? hintText;
   final TextInputType? textInputType;
+  final String? Function(String?)? validator;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: width,
       child: TextFormField(
+        validator: validator,
         keyboardType: textInputType,
         controller: textEditingController,
         style: bodySmallRegular.copyWith(

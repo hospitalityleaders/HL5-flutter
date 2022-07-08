@@ -358,6 +358,22 @@ class UsersController extends GetxController {
     }
   }
 
+  // Future<User> getSiteSettingsV2({
+  //   String? slug,
+  //   String? id,
+  //   String? token,
+  //   required BuildContext context,
+  //   bool? isLoggined = false,
+  // }) async {
+  //   isLoading(true);
+  //   final Holedoapi = await ApiServices().getSettings();
+  //   if (Holedoapi.data != null) {
+  //     Holedoapi.data.settings.generalSettings
+  //   } else {
+  //     print("No data found");
+  //   }
+  // }
+
   Future<List<User>?> fetchUsers(
       {String? category,
       String? type,

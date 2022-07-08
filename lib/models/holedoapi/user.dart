@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:holedo/models/holedoapi/received_reference.dart';
 import 'package:routemaster/routemaster.dart';
 
 import 'package:holedo/models/holedoapi/expertise.dart';
@@ -102,7 +103,7 @@ class User {
   List<dynamic>? requestReferences;
   List<dynamic>? requestedReferences;
   List<dynamic>? givenReferences;
-  List<dynamic>? receivedReferences;
+  List<ReceivedReference>? receivedReferences;
   List<dynamic>? testimonials;
   List<dynamic>? recommendations;
   List<dynamic>? posts;
@@ -345,7 +346,12 @@ class User {
         requestReferences: json['request_references'] as List<dynamic>?,
         requestedReferences: json['requested_references'] as List<dynamic>?,
         givenReferences: json['given_references'] as List<dynamic>?,
-        receivedReferences: json['received_references'] as List<dynamic>?,
+        receivedReferences: json['received_references'] == null
+            ? null
+            : (json['received_references'] as List<dynamic>?)
+                ?.map((e) =>
+                    ReceivedReference.fromJson(e as Map<String, dynamic>))
+                .toList(),
         testimonials: json['testimonials'] as List<dynamic>?,
         recommendations: json['recommendations'] as List<dynamic>?,
         posts: json['posts'] as List<dynamic>?,
@@ -503,7 +509,8 @@ class User {
         'request_references': requestReferences,
         'requested_references': requestedReferences,
         'given_references': givenReferences,
-        'received_references': receivedReferences,
+        'received_references':
+            receivedReferences?.map((e) => e.toJson()).toList(),
         'testimonials': testimonials,
         'recommendations': recommendations,
         'posts': posts,
@@ -636,7 +643,7 @@ class User {
     List<dynamic>? requestReferences,
     List<dynamic>? requestedReferences,
     List<dynamic>? givenReferences,
-    List<dynamic>? receivedReferences,
+    List<ReceivedReference>? receivedReferences,
     List<dynamic>? testimonials,
     List<dynamic>? recommendations,
     List<dynamic>? posts,

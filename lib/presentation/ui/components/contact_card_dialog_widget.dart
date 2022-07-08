@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:holedo/db_data.dart';
 import 'package:holedo/presentation/ui/components/onhover.dart';
 import 'package:holedo/presentation/ui/components/person_avatar.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
@@ -16,6 +17,7 @@ class ContactCardDialogWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userProfileData = DbData.getUserProfileData;
     return Container(
       color: Cr.whiteColor,
       width: 560,
@@ -37,18 +39,7 @@ class ContactCardDialogWidget extends StatelessWidget {
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Noberto Holden",
-                      style: h2Regular,
-                    ),
-                    Text(
-                      "General Manager, Four Seasons",
-                      style: bodyLarge.copyWith(
-                        color: Cr.darkGrey1,
-                      ),
-                    )
-                  ],
+                  children: [FullName(), ProfessionalTitle()],
                 ),
               ),
               Spacer(),
@@ -67,51 +58,55 @@ class ContactCardDialogWidget extends StatelessWidget {
             padding: EdgeInsets.all(Di.PSL),
             child: Column(
               children: [
-                ProfileCardListTile(
-                  text: "noberto@gmail.com",
-                  iconData: Icons.email,
-                ),
-                ProfileCardListTile(
-                  text: "+27 72 987 5467",
-                  iconData: Icons.phone,
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      ProfileSquareCard(
-                        Icons.phone,
-                        showBlue: true,
-                      ),
-                      ProfileSquareCard(
-                        Icons.whatsapp,
-                        showBlue: true,
-                      ),
-                      ProfileSquareCard(
-                        FontAwesomeIcons.solidMessage,
-                        showBlue: true,
-                        icon: Center(
-                          child: Text(
-                            'SMS',
-                            style: dividerTextSmall.copyWith(
-                              color: Cr.accentBlue1,
+                if (userProfileData.fullName != null)
+                  ProfileCardListTile(
+                    text: userProfileData.fullName!,
+                    iconData: Icons.email,
+                  ),
+                if (userProfileData.contactNumber != null)
+                  ProfileCardListTile(
+                    text: userProfileData.contactNumber!,
+                    iconData: Icons.phone,
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ProfileSquareCard(
+                          Icons.phone,
+                          showBlue: true,
+                        ),
+                        ProfileSquareCard(
+                          Icons.whatsapp,
+                          showBlue: true,
+                        ),
+                        ProfileSquareCard(
+                          FontAwesomeIcons.solidMessage,
+                          showBlue: true,
+                          icon: Center(
+                            child: Text(
+                              'SMS',
+                              style: dividerTextSmall.copyWith(
+                                color: Cr.accentBlue1,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                ProfileCardListTile(
-                  text: "Noberto.Holden",
-                  iconData: FontAwesomeIcons.skype,
-                ),
-                ProfileCardListTile(
-                  text: "www.nobertoholden.com",
-                  icon: SvgPicture.asset(
-                    Svgs.link,
-                    color: Cr.accentBlue1,
-                    width: 18,
+                if (userProfileData.skype != null)
+                  ProfileCardListTile(
+                    text: userProfileData.skype.toString(),
+                    iconData: FontAwesomeIcons.skype,
                   ),
-                ),
+                if (userProfileData.website != null)
+                  ProfileCardListTile(
+                    text: userProfileData.website.toString(),
+                    icon: SvgPicture.asset(
+                      Svgs.link,
+                      color: Cr.accentBlue1,
+                      width: 18,
+                    ),
+                  ),
               ],
             ),
           ),
@@ -139,6 +134,36 @@ class ContactCardDialogWidget extends StatelessWidget {
           Di.SBCH(50),
         ],
       ),
+    );
+  }
+}
+
+class ProfessionalTitle extends StatelessWidget {
+  const ProfessionalTitle({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      DbData.getUserProfileData.professionalTitle ?? "",
+      style: bodyLarge.copyWith(
+        color: Cr.darkGrey1,
+      ),
+    );
+  }
+}
+
+class FullName extends StatelessWidget {
+  const FullName({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      DbData.getUserProfileData.fullName ?? "",
+      style: h2Regular,
     );
   }
 }

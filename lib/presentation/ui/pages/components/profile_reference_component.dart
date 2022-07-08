@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:holedo/db_data.dart';
+import 'package:holedo/models/holedoapi/received_reference.dart';
 import 'package:holedo/presentation/ui/components/custom_text_button.dart';
 import 'package:holedo/presentation/ui/components/person_avatar.dart';
 import 'package:holedo/presentation/ui/pages/components/edit_add_buttons_of_sheet.dart';
@@ -17,7 +18,7 @@ class ProfileReferenceComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List? receivedReferences =
+    final List<ReceivedReference>? receivedReferences =
         DbData.getUserProfileData.receivedReferences;
     return Container(
       decoration: Styles.boxDecoration.copyWith(color: Cr.whiteColor),
@@ -57,7 +58,7 @@ class ProfileReferenceComponent extends StatelessWidget {
                                     title: Row(
                                       children: [
                                         Text(
-                                          "Sarah Lee",
+                                          "Name ",
                                           style: h4Bold,
                                         ),
                                         Di.SBWES,

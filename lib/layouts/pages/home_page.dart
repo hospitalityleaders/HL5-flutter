@@ -1,12 +1,9 @@
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
-import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/main.dart';
 import 'package:holedo/models/holedoapi/article.dart';
 import 'package:holedo/models/models.dart';
 import 'package:holedo/layouts/page_scaffold.dart';
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 class HomePage extends StatefulWidget {

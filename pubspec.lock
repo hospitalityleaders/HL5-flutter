@@ -336,6 +336,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "10.1.0"
+  form_field_validator:
+    dependency: "direct main"
+    description:
+      name: form_field_validator
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.0"
   fuchsia_remote_debug_protocol:
     dependency: transitive
     description: flutter
@@ -689,13 +696,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.0"
-  should_rebuild:
-    dependency: "direct main"
-    description:
-      name: should_rebuild
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.1"
   simple_animations:
     dependency: transitive
     description:
@@ -911,6 +911,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.10"
+  video_thumbnail:
+    dependency: "direct main"
+    description:
+      name: video_thumbnail
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.5.0"
   vm_service:
     dependency: transitive
     description:

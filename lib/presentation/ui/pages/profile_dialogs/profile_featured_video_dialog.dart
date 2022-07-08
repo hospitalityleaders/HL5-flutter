@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_expanded_tile/flutter_expanded_tile.dart';
+import 'package:holedo/db_data.dart';
 
 import 'package:holedo/models/holedoapi/holedoapi.dart';
 import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
@@ -8,6 +9,8 @@ import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/nav.dart';
 import 'package:holedo/presentation/utill/styles.dart';
+import 'package:routemaster/routemaster.dart';
+import 'package:video_player/video_player.dart';
 
 class ProfileFeaturedVideoDialogWidget extends StatefulWidget {
   const ProfileFeaturedVideoDialogWidget({
@@ -24,10 +27,10 @@ class ProfileFeaturedVideoDialogWidget extends StatefulWidget {
 
 class _ProfileWriteReferenceDialogWidgetState
     extends State<ProfileFeaturedVideoDialogWidget> {
-  final _formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
+    final userProfileData = DbData.getUserProfileData;
+
     return SingleChildScrollView(
       child: Container(
         color: Cr.darkGrey4,
@@ -39,7 +42,10 @@ class _ProfileWriteReferenceDialogWidgetState
               title: "Featured video",
             ),
             Di.SBHL,
-            _CoverDialogExpandedTile(isExpanded: true),
+            _CoverDialogExpandedTile(
+              isExpanded: true,
+              userProfileData: userProfileData,
+            ),
             Di.SBHD,
           ],
         ),
@@ -53,34 +59,77 @@ class _CoverDialogExpandedTile extends StatefulWidget {
   const _CoverDialogExpandedTile({
     Key? key,
     this.isExpanded = false,
+    required this.userProfileData,
   }) : super(key: key);
-
+  final User userProfileData;
   @override
   State<_CoverDialogExpandedTile> createState() =>
       __CoverDialogExpandedTileState();
 }
 
 class __CoverDialogExpandedTileState extends State<_CoverDialogExpandedTile> {
+  late final TextEditingController _videoLinkController;
+  late final TextEditingController _videoTitleController;
+  late final TextEditingController _videoDescriptionController;
+  VideoPlayerController? _videoPlayerController;
+
+  final _formKey = GlobalKey<FormState>();
+
   String? selectedValue;
   bool currentlyWorkHere = false;
-
   late ExpandedTileController expandedTileController;
   @override
   void initState() {
     expandedTileController = ExpandedTileController(
       isExpanded: widget.isExpanded,
     );
+    _videoLinkController = TextEditingController(
+      text: widget.userProfileData.profileVideoUrl,
+    )..addListener(() {
+        setState(() {});
+        setState(() async {
+          await Future.delayed(Duration(milliseconds: 200));
+          _videoPlayerController = VideoPlayerController.network(
+            _videoLinkController.text,
+          );
+          _videoPlayerController!.initialize().then((value) {
+            setState(() {});
+          });
+        });
+      });
+    _videoTitleController = TextEditingController(
+      text: widget.userProfileData.profileVideoTitle,
+    );
+    _videoDescriptionController = TextEditingController(
+      text: widget.userProfileData.profileVideoDescription,
+    );
+    if (widget.userProfileData.profileVideoUrl != null) {
+      _videoPlayerController = VideoPlayerController.network(
+          widget.userProfileData.profileVideoUrl!);
+      _videoPlayerController!.initialize().then((value) {
+        setState(() {});
+      });
+    }
     super.initState();
   }
 
   @override
   void dispose() {
+    if (_videoPlayerController != null) {
+      _videoPlayerController!.dispose();
+      ;
+    }
     expandedTileController.dispose();
+    _videoTitleController.dispose();
+    _videoDescriptionController.dispose();
+    _videoLinkController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final userProfileData = DbData.getUserProfileData;
+
     return Container(
       margin: EdgeInsets.symmetric(horizontal: Di.PSL),
       color: Cr.whiteColor,
@@ -142,81 +191,122 @@ class __CoverDialogExpandedTileState extends State<_CoverDialogExpandedTile> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                width: double.infinity,
-                height: 345,
-                child: Image.asset(
-                  "assets/images/videoThumbnail.png",
-                  fit: BoxFit.cover,
-                ),
-              ),
+              _videoPlayerController != null
+                  ? IntrinsicHeight(
+                      child: Stack(
+                        children: [
+                          Container(
+                            width: double.infinity,
+                            height: 345,
+                            child: VideoPlayer(_videoPlayerController!),
+                          ),
+                          Center(
+                            child: FloatingActionButton(
+                              backgroundColor: Cr.accentBlue1,
+                              onPressed: () {
+                                setState(() {
+                                  _videoPlayerController!.value.isPlaying
+                                      ? _videoPlayerController!.pause()
+                                      : _videoPlayerController!.play();
+                                });
+                              },
+                              child: Icon(
+                                _videoPlayerController!.value.isPlaying
+                                    ? Icons.pause
+                                    : Icons.play_arrow,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  : Di.ESB,
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: Di.PSL),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Di.SBHL,
-                    DialogLabelTextFormField(
-                      customLabel: "Video link",
-                    ),
-                    Di.SBHES,
-                    DialogTextFieldForm(),
-                    Di.SBCH(18),
-                    DialogLabelTextFormField(
-                      customLabel: "Video title",
-                    ),
-                    Di.SBHES,
-                    DialogTextFieldForm(),
-                    Di.SBCH(18),
-                    DialogLabelTextFormField(
-                      customLabel: "Video description",
-                    ),
-                    Di.SBHES,
-                    DialogMultiLineTextField(
-                      width: 575,
-                    ),
-                    Di.SBCH(28),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        CustomElevatedButton(
-                          borderColor: Cr.accentBlue2,
-                          makeWidthNull: true,
-                          onPressed: () => Nav.pop(context),
-                          child: Text(
-                            "Cancel",
-                            style: bodySmallRegular.copyWith(
-                              color: Cr.accentBlue1,
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Di.SBHL,
+                      DialogLabelTextFormField(
+                        customLabel: "Video link",
+                      ),
+                      Di.SBHES,
+                      DialogTextFieldForm(
+                        // validator: (vallue) {
+                        //   return null;
+                        //   // Validator.validateText(value);
+                        // },
+                        textEditingController: _videoLinkController,
+                      ),
+                      Di.SBCH(18),
+                      DialogLabelTextFormField(
+                        customLabel: "Video title",
+                      ),
+                      Di.SBHES,
+                      DialogTextFieldForm(
+                        textEditingController: _videoTitleController,
+                      ),
+                      Di.SBCH(18),
+                      DialogLabelTextFormField(
+                        customLabel: "Video description",
+                      ),
+                      Di.SBHES,
+                      DialogMultiLineTextField(
+                        textEditingController: _videoDescriptionController,
+                        width: 575,
+                      ),
+                      Di.SBCH(28),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          CustomElevatedButton(
+                            borderColor: Cr.accentBlue2,
+                            makeWidthNull: true,
+                            onPressed: () => Nav.pop(context),
+                            child: Text(
+                              "Cancel",
+                              style: bodySmallRegular.copyWith(
+                                color: Cr.accentBlue1,
+                              ),
                             ),
+                            height: 36,
+                            donotShowIcon: true,
+                            backgroundColor: Cr.accentBlue3,
                           ),
-                          height: 36,
-                          donotShowIcon: true,
-                          backgroundColor: Cr.accentBlue3,
-                        ),
-                        Di.SBWES,
-                        CustomElevatedButton(
-                          borderColor: Cr.accentBlue2,
-                          makeWidthNull: true,
-                          onPressed: () async {
-                            // Nav.pop(context);
-                            // await new User(
-                            //   profileSummary:
-                            //       _profileSummaryController.text,
-                            // ).save(widget.userProfileData);
-                          },
-                          child: Text(
-                            "Add to profile",
-                            style: bodySmallRegular.copyWith(
-                              color: Cr.whiteColor,
+                          Di.SBWES,
+                          CustomElevatedButton(
+                            borderColor: Cr.accentBlue2,
+                            makeWidthNull: true,
+                            onPressed: () async {
+                              showCircularProgressIndicator(context);
+                              await new User(
+                                profileVideoTitle: _videoTitleController.text,
+                                profileVideoUrl: _videoLinkController.text,
+                                profileVideoDescription:
+                                    _videoDescriptionController.text,
+                              ).save(DbData.getUserProfileData);
+
+                              Routemaster.of(context).push("/profile");
+                              Nav.pop(context);
+                              Nav.pop(context);
+                              // }
+                            },
+                            child: Text(
+                              "Add to profile",
+                              style: bodySmallRegular.copyWith(
+                                color: Cr.whiteColor,
+                              ),
                             ),
+                            height: 36,
+                            donotShowIcon: true,
+                            backgroundColor: Cr.accentBlue1,
                           ),
-                          height: 36,
-                          donotShowIcon: true,
-                          backgroundColor: Cr.accentBlue1,
-                        ),
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

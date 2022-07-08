@@ -13,6 +13,8 @@ void main() async {
 
   await Get.put(HoledoDatabase()).init();
   WidgetsFlutterBinding.ensureInitialized();
+  // await testingMain();
+
   runApp(HoledoApp());
 }
 

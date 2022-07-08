@@ -3,7 +3,6 @@ import 'package:holedo/presentation/popups/profile_connection_request_popup.dart
 import 'package:holedo/presentation/providers/profile_provider.dart';
 import 'package:holedo/presentation/ui/components/onhover.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
-import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/styles.dart';
 import 'package:provider/provider.dart';
 
@@ -23,7 +22,6 @@ class ProfileSubMenuPopup extends StatelessWidget {
       child: Container(
         width: 170,
         height: 220,
-        padding: const EdgeInsets.symmetric(vertical: Di.PSES),
         child: ListView(
           shrinkWrap: true,
           children: [

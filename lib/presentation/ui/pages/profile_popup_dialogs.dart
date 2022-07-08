@@ -1,73 +1,42 @@
-import 'package:flutter/material.dart';
-import 'package:holedo/presentation/utill/color_resources.dart';
-import 'package:holedo/presentation/utill/dimensions.dart';
+import 'package:holedo/models/holedoapi/holedoapi.dart';
+import 'package:holedo/services/holedo_api_services.dart';
+import 'package:dio/dio.dart' as dio;
+import 'package:http/http.dart' as http;
 
-void main() {
-  runApp(const MyApp());
+dio.Dio _dio = dio.Dio();
+Future<void> main() async {
+  final token =
+      "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjM4MjksImV4cCI6MTk3MTI0Mzc1NH0.iD6C9KbsPNit4xmBEby-iighMVcrilS-xlsNcpUwdOM";
+
+  ApiServices apiServices = ApiServices();
+
+  final response = await http.post(
+      Uri.parse("https://api.holedo.com/site-settings/v2?type=2"),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token',
+      });
+  // print('Token : ${token}');
+  // print(response);
+  // final response = await apiServices.POST(
+  //     target: "https://api.holedo.com/site-settings/v2?type=2");
+  // await getSettings();
+  print("response is ${response.toString()}");
+  //
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: MyStatefulWidget(),
-    );
-  }
-}
-
-class ProfilePopupDialogScreen extends StatefulWidget {
-  const ProfilePopupDialogScreen({Key? key}) : super(key: key);
-
-  @override
-  State<ProfilePopupDialogScreen> createState() =>
-      _ProfilePopupDialogScreenState();
-}
-
-class _ProfilePopupDialogScreenState extends State<ProfilePopupDialogScreen> {
-  Image? image;
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Cr.accentBlue1,
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              MyStatefulWidget(),
-              // ProfileWorkExperienceDialogWidget(
-              //   userProfileData: User(),
-              // ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class MyStatefulWidget extends StatefulWidget {
-  const MyStatefulWidget({Key? key}) : super(key: key);
-
-  @override
-  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
-}
-
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  String _selectedMenu = '';
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          Di.SBHOTL,
-        ],
-      ),
-    );
+Future<Holedoapi> getSettings() async {
+  try {
+    var data = new Holedoapi();
+    var url = "${baseUrl}" + "/site-settings/v2?type=2";
+    dio.Response response = await _dio.get(url);
+    print('URL: ${url}');
+    if (response.statusCode == 200 && response.data['success'] == true) {
+      data = Holedoapi.fromJson(response.data as Map<String, dynamic>);
+    }
+    return data;
+  } catch (e) {
+    throw Exception(e.toString());
   }
 }

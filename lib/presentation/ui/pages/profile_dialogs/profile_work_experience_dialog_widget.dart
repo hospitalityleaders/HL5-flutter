@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:holedo/models/holedoapi/experience.dart';
+import 'package:holedo/presentation/data/presentation_data.dart';
 import 'package:holedo/presentation/extensions/datetime_extension.dart';
 
 import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
@@ -11,6 +12,7 @@ import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/images.dart';
 import 'package:holedo/presentation/utill/nav.dart';
 import 'package:holedo/presentation/utill/styles.dart';
+import 'package:holedo/presentation/validators/form_validator.dart';
 
 class ProfileWorkExperienceDialogWidget extends StatefulWidget {
   const ProfileWorkExperienceDialogWidget({
@@ -176,6 +178,8 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
   String? selectedValue;
   bool currentlyWorkHere = false;
   late bool isExpanded;
+  String? country;
+  String? startMonth, startYear, endMonth, endYear;
 
   @override
   Widget build(BuildContext context) {
@@ -251,322 +255,316 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
       content: Container(
         color: Cr.whiteColor,
         padding: EdgeInsets.all(Di.PSL),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                DialogLabelTextFormField(
-                  customLabel: "Title / position",
-                ),
-                Di.SBHES,
-                DialogTextFieldForm(
-                  textEditingController: _titlePositionController,
-                ),
-                Di.SBCH(18),
-                DialogLabelTextFormField(
-                  customLabel: "Company name",
-                ),
-                Di.SBHES,
-                DialogTextFieldForm(
-                  textEditingController: _companyNameController,
-                ),
-                Di.SBCH(18),
-                DialogLabelTextFormField(
-                  isImportant: false,
-                  customLabel: "Company website",
-                ),
-                Di.SBHES,
-                DialogTextFieldForm(
-                  hintText: "www.website.com",
-                  textEditingController: _companyWebsiteController,
-                ),
-                Di.SBCH(18),
-                Row(
-                  children: [
-                    DialogLabelTextFormField(
-                      customLabel: "City / Area  / Region",
-                      width: 250,
-                    ),
-                    SizedBox(width: 18),
-                    DialogLabelTextFormField(
-                      customLabel: "Country",
-                      width: 250,
-                    ),
-                  ],
-                ),
-                Di.SBHES,
-                Row(
-                  children: [
-                    DialogTextFieldForm(
-                      textEditingController: _cityController,
-                      width: 250,
-                    ),
-                    SizedBox(width: 18),
-                    DialogDropDownTextField(
-                      alignHintTextStart: true,
-                      hintText: 'Select Country',
-                      dataList: [
-                        "United state",
-                        "Pakistan",
-                        "South Africa",
-                      ],
-                    ),
-                  ],
-                ),
-                Di.SBCH(18),
-                DialogLabelTextFormField(customLabel: "Time period"),
-                Di.SBHES,
-                Row(
-                  children: [
-                    DialogDropDownTextField(
-                      // initialValue: experience.fromDate?.getMonthInString,
-                      alignHintTextStart: true,
-                      // onChanged: (value) {
-                      //   setState(() {
-                      //     startMonth = value;
-                      //   });
-                      // },
-                      width: 122,
-                      hintText: 'Select Month',
-                      dataList: [
-                        "Jaun",
-                        "Feb",
-                        "March",
-                      ],
-                    ),
-                    Di.SBWES,
-                    DialogDropDownTextField(
-                      // initialValue: experience.fromDate?.getMonthInString,
-                      onChanged: (value) {
-                        // setState(() {
-                        //   startYear = value;
-                        // });
-                      },
-                      width: 72,
-                      hintText: 'Year',
-                      dataList: [
-                        "2020",
-                        "2021",
-                        "2022",
-                      ],
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: Di.PSS),
-                      child: Container(
-                        width: 9,
-                        height: 1.5,
-                        color: Cr.accentBlue1,
-                      ),
-                    ),
-                    DialogDropDownTextField(
-                      // initialValue: experience.fromDate?.getMonthInString,
-                      onChanged: (value) {
-                        // setState(() {
-                        //   endMonth = value;
-                        // });
-                      },
-                      disable: currentlyWorkHere,
-                      width: 122,
-                      hintText: 'Select Month',
-                      dataList: [
-                        "Jaun",
-                        "Feb",
-                        "March",
-                      ],
-                    ),
-                    Di.SBWES,
-                    DialogDropDownTextField(
-                      // initialValue: experience.fromDate?.getMonthInString,
-                      onChanged: (value) {
-                        // setState(() {
-                        //   endYear = value;
-                        // });
-                      },
-                      disable: currentlyWorkHere,
-                      width: 72,
-                      hintText: 'Year',
-                      dataList: [
-                        "2020",
-                        "2021",
-                        "2022",
-                      ],
-                    ),
-                  ],
-                ),
-                Di.SBCH(7),
-                Row(
-                  children: [
-                    Di.SBCW(220),
-                    CheckboxDialog(
-                      onChanged: (value) {
-                        setState(() {
-                          currentlyWorkHere = !currentlyWorkHere;
-                        });
-                      },
-                      value: currentlyWorkHere,
-                    ),
-                    Text(
-                      "I currently work here",
-                      style: bodySmallRegular.copyWith(
-                        color: Cr.darkGrey1,
-                      ),
-                    )
-                  ],
-                ),
-                Di.SBCH(18),
-                DialogLabelTextFormField(
-                  customLabel: "Salary per annum",
-                  icon: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  DialogLabelTextFormField(
+                    customLabel: "Title / position",
+                  ),
+                  Di.SBHES,
+                  DialogTextFieldForm(
+                    validator: requiredValidator,
+                    textEditingController: _titlePositionController,
+                  ),
+                  Di.SBCH(18),
+                  DialogLabelTextFormField(
+                    customLabel: "Company name",
+                  ),
+                  Di.SBHES,
+                  DialogTextFieldForm(
+                    validator: requiredValidator,
+                    textEditingController: _companyNameController,
+                  ),
+                  Di.SBCH(18),
+                  DialogLabelTextFormField(
+                    isImportant: false,
+                    customLabel: "Company website",
+                  ),
+                  Di.SBHES,
+                  DialogTextFieldForm(
+                    validator: requiredValidator,
+                    hintText: "www.website.com",
+                    textEditingController: _companyWebsiteController,
+                  ),
+                  Di.SBCH(18),
+                  Row(
                     children: [
-                      SvgPicture.asset(
-                        Svgs.helpCircle,
-                        color: Cr.accentBlue1,
-                        width: 10,
+                      DialogLabelTextFormField(
+                        customLabel: "City / Area  / Region",
+                        width: 250,
+                      ),
+                      SizedBox(width: 18),
+                      DialogLabelTextFormField(
+                        customLabel: "Country",
+                        width: 250,
                       ),
                     ],
                   ),
-                ),
-                Text(
-                  "This is for data report purposes only and will always be anonymously displayed",
-                  style: bodySmallRegular.copyWith(
-                    color: Cr.darkGrey1,
-                  ),
-                ),
-                Di.SBHES,
-                Row(
-                  children: [
-                    DialogDropDownTextField(
-                      width: 140,
-                      hintText: 'Select Currency',
-                      dataList: [
-                        "Jaun",
-                        "Feb",
-                        "March",
-                      ],
-                    ),
-                    Di.SBWES,
-                    DialogTextFieldForm(
-                      textInputType: TextInputType.number,
-                      width: 110,
-                      hintText: "Amount",
-                    ),
-                  ],
-                ),
-                Di.SBCH(18),
-                DialogLabelTextFormField(
-                  customLabel: "Leave days per annum",
-                  icon: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                  Di.SBHES,
+                  Row(
                     children: [
-                      SvgPicture.asset(
-                        Svgs.helpCircle,
-                        color: Cr.accentBlue1,
-                        width: 10,
+                      DialogTextFieldForm(
+                        validator: requiredValidator,
+                        textEditingController: _cityController,
+                        width: 250,
+                      ),
+                      SizedBox(width: 18),
+                      DialogDropDownTextField(
+                        onChanged: (value) {
+                          setState(() {
+                            country = value;
+                          });
+                        },
+                        alignHintTextStart: true,
+                        hintText: 'Select Country',
+                        dataList: PresentationData.countries.values.toList(),
                       ),
                     ],
                   ),
-                ),
-                Text(
-                  "This is for data report purposes only and will always be anonymously displayed",
-                  style: bodySmallRegular.copyWith(
-                    color: Cr.darkGrey1,
-                  ),
-                ),
-                Di.SBHES,
-                DialogDropDownTextField(
-                  width: 100,
-                  hintText: '10+ days',
-                  dataList: [
-                    "Jaun",
-                    "Feb",
-                    "March",
-                  ],
-                ),
-                Di.SBCH(18),
-                DialogLabelTextFormField(
-                  customLabel: "Job description",
-                  isImportant: false,
-                ),
-                Di.SBHES,
-                DialogMultiLineTextField(
-                  width: 575,
-                )
-              ],
-            ),
-            Di.SBCH(28),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      newTextField.add('');
-                    });
-                  },
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
+                  Di.SBCH(18),
+                  DialogLabelTextFormField(customLabel: "Time period"),
+                  Di.SBHES,
+                  Row(
                     children: [
-                      SvgPicture.asset(
-                        Svgs.delete,
-                        color: Cr.red1,
-                        width: 14,
+                      DialogDropDownTextField(
+                        // initialValue: experience.fromDate?.getMonthInString,
+                        alignHintTextStart: true,
+                        onChanged: (value) {
+                          setState(() {
+                            startMonth = value;
+                          });
+                        },
+                        width: 122,
+                        hintText: 'Select Month',
+                        dataList: PresentationData.monthList,
                       ),
-                      Di.SBWETS,
-                      Text(
-                        "Delete",
-                        style: bodySmallRegular.copyWith(
-                          color: Cr.red1,
-                        ),
+                      Di.SBWES,
+                      DialogDropDownTextField(
+                        // initialValue: experience.fromDate?.getMonthInString,
+                        onChanged: (value) {
+                          setState(() {
+                            startYear = value;
+                          });
+                        },
+                        width: 72,
+                        hintText: 'Year',
+                        dataList: PresentationData.yearsList,
                       ),
-                    ],
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    CustomElevatedButton(
-                      borderColor: Cr.accentBlue2,
-                      makeWidthNull: true,
-                      onPressed: () => Nav.pop(context),
-                      child: Text(
-                        "Cancel",
-                        style: bodySmallRegular.copyWith(
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: Di.PSS),
+                        child: Container(
+                          width: 9,
+                          height: 1.5,
                           color: Cr.accentBlue1,
                         ),
                       ),
-                      height: 36,
-                      donotShowIcon: true,
-                      backgroundColor: Cr.accentBlue3,
-                    ),
-                    Di.SBWES,
-                    CustomElevatedButton(
-                      borderColor: Cr.accentBlue2,
-                      makeWidthNull: true,
-                      onPressed: () async {
-                        // Nav.pop(context);
-                        // await new User(
-                        //   profileSummary:
-                        //       _profileSummaryController.text,
-                        // ).save(widget.userProfileData);
-                      },
-                      child: Text(
-                        "Save",
-                        style: bodySmallRegular.copyWith(
-                          color: Cr.whiteColor,
-                        ),
+                      DialogDropDownTextField(
+                        // initialValue: experience.fromDate?.getMonthInString,
+                        onChanged: (value) {
+                          setState(() {
+                            endMonth = value;
+                          });
+                        },
+                        disable: currentlyWorkHere,
+                        width: 122,
+                        hintText: 'Select Month',
+                        dataList: PresentationData.monthList,
                       ),
-                      height: 36,
-                      donotShowIcon: true,
-                      backgroundColor: Cr.accentBlue1,
+                      Di.SBWES,
+                      DialogDropDownTextField(
+                        // initialValue: experience.fromDate?.getMonthInString,
+                        onChanged: (value) {
+                          // setState(() {
+                          //   endYear = value;
+                          // });
+                        },
+                        disable: currentlyWorkHere,
+                        width: 72,
+                        hintText: 'Year',
+                        dataList: PresentationData.yearsList,
+                      ),
+                    ],
+                  ),
+                  Di.SBCH(7),
+                  Row(
+                    children: [
+                      Di.SBCW(220),
+                      CheckboxDialog(
+                        onChanged: (value) {
+                          setState(() {
+                            currentlyWorkHere = !currentlyWorkHere;
+                          });
+                        },
+                        value: currentlyWorkHere,
+                      ),
+                      Text(
+                        "I currently work here",
+                        style: bodySmallRegular.copyWith(
+                          color: Cr.darkGrey1,
+                        ),
+                      )
+                    ],
+                  ),
+                  Di.SBCH(18),
+                  DialogLabelTextFormField(
+                    customLabel: "Salary per annum",
+                    icon: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SvgPicture.asset(
+                          Svgs.helpCircle,
+                          color: Cr.accentBlue1,
+                          width: 10,
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              ],
-            )
-          ],
+                  ),
+                  Text(
+                    "This is for data report purposes only and will always be anonymously displayed",
+                    style: bodySmallRegular.copyWith(
+                      color: Cr.darkGrey1,
+                    ),
+                  ),
+                  Di.SBHES,
+                  Row(
+                    children: [
+                      DialogDropDownTextField(
+                        width: 140,
+                        hintText: 'Select Currency',
+                        dataList: [
+                          "ZAR - RAND",
+                        ],
+                      ),
+                      Di.SBWES,
+                      DialogTextFieldForm(
+                        validator: requiredValidator,
+                        textInputType: TextInputType.number,
+                        width: 110,
+                        hintText: "Amount",
+                      ),
+                    ],
+                  ),
+                  Di.SBCH(18),
+                  DialogLabelTextFormField(
+                    customLabel: "Leave days per annum",
+                    icon: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SvgPicture.asset(
+                          Svgs.helpCircle,
+                          color: Cr.accentBlue1,
+                          width: 10,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Text(
+                    "This is for data report purposes only and will always be anonymously displayed",
+                    style: bodySmallRegular.copyWith(
+                      color: Cr.darkGrey1,
+                    ),
+                  ),
+                  Di.SBHES,
+                  DialogDropDownTextField(
+                    width: 100,
+                    hintText: '10+ days',
+                    dataList: [
+                      "10",
+                      "30",
+                      "50",
+                      "100",
+                      "200",
+                    ],
+                  ),
+                  Di.SBCH(18),
+                  DialogLabelTextFormField(
+                    customLabel: "Job description",
+                    isImportant: false,
+                  ),
+                  Di.SBHES,
+                  DialogMultiLineTextField(
+                    width: 575,
+                  )
+                ],
+              ),
+              Di.SBCH(28),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        newTextField.add('');
+                      });
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SvgPicture.asset(
+                          Svgs.delete,
+                          color: Cr.red1,
+                          width: 14,
+                        ),
+                        Di.SBWETS,
+                        Text(
+                          "Delete",
+                          style: bodySmallRegular.copyWith(
+                            color: Cr.red1,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      CustomElevatedButton(
+                        borderColor: Cr.accentBlue2,
+                        makeWidthNull: true,
+                        onPressed: () => Nav.pop(context),
+                        child: Text(
+                          "Cancel",
+                          style: bodySmallRegular.copyWith(
+                            color: Cr.accentBlue1,
+                          ),
+                        ),
+                        height: 36,
+                        donotShowIcon: true,
+                        backgroundColor: Cr.accentBlue3,
+                      ),
+                      Di.SBWES,
+                      CustomElevatedButton(
+                        borderColor: Cr.accentBlue2,
+                        makeWidthNull: true,
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate()) {}
+                          // Nav.pop(context);
+                          // await new User(
+                          //   profileSummary:
+                          //       _profileSummaryController.text,
+                          // ).save(widget.userProfileData);
+                        },
+                        child: Text(
+                          "Save",
+                          style: bodySmallRegular.copyWith(
+                            color: Cr.whiteColor,
+                          ),
+                        ),
+                        height: 36,
+                        donotShowIcon: true,
+                        backgroundColor: Cr.accentBlue1,
+                      ),
+                    ],
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
