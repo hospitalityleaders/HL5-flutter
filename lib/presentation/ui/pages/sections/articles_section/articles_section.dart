@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:holedo/db_data.dart';
 import 'package:holedo/presentation/ui/pages/components/connection_component.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_article_timeline_component.dart';
 import 'package:holedo/presentation/ui/pages/components/rights_component.dart';
@@ -17,6 +18,7 @@ class ArticlesSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final articles = DbData.getUserProfileData.articles;
     return SizedBox(
       width: Di.getScreenSize(context).width,
       child: Row(

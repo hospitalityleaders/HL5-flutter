@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:holedo/common/build_work_exp_pop_up.dart';
@@ -1179,6 +1180,7 @@ class FeaturedVideoComponent extends StatefulWidget {
 
 class _FeaturedVideoComponentState extends State<FeaturedVideoComponent> {
   late VideoPlayerController _controller;
+  bool showMore = false;
 
   @override
   void initState() {
@@ -1188,13 +1190,20 @@ class _FeaturedVideoComponentState extends State<FeaturedVideoComponent> {
         'https://assets.mixkit.co/videos/preview/mixkit-people-pouring-a-warm-drink-around-a-campfire-513-large.mp4')
       ..initialize().then((_) {
         setState(() {});
+      })
+      ..addListener(() {
+        if (_controller.value.position == _controller.value.duration) {
+          setState(() {
+            _controller.pause();
+          });
+        }
       });
   }
 
   @override
   void dispose() {
-    super.dispose();
     _controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -1272,17 +1281,35 @@ class _FeaturedVideoComponentState extends State<FeaturedVideoComponent> {
                             ),
                             children: <TextSpan>[
                               TextSpan(
-                                text: widget.userProfileData
-                                        .profileVideoDescription ??
-                                    "",
+                                text: (widget.userProfileData
+                                            .profileVideoDescription!.length <
+                                        120
+                                    ? widget.userProfileData
+                                        .profileVideoDescription!
+                                    : (showMore
+                                        ? widget.userProfileData
+                                            .profileVideoDescription
+                                        : widget.userProfileData
+                                                .profileVideoDescription!
+                                                .substring(0, 120) +
+                                            "...")),
                                 // "Noberto's career has revolved around causing corporate transformation projects designed to optimize the use of resources enha...",
                               ),
-                              TextSpan(
-                                text: "show more",
-                                style: TextStyle(
-                                  color: Cr.accentBlue1,
+                              if (widget.userProfileData
+                                      .profileVideoDescription!.length >
+                                  120)
+                                TextSpan(
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () => setState(() {
+                                          showMore = !showMore;
+                                        }),
+                                  text: showMore
+                                      ? "show less   "
+                                      : "show more   ",
+                                  style: TextStyle(
+                                    color: Cr.accentBlue1,
+                                  ),
                                 ),
-                              ),
                             ],
                           ),
                         ),

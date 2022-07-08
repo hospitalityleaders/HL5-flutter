@@ -104,8 +104,17 @@ class __CoverDialogExpandedTileState extends State<_CoverDialogExpandedTile> {
       text: widget.userProfileData.profileVideoDescription,
     );
     if (widget.userProfileData.profileVideoUrl != null) {
-      _videoPlayerController = VideoPlayerController.network(
-          widget.userProfileData.profileVideoUrl!);
+      _videoPlayerController =
+          VideoPlayerController.network(widget.userProfileData.profileVideoUrl!)
+            ..addListener(() {
+              if (_videoPlayerController!.value.position ==
+                  _videoPlayerController!.value.duration) {
+                setState(() {
+                  _videoPlayerController!.pause();
+                });
+              }
+            });
+      ;
       _videoPlayerController!.initialize().then((value) {
         setState(() {});
       });
