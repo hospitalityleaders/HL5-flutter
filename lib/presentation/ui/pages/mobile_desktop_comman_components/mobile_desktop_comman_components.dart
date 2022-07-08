@@ -4,7 +4,6 @@ import 'package:holedo/models/holedoapi/holedoapi.dart';
 import 'package:holedo/presentation/ui/components/contact_card_dialog_widget.dart';
 import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/presentation/ui/components/custom_outlined_button.dart';
-import 'package:holedo/presentation/ui/components/submenus.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/profile_send_connection_request_dialog.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/profile_write_referenece_dialog.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/show_custom_dialog.dart';
@@ -43,7 +42,10 @@ class ContactCardMenuCommon extends StatelessWidget {
         ),
         isMobile ? Di.SBWS : Di.ESB,
         CustomOutlinedButton(
-          onPressed: onPressed ?? () => showMoreProfileCardSubmenu(context),
+          onPressed: onPressed ??
+              () {
+                // ProfileCardSubMenu
+              },
           icon: Icon(
             Icons.menu,
             size: 12,
@@ -86,8 +88,8 @@ class SendConnectionRequestButton extends StatelessWidget {
   }
 }
 
-class MoreProfileCardSubMenu extends StatelessWidget {
-  const MoreProfileCardSubMenu({
+class ProfileCardSubMenu extends StatelessWidget {
+  const ProfileCardSubMenu({
     Key? key,
   }) : super(key: key);
 
@@ -96,10 +98,12 @@ class MoreProfileCardSubMenu extends StatelessWidget {
     return ListView(
       shrinkWrap: true,
       children: [
-        ProfileCardListTile(
-          // removePadding: true,
-          iconData: Icons.email,
-          text: 'Share profile via email',
+        SizedBox(
+          child: ProfileCardListTile(
+            // removePadding: true,
+            iconData: Icons.email,
+            text: 'Share profile via email',
+          ),
         ),
         ProfileCardListTile(
           // removePadding: true,

@@ -11,7 +11,7 @@ import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/styles.dart';
 
-class ProfileImageBanner extends StatelessWidget {
+class ProfileImageBanner extends StatefulWidget {
   const ProfileImageBanner({
     Key? key,
     this.onEditButtonPressed,
@@ -23,6 +23,12 @@ class ProfileImageBanner extends StatelessWidget {
   final User userProfileData;
 
   @override
+  State<ProfileImageBanner> createState() => _ProfileImageBannerState();
+}
+
+class _ProfileImageBannerState extends State<ProfileImageBanner> {
+  bool showProfileSubMenu = false;
+  @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
@@ -32,7 +38,7 @@ class ProfileImageBanner extends StatelessWidget {
           decoration: BoxDecoration(
             image: DecorationImage(
               image: NetworkImage(
-                userProfileData.banner ??
+                widget.userProfileData.banner ??
                     "https://images.pexels.com/photos/313782/pexels-photo-313782.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
               ),
               fit: BoxFit.cover,
@@ -54,50 +60,74 @@ class ProfileImageBanner extends StatelessWidget {
                 height: 385,
                 color: Cr.whiteColor,
                 padding: EdgeInsets.all(Di.PSD),
-                child: Column(
+                child: Stack(
                   children: [
-                    ContactCardMenuCommon(),
-                    Di.SBHD,
-                    Text(
-                      userProfileData.fullName ?? "",
-                      style: display2,
-                    ),
-                    Text(
-                      userProfileData.professionalTitle.toString(),
-                      // ??
-                      //     "Business development manager, recruiter and hotel specialist.",
-                      style: bodyLarge.copyWith(
-                        color: Cr.darkGrey1,
+                    SizedBox(
+                      child: Column(
+                        children: [
+                          ContactCardMenuCommon(
+                            onPressed: () {
+                              setState(() {
+                                showProfileSubMenu = !showProfileSubMenu;
+                              });
+                            },
+                          ),
+                          Di.SBHD,
+                          Text(
+                            widget.userProfileData.fullName ?? "",
+                            style: display2,
+                          ),
+                          Text(
+                            widget.userProfileData.professionalTitle.toString(),
+                            // ??
+                            //     "Business development manager, recruiter and hotel specialist.",
+                            style: bodyLarge.copyWith(
+                              color: Cr.darkGrey1,
+                            ),
+                          ),
+                          Di.SBHES,
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.location_on,
+                                color: Cr.darkGrey1,
+                                size: 12,
+                              ),
+                              Text(
+                                widget.userProfileData.area ?? "",
+                                style: bodySmallRegular.copyWith(
+                                  color: Cr.darkGrey1,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Di.SBHL,
+                          SendConnectionRequestButton(),
+                          Di.SBHES,
+                          WriteReferenceRecommandButtonComman(
+                            userProfileData: widget.userProfileData,
+                          ),
+                          Di.SBHOTL,
+                          StatsComman(
+                            userProfileData: widget.userProfileData,
+                          ),
+                        ],
                       ),
                     ),
-                    Di.SBHES,
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.location_on,
-                          color: Cr.darkGrey1,
-                          size: 12,
-                        ),
-                        Text(
-                          userProfileData.area ?? "",
-                          style: bodySmallRegular.copyWith(
-                            color: Cr.darkGrey1,
+                    if (showProfileSubMenu)
+                      Positioned(
+                        top: 30,
+                        right: 0,
+                        child: SizedBox(
+                          width: 245,
+                          child: SizedBox(
+                            width: 245,
+                            child: ProfileCardSubMenu(),
                           ),
                         ),
-                      ],
-                    ),
-                    Di.SBHL,
-                    SendConnectionRequestButton(),
-                    Di.SBHES,
-                    WriteReferenceRecommandButtonComman(
-                      userProfileData: userProfileData,
-                    ),
-                    Di.SBHOTL,
-                    StatsComman(
-                      userProfileData: userProfileData,
-                    ),
+                      ),
                   ],
                 ),
               ),
@@ -111,6 +141,7 @@ class ProfileImageBanner extends StatelessWidget {
             child: PersonAvatar(avatarSize: 75),
           ),
         ),
+
         if (Provider.of<ProfileProvider>(context).isProfileEditable)
           Positioned(
             bottom: 10,
@@ -155,7 +186,7 @@ class ProfileImageBanner extends StatelessWidget {
                         Container(
                           // margin: const EdgeInsets.symmetric(vertical: 100),
                           child: ProfileEditDialogWidget(
-                            userProfileData: userProfileData,
+                            userProfileData: widget.userProfileData,
                           ),
                         ),
                       );
@@ -208,3 +239,5 @@ class ProfileImageBanner extends StatelessWidget {
 // "assets/svgicons/card-account-phone.svg",
 // "Contact card",
 //
+
+

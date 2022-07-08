@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:holedo/presentation/ui/components/text_with_background.dart';
-import 'package:holedo/presentation/ui/pages/mobile_desktop_comman_components/mobile_desktop_comman_components.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/nav.dart';
@@ -160,22 +159,7 @@ class ConnectionRequestAppbarComponent extends StatelessWidget {
   }
 }
 
-Future<Object?> showMoreProfileCardSubmenu(BuildContext context) {
-  return showPopover(
-    backgroundColor: Cr.whiteColor,
-    context: context,
-    barrierDismissible: true,
-    bodyBuilder: (context) => MouseRegion(
-      onExit: (_) => Nav.pop(context),
-      child: MoreProfileCardSubMenu(),
-    ),
-    direction: PopoverDirection.bottom,
-    height: 100,
-    width: 250,
-    arrowHeight: 10,
-    arrowWidth: 10,
-  );
-}
+
 
 // Future<Object?> showProfileHoverSubmenu(BuildContext context) {
 //   return showPopover(

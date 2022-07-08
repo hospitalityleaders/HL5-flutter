@@ -217,7 +217,7 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                                   ),
                                   if (showCardSubMenu) ...[
                                     Di.SBHS,
-                                    MoreProfileCardSubMenu(),
+                                    ProfileCardSubMenu(),
                                   ],
                                   Di.SBHOL,
                                   SendConnectionRequestButton(
