@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:holedo/db_data.dart';
 import 'package:holedo/models/holedoapi/experience.dart';
+import 'package:holedo/models/models.dart';
 import 'package:holedo/presentation/data/presentation_data.dart';
 import 'package:holedo/presentation/extensions/datetime_extension.dart';
+import 'package:holedo/presentation/functions/helper_functions.dart';
 
 import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/custom_expanded_tile.dart';
@@ -95,6 +98,7 @@ class _ProfileWorkExperienceDialogWidgetState
                   margin: EdgeInsets.symmetric(horizontal: Di.PSL),
                   width: 615,
                   child: _SingleWorkExperience(
+                    index: index,
                     experience: experiences[index],
                   ),
                 );
@@ -113,9 +117,11 @@ class _SingleWorkExperience extends StatefulWidget {
     Key? key,
     this.experience,
     this.isExpanded = false,
+    this.index,
   }) : super(key: key);
   final Experience? experience;
   final bool isExpanded;
+  final int? index;
 
   @override
   State<_SingleWorkExperience> createState() => __SingleWorkExperienceState();
@@ -179,10 +185,12 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
   bool currentlyWorkHere = false;
   late bool isExpanded;
   String? country;
+  int? countryId;
   String? startMonth, startYear, endMonth, endYear;
 
   @override
   Widget build(BuildContext context) {
+    final userProfileData = DbData.getUserProfileData;
     return CustomExpandedTile(
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -287,7 +295,6 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
                   ),
                   Di.SBHES,
                   DialogTextFieldForm(
-                    validator: requiredValidator,
                     hintText: "www.website.com",
                     textEditingController: _companyWebsiteController,
                   ),
@@ -316,9 +323,17 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
                       SizedBox(width: 18),
                       DialogDropDownTextField(
                         onChanged: (value) {
-                          setState(() {
-                            country = value;
-                          });
+                          if (value != null) {
+                            final countryidString = HelperFunctions()
+                                .findKeyByValueFromMap(
+                                    PresentationData.countries, value);
+
+                            if (countryidString != null) {
+                              setState(() {
+                                countryId = int.tryParse(countryidString);
+                              });
+                            }
+                          }
                         },
                         alignHintTextStart: true,
                         hintText: 'Select Country',
@@ -488,6 +503,7 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
                   ),
                   Di.SBHES,
                   DialogMultiLineTextField(
+                    textEditingController: _jobDescriptionController,
                     width: 575,
                   )
                 ],
@@ -542,12 +558,48 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
                         borderColor: Cr.accentBlue2,
                         makeWidthNull: true,
                         onPressed: () async {
-                          if (_formKey.currentState!.validate()) {}
-                          // Nav.pop(context);
-                          // await new User(
-                          //   profileSummary:
-                          //       _profileSummaryController.text,
-                          // ).save(widget.userProfileData);
+                          // if (_formKey.currentState!.validate()) {
+                          showCircularProgressIndicator(context);
+                          List<Experience> _experiences =
+                              userProfileData.experiences!;
+
+                          experience.title = _titlePositionController.text;
+                          experience.companyName = _companyNameController.text;
+                          experience.companyWebsite =
+                              _companyWebsiteController.text;
+                          experience.area = _cityController.text;
+                          if (countryId != null) {
+                            experience.countryId = countryId;
+                          }
+                          if (startYear != null && startMonth != null) {
+                            experience.fromDate = DateTime(
+                              int.tryParse(startYear!)!,
+                              int.tryParse(startMonth!)!,
+                            );
+                          }
+                          if (endYear != null && endMonth != null) {
+                            experience.toDate = DateTime(
+                              int.tryParse(endYear!)!,
+                              int.tryParse(endMonth!)!,
+                            );
+                          }
+                          experience.salary = _salaryController.text;
+                          // experience.leaveDayTypesId
+                          experience.description =
+                              _jobDescriptionController.text;
+                          //update exiting list
+                          if (widget.index != null) {
+                            _experiences[widget.index!] = experience;
+                          } else {
+                            _experiences.add(experience);
+                          }
+
+                          await User(
+                            experiences: _experiences,
+                          ).save(userProfileData);
+                          Nav.pop(context);
+                          Nav.pop(context);
+                          // }
                         },
                         child: Text(
                           "Save",

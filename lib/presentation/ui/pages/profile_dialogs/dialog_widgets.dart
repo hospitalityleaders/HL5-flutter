@@ -121,7 +121,8 @@ class DialogTextFieldForm extends StatelessWidget {
     return SizedBox(
       width: width,
       child: TextFormField(
-        validator: validator,
+        autovalidateMode: AutovalidateMode.disabled,
+        // validator: validator,
         keyboardType: textInputType,
         controller: textEditingController,
         style: bodySmallRegular.copyWith(
@@ -129,6 +130,7 @@ class DialogTextFieldForm extends StatelessWidget {
         ),
         decoration: Styles.popUpDialogTextFieldInputDecoration.copyWith(
           hintText: hintText,
+          errorStyle: TextStyle(fontSize: Di.FSES),
           hintStyle: bodySmallRegular.copyWith(color: Cr.darkGrey4),
         ),
       ),
@@ -245,7 +247,6 @@ class _DialogDropDownTextFieldState extends State<DialogDropDownTextField> {
             color: widget.disable ? Cr.grey2 : Cr.darkGrey1,
           ),
           iconSize: 20,
-
           buttonPadding: const EdgeInsets.symmetric(
             horizontal: Di.PSETS,
           ),
@@ -281,12 +282,12 @@ class _DialogDropDownTextFieldState extends State<DialogDropDownTextField> {
                     ),
                   ))
               .toList(),
-          validator: (value) {
-            if (value == null) {
-              return 'Please select value.';
-            }
-            return null;
-          },
+          // validator: (value) {
+          //   if (value == null) {
+          //     return 'Please select value.';
+          //   }
+          //   return null;
+          // },
           onChanged: widget.onChanged ?? (value) {},
           // onSaved: (value) {
           //   selectedValue = value.toString();

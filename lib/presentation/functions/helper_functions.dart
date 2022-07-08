@@ -31,4 +31,8 @@ class HelperFunctions {
     }
     return lenght;
   }
+
+  String? findKeyByValueFromMap(Map<String, String> givenMap, String value) {
+    return givenMap.keys.firstWhere((k) => givenMap[k] == value);
+  }
 }
