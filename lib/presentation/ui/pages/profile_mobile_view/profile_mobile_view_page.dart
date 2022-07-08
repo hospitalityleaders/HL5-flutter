@@ -220,7 +220,7 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                                     MoreProfileCardSubMenu(),
                                   ],
                                   Di.SBHOL,
-                                  SendConnectionRequestComman(
+                                  SendConnectionRequestButton(
                                     width: double.infinity,
                                   ),
                                   Di.SBHES,

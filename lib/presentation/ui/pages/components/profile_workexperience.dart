@@ -215,7 +215,6 @@ class _SingleExperienceWidgetState extends State<_SingleExperienceWidget> {
                   ),
                   Text(
                     widget.singleExperience.workDuration ?? "",
-                    // "February 2013 – 2014 (1 year 6 months)",
                     style: bodySmallRegular.copyWith(
                       color: Cr.darkGrey1,
                       fontSize: Di.FSS,

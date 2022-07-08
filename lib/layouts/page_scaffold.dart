@@ -218,11 +218,6 @@ class _PageScaffoldState extends State<PageScaffold> {
                                           Di.getScreenSize(context).width < 1301
                                               ? 5
                                               : 130,
-                                      // child: Container(
-                                      //   width: 100,
-                                      //   height: 400,
-                                      //   color: Cr.accentBlue1,
-                                      // ),
                                       child: ProfileSubMenuPopup(),
                                     );
                             },

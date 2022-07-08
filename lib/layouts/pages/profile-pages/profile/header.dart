@@ -271,8 +271,7 @@ class _HeaderState extends State<Header> {
           //       // await _apiServices.logout('${userData.read('token')}');
           //       await _apiServices.logout(
           //           '${Get.put(AuthController()).restoreModel().token}');
-          //       Navigator.pushReplacement(
-          //           context, MaterialPageRoute(builder: (context) => LogIn()));
+          //       Routemaster.of(context).push("/login");
           //     },
           //     child: Text('Log out'))
         ],

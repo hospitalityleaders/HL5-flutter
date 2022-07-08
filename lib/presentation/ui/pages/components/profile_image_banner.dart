@@ -89,7 +89,7 @@ class ProfileImageBanner extends StatelessWidget {
                       ],
                     ),
                     Di.SBHL,
-                    SendConnectionRequestComman(),
+                    SendConnectionRequestButton(),
                     Di.SBHES,
                     WriteReferenceRecommandButtonComman(
                       userProfileData: userProfileData,

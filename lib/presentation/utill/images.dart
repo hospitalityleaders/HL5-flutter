@@ -33,7 +33,7 @@ class Svgs {
   static const String informationVariant =
       'assets/svgicons/information-variant.svg';
   static const String clipboardCheck = 'assets/svgicons/clipboard-check.svg';
-  // static const String logo1 = 'assets/svgicons/logo1.svg';
+  static const String plusBox = 'assets/svgicons/plus-box.svg';
   // static const String logo1 = 'assets/svgicons/logo1.svg';
   // static const String logo1 = 'assets/svgicons/logo1.svg';
   // static const String logo1 = 'assets/svgicons/logo1.svg';

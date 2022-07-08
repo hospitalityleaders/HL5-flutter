@@ -330,11 +330,13 @@ class DialogMultiLineTextField extends StatelessWidget {
     this.textEditingController,
     this.width,
     this.hintText,
+    this.minLines,
   }) : super(key: key);
 
   final TextEditingController? textEditingController;
   final double? width;
   final String? hintText;
+  final int? minLines;
 
   @override
   Widget build(BuildContext context) {
@@ -345,10 +347,12 @@ class DialogMultiLineTextField extends StatelessWidget {
         style: bodySmallRegular.copyWith(
           color: Cr.darkGrey1,
         ),
+        keyboardType: TextInputType.multiline,
         maxLines: 100,
-        minLines: 5,
+        // expands: true,
+        minLines: minLines ?? 5,
         decoration: Styles.popUpDialogTextFieldInputDecoration.copyWith(
-          // hintText: hintText,
+          hintText: hintText,
           hintStyle: bodySmallRegular.copyWith(color: Cr.darkGrey4),
         ),
       ),

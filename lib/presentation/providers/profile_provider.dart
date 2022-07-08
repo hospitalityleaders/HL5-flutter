@@ -5,11 +5,13 @@ class ProfileProvider extends ChangeNotifier {
   bool showProfileLoading;
   bool showConectionRequestPopo;
   bool showProfileSubMenus;
+  bool profileSubMenuClicked;
   ProfileProvider({
     this.showConectionRequestPopo = false,
     this.showProfileSubMenus = false,
     this.isProfileEditable = false,
     this.showProfileLoading = false,
+    this.profileSubMenuClicked = false,
   });
 
   void changeShowProfileLoadingState(bool showLoading) {
@@ -34,6 +36,14 @@ class ProfileProvider extends ChangeNotifier {
     if (showPopup == true && showProfileSubMenus == false) {
       showProfileSubMenus = true;
     }
+    notifyListeners();
+  }
+
+  Future<void> changeProfileSubMenuClicked(bool showSubMenu) async {
+    showProfileSubMenus = false;
+    profileSubMenuClicked = showSubMenu;
+    notifyListeners();
+    profileSubMenuClicked = false;
     notifyListeners();
   }
 

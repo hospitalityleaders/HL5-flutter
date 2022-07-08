@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:get/get.dart' as Store;
+import 'package:holedo/controller/auth_controller.dart';
 
 //import 'package:get_storage/get_storage.dart';
 //import 'package:holedo/controller/auth_controller.dart';
@@ -93,6 +94,23 @@ class ApiServices {
     } catch (e) {
       print('e: ${e.toString()}');
       throw Exception();
+    }
+  }
+
+  Future<dynamic> logout(String accessToken) async {
+    Store.Get.find<AuthController>().resetModel();
+    try {
+      dio.Response response = await _dio.get(
+        'https://${AuthData.apiHost}/rest/users/access_token/InValidate',
+        queryParameters: {'apikey': AuthData.apiKey},
+        options: dio.Options(
+          headers: {'AuthApi': 'Bearer $accessToken'},
+        ),
+      );
+
+      return response.data;
+    } on dio.DioError catch (e) {
+      return e.response!.data;
     }
   }
 
