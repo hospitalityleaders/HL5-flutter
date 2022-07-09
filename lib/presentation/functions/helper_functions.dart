@@ -1,3 +1,6 @@
+import 'package:holedo/db_data.dart';
+import 'package:holedo/presentation/ui_classes.dart';
+
 class HelperFunctions {
   List<String> splitText(String text, int lenghtOfFirstString) {
     List<String> result = [];
@@ -34,5 +37,63 @@ class HelperFunctions {
 
   String? findKeyByValueFromMap(Map<String, String> givenMap, String value) {
     return givenMap.keys.firstWhere((k) => givenMap[k] == value);
+  }
+
+  List<TimelineClass> listOfTimeline() {
+    final userProfileData = DbData.getUserProfileData;
+    final experiences = userProfileData.experiences;
+    final achievements = userProfileData.achievements;
+    final educations = userProfileData.educations;
+    List<TimelineClass> _timelineClassList = <TimelineClass>[];
+    if (experiences != null && experiences.isNotEmpty) {
+      experiences.forEach(
+        (experience) {
+          if (experience.toDate != null) {
+            _timelineClassList.add(
+              TimelineClass(
+                experience.id!,
+                experience.toDate!,
+                TimelineClassTypes.Experience,
+                experience,
+              ),
+            );
+          }
+        },
+      );
+    }
+    if (achievements != null && achievements.isNotEmpty) {
+      achievements.forEach(
+        (achievement) {
+          if (achievement.dateReceived != null) {
+            _timelineClassList.add(
+              TimelineClass(
+                achievement.id!,
+                achievement.dateReceived!,
+                TimelineClassTypes.Achievement,
+                achievement,
+              ),
+            );
+          }
+        },
+      );
+    }
+    if (educations != null && educations.isNotEmpty) {
+      educations.forEach(
+        (education) {
+          if (education.durationToDate != null) {
+            _timelineClassList.add(
+              TimelineClass(
+                education.id!,
+                education.durationToDate!,
+                TimelineClassTypes.Education,
+                education,
+              ),
+            );
+          }
+        },
+      );
+    }
+    _timelineClassList.sort(((a, b) => b.dateTime.compareTo(a.dateTime)));
+    return _timelineClassList;
   }
 }

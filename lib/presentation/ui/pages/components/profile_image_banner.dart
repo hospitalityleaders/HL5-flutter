@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:holedo/models/models.dart';
 import 'package:holedo/presentation/providers/profile_provider.dart';
+import 'package:holedo/presentation/ui/components/contact_card_dialog_widget.dart';
+import 'package:holedo/presentation/ui/components/custom_outlined_button.dart';
 import 'package:holedo/presentation/ui/components/person_avatar.dart';
 import 'package:holedo/presentation/ui/components/rounded_icon_button.dart';
 import 'package:holedo/presentation/ui/pages/mobile_desktop_comman_components/mobile_desktop_comman_components.dart';
@@ -10,6 +13,7 @@ import 'package:holedo/presentation/ui/pages/profile_dialogs/show_custom_dialog.
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/styles.dart';
+import 'package:tap_canvas/tap_canvas.dart';
 
 class ProfileImageBanner extends StatefulWidget {
   const ProfileImageBanner({
@@ -65,24 +69,77 @@ class _ProfileImageBannerState extends State<ProfileImageBanner> {
                     SizedBox(
                       child: Column(
                         children: [
-                          ContactCardMenuCommon(
-                            onPressed: () {
-                              setState(() {
-                                showProfileSubMenu = !showProfileSubMenu;
-                              });
-                            },
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              CustomOutlinedButton(
+                                onPressed: () {
+                                  showCustomDialog(
+                                    context,
+                                    ContactCardDialogWidget(),
+                                  );
+                                },
+                                text: "Contact card",
+                                icon: SvgPicture.asset(
+                                  "assets/svgicons/card-account-phone.svg",
+                                  height: 12,
+                                  color: Cr.darkGrey1,
+                                ),
+                              ),
+                              Di.ESB,
+                              TapOutsideDetectorWidget(
+                                onTappedInside: () {
+                                  setState(() {
+                                    showProfileSubMenu = !showProfileSubMenu;
+                                  });
+                                },
+                                onTappedOutside: () {
+                                  setState(() {
+                                    showProfileSubMenu = false;
+                                  });
+                                },
+                                child: CustomOutlinedButton(
+                                  onPressed: () {},
+                                  icon: Icon(
+                                    Icons.menu,
+                                    size: 12,
+                                    color: Cr.darkGrey1,
+                                  ),
+                                  textWidget: Icon(
+                                    Icons.arrow_drop_down_outlined,
+                                    size: 12,
+                                    color: Cr.darkGrey1,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
+                          // ContactCardMenuCommon(
+                          //   onPressed: () {
+                          //     setState(() {
+                          //       showProfileSubMenu = !showProfileSubMenu;
+
+                          //     });
+                          //   },
+                          // ),
                           Di.SBHD,
                           Text(
                             widget.userProfileData.fullName ?? "",
                             style: display2,
                           ),
-                          Text(
-                            widget.userProfileData.professionalTitle.toString(),
-                            // ??
-                            //     "Business development manager, recruiter and hotel specialist.",
-                            style: bodyLarge.copyWith(
-                              color: Cr.darkGrey1,
+                          Center(
+                            child: SizedBox(
+                              width: 450,
+                              child: Text(
+                                widget.userProfileData.professionalTitle
+                                    .toString(),
+                                // ??
+                                textAlign: TextAlign.center,
+                                maxLines: 1,
+                                style: bodyLarge.copyWith(
+                                  color: Cr.darkGrey1,
+                                ),
+                              ),
                             ),
                           ),
                           Di.SBHES,

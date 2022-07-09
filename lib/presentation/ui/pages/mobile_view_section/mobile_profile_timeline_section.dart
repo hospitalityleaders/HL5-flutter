@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:holedo/db_data.dart';
+import 'package:holedo/presentation/functions/helper_functions.dart';
 import 'package:holedo/presentation/ui/pages/components/connection_component.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_completion_component.dart';
 import 'package:holedo/presentation/ui/pages/components/rights_component.dart';
 import 'package:holedo/presentation/ui/pages/sections/page_overview/page_overview_columns/page_overview_third_columns.dart';
 import 'package:holedo/presentation/ui/pages/sections/timeline_section/timeline_section.dart';
+import 'package:holedo/presentation/ui_classes.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 
 import 'package:flutter_html/flutter_html.dart';
@@ -15,7 +17,7 @@ import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/ui/components/container_with_icon.dart';
 import 'package:holedo/presentation/utill/styles.dart';
 
-class MobileProfileTimelineSection extends StatelessWidget {
+class MobileProfileTimelineSection extends StatefulWidget {
   const MobileProfileTimelineSection({
     Key? key,
     required this.isMobilePhn,
@@ -29,6 +31,21 @@ class MobileProfileTimelineSection extends StatelessWidget {
   final bool isTablt;
 
   @override
+  State<MobileProfileTimelineSection> createState() =>
+      _MobileProfileTimelineSectionState();
+}
+
+class _MobileProfileTimelineSectionState
+    extends State<MobileProfileTimelineSection> {
+  late final List<TimelineClass> timelines;
+
+  @override
+  void initState() {
+    timelines = HelperFunctions().listOfTimeline();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final userProfileData = DbData.getUserProfileData;
     return Padding(
@@ -38,19 +55,21 @@ class MobileProfileTimelineSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (isMobilePhn) ProfileCompletionComponent(),
-          isMobilePhn
+          if (widget.isMobilePhn) ProfileCompletionComponent(),
+          widget.isMobilePhn
               ? _MobileTimelineSection(
-                  jobDescriptionInHtml: jobDescriptionInHtml,
-                  showComments: showComments,
+                  jobDescriptionInHtml: widget.jobDescriptionInHtml,
+                  showComments: widget.showComments,
                 )
               : TimelineSectionComponent(),
           Di.SBHD,
-          if (isTablt) ProfileCompletionComponent(),
+          if (widget.isTablt) ProfileCompletionComponent(),
           ConnectionsComponent(
             isMobile: true,
           ),
+          Di.SBHS,
           ProfileAdsComponent(),
+          Di.SBHS,
           RightsComponent(
             isMobile: true,
           ),

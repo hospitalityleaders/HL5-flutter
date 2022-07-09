@@ -26,12 +26,10 @@ class MobileProfileReferenceSection extends StatelessWidget {
       ),
       child: Column(
         children: [
-          if (isMobilePhn)
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: Di.PSL),
-              child: ProfileCompletionComponent(),
-            ),
-          Di.SBHD,
+          if (isMobilePhn) ...[
+            ProfileCompletionComponent(),
+            Di.SBHS,
+          ],
           ProfileReferenceSingleComponent(
             isMobile: true,
             description:
@@ -42,21 +40,22 @@ class MobileProfileReferenceSection extends StatelessWidget {
             description:
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
           ),
-          Di.SBHD,
           ProfileReferenceSingleComponent(
             isMobile: true,
           ),
-          Di.SBHD,
           ProfileReferenceSingleComponent(
             isMobile: true,
           ),
-          Di.SBHD,
-          if (isTablt) ProfileCompletionComponent(),
-          Di.SBHD,
+          if (isTablt) ...[
+            ProfileCompletionComponent(),
+            Di.SBHS,
+          ],
           ConnectionsComponent(
             isMobile: true,
           ),
+          Di.SBHS,
           TimelineComponent(),
+          Di.SBHS,
           RightsComponent(
             isMobile: true,
           ),

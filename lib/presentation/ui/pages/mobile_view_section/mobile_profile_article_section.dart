@@ -71,7 +71,9 @@ class MobileProfileArticleSection extends StatelessWidget {
           ConnectionsComponent(
             isMobile: true,
           ),
+          Di.SBHS,
           ProfileAdsComponent(),
+          Di.SBHS,
           RightsComponent(
             isMobile: true,
           ),

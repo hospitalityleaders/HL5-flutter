@@ -87,6 +87,9 @@ class _ProfileWriteReferenceDialogState
                       ),
                       Di.SBHES,
                       DialogMultiLineTextField(
+                        hintStyle: bodySmallRegular.copyWith(
+                          color: Cr.darkGrey3,
+                        ),
                         minLines: 9,
                         hintText:
                             "E.g. Noberto is very professional and detailed...",

@@ -75,10 +75,14 @@ class MobileProfileOverviewSection extends StatelessWidget {
           // LanguagesComponent(
           //   userProfileData: userProfileData,
           // ),
+          Di.SBHS,
           ConnectionsComponent(
             isMobile: true,
           ),
+          Di.SBHS,
           TimelineComponent(),
+          Di.SBHS,
+
           RightsComponent(
             isMobile: true,
           ),

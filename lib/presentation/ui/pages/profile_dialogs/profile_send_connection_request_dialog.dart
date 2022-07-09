@@ -83,6 +83,9 @@ class _ProfileSendConnectionRequestDialogState
                 ),
                 Di.SBHES,
                 DialogMultiLineTextField(
+                  hintStyle: bodySmallRegular.copyWith(
+                    color: Cr.darkGrey3,
+                  ),
                   minLines: 9,
                   hintText:
                       "Hey Noberto! Please accept my request to be your connection :-)",

@@ -39,7 +39,7 @@ class ProfileSubMenuPopup extends StatelessWidget {
                     text: "Privacy settings",
                   ),
                   _SubMenuWidget(
-                    text: "Log asfadsout",
+                    text: "Log out",
                     onTap: () async {
                       Provider.of<ProfileProvider>(context, listen: false)
                           .changeProfileSubMenuClicked(true);

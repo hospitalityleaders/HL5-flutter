@@ -25,12 +25,14 @@ class ContactCardDialogWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               PersonAvatar(
                 avatarSize: 85,
               ),
               Di.SBCW(18),
-              Padding(
+              Container(
+                width: 395,
                 padding: const EdgeInsets.only(
                   left: 18,
                   bottom: Di.PSL,
@@ -39,15 +41,21 @@ class ContactCardDialogWidget extends StatelessWidget {
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [FullName(), ProfessionalTitle()],
+                  children: [
+                    FullName(),
+                    ProfessionalTitle(),
+                  ],
                 ),
               ),
               Spacer(),
-              GestureDetector(
-                onTap: () => Nav.pop(context),
-                child: Icon(
-                  Icons.close,
-                  color: Cr.accentBlue1,
+              Padding(
+                padding: const EdgeInsets.only(top: Di.PSL),
+                child: GestureDetector(
+                  onTap: () => Nav.pop(context),
+                  child: Icon(
+                    Icons.close,
+                    color: Cr.accentBlue1,
+                  ),
                 ),
               ),
               Di.SBWL,
@@ -147,6 +155,7 @@ class ProfessionalTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       DbData.getUserProfileData.professionalTitle ?? "",
+      maxLines: 1,
       style: bodyLarge.copyWith(
         color: Cr.darkGrey1,
       ),

@@ -1241,9 +1241,7 @@ class _FeaturedVideoComponentState extends State<FeaturedVideoComponent> {
                                   ),
                                 )
                               : Di.ESB,
-                          SizedBox(
-                            height: widget.isMobile ? null : 180,
-                            width: widget.isMobile ? null : 325,
+                          Positioned.fill(
                             child: Center(
                               child: FloatingActionButton(
                                 backgroundColor: Cr.accentBlue1,
@@ -1261,7 +1259,7 @@ class _FeaturedVideoComponentState extends State<FeaturedVideoComponent> {
                                 ),
                               ),
                             ),
-                          ),
+                          )
                         ],
                       ),
                       if (widget.userProfileData.profileVideoTitle != null) ...[
