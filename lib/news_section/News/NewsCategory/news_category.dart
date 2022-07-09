@@ -33,8 +33,8 @@ class _NewsSignalScreenState extends State<NewsCategory>
     with SingleTickerProviderStateMixin {
   CarouselController buttonCarouselController = CarouselController();
   // ScrollController _scrollController = ScrollController();
-  var _scrollController = ScrollController();
-
+  // var _scrollController = ScrollController();
+  ScrollController _scrollController = ScrollController();
   // ScrollController _scrollController = ScrollController();
   MenuController _controller = Get.put(MenuController());
 
@@ -52,6 +52,8 @@ class _NewsSignalScreenState extends State<NewsCategory>
   var page = 1;
   var limit = 10;
   int get count => articleList.length;
+  bool endOFPage = false;
+
   Future<List<Article>> fetchArticles1(
       {String? category,
       String? keyword,
@@ -60,7 +62,7 @@ class _NewsSignalScreenState extends State<NewsCategory>
       required int? page,
       required BuildContext context}) async {
     try {
-      isLoading(true);
+      // isLoading(true);
       var params = {
         'category': category,
         'type': type,
@@ -77,17 +79,17 @@ class _NewsSignalScreenState extends State<NewsCategory>
         var list = response.data!.articles as List<Article>;
         dataList.value = list;
 
-        //print('log: ${list}');
+        print('DATA LIST-----------:${dataList.length}');
         for (final data in list) {
           //articleList.add(data);
           // print('c ${data.id} ${(articleList.any((e) => e.id == data.id))}');
 
           if ((articleList.any((e) => e.id == data.id)) != true) {
-            // print('adding ${data.id}');
+            print('adding ${data.id}');
             articleList.add(data);
           }
         }
-        print('localcache: count: ${articleList.length}');
+        print('localcache111: count: ${articleList.length}');
       }
       return dataList.value as List<Article>;
     } finally {
@@ -95,47 +97,78 @@ class _NewsSignalScreenState extends State<NewsCategory>
     }
   }
 
-  void load() {
-    print("loading------------------");
-    setState(() {
-      Get.put(HoledoDatabase().news)
-          .fetchArticles1(context: context, limit: limit, page: page);
-      limit + 10;
-      page + 1;
-    });
+  Future<List<Article>>? _future;
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
-  Future<bool> _loadMore() async {
-    print("onLoadMore");
-    await Future.delayed(Duration(seconds: 0, milliseconds: 2000));
-    load();
-    return true;
-  }
-
-  Future<void> _refresh() async {
-    print('REFRESH_______');
-    await Future.delayed(Duration(seconds: 0, milliseconds: 2000));
-    load();
-  }
-
+  @override
   void initState() {
+    print('INIT STATE-------------');
     _tabController = TabController(length: 5, vsync: this);
 
     // LandingPage(page: 'NewsCategory');
     newsCategoryViewModel.newsCategoryViewModel('1');
     super.initState();
+    print('SUPER INIT STATE-------------');
+
     /* _scrollController.addListener(() {
       if (_scrollController.position.atEdge) {
         if (_scrollController.position.pixels == 0) {
           print('_scrollController');
           setState(() {
-            _future = fetchArticles1(context: context, limit: 10, page: 1);
+            Get.put(HoledoDatabase().news)
+                .fetchArticles1(context: context, limit: limit, page: page);
+            // _future =
+            //     fetchArticles1(context: context, limit: limit, page: page);
           });
         } else {
           print('_scrollController bottom');
+
+          print('LIMIT---${limit}');
+          print('PAGE---${page}');
+          setState(() {
+            Get.put(HoledoDatabase().news)
+                .fetchArticles1(context: context, limit: limit, page: page);
+          });
+          limit = limit += 10;
+          page = page += 1;
+          // _future = fetchArticles1(context: context, limit: limit, page: page);
+
+          // limit + 10;
+          // page + 1;
+          //
+          // Get.put(HoledoDatabase().news)
+          //     .fetchArticles1(context: context, limit: limit, page: page);
         }
       }
     });*/
+    _scrollController.addListener(() {
+      if (_scrollController.position.maxScrollExtent ==
+          _scrollController.position.pixels) {
+        /*if (_scrollController.offset >=
+                _scrollController.position.maxScrollExtent &&
+            !_scrollController.position.outOfRange) {
+          setState(() {
+            print("reach the bottom");
+            endOFPage = true;
+          });
+        }*/
+        setState(() {
+          fetchArticles1(context: context, limit: limit, page: page);
+          limit = limit += 10;
+          // page = page += 1;
+          // _future =
+          //     fetchArticles1(context: context, limit: limit, page: page);
+        });
+        /* if (!isLoading) {
+          isLoading = !isLoading;
+          // Perform event when user reach at the end of list (e.g. do Api call)
+        }*/
+      }
+    });
   }
 
   int pageCount = 0;
@@ -155,6 +188,7 @@ class _NewsSignalScreenState extends State<NewsCategory>
     return Responsive.isDesktop(context)
         ? Material(
             child: SingleChildScrollView(
+              controller: _scrollController,
               child: Column(
                 children: [
                   Header(page: 'Newscategory'),
@@ -271,8 +305,8 @@ class _NewsSignalScreenState extends State<NewsCategory>
                   Container(
                     child: FutureBuilder(
                       // future: _future,
-                      future: Get.put(HoledoDatabase().news)
-                          .fetchArticles(context: context),
+                      future: fetchArticles1(
+                          context: context, limit: limit, page: page),
                       builder:
                           (context, AsyncSnapshot<List<Article>> snapshot) {
                         if (!snapshot.hasData) {
@@ -1308,6 +1342,7 @@ class _NewsSignalScreenState extends State<NewsCategory>
             ),
             endDrawer: CommonWidget.drawer(context),
             body: SingleChildScrollView(
+              controller: _scrollController,
               physics: BouncingScrollPhysics(),
               child: Column(
                 children: [
@@ -1752,120 +1787,13 @@ class _NewsSignalScreenState extends State<NewsCategory>
                   ),
                   SB.SH20(),
                   Container(
-                    /* RefreshIndicator(
-                      onRefresh: _refresh,
-                      child: LoadMore(
-                        whenEmptyLoad: false,
-                        delegate: DefaultLoadMoreDelegate(),
-                        textBuilder: DefaultLoadMoreTextBuilder.chinese,
-                        onLoadMore: _loadMore,
-                        child: Column(
-                          children: [
-                            ListView.builder(
-                              controller: _scrollController,
-                              itemCount: count,
-                              shrinkWrap: true,
-                              physics: NeverScrollableScrollPhysics(),
-                              itemBuilder: (context, index) {
-                                return InkWell(
-                                  onTap: () {
-                                    print('hello');
-                                    print(
-                                        '----id-setNewsDataId----${articleList[index].id.toString()}');
-
-                                    PreferenceManager.setNewsDataId(
-                                        articleList[index].id.toString());
-                                    print(
-                                        '----PreferenceManager.getNewsDataId()---------------${PreferenceManager.getNewsDataId()}');
-                                    Routemaster.of(context).push(
-                                        '/article/${articleList[index].articleCategories?.first.slug}/${articleList[index].slug}');
-                                    // Get.to(NewsSingleLoggedInScreen());
-                                  },
-                                  child: Container(
-                                    padding: EdgeInsets.all(10),
-                                    margin: EdgeInsets.only(bottom: 10),
-                                    color: Colors.white,
-                                    child: ListView(
-                                      shrinkWrap: true,
-                                      children: [
-                                        Image(
-                                          image: NetworkImage(
-                                              '${articleList[index].bannerImage}'),
-                                          width: Get.width,
-                                          height: Get.width * 0.4,
-                                          fit: BoxFit.cover,
-                                        ),
-                                        SB.SH20(),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          children: [
-                                            CommonWidget.text(
-                                              '${articleList[index].title}',
-                                              style: FontTextStyle
-                                                  .kBlueDark118W700SSP,
-                                            ),
-                                            SB.SH10(),
-                                            RichText(
-                                              text: TextSpan(
-                                                text: "By: ",
-                                                style: FontTextStyle
-                                                    .kGreyLight514W400SSP
-                                                    .copyWith(height: 1.5),
-                                                children: [
-                                                  TextSpan(
-                                                      text:
-                                                          "${articleList[index].user!.fullName}  •  ",
-                                                      style: FontTextStyle
-                                                          .kGreyLight514W600SSP),
-                                                  TextSpan(
-                                                      text:
-                                                          "${Jiffy(articleList[index].created!).format('do MMMM yyyy • h:mm')}",
-                                                      style: FontTextStyle
-                                                          .kGreyLight514W400SSP),
-                                                ],
-                                              ),
-                                            ),
-                                            // SB.SH10(),
-                                            // data[index]['text2'].toString().isEmpty
-                                            //     ? SizedBox()
-                                            //     : Container(
-                                            //         padding: EdgeInsets.all(5),
-                                            //         child: CommonWidget.text(
-                                            //             'MEMBERS ONLY',
-                                            //             style: FontTextStyle
-                                            //                 .kRed210W700SSP),
-                                            //         decoration: BoxDecoration(
-                                            //           color: ColorPicker.kRedlight,
-                                            //           borderRadius:
-                                            //               BorderRadius.circular(2),
-                                            //         ),
-                                            //       ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                            SB.SH20(),
-                          ],
-                        ),
-                      ),
-                    ),*/
                     child: FutureBuilder(
-                      // future: _future,
-                      future: Get.put(HoledoDatabase().news)
-                          .fetchArticles(context: context),
+                      future: fetchArticles1(
+                          context: context, limit: limit, page: page),
                       builder:
                           (context, AsyncSnapshot<List<Article>> snapshot) {
                         if (!snapshot.hasData) {
-                          return Center(
-                            child: CircularProgressIndicator(),
-                          );
+                          return Center(child: SizedBox());
                         }
                         if (snapshot.hasError) {
                           return Center(child: Text("Error"));
@@ -1876,7 +1804,7 @@ class _NewsSignalScreenState extends State<NewsCategory>
                           return Column(
                             children: [
                               ListView.builder(
-                                controller: _scrollController,
+                                // controller: _scrollController,
                                 itemCount: snapshot.data!.length,
                                 shrinkWrap: true,
                                 physics: NeverScrollableScrollPhysics(),
@@ -1966,240 +1894,26 @@ class _NewsSignalScreenState extends State<NewsCategory>
                                 },
                               ),
                               SB.SH20(),
-
-                              ///Load More
-                              // controller.circularBool
-                              //     ? Center(child: CircularProgressIndicator())
-                              //     : GestureDetector(
-                              //   onTap: () async {
-                              //     controller.setCircularBool();
-                              //
-                              //     // controller.newsCategoryPageRefresh(
-                              //     //     '${controller.newsCategoryList.length / 10 + 1}');
-                              //
-                              //     await controller.newsCategoryViewModel(
-                              //         '${controller.newsCategoryListMOB.length / 10 + 1}');
-                              //
-                              //     // print(
-                              //     //     '----------length-------------------${controller.newsCategoryList.length + 10}');
-                              //     // controller.getNewsCategory(
-                              //     //     isRefresh: false,
-                              //     //     page:
-                              //     //         '${controller.newsCategoryList.length / 10 + 1}');
-                              //
-                              //     //     .then((value) {
-                              //     //   if (controller.apiResponse.status ==
-                              //     //       Status.COMPLETE) {
-                              //     //     NewsCategoryResponseModel _res =
-                              //     //         controller.apiResponse.data;
-                              //     //     controller.setCircularBool();
-                              //     //   }
-                              //     // });
-                              //     setState(() {});
-                              //   },
-                              //   child: Container(
-                              //     height: 52,
-                              //     width: 119,
-                              //     child: Center(
-                              //         child: CommonWidget.text(
-                              //           'LOAD MORE',
-                              //           style: FontTextStyle.kWhite14W600SSP,
-                              //         )),
-                              //     decoration: BoxDecoration(
-                              //         color: ColorPicker.kBlueLight1,
-                              //         borderRadius:
-                              //         BorderRadius.circular(2)),
-                              //   ),
-                              // ),
                             ],
                           );
                         }
                       },
                     ),
                   ),
-                  InkWell(
-                    onTap: () {
-                      FutureBuilder(
-                        // future: _future,
-                        future: Get.put(HoledoDatabase().news)
-                            .fetchArticles(context: context),
-                        builder:
-                            (context, AsyncSnapshot<List<Article>> snapshot) {
-                          if (!snapshot.hasData) {
-                            return Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          } else {
-                            return Column(
-                              children: [
-                                ListView.builder(
-                                  controller: _scrollController,
-                                  itemCount: snapshot.data!.length,
-                                  shrinkWrap: true,
-                                  physics: NeverScrollableScrollPhysics(),
-                                  itemBuilder: (context, index) {
-                                    return InkWell(
-                                      onTap: () {
-                                        print('hello');
-                                        print(
-                                            '----id-setNewsDataId----${snapshot.data![index].id.toString()}');
-
-                                        PreferenceManager.setNewsDataId(snapshot
-                                            .data![index].id
-                                            .toString());
-                                        print(
-                                            '----PreferenceManager.getNewsDataId()---------------${PreferenceManager.getNewsDataId()}');
-                                        Routemaster.of(context).push(
-                                            '/article/${snapshot.data![index].articleCategories?.first.slug}/${snapshot.data![index].slug}');
-                                        // Get.to(NewsSingleLoggedInScreen());
-                                      },
-                                      child: Container(
-                                        padding: EdgeInsets.all(10),
-                                        margin: EdgeInsets.only(bottom: 10),
-                                        color: Colors.white,
-                                        child: ListView(
-                                          shrinkWrap: true,
-                                          children: [
-                                            Image(
-                                              image: NetworkImage(
-                                                  '${snapshot.data![index].bannerImage}'),
-                                              width: Get.width,
-                                              height: Get.width * 0.4,
-                                              fit: BoxFit.cover,
-                                            ),
-                                            SB.SH20(),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                CommonWidget.text(
-                                                  '${snapshot.data![index].title}',
-                                                  style: FontTextStyle
-                                                      .kBlueDark118W700SSP,
-                                                ),
-                                                SB.SH10(),
-                                                RichText(
-                                                  text: TextSpan(
-                                                    text: "By: ",
-                                                    style: FontTextStyle
-                                                        .kGreyLight514W400SSP
-                                                        .copyWith(height: 1.5),
-                                                    children: [
-                                                      TextSpan(
-                                                          text:
-                                                              "${snapshot.data![index].user!.fullName}  •  ",
-                                                          style: FontTextStyle
-                                                              .kGreyLight514W600SSP),
-                                                      TextSpan(
-                                                          text:
-                                                              "${Jiffy(snapshot.data![index].created!).format('do MMMM yyyy • h:mm')}",
-                                                          style: FontTextStyle
-                                                              .kGreyLight514W400SSP),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ),
-                                SB.SH20(),
-
-                                ///Load More
-                                // controller.circularBool
-                                //     ? Center(child: CircularProgressIndicator())
-                                //     : GestureDetector(
-                                //   onTap: () async {
-                                //     controller.setCircularBool();
-                                //
-                                //     // controller.newsCategoryPageRefresh(
-                                //     //     '${controller.newsCategoryList.length / 10 + 1}');
-                                //
-                                //     await controller.newsCategoryViewModel(
-                                //         '${controller.newsCategoryListMOB.length / 10 + 1}');
-                                //
-                                //     // print(
-                                //     //     '----------length-------------------${controller.newsCategoryList.length + 10}');
-                                //     // controller.getNewsCategory(
-                                //     //     isRefresh: false,
-                                //     //     page:
-                                //     //         '${controller.newsCategoryList.length / 10 + 1}');
-                                //
-                                //     //     .then((value) {
-                                //     //   if (controller.apiResponse.status ==
-                                //     //       Status.COMPLETE) {
-                                //     //     NewsCategoryResponseModel _res =
-                                //     //         controller.apiResponse.data;
-                                //     //     controller.setCircularBool();
-                                //     //   }
-                                //     // });
-                                //     setState(() {});
-                                //   },
-                                //   child: Container(
-                                //     height: 52,
-                                //     width: 119,
-                                //     child: Center(
-                                //         child: CommonWidget.text(
-                                //           'LOAD MORE',
-                                //           style: FontTextStyle.kWhite14W600SSP,
-                                //         )),
-                                //     decoration: BoxDecoration(
-                                //         color: ColorPicker.kBlueLight1,
-                                //         borderRadius:
-                                //         BorderRadius.circular(2)),
-                                //   ),
-                                // ),
-                              ],
-                            );
-                          }
-                          //   CustomScrollView(
-                          //   slivers: <Widget>[
-                          //     SliverGrid(
-                          //       delegate: SliverChildBuilderDelegate(
-                          //         (context, index) {
-                          //           return NewsSingleCard(
-                          //               article: snapshot.data![index],
-                          //               showReleaseDate: true);
-                          //         },
-                          //         childCount: snapshot.data!.length,
-                          //       ),
-                          //       gridDelegate:
-                          //           const SliverGridDelegateWithFixedCrossAxisCount(
-                          //         crossAxisCount: 1,
-                          //         mainAxisSpacing: 15,
-                          //         crossAxisSpacing: 15,
-                          //         childAspectRatio: 2.0,
-                          //       ),
-                          //     ),
-                          //   ],
-                          // );
-                        },
-                      );
-                    },
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Container(
-                        height: 52,
-                        width: 119,
-                        color: Color(0xFF32A3FD),
-                        child: Center(
-                          child: Text(
-                            'LOAD MORE',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+                  CircularProgressIndicator(
+                    valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
                   ),
+                  Container(
+                    padding: EdgeInsets.all(10),
+                    margin: EdgeInsets.only(bottom: 10),
+                    height: Get.height * 0.5,
+                    width: Get.width,
+                    color: Colors.white,
+                    child: Image(
+                      image: AssetImage('assets/images/BannerImage.png'),
+                      fit: BoxFit.cover,
+                    ),
+                  )
 
 /*
                   ///LOAD MORE
