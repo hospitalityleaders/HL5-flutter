@@ -4,10 +4,10 @@ import 'package:holedo/presentation/utill/dimensions.dart';
 
 class Styles {
   static final List<BoxShadow> defaultBoxShadow = [
-    BoxShadow(
+    const BoxShadow(
       color: Cr.darkGrey3,
       spreadRadius: -1,
-      offset: const Offset(0, 2), // changes position of shadow
+      offset: Offset(0, 2), // changes position of shadow
     ),
   ];
 
@@ -21,7 +21,7 @@ class Styles {
 
     // border: InputBorder.none,
     border: OutlineInputBorder(
-      borderSide: BorderSide(
+      borderSide: const BorderSide(
         width: 1,
         color: Cr.darkGrey4,
         style: BorderStyle.solid,
@@ -29,7 +29,7 @@ class Styles {
       borderRadius: BorderRadius.circular(2),
     ),
     enabledBorder: OutlineInputBorder(
-      borderSide: BorderSide(
+      borderSide: const BorderSide(
         width: 1,
         color: Cr.darkGrey4,
         style: BorderStyle.solid,
@@ -37,7 +37,7 @@ class Styles {
       borderRadius: BorderRadius.circular(2),
     ),
     focusedBorder: OutlineInputBorder(
-      borderSide: BorderSide(
+      borderSide: const BorderSide(
         width: 1,
         color: Cr.accentBlue1,
         style: BorderStyle.solid,
@@ -45,7 +45,7 @@ class Styles {
       borderRadius: BorderRadius.circular(2),
     ),
     disabledBorder: OutlineInputBorder(
-      borderSide: BorderSide(
+      borderSide: const BorderSide(
         width: 1,
         color: Cr.darkGrey4,
         style: BorderStyle.solid,
@@ -53,7 +53,7 @@ class Styles {
       borderRadius: BorderRadius.circular(2),
     ),
     errorBorder: OutlineInputBorder(
-      borderSide: BorderSide(
+      borderSide: const BorderSide(
         width: 1,
         color: Cr.darkGrey4,
         style: BorderStyle.solid,
@@ -76,7 +76,7 @@ class Styles {
 
         // border: InputBorder.none,
         border: OutlineInputBorder(
-          borderSide: BorderSide(
+          borderSide: const BorderSide(
             width: 1,
             color: Cr.darkGrey4,
             style: BorderStyle.solid,
@@ -84,7 +84,7 @@ class Styles {
           borderRadius: BorderRadius.circular(2),
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
+          borderSide: const BorderSide(
             width: 1,
             color: Cr.darkGrey4,
             style: BorderStyle.solid,
@@ -92,7 +92,7 @@ class Styles {
           borderRadius: BorderRadius.circular(2),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
+          borderSide: const BorderSide(
             width: 1,
             color: Cr.accentBlue1,
             style: BorderStyle.solid,
@@ -100,7 +100,7 @@ class Styles {
           borderRadius: BorderRadius.circular(2),
         ),
         disabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
+          borderSide: const BorderSide(
             width: 1,
             color: Cr.darkGrey4,
             style: BorderStyle.solid,
@@ -108,7 +108,7 @@ class Styles {
           borderRadius: BorderRadius.circular(2),
         ),
         errorBorder: OutlineInputBorder(
-          borderSide: BorderSide(
+          borderSide: const BorderSide(
             width: 1,
             color: Cr.darkGrey4,
             style: BorderStyle.solid,
@@ -117,7 +117,7 @@ class Styles {
         ),
       );
 
-  static final BoxDecoration boxDecorationBorder = BoxDecoration(
+  static const BoxDecoration boxDecorationBorder = const BoxDecoration(
     color: Cr.whiteColor,
     border: Border(
       bottom: BorderSide(
@@ -131,7 +131,7 @@ class Styles {
     borderRadius: BorderRadius.circular(4),
   );
 
-  static final BoxDecoration boxDecorationCircle = BoxDecoration(
+  static const BoxDecoration boxDecorationCircle = const BoxDecoration(
     color: Cr.whiteColor,
     shape: BoxShape.circle,
   );

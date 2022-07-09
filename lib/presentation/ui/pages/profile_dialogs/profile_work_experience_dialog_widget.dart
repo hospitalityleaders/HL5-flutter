@@ -50,14 +50,14 @@ class _ProfileWorkExperienceDialogWidgetState
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            DialogTitleWidget(
+            const DialogTitleWidget(
               title: "Work Experience",
             ),
             Di.SBHL,
             addingToProfile
                 ? Container(
-                    padding: EdgeInsets.only(bottom: Di.PSS),
-                    margin: EdgeInsets.symmetric(horizontal: Di.PSL),
+                    padding: const EdgeInsets.only(bottom: Di.PSS),
+                    margin: const EdgeInsets.symmetric(horizontal: Di.PSL),
                     child: _SingleWorkExperience(
                       isExpanded: true,
                       experience: Experience(),
@@ -94,8 +94,8 @@ class _ProfileWorkExperienceDialogWidgetState
               itemCount: experiences.length,
               itemBuilder: (BuildContext context, int index) {
                 return Container(
-                  padding: EdgeInsets.only(bottom: Di.PSS),
-                  margin: EdgeInsets.symmetric(horizontal: Di.PSL),
+                  padding: const EdgeInsets.only(bottom: Di.PSS),
+                  margin: const EdgeInsets.symmetric(horizontal: Di.PSL),
                   width: 615,
                   child: _SingleWorkExperience(
                     index: index,
@@ -201,22 +201,19 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
           ),
           Text(
             _companyNameController.text +
-                (_cityController.text.length > 0
+                (_cityController.text.isNotEmpty
                     ? " · ${_cityController.text}"
                     : ""),
             style: bodySmallRegular.copyWith(
               color: Cr.accentBlue1,
-              fontWeight: _companyWebsiteController.text.length > 0
+              fontWeight: _companyWebsiteController.text.isNotEmpty
                   ? FontWeight.bold
                   : null,
             ),
           ),
           Text(
             ((experience.fromDate != null)
-                ? "${experience.fromDate!.getMonthInString} ${experience.fromDate!.year}" +
-                    ((experience.toDate != null)
-                        ? " - ${experience.toDate!.getMonthInString} ${experience.toDate!.year} (${experience.toDate!.month - experience.fromDate!.month} months)"
-                        : "")
+                ? "${experience.fromDate!.getMonthInString} ${experience.fromDate!.year}${(experience.toDate != null) ? " - ${experience.toDate!.getMonthInString} ${experience.toDate!.year} (${experience.toDate!.month - experience.fromDate!.month} months)" : ""}"
                 : ""),
             style: bodySmallRegular.copyWith(
               color: Cr.darkGrey1,
@@ -252,8 +249,8 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
           ),
         ),
       ),
-      trailing: Icon(Icons.keyboard_arrow_right),
-      theme: CustomExpandedTileThemeData(
+      trailing: const Icon(Icons.keyboard_arrow_right),
+      theme: const CustomExpandedTileThemeData(
         contentPadding: EdgeInsets.zero,
         headerPadding: EdgeInsets.all(17),
         headerRadius: 0,
@@ -262,7 +259,7 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
       controller: CustomExpandedTileController(isExpanded: isExpanded),
       content: Container(
         color: Cr.whiteColor,
-        padding: EdgeInsets.all(Di.PSL),
+        padding: const EdgeInsets.all(Di.PSL),
         child: Form(
           key: _formKey,
           child: Column(
@@ -271,7 +268,7 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  DialogLabelTextFormField(
+                  const DialogLabelTextFormField(
                     customLabel: "Title / position",
                   ),
                   Di.SBHES,
@@ -280,7 +277,7 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
                     textEditingController: _titlePositionController,
                   ),
                   Di.SBCH(18),
-                  DialogLabelTextFormField(
+                  const DialogLabelTextFormField(
                     customLabel: "Company name",
                   ),
                   Di.SBHES,
@@ -289,7 +286,7 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
                     textEditingController: _companyNameController,
                   ),
                   Di.SBCH(18),
-                  DialogLabelTextFormField(
+                  const DialogLabelTextFormField(
                     isImportant: false,
                     customLabel: "Company website",
                   ),
@@ -300,7 +297,7 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
                   ),
                   Di.SBCH(18),
                   Row(
-                    children: [
+                    children: const [
                       DialogLabelTextFormField(
                         customLabel: "City / Area  / Region",
                         width: 250,
@@ -320,7 +317,7 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
                         textEditingController: _cityController,
                         width: 250,
                       ),
-                      SizedBox(width: 18),
+                      const SizedBox(width: 18),
                       DialogDropDownTextField(
                         onChanged: (value) {
                           if (value != null) {
@@ -342,7 +339,7 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
                     ],
                   ),
                   Di.SBCH(18),
-                  DialogLabelTextFormField(customLabel: "Time period"),
+                  const DialogLabelTextFormField(customLabel: "Time period"),
                   Di.SBHES,
                   Row(
                     children: [
@@ -371,7 +368,7 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
                         dataList: PresentationData.yearsList,
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: Di.PSS),
+                        padding: const EdgeInsets.symmetric(horizontal: Di.PSS),
                         child: Container(
                           width: 9,
                           height: 1.5,
@@ -448,7 +445,7 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
                   Di.SBHES,
                   Row(
                     children: [
-                      DialogDropDownTextField(
+                      const DialogDropDownTextField(
                         width: 140,
                         hintText: 'Select Currency',
                         dataList: [
@@ -485,7 +482,7 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
                     ),
                   ),
                   Di.SBHES,
-                  DialogDropDownTextField(
+                  const DialogDropDownTextField(
                     width: 100,
                     hintText: '10+ days',
                     dataList: [
@@ -497,7 +494,7 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
                     ],
                   ),
                   Di.SBCH(18),
-                  DialogLabelTextFormField(
+                  const DialogLabelTextFormField(
                     customLabel: "Job description",
                     isImportant: false,
                   ),
@@ -543,15 +540,15 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
                         borderColor: Cr.accentBlue2,
                         makeWidthNull: true,
                         onPressed: () => Nav.pop(context),
+                        height: 36,
+                        donotShowIcon: true,
+                        backgroundColor: Cr.accentBlue3,
                         child: Text(
                           "Cancel",
                           style: bodySmallRegular.copyWith(
                             color: Cr.accentBlue1,
                           ),
                         ),
-                        height: 36,
-                        donotShowIcon: true,
-                        backgroundColor: Cr.accentBlue3,
                       ),
                       Di.SBWES,
                       CustomElevatedButton(
@@ -560,7 +557,7 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
                         onPressed: () async {
                           // if (_formKey.currentState!.validate()) {
                           showCircularProgressIndicator(context);
-                          List<Experience> _experiences =
+                          List<Experience> experiences =
                               userProfileData.experiences!;
 
                           experience.title = _titlePositionController.text;
@@ -589,27 +586,27 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
                               _jobDescriptionController.text;
                           //update exiting list
                           if (widget.index != null) {
-                            _experiences[widget.index!] = experience;
+                            experiences[widget.index!] = experience;
                           } else {
-                            _experiences.add(experience);
+                            experiences.add(experience);
                           }
 
                           await User(
-                            experiences: _experiences,
+                            experiences: experiences,
                           ).save(userProfileData);
                           Nav.pop(context);
                           Nav.pop(context);
                           // }
                         },
+                        height: 36,
+                        donotShowIcon: true,
+                        backgroundColor: Cr.accentBlue1,
                         child: Text(
                           "Save",
                           style: bodySmallRegular.copyWith(
                             color: Cr.whiteColor,
                           ),
                         ),
-                        height: 36,
-                        donotShowIcon: true,
-                        backgroundColor: Cr.accentBlue1,
                       ),
                     ],
                   ),

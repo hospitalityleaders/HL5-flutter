@@ -62,18 +62,18 @@ RouteMap _buildRouteMap(BuildContext context) {
       );
     },
     routes: {
-      '/': (route) => NoAnimationPage(child: HomePage()),
-      '/home': (route) => NoAnimationPage(child: HomePage()),
-      '/help': (route) => NoAnimationPage(child: HomePage()),
+      '/': (route) => NoAnimationPage(child: const HomePage()),
+      '/home': (route) => NoAnimationPage(child: const HomePage()),
+      '/help': (route) => NoAnimationPage(child: const HomePage()),
       '/pages/:slug': (route) => _isValidPage(route.pathParameters['slug'])
           ? NoAnimationPage(
               child: ContentPage(slug: route.pathParameters['slug']!))
-          : NotFound(),
+          : const NotFound(),
 
       '/:slug': (route) => _isValidPage(route.pathParameters['slug'])
           ? NoAnimationPage(
               child: ContentPage(slug: route.pathParameters['slug']!))
-          : Redirect('/'),
+          : const Redirect('/'),
       '/login': (route) => NoAnimationPage(
             child: LoginPage(
               redirectTo: route.queryParameters['redirectTo'],
@@ -87,11 +87,12 @@ RouteMap _buildRouteMap(BuildContext context) {
         }
         return Redirect('/login', queryParameters: {'redirectTo': route.path});
       },
-      '/recruitments': (route) => NoAnimationPage(child: RecruitmentPage()),
+      '/recruitments': (route) =>
+          NoAnimationPage(child: const RecruitmentPage()),
       '/recruitments/:id': (route) =>
           NoAnimationPage(child: ProfilePage(id: route.pathParameters['id']!)),
       '/news': (route) => TabPage(
-            child: NewsfrontPage(),
+            child: const NewsfrontPage(),
             paths: Get.put(HoledoDatabase()).articlePaths,
             pageBuilder: (child) => NoAnimationPage(child: child),
           ),
@@ -112,7 +113,7 @@ RouteMap _buildRouteMap(BuildContext context) {
                             (e) => e.slug == route.pathParameters['category'],
                           )),
                 )
-              : NotFound(),
+              : const NotFound(),
       '/category/:category': (route) =>
           _isValidCategory(route.pathParameters['category'])
               ? NoAnimationPage(
@@ -123,23 +124,23 @@ RouteMap _buildRouteMap(BuildContext context) {
                             ),
                   ),
                 )
-              : NotFound(),
+              : const NotFound(),
       '/article/:category/:slug': (route) =>
           NoAnimationPage(child: NewsPage(slug: route.pathParameters['slug'])),
       '/news2/:category/:id': (route) => _isValidCategory(
               route.pathParameters['category'])
           ? NoAnimationPage(child: NewsPage(id: route.pathParameters['id']!))
-          : NotFound(),
+          : const NotFound(),
       '/jobs': (route) => TabPage(
-            child: JobsfrontPage(),
-            paths: ['all', 'premium'],
+            child: const JobsfrontPage(),
+            paths: const ['all', 'premium'],
             pageBuilder: (child) => NoAnimationPage(child: child),
           ),
       '/jobs/all': (route) => NoAnimationPage(
-            child: JobsfrontListPage(mode: 'all'),
+            child: const JobsfrontListPage(mode: 'all'),
           ),
       '/jobs/premium': (route) => NoAnimationPage(
-            child: JobsfrontListPage(mode: 'premium'),
+            child: const JobsfrontListPage(mode: 'premium'),
           ),
       '/jobs/all/:slug': (route) =>
           _isValidCompany(route.pathParameters['slug'])
@@ -151,7 +152,7 @@ RouteMap _buildRouteMap(BuildContext context) {
                         ),
                   ),
                 )
-              : NotFound(),
+              : const NotFound(),
       '/jobs/premium/:slug': (route) =>
           _isValidCompany(route.pathParameters['slug'])
               ? NoAnimationPage(
@@ -162,7 +163,7 @@ RouteMap _buildRouteMap(BuildContext context) {
                         ),
                   ),
                 )
-              : NotFound(),
+              : const NotFound(),
       '/job/:id': (route) =>
           NoAnimationPage(child: JobsPage(slug: route.pathParameters['id'])),
       '/search': (route) => NoAnimationPage(
@@ -200,12 +201,12 @@ RouteMap _buildRouteMap(BuildContext context) {
 
 final loggedOutRouteMap = RouteMap(
   routes: {
-    '/': (route) => NoAnimationPage(child: LoginPage()),
+    '/': (route) => NoAnimationPage(child: const LoginPage()),
   },
 );
 
 class NoAnimationPage<T> extends TransitionPage<T> {
-  NoAnimationPage({required Widget child})
+  const NoAnimationPage({required Widget child})
       : super(
           child: child,
           pushTransition: PageTransition.none,
@@ -218,7 +219,7 @@ class HoledoApp extends StatelessWidget {
   final bool siteBlockedWithoutLogin;
   final RouteInformationProvider? routeInformationProvider;
 
-  HoledoApp({
+  const HoledoApp({
     Key? key,
     this.username,
     this.siteBlockedWithoutLogin = false,
@@ -243,12 +244,12 @@ class HoledoApp extends StatelessWidget {
         builder: (context, child) => ResponsiveWrapper.builder(
           ClampingScrollWrapper.builder(context, child!),
           breakpoints: [
-            ResponsiveBreakpoint.autoScaleDown(450, name: "SmallMobile"),
-            ResponsiveBreakpoint.resize(460, name: "Mobile"),
-            ResponsiveBreakpoint.resize(750, name: MOBILE),
-            ResponsiveBreakpoint.resize(1000, name: TABLET),
-            ResponsiveBreakpoint.resize(1300, name: DESKTOP),
-            ResponsiveBreakpoint.autoScale(1301, name: "Desktop"),
+            const ResponsiveBreakpoint.autoScaleDown(450, name: "SmallMobile"),
+            const ResponsiveBreakpoint.resize(460, name: "Mobile"),
+            const ResponsiveBreakpoint.resize(750, name: MOBILE),
+            const ResponsiveBreakpoint.resize(1000, name: TABLET),
+            const ResponsiveBreakpoint.resize(1300, name: DESKTOP),
+            const ResponsiveBreakpoint.autoScale(1301, name: "Desktop"),
           ],
         ),
         debugShowCheckedModeBanner: false,
@@ -263,7 +264,7 @@ class HoledoApp extends StatelessWidget {
         //   ),
         //   platform: TargetPlatform.macOS,
         // ),
-        routeInformationParser: RoutemasterParser(),
+        routeInformationParser: const RoutemasterParser(),
         routeInformationProvider: routeInformationProvider,
         routerDelegate: RoutemasterDelegate(
           routesBuilder: (context) {

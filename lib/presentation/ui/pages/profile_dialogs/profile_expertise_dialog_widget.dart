@@ -57,13 +57,13 @@ class _ProfileExpertiseDialogWidgetState
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       "Expertise",
                       style: h2Regular,
                     ),
                     GestureDetector(
                       onTap: () => Nav.pop(context),
-                      child: Icon(
+                      child: const Icon(
                         Icons.close,
                         size: 24,
                         color: Cr.accentBlue1,
@@ -76,8 +76,8 @@ class _ProfileExpertiseDialogWidgetState
           ),
           Container(
             color: Cr.whiteColor,
-            padding: EdgeInsets.all(Di.PSL),
-            margin: EdgeInsets.all(Di.PSL),
+            padding: const EdgeInsets.all(Di.PSL),
+            margin: const EdgeInsets.all(Di.PSL),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,14 +85,14 @@ class _ProfileExpertiseDialogWidgetState
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
+                    const Text(
                       "What are your areas of expertise",
                       style: h5Bold,
                     ),
                     Di.SBWES,
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
+                      children: const [
                         Icon(
                           Icons.help,
                           color: Cr.accentBlue1,
@@ -140,20 +140,20 @@ class _ProfileExpertiseDialogWidgetState
                       },
                       borderColor: Cr.accentBlue2,
                       makeWidthNull: true,
+                      height: 36,
+                      donotShowIcon: true,
+                      backgroundColor: Cr.accentBlue3,
                       child: Text(
                         "Add to lists",
                         style: bodySmallRegular.copyWith(
                           color: Cr.accentBlue1,
                         ),
                       ),
-                      height: 36,
-                      donotShowIcon: true,
-                      backgroundColor: Cr.accentBlue3,
                     ),
                   ],
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                     horizontal: Di.PSL,
                     vertical: 24,
                   ),
@@ -181,7 +181,7 @@ class _ProfileExpertiseDialogWidgetState
                   width: double.infinity,
                   child: Align(
                     alignment: Alignment.bottomLeft,
-                    child: Container(
+                    child: SizedBox(
                       height: 35,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
@@ -190,15 +190,15 @@ class _ProfileExpertiseDialogWidgetState
                             borderColor: Cr.accentBlue2,
                             makeWidthNull: true,
                             onPressed: () => Nav.pop(context),
+                            height: 36,
+                            donotShowIcon: true,
+                            backgroundColor: Cr.accentBlue3,
                             child: Text(
                               "Cancel",
                               style: bodySmallRegular.copyWith(
                                 color: Cr.accentBlue1,
                               ),
                             ),
-                            height: 36,
-                            donotShowIcon: true,
-                            backgroundColor: Cr.accentBlue3,
                           ),
                           Di.SBWES,
                           CustomElevatedButton(
@@ -206,19 +206,19 @@ class _ProfileExpertiseDialogWidgetState
                             makeWidthNull: true,
                             onPressed: () async {
                               Nav.pop(context);
-                              await new User(
+                              await User(
                                 expertise: expertise,
                               ).save(DbData.getUserProfileData);
                             },
+                            height: 36,
+                            donotShowIcon: true,
+                            backgroundColor: Cr.accentBlue1,
                             child: Text(
                               "Save",
                               style: bodySmallRegular.copyWith(
                                 color: Cr.whiteColor,
                               ),
                             ),
-                            height: 36,
-                            donotShowIcon: true,
-                            backgroundColor: Cr.accentBlue1,
                           ),
                         ],
                       ),

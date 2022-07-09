@@ -38,43 +38,43 @@ class MobileProfileArticleSection extends StatelessWidget {
       child: Column(
         children: [
           Di.SBHL,
-          Padding(
-            padding: const EdgeInsets.symmetric(
+          const Padding(
+            padding: EdgeInsets.symmetric(
               horizontal: Di.PSD,
             ),
             child: ProfileArticleTimelineComponent(
               isMobile: true,
             ),
           ),
-          ProfileArticleWidget(
+          const ProfileArticleWidget(
             isMobile: true,
             showIsMemberOnly: true,
           ),
-          ProfileArticleWidget(
+          const ProfileArticleWidget(
             isMobile: true,
           ),
-          ProfileArticleWidget(
+          const ProfileArticleWidget(
             isMobile: true,
           ),
-          ProfileArticleWidget(
+          const ProfileArticleWidget(
             isMobile: true,
           ),
-          ProfileArticleWidget(
+          const ProfileArticleWidget(
             isMobile: true,
           ),
-          ProfileArticleWidget(
+          const ProfileArticleWidget(
             isMobile: true,
           ),
-          ProfileArticleWidget(
+          const ProfileArticleWidget(
             isMobile: true,
           ),
-          ConnectionsComponent(
+          const ConnectionsComponent(
             isMobile: true,
           ),
           Di.SBHS,
-          ProfileAdsComponent(),
+          const ProfileAdsComponent(),
           Di.SBHS,
-          RightsComponent(
+          const RightsComponent(
             isMobile: true,
           ),
           Di.SBHOTL,
@@ -128,7 +128,7 @@ class _ProfileMobileTimelineTile extends StatelessWidget {
                   child: Container(
                     width: 16,
                     height: 16,
-                    decoration: new BoxDecoration(
+                    decoration: BoxDecoration(
                       border: Border.all(
                         color: Cr.darkGrey3,
                         width: 3.5,
@@ -147,13 +147,13 @@ class _ProfileMobileTimelineTile extends StatelessWidget {
           Container(
             height: 96,
             color: Cr.whiteColor,
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               horizontal: Di.PSL,
               vertical: Di.PSD,
             ),
             child: Row(
               children: [
-                ContainerWithIcon(
+                const ContainerWithIcon(
                   size: 50,
                   iconData: FontAwesomeIcons.buildingColumns,
                 ),
@@ -221,13 +221,13 @@ class _ProfileMobileTimelineTile extends StatelessWidget {
                         // ),
                       ),
                       Di.SBHES,
-                      Align(
+                      const Align(
                         alignment: Alignment.centerLeft,
                         child: CustomTextButton(
                           text: "  - Close",
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: Di.PSS,
                       ),
                     ],
@@ -254,7 +254,7 @@ class _ProfileMobileTimelineTile extends StatelessWidget {
               ? Container(
                   height: 120,
                   color: Cr.whiteColor,
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                     horizontal: Di.PSL,
                     vertical: Di.PSS,
                   ),
@@ -264,7 +264,7 @@ class _ProfileMobileTimelineTile extends StatelessWidget {
                         children: [
                           Row(
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.thumb_up,
                                 size: 12,
                                 color: Cr.accentBlue1,
@@ -300,7 +300,7 @@ class _ProfileMobileTimelineTile extends StatelessWidget {
                           Di.SBWOL,
                           Row(
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.comment,
                                 size: 12,
                                 color: Cr.accentBlue1,
@@ -336,7 +336,7 @@ class _ProfileMobileTimelineTile extends StatelessWidget {
                           Di.SBWOL,
                           Row(
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.share,
                                 size: 12,
                                 color: Cr.accentBlue1,
@@ -375,7 +375,7 @@ class _ProfileMobileTimelineTile extends StatelessWidget {
                         padding: const EdgeInsets.all(Di.PSL),
                         child: Row(
                           children: [
-                            PersonAvatar(
+                            const PersonAvatar(
                               avatarSize: 40,
                             ),
                             Di.SBWL,
@@ -389,17 +389,17 @@ class _ProfileMobileTimelineTile extends StatelessWidget {
                                   hintStyle: bodySmallRegular.copyWith(
                                     color: Cr.darkGrey1,
                                   ),
-                                  border: OutlineInputBorder(
+                                  border: const OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Cr.darkGrey4,
                                     ),
                                   ),
-                                  enabledBorder: OutlineInputBorder(
+                                  enabledBorder: const OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Cr.darkGrey4,
                                     ),
                                   ),
-                                  focusedBorder: OutlineInputBorder(
+                                  focusedBorder: const OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Cr.darkGrey4,
                                     ),
@@ -413,7 +413,7 @@ class _ProfileMobileTimelineTile extends StatelessWidget {
                     ],
                   ),
                 )
-              : SizedBox(),
+              : const SizedBox(),
         ],
       ),
     );

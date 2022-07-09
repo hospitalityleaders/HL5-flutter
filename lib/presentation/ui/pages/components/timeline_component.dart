@@ -20,7 +20,7 @@ class TimelineComponent extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            color: Color(0xff0D9BDC),
+            color: const Color(0xff0D9BDC),
           ),
           Positioned(
             left: -38,
@@ -29,7 +29,7 @@ class TimelineComponent extends StatelessWidget {
               width: 150,
               height: 150,
               decoration: BoxDecoration(
-                color: Color(0xff0E92CF),
+                color: const Color(0xff0E92CF),
                 borderRadius: BorderRadius.circular(199),
               ),
             ),
@@ -41,7 +41,7 @@ class TimelineComponent extends StatelessWidget {
               width: 65,
               height: 65,
               decoration: BoxDecoration(
-                color: Color(0xff0D9BDC),
+                color: const Color(0xff0D9BDC),
                 borderRadius: BorderRadius.circular(199),
               ),
             ),
@@ -51,7 +51,7 @@ class TimelineComponent extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: Di.PSD + 3,
                 ),
                 Container(
@@ -101,7 +101,7 @@ class TimelineComponent extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: Di.PSD + 3,
                   ),
                   Text(
@@ -124,15 +124,17 @@ class TimelineComponent extends StatelessWidget {
                   CustomElevatedButton(
                     width: 200,
                     height: 35,
+                    backgroundColor: Cr.accentBlue3,
+                    icon: const Icon(Icons.menu),
                     child: Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.menu,
                           color: Cr.accentBlue1,
                           size: 16,
                         ),
                         Di.SBWETS,
-                        Text(
+                        const Text(
                           "View Noberto’s timeline",
                           style: TextStyle(
                             color: Cr.accentBlue1,
@@ -140,8 +142,6 @@ class TimelineComponent extends StatelessWidget {
                         ),
                       ],
                     ),
-                    backgroundColor: Cr.accentBlue3,
-                    icon: Icon(Icons.menu),
                   ),
                 ],
               ),

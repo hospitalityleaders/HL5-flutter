@@ -46,11 +46,11 @@ class _UploadButtonWidgetState extends State<UploadButtonWidget> {
         ),
       ),
       margin: widget.margin ??
-          EdgeInsets.symmetric(
+          const EdgeInsets.symmetric(
             horizontal: Di.PSL,
           ),
       padding: widget.padding ??
-          EdgeInsets.symmetric(
+          const EdgeInsets.symmetric(
             horizontal: Di.PSS,
             vertical: Di.PSS,
           ),
@@ -74,7 +74,7 @@ class _UploadButtonWidgetState extends State<UploadButtonWidget> {
               width: 80,
               height: 20,
               decoration: BoxDecoration(
-                  boxShadow: [
+                  boxShadow: const [
                     BoxShadow(
                       offset: Offset(2, 2),
                       blurRadius: 2,
@@ -139,7 +139,7 @@ class _UploadButtonWidgetState extends State<UploadButtonWidget> {
                 });
               }
             },
-            child: Text(
+            child: const Text(
               "Upload",
             ),
           ),

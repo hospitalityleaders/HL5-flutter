@@ -4,10 +4,12 @@ import 'package:holedo/presentation/utill/dimensions.dart';
 class ExpandedSection extends StatefulWidget {
   final Widget child;
   final bool expand;
-  ExpandedSection({
+
+  const ExpandedSection({
+    Key? key,
     this.expand = false,
     required this.child,
-  });
+  }) : super(key: key);
 
   @override
   _ExpandedSectionState createState() => _ExpandedSectionState();

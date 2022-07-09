@@ -54,7 +54,7 @@ class _ProfileWorkExperienceComponentState
               color: Cr.whiteColor,
               padding: EdgeInsets.only(left: widget.isMobile ? Di.PSD : Di.PSS),
               child: ListTile(
-                title: Text(
+                title: const Text(
                   "Work experience",
                   style: h2Regular,
                 ),
@@ -191,7 +191,7 @@ class _SingleExperienceWidgetState extends State<_SingleExperienceWidget> {
           children: [
             Di.SBCH(18),
             ListTile(
-              leading: ContainerWithIcon(
+              leading: const ContainerWithIcon(
                 iconData: FontAwesomeIcons.buildingColumns,
                 size: 50,
               ),

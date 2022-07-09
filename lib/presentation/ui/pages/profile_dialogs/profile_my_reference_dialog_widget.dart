@@ -32,7 +32,7 @@ class _ProfileWriteReferenceDialogWidgetState
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            DialogTitleWidget(
+            const DialogTitleWidget(
               title: "My reference",
             ),
             Di.SBHL,
@@ -50,9 +50,9 @@ class _ProfileWriteReferenceDialogWidgetState
               ),
             ),
             Di.SBHL,
-            DialogExpandedTile(isExpanded: true),
+            const DialogExpandedTile(isExpanded: true),
             Di.SBHS,
-            DialogExpandedTile(),
+            const DialogExpandedTile(),
             Di.SBHD,
           ],
         ),
@@ -94,7 +94,7 @@ class _DialogExpandedTileState extends State<DialogExpandedTile> {
   Widget build(BuildContext context) {
     return Container(
       color: Cr.lightGrey2,
-      margin: EdgeInsets.symmetric(horizontal: Di.PSL),
+      margin: const EdgeInsets.symmetric(horizontal: Di.PSL),
       width: 615,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,9 +106,9 @@ class _DialogExpandedTileState extends State<DialogExpandedTile> {
               });
             },
             child: Container(
-              padding: EdgeInsets.all(Di.PSL),
+              padding: const EdgeInsets.all(Di.PSL),
               height: 90,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Cr.whiteColor,
               ),
               child: Row(
@@ -125,14 +125,13 @@ class _DialogExpandedTileState extends State<DialogExpandedTile> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
-                          children: [
+                          children: const [
                             Text(
                               'Ealasiad Wang',
                               style: h4Bold,
                             ),
                             Padding(
-                              padding:
-                                  const EdgeInsets.only(bottom: 2, left: 8),
+                              padding: EdgeInsets.only(bottom: 2, left: 8),
                               child: Text(
                                 'MHL',
                                 style: dividerTextSmall,
@@ -158,7 +157,7 @@ class _DialogExpandedTileState extends State<DialogExpandedTile> {
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: checked
-                        ? Icon(
+                        ? const Icon(
                             Icons.check,
                             color: Cr.accentBlue1,
                             size: 20,
@@ -169,7 +168,7 @@ class _DialogExpandedTileState extends State<DialogExpandedTile> {
               ),
             ),
           ),
-          ExpandedCollapseWidget(
+          const ExpandedCollapseWidget(
             showText: "Show reference",
             hideText: "Hide reference",
             description:

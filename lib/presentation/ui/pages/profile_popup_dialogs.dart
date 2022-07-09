@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Flutter',
       debugShowCheckedModeBanner: false,
       home: TestingScreen(),
@@ -25,7 +25,7 @@ class TestingScreen extends StatelessWidget {
     return Scaffold(
       body: Container(
         color: Cr.green1,
-        child: Center(
+        child: const Center(
             // child: Container(
             //   width: 299,
             //   height: 300,

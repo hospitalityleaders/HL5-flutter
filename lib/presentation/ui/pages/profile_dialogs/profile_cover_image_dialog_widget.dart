@@ -38,11 +38,11 @@ class _ProfileWriteReferenceDialogWidgetState
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            DialogTitleWidget(
+            const DialogTitleWidget(
               title: "Cover image",
             ),
             Di.SBHL,
-            ProfileCoverImageDialogExpandedTile(isExpanded: true),
+            const ProfileCoverImageDialogExpandedTile(isExpanded: true),
             Di.SBHD,
           ],
         ),
@@ -88,14 +88,14 @@ class _ProfileCoverImageDialogExpandedTileState
   Widget build(BuildContext context) {
     final userProfileData = DbData.getUserProfileData;
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: Di.PSL),
+      margin: const EdgeInsets.symmetric(horizontal: Di.PSL),
       color: Cr.whiteColor,
       width: 615,
       child: ExpandedTile(
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Cover image',
               style: h4Bold,
             ),
@@ -118,7 +118,7 @@ class _ProfileCoverImageDialogExpandedTileState
           width: 50,
           height: 50,
           color: Cr.accentBlue1,
-          child: Center(
+          child: const Center(
             child: Icon(
               Icons.camera_alt,
               size: 22,
@@ -129,8 +129,8 @@ class _ProfileCoverImageDialogExpandedTileState
         trailingRotation: 0,
         trailing: !(expandedTileController.isExpanded == false)
             ? null
-            : CustomMinusIcon(),
-        theme: ExpandedTileThemeData(
+            : const CustomMinusIcon(),
+        theme: const ExpandedTileThemeData(
           contentPadding: EdgeInsets.zero,
           headerPadding: EdgeInsets.all(17),
           headerRadius: 0,
@@ -139,7 +139,7 @@ class _ProfileCoverImageDialogExpandedTileState
         controller: expandedTileController,
         content: Container(
           color: Cr.whiteColor,
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
             // left: Di.PSL,
             // right: Di.PSL,
             top: 12,
@@ -148,21 +148,20 @@ class _ProfileCoverImageDialogExpandedTileState
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
+              SizedBox(
                 width: double.infinity,
                 height: 240,
-                child: pickedImage != null
-                    ? pickedImage
-                    : Image.network(
-                        userProfileData.banner ?? "",
-                        fit: BoxFit.cover,
-                      ),
+                child: pickedImage ??
+                    Image.network(
+                      userProfileData.banner ?? "",
+                      fit: BoxFit.cover,
+                    ),
               ),
               Di.SBHL,
               UploadButtonWidget(
                 folder: "banners",
                 uploadedImgCallback: (String imgUrl) async {
-                  await new User(
+                  await User(
                     banner: imgUrl,
                   ).save(userProfileData);
                 },
@@ -173,7 +172,7 @@ class _ProfileCoverImageDialogExpandedTileState
                 },
               ),
               Container(
-                margin: EdgeInsets.symmetric(
+                margin: const EdgeInsets.symmetric(
                   horizontal: Di.PSL,
                   vertical: Di.PSS,
                 ),
@@ -186,13 +185,13 @@ class _ProfileCoverImageDialogExpandedTileState
               ),
               Di.SBHS,
               Container(
-                margin: EdgeInsets.symmetric(
+                margin: const EdgeInsets.symmetric(
                   horizontal: Di.PSL,
                 ),
                 child: GestureDetector(
                   child: Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.delete,
                         color: Cr.red1,
                         size: 12,

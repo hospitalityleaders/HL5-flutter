@@ -41,9 +41,9 @@ class MobileProfileOverviewSection extends StatelessWidget {
       ),
       child: Column(
         children: [
-          if (isMobilePhn) ProfileCompletionComponent(),
+          if (isMobilePhn) const ProfileCompletionComponent(),
           Di.SBHS,
-          ProfileSummaryComponent(
+          const ProfileSummaryComponent(
             isMobile: true,
           ),
 
@@ -58,9 +58,9 @@ class MobileProfileOverviewSection extends StatelessWidget {
             userProfileData: userProfileData,
           ),
           Di.SBHS,
-          AreasOfExpertiseComponents(),
+          const AreasOfExpertiseComponents(),
           Di.SBHS,
-          ProfileReferenceComponent(),
+          const ProfileReferenceComponent(),
           Di.SBHS,
           EducationComponent(
             isMobile: true,
@@ -76,14 +76,14 @@ class MobileProfileOverviewSection extends StatelessWidget {
           //   userProfileData: userProfileData,
           // ),
           Di.SBHS,
-          ConnectionsComponent(
+          const ConnectionsComponent(
             isMobile: true,
           ),
           Di.SBHS,
-          TimelineComponent(),
+          const TimelineComponent(),
           Di.SBHS,
 
-          RightsComponent(
+          const RightsComponent(
             isMobile: true,
           ),
           Di.SBHOTL,
@@ -115,7 +115,7 @@ class _ProfileMobileAppbarState extends State<ProfileMobileAppbar> {
     return Container(
       color: Cr.colorPrimary,
       height: 50,
-      padding: EdgeInsets.symmetric(horizontal: Di.PSS),
+      padding: const EdgeInsets.symmetric(horizontal: Di.PSS),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -134,7 +134,7 @@ class _ProfileMobileAppbarState extends State<ProfileMobileAppbar> {
               ? Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    VerticalDivider(
+                    const VerticalDivider(
                       thickness: 1.3,
                       color: Cr.darkBlue5,
                     ),
@@ -146,7 +146,7 @@ class _ProfileMobileAppbarState extends State<ProfileMobileAppbar> {
                       // iconData: Icons.mail_rounded,
                       showNotification: true,
                     ),
-                    VerticalDivider(
+                    const VerticalDivider(
                       thickness: 1.3,
                       color: Cr.darkBlue5,
                     ),
@@ -157,17 +157,17 @@ class _ProfileMobileAppbarState extends State<ProfileMobileAppbar> {
                       ),
                       showNotification: true,
                     ),
-                    VerticalDivider(
+                    const VerticalDivider(
                       thickness: 1.3,
                       color: Cr.darkBlue5,
                     ),
-                    AppbarConnectionRequestButton(),
-                    VerticalDivider(
+                    const AppbarConnectionRequestButton(),
+                    const VerticalDivider(
                       thickness: 1.3,
                       color: Cr.darkBlue5,
                     ),
-                    PersonAvatar(),
-                    VerticalDivider(
+                    const PersonAvatar(),
+                    const VerticalDivider(
                       thickness: 1.3,
                       color: Cr.darkBlue5,
                     ),
@@ -185,7 +185,7 @@ class _ProfileMobileAppbarState extends State<ProfileMobileAppbar> {
                   icon: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
-                    children: [
+                    children: const [
                       Icon(
                         Icons.menu,
                         color: Cr.darkBlue9,
@@ -231,7 +231,7 @@ class TabButtonProfileMobile extends StatelessWidget {
         alignment: Alignment.centerLeft,
         child: Container(
           color: isActive ? Cr.accentBlue3 : Cr.whiteColor,
-          padding: EdgeInsets.symmetric(
+          padding: const EdgeInsets.symmetric(
             horizontal: Di.PSL,
             vertical: 12,
           ),
@@ -254,7 +254,7 @@ class TabButtonProfileMobile extends StatelessWidget {
                     Container(
                       width: 8,
                       height: 8,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Cr.accentBlue1,
                         shape: BoxShape.circle,
                       ),

@@ -8,7 +8,7 @@ class ActivitySection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text(
         "Activity Section",
         style: display1,

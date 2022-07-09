@@ -45,14 +45,14 @@ class _ProfileEducationDialogWidgetState
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            DialogTitleWidget(
+            const DialogTitleWidget(
               title: "Education",
             ),
             Di.SBHL,
             addingToProfile
                 ? Container(
-                    padding: EdgeInsets.only(bottom: Di.PSS),
-                    margin: EdgeInsets.symmetric(horizontal: Di.PSL),
+                    padding: const EdgeInsets.only(bottom: Di.PSS),
+                    margin: const EdgeInsets.symmetric(horizontal: Di.PSL),
                     child: _SingleEducation(
                       isExpanded: true,
                       educations: Education(),
@@ -89,8 +89,8 @@ class _ProfileEducationDialogWidgetState
               itemCount: educations.length,
               itemBuilder: (BuildContext context, int index) {
                 return Container(
-                  padding: EdgeInsets.only(bottom: Di.PSS),
-                  margin: EdgeInsets.symmetric(horizontal: Di.PSL),
+                  padding: const EdgeInsets.only(bottom: Di.PSS),
+                  margin: const EdgeInsets.symmetric(horizontal: Di.PSL),
                   width: 615,
                   child: _SingleEducation(
                     educations: educations[index],
@@ -177,10 +177,7 @@ class __SingleEducationState extends State<_SingleEducation> {
           ),
           Text(
             ((education.durationFromDate != null)
-                ? "${education.durationFromDate!.getMonthInString} ${education.durationFromDate!.year}" +
-                    ((education.durationToDate != null)
-                        ? " - ${education.durationToDate!.getMonthInString} ${education.durationToDate!.year} (${education.durationToDate!.month - education.durationFromDate!.month} months)"
-                        : "")
+                ? "${education.durationFromDate!.getMonthInString} ${education.durationFromDate!.year}${(education.durationToDate != null) ? " - ${education.durationToDate!.getMonthInString} ${education.durationToDate!.year} (${education.durationToDate!.month - education.durationFromDate!.month} months)" : ""}"
                 : ""),
             style: bodySmallRegular.copyWith(
               color: Cr.darkGrey1,
@@ -205,8 +202,8 @@ class __SingleEducationState extends State<_SingleEducation> {
           ),
         ),
       ),
-      trailing: Icon(Icons.keyboard_arrow_right),
-      theme: CustomExpandedTileThemeData(
+      trailing: const Icon(Icons.keyboard_arrow_right),
+      theme: const CustomExpandedTileThemeData(
         contentPadding: EdgeInsets.zero,
         headerPadding: EdgeInsets.all(17),
         headerRadius: 0,
@@ -215,14 +212,14 @@ class __SingleEducationState extends State<_SingleEducation> {
       controller: CustomExpandedTileController(isExpanded: isExpanded),
       content: Container(
         color: Cr.whiteColor,
-        padding: EdgeInsets.all(Di.PSL),
+        padding: const EdgeInsets.all(Di.PSL),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                DialogLabelTextFormField(
+                const DialogLabelTextFormField(
                   customLabel: "Educational institution",
                 ),
                 Di.SBHES,
@@ -230,11 +227,11 @@ class __SingleEducationState extends State<_SingleEducation> {
                   textEditingController: _educationalInstituteController,
                 ),
                 Di.SBCH(18),
-                DialogLabelTextFormField(customLabel: "Time period"),
+                const DialogLabelTextFormField(customLabel: "Time period"),
                 Di.SBHES,
                 Row(
                   children: [
-                    DialogDropDownTextField(
+                    const DialogDropDownTextField(
                       // initialValue: experience.durationFromDate?.getMonthInString,
                       alignHintTextStart: true,
                       // onChanged: (value) {
@@ -260,14 +257,14 @@ class __SingleEducationState extends State<_SingleEducation> {
                       },
                       width: 72,
                       hintText: 'Year',
-                      dataList: [
+                      dataList: const [
                         "2020",
                         "2021",
                         "2022",
                       ],
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: Di.PSS),
+                      padding: const EdgeInsets.symmetric(horizontal: Di.PSS),
                       child: Container(
                         width: 9,
                         height: 1.5,
@@ -284,7 +281,7 @@ class __SingleEducationState extends State<_SingleEducation> {
                       disable: currentlyWorkHere,
                       width: 122,
                       hintText: 'Select Month',
-                      dataList: [
+                      dataList: const [
                         "Jaun",
                         "Feb",
                         "March",
@@ -301,7 +298,7 @@ class __SingleEducationState extends State<_SingleEducation> {
                       disable: currentlyWorkHere,
                       width: 72,
                       hintText: 'Year',
-                      dataList: [
+                      dataList: const [
                         "2020",
                         "2021",
                         "2022",
@@ -310,7 +307,7 @@ class __SingleEducationState extends State<_SingleEducation> {
                   ],
                 ),
                 Di.SBCH(18),
-                DialogLabelTextFormField(
+                const DialogLabelTextFormField(
                   isImportant: false,
                   customLabel: "Qualification title",
                 ),
@@ -319,15 +316,15 @@ class __SingleEducationState extends State<_SingleEducation> {
                   textEditingController: _qualificationTitleController,
                 ),
                 Di.SBCH(18),
-                DialogLabelTextFormField(
+                const DialogLabelTextFormField(
                   customLabel: "Description",
                   isImportant: false,
                 ),
                 Di.SBHES,
-                DialogMultiLineTextField(
+                const DialogMultiLineTextField(
                   width: 575,
                 ),
-                DialogLabelTextFormField(
+                const DialogLabelTextFormField(
                   customLabel: "Course outline",
                   isImportant: false,
                 ),
@@ -394,15 +391,15 @@ class __SingleEducationState extends State<_SingleEducation> {
                       borderColor: Cr.accentBlue2,
                       makeWidthNull: true,
                       onPressed: () => Nav.pop(context),
+                      height: 36,
+                      donotShowIcon: true,
+                      backgroundColor: Cr.accentBlue3,
                       child: Text(
                         "Cancel",
                         style: bodySmallRegular.copyWith(
                           color: Cr.accentBlue1,
                         ),
                       ),
-                      height: 36,
-                      donotShowIcon: true,
-                      backgroundColor: Cr.accentBlue3,
                     ),
                     Di.SBWES,
                     CustomElevatedButton(
@@ -415,15 +412,15 @@ class __SingleEducationState extends State<_SingleEducation> {
                         //       _profileSummaryController.text,
                         // ).save(widget.userProfileData);
                       },
+                      height: 36,
+                      donotShowIcon: true,
+                      backgroundColor: Cr.accentBlue1,
                       child: Text(
                         "Save",
                         style: bodySmallRegular.copyWith(
                           color: Cr.whiteColor,
                         ),
                       ),
-                      height: 36,
-                      donotShowIcon: true,
-                      backgroundColor: Cr.accentBlue1,
                     ),
                   ],
                 ),
@@ -473,7 +470,7 @@ class __QualificationFieldState extends State<_QualificationField> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Expanded(
+            const Expanded(
               child: DialogTextFieldForm(
                 hintText: "Course name",
               ),
@@ -482,10 +479,10 @@ class __QualificationFieldState extends State<_QualificationField> {
             Material(
               child: InkWell(
                 onTap: widget.onCloseTap,
-                child: Container(
+                child: SizedBox(
                   height: 30,
                   width: 30,
-                  child: Icon(
+                  child: const Icon(
                     Icons.close,
                     color: Cr.accentBlue1,
                     size: 14,

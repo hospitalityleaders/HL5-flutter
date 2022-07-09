@@ -53,7 +53,7 @@ class _ProfileOverviewSecondColumnState
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: BoxConstraints(minWidth: 100, maxWidth: 360),
+      constraints: const BoxConstraints(minWidth: 100, maxWidth: 360),
       // width: 360,
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -97,10 +97,10 @@ class _ProfileOverviewSecondColumnState
 
   Widget buildProfileSec2Cards(
     sec2Key,
-    sec2_H,
-    sec2_W,
-    _width,
-    _height,
+    sec2H,
+    sec2W,
+    width,
+    height,
     String cardName,
     String cardTitle,
     String cardSubTitle,
@@ -118,7 +118,7 @@ class _ProfileOverviewSecondColumnState
       child: Stack(
         children: [
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: Container(
               key: sec2Key as Key,
               color: ColorPicker.kWhite,
@@ -131,7 +131,7 @@ class _ProfileOverviewSecondColumnState
                     children: [
                       Expanded(
                         child: Padding(
-                          padding: EdgeInsets.only(left: 20, top: 13),
+                          padding: const EdgeInsets.only(left: 20, top: 13),
                           child: Text(cardName,
                               style: FontTextStyle.kBlueDark120W400SSP),
                         ),
@@ -155,8 +155,8 @@ class _ProfileOverviewSecondColumnState
                                       });
                                     },
                                     child: Padding(
-                                      padding:
-                                          EdgeInsets.only(top: 13, right: 20),
+                                      padding: const EdgeInsets.only(
+                                          top: 13, right: 20),
                                       child: Container(
                                         decoration: BoxDecoration(
                                             borderRadius: isHovering
@@ -169,7 +169,7 @@ class _ProfileOverviewSecondColumnState
                                                 : Border.all(
                                                     width: 0,
                                                     color: Colors.transparent)),
-                                        child: Icon(
+                                        child: const Icon(
                                           Icons.arrow_drop_down_sharp,
                                           color: ColorPicker.kBlueDark1,
                                         ),
@@ -183,7 +183,7 @@ class _ProfileOverviewSecondColumnState
                     ],
                   ),
                   SS.sB(8),
-                  Divider(
+                  const Divider(
                     height: .5,
                     color: Color(0xFFE5E5E5),
                   ),
@@ -243,14 +243,14 @@ class _ProfileOverviewSecondColumnState
                           AnimatedContainer(
                             height: isVisible ? 120 : 0,
                             color: ColorPicker.kGreyLight2,
-                            duration: Duration(seconds: 1),
+                            duration: const Duration(seconds: 1),
                             alignment: isVisible
                                 ? Alignment.topCenter
                                 : Alignment.bottomCenter,
                             curve: Curves.fastOutSlowIn,
                             child: SingleChildScrollView(
                               child: Padding(
-                                padding: EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.all(8.0),
                                 child: Text(
                                   description,
                                   style: FontTextStyle.kGreyLight516W400SSP,
@@ -259,7 +259,7 @@ class _ProfileOverviewSecondColumnState
                             ),
                           ),
                           Container(
-                            padding: EdgeInsets.all(5),
+                            padding: const EdgeInsets.all(5),
                             color: ColorPicker.kGreyLight2,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -298,7 +298,7 @@ class _ProfileOverviewSecondColumnState
                     child: Column(
                       children: [
                         Align(
-                          alignment: Alignment(.35, 0),
+                          alignment: const Alignment(.35, 0),
                           child: ClipPath(
                             clipper: ArrowClipper(),
                             child: Container(
@@ -311,7 +311,7 @@ class _ProfileOverviewSecondColumnState
                           ),
                         ),
                         Align(
-                            alignment: Alignment(.25, .12),
+                            alignment: const Alignment(.25, .12),
                             child: Container(
                               color: ColorPicker.kWhite,
                               child: Column(
@@ -320,7 +320,7 @@ class _ProfileOverviewSecondColumnState
                                     padding: const EdgeInsets.all(8.0),
                                     child: Row(
                                       children: [
-                                        Icon(
+                                        const Icon(
                                           Icons.menu,
                                           color: ColorPicker.kBlueLight1,
                                           size: 10,
@@ -334,7 +334,7 @@ class _ProfileOverviewSecondColumnState
                                       ],
                                     ),
                                   ),
-                                  Divider(
+                                  const Divider(
                                     height: 0.5,
                                     color: Colors.grey,
                                   ),
@@ -342,7 +342,7 @@ class _ProfileOverviewSecondColumnState
                                     padding: const EdgeInsets.all(8.0),
                                     child: Row(
                                       children: [
-                                        Icon(
+                                        const Icon(
                                           Icons.menu,
                                           color: ColorPicker.kBlueLight1,
                                           size: 10,
@@ -365,7 +365,7 @@ class _ProfileOverviewSecondColumnState
               : Container(),
           if (widget.sec2IsEditable as bool)
             ProfileEdit.buildProfileEdit(
-              width: sec2_W as double,
+              width: sec2W as double,
               height: 100,
               popUpEdit: () {
                 popUpEditCards();
@@ -376,7 +376,7 @@ class _ProfileOverviewSecondColumnState
               },
             )
           else
-            SizedBox(),
+            const SizedBox(),
         ],
       ),
     );
@@ -391,7 +391,7 @@ class _ProfileOverviewSecondColumnState
   bool isExperienceShowCard = false;
   int indexExp = 1;
 
-  BuildWorkExpPopUp _buildWorkExpPopUp = BuildWorkExpPopUp();
+  final BuildWorkExpPopUp _buildWorkExpPopUp = BuildWorkExpPopUp();
 
   Future<String?> buildWorkExpPopUp() {
     return showDialog(
@@ -416,7 +416,7 @@ class _ProfileOverviewSecondColumnState
                           ? _buildWorkExpPopUp.buildExpInnerCard(
                               false, true, indexExp)
                           : Padding(
-                              padding: EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(8.0),
                               child: CircleAvatar(
                                 radius: 30,
                                 backgroundColor: ColorPicker.kGreenNeon,
@@ -430,7 +430,7 @@ class _ProfileOverviewSecondColumnState
                                       },
                                     );
                                   },
-                                  icon: Icon(Icons.add),
+                                  icon: const Icon(Icons.add),
                                 ),
                               ),
                             ),
@@ -466,7 +466,7 @@ class _ProfileOverviewSecondColumnState
         List<Widget> eduTextFieldGenerate = List.generate(indexEdu,
             (int i) => TextFieldAndFieldName.buildTextField('Course name'));
         return Padding(
-          padding: EdgeInsets.symmetric(vertical: 5, horizontal: 16),
+          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
           child: Container(
             width: Responsive.isDesktop(context)
                 ? SS.sW(context) * .50
@@ -484,14 +484,14 @@ class _ProfileOverviewSecondColumnState
                       height: 50,
                       width: 50,
                       color: ColorPicker.kBlueLight1,
-                      child: Icon(
+                      child: const Icon(
                         Icons.school_rounded,
                         color: ColorPicker.kWhite,
                         size: 18,
                       ),
                     ),
-                    title: Text(''),
-                    subtitle: Text(''),
+                    title: const Text(''),
+                    subtitle: const Text(''),
                     trailing: isEducationEditable
                         ? IconButton(
                             onPressed: () {
@@ -499,7 +499,7 @@ class _ProfileOverviewSecondColumnState
                                 isEducationShowCard = !isEducationShowCard;
                               });
                             },
-                            icon: Icon(Icons.edit),
+                            icon: const Icon(Icons.edit),
                           )
                         : null,
                   ),
@@ -511,7 +511,7 @@ class _ProfileOverviewSecondColumnState
                                   height: SS.sH(context) * 0.01,
                                   color: ColorPicker.kGreyLight3),
                               Padding(
-                                padding: EdgeInsets.all(16.0),
+                                padding: const EdgeInsets.all(16.0),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -525,7 +525,7 @@ class _ProfileOverviewSecondColumnState
                                     TextFieldAndFieldName.buildTextField(),
                                     TextFieldAndFieldName.buildFieldName(
                                         'Description'),
-                                    TextField(
+                                    const TextField(
                                       autocorrect: true,
                                       minLines: 4,
                                       maxLines: 6,
@@ -545,19 +545,19 @@ class _ProfileOverviewSecondColumnState
                                           indexEdu++;
                                         });
                                       },
-                                      icon: Icon(Icons.add),
-                                      label: Text('Add another'),
+                                      icon: const Icon(Icons.add),
+                                      label: const Text('Add another'),
                                     ),
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
                                         OutlinedButton(
                                             onPressed: () {},
-                                            child: Text('Cancel')),
+                                            child: const Text('Cancel')),
                                         SS.sB(0, 10),
                                         ElevatedButton(
                                           onPressed: () {},
-                                          child: Text('Save'),
+                                          child: const Text('Save'),
                                         ),
                                       ],
                                     ),
@@ -599,7 +599,7 @@ class _ProfileOverviewSecondColumnState
                         isVisibleEducation
                             ? buildEduInnerCard(false, true, indexEdu)
                             : Padding(
-                                padding: EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.all(8.0),
                                 child: CircleAvatar(
                                   radius: 30,
                                   backgroundColor: ColorPicker.kGreenNeon,
@@ -611,7 +611,7 @@ class _ProfileOverviewSecondColumnState
                                               !isVisibleEducation;
                                         });
                                       },
-                                      icon: Icon(Icons.add)),
+                                      icon: const Icon(Icons.add)),
                                 ),
                               ),
                         buildEduInnerCard(true, isEducationShowCard, indexEdu),
@@ -641,7 +641,7 @@ class _ProfileOverviewSecondColumnState
       [String? title, String? subTitle, String? year]) {
     return StatefulBuilder(builder: (context, setState) {
       return Padding(
-        padding: EdgeInsets.symmetric(vertical: 5, horizontal: 16),
+        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
         child: Container(
           width: Responsive.isDesktop(context)
               ? SS.sW(context) * .50
@@ -659,14 +659,14 @@ class _ProfileOverviewSecondColumnState
                     height: 50,
                     width: 50,
                     color: ColorPicker.kBlueLight1,
-                    child: FaIcon(
+                    child: const FaIcon(
                       Icons.verified_user_rounded,
                       color: ColorPicker.kWhite,
                       size: 18,
                     ),
                   ),
-                  title: Text(''),
-                  subtitle: Text(''),
+                  title: const Text(''),
+                  subtitle: const Text(''),
                   trailing: isArchiveEditable
                       ? IconButton(
                           onPressed: () {
@@ -674,7 +674,7 @@ class _ProfileOverviewSecondColumnState
                               isArchiveShowCard = !isArchiveShowCard;
                             });
                           },
-                          icon: Icon(Icons.edit),
+                          icon: const Icon(Icons.edit),
                         )
                       : null,
                 ),
@@ -686,7 +686,7 @@ class _ProfileOverviewSecondColumnState
                             color: ColorPicker.kGreyLight3,
                           ),
                           Padding(
-                            padding: EdgeInsets.all(16.0),
+                            padding: const EdgeInsets.all(16.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -719,10 +719,11 @@ class _ProfileOverviewSecondColumnState
                                   children: [
                                     OutlinedButton(
                                         onPressed: () {},
-                                        child: Text('Cancel')),
+                                        child: const Text('Cancel')),
                                     SS.sB(0, 10),
                                     ElevatedButton(
-                                        onPressed: () {}, child: Text('Save'))
+                                        onPressed: () {},
+                                        child: const Text('Save'))
                                   ],
                                 )
                               ],
@@ -760,7 +761,7 @@ class _ProfileOverviewSecondColumnState
                       isVisibleAchivement
                           ? buildAchiveInnerCard(false, true)
                           : Padding(
-                              padding: EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(8.0),
                               child: CircleAvatar(
                                 radius: 30,
                                 backgroundColor: ColorPicker.kGreenNeon,
@@ -772,7 +773,7 @@ class _ProfileOverviewSecondColumnState
                                             !isVisibleAchivement;
                                       });
                                     },
-                                    icon: Icon(Icons.add)),
+                                    icon: const Icon(Icons.add)),
                               ),
                             ),
                       buildAchiveInnerCard(true, isArchiveShowCard),
@@ -828,7 +829,7 @@ class _ProfileOverviewSecondColumnState
                     children: [
                       PopUpHeadMenu.popUpHead('Languages', context),
                       Padding(
-                        padding: EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.all(16.0),
                         child: Container(
                           width: Responsive.isDesktop(context)
                               ? SS.sW(context) * .50
@@ -844,7 +845,7 @@ class _ProfileOverviewSecondColumnState
                               Expanded(
                                 flex: 1,
                                 child: Padding(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(8.0),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -861,8 +862,8 @@ class _ProfileOverviewSecondColumnState
                                             langIndex++;
                                           });
                                         },
-                                        icon: Icon(Icons.add),
-                                        label: Text('Add another'),
+                                        icon: const Icon(Icons.add),
+                                        label: const Text('Add another'),
                                       ),
                                     ],
                                   ),
@@ -871,7 +872,7 @@ class _ProfileOverviewSecondColumnState
                               Expanded(
                                 flex: 2,
                                 child: Padding(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(8.0),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -889,14 +890,14 @@ class _ProfileOverviewSecondColumnState
                                         children: [
                                           OutlinedButton(
                                             onPressed: () {},
-                                            child: Text(
+                                            child: const Text(
                                               'Cancel',
                                             ),
                                           ),
                                           SS.sB(0, 10),
                                           ElevatedButton(
                                             onPressed: () {},
-                                            child: Text(
+                                            child: const Text(
                                               'Save',
                                             ),
                                           ),
@@ -1062,7 +1063,7 @@ class AchievementComponent extends StatelessWidget {
           Di.SBHETS,
           Container(
             color: Cr.whiteColor,
-            child: ListTile(
+            child: const ListTile(
               title: Text(
                 "Achievement",
                 style: h2Regular,
@@ -1093,12 +1094,12 @@ class AchievementComponent extends StatelessWidget {
                                 Container(
                                   color: Cr.whiteColor,
                                   child: ListTile(
-                                    leading: ContainerWithIcon(
+                                    leading: const ContainerWithIcon(
                                       iconData:
                                           FontAwesomeIcons.buildingColumns,
                                       size: 50,
                                     ),
-                                    trailing: SizedBox(),
+                                    trailing: const SizedBox(),
                                     title: Text(
                                       singleAchievement.title ?? "",
                                       // "Marriott Hotel and Resorts employee of the year awards",
@@ -1212,7 +1213,7 @@ class _FeaturedVideoComponentState extends State<FeaturedVideoComponent> {
       decoration: Styles.boxDecoration.copyWith(color: Cr.whiteColor),
       child: Column(
         children: [
-          ListTile(
+          const ListTile(
             title: Text(
               "Featured video",
               style: h2Regular,
@@ -1225,7 +1226,7 @@ class _FeaturedVideoComponentState extends State<FeaturedVideoComponent> {
             child: Stack(
               children: [
                 Padding(
-                  padding: EdgeInsets.all(Di.PSL),
+                  padding: const EdgeInsets.all(Di.PSL),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -1287,10 +1288,7 @@ class _FeaturedVideoComponentState extends State<FeaturedVideoComponent> {
                                     : (showMore
                                         ? widget.userProfileData
                                             .profileVideoDescription
-                                        : widget.userProfileData
-                                                .profileVideoDescription!
-                                                .substring(0, 120) +
-                                            "...")),
+                                        : "${widget.userProfileData.profileVideoDescription!.substring(0, 120)}...")),
                                 // "Noberto's career has revolved around causing corporate transformation projects designed to optimize the use of resources enha...",
                               ),
                               if (widget.userProfileData
@@ -1304,7 +1302,7 @@ class _FeaturedVideoComponentState extends State<FeaturedVideoComponent> {
                                   text: showMore
                                       ? "show less   "
                                       : "show more   ",
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Cr.accentBlue1,
                                   ),
                                 ),

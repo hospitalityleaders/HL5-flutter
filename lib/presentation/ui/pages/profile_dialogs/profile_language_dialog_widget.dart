@@ -53,13 +53,13 @@ class _ProfileLanguagesDialogWidgetState
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         "Languages",
                         style: h2Regular,
                       ),
                       GestureDetector(
                         onTap: () => Nav.pop(context),
-                        child: Icon(
+                        child: const Icon(
                           Icons.close,
                           size: 24,
                           color: Cr.accentBlue1,
@@ -72,8 +72,8 @@ class _ProfileLanguagesDialogWidgetState
             ),
             Container(
               color: Cr.whiteColor,
-              padding: EdgeInsets.all(Di.PSL),
-              margin: EdgeInsets.all(Di.PSL),
+              padding: const EdgeInsets.all(Di.PSL),
+              margin: const EdgeInsets.all(Di.PSL),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -84,14 +84,14 @@ class _ProfileLanguagesDialogWidgetState
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text(
+                            const Text(
                               "Language",
                               style: h5Bold,
                             ),
                             Di.SBWES,
                             Column(
                               mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
+                              children: const [
                                 Icon(
                                   Icons.star,
                                   color: Cr.accentBlue1,
@@ -102,18 +102,18 @@ class _ProfileLanguagesDialogWidgetState
                           ],
                         ),
                       ),
-                      SizedBox(width: 18),
+                      const SizedBox(width: 18),
                       Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text(
+                          const Text(
                             "Proficiency",
                             style: h5Bold,
                           ),
                           Di.SBWES,
                           Column(
                             mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
+                            children: const [
                               Icon(
                                 Icons.star,
                                 color: Cr.accentBlue1,
@@ -156,7 +156,7 @@ class _ProfileLanguagesDialogWidgetState
                     width: double.infinity,
                     child: Align(
                       alignment: Alignment.bottomLeft,
-                      child: Container(
+                      child: SizedBox(
                         height: 35,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
@@ -165,15 +165,15 @@ class _ProfileLanguagesDialogWidgetState
                               borderColor: Cr.accentBlue2,
                               makeWidthNull: true,
                               onPressed: () => Nav.pop(context),
+                              height: 36,
+                              donotShowIcon: true,
+                              backgroundColor: Cr.accentBlue3,
                               child: Text(
                                 "Cancel",
                                 style: bodySmallRegular.copyWith(
                                   color: Cr.accentBlue1,
                                 ),
                               ),
-                              height: 36,
-                              donotShowIcon: true,
-                              backgroundColor: Cr.accentBlue3,
                             ),
                             Di.SBWES,
                             CustomElevatedButton(
@@ -186,15 +186,15 @@ class _ProfileLanguagesDialogWidgetState
                                 //       _profileSummaryController.text,
                                 // ).save(widget.userProfileData);
                               },
+                              height: 36,
+                              donotShowIcon: true,
+                              backgroundColor: Cr.accentBlue1,
                               child: Text(
                                 "Save",
                                 style: bodySmallRegular.copyWith(
                                   color: Cr.whiteColor,
                                 ),
                               ),
-                              height: 36,
-                              donotShowIcon: true,
-                              backgroundColor: Cr.accentBlue1,
                             ),
                           ],
                         ),
@@ -227,7 +227,7 @@ class _ProfileLanguagesDialogWidgetState
                   decoration: Styles.popUpDialogTextFieldInputDecoration,
                 ),
               ),
-              SizedBox(width: 18),
+              const SizedBox(width: 18),
               SizedBox(
                 width: 335,
                 height: 36,

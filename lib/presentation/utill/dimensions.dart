@@ -24,26 +24,26 @@ class Di {
   static const double WSOTL = 400.0;
 
   // SizedBox Width
-  static final SizedBox ESB = SizedBox();
-  static final SizedBox SBWETS = SizedBox(width: PSETS);
-  static final SizedBox SBWES = SizedBox(width: PSES);
-  static final SizedBox SBWS = SizedBox(width: PSS);
-  static final SizedBox SBWD = SizedBox(width: PSD);
-  static final SizedBox SBWL = SizedBox(width: PSL);
-  static final SizedBox SBWEL = SizedBox(width: PSEL);
-  static final SizedBox SBWOL = SizedBox(width: PSOL);
-  static final SizedBox SBWOTL = SizedBox(width: PSOTL);
+  static const SizedBox ESB = SizedBox();
+  static const SizedBox SBWETS = SizedBox(width: PSETS);
+  static const SizedBox SBWES = SizedBox(width: PSES);
+  static const SizedBox SBWS = SizedBox(width: PSS);
+  static const SizedBox SBWD = SizedBox(width: PSD);
+  static const SizedBox SBWL = SizedBox(width: PSL);
+  static const SizedBox SBWEL = SizedBox(width: PSEL);
+  static const SizedBox SBWOL = SizedBox(width: PSOL);
+  static const SizedBox SBWOTL = SizedBox(width: PSOTL);
   static SizedBox SBCW(double width) => SizedBox(width: width);
 
   // SizedBox Height
-  static final SizedBox SBHETS = SizedBox(height: PSETS);
-  static final SizedBox SBHES = SizedBox(height: PSES);
-  static final SizedBox SBHS = SizedBox(height: PSS);
-  static final SizedBox SBHD = SizedBox(height: PSD);
-  static final SizedBox SBHL = SizedBox(height: PSL);
-  static final SizedBox SBHEL = SizedBox(height: PSEL);
-  static final SizedBox SBHOL = SizedBox(height: PSOL);
-  static final SizedBox SBHOTL = SizedBox(height: PSOTL);
+  static const SizedBox SBHETS = SizedBox(height: PSETS);
+  static const SizedBox SBHES = SizedBox(height: PSES);
+  static const SizedBox SBHS = SizedBox(height: PSS);
+  static const SizedBox SBHD = SizedBox(height: PSD);
+  static const SizedBox SBHL = SizedBox(height: PSL);
+  static const SizedBox SBHEL = SizedBox(height: PSEL);
+  static const SizedBox SBHOL = SizedBox(height: PSOL);
+  static const SizedBox SBHOTL = SizedBox(height: PSOTL);
   static SizedBox SBCH(double height) => SizedBox(height: height);
 
   // Radius Size
@@ -60,22 +60,22 @@ class Di {
   static const double PSOL = 30.0;
   static const double PSOTL = 35.0;
 
-  static final Divider DD = Divider(thickness: 1);
-  static final Divider DD2 = Divider(
+  static const Divider DD = Divider(thickness: 1);
+  static const Divider DD2 = Divider(
     thickness: .7,
     color: Cr.darkGrey2,
   );
 
-  static final Divider DWZH = Divider(
+  static const Divider DWZH = Divider(
     thickness: 1,
     height: 0,
   );
 
-  static final Divider DHDT = Divider(
+  static const Divider DHDT = Divider(
     thickness: 2,
     height: 0,
   );
-  static final VerticalDivider DVZW = VerticalDivider(
+  static const VerticalDivider DVZW = VerticalDivider(
     thickness: 2,
     width: 0,
   );

@@ -19,20 +19,21 @@ class ProfileConnectionRequestPopup extends StatelessWidget {
     return InkWell(
       onTap: () {},
       onHover: (hover) {
-        if (hover == false)
+        if (hover == false) {
           userProfileProvider.changeConectionRequestPopup2State(hover);
+        }
       },
       child: SizedBox(
         width: 460,
         child: ListView(
           shrinkWrap: true,
           children: [
-            PopupArrow(),
+            const PopupArrow(),
             Container(
               width: 200,
               color: Cr.colorPrimary,
               height: 38,
-              padding: EdgeInsets.symmetric(horizontal: Di.PSS),
+              padding: const EdgeInsets.symmetric(horizontal: Di.PSS),
               child: Center(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -47,7 +48,7 @@ class ProfileConnectionRequestPopup extends StatelessWidget {
                           style: h5Bold.copyWith(color: Cr.whiteColor),
                         ),
                         Di.SBWES,
-                        TextWithBackground(
+                        const TextWithBackground(
                           text: "2",
                           textColor: Cr.darkBlue9,
                           padding: 0,
@@ -61,7 +62,7 @@ class ProfileConnectionRequestPopup extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         TextWithBackground(
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.mail,
                             color: Cr.whiteColor,
                             size: 16,
@@ -81,8 +82,8 @@ class ProfileConnectionRequestPopup extends StatelessWidget {
               height: Di.PSES,
               color: Cr.whiteColor,
             ),
-            ConnectionRequestAppbarComponent(),
-            ConnectionRequestAppbarComponent(),
+            const ConnectionRequestAppbarComponent(),
+            const ConnectionRequestAppbarComponent(),
             Container(
               color: Cr.whiteColor,
               padding: const EdgeInsets.only(

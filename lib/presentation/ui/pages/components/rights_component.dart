@@ -36,7 +36,7 @@ class RightsComponent extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Cr.whiteColor,
                   borderRadius: BorderRadius.circular(2),
-                  boxShadow: [
+                  boxShadow: const [
                     BoxShadow(
                       blurRadius: 2,
                       color: Color.fromARGB(64, 0, 0, 0),

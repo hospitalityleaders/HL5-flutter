@@ -29,8 +29,8 @@ class ProfileTabbar extends StatelessWidget {
     final double fontSize = isTab ? 12.5 : 14;
 
     final EdgeInsets tabPadding = isTab
-        ? EdgeInsets.symmetric(horizontal: 0, vertical: 10)
-        : EdgeInsets.all(10);
+        ? const EdgeInsets.symmetric(horizontal: 0, vertical: 10)
+        : const EdgeInsets.all(10);
     return Container(
       decoration: BoxDecoration(
         color: Cr.whiteColor,
@@ -70,9 +70,9 @@ class ProfileTabbar extends StatelessWidget {
                   labelColor: Cr.accentBlue1,
                   unselectedLabelColor: Cr.darkGrey2,
                   indicatorColor: Cr.accentBlue1,
-                  indicatorPadding: EdgeInsets.symmetric(horizontal: 10),
+                  indicatorPadding: const EdgeInsets.symmetric(horizontal: 10),
                   controller: tabController,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   isScrollable: true,
                   automaticIndicatorColorAdjustment: true,
                   tabs: [
@@ -164,7 +164,7 @@ class EditProfileButton extends StatelessWidget {
           ? Cr.green1
           : null,
       icon: Provider.of<ProfileProvider>(context).isProfileEditable
-          ? Icon(
+          ? const Icon(
               Icons.check,
               size: Di.FSD,
             )

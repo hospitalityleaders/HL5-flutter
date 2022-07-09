@@ -17,14 +17,14 @@ class ProfileArticleWidget extends StatelessWidget {
       width: 360,
       height: showIsMemberOnly ? 332 : 305,
       color: Cr.whiteColor,
-      margin: EdgeInsets.symmetric(vertical: Di.PSS),
+      margin: const EdgeInsets.symmetric(vertical: Di.PSS),
       child: Padding(
         padding: const EdgeInsets.all(Di.PSD),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
+            SizedBox(
               width: double.infinity,
               height: 175,
               child: Image.asset(
@@ -33,7 +33,7 @@ class ProfileArticleWidget extends StatelessWidget {
               ),
             ),
             Di.SBHD,
-            Text(
+            const Text(
               "Baha Mar Files Chapter 11 Plan of Reorganization",
               maxLines: 2,
               overflow: TextOverflow.ellipsis,

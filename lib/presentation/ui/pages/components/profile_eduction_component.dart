@@ -43,7 +43,7 @@ class _EducationComponentState extends State<EducationComponent> {
         children: [
           Container(
             color: Cr.whiteColor,
-            child: ListTile(
+            child: const ListTile(
               title: Text(
                 "Education",
                 style: h2Regular,
@@ -74,7 +74,7 @@ class _EducationComponentState extends State<EducationComponent> {
                               children: [
                                 Di.SBCH(18),
                                 ListTile(
-                                  leading: ContainerWithIcon(
+                                  leading: const ContainerWithIcon(
                                     iconData: FontAwesomeIcons.buildingColumns,
                                     size: 50,
                                   ),
@@ -95,7 +95,7 @@ class _EducationComponentState extends State<EducationComponent> {
                                           fontSize: Di.FSS,
                                         ),
                                       ),
-                                      SizedBox(height: Di.PSETS),
+                                      const SizedBox(height: Di.PSETS),
                                       Text(
                                         singleEductaion.studyDuration ?? "",
                                         // "2010 - 2013",

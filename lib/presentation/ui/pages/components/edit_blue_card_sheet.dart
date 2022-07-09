@@ -28,7 +28,7 @@ class EditBlueCardSheet extends StatelessWidget {
       return dataIsNull
           ? Container(
               color: Cr.green3,
-              padding: EdgeInsets.only(
+              padding: const EdgeInsets.only(
                 left: Di.PSL,
                 right: Di.PSL,
                 bottom: Di.PSL,
@@ -69,7 +69,7 @@ class EditBlueCardSheet extends StatelessWidget {
                       decoration: Styles.boxDecorationCircle.copyWith(
                         color: Cr.green1,
                       ),
-                      child: Icon(
+                      child: const Icon(
                         Icons.add,
                         color: Cr.whiteColor,
                         // size: 18,
@@ -84,7 +84,7 @@ class EditBlueCardSheet extends StatelessWidget {
               // height:
               //     DbData.getUserProfileData.expertise!.length < 3 ? 100 : null,
               color: Cr.accentBlue2.withOpacity(.8),
-              padding: EdgeInsets.all(Di.PSD),
+              padding: const EdgeInsets.all(Di.PSD),
             );
     } else {
       return Di.ESB;

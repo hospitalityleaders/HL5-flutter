@@ -32,7 +32,7 @@ class _ProfileWriteReferenceDialogState
         mainAxisAlignment: MainAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          DialogTitleWidget(
+          const DialogTitleWidget(
             title: "Write a reference",
           ),
           IntrinsicHeight(
@@ -41,17 +41,17 @@ class _ProfileWriteReferenceDialogState
               children: [
                 Container(
                   width: 560,
-                  padding: EdgeInsets.all(Di.PSL),
+                  padding: const EdgeInsets.all(Di.PSL),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         "Reference recipient",
                         style: h5Bold,
                       ),
                       Di.SBCH(7),
                       Container(
-                        padding: EdgeInsets.all(Di.PSS),
+                        padding: const EdgeInsets.all(Di.PSS),
                         decoration: BoxDecoration(
                           border: Border.all(
                             color: Cr.darkGrey4,
@@ -61,7 +61,7 @@ class _ProfileWriteReferenceDialogState
                         ),
                         child: Row(
                           children: [
-                            PersonAvatar(
+                            const PersonAvatar(
                               avatarSize: 26,
                             ),
                             Di.SBCW(8),
@@ -75,7 +75,7 @@ class _ProfileWriteReferenceDialogState
                         ),
                       ),
                       Di.SBHL,
-                      Text(
+                      const Text(
                         "Reference",
                         style: h5Bold,
                       ),
@@ -95,7 +95,7 @@ class _ProfileWriteReferenceDialogState
                             "E.g. Noberto is very professional and detailed...",
                       ),
                       Di.SBHL,
-                      Align(
+                      const Align(
                         alignment: Alignment.centerRight,
                         child: CustomElevatedButton(
                           text: "Submit reference",
@@ -108,8 +108,8 @@ class _ProfileWriteReferenceDialogState
                 ),
                 Expanded(
                   child: Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: Di.PSOL, vertical: 24),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: Di.PSOL, vertical: 24),
                     color: Cr.accentBlue1,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

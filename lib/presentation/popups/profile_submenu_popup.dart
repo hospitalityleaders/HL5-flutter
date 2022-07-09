@@ -19,23 +19,24 @@ class ProfileSubMenuPopup extends StatelessWidget {
         : InkWell(
             onTap: () {},
             onHover: (hover) {
-              if (hover == false)
+              if (hover == false) {
                 userProfileProvider.changeSubMenusPopup2State(hover);
+              }
             },
-            child: Container(
+            child: SizedBox(
               width: 170,
               height: 220,
               child: ListView(
                 shrinkWrap: true,
                 children: [
-                  PopupArrow(),
-                  _SubMenuWidget(
+                  const PopupArrow(),
+                  const _SubMenuWidget(
                     text: "View profile",
                   ),
-                  _SubMenuWidget(
+                  const _SubMenuWidget(
                     text: "Account settings",
                   ),
-                  _SubMenuWidget(
+                  const _SubMenuWidget(
                     text: "Privacy settings",
                   ),
                   _SubMenuWidget(

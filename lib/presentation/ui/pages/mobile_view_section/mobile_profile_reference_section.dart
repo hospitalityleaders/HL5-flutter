@@ -27,36 +27,36 @@ class MobileProfileReferenceSection extends StatelessWidget {
       child: Column(
         children: [
           if (isMobilePhn) ...[
-            ProfileCompletionComponent(),
+            const ProfileCompletionComponent(),
             Di.SBHS,
           ],
-          ProfileReferenceSingleComponent(
+          const ProfileReferenceSingleComponent(
             isMobile: true,
             description:
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco, Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamcoLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamcoLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamcoLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamcoLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
           ),
-          ProfileReferenceSingleComponent(
+          const ProfileReferenceSingleComponent(
             isMobile: true,
             description:
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
           ),
-          ProfileReferenceSingleComponent(
+          const ProfileReferenceSingleComponent(
             isMobile: true,
           ),
-          ProfileReferenceSingleComponent(
+          const ProfileReferenceSingleComponent(
             isMobile: true,
           ),
           if (isTablt) ...[
-            ProfileCompletionComponent(),
+            const ProfileCompletionComponent(),
             Di.SBHS,
           ],
-          ConnectionsComponent(
+          const ConnectionsComponent(
             isMobile: true,
           ),
           Di.SBHS,
-          TimelineComponent(),
+          const TimelineComponent(),
           Di.SBHS,
-          RightsComponent(
+          const RightsComponent(
             isMobile: true,
           ),
           Di.SBHOTL,

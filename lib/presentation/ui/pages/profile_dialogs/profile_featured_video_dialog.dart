@@ -38,7 +38,7 @@ class _ProfileWriteReferenceDialogWidgetState
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            DialogTitleWidget(
+            const DialogTitleWidget(
               title: "Featured video",
             ),
             Di.SBHL,
@@ -88,7 +88,7 @@ class __CoverDialogExpandedTileState extends State<_CoverDialogExpandedTile> {
     )..addListener(() {
         setState(() {});
         setState(() async {
-          await Future.delayed(Duration(milliseconds: 200));
+          await Future.delayed(const Duration(milliseconds: 200));
           _videoPlayerController = VideoPlayerController.network(
             _videoLinkController.text,
           );
@@ -114,7 +114,6 @@ class __CoverDialogExpandedTileState extends State<_CoverDialogExpandedTile> {
                 });
               }
             });
-      ;
       _videoPlayerController!.initialize().then((value) {
         setState(() {});
       });
@@ -126,7 +125,6 @@ class __CoverDialogExpandedTileState extends State<_CoverDialogExpandedTile> {
   void dispose() {
     if (_videoPlayerController != null) {
       _videoPlayerController!.dispose();
-      ;
     }
     expandedTileController.dispose();
     _videoTitleController.dispose();
@@ -140,14 +138,14 @@ class __CoverDialogExpandedTileState extends State<_CoverDialogExpandedTile> {
     final userProfileData = DbData.getUserProfileData;
 
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: Di.PSL),
+      margin: const EdgeInsets.symmetric(horizontal: Di.PSL),
       color: Cr.whiteColor,
       width: 615,
       child: ExpandedTile(
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Featured video',
               style: h4Bold,
             ),
@@ -170,7 +168,7 @@ class __CoverDialogExpandedTileState extends State<_CoverDialogExpandedTile> {
           width: 50,
           height: 50,
           color: Cr.accentBlue1,
-          child: Center(
+          child: const Center(
             child: Icon(
               Icons.play_arrow,
               size: 22,
@@ -181,8 +179,8 @@ class __CoverDialogExpandedTileState extends State<_CoverDialogExpandedTile> {
         trailingRotation: 0,
         trailing: !(expandedTileController.isExpanded == false)
             ? null
-            : CustomMinusIcon(),
-        theme: ExpandedTileThemeData(
+            : const CustomMinusIcon(),
+        theme: const ExpandedTileThemeData(
           contentPadding: EdgeInsets.zero,
           headerPadding: EdgeInsets.all(17),
           headerRadius: 0,
@@ -191,7 +189,7 @@ class __CoverDialogExpandedTileState extends State<_CoverDialogExpandedTile> {
         controller: expandedTileController,
         content: Container(
           color: Cr.whiteColor,
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
             // left: Di.PSL,
             // right: Di.PSL,
             top: 12,
@@ -204,7 +202,7 @@ class __CoverDialogExpandedTileState extends State<_CoverDialogExpandedTile> {
                   ? IntrinsicHeight(
                       child: Stack(
                         children: [
-                          Container(
+                          SizedBox(
                             width: double.infinity,
                             height: 345,
                             child: VideoPlayer(_videoPlayerController!),
@@ -238,7 +236,7 @@ class __CoverDialogExpandedTileState extends State<_CoverDialogExpandedTile> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Di.SBHL,
-                      DialogLabelTextFormField(
+                      const DialogLabelTextFormField(
                         customLabel: "Video link",
                       ),
                       Di.SBHES,
@@ -250,7 +248,7 @@ class __CoverDialogExpandedTileState extends State<_CoverDialogExpandedTile> {
                         textEditingController: _videoLinkController,
                       ),
                       Di.SBCH(18),
-                      DialogLabelTextFormField(
+                      const DialogLabelTextFormField(
                         customLabel: "Video title",
                       ),
                       Di.SBHES,
@@ -258,7 +256,7 @@ class __CoverDialogExpandedTileState extends State<_CoverDialogExpandedTile> {
                         textEditingController: _videoTitleController,
                       ),
                       Di.SBCH(18),
-                      DialogLabelTextFormField(
+                      const DialogLabelTextFormField(
                         customLabel: "Video description",
                       ),
                       Di.SBHES,
@@ -274,15 +272,15 @@ class __CoverDialogExpandedTileState extends State<_CoverDialogExpandedTile> {
                             borderColor: Cr.accentBlue2,
                             makeWidthNull: true,
                             onPressed: () => Nav.pop(context),
+                            height: 36,
+                            donotShowIcon: true,
+                            backgroundColor: Cr.accentBlue3,
                             child: Text(
                               "Cancel",
                               style: bodySmallRegular.copyWith(
                                 color: Cr.accentBlue1,
                               ),
                             ),
-                            height: 36,
-                            donotShowIcon: true,
-                            backgroundColor: Cr.accentBlue3,
                           ),
                           Di.SBWES,
                           CustomElevatedButton(
@@ -290,7 +288,7 @@ class __CoverDialogExpandedTileState extends State<_CoverDialogExpandedTile> {
                             makeWidthNull: true,
                             onPressed: () async {
                               showCircularProgressIndicator(context);
-                              await new User(
+                              await User(
                                 profileVideoTitle: _videoTitleController.text,
                                 profileVideoUrl: _videoLinkController.text,
                                 profileVideoDescription:
@@ -302,15 +300,15 @@ class __CoverDialogExpandedTileState extends State<_CoverDialogExpandedTile> {
                               Nav.pop(context);
                               // }
                             },
+                            height: 36,
+                            donotShowIcon: true,
+                            backgroundColor: Cr.accentBlue1,
                             child: Text(
                               "Add to profile",
                               style: bodySmallRegular.copyWith(
                                 color: Cr.whiteColor,
                               ),
                             ),
-                            height: 36,
-                            donotShowIcon: true,
-                            backgroundColor: Cr.accentBlue1,
                           ),
                         ],
                       ),

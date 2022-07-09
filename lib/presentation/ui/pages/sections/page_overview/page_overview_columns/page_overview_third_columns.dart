@@ -27,21 +27,21 @@ class _ProfileOverviewThirdColumnState
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
-      constraints: BoxConstraints(
+      constraints: const BoxConstraints(
         maxWidth: 360,
         minWidth: 280,
       ),
       child: Container(
         child: Column(
           children: [
-            ProfileCompletionComponent(),
+            const ProfileCompletionComponent(),
             Di.SBHEL,
-            ConnectionsComponent(),
+            const ConnectionsComponent(),
             Di.SBHEL,
-            TimelineComponent(),
+            const TimelineComponent(),
             // ProfileAdsComponent(),
             Di.SBHL,
-            RightsComponent(),
+            const RightsComponent(),
           ],
         ),
       ),
@@ -57,7 +57,7 @@ class TimelineComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: Styles.boxDecoration.copyWith(color: Color(0xff0D9BDC)),
+      decoration: Styles.boxDecoration.copyWith(color: const Color(0xff0D9BDC)),
       // padding: const EdgeInsets.all(Di.PSD),
       height: 305,
       child: Stack(
@@ -69,7 +69,7 @@ class TimelineComponent extends StatelessWidget {
               width: 150,
               height: 150,
               decoration: BoxDecoration(
-                color: Color(0xff0E92CF),
+                color: const Color(0xff0E92CF),
                 borderRadius: BorderRadius.circular(199),
               ),
               child: Center(
@@ -77,7 +77,7 @@ class TimelineComponent extends StatelessWidget {
                   width: 65,
                   height: 65,
                   decoration: BoxDecoration(
-                    color: Color(0xff0D9BDC),
+                    color: const Color(0xff0D9BDC),
                     borderRadius: BorderRadius.circular(199),
                   ),
                 ),
@@ -158,6 +158,8 @@ class TimelineComponent extends StatelessWidget {
                   CustomElevatedButton(
                     width: 200,
                     height: 35,
+                    backgroundColor: Cr.accentBlue3,
+                    icon: const Icon(Icons.menu),
                     child: Row(
                       children: [
                         Icon(
@@ -174,8 +176,6 @@ class TimelineComponent extends StatelessWidget {
                         ),
                       ],
                     ),
-                    backgroundColor: Cr.accentBlue3,
-                    icon: Icon(Icons.menu),
                   ),
                 ],
               ),

@@ -21,7 +21,7 @@ class ConnectionsComponent extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Di.SBHETS,
-          ListTile(
+          const ListTile(
             title: Text(
               "Connections",
               style: h2Regular,

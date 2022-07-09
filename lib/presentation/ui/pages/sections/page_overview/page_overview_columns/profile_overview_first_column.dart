@@ -46,11 +46,11 @@ class _ProfileOverviewFirstColumnState
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ProfileSummaryComponent(),
+          const ProfileSummaryComponent(),
           Di.SBHETS,
-          AreasOfExpertiseComponents(),
+          const AreasOfExpertiseComponents(),
           Di.SBHL,
-          ProfileReferenceComponent(),
+          const ProfileReferenceComponent(),
         ],
       ),
     );
@@ -68,7 +68,7 @@ class _ProfileOverviewFirstColumnState
         "id": id,
         "profile_summary": profileSummaryController
       };
-      print('usser: ${userData}');
+      print('usser: $userData');
       dynamic res = await _apiServices.updateUserProfile();
       if (res?.success as bool) {
         Navigator.pop(context);
@@ -95,7 +95,7 @@ class _ProfileOverviewFirstColumnState
         ),
       ),
       onPressed: () {},
-      icon: Padding(
+      icon: const Padding(
         padding: EdgeInsets.symmetric(vertical: 12.0),
         child: Icon(
           Icons.check_circle,
@@ -120,7 +120,7 @@ class _ProfileOverviewFirstColumnState
   ) {
     return Container(
       width: 200,
-      padding: EdgeInsets.all(6),
+      padding: const EdgeInsets.all(6),
       color: ColorPicker.kWhite,
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -140,28 +140,28 @@ class _ProfileOverviewFirstColumnState
               ]),
             ),
             subtitle: Padding(
-              padding: EdgeInsets.only(right: 30.0),
+              padding: const EdgeInsets.only(right: 30.0),
               child: Text(subTitle, style: FontTextStyle.kGreyLight514W400SSP),
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: RichText(
               text: TextSpan(
-                style: TextStyle(color: Colors.black, fontSize: 30),
+                style: const TextStyle(color: Colors.black, fontSize: 30),
                 children: [
                   WidgetSpan(
                     child: SizedBox(
                       height: 50,
                       width: 50,
                       child: Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 2.0, vertical: 2),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 2.0, vertical: 2),
                         child: Card(
                           color: Colors.blue,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(1.0)),
-                          child: Icon(
+                          child: const Icon(
                             Icons.format_quote_rounded,
                             color: Colors.white,
                           ),
@@ -177,7 +177,7 @@ class _ProfileOverviewFirstColumnState
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Row(
@@ -185,7 +185,7 @@ class _ProfileOverviewFirstColumnState
             children: [
               TextButton.icon(
                   onPressed: () {},
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.add,
                     color: ColorPicker.kBlueLight1,
                   ),
@@ -206,7 +206,7 @@ class _ProfileOverviewFirstColumnState
 
   Future<String?> buildProfileCardPopUp(
       {required dynamic id, required String profileSummary}) {
-    TextEditingController _profileCtrl =
+    TextEditingController profileCtrl =
         TextEditingController(text: profileSummary);
     return showDialog<String>(
       context: context,
@@ -224,27 +224,27 @@ class _ProfileOverviewFirstColumnState
                 children: [
                   PopUpHeadMenu.popUpHead('Profile Summary', context),
                   Padding(
-                    padding: EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(16.0),
                     child: Container(
                       color: ColorPicker.kWhite,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: EdgeInsets.all(4.0),
+                            padding: const EdgeInsets.all(4.0),
                             child: Text(
                               'Summary',
                               style: FontTextStyle.kBlueDark114W700SSP,
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(8.0),
                             child: TextField(
-                              controller: _profileCtrl,
+                              controller: profileCtrl,
                               autocorrect: true,
                               minLines: 4,
                               maxLines: 6,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 border: OutlineInputBorder(
                                   borderSide: BorderSide(),
                                 ),
@@ -252,27 +252,27 @@ class _ProfileOverviewFirstColumnState
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.all(4.0),
+                            padding: const EdgeInsets.all(4.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 Padding(
-                                  padding: EdgeInsets.all(4.0),
+                                  padding: const EdgeInsets.all(4.0),
                                   child: OutlinedButton(
                                       onPressed: () {
                                         Navigator.pop(context);
                                       },
-                                      child: Text('Cancel')),
+                                      child: const Text('Cancel')),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(8.0),
                                   child: isUpdating
-                                      ? CircularProgressIndicator()
+                                      ? const CircularProgressIndicator()
                                       : ElevatedButton(
                                           onPressed: () {
-                                            updateUsers(id, _profileCtrl.text);
+                                            updateUsers(id, profileCtrl.text);
                                           },
-                                          child: Text('Save'),
+                                          child: const Text('Save'),
                                         ),
                                 ),
                               ],
@@ -295,7 +295,7 @@ class _ProfileOverviewFirstColumnState
 
   ///Area of exper pop up start
 
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
 
   List chipList = ['Business'];
 
@@ -329,14 +329,14 @@ class OldPopUpDialogs {
                         height: SS.sH(context) * .05,
                       ),
                       Padding(
-                        padding: EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.all(16.0),
                         child: Column(
                           children: [
                             Container(
                               color: ColorPicker.kWhite,
                               width: double.infinity,
                               child: Padding(
-                                padding: EdgeInsets.all(20),
+                                padding: const EdgeInsets.all(20),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -351,7 +351,7 @@ class OldPopUpDialogs {
                                           WidgetSpan(
                                             child: GestureDetector(
                                               onTap: () {},
-                                              child: Icon(
+                                              child: const Icon(
                                                 Icons.help,
                                                 size: 15,
                                                 color: ColorPicker.kBlueLight1,
@@ -405,8 +405,9 @@ class OldPopUpDialogs {
                                             },
                                             onHover: (value) {},
                                             child: Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 6),
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 6),
                                               child: Container(
                                                 decoration: BoxDecoration(
                                                     borderRadius:
@@ -477,17 +478,17 @@ class OldPopUpDialogs {
                                   //   ),
                                   // ),
                                   Padding(
-                                    padding: EdgeInsets.all(20),
+                                    padding: const EdgeInsets.all(20),
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
                                         OutlinedButton(
                                             onPressed: () {},
-                                            child: Text('Cancel')),
+                                            child: const Text('Cancel')),
                                         SS.sB(0, 10),
                                         ElevatedButton(
                                             onPressed: () {},
-                                            child: Text('Save'))
+                                            child: const Text('Save'))
                                       ],
                                     ),
                                   ),
@@ -528,7 +529,7 @@ class _ProfileSummaryComponentState extends State<ProfileSummaryComponent> {
     final isMobilePhn = isMobilePhone(context);
 
     return Container(
-      margin: EdgeInsets.only(bottom: Di.PSD),
+      margin: const EdgeInsets.only(bottom: Di.PSD),
       decoration: Styles.boxDecoration.copyWith(
         color: Cr.whiteColor,
         boxShadow: Styles.defaultBoxShadow,
@@ -536,7 +537,7 @@ class _ProfileSummaryComponentState extends State<ProfileSummaryComponent> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ListTile(
+          const ListTile(
             title: Text(
               "Profile summary",
               style: h2Regular,
@@ -614,7 +615,7 @@ class AreasOfExpertiseComponents extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          ListTile(
+          const ListTile(
             title: Text(
               "Areas of expertise",
               style: h2Regular,
@@ -626,7 +627,7 @@ class AreasOfExpertiseComponents extends StatelessWidget {
             child: Stack(
               children: [
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: Di.PSD),
+                  padding: const EdgeInsets.symmetric(horizontal: Di.PSD),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -664,7 +665,7 @@ class AreasOfExpertiseComponents extends StatelessWidget {
                   onAddPressed: () {
                     showCustomDialog(
                       context,
-                      ProfileExpertiseDialogWidget(),
+                      const ProfileExpertiseDialogWidget(),
                     );
                   },
                 ),
@@ -674,13 +675,13 @@ class AreasOfExpertiseComponents extends StatelessWidget {
                     onEditPressed: () {
                       showCustomDialog(
                         context,
-                        ProfileExpertiseDialogWidget(),
+                        const ProfileExpertiseDialogWidget(),
                       );
                     },
                     onAddPressed: () {
                       showCustomDialog(
                         context,
-                        ProfileExpertiseDialogWidget(),
+                        const ProfileExpertiseDialogWidget(),
                       );
                       // buildAreaOfExpePopUp(context);
                     },

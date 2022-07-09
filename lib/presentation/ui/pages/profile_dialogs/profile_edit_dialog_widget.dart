@@ -42,15 +42,15 @@ class _ProfileEditDialogWidgetState extends State<ProfileEditDialogWidget> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            DialogTitleWidget(
+            const DialogTitleWidget(
               title: "My Profile",
             ),
             Di.SBHL,
-            _ProfilePictureDialogExpandedTile(isExpanded: true),
+            const _ProfilePictureDialogExpandedTile(isExpanded: true),
             Di.SBHS,
-            ProfileDetailsExpandedTile(isExpanded: true),
+            const ProfileDetailsExpandedTile(isExpanded: true),
             Di.SBHS,
-            ContactDetailsExpandedTile(isExpanded: true),
+            const ContactDetailsExpandedTile(isExpanded: true),
             Di.SBHD,
           ],
         ),
@@ -96,14 +96,14 @@ class _ContactDetailsExpandedTileState
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: Di.PSL),
+      margin: const EdgeInsets.symmetric(horizontal: Di.PSL),
       color: Cr.whiteColor,
       width: 645,
       child: ExpandedTile(
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Contact details',
               style: h4Bold,
             ),
@@ -126,7 +126,7 @@ class _ContactDetailsExpandedTileState
           width: 50,
           height: 50,
           color: Cr.accentBlue1,
-          child: Center(
+          child: const Center(
             child: Icon(
               Icons.camera_alt,
               size: 22,
@@ -137,8 +137,8 @@ class _ContactDetailsExpandedTileState
         trailingRotation: 0,
         trailing: !(expandedTileController.isExpanded == false)
             ? null
-            : CustomMinusIcon(),
-        theme: ExpandedTileThemeData(
+            : const CustomMinusIcon(),
+        theme: const ExpandedTileThemeData(
           contentPadding: EdgeInsets.zero,
           headerPadding: EdgeInsets.all(17),
           headerRadius: 0,
@@ -146,7 +146,7 @@ class _ContactDetailsExpandedTileState
         ),
         controller: expandedTileController,
         content: Container(
-          padding: EdgeInsets.symmetric(horizontal: Di.PSL),
+          padding: const EdgeInsets.symmetric(horizontal: Di.PSL),
           color: Cr.whiteColor,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -157,7 +157,7 @@ class _ContactDetailsExpandedTileState
                 children: [
                   Di.SBCH(18),
                   Container(
-                    padding: EdgeInsets.all(Di.PSL),
+                    padding: const EdgeInsets.all(Di.PSL),
                     decoration: BoxDecoration(
                       border: Border.all(
                         color: Cr.darkGrey4,
@@ -183,7 +183,7 @@ class _ContactDetailsExpandedTileState
                     ),
                   ),
                   Di.SBCH(18),
-                  DialogLabelTextFormField(
+                  const DialogLabelTextFormField(
                     customLabel: "Contact number",
                     icon: HelpIconDialog(),
                   ),
@@ -219,28 +219,28 @@ class _ContactDetailsExpandedTileState
                     ),
                   ),
                   Di.SBCH(18),
-                  DialogLabelTextFormField(
+                  const DialogLabelTextFormField(
                     customLabel: "Email address",
                     isImportant: false,
                   ),
                   Di.SBHES,
-                  _TextFieldWithPrivacy(),
+                  const _TextFieldWithPrivacy(),
                   Di.SBCH(18),
-                  DialogLabelTextFormField(
+                  const DialogLabelTextFormField(
                     customLabel: "Website link",
                     isImportant: false,
                   ),
                   Di.SBHES,
-                  _TextFieldWithPrivacy(),
+                  const _TextFieldWithPrivacy(),
                   Di.SBCH(18),
-                  DialogLabelTextFormField(
+                  const DialogLabelTextFormField(
                     customLabel: "Skype",
                     isImportant: false,
                   ),
                   Di.SBHES,
-                  _TextFieldWithPrivacy(),
+                  const _TextFieldWithPrivacy(),
                   Di.SBCH(18),
-                  DialogLabelTextFormField(
+                  const DialogLabelTextFormField(
                     customLabel: "Social profiles",
                     isImportant: false,
                   ),
@@ -281,15 +281,15 @@ class _ContactDetailsExpandedTileState
                       borderColor: Cr.accentBlue2,
                       makeWidthNull: true,
                       onPressed: () => Nav.pop(context),
+                      height: 36,
+                      donotShowIcon: true,
+                      backgroundColor: Cr.accentBlue3,
                       child: Text(
                         "Cancel",
                         style: bodySmallRegular.copyWith(
                           color: Cr.accentBlue1,
                         ),
                       ),
-                      height: 36,
-                      donotShowIcon: true,
-                      backgroundColor: Cr.accentBlue3,
                     ),
                     Di.SBWES,
                     CustomElevatedButton(
@@ -302,15 +302,15 @@ class _ContactDetailsExpandedTileState
                         //       _profileSummaryController.text,
                         // ).save(widget.userProfileData);
                       },
+                      height: 36,
+                      donotShowIcon: true,
+                      backgroundColor: Cr.accentBlue1,
                       child: Text(
                         "Save",
                         style: bodySmallRegular.copyWith(
                           color: Cr.whiteColor,
                         ),
                       ),
-                      height: 36,
-                      donotShowIcon: true,
-                      backgroundColor: Cr.accentBlue1,
                     ),
                   ],
                 ),
@@ -383,34 +383,34 @@ class __SocialProfileFieldState extends State<_SocialProfileField> {
             DialogDropDownTextField(
               selectedSocialMediaIndex: widget.selectedSocialMediaIndex,
               width: 132,
-              iconDataList: [
+              iconDataList: const [
                 Icons.facebook,
                 FontAwesomeIcons.twitter,
                 FontAwesomeIcons.google,
               ],
               hintText: 'Choose',
-              dataList: [
+              dataList: const [
                 "Facebook",
                 "Twitter",
                 "Google",
               ],
             ),
             Di.SBCW(12),
-            Expanded(
+            const Expanded(
               child: DialogTextFieldForm(
                 hintText: "Profile Url",
               ),
             ),
             Di.SBCW(12),
-            PrivacyDropDown(),
+            const PrivacyDropDown(),
             Di.SBCW(12),
             Material(
               child: InkWell(
                 onTap: widget.onCloseTap,
-                child: Container(
+                child: SizedBox(
                   height: 30,
                   width: 30,
-                  child: Icon(
+                  child: const Icon(
                     Icons.close,
                     color: Cr.accentBlue1,
                     size: 14,
@@ -469,15 +469,15 @@ class __TextFieldWithPrivacyState extends State<_TextFieldWithPrivacy> {
               ),
             ),
             Di.SBCW(12),
-            PrivacyDropDown(),
+            const PrivacyDropDown(),
             Di.SBCW(12),
             Material(
               child: InkWell(
                 onTap: widget.onCloseTap,
-                child: Container(
+                child: SizedBox(
                   height: 30,
                   width: 30,
-                  child: Icon(
+                  child: const Icon(
                     Icons.close,
                     color: Cr.accentBlue1,
                     size: 14,
@@ -517,7 +517,7 @@ class __ContactNumberFieldState extends State<_ContactNumberField> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            DialogDropDownTextField(
+            const DialogDropDownTextField(
               width: 122,
               hintText: 'Mobile',
               dataList: [
@@ -526,21 +526,21 @@ class __ContactNumberFieldState extends State<_ContactNumberField> {
               ],
             ),
             Di.SBCW(12),
-            Expanded(
+            const Expanded(
               child: DialogTextFieldForm(
                 hintText: "123456789",
               ),
             ),
             Di.SBCW(12),
-            PrivacyDropDown(),
+            const PrivacyDropDown(),
             Di.SBCW(12),
             Material(
               child: InkWell(
                 onTap: widget.onCloseTap,
-                child: Container(
+                child: SizedBox(
                   height: 30,
                   width: 30,
-                  child: Icon(
+                  child: const Icon(
                     Icons.close,
                     color: Cr.accentBlue1,
                     size: 14,
@@ -617,7 +617,7 @@ class PrivacyDropDown extends StatelessWidget {
           width: 15,
         ),
       ],
-      dataList: [
+      dataList: const [
         "Public",
         "Private",
         "Home",
@@ -664,14 +664,14 @@ class __ProfilePictureDialogExpandedTileState
     final userProfileData = DbData.getUserProfileData;
 
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: Di.PSL),
+      margin: const EdgeInsets.symmetric(horizontal: Di.PSL),
       color: Cr.whiteColor,
       width: 615,
       child: ExpandedTile(
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Profile picture',
               style: h4Bold,
             ),
@@ -694,7 +694,7 @@ class __ProfilePictureDialogExpandedTileState
           width: 50,
           height: 50,
           color: Cr.accentBlue1,
-          child: Center(
+          child: const Center(
             child: Icon(
               Icons.camera_alt,
               size: 22,
@@ -705,8 +705,8 @@ class __ProfilePictureDialogExpandedTileState
         trailingRotation: 0,
         trailing: !(expandedTileController.isExpanded == false)
             ? null
-            : CustomMinusIcon(),
-        theme: ExpandedTileThemeData(
+            : const CustomMinusIcon(),
+        theme: const ExpandedTileThemeData(
           contentPadding: EdgeInsets.zero,
           headerPadding: EdgeInsets.all(17),
           headerRadius: 0,
@@ -715,7 +715,7 @@ class __ProfilePictureDialogExpandedTileState
         controller: expandedTileController,
         content: Container(
           color: Cr.whiteColor,
-          padding: EdgeInsets.all(Di.PSL),
+          padding: const EdgeInsets.all(Di.PSL),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -788,7 +788,7 @@ class __ProfilePictureDialogExpandedTileState
                 },
                 child: Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.delete,
                       color: Cr.red1,
                       size: 12,
@@ -847,14 +847,14 @@ class _ProfileDetailsExpandedTileState
   Widget build(BuildContext context) {
     final userProfileData = DbData.getUserProfileData;
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: Di.PSL),
+      margin: const EdgeInsets.symmetric(horizontal: Di.PSL),
       color: Cr.whiteColor,
       width: 645,
       child: ExpandedTile(
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Profile details',
               style: h4Bold,
             ),
@@ -877,7 +877,7 @@ class _ProfileDetailsExpandedTileState
           width: 50,
           height: 50,
           color: Cr.accentBlue1,
-          child: Center(
+          child: const Center(
             child: Icon(
               Icons.camera_alt,
               size: 22,
@@ -888,8 +888,8 @@ class _ProfileDetailsExpandedTileState
         trailingRotation: 0,
         trailing: !(expandedTileController.isExpanded == false)
             ? null
-            : CustomMinusIcon(),
-        theme: ExpandedTileThemeData(
+            : const CustomMinusIcon(),
+        theme: const ExpandedTileThemeData(
           contentPadding: EdgeInsets.zero,
           headerPadding: EdgeInsets.all(17),
           headerRadius: 0,
@@ -897,7 +897,7 @@ class _ProfileDetailsExpandedTileState
         ),
         controller: expandedTileController,
         content: Container(
-          padding: EdgeInsets.symmetric(horizontal: Di.PSL),
+          padding: const EdgeInsets.symmetric(horizontal: Di.PSL),
           color: Cr.whiteColor,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -905,13 +905,13 @@ class _ProfileDetailsExpandedTileState
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  DialogLabelTextFormField(customLabel: "Name"),
+                  const DialogLabelTextFormField(customLabel: "Name"),
                   Di.SBHES,
-                  DialogTextFieldForm(),
+                  const DialogTextFieldForm(),
                   Di.SBCH(18),
-                  DialogLabelTextFormField(customLabel: "Surname"),
+                  const DialogLabelTextFormField(customLabel: "Surname"),
                   Di.SBHES,
-                  DialogTextFieldForm(),
+                  const DialogTextFieldForm(),
                   Di.SBCH(18),
                   DialogLabelTextFormField(
                     customLabel: "Professional title",
@@ -933,10 +933,10 @@ class _ProfileDetailsExpandedTileState
                     ),
                   ),
                   Di.SBHES,
-                  DialogTextFieldForm(),
+                  const DialogTextFieldForm(),
                   Di.SBCH(18),
                   Row(
-                    children: [
+                    children: const [
                       DialogLabelTextFormField(
                         customLabel: "City / Area  / Region",
                         width: 250,
@@ -950,7 +950,7 @@ class _ProfileDetailsExpandedTileState
                   ),
                   Di.SBHES,
                   Row(
-                    children: [
+                    children: const [
                       DialogTextFieldForm(
                         width: 250,
                       ),
@@ -978,15 +978,15 @@ class _ProfileDetailsExpandedTileState
                         borderColor: Cr.accentBlue2,
                         makeWidthNull: true,
                         onPressed: () => Nav.pop(context),
+                        height: 36,
+                        donotShowIcon: true,
+                        backgroundColor: Cr.accentBlue3,
                         child: Text(
                           "Cancel",
                           style: bodySmallRegular.copyWith(
                             color: Cr.accentBlue1,
                           ),
                         ),
-                        height: 36,
-                        donotShowIcon: true,
-                        backgroundColor: Cr.accentBlue3,
                       ),
                       Di.SBWES,
                       CustomElevatedButton(
@@ -1004,15 +1004,15 @@ class _ProfileDetailsExpandedTileState
                                 title: "Pakistan",
                               )).save(userProfileData);
                         },
+                        height: 36,
+                        donotShowIcon: true,
+                        backgroundColor: Cr.accentBlue1,
                         child: Text(
                           "Save",
                           style: bodySmallRegular.copyWith(
                             color: Cr.whiteColor,
                           ),
                         ),
-                        height: 36,
-                        donotShowIcon: true,
-                        backgroundColor: Cr.accentBlue1,
                       ),
                     ],
                   ),

@@ -259,6 +259,8 @@ class _UserProfilePageState extends State<UserProfilePage>
                       children: [
                         if (showNotifications)
                           AppbarNotification(
+                            title:
+                                "Your profile is only 25% complete. Complete it now to earn first Hospitality Leader grade.",
                             onClosePressed: () {
                               setState(
                                 () {
@@ -639,16 +641,22 @@ class AppbarNotification extends StatelessWidget {
   const AppbarNotification({
     Key? key,
     this.onClosePressed,
+    required this.title,
+    this.bgcolor,
+    this.buttonText,
   }) : super(key: key);
 
   final void Function()? onClosePressed;
+  final String title;
+  final String? buttonText;
+  final Color? bgcolor;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 50,
       width: Di.getScreenSize(context).width,
-      color: Cr.red3,
+      color: bgcolor ?? Cr.red3,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -656,13 +664,14 @@ class AppbarNotification extends StatelessWidget {
           Row(
             children: [
               Text(
-                "Your profile is only 25% complete. Complete it now to earn your first Hospitality Leaders grade.   ",
+                title,
                 textAlign: TextAlign.center,
                 style: bodyLarge.copyWith(
                   color: Cr.redTextColor,
                 ),
               ),
               CustomElevatedButton(
+                text: buttonText,
                 width: 97,
                 height: 32,
                 backgroundColor: Cr.redTextColor,

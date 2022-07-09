@@ -13,7 +13,7 @@ import 'package:holedo/presentation/ui/pages/components/profile_completion_compo
 import 'package:holedo/presentation/ui/pages/components/rights_component.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/expanded_section.dart';
 import 'package:holedo/presentation/ui/pages/sections/page_overview/page_overview_columns/page_overview_third_columns.dart';
-import 'package:holedo/presentation/ui_classes.dart';
+import 'package:holedo/presentation/classes.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/styles.dart';
@@ -36,18 +36,18 @@ class _TimelineSectionState extends State<TimelineSection> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TimelineSectionComponent(),
+          const TimelineSectionComponent(),
           Di.SBCW(24),
           Flexible(
             child: SizedBox(
               width: 360,
               child: Column(
                 children: [
-                  ProfileCompletionComponent(),
+                  const ProfileCompletionComponent(),
                   Di.SBHEL,
-                  ConnectionsComponent(),
-                  ProfileAdsComponent(),
-                  RightsComponent(),
+                  const ConnectionsComponent(),
+                  const ProfileAdsComponent(),
+                  const RightsComponent(),
                 ],
               ),
             ),
@@ -90,20 +90,20 @@ class _TimelineSectionComponentState extends State<TimelineSectionComponent> {
               shrinkWrap: true,
               itemCount: timelineClasslist.length,
               itemBuilder: (context, index) {
-                final TimelineClass _timelineClass = timelineClasslist[index];
-                if (_timelineClass.timelineClassType ==
+                final TimelineClass timelineClass = timelineClasslist[index];
+                if (timelineClass.timelineClassType ==
                     TimelineClassTypes.Education) {
                   return EducationTimeLineWidget(
-                    education: _timelineClass.timeline as Education,
+                    education: timelineClass.timeline as Education,
                   );
-                } else if (_timelineClass.timelineClassType ==
+                } else if (timelineClass.timelineClassType ==
                     TimelineClassTypes.Achievement) {
                   return AchievementTimeLineWidget(
-                    achievement: _timelineClass.timeline as Achievement,
+                    achievement: timelineClass.timeline as Achievement,
                   );
                 } else {
                   return ExperienceTimeLineWidget(
-                    experience: _timelineClass.timeline as Experience,
+                    experience: timelineClass.timeline as Experience,
                   );
                 }
               },
@@ -140,7 +140,7 @@ class _EducationTimeLineWidgetState extends State<EducationTimeLineWidget> {
           Stack(
             children: [
               Container(
-                margin: EdgeInsets.only(left: Di.PSOTL),
+                margin: const EdgeInsets.only(left: Di.PSOTL),
                 child: Container(
                   width: 3,
                   color: Cr.darkGrey3,
@@ -149,7 +149,7 @@ class _EducationTimeLineWidgetState extends State<EducationTimeLineWidget> {
               Container(
                 width: 13,
                 height: 13,
-                margin: EdgeInsets.only(
+                margin: const EdgeInsets.only(
                   left: Di.PSOL,
                   top: Di.PSOTL,
                 ),
@@ -184,13 +184,13 @@ class _EducationTimeLineWidgetState extends State<EducationTimeLineWidget> {
                 Container(
                   height: 96,
                   color: Cr.whiteColor,
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                     horizontal: Di.PSL,
                     vertical: Di.PSD,
                   ),
                   child: Row(
                     children: [
-                      ContainerWithIcon(
+                      const ContainerWithIcon(
                         size: 50,
                         iconData: FontAwesomeIcons.buildingColumns,
                       ),
@@ -214,7 +214,7 @@ class _EducationTimeLineWidgetState extends State<EducationTimeLineWidget> {
                           Text(
                             widget.education.studyDuration ?? "",
                             style: bodySmallRegular.copyWith(
-                              color: Color.fromRGBO(124, 137, 144, 1),
+                              color: const Color.fromRGBO(124, 137, 144, 1),
                             ),
                           )
                         ],
@@ -228,7 +228,7 @@ class _EducationTimeLineWidgetState extends State<EducationTimeLineWidget> {
                     child: Container(
                       width: 550,
                       color: Cr.lightGrey2,
-                      padding: EdgeInsets.symmetric(horizontal: Di.PSL),
+                      padding: const EdgeInsets.symmetric(horizontal: Di.PSL),
                       child: Html(
                         data: widget.education.description != null
                             ? widget.education.description.toString()
@@ -255,7 +255,7 @@ class _EducationTimeLineWidgetState extends State<EducationTimeLineWidget> {
                     height: 40,
                     width: double.infinity,
                     color: Cr.lightGrey2,
-                    padding: EdgeInsets.only(left: Di.PSL),
+                    padding: const EdgeInsets.only(left: Di.PSL),
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: AnimatedCrossFade(
@@ -288,7 +288,7 @@ class _EducationTimeLineWidgetState extends State<EducationTimeLineWidget> {
                         crossFadeState: showMore
                             ? CrossFadeState.showSecond
                             : CrossFadeState.showFirst,
-                        duration: Duration(milliseconds: 200),
+                        duration: const Duration(milliseconds: 200),
                       ),
                     ),
                   ),
@@ -297,7 +297,7 @@ class _EducationTimeLineWidgetState extends State<EducationTimeLineWidget> {
                     ? Container(
                         height: 120,
                         color: Cr.whiteColor,
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           horizontal: Di.PSL,
                           vertical: Di.PSS,
                         ),
@@ -307,7 +307,7 @@ class _EducationTimeLineWidgetState extends State<EducationTimeLineWidget> {
                               children: [
                                 Row(
                                   children: [
-                                    Icon(
+                                    const Icon(
                                       Icons.thumb_up,
                                       size: 12,
                                       color: Cr.accentBlue1,
@@ -343,7 +343,7 @@ class _EducationTimeLineWidgetState extends State<EducationTimeLineWidget> {
                                 Di.SBWOL,
                                 Row(
                                   children: [
-                                    Icon(
+                                    const Icon(
                                       Icons.comment,
                                       size: 12,
                                       color: Cr.accentBlue1,
@@ -379,7 +379,7 @@ class _EducationTimeLineWidgetState extends State<EducationTimeLineWidget> {
                                 Di.SBWOL,
                                 Row(
                                   children: [
-                                    Icon(
+                                    const Icon(
                                       Icons.share,
                                       size: 12,
                                       color: Cr.accentBlue1,
@@ -418,7 +418,7 @@ class _EducationTimeLineWidgetState extends State<EducationTimeLineWidget> {
                               padding: const EdgeInsets.all(Di.PSL),
                               child: Row(
                                 children: [
-                                  PersonAvatar(
+                                  const PersonAvatar(
                                     avatarSize: 40,
                                   ),
                                   Di.SBWL,
@@ -432,17 +432,17 @@ class _EducationTimeLineWidgetState extends State<EducationTimeLineWidget> {
                                         hintStyle: bodySmallRegular.copyWith(
                                           color: Cr.darkGrey1,
                                         ),
-                                        border: OutlineInputBorder(
+                                        border: const OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Cr.darkGrey4,
                                           ),
                                         ),
-                                        enabledBorder: OutlineInputBorder(
+                                        enabledBorder: const OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Cr.darkGrey4,
                                           ),
                                         ),
-                                        focusedBorder: OutlineInputBorder(
+                                        focusedBorder: const OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Cr.darkGrey4,
                                           ),
@@ -456,7 +456,7 @@ class _EducationTimeLineWidgetState extends State<EducationTimeLineWidget> {
                           ],
                         ),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               ],
             ),
           ),
@@ -492,7 +492,7 @@ class _AchievementTimeLineWidgetState extends State<AchievementTimeLineWidget> {
           Stack(
             children: [
               Container(
-                margin: EdgeInsets.only(left: Di.PSOTL),
+                margin: const EdgeInsets.only(left: Di.PSOTL),
                 child: Container(
                   width: 3,
                   color: Cr.darkGrey3,
@@ -501,7 +501,7 @@ class _AchievementTimeLineWidgetState extends State<AchievementTimeLineWidget> {
               Container(
                 width: 13,
                 height: 13,
-                margin: EdgeInsets.only(
+                margin: const EdgeInsets.only(
                   left: Di.PSOL,
                   top: Di.PSOTL,
                 ),
@@ -536,13 +536,13 @@ class _AchievementTimeLineWidgetState extends State<AchievementTimeLineWidget> {
                 Container(
                   height: 96,
                   color: Cr.whiteColor,
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                     horizontal: Di.PSL,
                     vertical: Di.PSD,
                   ),
                   child: Row(
                     children: [
-                      ContainerWithIcon(
+                      const ContainerWithIcon(
                         size: 50,
                         iconData: FontAwesomeIcons.buildingColumns,
                       ),
@@ -566,7 +566,7 @@ class _AchievementTimeLineWidgetState extends State<AchievementTimeLineWidget> {
                           Text(
                             widget.achievement.dateIssued ?? "",
                             style: bodySmallRegular.copyWith(
-                              color: Color.fromRGBO(124, 137, 144, 1),
+                              color: const Color.fromRGBO(124, 137, 144, 1),
                             ),
                           )
                         ],
@@ -580,7 +580,7 @@ class _AchievementTimeLineWidgetState extends State<AchievementTimeLineWidget> {
                     child: Container(
                       width: 550,
                       color: Cr.lightGrey2,
-                      padding: EdgeInsets.symmetric(horizontal: Di.PSL),
+                      padding: const EdgeInsets.symmetric(horizontal: Di.PSL),
                       child: Html(
                         // data:
                         //     // """<h4>A powerful API that allows you to customize everything </h4><h4>A powerful API that allows you to customize everything </h4><h4>A powerful API that allows you to customize everything </h4><h4>A powerful API that allows you to customize everything </h4><h4>A powerful API that allows you to customize everything </h4><h4>A powerful API that allows you to customize everything </h4>when rendering a specific HTML tag. This means you can change the default behaviour or add support for HTML elements that aren't supported natively. You can also make up your own llows you to customize everything when rendering a specific HTML tag. This means you can change the default behaviour or add support for HTML elements that aren't supported natively. You can also make up your own cust custom tags in your HTML """,
@@ -609,7 +609,7 @@ class _AchievementTimeLineWidgetState extends State<AchievementTimeLineWidget> {
                     height: 40,
                     width: double.infinity,
                     color: Cr.lightGrey2,
-                    padding: EdgeInsets.only(left: Di.PSL),
+                    padding: const EdgeInsets.only(left: Di.PSL),
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: AnimatedCrossFade(
@@ -642,7 +642,7 @@ class _AchievementTimeLineWidgetState extends State<AchievementTimeLineWidget> {
                         crossFadeState: showMore
                             ? CrossFadeState.showSecond
                             : CrossFadeState.showFirst,
-                        duration: Duration(milliseconds: 200),
+                        duration: const Duration(milliseconds: 200),
                       ),
                     ),
                   ),
@@ -651,7 +651,7 @@ class _AchievementTimeLineWidgetState extends State<AchievementTimeLineWidget> {
                     ? Container(
                         height: 120,
                         color: Cr.whiteColor,
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           horizontal: Di.PSL,
                           vertical: Di.PSS,
                         ),
@@ -661,7 +661,7 @@ class _AchievementTimeLineWidgetState extends State<AchievementTimeLineWidget> {
                               children: [
                                 Row(
                                   children: [
-                                    Icon(
+                                    const Icon(
                                       Icons.thumb_up,
                                       size: 12,
                                       color: Cr.accentBlue1,
@@ -697,7 +697,7 @@ class _AchievementTimeLineWidgetState extends State<AchievementTimeLineWidget> {
                                 Di.SBWOL,
                                 Row(
                                   children: [
-                                    Icon(
+                                    const Icon(
                                       Icons.comment,
                                       size: 12,
                                       color: Cr.accentBlue1,
@@ -733,7 +733,7 @@ class _AchievementTimeLineWidgetState extends State<AchievementTimeLineWidget> {
                                 Di.SBWOL,
                                 Row(
                                   children: [
-                                    Icon(
+                                    const Icon(
                                       Icons.share,
                                       size: 12,
                                       color: Cr.accentBlue1,
@@ -772,7 +772,7 @@ class _AchievementTimeLineWidgetState extends State<AchievementTimeLineWidget> {
                               padding: const EdgeInsets.all(Di.PSL),
                               child: Row(
                                 children: [
-                                  PersonAvatar(
+                                  const PersonAvatar(
                                     avatarSize: 40,
                                   ),
                                   Di.SBWL,
@@ -786,17 +786,17 @@ class _AchievementTimeLineWidgetState extends State<AchievementTimeLineWidget> {
                                         hintStyle: bodySmallRegular.copyWith(
                                           color: Cr.darkGrey1,
                                         ),
-                                        border: OutlineInputBorder(
+                                        border: const OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Cr.darkGrey4,
                                           ),
                                         ),
-                                        enabledBorder: OutlineInputBorder(
+                                        enabledBorder: const OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Cr.darkGrey4,
                                           ),
                                         ),
-                                        focusedBorder: OutlineInputBorder(
+                                        focusedBorder: const OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Cr.darkGrey4,
                                           ),
@@ -810,7 +810,7 @@ class _AchievementTimeLineWidgetState extends State<AchievementTimeLineWidget> {
                           ],
                         ),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               ],
             ),
           ),
@@ -846,7 +846,7 @@ class _ExperienceTimeLineWidgetState extends State<ExperienceTimeLineWidget> {
           Stack(
             children: [
               Container(
-                margin: EdgeInsets.only(left: Di.PSOTL),
+                margin: const EdgeInsets.only(left: Di.PSOTL),
                 child: Container(
                   width: 3,
                   color: Cr.darkGrey3,
@@ -855,7 +855,7 @@ class _ExperienceTimeLineWidgetState extends State<ExperienceTimeLineWidget> {
               Container(
                 width: 13,
                 height: 13,
-                margin: EdgeInsets.only(
+                margin: const EdgeInsets.only(
                   left: Di.PSOL,
                   top: Di.PSOTL,
                 ),
@@ -890,13 +890,13 @@ class _ExperienceTimeLineWidgetState extends State<ExperienceTimeLineWidget> {
                 Container(
                   height: 96,
                   color: Cr.whiteColor,
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                     horizontal: Di.PSL,
                     vertical: Di.PSD,
                   ),
                   child: Row(
                     children: [
-                      ContainerWithIcon(
+                      const ContainerWithIcon(
                         size: 50,
                         iconData: FontAwesomeIcons.buildingColumns,
                       ),
@@ -920,7 +920,7 @@ class _ExperienceTimeLineWidgetState extends State<ExperienceTimeLineWidget> {
                           Text(
                             widget.experience.workDuration ?? "",
                             style: bodySmallRegular.copyWith(
-                              color: Color.fromRGBO(124, 137, 144, 1),
+                              color: const Color.fromRGBO(124, 137, 144, 1),
                             ),
                           )
                         ],
@@ -934,7 +934,7 @@ class _ExperienceTimeLineWidgetState extends State<ExperienceTimeLineWidget> {
                     child: Container(
                       width: 550,
                       color: Cr.lightGrey2,
-                      padding: EdgeInsets.symmetric(horizontal: Di.PSL),
+                      padding: const EdgeInsets.symmetric(horizontal: Di.PSL),
                       child: Html(
                         // data:
                         //     // """<h4>A powerful API that allows you to customize everything </h4><h4>A powerful API that allows you to customize everything </h4><h4>A powerful API that allows you to customize everything </h4><h4>A powerful API that allows you to customize everything </h4><h4>A powerful API that allows you to customize everything </h4><h4>A powerful API that allows you to customize everything </h4>when rendering a specific HTML tag. This means you can change the default behaviour or add support for HTML elements that aren't supported natively. You can also make up your own llows you to customize everything when rendering a specific HTML tag. This means you can change the default behaviour or add support for HTML elements that aren't supported natively. You can also make up your own cust custom tags in your HTML """,
@@ -963,7 +963,7 @@ class _ExperienceTimeLineWidgetState extends State<ExperienceTimeLineWidget> {
                     height: 40,
                     width: double.infinity,
                     color: Cr.lightGrey2,
-                    padding: EdgeInsets.only(left: Di.PSL),
+                    padding: const EdgeInsets.only(left: Di.PSL),
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: AnimatedCrossFade(
@@ -996,7 +996,7 @@ class _ExperienceTimeLineWidgetState extends State<ExperienceTimeLineWidget> {
                         crossFadeState: showMore
                             ? CrossFadeState.showSecond
                             : CrossFadeState.showFirst,
-                        duration: Duration(milliseconds: 200),
+                        duration: const Duration(milliseconds: 200),
                       ),
                     ),
                   ),
@@ -1005,7 +1005,7 @@ class _ExperienceTimeLineWidgetState extends State<ExperienceTimeLineWidget> {
                     ? Container(
                         height: 120,
                         color: Cr.whiteColor,
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           horizontal: Di.PSL,
                           vertical: Di.PSS,
                         ),
@@ -1015,7 +1015,7 @@ class _ExperienceTimeLineWidgetState extends State<ExperienceTimeLineWidget> {
                               children: [
                                 Row(
                                   children: [
-                                    Icon(
+                                    const Icon(
                                       Icons.thumb_up,
                                       size: 12,
                                       color: Cr.accentBlue1,
@@ -1051,7 +1051,7 @@ class _ExperienceTimeLineWidgetState extends State<ExperienceTimeLineWidget> {
                                 Di.SBWOL,
                                 Row(
                                   children: [
-                                    Icon(
+                                    const Icon(
                                       Icons.comment,
                                       size: 12,
                                       color: Cr.accentBlue1,
@@ -1087,7 +1087,7 @@ class _ExperienceTimeLineWidgetState extends State<ExperienceTimeLineWidget> {
                                 Di.SBWOL,
                                 Row(
                                   children: [
-                                    Icon(
+                                    const Icon(
                                       Icons.share,
                                       size: 12,
                                       color: Cr.accentBlue1,
@@ -1126,7 +1126,7 @@ class _ExperienceTimeLineWidgetState extends State<ExperienceTimeLineWidget> {
                               padding: const EdgeInsets.all(Di.PSL),
                               child: Row(
                                 children: [
-                                  PersonAvatar(
+                                  const PersonAvatar(
                                     avatarSize: 40,
                                   ),
                                   Di.SBWL,
@@ -1140,17 +1140,17 @@ class _ExperienceTimeLineWidgetState extends State<ExperienceTimeLineWidget> {
                                         hintStyle: bodySmallRegular.copyWith(
                                           color: Cr.darkGrey1,
                                         ),
-                                        border: OutlineInputBorder(
+                                        border: const OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Cr.darkGrey4,
                                           ),
                                         ),
-                                        enabledBorder: OutlineInputBorder(
+                                        enabledBorder: const OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Cr.darkGrey4,
                                           ),
                                         ),
-                                        focusedBorder: OutlineInputBorder(
+                                        focusedBorder: const OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Cr.darkGrey4,
                                           ),
@@ -1164,7 +1164,7 @@ class _ExperienceTimeLineWidgetState extends State<ExperienceTimeLineWidget> {
                           ],
                         ),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               ],
             ),
           ),
@@ -1190,10 +1190,10 @@ class CreatePath extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          margin: EdgeInsets.only(top: 0),
+          margin: const EdgeInsets.only(top: 0),
           width: 16,
           height: 16,
-          decoration: new BoxDecoration(
+          decoration: BoxDecoration(
             shape: BoxShape
                 .circle, // You can use like this way or like the below line
             //borderRadius: new BorderRadius.circular(30.0),
@@ -1204,7 +1204,7 @@ class CreatePath extends StatelessWidget {
           child: Row(
             children: <Widget>[
               Container(
-                margin: EdgeInsets.only(left: 7.5, right: 7.5),
+                margin: const EdgeInsets.only(left: 7.5, right: 7.5),
                 child: Container(
                   width: 1,
                   color: Colors.grey[400],
@@ -1212,29 +1212,29 @@ class CreatePath extends StatelessWidget {
               ),
               Expanded(
                 child: Container(
-                  margin: EdgeInsets.only(left: 32, right: 32),
+                  margin: const EdgeInsets.only(left: 32, right: 32),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(orderStatus,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
                           )),
-                      SizedBox(
+                      const SizedBox(
                         height: 4,
                       ),
                       Text(date,
                           style:
                               TextStyle(color: Colors.grey[400], fontSize: 11)),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       Text(orderDescription,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Cr.darkBlue1,
                           )),
-                      SizedBox(
+                      const SizedBox(
                         height: 24,
                       )
                     ],

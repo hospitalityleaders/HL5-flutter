@@ -32,22 +32,22 @@ class _ProfileSendConnectionRequestDialogState
         mainAxisAlignment: MainAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          DialogTitleWidget(
+          const DialogTitleWidget(
             title: "Send connection request",
           ),
           Container(
             width: 560,
-            padding: EdgeInsets.all(Di.PSL),
+            padding: const EdgeInsets.all(Di.PSL),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   "Send to",
                   style: h5Bold,
                 ),
                 Di.SBCH(7),
                 Container(
-                  padding: EdgeInsets.all(Di.PSS),
+                  padding: const EdgeInsets.all(Di.PSS),
                   decoration: BoxDecoration(
                     border: Border.all(
                       color: Cr.darkGrey4,
@@ -57,7 +57,7 @@ class _ProfileSendConnectionRequestDialogState
                   ),
                   child: Row(
                     children: [
-                      PersonAvatar(
+                      const PersonAvatar(
                         avatarSize: 26,
                       ),
                       Di.SBCW(8),
@@ -71,7 +71,7 @@ class _ProfileSendConnectionRequestDialogState
                   ),
                 ),
                 Di.SBHL,
-                Text(
+                const Text(
                   "Intro message",
                   style: h5Bold,
                 ),
@@ -91,7 +91,7 @@ class _ProfileSendConnectionRequestDialogState
                       "Hey Noberto! Please accept my request to be your connection :-)",
                 ),
                 Di.SBHL,
-                Align(
+                const Align(
                   alignment: Alignment.centerRight,
                   child: CustomElevatedButton(
                     text: "Send request",

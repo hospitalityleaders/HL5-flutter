@@ -122,7 +122,7 @@ class ProfileArticleTimelineComponent extends StatelessWidget {
                       Container(
                         width: 35,
                         height: 35,
-                        padding: EdgeInsets.symmetric(vertical: Di.PSS),
+                        padding: const EdgeInsets.symmetric(vertical: Di.PSS),
                         color: Cr.darkBlue5,
                         child: Align(
                           alignment: Alignment.centerLeft,
@@ -160,7 +160,7 @@ class ProfileArticleTimelineComponent extends StatelessWidget {
                       Container(
                         width: 35,
                         height: 35,
-                        padding: EdgeInsets.symmetric(vertical: Di.PSS),
+                        padding: const EdgeInsets.symmetric(vertical: Di.PSS),
                         color: Cr.darkBlue5,
                         child: Align(
                           alignment: Alignment.centerLeft,
@@ -198,7 +198,7 @@ class ProfileArticleTimelineComponent extends StatelessWidget {
                       Container(
                         width: 35,
                         height: 35,
-                        padding: EdgeInsets.symmetric(vertical: Di.PSS),
+                        padding: const EdgeInsets.symmetric(vertical: Di.PSS),
                         color: Cr.darkBlue5,
                         child: Align(
                           alignment: Alignment.centerLeft,
@@ -236,7 +236,7 @@ class ProfileArticleTimelineComponent extends StatelessWidget {
                       Container(
                         width: 35,
                         height: 35,
-                        padding: EdgeInsets.symmetric(vertical: Di.PSS),
+                        padding: const EdgeInsets.symmetric(vertical: Di.PSS),
                         color: Cr.darkBlue5,
                         child: Align(
                           alignment: Alignment.centerLeft,
@@ -274,6 +274,8 @@ class ProfileArticleTimelineComponent extends StatelessWidget {
                     child: CustomElevatedButton(
                       width: 200,
                       height: 35,
+                      backgroundColor: Cr.whiteColor,
+                      icon: const Icon(Icons.menu),
                       child: Row(
                         children: [
                           Icon(
@@ -288,8 +290,6 @@ class ProfileArticleTimelineComponent extends StatelessWidget {
                           ),
                         ],
                       ),
-                      backgroundColor: Cr.whiteColor,
-                      icon: Icon(Icons.menu),
                     ),
                   ),
                   Di.SBHS,
@@ -298,7 +298,7 @@ class ProfileArticleTimelineComponent extends StatelessWidget {
                       Container(
                         width: 35,
                         height: 35,
-                        padding: EdgeInsets.symmetric(vertical: Di.PSS),
+                        padding: const EdgeInsets.symmetric(vertical: Di.PSS),
                         color: Cr.darkBlue5,
                         child: Align(
                           alignment: Alignment.centerLeft,
@@ -327,7 +327,7 @@ class ProfileArticleTimelineComponent extends StatelessWidget {
                           width: 80,
                           height: 36,
                           color: Cr.facebook,
-                          child: Icon(
+                          child: const Icon(
                             FontAwesomeIcons.facebook,
                             color: Cr.whiteColor,
                             size: 14,
@@ -338,7 +338,7 @@ class ProfileArticleTimelineComponent extends StatelessWidget {
                           width: 80,
                           height: 36,
                           color: Cr.google,
-                          child: Icon(
+                          child: const Icon(
                             FontAwesomeIcons.googlePlusG,
                             color: Cr.whiteColor,
                             size: 14,
@@ -349,7 +349,7 @@ class ProfileArticleTimelineComponent extends StatelessWidget {
                           width: 80,
                           height: 36,
                           color: Cr.xing,
-                          child: Icon(
+                          child: const Icon(
                             FontAwesomeIcons.xing,
                             color: Cr.whiteColor,
                             size: 14,

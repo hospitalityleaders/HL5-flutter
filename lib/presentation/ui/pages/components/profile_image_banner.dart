@@ -58,12 +58,12 @@ class _ProfileImageBannerState extends State<ProfileImageBanner> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 50),
+              const SizedBox(height: 50),
               Container(
                 width: 560,
                 height: 385,
                 color: Cr.whiteColor,
-                padding: EdgeInsets.all(Di.PSD),
+                padding: const EdgeInsets.all(Di.PSD),
                 child: Stack(
                   children: [
                     SizedBox(
@@ -76,7 +76,7 @@ class _ProfileImageBannerState extends State<ProfileImageBanner> {
                                 onPressed: () {
                                   showCustomDialog(
                                     context,
-                                    ContactCardDialogWidget(),
+                                    const ContactCardDialogWidget(),
                                   );
                                 },
                                 text: "Contact card",
@@ -100,12 +100,12 @@ class _ProfileImageBannerState extends State<ProfileImageBanner> {
                                 },
                                 child: CustomOutlinedButton(
                                   onPressed: () {},
-                                  icon: Icon(
+                                  icon: const Icon(
                                     Icons.menu,
                                     size: 12,
                                     color: Cr.darkGrey1,
                                   ),
-                                  textWidget: Icon(
+                                  textWidget: const Icon(
                                     Icons.arrow_drop_down_outlined,
                                     size: 12,
                                     color: Cr.darkGrey1,
@@ -147,7 +147,7 @@ class _ProfileImageBannerState extends State<ProfileImageBanner> {
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.location_on,
                                 color: Cr.darkGrey1,
                                 size: 12,
@@ -161,7 +161,7 @@ class _ProfileImageBannerState extends State<ProfileImageBanner> {
                             ],
                           ),
                           Di.SBHL,
-                          SendConnectionRequestButton(),
+                          const SendConnectionRequestButton(),
                           Di.SBHES,
                           WriteReferenceRecommandButtonComman(
                             userProfileData: widget.userProfileData,
@@ -174,7 +174,7 @@ class _ProfileImageBannerState extends State<ProfileImageBanner> {
                       ),
                     ),
                     if (showProfileSubMenu)
-                      Positioned(
+                      const Positioned(
                         top: 30,
                         right: 0,
                         child: SizedBox(
@@ -191,7 +191,7 @@ class _ProfileImageBannerState extends State<ProfileImageBanner> {
             ],
           ),
         ),
-        Positioned.fill(
+        const Positioned.fill(
           top: 10,
           child: Align(
             alignment: Alignment.topCenter,
@@ -205,11 +205,11 @@ class _ProfileImageBannerState extends State<ProfileImageBanner> {
             right: 10,
             child: FloatingActionButton(
               backgroundColor: Cr.accentBlue1,
-              child: Icon(Icons.camera_alt),
+              child: const Icon(Icons.camera_alt),
               onPressed: () {
                 showCustomDialog(
                   context,
-                  ProfileCoverImageDialogWidget(),
+                  const ProfileCoverImageDialogWidget(),
                 );
               },
             ),
@@ -220,12 +220,12 @@ class _ProfileImageBannerState extends State<ProfileImageBanner> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(height: 50),
+                    const SizedBox(height: 50),
                     Container(
                       width: 560,
                       height: 385,
                       color: Cr.accentBlue2.withOpacity(.8),
-                      padding: EdgeInsets.all(Di.PSD),
+                      padding: const EdgeInsets.all(Di.PSD),
                     ),
                   ],
                 ),
@@ -249,7 +249,7 @@ class _ProfileImageBannerState extends State<ProfileImageBanner> {
                       );
                     },
                     backgroundColor: Cr.accentBlue1,
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.edit,
                       color: Cr.whiteColor,
                     ),

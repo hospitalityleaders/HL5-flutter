@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:holedo/db_data.dart';
 import 'package:holedo/layouts/pages/profile-pages/profile/user_profile_page.dart';
 import 'package:holedo/models/models.dart';
+import 'package:holedo/presentation/classes.dart';
+import 'package:holedo/presentation/providers/notification_provider.dart';
 import 'package:holedo/presentation/providers/profile_provider.dart';
-import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/presentation/ui/components/person_avatar.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_image_banner.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_tabbar.dart';
@@ -48,55 +49,17 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
     final isEditable = Provider.of<ProfileProvider>(context).isProfileEditable;
     final appState = Provider.of<AppState>(context);
     final bool isMine = appState.isLoginnedAndEditable(widget.userProfileData);
-
+    final ProfileNotification? notification =
+        Provider.of<NotificationProvider>(context).notification;
     return Scaffold(
       backgroundColor: Cr.backgroundColor,
       body: ListView(
         children: [
-          if (isTablt)
-            Di.getScreenSize(context).width > 800
-                ? AppbarNotification()
-                : Container(
-                    height: 100,
-                    width: Di.getScreenSize(context).width,
-                    color: Cr.red3,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Di.SBWS,
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Container(
-                              width: 380,
-                              child: Text(
-                                "Your profile is only 25% complete. Complete it now to earn your first Hospitality Leaders grade.   ",
-                                textAlign: TextAlign.center,
-                                style: bodySmallRegular.copyWith(
-                                  color: Cr.red1,
-                                ),
-                              ),
-                            ),
-                            CustomElevatedButton(
-                              width: 97,
-                              height: 32,
-                              backgroundColor: Cr.redTextColor,
-                              donotShowIcon: true,
-                            ),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            Di.SBHS,
-                            Icon(
-                              Icons.close,
-                              color: Cr.redTextColor,
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
+          if (notification != null)
+            AppbarNotification(
+              title: notification.text,
+              buttonText: notification.buttonText,
+            ),
           if (isTablt)
             ProfileImageBanner(
               userProfileData: widget.userProfileData,
@@ -114,11 +77,11 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
               right: isTablt ? 30 : 0,
             ),
             child: ListView(
-              physics: ClampingScrollPhysics(),
+              physics: const ClampingScrollPhysics(),
               shrinkWrap: true,
               children: [
                 if (isMobilePhn)
-                  Container(
+                  SizedBox(
                     // decoration: Styles.boxDecorationWithShadow.copyWith(),
                     height: showMenu
                         ? showCardSubMenu
@@ -144,7 +107,7 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                           child: Align(
                             alignment: Alignment.center,
                             child: Container(
-                              padding: EdgeInsets.only(
+                              padding: const EdgeInsets.only(
                                 left: Di.PSL,
                                 right: Di.PSL,
                               ),
@@ -190,7 +153,7 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                                           MainAxisAlignment.center,
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        Icon(
+                                        const Icon(
                                           Icons.location_on,
                                           size: 16,
                                           color: Cr.darkGrey1,
@@ -217,10 +180,10 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                                   ),
                                   if (showCardSubMenu) ...[
                                     Di.SBHS,
-                                    ProfileCardSubMenu(),
+                                    const ProfileCardSubMenu(),
                                   ],
                                   Di.SBHOL,
-                                  SendConnectionRequestButton(
+                                  const SendConnectionRequestButton(
                                     width: double.infinity,
                                   ),
                                   Di.SBHES,
@@ -257,10 +220,10 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                                   // ),
                                   Di.SBHD,
                                   Container(
-                                    padding: EdgeInsets.only(
+                                    padding: const EdgeInsets.only(
                                       bottom: Di.PSS,
                                     ),
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                       color: Cr.whiteColor,
                                       // border: Border(
                                       //   bottom: BorderSide(
@@ -284,7 +247,7 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                                             Row(
                                               mainAxisSize: MainAxisSize.min,
                                               children: [
-                                                PersonAvatar(),
+                                                const PersonAvatar(),
                                                 Di.SBWD,
                                                 Text(
                                                   widget.userProfileData
@@ -294,7 +257,7 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                                                   // de
                                                 ),
                                                 Di.SBWS,
-                                                Text(
+                                                const Text(
                                                   "MHL",
                                                   style: dividerTextSmall,
                                                   // de
@@ -308,7 +271,7 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                                                 });
                                               },
                                               child: showMenu
-                                                  ? Icon(
+                                                  ? const Icon(
                                                       Icons.close,
                                                       color: Cr.accentBlue1,
                                                     )
@@ -318,7 +281,7 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                                                               .center,
                                                       mainAxisSize:
                                                           MainAxisSize.min,
-                                                      children: [
+                                                      children: const [
                                                         Icon(
                                                           Icons.menu,
                                                           color: Cr.accentBlue1,
@@ -418,7 +381,7 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                               width: 75,
                               height: 75,
                               decoration: Styles.boxDecorationRounded.copyWith(
-                                image: DecorationImage(
+                                image: const DecorationImage(
                                   image: AssetImage("assets/images/avatar.png"),
                                   fit: BoxFit.cover,
                                 ),
@@ -445,8 +408,8 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                     isTablt: isTablt,
                     showComments: false,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(Di.PSOTL),
+                  const Padding(
+                    padding: EdgeInsets.all(Di.PSOTL),
                     child: Center(
                       child: Text(
                         "Activity",

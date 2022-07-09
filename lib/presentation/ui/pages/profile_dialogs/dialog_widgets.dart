@@ -14,10 +14,10 @@ void showCircularProgressIndicator(
 }) {
   showCustomDialog(
     context,
-    Container(
+    SizedBox(
       width: 100,
       height: 100,
-      child: Center(
+      child: const Center(
         child: CircularProgressIndicator(),
       ),
     ),
@@ -32,7 +32,7 @@ class StarIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Icon(
+    return const Icon(
       Icons.star,
       color: Cr.accentBlue1,
       size: 8,
@@ -87,7 +87,7 @@ class DialogTitleWidget extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () => Nav.pop(context),
-                child: Icon(
+                child: const Icon(
                   Icons.close,
                   size: 24,
                   color: Cr.accentBlue1,
@@ -130,7 +130,7 @@ class DialogTextFieldForm extends StatelessWidget {
         ),
         decoration: Styles.popUpDialogTextFieldInputDecoration.copyWith(
           hintText: hintText,
-          errorStyle: TextStyle(fontSize: Di.FSES),
+          errorStyle: const TextStyle(fontSize: Di.FSES),
           hintStyle: bodySmallRegular.copyWith(color: Cr.darkGrey4),
         ),
       ),
@@ -164,7 +164,7 @@ class DialogLabelTextFormField extends StatelessWidget {
                   style: h5Bold,
                 ),
                 Di.SBWES,
-                icon ?? StarIcon(),
+                icon ?? const StarIcon(),
               ],
             )
           : Text(
@@ -330,7 +330,8 @@ class DialogMultiLineTextField extends StatelessWidget {
     this.textEditingController,
     this.width,
     this.hintText,
-    this.minLines, this.hintStyle,
+    this.minLines,
+    this.hintStyle,
   }) : super(key: key);
 
   final TextEditingController? textEditingController;
@@ -354,7 +355,8 @@ class DialogMultiLineTextField extends StatelessWidget {
         minLines: minLines ?? 5,
         decoration: Styles.popUpDialogTextFieldInputDecoration.copyWith(
           hintText: hintText,
-          hintStyle:hintStyle?? bodySmallRegular.copyWith(color: Cr.darkGrey4),
+          hintStyle:
+              hintStyle ?? bodySmallRegular.copyWith(color: Cr.darkGrey4),
         ),
       ),
     );

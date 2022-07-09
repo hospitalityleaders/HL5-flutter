@@ -30,7 +30,7 @@ class ContactCardMenuCommon extends StatelessWidget {
           onPressed: () {
             showCustomDialog(
               context,
-              ContactCardDialogWidget(),
+              const ContactCardDialogWidget(),
             );
           },
           text: "Contact card",
@@ -46,12 +46,12 @@ class ContactCardMenuCommon extends StatelessWidget {
               () {
                 // ProfileCardSubMenu
               },
-          icon: Icon(
+          icon: const Icon(
             Icons.menu,
             size: 12,
             color: Cr.darkGrey1,
           ),
-          textWidget: Icon(
+          textWidget: const Icon(
             Icons.arrow_drop_down_outlined,
             size: 12,
             color: Cr.darkGrey1,
@@ -74,13 +74,13 @@ class SendConnectionRequestButton extends StatelessWidget {
       onPressed: () {
         showCustomDialog(
           context,
-          ProfileSendConnectionRequestDialog(),
+          const ProfileSendConnectionRequestDialog(),
         );
       },
       width: width ?? 285,
       height: 55,
       text: "SEND CONNECTION REQUEST",
-      icon: Icon(
+      icon: const Icon(
         Icons.person_add,
         color: Cr.whiteColor,
       ),
@@ -97,7 +97,7 @@ class ProfileCardSubMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       shrinkWrap: true,
-      children: [
+      children: const [
         SizedBox(
           child: ProfileCardListTile(
             // removePadding: true,
@@ -150,7 +150,10 @@ class StatsComman extends StatelessWidget {
             children: [
               Text(
                 userProfileData.approvedConnections != null
-                    ? "${userProfileData.approvedConnections!.length.toString() + (userProfileData.approvedConnections!.length > 250 ? "+" : "")}"
+                    ? userProfileData.approvedConnections!.length.toString() +
+                        (userProfileData.approvedConnections!.length > 250
+                            ? "+"
+                            : "")
                     : "0",
                 style: h2Regular.copyWith(
                   color: Cr.accentBlue1,
@@ -166,7 +169,7 @@ class StatsComman extends StatelessWidget {
             children: [
               Text(
                 membershipGradeLeaderPoints >= 1000
-                    ? (membershipGradeLeaderPoints / 1000).toString() + "K"
+                    ? "${membershipGradeLeaderPoints / 1000}K"
                     : membershipGradeLeaderPoints.toString(),
                 style: h2Regular.copyWith(
                   color: Cr.accentBlue1,
@@ -237,7 +240,7 @@ class WriteReferenceRecommandButtonComman extends StatelessWidget {
           onPressed: () {
             showCustomDialog(
               context,
-              ProfileWriteReferenceDialog(),
+              const ProfileWriteReferenceDialog(),
             );
           },
           width: width ?? 140,
@@ -246,7 +249,7 @@ class WriteReferenceRecommandButtonComman extends StatelessWidget {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(
+              const Icon(
                 Icons.check,
                 color: Cr.accentBlue1,
                 size: 12,
@@ -267,6 +270,7 @@ class WriteReferenceRecommandButtonComman extends StatelessWidget {
           width: width ?? 140,
           height: 35,
           backgroundColor: Cr.accentBlue3,
+          borderColor: Cr.accentBlue2,
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -284,7 +288,6 @@ class WriteReferenceRecommandButtonComman extends StatelessWidget {
               ),
             ],
           ),
-          borderColor: Cr.accentBlue2,
         ),
       ],
     );

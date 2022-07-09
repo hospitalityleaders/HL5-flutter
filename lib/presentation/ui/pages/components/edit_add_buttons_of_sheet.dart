@@ -17,7 +17,7 @@ class EditAddButtonOfSheet extends StatelessWidget {
   @override
   Widget build(_) {
     // return Di.ESB;
-    if (Provider.of<ProfileProvider>(context).isProfileEditable)
+    if (Provider.of<ProfileProvider>(context).isProfileEditable) {
       return Center(
         child: SizedBox(
           width: 200,
@@ -40,7 +40,8 @@ class EditAddButtonOfSheet extends StatelessWidget {
           ),
         ),
       );
-    else
+    } else {
       return Di.ESB;
+    }
   }
 }

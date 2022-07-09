@@ -1,5 +1,5 @@
 import 'package:holedo/db_data.dart';
-import 'package:holedo/presentation/ui_classes.dart';
+import 'package:holedo/presentation/classes.dart';
 
 class HelperFunctions {
   List<String> splitText(String text, int lenghtOfFirstString) {
@@ -44,56 +44,50 @@ class HelperFunctions {
     final experiences = userProfileData.experiences;
     final achievements = userProfileData.achievements;
     final educations = userProfileData.educations;
-    List<TimelineClass> _timelineClassList = <TimelineClass>[];
+    List<TimelineClass> timelineClassList = <TimelineClass>[];
     if (experiences != null && experiences.isNotEmpty) {
-      experiences.forEach(
-        (experience) {
-          if (experience.toDate != null) {
-            _timelineClassList.add(
-              TimelineClass(
-                experience.id!,
-                experience.toDate!,
-                TimelineClassTypes.Experience,
-                experience,
-              ),
-            );
-          }
-        },
-      );
+      for (var experience in experiences) {
+        if (experience.toDate != null) {
+          timelineClassList.add(
+            TimelineClass(
+              experience.id!,
+              experience.toDate!,
+              TimelineClassTypes.Experience,
+              experience,
+            ),
+          );
+        }
+      }
     }
     if (achievements != null && achievements.isNotEmpty) {
-      achievements.forEach(
-        (achievement) {
-          if (achievement.dateReceived != null) {
-            _timelineClassList.add(
-              TimelineClass(
-                achievement.id!,
-                achievement.dateReceived!,
-                TimelineClassTypes.Achievement,
-                achievement,
-              ),
-            );
-          }
-        },
-      );
+      for (var achievement in achievements) {
+        if (achievement.dateReceived != null) {
+          timelineClassList.add(
+            TimelineClass(
+              achievement.id!,
+              achievement.dateReceived!,
+              TimelineClassTypes.Achievement,
+              achievement,
+            ),
+          );
+        }
+      }
     }
     if (educations != null && educations.isNotEmpty) {
-      educations.forEach(
-        (education) {
-          if (education.durationToDate != null) {
-            _timelineClassList.add(
-              TimelineClass(
-                education.id!,
-                education.durationToDate!,
-                TimelineClassTypes.Education,
-                education,
-              ),
-            );
-          }
-        },
-      );
+      for (var education in educations) {
+        if (education.durationToDate != null) {
+          timelineClassList.add(
+            TimelineClass(
+              education.id!,
+              education.durationToDate!,
+              TimelineClassTypes.Education,
+              education,
+            ),
+          );
+        }
+      }
     }
-    _timelineClassList.sort(((a, b) => b.dateTime.compareTo(a.dateTime)));
-    return _timelineClassList;
+    timelineClassList.sort(((a, b) => b.dateTime.compareTo(a.dateTime)));
+    return timelineClassList;
   }
 }

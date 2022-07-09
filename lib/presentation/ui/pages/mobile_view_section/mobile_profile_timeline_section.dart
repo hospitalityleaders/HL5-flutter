@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:holedo/db_data.dart';
-import 'package:holedo/presentation/functions/helper_functions.dart';
 import 'package:holedo/presentation/ui/pages/components/connection_component.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_completion_component.dart';
 import 'package:holedo/presentation/ui/pages/components/rights_component.dart';
 import 'package:holedo/presentation/ui/pages/sections/page_overview/page_overview_columns/page_overview_third_columns.dart';
 import 'package:holedo/presentation/ui/pages/sections/timeline_section/timeline_section.dart';
-import 'package:holedo/presentation/ui_classes.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 
 import 'package:flutter_html/flutter_html.dart';
@@ -37,17 +34,9 @@ class MobileProfileTimelineSection extends StatefulWidget {
 
 class _MobileProfileTimelineSectionState
     extends State<MobileProfileTimelineSection> {
-  late final List<TimelineClass> timelines;
-
-  @override
-  void initState() {
-    timelines = HelperFunctions().listOfTimeline();
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
-    final userProfileData = DbData.getUserProfileData;
+    // final userProfileData = DbData.getUserProfileData;
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: Di.PSS,
@@ -55,22 +44,22 @@ class _MobileProfileTimelineSectionState
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (widget.isMobilePhn) ProfileCompletionComponent(),
+          if (widget.isMobilePhn) const ProfileCompletionComponent(),
           widget.isMobilePhn
               ? _MobileTimelineSection(
                   jobDescriptionInHtml: widget.jobDescriptionInHtml,
                   showComments: widget.showComments,
                 )
-              : TimelineSectionComponent(),
+              : const TimelineSectionComponent(),
           Di.SBHD,
-          if (widget.isTablt) ProfileCompletionComponent(),
-          ConnectionsComponent(
+          if (widget.isTablt) const ProfileCompletionComponent(),
+          const ConnectionsComponent(
             isMobile: true,
           ),
           Di.SBHS,
-          ProfileAdsComponent(),
+          const ProfileAdsComponent(),
           Di.SBHS,
-          RightsComponent(
+          const RightsComponent(
             isMobile: true,
           ),
           Di.SBHOTL,
@@ -80,7 +69,7 @@ class _MobileProfileTimelineSectionState
   }
 }
 
-class _MobileTimelineSection extends StatelessWidget {
+class _MobileTimelineSection extends StatefulWidget {
   const _MobileTimelineSection({
     Key? key,
     required this.jobDescriptionInHtml,
@@ -91,31 +80,37 @@ class _MobileTimelineSection extends StatelessWidget {
   final bool showComments;
 
   @override
+  State<_MobileTimelineSection> createState() => _MobileTimelineSectionState();
+}
+
+class _MobileTimelineSectionState extends State<_MobileTimelineSection> {
+  @override
   Widget build(BuildContext context) {
     // return _ProfileMobileTimelineTile(
     //   jobDescriptionInHtml: jobDescriptionInHtml,
     //   showComments: showComments,
     // );
+
     return Column(
       children: [
-        _MobileTimelinePath(
-          year: '2013',
+        // _MobileTimelinePath(
+        //   year: timelineClasslist.last.dateTime.year.toString(),
+        // ),
+        _ProfileMobileTimelineTile(
+          jobDescriptionInHtml: widget.jobDescriptionInHtml,
+          showComments: widget.showComments,
         ),
         _ProfileMobileTimelineTile(
-          jobDescriptionInHtml: jobDescriptionInHtml,
-          showComments: showComments,
+          jobDescriptionInHtml: widget.jobDescriptionInHtml,
+          showComments: widget.showComments,
         ),
         _ProfileMobileTimelineTile(
-          jobDescriptionInHtml: jobDescriptionInHtml,
-          showComments: showComments,
+          jobDescriptionInHtml: widget.jobDescriptionInHtml,
+          showComments: widget.showComments,
         ),
-        _ProfileMobileTimelineTile(
-          jobDescriptionInHtml: jobDescriptionInHtml,
-          showComments: showComments,
-        ),
-        _MobileTimelinePath(
-          year: '2011',
-        ),
+        // _MobileTimelinePath(
+        //   year: timelineClasslist.last.dateTime.year.toString(),
+        // ),
       ],
     );
   }
@@ -160,7 +155,7 @@ class _MobileTimelinePath extends StatelessWidget {
               child: Container(
                 width: 16,
                 height: 16,
-                decoration: new BoxDecoration(
+                decoration: BoxDecoration(
                   border: Border.all(
                     color: Cr.darkGrey3,
                     width: 3.5,
@@ -198,13 +193,13 @@ class _ProfileMobileTimelineTile extends StatelessWidget {
         Container(
           height: 96,
           color: Cr.whiteColor,
-          padding: EdgeInsets.symmetric(
+          padding: const EdgeInsets.symmetric(
             horizontal: Di.PSL,
             vertical: Di.PSD,
           ),
           child: Row(
             children: [
-              ContainerWithIcon(
+              const ContainerWithIcon(
                 size: 50,
                 iconData: FontAwesomeIcons.buildingColumns,
               ),
@@ -272,13 +267,13 @@ class _ProfileMobileTimelineTile extends StatelessWidget {
                       // ),
                     ),
                     Di.SBHES,
-                    Align(
+                    const Align(
                       alignment: Alignment.centerLeft,
                       child: CustomTextButton(
                         text: "  - Close",
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: Di.PSS,
                     ),
                   ],
@@ -305,7 +300,7 @@ class _ProfileMobileTimelineTile extends StatelessWidget {
             ? Container(
                 height: 120,
                 color: Cr.whiteColor,
-                padding: EdgeInsets.symmetric(
+                padding: const EdgeInsets.symmetric(
                   horizontal: Di.PSL,
                   vertical: Di.PSS,
                 ),
@@ -315,7 +310,7 @@ class _ProfileMobileTimelineTile extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.thumb_up,
                               size: 12,
                               color: Cr.accentBlue1,
@@ -351,7 +346,7 @@ class _ProfileMobileTimelineTile extends StatelessWidget {
                         Di.SBWOL,
                         Row(
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.comment,
                               size: 12,
                               color: Cr.accentBlue1,
@@ -387,7 +382,7 @@ class _ProfileMobileTimelineTile extends StatelessWidget {
                         Di.SBWOL,
                         Row(
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.share,
                               size: 12,
                               color: Cr.accentBlue1,
@@ -426,7 +421,7 @@ class _ProfileMobileTimelineTile extends StatelessWidget {
                       padding: const EdgeInsets.all(Di.PSL),
                       child: Row(
                         children: [
-                          PersonAvatar(
+                          const PersonAvatar(
                             avatarSize: 40,
                           ),
                           Di.SBWL,
@@ -440,17 +435,17 @@ class _ProfileMobileTimelineTile extends StatelessWidget {
                                 hintStyle: bodySmallRegular.copyWith(
                                   color: Cr.darkGrey1,
                                 ),
-                                border: OutlineInputBorder(
+                                border: const OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Cr.darkGrey4,
                                   ),
                                 ),
-                                enabledBorder: OutlineInputBorder(
+                                enabledBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Cr.darkGrey4,
                                   ),
                                 ),
-                                focusedBorder: OutlineInputBorder(
+                                focusedBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Cr.darkGrey4,
                                   ),
@@ -464,7 +459,7 @@ class _ProfileMobileTimelineTile extends StatelessWidget {
                   ],
                 ),
               )
-            : SizedBox(),
+            : const SizedBox(),
       ],
     );
   }

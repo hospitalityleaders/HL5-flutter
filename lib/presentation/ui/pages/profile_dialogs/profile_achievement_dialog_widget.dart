@@ -51,15 +51,15 @@ class _ProfileAchievementDialogWidgetState
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            DialogTitleWidget(
+            const DialogTitleWidget(
               title: "Achievement",
             ),
             Di.SBHL,
             addingToAchievement
                 ? Container(
-                    padding: EdgeInsets.only(bottom: Di.PSS),
-                    margin: EdgeInsets.symmetric(horizontal: Di.PSL),
-                    child: _SingleAchievement(
+                    padding: const EdgeInsets.only(bottom: Di.PSS),
+                    margin: const EdgeInsets.symmetric(horizontal: Di.PSL),
+                    child: const _SingleAchievement(
                       isExpanded: true,
                     ),
                   )
@@ -94,8 +94,8 @@ class _ProfileAchievementDialogWidgetState
               itemCount: achievements.length,
               itemBuilder: (BuildContext context, int index) {
                 return Container(
-                  padding: EdgeInsets.only(bottom: Di.PSS),
-                  margin: EdgeInsets.symmetric(horizontal: Di.PSL),
+                  padding: const EdgeInsets.only(bottom: Di.PSS),
+                  margin: const EdgeInsets.symmetric(horizontal: Di.PSL),
                   width: 615,
                   child: _SingleAchievement(
                     achievement: achievements[index],
@@ -213,8 +213,8 @@ class __SingleAchievementState extends State<_SingleAchievement> {
           ),
         ),
       ),
-      trailing: Icon(Icons.keyboard_arrow_right),
-      theme: CustomExpandedTileThemeData(
+      trailing: const Icon(Icons.keyboard_arrow_right),
+      theme: const CustomExpandedTileThemeData(
         contentPadding: EdgeInsets.zero,
         headerPadding: EdgeInsets.all(17),
         headerRadius: 0,
@@ -223,14 +223,14 @@ class __SingleAchievementState extends State<_SingleAchievement> {
       controller: CustomExpandedTileController(isExpanded: isExpanded),
       content: Container(
         color: Cr.whiteColor,
-        padding: EdgeInsets.all(Di.PSL),
+        padding: const EdgeInsets.all(Di.PSL),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                DialogLabelTextFormField(customLabel: "Achievement type"),
+                const DialogLabelTextFormField(customLabel: "Achievement type"),
                 Di.SBHES,
                 DialogDropDownTextField(
                   width: double.infinity,
@@ -249,7 +249,7 @@ class __SingleAchievementState extends State<_SingleAchievement> {
                   dataList: achievementTypeMap.keys.toList(),
                 ),
                 Di.SBCH(18),
-                DialogLabelTextFormField(
+                const DialogLabelTextFormField(
                   customLabel: "Achievement title",
                 ),
                 Di.SBHES,
@@ -257,7 +257,7 @@ class __SingleAchievementState extends State<_SingleAchievement> {
                   textEditingController: _achievementTitleController,
                 ),
                 Di.SBCH(18),
-                DialogLabelTextFormField(
+                const DialogLabelTextFormField(
                   isImportant: false,
                   customLabel: "Issuing entity",
                 ),
@@ -266,7 +266,7 @@ class __SingleAchievementState extends State<_SingleAchievement> {
                   textEditingController: _issuingEntityController,
                 ),
                 Di.SBCH(18),
-                DialogLabelTextFormField(
+                const DialogLabelTextFormField(
                   isImportant: false,
                   customLabel: "Award/Website link",
                 ),
@@ -276,7 +276,7 @@ class __SingleAchievementState extends State<_SingleAchievement> {
                   textEditingController: _awardWebsiteController,
                 ),
                 Di.SBCH(18),
-                DialogLabelTextFormField(customLabel: "Date received"),
+                const DialogLabelTextFormField(customLabel: "Date received"),
                 Di.SBHES,
                 DialogDropDownTextField(
                   width: 72,
@@ -331,15 +331,15 @@ class __SingleAchievementState extends State<_SingleAchievement> {
                       borderColor: Cr.accentBlue2,
                       makeWidthNull: true,
                       onPressed: () => Nav.pop(context),
+                      height: 36,
+                      donotShowIcon: true,
+                      backgroundColor: Cr.accentBlue3,
                       child: Text(
                         "Cancel",
                         style: bodySmallRegular.copyWith(
                           color: Cr.accentBlue1,
                         ),
                       ),
-                      height: 36,
-                      donotShowIcon: true,
-                      backgroundColor: Cr.accentBlue3,
                     ),
                     Di.SBWES,
                     CustomElevatedButton(
@@ -352,15 +352,15 @@ class __SingleAchievementState extends State<_SingleAchievement> {
                         //       _profileSummaryController.text,
                         // ).save(widget.userProfileData);
                       },
+                      height: 36,
+                      donotShowIcon: true,
+                      backgroundColor: Cr.accentBlue1,
                       child: Text(
                         "Save",
                         style: bodySmallRegular.copyWith(
                           color: Cr.whiteColor,
                         ),
                       ),
-                      height: 36,
-                      donotShowIcon: true,
-                      backgroundColor: Cr.accentBlue1,
                     ),
                   ],
                 ),

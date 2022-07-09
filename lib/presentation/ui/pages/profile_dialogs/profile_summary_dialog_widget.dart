@@ -47,20 +47,20 @@ class _ProfileSummaryDialogWidgetState
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          DialogTitleWidget(
+          const DialogTitleWidget(
             title: "Profile summary",
           ),
           Container(
             color: Cr.whiteColor,
-            padding: EdgeInsets.all(Di.PSL),
-            margin: EdgeInsets.all(Di.PSL),
+            padding: const EdgeInsets.all(Di.PSL),
+            margin: const EdgeInsets.all(Di.PSL),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    DialogLabelTextFormField(customLabel: "Summary"),
+                    const DialogLabelTextFormField(customLabel: "Summary"),
                     Di.SBHES,
                     DialogMultiLineTextField(
                       textEditingController: _profileSummaryController,
@@ -75,15 +75,15 @@ class _ProfileSummaryDialogWidgetState
                       borderColor: Cr.accentBlue2,
                       makeWidthNull: true,
                       onPressed: () => Nav.pop(context),
+                      height: 36,
+                      donotShowIcon: true,
+                      backgroundColor: Cr.accentBlue3,
                       child: Text(
                         "Cancel",
                         style: bodySmallRegular.copyWith(
                           color: Cr.accentBlue1,
                         ),
                       ),
-                      height: 36,
-                      donotShowIcon: true,
-                      backgroundColor: Cr.accentBlue3,
                     ),
                     Di.SBWES,
                     CustomElevatedButton(
@@ -91,19 +91,19 @@ class _ProfileSummaryDialogWidgetState
                       makeWidthNull: true,
                       onPressed: () async {
                         Nav.pop(context);
-                        await new User(
+                        await User(
                           profileSummary: _profileSummaryController.text,
                         ).save(widget.userProfileData);
                       },
+                      height: 36,
+                      donotShowIcon: true,
+                      backgroundColor: Cr.accentBlue1,
                       child: Text(
                         "Save",
                         style: bodySmallRegular.copyWith(
                           color: Cr.whiteColor,
                         ),
                       ),
-                      height: 36,
-                      donotShowIcon: true,
-                      backgroundColor: Cr.accentBlue1,
                     ),
                   ],
                 )

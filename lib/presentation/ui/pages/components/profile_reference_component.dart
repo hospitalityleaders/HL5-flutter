@@ -26,7 +26,7 @@ class ProfileReferenceComponent extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Di.SBHETS,
-          ListTile(
+          const ListTile(
             title: Text(
               "References",
               style: h2Regular,
@@ -45,24 +45,25 @@ class ProfileReferenceComponent extends StatelessWidget {
                       children: receivedReferences
                           .map(
                             (value) => Container(
-                              padding: EdgeInsets.symmetric(horizontal: Di.PSS),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: Di.PSS),
                               decoration: Styles.boxDecoration
                                   .copyWith(color: Cr.whiteColor),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   ListTile(
-                                    leading: PersonAvatar(
+                                    leading: const PersonAvatar(
                                       avatarSize: Di.FSOTL + 10,
                                     ),
                                     title: Row(
                                       children: [
-                                        Text(
+                                        const Text(
                                           "Name ",
                                           style: h4Bold,
                                         ),
                                         Di.SBWES,
-                                        Text(
+                                        const Text(
                                           "MHL",
                                           style: dividerTextSmall,
                                         )
@@ -89,7 +90,7 @@ class ProfileReferenceComponent extends StatelessWidget {
                                               Styles.boxDecoration.copyWith(
                                             color: Cr.accentBlue1,
                                           ),
-                                          child: Icon(
+                                          child: const Icon(
                                             Icons.format_quote,
                                             color: Cr.whiteColor,
                                           ),
@@ -123,11 +124,11 @@ class ProfileReferenceComponent extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  CustomTextButton(
+                                  const CustomTextButton(
                                     text: "  + Show more",
                                   ),
                                   Di.SBHD,
-                                  Divider(thickness: 1),
+                                  const Divider(thickness: 1),
                                 ],
                               ),
                             ),
@@ -172,23 +173,23 @@ class _ProfileReferenceListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 360,
-      padding: EdgeInsets.symmetric(horizontal: Di.PSS),
+      padding: const EdgeInsets.symmetric(horizontal: Di.PSS),
       decoration: Styles.boxDecoration.copyWith(color: Cr.whiteColor),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ListTile(
-            leading: PersonAvatar(
+            leading: const PersonAvatar(
               avatarSize: Di.FSOTL + 10,
             ),
             title: Row(
               children: [
-                Text(
+                const Text(
                   "Sarah Lee",
                   style: h4Bold,
                 ),
                 Di.SBWES,
-                Text(
+                const Text(
                   "MHL",
                   style: dividerTextSmall,
                 )
@@ -213,7 +214,7 @@ class _ProfileReferenceListTile extends StatelessWidget {
                   decoration: Styles.boxDecoration.copyWith(
                     color: Cr.accentBlue1,
                   ),
-                  child: Icon(
+                  child: const Icon(
                     Icons.format_quote,
                     color: Cr.whiteColor,
                   ),
@@ -246,7 +247,7 @@ class _ProfileReferenceListTile extends StatelessWidget {
               ),
             ),
           ),
-          CustomTextButton(
+          const CustomTextButton(
             text: "  + Show more",
           ),
           Di.SBHD,
