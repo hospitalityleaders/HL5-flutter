@@ -288,7 +288,8 @@ class UsersController extends GetxController {
         'password': password
       }, headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        'Accept': 'application/json',
+        'Device': 'Holedo_Flutter'
       });
 
       if (api.success == true) {
