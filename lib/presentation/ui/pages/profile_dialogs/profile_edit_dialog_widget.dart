@@ -6,6 +6,8 @@ import 'package:holedo/db_data.dart';
 import 'package:holedo/models/holedoapi/country.dart';
 
 import 'package:holedo/models/holedoapi/holedoapi.dart';
+import 'package:holedo/presentation/data/presentation_data.dart';
+import 'package:holedo/presentation/functions/helper_functions.dart';
 import 'package:holedo/presentation/functions/image_upload_functions.dart';
 import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/presentation/ui/pages/components/upload_button_widget.dart';
@@ -48,7 +50,10 @@ class _ProfileEditDialogWidgetState extends State<ProfileEditDialogWidget> {
             Di.SBHL,
             const _ProfilePictureDialogExpandedTile(isExpanded: true),
             Di.SBHS,
-            const ProfileDetailsExpandedTile(isExpanded: true),
+            ProfileDetailsExpandedTile(
+              isExpanded: true,
+              userProfileData: widget.userProfileData,
+            ),
             Di.SBHS,
             const ContactDetailsExpandedTile(isExpanded: true),
             Di.SBHD,
@@ -816,7 +821,9 @@ class ProfileDetailsExpandedTile extends StatefulWidget {
   const ProfileDetailsExpandedTile({
     Key? key,
     this.isExpanded = false,
+    required this.userProfileData,
   }) : super(key: key);
+  final User userProfileData;
 
   @override
   State<ProfileDetailsExpandedTile> createState() =>
@@ -829,17 +836,37 @@ class _ProfileDetailsExpandedTileState
   bool currentlyWorkHere = false;
 
   late ExpandedTileController expandedTileController;
+  late final TextEditingController _fullNameController;
+  late final TextEditingController _surnameController;
+  late final TextEditingController _professionalTitleController;
+  late final TextEditingController _cityAreaController;
+  int? countryId;
+
   @override
   void initState() {
+    _fullNameController =
+        TextEditingController(text: widget.userProfileData.fullName ?? "");
+    _surnameController =
+        TextEditingController(text: widget.userProfileData.lastName ?? "");
+    _professionalTitleController = TextEditingController(
+        text: widget.userProfileData.professionalTitle ?? "");
+    _cityAreaController =
+        TextEditingController(text: widget.userProfileData.area ?? "");
     expandedTileController = ExpandedTileController(
       isExpanded: widget.isExpanded,
     );
+    countryId = widget.userProfileData.countryId;
     super.initState();
   }
 
   @override
   void dispose() {
     expandedTileController.dispose();
+    _fullNameController.dispose();
+    _surnameController.dispose();
+    _professionalTitleController.dispose();
+    _cityAreaController.dispose();
+
     super.dispose();
   }
 
@@ -907,11 +934,15 @@ class _ProfileDetailsExpandedTileState
                 children: [
                   const DialogLabelTextFormField(customLabel: "Name"),
                   Di.SBHES,
-                  const DialogTextFieldForm(),
+                  DialogTextFieldForm(
+                    textEditingController: _fullNameController,
+                  ),
                   Di.SBCH(18),
                   const DialogLabelTextFormField(customLabel: "Surname"),
                   Di.SBHES,
-                  const DialogTextFieldForm(),
+                  DialogTextFieldForm(
+                    textEditingController: _surnameController,
+                  ),
                   Di.SBCH(18),
                   DialogLabelTextFormField(
                     customLabel: "Professional title",
@@ -933,7 +964,9 @@ class _ProfileDetailsExpandedTileState
                     ),
                   ),
                   Di.SBHES,
-                  const DialogTextFieldForm(),
+                  DialogTextFieldForm(
+                    textEditingController: _professionalTitleController,
+                  ),
                   Di.SBCH(18),
                   Row(
                     children: const [
@@ -950,18 +983,33 @@ class _ProfileDetailsExpandedTileState
                   ),
                   Di.SBHES,
                   Row(
-                    children: const [
+                    children: [
                       DialogTextFieldForm(
+                        textEditingController: _cityAreaController,
                         width: 250,
                       ),
                       SizedBox(width: 18),
                       DialogDropDownTextField(
+                        initialValue:
+                            PresentationData.countries[countryId.toString()],
+                        onChanged: (value) {
+                          if (value != null) {
+                            final countryidString =
+                                HelperFunctions.findKeyByValueFromMap(
+                              PresentationData.countries,
+                              value,
+                            );
+
+                            if (countryidString != null) {
+                              setState(() {
+                                countryId = int.tryParse(countryidString);
+                              });
+                            }
+                          }
+                        },
+                        alignHintTextStart: true,
                         hintText: 'Select Country',
-                        dataList: [
-                          "United state",
-                          "Pakistan",
-                          "South Africa",
-                        ],
+                        dataList: PresentationData.countries.values.toList(),
                       ),
                     ],
                   ),

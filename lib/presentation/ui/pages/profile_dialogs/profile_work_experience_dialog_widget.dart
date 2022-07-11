@@ -165,6 +165,7 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
         TextEditingController(text: experience.description);
     _salaryController =
         TextEditingController(text: experience.salary.toString());
+    countryId = experience.countryId;
     super.initState();
   }
 
@@ -184,13 +185,13 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
   String? selectedValue;
   bool currentlyWorkHere = false;
   late bool isExpanded;
-  String? country;
   int? countryId;
   String? startMonth, startYear, endMonth, endYear;
 
   @override
   Widget build(BuildContext context) {
     final userProfileData = DbData.getUserProfileData;
+
     return CustomExpandedTile(
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -319,11 +320,16 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
                       ),
                       const SizedBox(width: 18),
                       DialogDropDownTextField(
+                        initialValue: countryId == null
+                            ? null
+                            : PresentationData.countries[countryId!.toString()],
                         onChanged: (value) {
                           if (value != null) {
-                            final countryidString = HelperFunctions()
-                                .findKeyByValueFromMap(
-                                    PresentationData.countries, value);
+                            final countryidString =
+                                HelperFunctions.findKeyByValueFromMap(
+                              PresentationData.countries,
+                              value,
+                            );
 
                             if (countryidString != null) {
                               setState(() {
