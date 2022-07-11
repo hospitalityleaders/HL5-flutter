@@ -23,7 +23,6 @@ class ProfileImageBanner extends StatefulWidget {
   }) : super(key: key);
 
   final void Function()? onEditButtonPressed;
-
   final User userProfileData;
 
   @override

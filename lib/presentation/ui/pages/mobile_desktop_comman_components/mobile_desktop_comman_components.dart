@@ -102,7 +102,7 @@ class ProfileCardSubMenu extends StatelessWidget {
           child: ProfileCardListTile(
             // removePadding: true,
             iconData: Icons.email,
-            text: 'Share profile via email',
+            text: 'Share profile',
           ),
         ),
         ProfileCardListTile(

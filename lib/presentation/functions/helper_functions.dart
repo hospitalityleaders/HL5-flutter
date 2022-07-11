@@ -51,7 +51,7 @@ class HelperFunctions {
           timelineClassList.add(
             TimelineClass(
               experience.id!,
-              experience.toDate!,
+              experience.fromDate!,
               TimelineClassTypes.Experience,
               experience,
             ),
@@ -65,7 +65,7 @@ class HelperFunctions {
           timelineClassList.add(
             TimelineClass(
               achievement.id!,
-              achievement.dateReceived!,
+              achievement.created!,
               TimelineClassTypes.Achievement,
               achievement,
             ),
@@ -79,7 +79,7 @@ class HelperFunctions {
           timelineClassList.add(
             TimelineClass(
               education.id!,
-              education.durationToDate!,
+              education.durationFromDate!,
               TimelineClassTypes.Education,
               education,
             ),

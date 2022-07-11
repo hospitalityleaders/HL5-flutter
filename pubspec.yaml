@@ -48,6 +48,7 @@ dependencies:
   animated: ^2.0.0
   video_thumbnail: ^0.5.0
   form_field_validator: ^1.1.0
+  freezed_annotation: ^0.15.0
 
 dev_dependencies:
   integration_test:
@@ -56,6 +57,8 @@ dev_dependencies:
     sdk: flutter
   flutter_driver:
     sdk: flutter
+  build_runner: ^2.1.11
+  freezed: ^0.14.2
   # json_serializable: ^6.1.5
 
 # For information on the generic Dart part of this file, see the

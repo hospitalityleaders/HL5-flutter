@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:holedo/layouts/pages/profile-pages/profile/user_profile_page.dart';
 import 'package:holedo/layouts/page_scaffold.dart';
 import 'package:holedo/models/models.dart';
+import 'package:holedo/presentation/ui/pages/profile_page.dart';
 
 class ProfilePage extends StatefulWidget {
   final String? id;

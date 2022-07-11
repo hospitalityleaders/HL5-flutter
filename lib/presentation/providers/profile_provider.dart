@@ -1,6 +1,17 @@
-import 'package:flutter/material.dart';
 import 'package:holedo/db_data.dart';
 import 'package:holedo/models/models.dart';
+// This file is "main.dart"
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/foundation.dart';
+part 'profile_provider.freezed.dart';
+
+@freezed
+class AppNotificationState with _$AppNotificationState {
+  const AppNotificationState._();
+  const factory AppNotificationState.showNothing() = _ShowNothing;
+  const factory AppNotificationState.sucess() = _Sucess;
+  const factory AppNotificationState.profileCompletion() = _ProfileCompletion;
+}
 
 class ProfileProvider extends ChangeNotifier {
   bool isProfileEditable;
@@ -9,20 +20,25 @@ class ProfileProvider extends ChangeNotifier {
   bool showProfileSubMenus;
   bool profileSubMenuClicked;
   int percentageProfileCompleted;
+  AppNotificationState appNotificationState;
   ProfileProvider({
     this.showConectionRequestPopo = false,
     this.showProfileSubMenus = false,
     this.isProfileEditable = false,
     this.showProfileLoading = false,
     this.profileSubMenuClicked = false,
-    this.percentageProfileCompleted = 0,
-  }) {
-    // percentageProfileCompleted = _getUserProfilePercentage(appState!, percentageProfileCompleted);
+    this.percentageProfileCompleted = 20,
+    this.appNotificationState = const AppNotificationState.profileCompletion(),
+  });
+
+  void changeAppNotificationState(AppNotificationState appNotificationState) {
+    this.appNotificationState = appNotificationState;
+    notifyListeners();
   }
 
-  int _getUserProfilePercentage(AppState appState, int percentage) {
-    // Provider.of(context);
-    if (true) {
+  void changeUserProfilePercentage(AppState appState) {
+    int _percentage = 20;
+    if (appState.isLoggedIn) {
       final userProfileData = DbData.getUserProfileData;
       final bool experienceAdded = (userProfileData.experiences != null ||
           userProfileData.experiences!.isNotEmpty);
@@ -36,21 +52,21 @@ class ProfileProvider extends ChangeNotifier {
           userProfileData.languages!.isNotEmpty);
 
       if (experienceAdded) {
-        percentage += 20;
+        _percentage += 20;
       }
       if (qualificationAdded) {
-        percentage += 20;
+        _percentage += 20;
       }
       if (expertiseAdded) {
-        percentage += 20;
+        _percentage += 20;
       }
 
       if (languagesAdded) {
-        percentage += 20;
+        _percentage += 20;
       }
+      percentageProfileCompleted = _percentage;
+      notifyListeners();
     }
-
-    return percentageProfileCompleted;
   }
 
   void changeShowProfileLoadingState(bool showLoading) {

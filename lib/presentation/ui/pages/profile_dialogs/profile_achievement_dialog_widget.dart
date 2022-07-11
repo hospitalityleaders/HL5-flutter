@@ -135,6 +135,8 @@ class __SingleAchievementState extends State<_SingleAchievement> {
   late final TextEditingController _achievementTitleController;
   late final TextEditingController _issuingEntityController;
   late final TextEditingController _awardWebsiteController;
+  late final TextEditingController _descriptionController;
+
   // issuingEntity
   final _formKey = GlobalKey<FormState>();
   late Achievement achievement;
@@ -159,6 +161,8 @@ class __SingleAchievementState extends State<_SingleAchievement> {
           });
 
     _awardWebsiteController = TextEditingController(text: achievement.website);
+    _descriptionController =
+        TextEditingController(text: achievement.description);
     super.initState();
 
     currentYear = achievement.dateReceived?.year.toString();
@@ -169,6 +173,7 @@ class __SingleAchievementState extends State<_SingleAchievement> {
     _achievementTitleController.dispose();
     _awardWebsiteController.dispose();
     _issuingEntityController.dispose();
+    _descriptionController.dispose();
     super.dispose();
   }
 
@@ -295,6 +300,16 @@ class __SingleAchievementState extends State<_SingleAchievement> {
                 ),
                 Di.SBCH(18),
               ],
+            ),
+            Di.SBCH(18),
+            const DialogLabelTextFormField(
+              customLabel: "Job description",
+              isImportant: false,
+            ),
+            Di.SBHES,
+            DialogMultiLineTextField(
+              textEditingController: _descriptionController,
+              width: 575,
             ),
             Di.SBCH(28),
             Row(

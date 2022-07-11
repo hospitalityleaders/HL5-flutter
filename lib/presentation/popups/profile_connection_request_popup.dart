@@ -14,13 +14,14 @@ class ProfileConnectionRequestPopup extends StatelessWidget {
   const ProfileConnectionRequestPopup({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final userProfileProvider =
+    final userProfileProviderNotListener =
         Provider.of<ProfileProvider>(context, listen: false);
     return InkWell(
       onTap: () {},
       onHover: (hover) {
         if (hover == false) {
-          userProfileProvider.changeConectionRequestPopup2State(hover);
+          userProfileProviderNotListener
+              .changeConectionRequestPopup2State(hover);
         }
       },
       child: SizedBox(

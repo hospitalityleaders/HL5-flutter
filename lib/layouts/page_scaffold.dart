@@ -13,7 +13,6 @@ import 'package:holedo/presentation/utill/images.dart';
 import 'package:holedo/presentation/utill/responsive.dart';
 import 'package:holedo/presentation/utill/styles.dart';
 import 'package:holedo/responsive/responsive.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 import 'package:routemaster/routemaster.dart';
 export 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 export 'package:holedo/layouts/cards/holedo_cards.dart';
@@ -129,8 +128,7 @@ class _PageScaffoldState extends State<PageScaffold> {
     final canGoForward = routemaster.history.canGoForward;
 
     final menuItems = Get.put(HoledoDatabase()).menuItems;
-    final isSmallerThanDesltop =
-        ResponsiveWrapper.of(context).isSmallerThan(DESKTOP);
+
     final GlobalKey<ScaffoldState> _scaffoldKey =
         new GlobalKey<ScaffoldState>();
     bool inDrawer = true;
@@ -158,34 +156,13 @@ class _PageScaffoldState extends State<PageScaffold> {
                       ),
                 body: isTableOrMobile(context)
                     ? SliderDrawer(
-                        // appBar: ProfileMobileAppbar(
-                        //   searchController: _searchController,
-                        //   onSearch: (onSearch) {},
-                        // ),
                         splashColor: Cr.colorPrimary,
                         child: Container(
-                            decoration: BoxDecoration(
-                              color: ColorPicker.kBG,
-                            ),
-                            child: widget.body
-
-                            /* ListView(children: <Widget>[
-            Container(
-                      height: constraints.maxHeight,
-                      child: Column(
-                        children: [
-                          Expanded(
-                              child: Container(
-                            child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 0),
-                                child: widget.body),
-                          )),
-                        ],
-                      )),
-            _buildFooter(isMobile),
-          ]),*/
-
-                            ),
+                          decoration: BoxDecoration(
+                            color: ColorPicker.kBG,
+                          ),
+                          child: widget.body,
+                        ),
                       )
                     : Stack(
                         children: [

@@ -17,10 +17,3 @@ class TimelineClass {
     return 'TimelineClass(id: $id, dateTime: $dateTime, timelineClassType: $timelineClassType, timeline: $timeline)';
   }
 }
-
-class ProfileNotification {
-  final String text;
-  final String buttonText;
-
-  ProfileNotification(this.text, this.buttonText);
-}

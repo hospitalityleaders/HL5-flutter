@@ -98,7 +98,7 @@ class _HeaderCardState extends State<HeaderCard> {
         "professional_title": professionalTitleController,
         "area": areaController
       };
-      print('usser profile: ${profileData}');
+      print('usser profile: $profileData');
       dynamic res = await _apiServices.updateUserProfile();
 
       if (res?.success as bool) {
@@ -1982,7 +1982,7 @@ class _HeaderCardState extends State<HeaderCard> {
                                             ),
                                             SS.sB(0, 6),
                                             Text(
-                                              'Share profile via email',
+                                              'Share profile',
                                               style: FontTextStyle
                                                   .kBlueLight114W400SSP,
                                             ),
@@ -2218,7 +2218,7 @@ class _HeaderCardState extends State<HeaderCard> {
                                     ),
                                     SS.sB(0, 6),
                                     Text(
-                                      'Share profile via email',
+                                      'Share profile',
                                       style: FontTextStyle.kBlueLight114W400SSP,
                                     ),
                                   ],

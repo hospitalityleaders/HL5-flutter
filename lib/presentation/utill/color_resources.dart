@@ -27,7 +27,8 @@ class Cr {
   static const Color green1 = Color(0xff7DC81B);
   static const Color green3 = Color(0xffDEF1C6);
 
-// 7DC81B g.
+  static const Color orange1 = Color(0xffFFA800);
+  static const Color orange3 = Color(0xffFFE9BF);
 
   static const Color grey1 = Color(0xffB5BDC2);
   static const Color grey2 = Color(0xffDADEE0);

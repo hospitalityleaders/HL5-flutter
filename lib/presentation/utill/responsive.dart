@@ -14,3 +14,19 @@ bool isTableOrMobile(BuildContext context) {
   return isMobilePhone(context) ||
       ResponsiveWrapper.of(context).isSmallerThan(TABLET);
 }
+
+// import 'package:flutter/material.dart';
+// import 'package:holedo/presentation/utill/dimensions.dart';
+
+// bool isMobilePhone(BuildContext context) {
+//   return Di.getScreenSize(context).width < 750;
+// }
+
+// bool isTablet(BuildContext context) {
+//   return Di.getScreenSize(context).width < 1000 &&
+//       Di.getScreenSize(context).width > 470;
+// }
+
+// bool isTableOrMobile(BuildContext context) {
+//   return Di.getScreenSize(context).width < 1000;
+// }

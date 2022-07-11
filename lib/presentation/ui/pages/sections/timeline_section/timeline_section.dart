@@ -166,7 +166,7 @@ class _EducationTimeLineWidgetState extends State<EducationTimeLineWidget> {
                 child: SizedBox(
                   width: 27,
                   child: Text(
-                    widget.education.durationToDate!.year.toString(),
+                    widget.education.durationFromDate!.year.toString(),
                     maxLines: 1,
                     style: dividerTextSmall.copyWith(
                       // overflow: TextOverflow.fade,
@@ -518,7 +518,7 @@ class _AchievementTimeLineWidgetState extends State<AchievementTimeLineWidget> {
                 child: SizedBox(
                   width: 27,
                   child: Text(
-                    widget.achievement.dateReceived!.year.toString(),
+                    widget.achievement.created!.year.toString(),
                     maxLines: 1,
                     style: dividerTextSmall.copyWith(
                       // overflow: TextOverflow.fade,

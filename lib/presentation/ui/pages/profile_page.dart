@@ -1,153 +1,160 @@
-// import 'package:flutter/material.dart';
-// import 'package:holedo/models/models.dart';
-// import 'package:holedo/presentation/providers/profile_provider.dart';
-// import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
-// import 'package:holedo/presentation/ui/pages/components/profile_tabbar.dart';
-// import 'package:holedo/presentation/ui/pages/components/profile_image_banner.dart';
-// import 'package:holedo/presentation/ui/pages/sections/activity_section/activity_section.dart';
-// import 'package:holedo/presentation/ui/pages/sections/articles_section/articles_section.dart';
-// import 'package:holedo/presentation/ui/pages/sections/page_overview/page_overview_section.dart';
-// import 'package:holedo/presentation/ui/pages/sections/reference_section/reference_section.dart';
-// import 'package:holedo/presentation/ui/pages/sections/timeline_section/timeline_section.dart';
-// import 'package:holedo/presentation/utill/color_resources.dart';
-// import 'package:holedo/presentation/utill/dimensions.dart';
-// import 'package:holedo/presentation/utill/styles.dart';
-// import 'package:responsive_framework/responsive_framework.dart';
+import 'package:holedo/presentation/providers/profile_provider.dart';
+import 'package:holedo/presentation/ui/components/appbar_notification_widget.dart';
+import 'package:holedo/presentation/ui/pages/components/profile_image_banner.dart';
+import 'package:holedo/presentation/ui/pages/components/profile_tabbar.dart';
+import 'package:holedo/presentation/ui/pages/profile_mobile_view/profile_mobile_view_page.dart';
+import 'package:holedo/presentation/ui/pages/sections/activity_section/activity_section.dart';
+import 'package:holedo/presentation/ui/pages/sections/articles_section/articles_section.dart';
+import 'package:holedo/presentation/ui/pages/sections/page_overview/page_overview_section.dart';
+import 'package:holedo/presentation/ui/pages/sections/reference_section/reference_section.dart';
+import 'package:holedo/presentation/ui/pages/sections/timeline_section/timeline_section.dart';
+import 'package:holedo/presentation/utill/nav.dart';
+import 'package:holedo/presentation/utill/responsive.dart';
+import 'package:tap_canvas/tap_canvas.dart';
 
-// void main() {
-//   runApp(MyApp());
-// }
+import 'package:flutter/material.dart';
+import 'package:holedo/models/models.dart';
+import 'package:holedo/presentation/utill/color_resources.dart';
+import 'package:holedo/presentation/utill/dimensions.dart';
 
-// class MyApp extends StatelessWidget {
-//   @overridexxwxwx2
-//   Widget build(BuildContext context) {
-//     return MultiProvider(
-//       providers: [
-//         ChangeNotifierProvider(
-//           create: (context) => ProfileProvider(),
-//         ),
-//       ],
-//       child: MaterialApp(
-//         builder: (context, child) => ResponsiveWrapper.builder(
-//           child,
-//           breakpoints: [
-//             ResponsiveBreakpoint.resize(650, name: MOBILE),
-//             ResponsiveBreakpoint.autoScale(950, name: TABLET),
-//             ResponsiveBreakpoint.resize(1200, name: DESKTOP),
+enum CarType { sedan, suv, truck }
 
-//             // ResponsiveBreakpoint.autoScaleDown(450, name: MOBILE),
-//             // ResponsiveBreakpoint.autoScaleDown(1200, name: DESKTOP),
-//           ],
-//         ),
-//         debugShowCheckedModeBanner: false,
-//         home: ProfilePage(),
-//       ),
-//     );
-//   }
-// }
+class UserProfilePage extends StatefulWidget {
+  final User userProfileData;
 
-// class ProfilePage extends StatefulWidget {
-//   const ProfilePage({Key? key}) : super(key: key);
+  const UserProfilePage({
+    Key? key,
+    required this.userProfileData,
+  }) : super(key: key);
 
-//   @override
-//   State<ProfilePage> createState() => _ProfilePageState();
-// }
+  @override
+  State<UserProfilePage> createState() => _UserProfilePageState();
+}
 
-// class _ProfilePageState extends State<ProfilePage>
-//     with TickerProviderStateMixin {
-//   int tabBar = 0;
-//   late TabController _tabController;
-//   bool isEditable = false;
+class _UserProfilePageState extends State<UserProfilePage>
+    with TickerProviderStateMixin {
+  bool isEditable = false;
 
-//   @override
-//   void initState() {
-//     _tabController = TabController(length: 5, vsync: this);
-//     super.initState();
-//   }
+  int tabBar = 0;
+  late TabController _tabController;
+  int currentTabIndex = 0;
+  bool showNotifications = true;
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       // backgroundColor: Colors.lightBlue,
-//       backgroundColor: Colors.white,
-//       body:
-//           // ResponsiveWrapper.of(context).isSmallerThan(MOBILE)
-//           //     ? ProfileMobileViewPage(
-//           //       userProfileData: widget,
-//           //     )
-//           //     :
-//           Center(
-//         child: ListView(
-//           shrinkWrap: true,
-//           children: [
-//             // CustomAppbar(),
-//             Container(
-//               height: 50,
-//               width: Di.getScreenSize(context).width,
-//               color: Cr.red3,
-//               child: Row(
-//                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-//                 children: [
-//                   Di.ESB,
-//                   Row(
-//                     children: [
-//                       Text(
-//                         "Your profile is only 25% complete. Complete it now to earn your first Hospitality Leaders grade.   ",
-//                         textAlign: TextAlign.center,
-//                         style: bodyLarge.copyWith(
-//                           color: Cr.redTextColor,
-//                         ),
-//                       ),
-//                       CustomElevatedButton(
-//                         width: 100,
-//                         height: 32,
-//                         backgroundColor: Cr.redTextColor,
-//                         donotShowIcon: true,
-//                       ),
-//                     ],
-//                   ),
-//                   Icon(
-//                     Icons.close,
-//                     color: Cr.redTextColor,
-//                   ),
-//                 ],
-//               ),
-//             ),
-//             ProfileImageBanner(
-//               userProfileData: User(),
-//               onEditButtonPressed: () {},
-//             ),
-//             ProfileTabbar(
-//               tabController: _tabController,
-//               onEditProfilePressed: () {
-//                 setState(() {
-//                   isEditable = !isEditable;
-//                 });
-//               },
-//             ),
-//             Di.SBHEL,
-//             SizedBox(
-//               // width: Di.getScreenSize(context).width,
-//               height: 2000,
-//               child: TabBarView(
-//                 // physics: NeverScrollableScrollPhysics,
-//                 controller: _tabController,
-//                 children: <Widget>[
-//                   PageOverviewSection(
-//                     isEditable: false,
-//                     userProfileData: User(),
-//                   ),
-//                   TimelineSection(),
-//                   ArticlesSection(),
-//                   ActivitySection(),
-//                   ReferenceSection(),
-//                 ],
-//               ),
-//             ),
-//             Di.SBHOTL,
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
+  void changeCurrentIndex(int newIndex) {
+    newIndex == 5
+        ? _tabController.animateTo(0)
+        : _tabController.animateTo(newIndex);
+    setState(() {
+      currentTabIndex = newIndex;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 5, vsync: this);
+  }
+
+  @override
+  void didChangeDependencies() {
+    Provider.of<ProfileProvider>(context, listen: false)
+        .changeUserProfilePercentage(Provider.of<AppState>(context));
+    super.didChangeDependencies();
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  void onTabBarTap(int value) {
+    setState(() {
+      currentTabIndex = _tabController.index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    print("userProfileData: is  ${widget.userProfileData.toString()} ");
+    final appState = Provider.of<AppState>(context);
+    final userProfileProvider = Provider.of<ProfileProvider>(context);
+    final userProfileProviderNotListener =
+        Provider.of<ProfileProvider>(context, listen: false);
+    print('app $isEditable');
+    return TapCanvas(
+      child: Container(
+        color: Cr.backgroundColor,
+        child:
+            // if (ResponsiveWrapper.of(context).isSmallerThan(MOBILE))
+            isTableOrMobile(context)
+                ? ProfileMobileViewPage(
+                    currentTabIndex: currentTabIndex,
+                    changeCurrentIndex: changeCurrentIndex,
+                    userProfileData: widget.userProfileData,
+                    tabController: _tabController,
+                    onTabBarTap: onTabBarTap,
+                  )
+                : Center(
+                    child: ListView(
+                      shrinkWrap: true,
+                      children: [
+                        userProfileProvider.appNotificationState.map(
+                          showNothing: (_) => Di.ESB,
+                          profileCompletion: (notification) =>
+                              userProfileProvider.percentageProfileCompleted ==
+                                      100
+                                  ? Di.ESB
+                                  : AppbarNotificationWidget(
+                                      title:
+                                          "Your profile is only ${userProfileProvider.percentageProfileCompleted}% complete. Complete it now to earn first Hospitality Leader grade.",
+                                      onButtonPressed: () {
+                                        userProfileProviderNotListener
+                                            .changeIsProfieEditableState(true);
+                                      },
+                                    ),
+                          sucess: (notification) => AppbarNotificationWidget(
+                            appbarNotificationColor:
+                                AppbarNotificationColor.green,
+                            buttonText: "View profile",
+                            title:
+                                "Your profile has been successfully updated.",
+                            onButtonPressed: () {
+                              Nav().goToCurrentUserProfile(context);
+                            },
+                          ),
+                        ),
+                        ProfileImageBanner(
+                          userProfileData: widget.userProfileData,
+                          onEditButtonPressed: () {},
+                        ),
+                        ProfileTabbar(
+                          onTap: onTabBarTap,
+                          isMine: appState.isLoggedIn,
+                          tabController: _tabController,
+                        ),
+                        Di.SBHEL,
+                        Center(
+                          child: [
+                            PageOverviewSection(
+                              isEditable: isEditable,
+                              userProfileData: widget.userProfileData,
+                            ),
+                            TimelineSection(),
+                            ArticlesSection(),
+                            ActivitySection(),
+                            ReferenceSection(),
+                          ][_tabController.index],
+                        ),
+                        Di.SBHOTL,
+                      ],
+                    ),
+                  ),
+
+        // userProfileProvider.showProfileLoading
+        //     ? CustomLoading()
+        //     : Di.ESB,
+      ),
+    );
+  }
+}

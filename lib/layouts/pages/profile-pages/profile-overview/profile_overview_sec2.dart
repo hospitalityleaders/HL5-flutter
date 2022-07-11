@@ -57,8 +57,8 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
 
   Widget buildProfileSec2Cards(
     sec2Key,
-    sec2_H,
-    sec2_W,
+    sec2H,
+    sec2W,
     _width,
     _height,
     String cardName,
@@ -321,8 +321,8 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
             : Container(),
         widget.sec2IsEditable as bool
             ? ProfileEdit.buildProfileEdit(
-                width: sec2_W as double,
-                height: sec2_H as double,
+                width: sec2W as double,
+                height: sec2H as double,
                 popUpEdit: () {
                   popUpEditCards();
                 },

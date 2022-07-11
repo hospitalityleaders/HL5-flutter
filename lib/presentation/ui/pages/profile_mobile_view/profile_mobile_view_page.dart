@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:holedo/db_data.dart';
-import 'package:holedo/layouts/pages/profile-pages/profile/user_profile_page.dart';
 import 'package:holedo/models/models.dart';
-import 'package:holedo/presentation/classes.dart';
-import 'package:holedo/presentation/providers/notification_provider.dart';
 import 'package:holedo/presentation/providers/profile_provider.dart';
 import 'package:holedo/presentation/ui/components/person_avatar.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_image_banner.dart';
@@ -49,17 +46,17 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
     final isEditable = Provider.of<ProfileProvider>(context).isProfileEditable;
     final appState = Provider.of<AppState>(context);
     final bool isMine = appState.isLoginnedAndEditable(widget.userProfileData);
-    final ProfileNotification? notification =
-        Provider.of<NotificationProvider>(context).notification;
+
     return Scaffold(
       backgroundColor: Cr.backgroundColor,
       body: ListView(
         children: [
-          if (notification != null)
-            AppbarNotification(
-              title: notification.text,
-              buttonText: notification.buttonText,
-            ),
+          //TODO:Need to work on app notification
+          // if (notification != null)
+          //   AppbarNotification(
+          //     title: notification.text,
+          //     buttonText: notification.buttonText,
+          //   ),
           if (isTablt)
             ProfileImageBanner(
               userProfileData: widget.userProfileData,
