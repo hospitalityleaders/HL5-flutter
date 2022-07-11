@@ -29,6 +29,7 @@ import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/constant/sizedbox.dart';
 import 'package:holedo/common/common_widget.dart';
+import 'package:intercom_flutter/intercom_flutter.dart';
 
 class PageScaffold extends StatefulWidget {
   final String title;
@@ -136,6 +137,24 @@ class _PageScaffoldState extends State<PageScaffold> {
             maxWidth = constraints.maxWidth;
             return Scaffold(
               key: _scaffoldKey,
+              floatingActionButton: FloatingActionButton(
+                child: Text('Chat'),
+                onPressed: () async {
+                  if (appState.isLoggedIn) {
+                    await Intercom.instance.loginIdentifiedUser(
+                        email: appState.profile?.email.toString());
+                    await Intercom.instance.updateUser(
+                      email: appState.profile?.email.toString(),
+                      name: appState.profile?.fullName.toString(),
+                      phone: appState.profile?.contactableSms.toString(),
+                      company: appState.profile?.company?.name.toString(),
+                      companyId: appState.profile?.companyId.toString(),
+                      userId: appState.profile?.id.toString(),
+                    );
+                  }
+                  await Intercom.instance.displayMessenger();
+                },
+              ),
               endDrawer: isMobilePhone(context)
                   ? Drawer(
                       child: Container(

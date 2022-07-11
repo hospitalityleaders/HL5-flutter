@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intercom_flutter/intercom_flutter.dart';
 import 'package:holedo/layouts/page_scaffold.dart';
 import 'package:holedo/layouts/pages/content_page.dart';
 import 'package:holedo/models/models.dart';
@@ -13,6 +14,13 @@ void main() async {
 
   await Get.put(HoledoDatabase()).init();
   WidgetsFlutterBinding.ensureInitialized();
+
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Intercom.instance.initialize('c6v4qg56',
+      iosApiKey: 'ios_sdk-3a9bbf8f38e388199f2031358d7f8c350c2a4e39',
+      androidApiKey: 'android_sdk-3c65cc36ee07675515866bac0090c30e84d03da6');
+
   runApp(HoledoApp());
 }
 
