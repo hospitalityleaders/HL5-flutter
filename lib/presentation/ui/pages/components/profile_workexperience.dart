@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:holedo/db_data.dart';
 import 'package:holedo/models/holedoapi/experience.dart';
 import 'package:holedo/models/holedoapi/holedoapi.dart';
-import 'package:holedo/presentation/ui/components/container_with_icon.dart';
+import 'package:holedo/presentation/providers/profile_provider.dart';
 import 'package:holedo/presentation/ui/components/expanded_collapse_widget.dart';
 import 'package:holedo/presentation/ui/components/profile_reference_single_compoenet.dart';
+import 'package:holedo/presentation/ui/components/svg_with_background.dart';
 import 'package:holedo/presentation/ui/pages/components/edit_add_buttons_of_sheet.dart';
 import 'package:holedo/presentation/ui/pages/components/edit_blue_card_sheet.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/profile_work_experience_dialog_widget.dart';
@@ -15,6 +15,7 @@ import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/images.dart';
 import 'package:holedo/presentation/utill/styles.dart';
+import 'package:provider/provider.dart';
 
 class ProfileWorkExperienceComponent extends StatefulWidget {
   const ProfileWorkExperienceComponent({
@@ -65,9 +66,9 @@ class _ProfileWorkExperienceComponentState
                     });
                   },
                   onTappedOutside: () {
-                    setState(() {
-                      showSubMenu = false;
-                    });
+                    // setState(() {
+                    //   showSubMenu = false;
+                    // });
                   },
                 ),
               ),
@@ -119,8 +120,8 @@ class _ProfileWorkExperienceComponentState
         ),
         if (showSubMenu)
           Positioned(
-            right: 10,
-            top: 30,
+            right: 8,
+            top: 43.5,
             child: CustomSubMenu(
               customSubMenuItems: [
                 CustomSubmenuItem(
@@ -137,6 +138,13 @@ class _ProfileWorkExperienceComponentState
                   text: "View in timeline",
                 ),
                 CustomSubmenuItem(
+                  onTap: () {
+                    Provider.of<ProfileProvider>(context, listen: false)
+                        .changeIsProfieEditableState(true);
+                    setState(() {
+                      showSubMenu = false;
+                    });
+                  },
                   width: 245,
                   textIconColor: Cr.accentBlue1,
                   textStyle: bodySmallRegular.copyWith(
@@ -191,9 +199,8 @@ class _SingleExperienceWidgetState extends State<_SingleExperienceWidget> {
           children: [
             Di.SBCH(18),
             ListTile(
-              leading: const ContainerWithIcon(
-                iconData: FontAwesomeIcons.buildingColumns,
-                size: 50,
+              leading: SvgWithBackground(
+                svg: Svgs.domain,
               ),
               title: Text(
                 widget.singleExperience.title ?? "",

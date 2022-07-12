@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:holedo/db_data.dart';
 import 'package:holedo/models/holedoapi/education.dart';
 import 'package:holedo/models/holedoapi/holedoapi.dart';
-import 'package:holedo/presentation/ui/components/container_with_icon.dart';
 import 'package:holedo/presentation/ui/components/expanded_collapse_widget.dart';
+import 'package:holedo/presentation/ui/components/svg_with_background.dart';
 import 'package:holedo/presentation/ui/pages/components/edit_add_buttons_of_sheet.dart';
 import 'package:holedo/presentation/ui/pages/components/edit_blue_card_sheet.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/profile_education_dialog_widget.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/show_custom_dialog.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
+import 'package:holedo/presentation/utill/images.dart';
 import 'package:holedo/presentation/utill/styles.dart';
 
 class EducationComponent extends StatefulWidget {
@@ -74,9 +74,8 @@ class _EducationComponentState extends State<EducationComponent> {
                               children: [
                                 Di.SBCH(18),
                                 ListTile(
-                                  leading: const ContainerWithIcon(
-                                    iconData: FontAwesomeIcons.buildingColumns,
-                                    size: 50,
+                                  leading: SvgWithBackground(
+                                    svg: Svgs.school,
                                   ),
                                   title: Text(
                                     singleEductaion.institution ?? "",

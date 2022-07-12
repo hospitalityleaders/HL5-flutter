@@ -3,7 +3,6 @@ import 'package:flutter_expanded_tile/flutter_expanded_tile.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:holedo/db_data.dart';
-import 'package:holedo/models/holedoapi/country.dart';
 
 import 'package:holedo/models/holedoapi/holedoapi.dart';
 import 'package:holedo/presentation/data/presentation_data.dart';
@@ -836,7 +835,7 @@ class _ProfileDetailsExpandedTileState
   bool currentlyWorkHere = false;
 
   late ExpandedTileController expandedTileController;
-  late final TextEditingController _fullNameController;
+  late final TextEditingController _nameController;
   late final TextEditingController _surnameController;
   late final TextEditingController _professionalTitleController;
   late final TextEditingController _cityAreaController;
@@ -844,8 +843,8 @@ class _ProfileDetailsExpandedTileState
 
   @override
   void initState() {
-    _fullNameController =
-        TextEditingController(text: widget.userProfileData.fullName ?? "");
+    _nameController =
+        TextEditingController(text: widget.userProfileData.firstName ?? "");
     _surnameController =
         TextEditingController(text: widget.userProfileData.lastName ?? "");
     _professionalTitleController = TextEditingController(
@@ -862,7 +861,7 @@ class _ProfileDetailsExpandedTileState
   @override
   void dispose() {
     expandedTileController.dispose();
-    _fullNameController.dispose();
+    _nameController.dispose();
     _surnameController.dispose();
     _professionalTitleController.dispose();
     _cityAreaController.dispose();
@@ -935,7 +934,7 @@ class _ProfileDetailsExpandedTileState
                   const DialogLabelTextFormField(customLabel: "Name"),
                   Di.SBHES,
                   DialogTextFieldForm(
-                    textEditingController: _fullNameController,
+                    textEditingController: _nameController,
                   ),
                   Di.SBCH(18),
                   const DialogLabelTextFormField(customLabel: "Surname"),
@@ -1041,16 +1040,18 @@ class _ProfileDetailsExpandedTileState
                         borderColor: Cr.accentBlue2,
                         makeWidthNull: true,
                         onPressed: () async {
-                          // Nav.pop(context);
+                          showCircularProgressIndicator(context);
                           await User(
-                              fullName: "Kalimullah",
-                              professionalTitle: "flutter app developer",
-                              lastName: "Khan",
-                              area: "Sargodha",
-                              country: Country(
-                                id: 123,
-                                title: "Pakistan",
-                              )).save(userProfileData);
+                            firstName: _nameController.text,
+                            professionalTitle:
+                                _professionalTitleController.text,
+                            lastName: _surnameController.text,
+                            area: _cityAreaController.text,
+                            countryId: countryId,
+                          ).save(userProfileData);
+                          Nav.profile(context);
+                          Nav.pop(context);
+                          Nav.pop(context);
                         },
                         height: 36,
                         donotShowIcon: true,

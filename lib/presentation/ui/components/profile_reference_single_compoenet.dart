@@ -481,6 +481,7 @@ class CustomSubmenuItem extends StatelessWidget {
     this.textIconColor,
     this.textStyle,
     this.width,
+    this.onTap,
   }) : super(key: key);
   final String text;
   final IconData? iconData;
@@ -488,37 +489,41 @@ class CustomSubmenuItem extends StatelessWidget {
   final Color? textIconColor;
   final TextStyle? textStyle;
   final double? width;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     return OnHover(builder: (bool isHovered) {
-      return Container(
-        color: isHovered ? Cr.accentBlue3 : Cr.whiteColor,
-        width: width ?? 180,
-        height: 38,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: Di.PSS,
-          ),
-          child: Row(
-            children: [
-              icon ??
-                  (iconData != null
-                      ? Icon(
-                          iconData,
-                          color: textIconColor ?? Cr.darkGrey1,
-                          size: 14,
-                        )
-                      : Di.ESB),
-              Di.SBCW(6.5),
-              Text(
-                text,
-                style: textStyle ??
-                    bodySmallSemibold.copyWith(
-                      color: textIconColor ?? Cr.darkGrey1,
-                    ),
-              )
-            ],
+      return GestureDetector(
+        onTap: onTap,
+        child: Container(
+          color: isHovered ? Cr.accentBlue3 : Cr.whiteColor,
+          width: width ?? 180,
+          height: 38,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: Di.PSS,
+            ),
+            child: Row(
+              children: [
+                icon ??
+                    (iconData != null
+                        ? Icon(
+                            iconData,
+                            color: textIconColor ?? Cr.darkGrey1,
+                            size: 14,
+                          )
+                        : Di.ESB),
+                Di.SBCW(6.5),
+                Text(
+                  text,
+                  style: textStyle ??
+                      bodySmallSemibold.copyWith(
+                        color: textIconColor ?? Cr.darkGrey1,
+                      ),
+                )
+              ],
+            ),
           ),
         ),
       );

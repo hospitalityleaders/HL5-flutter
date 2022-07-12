@@ -163,8 +163,11 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
       });
     _jobDescriptionController =
         TextEditingController(text: experience.description);
-    _salaryController =
-        TextEditingController(text: experience.salary.toString());
+    experience.salary == null
+        ? _salaryController = TextEditingController()
+        : _salaryController = TextEditingController(
+            text: experience.salary.toString(),
+          );
     countryId = experience.countryId;
     super.initState();
   }
@@ -350,7 +353,7 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
                   Row(
                     children: [
                       DialogDropDownTextField(
-                        // initialValue: experience.fromDate?.getMonthInString,
+                        initialValue: experience.fromDate?.getMonthInString,
                         alignHintTextStart: true,
                         onChanged: (value) {
                           setState(() {
@@ -363,7 +366,7 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
                       ),
                       Di.SBWES,
                       DialogDropDownTextField(
-                        // initialValue: experience.fromDate?.getMonthInString,
+                        initialValue: experience.fromDate?.getYearInString,
                         onChanged: (value) {
                           setState(() {
                             startYear = value;
@@ -382,7 +385,7 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
                         ),
                       ),
                       DialogDropDownTextField(
-                        // initialValue: experience.fromDate?.getMonthInString,
+                        initialValue: experience.toDate?.getMonthInString,
                         onChanged: (value) {
                           setState(() {
                             endMonth = value;
@@ -395,7 +398,7 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
                       ),
                       Di.SBWES,
                       DialogDropDownTextField(
-                        // initialValue: experience.fromDate?.getMonthInString,
+                        initialValue: experience.fromDate?.getYearInString,
                         onChanged: (value) {
                           // setState(() {
                           //   endYear = value;
@@ -443,7 +446,7 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
                     ),
                   ),
                   Text(
-                    "This is for data report purposes only and will always be anonymously displayed",
+                    "We collect this data to compile hospitatliy industry salary surveys. Holedo members participating in our survey get our report free of charge ",
                     style: bodySmallRegular.copyWith(
                       color: Cr.darkGrey1,
                     ),
@@ -460,6 +463,7 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
                       ),
                       Di.SBWES,
                       DialogTextFieldForm(
+                        textEditingController: _salaryController,
                         validator: requiredValidator,
                         textInputType: TextInputType.number,
                         width: 110,
@@ -479,12 +483,6 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
                           width: 10,
                         ),
                       ],
-                    ),
-                  ),
-                  Text(
-                    "This is for data report purposes only and will always be anonymously displayed",
-                    style: bodySmallRegular.copyWith(
-                      color: Cr.darkGrey1,
                     ),
                   ),
                   Di.SBHES,

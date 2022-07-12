@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:holedo/db_data.dart';
 import 'package:holedo/models/holedoapi/achievement.dart';
+import 'package:holedo/models/holedoapi/holedoapi.dart';
 import 'package:holedo/presentation/data/presentation_data.dart';
 
 import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
@@ -98,6 +100,7 @@ class _ProfileAchievementDialogWidgetState
                   margin: const EdgeInsets.symmetric(horizontal: Di.PSL),
                   width: 615,
                   child: _SingleAchievement(
+                    index: index,
                     achievement: achievements[index],
                   ),
                 );
@@ -123,9 +126,11 @@ class _SingleAchievement extends StatefulWidget {
     Key? key,
     this.achievement,
     this.isExpanded = false,
+    this.index,
   }) : super(key: key);
   final Achievement? achievement;
   final bool isExpanded;
+  final int? index;
 
   @override
   State<_SingleAchievement> createState() => __SingleAchievementState();
@@ -361,11 +366,20 @@ class __SingleAchievementState extends State<_SingleAchievement> {
                       borderColor: Cr.accentBlue2,
                       makeWidthNull: true,
                       onPressed: () async {
-                        // Nav.pop(context);
-                        // await new User(
-                        //   profileSummary:
-                        //       _profileSummaryController.text,
-                        // ).save(widget.userProfileData);
+                        showCircularProgressIndicator(context);
+                        final userProfileData = DbData.getUserProfileData;
+                        List<Achievement> _achievementList =
+                            DbData.getUserProfileData.achievements ?? [];
+                        if (widget.index != null) {
+                          _achievementList[widget.index!] = achievement;
+                        } else {
+                          _achievementList.add(achievement);
+                        }
+                        await User(
+                          achievements: _achievementList,
+                        ).save(userProfileData);
+                        Nav.pop(context);
+                        Nav.pop(context);
                       },
                       height: 36,
                       donotShowIcon: true,

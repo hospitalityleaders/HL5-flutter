@@ -48,7 +48,7 @@ class HelperFunctions {
     List<TimelineClass> timelineClassList = <TimelineClass>[];
     if (experiences != null && experiences.isNotEmpty) {
       for (var experience in experiences) {
-        if (experience.toDate != null) {
+        if (experience.fromDate != null) {
           timelineClassList.add(
             TimelineClass(
               experience.id!,
@@ -62,7 +62,7 @@ class HelperFunctions {
     }
     if (achievements != null && achievements.isNotEmpty) {
       for (var achievement in achievements) {
-        if (achievement.dateReceived != null) {
+        if (achievement.created != null) {
           timelineClassList.add(
             TimelineClass(
               achievement.id!,
@@ -76,7 +76,7 @@ class HelperFunctions {
     }
     if (educations != null && educations.isNotEmpty) {
       for (var education in educations) {
-        if (education.durationToDate != null) {
+        if (education.durationFromDate != null) {
           timelineClassList.add(
             TimelineClass(
               education.id!,

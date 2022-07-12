@@ -107,7 +107,11 @@ class ProfileCompletionComponent extends StatelessWidget {
           ],
           if (percentage != 100) ...[
             Di.SBHL,
-            const CustomElevatedButton(
+            CustomElevatedButton(
+              onPressed: () {
+                Provider.of<ProfileProvider>(context, listen: false)
+                    .changeIsProfieEditableState(true);
+              },
               width: 320,
               text: "Edit my profile",
               donotShowIcon: true,

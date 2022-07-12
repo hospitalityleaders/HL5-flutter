@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:holedo/models/holedoapi/education.dart';
+import 'package:holedo/presentation/data/presentation_data.dart';
 import 'package:holedo/presentation/extensions/datetime_extension.dart';
 
 import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
@@ -147,6 +148,7 @@ class __SingleEducationState extends State<_SingleEducation> {
           });
 
     _descriptionController = TextEditingController(text: education.description);
+
     super.initState();
   }
 
@@ -155,7 +157,6 @@ class __SingleEducationState extends State<_SingleEducation> {
     _educationalInstituteController.dispose();
     _qualificationTitleController.dispose();
     _descriptionController.dispose();
-
     super.dispose();
   }
 
@@ -231,8 +232,9 @@ class __SingleEducationState extends State<_SingleEducation> {
                 Di.SBHES,
                 Row(
                   children: [
-                    const DialogDropDownTextField(
-                      // initialValue: experience.durationFromDate?.getMonthInString,
+                    DialogDropDownTextField(
+                      initialValue:
+                          education.durationFromDate?.getMonthInString,
                       alignHintTextStart: true,
                       // onChanged: (value) {
                       //   setState(() {
@@ -241,15 +243,11 @@ class __SingleEducationState extends State<_SingleEducation> {
                       // },
                       width: 122,
                       hintText: 'Select Month',
-                      dataList: [
-                        "Jaun",
-                        "Feb",
-                        "March",
-                      ],
+                      dataList: PresentationData.monthList,
                     ),
                     Di.SBWES,
                     DialogDropDownTextField(
-                      // initialValue: experience.durationFromDate?.getMonthInString,
+                      initialValue: education.durationFromDate?.getYearInString,
                       onChanged: (value) {
                         // setState(() {
                         //   startYear = value;
@@ -257,11 +255,7 @@ class __SingleEducationState extends State<_SingleEducation> {
                       },
                       width: 72,
                       hintText: 'Year',
-                      dataList: const [
-                        "2020",
-                        "2021",
-                        "2022",
-                      ],
+                      dataList: PresentationData.yearsList,
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: Di.PSS),
@@ -272,7 +266,7 @@ class __SingleEducationState extends State<_SingleEducation> {
                       ),
                     ),
                     DialogDropDownTextField(
-                      // initialValue: experience.durationFromDate?.getMonthInString,
+                      initialValue: education.durationToDate?.getMonthInString,
                       onChanged: (value) {
                         // setState(() {
                         //   endMonth = value;
@@ -281,15 +275,11 @@ class __SingleEducationState extends State<_SingleEducation> {
                       disable: currentlyWorkHere,
                       width: 122,
                       hintText: 'Select Month',
-                      dataList: const [
-                        "Jaun",
-                        "Feb",
-                        "March",
-                      ],
+                      dataList: PresentationData.monthList,
                     ),
                     Di.SBWES,
                     DialogDropDownTextField(
-                      // initialValue: experience.durationFromDate?.getMonthInString,
+                      initialValue: education.durationToDate?.getYearInString,
                       onChanged: (value) {
                         // setState(() {
                         //   endYear = value;
@@ -298,11 +288,7 @@ class __SingleEducationState extends State<_SingleEducation> {
                       disable: currentlyWorkHere,
                       width: 72,
                       hintText: 'Year',
-                      dataList: const [
-                        "2020",
-                        "2021",
-                        "2022",
-                      ],
+                      dataList: PresentationData.yearsList,
                     ),
                   ],
                 ),
@@ -321,10 +307,12 @@ class __SingleEducationState extends State<_SingleEducation> {
                   isImportant: false,
                 ),
                 Di.SBHES,
-                const DialogMultiLineTextField(
+                DialogMultiLineTextField(
+                  textEditingController: _descriptionController,
                   width: 575,
                 ),
-                const DialogLabelTextFormField(
+                Di.SBCH(18),
+                DialogLabelTextFormField(
                   customLabel: "Course outline",
                   isImportant: false,
                 ),

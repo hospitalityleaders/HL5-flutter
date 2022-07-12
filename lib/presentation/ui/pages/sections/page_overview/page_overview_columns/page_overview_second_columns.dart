@@ -11,8 +11,8 @@ import 'package:holedo/db_data.dart';
 import 'package:holedo/layouts/pages/profile-pages/profile-edit/profile_edit.dart';
 import 'package:holedo/models/holedoapi/achievement.dart';
 import 'package:holedo/models/holedoapi/holedoapi.dart';
-import 'package:holedo/presentation/ui/components/container_with_icon.dart';
 import 'package:holedo/presentation/ui/components/expanded_collapse_widget.dart';
+import 'package:holedo/presentation/ui/components/svg_with_background.dart';
 import 'package:holedo/presentation/ui/pages/components/edit_add_buttons_of_sheet.dart';
 import 'package:holedo/presentation/ui/pages/components/edit_blue_card_sheet.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_eduction_component.dart';
@@ -22,6 +22,7 @@ import 'package:holedo/presentation/ui/pages/profile_dialogs/profile_featured_vi
 import 'package:holedo/presentation/ui/pages/profile_dialogs/show_custom_dialog.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
+import 'package:holedo/presentation/utill/images.dart';
 import 'package:holedo/presentation/utill/styles.dart';
 import 'package:holedo/responsive/responsive.dart';
 import 'package:holedo/common/dropDownButton.dart';
@@ -64,7 +65,6 @@ class _ProfileOverviewSecondColumnState
             userProfileData: widget.userProfileData,
           ),
           Di.SBHL,
-
           ProfileWorkExperienceComponent(
             userProfileData: widget.userProfileData,
             onEditPressed: buildWorkExpPopUp,
@@ -977,11 +977,7 @@ class _ProfileOverviewSecondColumnState
 //                                   crossAxisAlignment: CrossAxisAlignment.start,
 //                                   children: [
 //                                     ListTile(
-//                                       leading: ContainerWithIcon(
-//                                         iconData:
-//                                             FontAwesomeIcons.buildingColumns,
-//                                         size: 50,
-//                                       ),
+//                                       leading: SvgPicture.asset(Svgs.earth),
 //                                       trailing: SizedBox(),
 //                                       title: Text(
 //                                         singleLanguage.title ?? "",
@@ -1065,7 +1061,7 @@ class AchievementComponent extends StatelessWidget {
             color: Cr.whiteColor,
             child: const ListTile(
               title: Text(
-                "Achievement",
+                "Achievements",
                 style: h2Regular,
               ),
             ),
@@ -1094,10 +1090,8 @@ class AchievementComponent extends StatelessWidget {
                                 Container(
                                   color: Cr.whiteColor,
                                   child: ListTile(
-                                    leading: const ContainerWithIcon(
-                                      iconData:
-                                          FontAwesomeIcons.buildingColumns,
-                                      size: 50,
+                                    leading: SvgWithBackground(
+                                      svg: Svgs.school,
                                     ),
                                     trailing: const SizedBox(),
                                     title: Text(
@@ -1126,13 +1120,13 @@ class AchievementComponent extends StatelessWidget {
                                   ),
                                 ),
                                 Di.DWZH,
-                                ExpandedCollapseWidget(
-                                  showText: "More info",
-                                  description:
-                                      ", when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but a",
-                                  isTablet: false,
-                                  isMobile: isMobile,
-                                )
+                                if (singleAchievement.description != null)
+                                  ExpandedCollapseWidget(
+                                    showText: "More info",
+                                    description: singleAchievement.description,
+                                    isTablet: false,
+                                    isMobile: isMobile,
+                                  )
                               ],
                             ),
                           ),

@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:holedo/models/holedoapi/achievement.dart';
 import 'package:holedo/models/holedoapi/education.dart';
 import 'package:holedo/models/holedoapi/experience.dart';
 import 'package:holedo/presentation/functions/helper_functions.dart';
 
-import 'package:holedo/presentation/ui/components/container_with_icon.dart';
 import 'package:holedo/presentation/ui/components/person_avatar.dart';
+import 'package:holedo/presentation/ui/components/svg_with_background.dart';
 import 'package:holedo/presentation/ui/pages/components/connection_component.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_completion_component.dart';
 import 'package:holedo/presentation/ui/pages/components/rights_component.dart';
@@ -16,6 +14,7 @@ import 'package:holedo/presentation/ui/pages/sections/page_overview/page_overvie
 import 'package:holedo/presentation/classes.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
+import 'package:holedo/presentation/utill/images.dart';
 import 'package:holedo/presentation/utill/styles.dart';
 
 class TimelineSection extends StatefulWidget {
@@ -90,378 +89,31 @@ class _TimelineSectionComponentState extends State<TimelineSectionComponent> {
               shrinkWrap: true,
               itemCount: timelineClasslist.length,
               itemBuilder: (context, index) {
-                final TimelineClass timelineClass = timelineClasslist[index];
-                if (timelineClass.timelineClassType ==
+                final TimelineClass _timelineClass = timelineClasslist[index];
+                if (_timelineClass.timelineClassType ==
                     TimelineClassTypes.Education) {
+                  // return Di.ESB;
                   return EducationTimeLineWidget(
-                    education: timelineClass.timeline as Education,
+                    education: _timelineClass.timeline as Education,
                   );
-                } else if (timelineClass.timelineClassType ==
+                } else if (_timelineClass.timelineClassType ==
                     TimelineClassTypes.Achievement) {
+                  // return Di.ESB;
+
                   return AchievementTimeLineWidget(
-                    achievement: timelineClass.timeline as Achievement,
+                    achievement: _timelineClass.timeline as Achievement,
                   );
-                } else {
+                } else if (_timelineClass.timelineClassType ==
+                    TimelineClassTypes.Experience) {
                   return ExperienceTimeLineWidget(
-                    experience: timelineClass.timeline as Experience,
+                    experience: _timelineClass.timeline as Experience,
                   );
                 }
+                return Di.ESB;
               },
             )),
         Di.SBWEL,
       ],
-    );
-  }
-}
-
-class EducationTimeLineWidget extends StatefulWidget {
-  const EducationTimeLineWidget({
-    Key? key,
-    this.showComments = false,
-    required this.education,
-  }) : super(key: key);
-  final bool showComments;
-  final Education education;
-
-  @override
-  State<EducationTimeLineWidget> createState() =>
-      _EducationTimeLineWidgetState();
-}
-
-class _EducationTimeLineWidgetState extends State<EducationTimeLineWidget> {
-  bool showMore = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return IntrinsicHeight(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Stack(
-            children: [
-              Container(
-                margin: const EdgeInsets.only(left: Di.PSOTL),
-                child: Container(
-                  width: 3,
-                  color: Cr.darkGrey3,
-                ),
-              ),
-              Container(
-                width: 13,
-                height: 13,
-                margin: const EdgeInsets.only(
-                  left: Di.PSOL,
-                  top: Di.PSOTL,
-                ),
-                decoration: BoxDecoration(
-                  border: Border.all(width: 3, color: Cr.darkGrey3),
-                  color: Cr.darkGrey4,
-                  shape: BoxShape.circle,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: Di.PSOTL,
-                ),
-                child: SizedBox(
-                  width: 27,
-                  child: Text(
-                    widget.education.durationFromDate!.year.toString(),
-                    maxLines: 1,
-                    style: dividerTextSmall.copyWith(
-                      // overflow: TextOverflow.fade,
-                      color: Cr.darkGrey1,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            width: 550,
-            child: Column(
-              children: [
-                Container(
-                  height: 96,
-                  color: Cr.whiteColor,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: Di.PSL,
-                    vertical: Di.PSD,
-                  ),
-                  child: Row(
-                    children: [
-                      const ContainerWithIcon(
-                        size: 50,
-                        iconData: FontAwesomeIcons.buildingColumns,
-                      ),
-                      Di.SBWD,
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Text(
-                            widget.education.title ?? "",
-                            style: h4Bold.copyWith(
-                              color: Cr.darkBlue1,
-                            ),
-                          ),
-                          Text(
-                            "${widget.education.institution} · ${widget.education.area}",
-                            style: bodySmallRegular.copyWith(
-                              color: Cr.accentBlue1,
-                            ),
-                          ),
-                          Text(
-                            widget.education.studyDuration ?? "",
-                            style: bodySmallRegular.copyWith(
-                              color: const Color.fromRGBO(124, 137, 144, 1),
-                            ),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                if (widget.education.description != null)
-                  ExpandedSection(
-                    expand: showMore,
-                    child: Container(
-                      width: 550,
-                      color: Cr.lightGrey2,
-                      padding: const EdgeInsets.symmetric(horizontal: Di.PSL),
-                      child: Html(
-                        data: widget.education.description != null
-                            ? widget.education.description.toString()
-                            : "",
-                        style: {
-                          "h4": Style(
-                            color: Cr.darkGrey1,
-                          ),
-                          "p": Style(
-                            color: Cr.darkGrey1,
-                            backgroundColor: Cr.lightGrey2,
-                          ),
-                          "li": Style(
-                            color: Cr.darkGrey1,
-                            backgroundColor: Cr.lightGrey2,
-                          ),
-                        },
-                      ),
-                    ),
-                  ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: Di.PSL),
-                  child: Container(
-                    height: 40,
-                    width: double.infinity,
-                    color: Cr.lightGrey2,
-                    padding: const EdgeInsets.only(left: Di.PSL),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: AnimatedCrossFade(
-                        firstChild: GestureDetector(
-                          onTap: () async {
-                            setState(() {
-                              showMore = !showMore;
-                            });
-                          },
-                          child: Text(
-                            r"  + Job Description",
-                            style: (bodySmallRegular).copyWith(
-                              color: Cr.accentBlue1,
-                            ),
-                          ),
-                        ),
-                        secondChild: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              showMore = !showMore;
-                            });
-                          },
-                          child: Text(
-                            r"  - Close",
-                            style: (bodySmallRegular).copyWith(
-                              color: Cr.accentBlue1,
-                            ),
-                          ),
-                        ),
-                        crossFadeState: showMore
-                            ? CrossFadeState.showSecond
-                            : CrossFadeState.showFirst,
-                        duration: const Duration(milliseconds: 200),
-                      ),
-                    ),
-                  ),
-                ),
-                widget.showComments
-                    ? Container(
-                        height: 120,
-                        color: Cr.whiteColor,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: Di.PSL,
-                          vertical: Di.PSS,
-                        ),
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.thumb_up,
-                                      size: 12,
-                                      color: Cr.accentBlue1,
-                                    ),
-                                    Di.SBWES,
-                                    Text(
-                                      "Like",
-                                      style: bodySmallRegular.copyWith(
-                                        color: Cr.accentBlue1,
-                                      ),
-                                    ),
-                                    Di.SBWES,
-                                    DecoratedBox(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(1),
-                                        color: Cr.accentBlue3,
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 4),
-                                        child: Center(
-                                          child: Text(
-                                            "12",
-                                            style: dividerTextSmall.copyWith(
-                                              color: Cr.accentBlue1,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Di.SBWOL,
-                                Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.comment,
-                                      size: 12,
-                                      color: Cr.accentBlue1,
-                                    ),
-                                    Di.SBWES,
-                                    Text(
-                                      "Comment",
-                                      style: bodySmallRegular.copyWith(
-                                        color: Cr.accentBlue1,
-                                      ),
-                                    ),
-                                    Di.SBWES,
-                                    DecoratedBox(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(1),
-                                        color: Cr.accentBlue3,
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 4),
-                                        child: Center(
-                                          child: Text(
-                                            "12",
-                                            style: dividerTextSmall.copyWith(
-                                              color: Cr.accentBlue1,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Di.SBWOL,
-                                Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.share,
-                                      size: 12,
-                                      color: Cr.accentBlue1,
-                                    ),
-                                    Di.SBWES,
-                                    Text(
-                                      "Share",
-                                      style: bodySmallRegular.copyWith(
-                                        color: Cr.accentBlue1,
-                                      ),
-                                    ),
-                                    Di.SBWES,
-                                    DecoratedBox(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(1),
-                                        color: Cr.accentBlue3,
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 4),
-                                        child: Center(
-                                          child: Text(
-                                            "12",
-                                            style: dividerTextSmall.copyWith(
-                                              color: Cr.accentBlue1,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(Di.PSL),
-                              child: Row(
-                                children: [
-                                  const PersonAvatar(
-                                    avatarSize: 40,
-                                  ),
-                                  Di.SBWL,
-                                  SizedBox(
-                                    width: 360,
-                                    height: 40,
-                                    child: TextFormField(
-                                      decoration: InputDecoration(
-                                        isDense: true,
-                                        hintText: "Leave a comment",
-                                        hintStyle: bodySmallRegular.copyWith(
-                                          color: Cr.darkGrey1,
-                                        ),
-                                        border: const OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: Cr.darkGrey4,
-                                          ),
-                                        ),
-                                        enabledBorder: const OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: Cr.darkGrey4,
-                                          ),
-                                        ),
-                                        focusedBorder: const OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: Cr.darkGrey4,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    : const SizedBox(),
-              ],
-            ),
-          ),
-        ],
-      ),
     );
   }
 }
@@ -491,41 +143,10 @@ class _AchievementTimeLineWidgetState extends State<AchievementTimeLineWidget> {
         children: [
           Stack(
             children: [
-              Container(
-                margin: const EdgeInsets.only(left: Di.PSOTL),
-                child: Container(
-                  width: 3,
-                  color: Cr.darkGrey3,
-                ),
-              ),
-              Container(
-                width: 13,
-                height: 13,
-                margin: const EdgeInsets.only(
-                  left: Di.PSOL,
-                  top: Di.PSOTL,
-                ),
-                decoration: BoxDecoration(
-                  border: Border.all(width: 3, color: Cr.darkGrey3),
-                  color: Cr.darkGrey4,
-                  shape: BoxShape.circle,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: Di.PSOTL,
-                ),
-                child: SizedBox(
-                  width: 27,
-                  child: Text(
-                    widget.achievement.created!.year.toString(),
-                    maxLines: 1,
-                    style: dividerTextSmall.copyWith(
-                      // overflow: TextOverflow.fade,
-                      color: Cr.darkGrey1,
-                    ),
-                  ),
-                ),
+              _TimelineFirstWidget(),
+              _TimelineSecondWidget(),
+              _TimelineStartYearText(
+                year: widget.achievement.created!.year.toString(),
               ),
             ],
           ),
@@ -533,284 +154,37 @@ class _AchievementTimeLineWidgetState extends State<AchievementTimeLineWidget> {
             width: 550,
             child: Column(
               children: [
-                Container(
-                  height: 96,
-                  color: Cr.whiteColor,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: Di.PSL,
-                    vertical: Di.PSD,
-                  ),
-                  child: Row(
-                    children: [
-                      const ContainerWithIcon(
-                        size: 50,
-                        iconData: FontAwesomeIcons.buildingColumns,
-                      ),
-                      Di.SBWD,
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Text(
-                            widget.achievement.title ?? "",
-                            style: h4Bold.copyWith(
-                              color: Cr.darkBlue1,
-                            ),
-                          ),
-                          Text(
-                            "${widget.achievement.issuingEntity}",
-                            style: bodySmallRegular.copyWith(
-                              color: Cr.accentBlue1,
-                            ),
-                          ),
-                          Text(
-                            widget.achievement.dateIssued ?? "",
-                            style: bodySmallRegular.copyWith(
-                              color: const Color.fromRGBO(124, 137, 144, 1),
-                            ),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
+                _TimelineTitleSubtitleDurationWidget(
+                  duration: widget.achievement.dateIssued ?? "",
+                  subtitle: "${widget.achievement.issuingEntity}",
+                  title: widget.achievement.title ?? "",
+                  svgName: Svgs.school,
                 ),
                 if (widget.achievement.description != null)
-                  ExpandedSection(
-                    expand: showMore,
-                    child: Container(
-                      width: 550,
-                      color: Cr.lightGrey2,
-                      padding: const EdgeInsets.symmetric(horizontal: Di.PSL),
-                      child: Html(
-                        // data:
-                        //     // """<h4>A powerful API that allows you to customize everything </h4><h4>A powerful API that allows you to customize everything </h4><h4>A powerful API that allows you to customize everything </h4><h4>A powerful API that allows you to customize everything </h4><h4>A powerful API that allows you to customize everything </h4><h4>A powerful API that allows you to customize everything </h4>when rendering a specific HTML tag. This means you can change the default behaviour or add support for HTML elements that aren't supported natively. You can also make up your own llows you to customize everything when rendering a specific HTML tag. This means you can change the default behaviour or add support for HTML elements that aren't supported natively. You can also make up your own cust custom tags in your HTML """,
-                        data: widget.achievement.description != null
-                            ? widget.achievement.description.toString()
-                            : "",
-                        style: {
-                          "h4": Style(
-                            color: Cr.darkGrey1,
-                          ),
-                          "p": Style(
-                            color: Cr.darkGrey1,
-                            backgroundColor: Cr.lightGrey2,
-                          ),
-                          "li": Style(
-                            color: Cr.darkGrey1,
-                            backgroundColor: Cr.lightGrey2,
-                          ),
-                        },
-                      ),
-                    ),
+                  _TimelineExpandedSection(
+                    showMore: showMore,
+                    description: widget.achievement.description != null
+                        ? widget.achievement.description.toString()
+                        : "",
                   ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: Di.PSL),
-                  child: Container(
-                    height: 40,
-                    width: double.infinity,
-                    color: Cr.lightGrey2,
-                    padding: const EdgeInsets.only(left: Di.PSL),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: AnimatedCrossFade(
-                        firstChild: GestureDetector(
-                          onTap: () async {
-                            setState(() {
-                              showMore = !showMore;
-                            });
-                          },
-                          child: Text(
-                            r"  + Job Description",
-                            style: (bodySmallRegular).copyWith(
-                              color: Cr.accentBlue1,
-                            ),
-                          ),
-                        ),
-                        secondChild: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              showMore = !showMore;
-                            });
-                          },
-                          child: Text(
-                            r"  - Close",
-                            style: (bodySmallRegular).copyWith(
-                              color: Cr.accentBlue1,
-                            ),
-                          ),
-                        ),
-                        crossFadeState: showMore
-                            ? CrossFadeState.showSecond
-                            : CrossFadeState.showFirst,
-                        duration: const Duration(milliseconds: 200),
-                      ),
-                    ),
-                  ),
+                _TimelineButtons(
+                  showMore: showMore,
+                  collapsedButtonText: r"  + Job Description",
+                  expandedButtonText: r"  - Close",
+                  onCollpaseButtonPressed: () async {
+                    setState(() {
+                      showMore = !showMore;
+                    });
+                  },
+                  onExpandedButtonPressed: () async {
+                    setState(() {
+                      showMore = !showMore;
+                    });
+                  },
                 ),
-                widget.showComments
-                    ? Container(
-                        height: 120,
-                        color: Cr.whiteColor,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: Di.PSL,
-                          vertical: Di.PSS,
-                        ),
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.thumb_up,
-                                      size: 12,
-                                      color: Cr.accentBlue1,
-                                    ),
-                                    Di.SBWES,
-                                    Text(
-                                      "Like",
-                                      style: bodySmallRegular.copyWith(
-                                        color: Cr.accentBlue1,
-                                      ),
-                                    ),
-                                    Di.SBWES,
-                                    DecoratedBox(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(1),
-                                        color: Cr.accentBlue3,
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 4),
-                                        child: Center(
-                                          child: Text(
-                                            "12",
-                                            style: dividerTextSmall.copyWith(
-                                              color: Cr.accentBlue1,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Di.SBWOL,
-                                Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.comment,
-                                      size: 12,
-                                      color: Cr.accentBlue1,
-                                    ),
-                                    Di.SBWES,
-                                    Text(
-                                      "Comment",
-                                      style: bodySmallRegular.copyWith(
-                                        color: Cr.accentBlue1,
-                                      ),
-                                    ),
-                                    Di.SBWES,
-                                    DecoratedBox(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(1),
-                                        color: Cr.accentBlue3,
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 4),
-                                        child: Center(
-                                          child: Text(
-                                            "12",
-                                            style: dividerTextSmall.copyWith(
-                                              color: Cr.accentBlue1,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Di.SBWOL,
-                                Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.share,
-                                      size: 12,
-                                      color: Cr.accentBlue1,
-                                    ),
-                                    Di.SBWES,
-                                    Text(
-                                      "Share",
-                                      style: bodySmallRegular.copyWith(
-                                        color: Cr.accentBlue1,
-                                      ),
-                                    ),
-                                    Di.SBWES,
-                                    DecoratedBox(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(1),
-                                        color: Cr.accentBlue3,
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 4),
-                                        child: Center(
-                                          child: Text(
-                                            "12",
-                                            style: dividerTextSmall.copyWith(
-                                              color: Cr.accentBlue1,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(Di.PSL),
-                              child: Row(
-                                children: [
-                                  const PersonAvatar(
-                                    avatarSize: 40,
-                                  ),
-                                  Di.SBWL,
-                                  SizedBox(
-                                    width: 360,
-                                    height: 40,
-                                    child: TextFormField(
-                                      decoration: InputDecoration(
-                                        isDense: true,
-                                        hintText: "Leave a comment",
-                                        hintStyle: bodySmallRegular.copyWith(
-                                          color: Cr.darkGrey1,
-                                        ),
-                                        border: const OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: Cr.darkGrey4,
-                                          ),
-                                        ),
-                                        enabledBorder: const OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: Cr.darkGrey4,
-                                          ),
-                                        ),
-                                        focusedBorder: const OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: Cr.darkGrey4,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    : const SizedBox(),
+                // widget.showComments
+                //     ? _TimelineCommentWidget()
+                //     : const SizedBox(),
               ],
             ),
           ),
@@ -845,41 +219,10 @@ class _ExperienceTimeLineWidgetState extends State<ExperienceTimeLineWidget> {
         children: [
           Stack(
             children: [
-              Container(
-                margin: const EdgeInsets.only(left: Di.PSOTL),
-                child: Container(
-                  width: 3,
-                  color: Cr.darkGrey3,
-                ),
-              ),
-              Container(
-                width: 13,
-                height: 13,
-                margin: const EdgeInsets.only(
-                  left: Di.PSOL,
-                  top: Di.PSOTL,
-                ),
-                decoration: BoxDecoration(
-                  border: Border.all(width: 3, color: Cr.darkGrey3),
-                  color: Cr.darkGrey4,
-                  shape: BoxShape.circle,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: Di.PSOTL,
-                ),
-                child: SizedBox(
-                  width: 27,
-                  child: Text(
-                    widget.experience.toDate!.year.toString(),
-                    maxLines: 1,
-                    style: dividerTextSmall.copyWith(
-                      // overflow: TextOverflow.fade,
-                      color: Cr.darkGrey1,
-                    ),
-                  ),
-                ),
+              _TimelineFirstWidget(),
+              _TimelineSecondWidget(),
+              _TimelineStartYearText(
+                year: widget.experience.fromDate!.year.toString(),
               ),
             ],
           ),
@@ -887,288 +230,507 @@ class _ExperienceTimeLineWidgetState extends State<ExperienceTimeLineWidget> {
             width: 550,
             child: Column(
               children: [
-                Container(
-                  height: 96,
-                  color: Cr.whiteColor,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: Di.PSL,
-                    vertical: Di.PSD,
-                  ),
-                  child: Row(
-                    children: [
-                      const ContainerWithIcon(
-                        size: 50,
-                        iconData: FontAwesomeIcons.buildingColumns,
-                      ),
-                      Di.SBWD,
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Text(
-                            widget.experience.title ?? "",
-                            style: h4Bold.copyWith(
-                              color: Cr.darkBlue1,
-                            ),
-                          ),
-                          Text(
-                            "${widget.experience.company} · ${widget.experience.area}",
-                            style: bodySmallRegular.copyWith(
-                              color: Cr.accentBlue1,
-                            ),
-                          ),
-                          Text(
-                            widget.experience.workDuration ?? "",
-                            style: bodySmallRegular.copyWith(
-                              color: const Color.fromRGBO(124, 137, 144, 1),
-                            ),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
+                _TimelineTitleSubtitleDurationWidget(
+                  duration: widget.experience.workDuration ?? "",
+                  subtitle:
+                      "${widget.experience.companyName! == null ? '' : widget.experience.companyName! + ' · '}${widget.experience.area}",
+                  title: widget.experience.title ?? "",
+                  svgName: Svgs.domain,
                 ),
                 if (widget.experience.description != null)
-                  ExpandedSection(
-                    expand: showMore,
-                    child: Container(
-                      width: 550,
-                      color: Cr.lightGrey2,
-                      padding: const EdgeInsets.symmetric(horizontal: Di.PSL),
-                      child: Html(
-                        // data:
-                        //     // """<h4>A powerful API that allows you to customize everything </h4><h4>A powerful API that allows you to customize everything </h4><h4>A powerful API that allows you to customize everything </h4><h4>A powerful API that allows you to customize everything </h4><h4>A powerful API that allows you to customize everything </h4><h4>A powerful API that allows you to customize everything </h4>when rendering a specific HTML tag. This means you can change the default behaviour or add support for HTML elements that aren't supported natively. You can also make up your own llows you to customize everything when rendering a specific HTML tag. This means you can change the default behaviour or add support for HTML elements that aren't supported natively. You can also make up your own cust custom tags in your HTML """,
-                        data: widget.experience.description != null
-                            ? widget.experience.description.toString()
-                            : "",
-                        style: {
-                          "h4": Style(
-                            color: Cr.darkGrey1,
-                          ),
-                          "p": Style(
-                            color: Cr.darkGrey1,
-                            backgroundColor: Cr.lightGrey2,
-                          ),
-                          "li": Style(
-                            color: Cr.darkGrey1,
-                            backgroundColor: Cr.lightGrey2,
-                          ),
-                        },
-                      ),
-                    ),
+                  _TimelineExpandedSection(
+                    showMore: showMore,
+                    description: widget.experience.description != null
+                        ? widget.experience.description.toString()
+                        : "",
                   ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: Di.PSL),
-                  child: Container(
-                    height: 40,
-                    width: double.infinity,
-                    color: Cr.lightGrey2,
-                    padding: const EdgeInsets.only(left: Di.PSL),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: AnimatedCrossFade(
-                        firstChild: GestureDetector(
-                          onTap: () async {
-                            setState(() {
-                              showMore = !showMore;
-                            });
-                          },
-                          child: Text(
-                            r"  + Job Description",
-                            style: (bodySmallRegular).copyWith(
-                              color: Cr.accentBlue1,
-                            ),
-                          ),
-                        ),
-                        secondChild: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              showMore = !showMore;
-                            });
-                          },
-                          child: Text(
-                            r"  - Close",
-                            style: (bodySmallRegular).copyWith(
-                              color: Cr.accentBlue1,
-                            ),
-                          ),
-                        ),
-                        crossFadeState: showMore
-                            ? CrossFadeState.showSecond
-                            : CrossFadeState.showFirst,
-                        duration: const Duration(milliseconds: 200),
-                      ),
-                    ),
-                  ),
+                _TimelineButtons(
+                  showMore: showMore,
+                  collapsedButtonText: r"  + Job Description",
+                  expandedButtonText: r"  - Close",
+                  onCollpaseButtonPressed: () async {
+                    setState(() {
+                      showMore = !showMore;
+                    });
+                  },
+                  onExpandedButtonPressed: () async {
+                    setState(() {
+                      showMore = !showMore;
+                    });
+                  },
                 ),
-                widget.showComments
-                    ? Container(
-                        height: 120,
-                        color: Cr.whiteColor,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: Di.PSL,
-                          vertical: Di.PSS,
-                        ),
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.thumb_up,
-                                      size: 12,
-                                      color: Cr.accentBlue1,
-                                    ),
-                                    Di.SBWES,
-                                    Text(
-                                      "Like",
-                                      style: bodySmallRegular.copyWith(
-                                        color: Cr.accentBlue1,
-                                      ),
-                                    ),
-                                    Di.SBWES,
-                                    DecoratedBox(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(1),
-                                        color: Cr.accentBlue3,
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 4),
-                                        child: Center(
-                                          child: Text(
-                                            "12",
-                                            style: dividerTextSmall.copyWith(
-                                              color: Cr.accentBlue1,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Di.SBWOL,
-                                Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.comment,
-                                      size: 12,
-                                      color: Cr.accentBlue1,
-                                    ),
-                                    Di.SBWES,
-                                    Text(
-                                      "Comment",
-                                      style: bodySmallRegular.copyWith(
-                                        color: Cr.accentBlue1,
-                                      ),
-                                    ),
-                                    Di.SBWES,
-                                    DecoratedBox(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(1),
-                                        color: Cr.accentBlue3,
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 4),
-                                        child: Center(
-                                          child: Text(
-                                            "12",
-                                            style: dividerTextSmall.copyWith(
-                                              color: Cr.accentBlue1,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Di.SBWOL,
-                                Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.share,
-                                      size: 12,
-                                      color: Cr.accentBlue1,
-                                    ),
-                                    Di.SBWES,
-                                    Text(
-                                      "Share",
-                                      style: bodySmallRegular.copyWith(
-                                        color: Cr.accentBlue1,
-                                      ),
-                                    ),
-                                    Di.SBWES,
-                                    DecoratedBox(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(1),
-                                        color: Cr.accentBlue3,
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 4),
-                                        child: Center(
-                                          child: Text(
-                                            "12",
-                                            style: dividerTextSmall.copyWith(
-                                              color: Cr.accentBlue1,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(Di.PSL),
-                              child: Row(
-                                children: [
-                                  const PersonAvatar(
-                                    avatarSize: 40,
-                                  ),
-                                  Di.SBWL,
-                                  SizedBox(
-                                    width: 360,
-                                    height: 40,
-                                    child: TextFormField(
-                                      decoration: InputDecoration(
-                                        isDense: true,
-                                        hintText: "Leave a comment",
-                                        hintStyle: bodySmallRegular.copyWith(
-                                          color: Cr.darkGrey1,
-                                        ),
-                                        border: const OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: Cr.darkGrey4,
-                                          ),
-                                        ),
-                                        enabledBorder: const OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: Cr.darkGrey4,
-                                          ),
-                                        ),
-                                        focusedBorder: const OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: Cr.darkGrey4,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    : const SizedBox(),
+                // widget.showComments
+                //     ? _TimelineCommentWidget()
+                //     : const SizedBox(),
               ],
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class EducationTimeLineWidget extends StatefulWidget {
+  const EducationTimeLineWidget({
+    Key? key,
+    this.showComments = false,
+    required this.education,
+  }) : super(key: key);
+  final bool showComments;
+  final Education education;
+
+  @override
+  State<EducationTimeLineWidget> createState() =>
+      _EducationTimeLineWidgetState();
+}
+
+class _EducationTimeLineWidgetState extends State<EducationTimeLineWidget> {
+  bool showMore = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return IntrinsicHeight(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Stack(
+            children: [
+              _TimelineFirstWidget(),
+              _TimelineSecondWidget(),
+              _TimelineStartYearText(
+                year: widget.education.durationFromDate!.year.toString(),
+              ),
+            ],
+          ),
+          SizedBox(
+            width: 550,
+            child: Column(
+              children: [
+                _TimelineTitleSubtitleDurationWidget(
+                  duration: widget.education.studyDuration ?? "",
+                  subtitle:
+                      "${widget.education.institution} · ${widget.education.area}",
+                  title: widget.education.title ?? "",
+                  svgName: Svgs.school,
+                ),
+                if (widget.education.description != null)
+                  _TimelineExpandedSection(
+                    showMore: showMore,
+                    description: widget.education.description!,
+                  ),
+                _TimelineButtons(
+                  showMore: showMore,
+                  collapsedButtonText: r"  + Job Description",
+                  expandedButtonText: r"  - Close",
+                  onCollpaseButtonPressed: () async {
+                    setState(() {
+                      showMore = !showMore;
+                    });
+                  },
+                  onExpandedButtonPressed: () async {
+                    setState(() {
+                      showMore = !showMore;
+                    });
+                  },
+                ),
+                // widget.showComments
+                //     ? _TimelineCommentWidget()
+                //     : const SizedBox(),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _TimelineButtons extends StatelessWidget {
+  const _TimelineButtons({
+    Key? key,
+    required this.showMore,
+    required this.collapsedButtonText,
+    required this.onCollpaseButtonPressed,
+    required this.expandedButtonText,
+    required this.onExpandedButtonPressed,
+  }) : super(key: key);
+
+  final bool showMore;
+  final String collapsedButtonText;
+  final Future<void> Function() onCollpaseButtonPressed;
+  final String expandedButtonText;
+  final Future<void> Function() onExpandedButtonPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: Di.PSL),
+      child: Container(
+        height: 40,
+        width: double.infinity,
+        color: Cr.lightGrey2,
+        padding: const EdgeInsets.only(left: Di.PSL),
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: AnimatedCrossFade(
+            firstChild: GestureDetector(
+              onTap: onCollpaseButtonPressed,
+              child: Text(
+                collapsedButtonText,
+                style: (bodySmallRegular).copyWith(
+                  color: Cr.accentBlue1,
+                ),
+              ),
+            ),
+            secondChild: GestureDetector(
+              onTap: onExpandedButtonPressed,
+              child: Text(
+                expandedButtonText,
+                style: (bodySmallRegular).copyWith(
+                  color: Cr.accentBlue1,
+                ),
+              ),
+            ),
+            crossFadeState:
+                showMore ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+            duration: const Duration(milliseconds: 200),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _TimelineExpandedSection extends StatelessWidget {
+  const _TimelineExpandedSection({
+    Key? key,
+    required this.showMore,
+    required this.description,
+  }) : super(key: key);
+
+  final bool showMore;
+  final String description;
+
+  @override
+  Widget build(BuildContext context) {
+    return ExpandedSection(
+      expand: showMore,
+      child: Container(
+        width: 550,
+        color: Cr.lightGrey2,
+        padding: const EdgeInsets.symmetric(horizontal: Di.PSL),
+        child: Text(
+          description,
+          style: bodyLarge.copyWith(color: Cr.darkGrey1),
+        ),
+        //  Html(
+        //   data: description,
+        //   style: {
+        //     "h4": Style(
+        //       color: Cr.darkGrey1,
+        //     ),
+        //     "p": Style(
+        //       color: Cr.darkGrey1,
+        //       backgroundColor: Cr.lightGrey2,
+        //     ),
+        //     "li": Style(
+        //       color: Cr.darkGrey1,
+        //       backgroundColor: Cr.lightGrey2,
+        //     ),
+        //   },
+        // ),
+      ),
+    );
+  }
+}
+
+class _TimelineTitleSubtitleDurationWidget extends StatelessWidget {
+  const _TimelineTitleSubtitleDurationWidget({
+    Key? key,
+    required this.title,
+    required this.subtitle,
+    required this.duration,
+    required this.svgName,
+  }) : super(key: key);
+  final String title;
+  final String subtitle;
+  final String duration;
+  final String svgName;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 96,
+      color: Cr.whiteColor,
+      padding: const EdgeInsets.symmetric(
+        horizontal: Di.PSL,
+        vertical: Di.PSD,
+      ),
+      child: Row(
+        children: [
+          SvgWithBackground(svg: svgName),
+          Di.SBWD,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Text(
+                title,
+                style: h4Bold.copyWith(
+                  color: Cr.darkBlue1,
+                ),
+              ),
+              Text(
+                subtitle,
+                style: bodySmallRegular.copyWith(
+                  color: Cr.accentBlue1,
+                ),
+              ),
+              Text(
+                duration,
+                style: bodySmallRegular.copyWith(
+                  color: const Color.fromRGBO(124, 137, 144, 1),
+                ),
+              )
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _TimelineCommentWidget extends StatelessWidget {
+  const _TimelineCommentWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 120,
+      color: Cr.whiteColor,
+      padding: const EdgeInsets.symmetric(
+        horizontal: Di.PSL,
+        vertical: Di.PSS,
+      ),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Row(
+                children: [
+                  const Icon(
+                    Icons.thumb_up,
+                    size: 12,
+                    color: Cr.accentBlue1,
+                  ),
+                  Di.SBWES,
+                  Text(
+                    "Like",
+                    style: bodySmallRegular.copyWith(
+                      color: Cr.accentBlue1,
+                    ),
+                  ),
+                  Di.SBWES,
+                  DecoratedBox(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(1),
+                      color: Cr.accentBlue3,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 4),
+                      child: Center(
+                        child: Text(
+                          "12",
+                          style: dividerTextSmall.copyWith(
+                            color: Cr.accentBlue1,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Di.SBWOL,
+              Row(
+                children: [
+                  const Icon(
+                    Icons.comment,
+                    size: 12,
+                    color: Cr.accentBlue1,
+                  ),
+                  Di.SBWES,
+                  Text(
+                    "Comment",
+                    style: bodySmallRegular.copyWith(
+                      color: Cr.accentBlue1,
+                    ),
+                  ),
+                  Di.SBWES,
+                  DecoratedBox(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(1),
+                      color: Cr.accentBlue3,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 4),
+                      child: Center(
+                        child: Text(
+                          "12",
+                          style: dividerTextSmall.copyWith(
+                            color: Cr.accentBlue1,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Di.SBWOL,
+              Row(
+                children: [
+                  const Icon(
+                    Icons.share,
+                    size: 12,
+                    color: Cr.accentBlue1,
+                  ),
+                  Di.SBWES,
+                  Text(
+                    "Share",
+                    style: bodySmallRegular.copyWith(
+                      color: Cr.accentBlue1,
+                    ),
+                  ),
+                  Di.SBWES,
+                  DecoratedBox(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(1),
+                      color: Cr.accentBlue3,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 4),
+                      child: Center(
+                        child: Text(
+                          "12",
+                          style: dividerTextSmall.copyWith(
+                            color: Cr.accentBlue1,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.all(Di.PSL),
+            child: Row(
+              children: [
+                const PersonAvatar(
+                  avatarSize: 40,
+                ),
+                Di.SBWL,
+                SizedBox(
+                  width: 360,
+                  height: 40,
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      isDense: true,
+                      hintText: "Leave a comment",
+                      hintStyle: bodySmallRegular.copyWith(
+                        color: Cr.darkGrey1,
+                      ),
+                      border: const OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Cr.darkGrey4,
+                        ),
+                      ),
+                      enabledBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Cr.darkGrey4,
+                        ),
+                      ),
+                      focusedBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Cr.darkGrey4,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _TimelineFirstWidget extends StatelessWidget {
+  const _TimelineFirstWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(left: Di.PSOTL),
+      child: Container(
+        width: 3,
+        color: Cr.darkGrey3,
+      ),
+    );
+  }
+}
+
+class _TimelineSecondWidget extends StatelessWidget {
+  const _TimelineSecondWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 13,
+      height: 13,
+      margin: const EdgeInsets.only(
+        left: Di.PSOL,
+        top: Di.PSOTL,
+      ),
+      decoration: BoxDecoration(
+        border: Border.all(width: 3, color: Cr.darkGrey3),
+        color: Cr.darkGrey4,
+        shape: BoxShape.circle,
+      ),
+    );
+  }
+}
+
+class _TimelineStartYearText extends StatelessWidget {
+  const _TimelineStartYearText({
+    Key? key,
+    required this.year,
+  }) : super(key: key);
+  final String year;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(
+        top: Di.PSOTL,
+      ),
+      child: SizedBox(
+        width: 27,
+        child: Text(
+          year,
+          maxLines: 1,
+          style: dividerTextSmall.copyWith(
+            // overflow: TextOverflow.fade,
+            color: Cr.darkGrey1,
+          ),
+        ),
       ),
     );
   }

@@ -120,7 +120,7 @@ class _UserProfilePageState extends State<UserProfilePage>
                             title:
                                 "Your profile has been successfully updated.",
                             onButtonPressed: () {
-                              Nav().goToCurrentUserProfile(context);
+                              Nav.goToCurrentUserProfile(context);
                             },
                           ),
                         ),
@@ -135,16 +135,19 @@ class _UserProfilePageState extends State<UserProfilePage>
                         ),
                         Di.SBHEL,
                         Center(
-                          child: [
-                            PageOverviewSection(
-                              isEditable: isEditable,
-                              userProfileData: widget.userProfileData,
-                            ),
-                            TimelineSection(),
-                            ArticlesSection(),
-                            ActivitySection(),
-                            ReferenceSection(),
-                          ][_tabController.index],
+                          child: IndexedStack(
+                            index: _tabController.index,
+                            children: [
+                              PageOverviewSection(
+                                isEditable: isEditable,
+                                userProfileData: widget.userProfileData,
+                              ),
+                              TimelineSection(),
+                              ArticlesSection(),
+                              ActivitySection(),
+                              ReferenceSection(),
+                            ],
+                          ),
                         ),
                         Di.SBHOTL,
                       ],

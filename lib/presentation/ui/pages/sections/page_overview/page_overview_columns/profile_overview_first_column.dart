@@ -557,7 +557,7 @@ class _ProfileSummaryComponentState extends State<ProfileSummaryComponent> {
                           left: Di.PSD,
                           right: Di.PSD,
                           top: Di.PSD,
-                          bottom: widget.isMobile ? Di.PSD : 0,
+                          bottom: Di.PSD,
                         ),
                         child: Text(
                           profileSummary ?? "",
@@ -637,15 +637,12 @@ class AreasOfExpertiseComponents extends StatelessWidget {
                               alignment: Alignment.centerLeft,
                               child: Wrap(
                                 children: List<Widget>.generate(
-                                  DbData.getUserProfileData.expertise!.length,
+                                  expertise!.length,
                                   (int idx) {
                                     return
                                         //  Di.SBWS,
                                         CustomCheckboxWithTitle(
-                                      title: (DbData.getUserProfileData
-                                                  .expertise![idx])
-                                              .title ??
-                                          "",
+                                      title: (expertise[idx]).title ?? "",
                                     );
                                   },
                                 ).toList(),

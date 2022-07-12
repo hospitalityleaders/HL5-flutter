@@ -32,7 +32,7 @@ class ContactCardDialogWidget extends StatelessWidget {
               ),
               Di.SBCW(18),
               Container(
-                width: 395,
+                width: 400,
                 padding: const EdgeInsets.only(
                   left: 18,
                   bottom: Di.PSL,
@@ -42,8 +42,8 @@ class ContactCardDialogWidget extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    FullName(),
-                    ProfessionalTitle(),
+                    _FullName(),
+                    _ProfessionalTitle(),
                   ],
                 ),
               ),
@@ -146,8 +146,8 @@ class ContactCardDialogWidget extends StatelessWidget {
   }
 }
 
-class ProfessionalTitle extends StatelessWidget {
-  const ProfessionalTitle({
+class _ProfessionalTitle extends StatelessWidget {
+  const _ProfessionalTitle({
     Key? key,
   }) : super(key: key);
 
@@ -155,7 +155,6 @@ class ProfessionalTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       DbData.getUserProfileData.professionalTitle ?? "",
-      maxLines: 1,
       style: bodyLarge.copyWith(
         color: Cr.darkGrey1,
       ),
@@ -163,8 +162,8 @@ class ProfessionalTitle extends StatelessWidget {
   }
 }
 
-class FullName extends StatelessWidget {
-  const FullName({
+class _FullName extends StatelessWidget {
+  const _FullName({
     Key? key,
   }) : super(key: key);
 
