@@ -1120,7 +1120,7 @@ class AchievementComponent extends StatelessWidget {
                                   ),
                                 ),
                                 Di.DWZH,
-                                if (singleAchievement.description != null)
+                                if (singleAchievement.description)
                                   ExpandedCollapseWidget(
                                     showText: "More info",
                                     description: singleAchievement.description,

@@ -21,7 +21,7 @@ class _ProfilePageState extends State<ProfilePage> {
       future: controller.getProfileData(
         context: context,
         slug: widget.slug,
-        id: widget.id,
+        id: widget.id ?? 3829.toString(),
       ),
       builder: (context, AsyncSnapshot<User> snapshot) {
         if (!snapshot.hasData) {

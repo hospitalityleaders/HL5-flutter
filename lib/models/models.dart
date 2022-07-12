@@ -144,7 +144,7 @@ class HoledoDatabase extends GetxController {
     }
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('${label}: ${message}'),
+        content: Text('$label: $message'),
         backgroundColor: color,
         elevation: 10,
       ),
@@ -220,7 +220,7 @@ class HoledoDatabase extends GetxController {
       }
 
       if (data.articleCategories?.length == null) {
-        print('getting new settings: ${data}');
+        print('getting new settings: $data');
         var response = await _api.GET(target: '/site-settings/?type=2');
         data = response.data as DataModel;
       }
@@ -314,7 +314,7 @@ class UsersController extends GetxController {
   String? getToken(slug) {
     final model = Get.put(HoledoDatabase()).getModel();
     if (model.token != null && model.user?.slug == slug) {
-      print('match: ${slug} token: ${model.token}');
+      print('match: $slug token: ${model.token}');
       return model.token;
     }
     return null;
@@ -393,7 +393,7 @@ class UsersController extends GetxController {
       };
 
       params.removeWhere((k, v) => v == null);
-      print('context: ${context} type: ${type} cat: ${category}');
+      print('context: $context type: $type cat: $category');
       var response = await _api.GET(target: '/users/index', data: params);
 
       userList.value = response.data!.users as List<User>;
@@ -404,11 +404,11 @@ class UsersController extends GetxController {
     }
   }
 
-  void fetch({String? slug, String? id}) async {
+  void fetchUser({String? slug, String? id}) async {
     try {
       isLoading(true);
       var response = await _api.getUserData(id: id, slug: slug);
-      print('log: ${response}');
+      print('log: $response');
       user = response;
     } finally {
       isLoading(false);
@@ -496,7 +496,7 @@ class NewsController extends GetxController {
       };
       params.removeWhere((k, v) => v == null);
 
-      print('context: ${context} type: ${type} cat: ${category}');
+      print('context: $context type: $type cat: $category');
       var response = await _api.GET(target: '/articles/index', data: params);
 
       if (response.success == true) {
@@ -566,7 +566,7 @@ class JobsController extends GetxController {
       };
       params.removeWhere((k, v) => v == null);
 
-      print('context: ${context} type: ${type} company: ${company}');
+      print('context: $context type: $type company: $company');
       var response = await _api.GET(target: '/jobs/index', data: params);
 
       if (response.success == true) {

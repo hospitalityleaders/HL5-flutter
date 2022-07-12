@@ -23,6 +23,7 @@ class ProfileImageBanner extends StatefulWidget {
   }) : super(key: key);
 
   final void Function()? onEditButtonPressed;
+
   final User userProfileData;
 
   @override
@@ -41,8 +42,7 @@ class _ProfileImageBannerState extends State<ProfileImageBanner> {
           decoration: BoxDecoration(
             image: DecorationImage(
               image: NetworkImage(
-                widget.userProfileData.banner ??
-                    "https://images.pexels.com/photos/313782/pexels-photo-313782.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+                widget.userProfileData.banner ?? "",
               ),
               fit: BoxFit.cover,
               colorFilter: ColorFilter.mode(
@@ -53,141 +53,130 @@ class _ProfileImageBannerState extends State<ProfileImageBanner> {
           ),
         ),
         Center(
-          // height: 500,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(height: 50),
-              Container(
-                width: 560,
-                height: 385,
-                color: Cr.whiteColor,
-                padding: const EdgeInsets.all(Di.PSD),
-                child: Stack(
+          child: Container(
+            width: 560,
+            margin: EdgeInsets.only(top: 50),
+            color: Cr.whiteColor,
+            padding: const EdgeInsets.all(Di.PSD),
+            child: Stack(
+              children: [
+                ListView(
+                  shrinkWrap: true,
                   children: [
-                    SizedBox(
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              CustomOutlinedButton(
-                                onPressed: () {
-                                  showCustomDialog(
-                                    context,
-                                    const ContactCardDialogWidget(),
-                                  );
-                                },
-                                text: "Contact card",
-                                icon: SvgPicture.asset(
-                                  "assets/svgicons/card-account-phone.svg",
-                                  height: 12,
-                                  color: Cr.darkGrey1,
-                                ),
-                              ),
-                              Di.ESB,
-                              TapOutsideDetectorWidget(
-                                onTappedInside: () {
-                                  setState(() {
-                                    showProfileSubMenu = !showProfileSubMenu;
-                                  });
-                                },
-                                onTappedOutside: () {
-                                  setState(() {
-                                    showProfileSubMenu = false;
-                                  });
-                                },
-                                child: CustomOutlinedButton(
-                                  onPressed: () {},
-                                  icon: const Icon(
-                                    Icons.menu,
-                                    size: 12,
-                                    color: Cr.darkGrey1,
-                                  ),
-                                  textWidget: const Icon(
-                                    Icons.arrow_drop_down_outlined,
-                                    size: 12,
-                                    color: Cr.darkGrey1,
-                                  ),
-                                ),
-                              ),
-                            ],
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CustomOutlinedButton(
+                          onPressed: () {
+                            showCustomDialog(
+                              context,
+                              const ContactCardDialogWidget(),
+                            );
+                          },
+                          text: "Contact card",
+                          icon: SvgPicture.asset(
+                            "assets/svgicons/card-account-phone.svg",
+                            height: 12,
+                            color: Cr.darkGrey1,
                           ),
-                          // ContactCardMenuCommon(
-                          //   onPressed: () {
-                          //     setState(() {
-                          //       showProfileSubMenu = !showProfileSubMenu;
-
-                          //     });
-                          //   },
-                          // ),
-                          Di.SBHD,
-                          Text(
-                            widget.userProfileData.fullName ?? "",
-                            style: display2,
-                          ),
-                          Center(
-                            child: SizedBox(
-                              width: 450,
-                              child: Text(
-                                widget.userProfileData.professionalTitle
-                                    .toString(),
-                                // ??
-                                textAlign: TextAlign.center,
-                                maxLines: 1,
-                                style: bodyLarge.copyWith(
-                                  color: Cr.darkGrey1,
-                                ),
-                              ),
+                        ),
+                        Di.ESB,
+                        TapOutsideDetectorWidget(
+                          onTappedInside: () {
+                            setState(() {
+                              showProfileSubMenu = !showProfileSubMenu;
+                            });
+                          },
+                          onTappedOutside: () {
+                            setState(() {
+                              showProfileSubMenu = false;
+                            });
+                          },
+                          child: CustomOutlinedButton(
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.menu,
+                              size: 12,
+                              color: Cr.darkGrey1,
+                            ),
+                            textWidget: const Icon(
+                              Icons.arrow_drop_down_outlined,
+                              size: 12,
+                              color: Cr.darkGrey1,
                             ),
                           ),
-                          Di.SBHES,
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              const Icon(
-                                Icons.location_on,
-                                color: Cr.darkGrey1,
-                                size: 12,
-                              ),
-                              Text(
-                                widget.userProfileData.area ?? "",
-                                style: bodySmallRegular.copyWith(
-                                  color: Cr.darkGrey1,
-                                ),
-                              ),
-                            ],
+                        ),
+                      ],
+                    ),
+                    Di.SBHD,
+                    Text(
+                      widget.userProfileData.fullName ?? "",
+                      textAlign: TextAlign.center,
+                      style: display2,
+                    ),
+                    Center(
+                      child: SizedBox(
+                        width: 450,
+                        child: Text(
+                          widget.userProfileData.professionalTitle.toString(),
+                          // ??
+                          textAlign: TextAlign.center,
+                          style: bodyLarge.copyWith(
+                            color: Cr.darkGrey1,
                           ),
-                          Di.SBHL,
-                          const SendConnectionRequestButton(),
-                          Di.SBHES,
-                          WriteReferenceRecommandButtonComman(
-                            userProfileData: widget.userProfileData,
+                        ),
+                      ),
+                    ),
+                    Di.SBHES,
+                    Center(
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.location_on,
+                            color: Cr.darkGrey1,
+                            size: 12,
                           ),
-                          Di.SBHOTL,
-                          StatsComman(
-                            userProfileData: widget.userProfileData,
+                          Text(
+                            widget.userProfileData.area ?? "",
+                            style: bodySmallRegular.copyWith(
+                              color: Cr.darkGrey1,
+                            ),
                           ),
                         ],
                       ),
                     ),
-                    if (showProfileSubMenu)
-                      const Positioned(
-                        top: 30,
-                        right: 0,
-                        child: SizedBox(
-                          width: 245,
-                          child: SizedBox(
-                            width: 245,
-                            child: ProfileCardSubMenu(),
-                          ),
-                        ),
+                    Di.SBHL,
+                    SizedBox(
+                      child: Center(
+                        child: const SendConnectionRequestButton(),
                       ),
+                    ),
+                    Di.SBHES,
+                    WriteReferenceRecommandButtonComman(
+                      userProfileData: widget.userProfileData,
+                    ),
+                    Di.SBHOTL,
+                    StatsComman(
+                      userProfileData: widget.userProfileData,
+                    ),
                   ],
                 ),
-              ),
-            ],
+                if (showProfileSubMenu)
+                  const Positioned(
+                    top: 30,
+                    right: 0,
+                    child: SizedBox(
+                      width: 245,
+                      child: SizedBox(
+                        width: 245,
+                        child: ProfileCardSubMenu(),
+                      ),
+                    ),
+                  ),
+              ],
+            ),
           ),
         ),
         const Positioned.fill(

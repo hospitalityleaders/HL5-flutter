@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:holedo/db_data.dart';
 import 'package:holedo/models/models.dart';
+import 'package:holedo/presentation/data/presentation_data.dart';
 import 'package:holedo/presentation/providers/profile_provider.dart';
 import 'package:holedo/presentation/ui/components/person_avatar.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_image_banner.dart';
@@ -156,7 +157,12 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                                           color: Cr.darkGrey1,
                                         ),
                                         Text(
-                                          widget.userProfileData.area ?? "",
+                                          widget.userProfileData.area ??
+                                              "" +
+                                                  (PresentationData.countries[
+                                                          widget.userProfileData
+                                                              .countryId] ??
+                                                      ""),
                                           // " Cape Town, South Africa",
                                           textAlign: TextAlign.center,
                                           style: bodyLarge.copyWith(
