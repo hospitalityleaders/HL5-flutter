@@ -31,7 +31,8 @@
 .pub-cache/
 .pub/
 /build/
-
+/windows/flutter/generated_plugin*
+/macos/flutter/GeneratedPluginRegistrant*
 # Web related
 lib/generated_plugin_registrant.dart
 
