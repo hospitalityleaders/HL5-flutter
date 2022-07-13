@@ -106,16 +106,15 @@ class _EducationComponentState extends State<EducationComponent> {
                                     ],
                                   ),
                                 ),
-                                if (singleEductaion.description != null) ...[
-                                  Di.SBHD,
-                                  Di.DWZH,
+                                Di.SBHD,
+                                Di.DWZH,
+                                if (singleEductaion.description != null)
                                   ExpandedCollapseWidget(
                                     showText: "Course online",
                                     description: singleEductaion.description!,
                                     isTablet: widget.isTablet,
                                     isMobile: widget.isMobile,
-                                  )
-                                ],
+                                  ),
                               ],
                             ),
                           ),

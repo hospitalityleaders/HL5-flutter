@@ -139,15 +139,16 @@ class _ProfileImageBannerState extends State<ProfileImageBanner> {
                             color: Cr.darkGrey1,
                             size: 12,
                           ),
+                          Di.SBWES,
                           Text(
-                            widget.userProfileData.area ??
-                                "" +
-                                    " " +
-                                    (widget.userProfileData.countryId != null
-                                        ? (PresentationData.countries[widget
-                                                .userProfileData.countryId!] ??
-                                            "")
-                                        : ""),
+                            (widget.userProfileData.area ?? "") +
+                                (widget.userProfileData.countryId != null
+                                    ? (", " +
+                                        (PresentationData.countries[widget
+                                                .userProfileData.countryId!
+                                                .toString()] ??
+                                            ""))
+                                    : ""),
                             style: bodySmallRegular.copyWith(
                               color: Cr.darkGrey1,
                             ),

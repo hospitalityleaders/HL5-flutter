@@ -79,41 +79,38 @@ class _TimelineSectionComponentState extends State<TimelineSectionComponent> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        SizedBox(
-            // width: 550,
-            width: 620,
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: timelineClasslist.length,
-              itemBuilder: (context, index) {
-                final TimelineClass _timelineClass = timelineClasslist[index];
-                if (_timelineClass.timelineClassType ==
-                    TimelineClassTypes.Education) {
-                  // return Di.ESB;
-                  return EducationTimeLineWidget(
-                    education: _timelineClass.timeline as Education,
-                  );
-                } else if (_timelineClass.timelineClassType ==
-                    TimelineClassTypes.Achievement) {
-                  // return Di.ESB;
+    return SizedBox(
+      width: 620,
+      child: ListView.builder(
+        shrinkWrap: true,
+        itemCount: timelineClasslist.length,
+        itemBuilder: (context, index) {
+          final TimelineClass _timelineClass = timelineClasslist[index];
+          if (_timelineClass.timelineClassType ==
+              TimelineClassTypes.Education) {
+            // return Di.ESB;
+            return EducationTimeLineWidget(
+              showComments: index == timelineClasslist.length - 1,
+              education: _timelineClass.timeline as Education,
+            );
+          } else if (_timelineClass.timelineClassType ==
+              TimelineClassTypes.Achievement) {
+            // return Di.ESB;
 
-                  return AchievementTimeLineWidget(
-                    achievement: _timelineClass.timeline as Achievement,
-                  );
-                } else if (_timelineClass.timelineClassType ==
-                    TimelineClassTypes.Experience) {
-                  return ExperienceTimeLineWidget(
-                    experience: _timelineClass.timeline as Experience,
-                  );
-                }
-                return Di.ESB;
-              },
-            )),
-        Di.SBWEL,
-      ],
+            return AchievementTimeLineWidget(
+              showComments: index == timelineClasslist.length - 1,
+              achievement: _timelineClass.timeline as Achievement,
+            );
+          } else if (_timelineClass.timelineClassType ==
+              TimelineClassTypes.Experience) {
+            return ExperienceTimeLineWidget(
+              showComments: index == timelineClasslist.length - 1,
+              experience: _timelineClass.timeline as Experience,
+            );
+          }
+          return Di.ESB;
+        },
+      ),
     );
   }
 }
@@ -169,7 +166,7 @@ class _AchievementTimeLineWidgetState extends State<AchievementTimeLineWidget> {
                   ),
                 _TimelineButtons(
                   showMore: showMore,
-                  collapsedButtonText: r"  + Job Description",
+                  collapsedButtonText: r"  + Description",
                   expandedButtonText: r"  - Close",
                   onCollpaseButtonPressed: () async {
                     setState(() {
@@ -182,9 +179,9 @@ class _AchievementTimeLineWidgetState extends State<AchievementTimeLineWidget> {
                     });
                   },
                 ),
-                // widget.showComments
-                //     ? _TimelineCommentWidget()
-                //     : const SizedBox(),
+                widget.showComments
+                    ? _TimelineCommentWidget()
+                    : const SizedBox(),
               ],
             ),
           ),
@@ -246,7 +243,7 @@ class _ExperienceTimeLineWidgetState extends State<ExperienceTimeLineWidget> {
                   ),
                 _TimelineButtons(
                   showMore: showMore,
-                  collapsedButtonText: r"  + Job Description",
+                  collapsedButtonText: r"  + Description",
                   expandedButtonText: r"  - Close",
                   onCollpaseButtonPressed: () async {
                     setState(() {
@@ -259,9 +256,9 @@ class _ExperienceTimeLineWidgetState extends State<ExperienceTimeLineWidget> {
                     });
                   },
                 ),
-                // widget.showComments
-                //     ? _TimelineCommentWidget()
-                //     : const SizedBox(),
+                widget.showComments
+                    ? _TimelineCommentWidget()
+                    : const SizedBox(),
               ],
             ),
           ),
@@ -321,7 +318,7 @@ class _EducationTimeLineWidgetState extends State<EducationTimeLineWidget> {
                   ),
                 _TimelineButtons(
                   showMore: showMore,
-                  collapsedButtonText: r"  + Job Description",
+                  collapsedButtonText: r"  + Description",
                   expandedButtonText: r"  - Close",
                   onCollpaseButtonPressed: () async {
                     setState(() {
@@ -334,9 +331,9 @@ class _EducationTimeLineWidgetState extends State<EducationTimeLineWidget> {
                     });
                   },
                 ),
-                // widget.showComments
-                //     ? _TimelineCommentWidget()
-                //     : const SizedBox(),
+                widget.showComments
+                    ? _TimelineCommentWidget()
+                    : const SizedBox(),
               ],
             ),
           ),
@@ -419,7 +416,11 @@ class _TimelineExpandedSection extends StatelessWidget {
       child: Container(
         width: 550,
         color: Cr.lightGrey2,
-        padding: const EdgeInsets.symmetric(horizontal: Di.PSL),
+        padding: const EdgeInsets.only(
+          left: Di.PSL,
+          right: Di.PSL,
+          top: 12,
+        ),
         child: Text(
           description,
           style: bodyLarge.copyWith(color: Cr.darkGrey1),

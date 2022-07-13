@@ -70,7 +70,6 @@ class _ProfileOverviewSecondColumnState
           ),
           Di.SBHL,
           EducationComponent(
-            // onEditPressed: buildEducationPopUp,
             userProfileData: widget.userProfileData,
           ),
           Di.SBHL,
@@ -1075,42 +1074,39 @@ class AchievementComponent extends StatelessWidget {
                                         ? 0
                                         : Di.PSS),
                             decoration: Styles.boxDecoration
-                                .copyWith(color: Cr.backgroundColor),
+                                .copyWith(color: Cr.whiteColor),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Container(
-                                  color: Cr.whiteColor,
-                                  child: ListTile(
-                                    leading: SvgWithBackground(
-                                      svg: Svgs.school,
-                                    ),
-                                    trailing: const SizedBox(),
-                                    title: Text(
-                                      singleAchievement.title ?? "",
-                                      // "Marriott Hotel and Resorts employee of the year awards",
-                                      style: h4Bold.copyWith(
-                                        fontSize: Di.FSD,
-                                      ),
-                                    ),
-                                    subtitle: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Di.SBHES,
-                                        Text(
-                                          singleAchievement.website ??
-                                              "No website added",
-                                          // "www.marriott.com/awards",
-                                          style: bodySmallRegular.copyWith(
-                                            color: Cr.accentBlue1,
-                                            fontSize: Di.FSS,
-                                          ),
-                                        ),
-                                      ],
+                                ListTile(
+                                  leading: SvgWithBackground(
+                                    svg: Svgs.school,
+                                  ),
+                                  trailing: const SizedBox(),
+                                  title: Text(
+                                    singleAchievement.title ?? "",
+                                    // "Marriott Hotel and Resorts employee of the year awards",
+                                    style: h4Bold.copyWith(
+                                      fontSize: Di.FSD,
                                     ),
                                   ),
+                                  subtitle: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Di.SBHES,
+                                      Text(
+                                        singleAchievement.website ??
+                                            "No website added",
+                                        style: bodySmallRegular.copyWith(
+                                          color: Cr.accentBlue1,
+                                          fontSize: Di.FSS,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
+                                Di.SBHD,
                                 Di.DWZH,
                                 if (singleAchievement.description != null)
                                   ExpandedCollapseWidget(
