@@ -135,19 +135,16 @@ class _UserProfilePageState extends State<UserProfilePage>
                         ),
                         Di.SBHEL,
                         Center(
-                          child: IndexedStack(
-                            index: _tabController.index,
-                            children: [
-                              PageOverviewSection(
-                                isEditable: isEditable,
-                                userProfileData: widget.userProfileData,
-                              ),
-                              TimelineSection(),
-                              ArticlesSection(),
-                              ActivitySection(),
-                              ReferenceSection(),
-                            ],
-                          ),
+                          child: [
+                            PageOverviewSection(
+                              isEditable: isEditable,
+                              userProfileData: widget.userProfileData,
+                            ),
+                            TimelineSection(),
+                            ArticlesSection(),
+                            ActivitySection(),
+                            ReferenceSection(),
+                          ][_tabController.index],
                         ),
                         Di.SBHOTL,
                       ],

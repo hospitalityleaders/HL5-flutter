@@ -54,7 +54,6 @@ class _ProfileOverviewSecondColumnState
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: const BoxConstraints(minWidth: 100, maxWidth: 360),
       // width: 360,
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -71,15 +70,12 @@ class _ProfileOverviewSecondColumnState
           ),
           Di.SBHL,
           EducationComponent(
-            onEditPressed: buildEducationPopUp,
+            // onEditPressed: buildEducationPopUp,
             userProfileData: widget.userProfileData,
           ),
           Di.SBHL,
-          AchievementComponent(
-            onEditPressed: buildAchivementPopUp,
-            userProfileData: widget.userProfileData,
-          ),
-          // Di.SBHEL,
+          AchievementComponent(),
+          Di.SBHEL,
           // LanguagesComponent(
           //   onEditPressed: () => buildLanguagePopUp(langIndex),
           //   userProfileData: widget.userProfileData,
@@ -1037,13 +1033,9 @@ class _ProfileOverviewSecondColumnState
 class AchievementComponent extends StatelessWidget {
   const AchievementComponent({
     Key? key,
-    this.onEditPressed,
-    required this.userProfileData,
     this.isMobile = false,
   }) : super(key: key);
-  final User userProfileData;
   final bool isMobile;
-  final void Function()? onEditPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -1120,7 +1112,7 @@ class AchievementComponent extends StatelessWidget {
                                   ),
                                 ),
                                 Di.DWZH,
-                                if (singleAchievement.description)
+                                if (singleAchievement.description != null)
                                   ExpandedCollapseWidget(
                                     showText: "More info",
                                     description: singleAchievement.description,
@@ -1139,19 +1131,17 @@ class AchievementComponent extends StatelessWidget {
                   greenCardText:
                       "Add the educational institutions you attended, the qualifications you achieved and the courses completed.",
                 ),
-                if (hasData)
-                  EditAddButtonOfSheet(
-                    context,
-                    onEditPressed: () {
-                      showCustomDialog(
-                        context,
-                        ProfileAchievementDialogWidget(
-                          achievements:
-                              userProfileData.achievements ?? <Achievement>[],
-                        ),
-                      );
-                    },
-                  ),
+                EditAddButtonOfSheet(
+                  context,
+                  onEditPressed: () {
+                    showCustomDialog(
+                      context,
+                      ProfileAchievementDialogWidget(
+                        achievements: achievement ?? <Achievement>[],
+                      ),
+                    );
+                  },
+                ),
               ],
             ),
           ),

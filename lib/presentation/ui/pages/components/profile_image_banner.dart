@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:holedo/models/models.dart';
+import 'package:holedo/presentation/data/presentation_data.dart';
 import 'package:holedo/presentation/providers/profile_provider.dart';
 import 'package:holedo/presentation/ui/components/contact_card_dialog_widget.dart';
 import 'package:holedo/presentation/ui/components/custom_outlined_button.dart';
@@ -139,7 +140,14 @@ class _ProfileImageBannerState extends State<ProfileImageBanner> {
                             size: 12,
                           ),
                           Text(
-                            widget.userProfileData.area ?? "",
+                            widget.userProfileData.area ??
+                                "" +
+                                    " " +
+                                    (widget.userProfileData.countryId != null
+                                        ? (PresentationData.countries[widget
+                                                .userProfileData.countryId!] ??
+                                            "")
+                                        : ""),
                             style: bodySmallRegular.copyWith(
                               color: Cr.darkGrey1,
                             ),

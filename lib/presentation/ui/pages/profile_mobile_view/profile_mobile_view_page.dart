@@ -159,10 +159,17 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                                         Text(
                                           widget.userProfileData.area ??
                                               "" +
-                                                  (PresentationData.countries[
-                                                          widget.userProfileData
-                                                              .countryId] ??
-                                                      ""),
+                                                  " " +
+                                                  (widget.userProfileData
+                                                              .countryId !=
+                                                          null
+                                                      ? (PresentationData
+                                                                  .countries[
+                                                              widget
+                                                                  .userProfileData
+                                                                  .countryId!] ??
+                                                          "")
+                                                      : ""),
                                           // " Cape Town, South Africa",
                                           textAlign: TextAlign.center,
                                           style: bodyLarge.copyWith(

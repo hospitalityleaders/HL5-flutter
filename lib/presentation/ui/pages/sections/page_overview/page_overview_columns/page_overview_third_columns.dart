@@ -26,24 +26,18 @@ class _ProfileOverviewThirdColumnState
     extends State<ProfileOverviewThirdColumn> {
   @override
   Widget build(BuildContext context) {
-    return ConstrainedBox(
-      constraints: const BoxConstraints(
-        maxWidth: 360,
-        minWidth: 280,
-      ),
-      child: Container(
-        child: Column(
-          children: [
-            const ProfileCompletionComponent(),
-            Di.SBHEL,
-            const ConnectionsComponent(),
-            Di.SBHEL,
-            const TimelineComponent(),
-            // ProfileAdsComponent(),
-            Di.SBHL,
-            const RightsComponent(),
-          ],
-        ),
+    return Container(
+      child: Column(
+        children: [
+          const ProfileCompletionComponent(),
+          Di.SBHEL,
+          const ConnectionsComponent(),
+          Di.SBHEL,
+          const TimelineComponent(),
+          // ProfileAdsComponent(),
+          Di.SBHL,
+          const RightsComponent(),
+        ],
       ),
     );
   }
