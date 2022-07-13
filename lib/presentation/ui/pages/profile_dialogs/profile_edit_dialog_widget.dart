@@ -4,10 +4,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:holedo/db_data.dart';
 
-import 'package:holedo/models/holedoapi/holedoapi.dart';
+import 'package:holedo/models/models.dart';
 import 'package:holedo/presentation/data/presentation_data.dart';
 import 'package:holedo/presentation/functions/helper_functions.dart';
 import 'package:holedo/presentation/functions/image_upload_functions.dart';
+import 'package:holedo/presentation/providers/profile_provider.dart';
 import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/presentation/ui/pages/components/upload_button_widget.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/dialog_widgets.dart';
@@ -390,13 +391,13 @@ class __SocialProfileFieldState extends State<_SocialProfileField> {
               iconDataList: const [
                 Icons.facebook,
                 FontAwesomeIcons.twitter,
-                FontAwesomeIcons.google,
+                FontAwesomeIcons.linkedin,
               ],
               hintText: 'Choose',
               dataList: const [
                 "Facebook",
                 "Twitter",
-                "Google",
+                "Linkedin",
               ],
             ),
             Di.SBCW(12),
@@ -1049,7 +1050,11 @@ class _ProfileDetailsExpandedTileState
                             area: _cityAreaController.text,
                             countryId: countryId,
                           ).save(userProfileData);
+                          Provider.of<ProfileProvider>(context, listen: false)
+                              .changeAppNotificationState(
+                                  AppNotificationState.sucess());
                           Nav.profile(context);
+
                           Nav.pop(context);
                           Nav.pop(context);
                         },

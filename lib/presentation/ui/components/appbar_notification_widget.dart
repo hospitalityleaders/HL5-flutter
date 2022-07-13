@@ -73,8 +73,9 @@ class AppbarNotificationWidget extends StatelessWidget {
               CustomElevatedButton(
                 onPressed: onButtonPressed,
                 text: buttonText,
-                width: 97,
+                customPadding: EdgeInsets.symmetric(horizontal: Di.PSD),
                 height: 32,
+                makeWidthNull: true,
                 backgroundColor: textAndButtonColor,
                 donotShowIcon: true,
               ),
@@ -89,7 +90,7 @@ class AppbarNotificationWidget extends StatelessWidget {
             },
             child: Icon(
               Icons.close,
-              color: Cr.redTextColor,
+              color: textAndButtonColor,
             ),
           ),
         ],

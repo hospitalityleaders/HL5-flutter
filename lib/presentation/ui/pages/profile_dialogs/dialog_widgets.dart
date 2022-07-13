@@ -265,12 +265,12 @@ class _DialogDropDownTextFieldState extends State<DialogDropDownTextField> {
                             ? widget.iconDataList!.length ==
                                 widget.dataList.length
                             : false) ...[
-                          Di.SBWS,
                           Icon(
                             widget.iconDataList![widget.dataList.indexOf(item)],
                             color: Cr.darkGrey1,
                             size: 15,
                           ),
+                          Di.SBWS,
                         ],
                         Text(
                           item,

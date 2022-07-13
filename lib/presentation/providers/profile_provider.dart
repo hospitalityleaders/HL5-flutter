@@ -37,7 +37,7 @@ class ProfileProvider extends ChangeNotifier {
   }
 
   void changeUserProfilePercentage(AppState appState) {
-    int _percentage = 20;
+    int _percentage = 0;
     if (appState.isLoggedIn) {
       final userProfileData = DbData.getUserProfileData;
       final bool experienceAdded = (userProfileData.experiences != null ||

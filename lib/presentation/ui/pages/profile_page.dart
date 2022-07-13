@@ -8,7 +8,6 @@ import 'package:holedo/presentation/ui/pages/sections/articles_section/articles_
 import 'package:holedo/presentation/ui/pages/sections/page_overview/page_overview_section.dart';
 import 'package:holedo/presentation/ui/pages/sections/reference_section/reference_section.dart';
 import 'package:holedo/presentation/ui/pages/sections/timeline_section/timeline_section.dart';
-import 'package:holedo/presentation/utill/nav.dart';
 import 'package:holedo/presentation/utill/responsive.dart';
 import 'package:tap_canvas/tap_canvas.dart';
 
@@ -120,7 +119,11 @@ class _UserProfilePageState extends State<UserProfilePage>
                             title:
                                 "Your profile has been successfully updated.",
                             onButtonPressed: () {
-                              Nav.goToCurrentUserProfile(context);
+                              userProfileProviderNotListener
+                                ..changeIsProfieEditableState(false)
+                                ..changeAppNotificationState(
+                                  AppNotificationState.showNothing(),
+                                );
                             },
                           ),
                         ),

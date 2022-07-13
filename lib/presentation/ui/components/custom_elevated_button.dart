@@ -18,6 +18,7 @@ class CustomElevatedButton extends StatelessWidget {
     this.onPressed,
     this.padding,
     this.makeWidthNull = false,
+    this.customPadding,
   }) : super(key: key);
 
   final double? width;
@@ -32,6 +33,7 @@ class CustomElevatedButton extends StatelessWidget {
   final void Function()? onPressed;
   final double? padding;
   final bool makeWidthNull;
+  final EdgeInsets? customPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +44,8 @@ class CustomElevatedButton extends StatelessWidget {
         style: ButtonStyle(
           padding: padding == null
               ? null
-              : MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(padding!)),
+              : MaterialStateProperty.all<EdgeInsets>(
+                  customPadding ?? EdgeInsets.all(padding!)),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
               side: BorderSide(
