@@ -1,16 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart' hide Provider;
 import 'package:flutter_svg/svg.dart';
-import 'package:holedo/models/models.dart';
-import 'package:holedo/presentation/providers/profile_provider.dart';
+import 'package:holedo/application/shared/providers.dart';
+import 'package:holedo/models/models.dart' hide Provider;
 import 'package:holedo/presentation/ui/components/appbar_textfield.dart';
 import 'package:holedo/presentation/ui/components/custom_icon_button.dart';
 import 'package:holedo/presentation/ui/components/custom_text_button.dart';
-
 import 'package:holedo/presentation/ui/components/text_with_background.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/images.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:routemaster/routemaster.dart';
 
@@ -31,7 +32,7 @@ class CustomAppbar extends StatefulWidget {
 class _CustomAppbarState extends State<CustomAppbar> {
   @override
   Widget build(BuildContext context) {
-    final appState = Provider.of<AppState>(context);
+    // final appState = Provider.of<AppState>(context);
     final menuItems = Get.put(HoledoDatabase()).menuItems;
     final isSmallerThanDesltop =
         ResponsiveWrapper.of(context).isSmallerThan(DESKTOP);
@@ -143,14 +144,13 @@ class AppbarEmailButton extends StatelessWidget {
   }
 }
 
-class _ProfileWithSubMenu extends StatelessWidget {
+class _ProfileWithSubMenu extends ConsumerWidget {
   const _ProfileWithSubMenu({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final appState = Provider.of<AppState>(context);
+  Widget build(BuildContext context, ref) {
     return Row(
       children: [
         ProfileSideHover(),
@@ -162,7 +162,8 @@ class _ProfileWithSubMenu extends StatelessWidget {
             InkWell(
               onTap: () {},
               onHover: (hover) async {
-                Provider.of<ProfileProvider>(context, listen: false)
+                ref
+                    .read(profileNotifierProvider.notifier)
                     .changeSubMenusPopupState(hover);
               },
               child: Padding(
@@ -212,7 +213,7 @@ class AppbarConnectionRequestButton extends StatelessWidget {
             InkWell(
               onTap: () {},
               onHover: (hover) async {
-                Provider.of<ProfileProvider>(context, listen: false)
+                Provider.of(context, listen: false)
                     .changeConectionRequestPopupState(hover);
               },
               child: Row(
@@ -241,7 +242,7 @@ class AppbarConnectionRequestButton extends StatelessWidget {
   }
 }
 
-class SizedboxWithHover extends StatelessWidget {
+class SizedboxWithHover extends ConsumerWidget {
   const SizedboxWithHover({
     Key? key,
     this.isInHorizantal = false,
@@ -249,11 +250,11 @@ class SizedboxWithHover extends StatelessWidget {
   final bool isInHorizantal;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
     return InkWell(
       onTap: () {},
       onHover: (hover) {
-        Provider.of<ProfileProvider>(context, listen: false)
+        Provider.of(context, listen: false)
             .changeConectionRequestPopup2State(false);
       },
       child: isInHorizantal
@@ -267,7 +268,7 @@ class SizedboxWithHover extends StatelessWidget {
   }
 }
 
-class ProfileSideHover extends StatelessWidget {
+class ProfileSideHover extends ConsumerWidget {
   const ProfileSideHover({
     Key? key,
     this.isInHorizantal = false,
@@ -275,11 +276,12 @@ class ProfileSideHover extends StatelessWidget {
   final bool isInHorizantal;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext contex, ref) {
     return InkWell(
       onTap: () {},
       onHover: (hover) {
-        Provider.of<ProfileProvider>(context, listen: false)
+        ref
+            .read(profileNotifierProvider.notifier)
             .changeSubMenusPopup2State(false);
       },
       child: isInHorizantal

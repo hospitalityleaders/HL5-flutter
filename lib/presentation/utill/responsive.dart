@@ -10,6 +10,10 @@ bool isTablet(BuildContext context) {
       ResponsiveWrapper.of(context).isLargerThan("Mobile");
 }
 
+// bool isTableOrMobile(BuildContext context) {
+//   return Di.getScreenSize(context).width < 1000;
+// }
+
 bool isTableOrMobile(BuildContext context) {
   return isMobilePhone(context) ||
       ResponsiveWrapper.of(context).isSmallerThan(TABLET);
@@ -27,6 +31,3 @@ bool isTableOrMobile(BuildContext context) {
 //       Di.getScreenSize(context).width > 470;
 // }
 
-// bool isTableOrMobile(BuildContext context) {
-//   return Di.getScreenSize(context).width < 1000;
-// }

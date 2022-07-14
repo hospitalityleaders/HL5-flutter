@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:holedo/db_data.dart';
 import 'package:holedo/models/holedoapi/experience.dart';
 import 'package:holedo/models/holedoapi/holedoapi.dart';
-import 'package:holedo/presentation/providers/profile_provider.dart';
 import 'package:holedo/presentation/ui/components/expanded_collapse_widget.dart';
-import 'package:holedo/presentation/ui/components/profile_reference_single_compoenet.dart';
 import 'package:holedo/presentation/ui/components/svg_with_background.dart';
+import 'package:holedo/presentation/ui/components/view_timeline_edit_profile_submenu.dart';
 import 'package:holedo/presentation/ui/pages/components/edit_add_buttons_of_sheet.dart';
 import 'package:holedo/presentation/ui/pages/components/edit_blue_card_sheet.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/profile_work_experience_dialog_widget.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/show_custom_dialog.dart';
+import 'package:holedo/presentation/ui/pages/sections/page_overview/page_overview_columns/page_overview_second_columns.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/images.dart';
 import 'package:holedo/presentation/utill/styles.dart';
-import 'package:provider/provider.dart';
 
 class ProfileWorkExperienceComponent extends StatefulWidget {
   const ProfileWorkExperienceComponent({
@@ -51,26 +49,18 @@ class _ProfileWorkExperienceComponentState
         Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Container(
-              color: Cr.whiteColor,
-              padding: EdgeInsets.only(left: widget.isMobile ? Di.PSD : Di.PSS),
-              child: ListTile(
-                title: const Text(
-                  "Work experience",
-                  style: h2Regular,
-                ),
-                trailing: WorkExperienceDropdown(
-                  onTappedInside: () {
-                    setState(() {
-                      showSubMenu = !showSubMenu;
-                    });
-                  },
-                  onTappedOutside: () {
-                    // setState(() {
-                    //   showSubMenu = false;
-                    // });
-                  },
-                ),
+            DecoratedBox(
+              decoration: BoxDecoration(
+                color: Cr.whiteColor,
+              ),
+              child: ProfileComponentTitle(
+                isMobile: widget.isMobile,
+                onIconPressed: () {
+                  setState(() {
+                    showSubMenu = !showSubMenu;
+                  });
+                },
+                title: "Work experience",
               ),
             ),
             Di.DWZH,
@@ -121,43 +111,14 @@ class _ProfileWorkExperienceComponentState
         if (showSubMenu)
           Positioned(
             right: 8,
-            top: 43.5,
-            child: CustomSubMenu(
-              customSubMenuItems: [
-                CustomSubmenuItem(
-                  width: 245,
-                  textIconColor: Cr.accentBlue1,
-                  textStyle: bodySmallRegular.copyWith(
-                    color: Cr.accentBlue1,
-                  ),
-                  icon: SvgPicture.asset(
-                    Svgs.menu,
-                    width: 16,
-                    color: Cr.accentBlue1,
-                  ),
-                  text: "View in timeline",
-                ),
-                CustomSubmenuItem(
-                  onTap: () {
-                    Provider.of<ProfileProvider>(context, listen: false)
-                        .changeIsProfieEditableState(true);
-                    setState(() {
-                      showSubMenu = false;
-                    });
-                  },
-                  width: 245,
-                  textIconColor: Cr.accentBlue1,
-                  textStyle: bodySmallRegular.copyWith(
-                    color: Cr.accentBlue1,
-                  ),
-                  icon: SvgPicture.asset(
-                    Svgs.pencil,
-                    width: 16,
-                    color: Cr.accentBlue1,
-                  ),
-                  text: "Edit work experience",
-                ),
-              ],
+            top: 41,
+            child: ViewTimeEditProfileSubmenu(
+              hideSubMenuCallback: () {
+                setState(() {
+                  showSubMenu = false;
+                });
+              },
+              editText: 'work experience',
             ),
           ),
       ],

@@ -1,26 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:holedo/models/models.dart';
-import 'package:holedo/presentation/providers/profile_provider.dart';
 import 'package:holedo/presentation/ui/components/submenus.dart';
-
 import 'package:holedo/presentation/ui/components/text_with_background.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/images.dart';
 import 'package:holedo/presentation/utill/styles.dart';
+import 'package:provider/provider.dart';
 
 class ProfileConnectionRequestPopup extends StatelessWidget {
   const ProfileConnectionRequestPopup({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final userProfileProviderNotListener =
-        Provider.of<ProfileProvider>(context, listen: false);
     return InkWell(
       onTap: () {},
       onHover: (hover) {
         if (hover == false) {
-          userProfileProviderNotListener
+          Provider.of(context, listen: false)
               .changeConectionRequestPopup2State(hover);
         }
       },
