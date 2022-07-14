@@ -188,13 +188,15 @@ class __SingleAchievementState extends State<_SingleAchievement> {
               achievement.description = _descriptionController.text.toString();
             });
           });
-
     super.initState();
-    achievement.achievementTypeId = 1;
+    if (achievement.achievementTypeId == null) {
+      //achievement.achievementTypeId = 1;
+    }
     if (achievement.dateReceived == null) {
       achievement.dateReceived = DateTime.now();
     }
     currentYear = achievement.dateReceived?.year.toString();
+    //currentAchivement = '${achievement.achievementTypeId as String}';
   }
 
   @override
@@ -272,7 +274,7 @@ class __SingleAchievementState extends State<_SingleAchievement> {
                   Di.SBHES,
                   DialogDropDownTextField(
                     width: double.infinity,
-                    initialValue: currentAchivement,
+                    initialValue: '${currentAchivement}',
                     alignHintTextStart: true,
                     onChanged: (value) {
                       setState(() {
@@ -280,8 +282,6 @@ class __SingleAchievementState extends State<_SingleAchievement> {
                         int selection = int.parse(achievementTypes?.keys
                             .firstWhere((k) => achievementTypes![k] == value,
                                 orElse: () => '1') as String);
-                        print(
-                            'sle: ${achievementTypes?.keys.firstWhere((k) => achievementTypes![k] == value, orElse: () => '1')}');
                         achievement.achievementTypeId = selection;
                       });
                     },
@@ -325,17 +325,14 @@ class __SingleAchievementState extends State<_SingleAchievement> {
                   Di.SBHES,
                   DialogDropDownTextField(
                     width: 72,
+                    initialValue: currentYear,
                     alignHintTextStart: true,
                     onChanged: (value) {
                       setState(() {
                         currentYear = value;
-                        //DateTime now =
-                        //   DateTime.parse('${value.toString()}-07-01');
+
                         achievement.dateReceived =
                             DateTime.parse('${value.toString()}-07-01');
-                        //DateFormat('yyyy-MM-dd').format(now) as DateTime?;
-
-                        //print('date ${DateTime('${value.toString()}-07-25')}');
                       });
                     },
                     // iconsList: achievementTypeList

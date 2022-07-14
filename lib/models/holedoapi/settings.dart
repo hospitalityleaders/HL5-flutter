@@ -13,6 +13,7 @@ class Settings {
   Map<String, dynamic>? languagesProficiencies;
   Map<String, dynamic>? userTitleTypes;
   Map<String, dynamic>? expertiseList;
+  Map<String, dynamic>? ads;
 
   Settings({
     this.headerLinks,
@@ -24,6 +25,7 @@ class Settings {
     this.languagesProficiencies,
     this.userTitleTypes,
     this.expertiseList,
+    this.ads,
   });
 
   factory Settings.fromJson(Map<String, dynamic> json) => Settings(
@@ -55,6 +57,7 @@ class Settings {
         expertiseList: json['expertise_list'] == null
             ? null
             : json['expertise_list'] as Map<String, dynamic>,
+        ads: json['ads'] == null ? null : json['ads'] as Map<String, dynamic>,
       );
 
   get length => null;
@@ -69,5 +72,6 @@ class Settings {
         'languages_proficiencies': languagesProficiencies,
         'user_title_types': userTitleTypes,
         'expertise_list': expertiseList,
+        'ads': ads,
       };
 }

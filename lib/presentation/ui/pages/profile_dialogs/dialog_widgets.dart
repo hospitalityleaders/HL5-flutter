@@ -255,7 +255,7 @@ class _DialogDropDownTextFieldState extends State<DialogDropDownTextField> {
           ),
           items: widget.dataList
               .map((item) => DropdownMenuItem<String>(
-                    value: item,
+                    value: item as String,
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [

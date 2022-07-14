@@ -1,3 +1,4 @@
+import 'package:holedo/main.dart';
 import 'package:holedo/models/holedoapi/data.dart';
 import 'package:holedo/models/models.dart';
 import 'package:holedo/layouts/page_scaffold.dart';
@@ -48,28 +49,33 @@ class _LoginPageState extends State<LoginPage> {
       );
       if (_usernameController.text.isNotEmpty) {
         var api = new Holedoapi();
-        var response = await api.login(
+        api = await api.login(
             context: context,
             email: _usernameController.text,
             password: _passwordController.text);
-        print('cjec: ${usersControler.isLogin.value}');
+        print('cjec: ${api.data?.user?.toJson().toString()}');
 
-        if (response != null) {
+        if (api.success == true) {
           Provider.of<AppState>(context, listen: false).username =
               _usernameController.text;
-          Provider.of<AppState>(context, listen: false).profile = response;
+          Provider.of<AppState>(context, listen: false).profile =
+              api.data?.user;
           var redirect = widget.redirectTo;
-          if (redirect == null) redirect = '/profile/${response.slug}';
+          if (redirect == null) redirect = '/profile/${api.data?.user?.slug}';
           Routemaster.of(context).push(redirect);
+        }
+        if (api.errors != null) {
+          holedoDatabase.snackBarMessage(
+              context, 'error', api.errors.toString());
+        }
+        if (api.messages != null) {
+          holedoDatabase.snackBarMessage(
+              context, 'error', api.messages.toString());
         }
       }
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Error: ${_formKey.currentState!.validate()}'),
-          backgroundColor: Colors.red.shade300,
-        ),
-      );
+      holedoDatabase.snackBarMessage(
+          context, 'error', 'Error: ${_formKey.currentState!.validate()}');
     }
   }
 

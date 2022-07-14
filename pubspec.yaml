@@ -48,6 +48,8 @@ dependencies:
   freezed_annotation: ^0.15.0
   intercom_flutter: ^7.3.0
   flutter_riverpod: ^1.0.4
+  flutter_webview_plugin: ^0.4.0
+  webview_flutter: ^3.0.4
 
 dev_dependencies:
   integration_test:

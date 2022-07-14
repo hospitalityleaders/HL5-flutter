@@ -470,18 +470,20 @@ class _FeaturedVideoComponentState extends State<FeaturedVideoComponent> {
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.network(
-        widget.userProfileData.profileVideoUrl ?? '')
-      ..initialize().then((_) {
-        setState(() {});
-      })
-      ..addListener(() {
-        if (_controller.value.position == _controller.value.duration) {
-          setState(() {
-            _controller.pause();
-          });
-        }
-      });
+    if (widget.userProfileData.profileVideoUrl != null) {
+      _controller = VideoPlayerController.network(
+          widget.userProfileData.profileVideoUrl ?? '')
+        ..initialize().then((_) {
+          setState(() {});
+        })
+        ..addListener(() {
+          if (_controller.value.position == _controller.value.duration) {
+            setState(() {
+              _controller.pause();
+            });
+          }
+        });
+    }
   }
 
   @override

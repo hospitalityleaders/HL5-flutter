@@ -231,7 +231,7 @@ class HoledoDatabase extends GetxController {
     try {
       isLoading(true);
 
-      var data = getModel();
+      DataModel data = getModel();
 
       if (data.articleCategories?.length != null) {
         print(
@@ -243,8 +243,9 @@ class HoledoDatabase extends GetxController {
         var response = await _api.GET(
           target: '/site-settings/v2?type=2',
         );
-
-        data = response.data as DataModel;
+        data.settings = response.data?.settings;
+        data.articleCategories = response.data?.articleCategories;
+        data.block = response.data?.block;
       }
 
       if (data.pages?.length == 0 || data.pages?.length == null) {
@@ -282,8 +283,8 @@ class HoledoDatabase extends GetxController {
     this.context = context;
     this.snackBarMessage(context, 'info', 'AppState Loaded');
     print('test ${appState.username}');
-    if (this.getModel().user!.token != null) {
-      var user = this.getModel().user;
+    if (getModel().user!.token != null) {
+      var user = getModel().user;
       this.snackBarMessage(
           context, 'info', 'Login: ${user?.fullName} on ${user?.dateOfBirth}');
     }
@@ -301,6 +302,7 @@ class UsersController extends GetxController {
   final ApiServices _api = ApiServices();
   // ignore: non_constant_identifier_names
   late HoledoDatabase DB = holedoDatabase;
+  var api = Holedoapi();
   @override
   void onInit() {
     //checkLogin();
@@ -308,15 +310,13 @@ class UsersController extends GetxController {
     super.onInit();
   }
 
-  Future<User> login(
+  Future<Holedoapi> login(
       {required String email,
       required String password,
       required BuildContext context}) async {
+    final model = getModel();
     try {
-      DB.isLoading(true);
-      var api = new Holedoapi();
-      final model = DB.getModel();
-      var user = new User();
+      this.isLoading(true);
 
       api = await _api.POST(target: '/users/login', data: {
         'email': email,
@@ -326,20 +326,26 @@ class UsersController extends GetxController {
         'Accept': 'application/json',
         'Device': 'Holedo_Flutter'
       });
+      if (api == null) {
+        holedoDatabase.snackBarMessage(context, 'error', 'Credential Error...');
+      }
 
       if (api.success == true) {
-        print('login: ${api.data!.user!.email.toString()}');
+        user = api.data?.user as User;
+        print('login1: ${user.email.toString()} ${api.data?.token}');
         isLogin.value = true;
         token.value = api.data?.token as String;
-        user = api.data?.user as User;
-        model.user!.token = api.data!.token;
-        this.saveUserToModel(user, api.data!.token as String);
-      } else {
-        DB.snackBarMessage(context, 'error', api.errors.toString());
+
+        model.user?.token = token.value;
+        saveUserToModel(user, token.value);
+        print('u: ${user.email} ${getModel().user?.token}');
+        return api;
       }
-      return user;
+
+      print('login: ${user.email.toString()}');
+      return api;
     } finally {
-      DB.isLoading(false);
+      this.isLoading(false);
     }
   }
 
@@ -371,7 +377,11 @@ class UsersController extends GetxController {
     model.user = user;
     //print('update user: ${model.user.toString()} token $token');
     //Get.find<HoledoDatabase>().setModel(model);
-    holedoDatabase.setModel(model);
+    try {
+      holedoDatabase.setModel(model);
+    } finally {
+      print('chec: ${holedoDatabase.getModel().user!.email}');
+    }
   }
 
   Future<User> getProfileData({
@@ -384,7 +394,7 @@ class UsersController extends GetxController {
     try {
       isLoading(true);
       var user = new User();
-      var token = this.getToken(slug);
+      var token = getToken(slug);
       var headers = <String, dynamic>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json',
@@ -476,8 +486,8 @@ class UsersController extends GetxController {
   Future<DataModel> saveProfile(context, User user) async {
     try {
       isLoading(true);
-      var dataModel = this.getModel();
-      var token = this.getToken(user.slug);
+      var dataModel = getModel();
+      var token = getToken(user.slug);
 
       if (user.id != null) {
         if (dataModel.user!.id == null) {
@@ -510,7 +520,7 @@ class UsersController extends GetxController {
         print('log: ${dataModel.user?.firstName}');
 
         dataModel.user?.token = token;
-        this.saveUserToModel(dataModel.user as User, token);
+        saveUserToModel(dataModel.user as User, token);
       }
       // isLoading(false);
       return dataModel;
