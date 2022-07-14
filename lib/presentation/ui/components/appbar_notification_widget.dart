@@ -1,6 +1,7 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:holedo/application/shared/providers.dart';
 import 'package:holedo/presentation/providers/profile_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:holedo/models/models.dart';
 import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
@@ -14,7 +15,7 @@ enum AppbarNotificationColor {
   // dark,
 }
 
-class AppbarNotificationWidget extends StatelessWidget {
+class AppbarNotificationWidget extends ConsumerWidget {
   const AppbarNotificationWidget({
     Key? key,
     required this.title,
@@ -28,7 +29,7 @@ class AppbarNotificationWidget extends StatelessWidget {
   final String? buttonText;
   final AppbarNotificationColor appbarNotificationColor;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
     late final Color bgColor;
     late final Color textAndButtonColor;
     switch (appbarNotificationColor) {
@@ -83,10 +84,11 @@ class AppbarNotificationWidget extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              Provider.of<ProfileProvider>(context, listen: false)
+              ref
+                  .read(profileNotifierProvider.notifier)
                   .changeAppNotificationState(
-                AppNotificationState.showNothing(),
-              );
+                    AppNotificationState.showNothing(),
+                  );
             },
             child: Icon(
               Icons.close,

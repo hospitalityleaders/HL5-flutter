@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:holedo/application/shared/providers.dart';
 import 'package:holedo/models/models.dart';
 import 'package:holedo/presentation/data/presentation_data.dart';
-import 'package:holedo/presentation/providers/profile_provider.dart';
 import 'package:holedo/presentation/ui/components/contact_card_dialog_widget.dart';
 import 'package:holedo/presentation/ui/components/custom_outlined_button.dart';
 import 'package:holedo/presentation/ui/components/person_avatar.dart';
@@ -16,7 +17,7 @@ import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/styles.dart';
 import 'package:tap_canvas/tap_canvas.dart';
 
-class ProfileImageBanner extends StatefulWidget {
+class ProfileImageBanner extends ConsumerStatefulWidget {
   const ProfileImageBanner({
     Key? key,
     this.onEditButtonPressed,
@@ -28,10 +29,10 @@ class ProfileImageBanner extends StatefulWidget {
   final User userProfileData;
 
   @override
-  State<ProfileImageBanner> createState() => _ProfileImageBannerState();
+  ConsumerState<ProfileImageBanner> createState() => _ProfileImageBannerState();
 }
 
-class _ProfileImageBannerState extends State<ProfileImageBanner> {
+class _ProfileImageBannerState extends ConsumerState<ProfileImageBanner> {
   bool showProfileSubMenu = false;
   @override
   Widget build(BuildContext context) {
@@ -196,7 +197,7 @@ class _ProfileImageBannerState extends State<ProfileImageBanner> {
           ),
         ),
 
-        if (Provider.of<ProfileProvider>(context).isProfileEditable)
+        if (ref.watch(profileNotifierProvider).isProfileEditable)
           Positioned(
             bottom: 10,
             right: 10,
@@ -212,7 +213,7 @@ class _ProfileImageBannerState extends State<ProfileImageBanner> {
             ),
           ),
 
-        Provider.of<ProfileProvider>(context).isProfileEditable
+        ref.watch(profileNotifierProvider).isProfileEditable
             ? Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -229,7 +230,7 @@ class _ProfileImageBannerState extends State<ProfileImageBanner> {
               )
             : Di.ESB,
 
-        Provider.of<ProfileProvider>(context).isProfileEditable
+        ref.watch(profileNotifierProvider).isProfileEditable
             ? Positioned.fill(
                 child: Align(
                   alignment: Alignment.center,

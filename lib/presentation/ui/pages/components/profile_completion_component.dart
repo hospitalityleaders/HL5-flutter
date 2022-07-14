@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:holedo/application/shared/providers.dart';
 import 'package:holedo/db_data.dart';
-import 'package:holedo/presentation/providers/profile_provider.dart';
 import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/presentation/ui/components/text_with_background.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
@@ -9,15 +10,14 @@ import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/images.dart';
 import 'package:holedo/presentation/utill/styles.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
-import 'package:provider/provider.dart';
 
-class ProfileCompletionComponent extends StatelessWidget {
+class ProfileCompletionComponent extends ConsumerWidget {
   const ProfileCompletionComponent({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
     final userProfileData = DbData.getUserProfileData;
     final bool experienceAdded = (userProfileData.experiences != null ||
         userProfileData.experiences!.isNotEmpty);
@@ -30,7 +30,7 @@ class ProfileCompletionComponent extends StatelessWidget {
     final bool languagesAdded = (userProfileData.languages == null ||
         userProfileData.languages!.isNotEmpty);
     final percentage =
-        Provider.of<ProfileProvider>(context).percentageProfileCompleted;
+        ref.watch(profileNotifierProvider).percentageProfileCompleted;
 
     return Container(
       padding: const EdgeInsets.all(Di.PSD),
@@ -109,7 +109,8 @@ class ProfileCompletionComponent extends StatelessWidget {
             Di.SBHL,
             CustomElevatedButton(
               onPressed: () {
-                Provider.of<ProfileProvider>(context, listen: false)
+                ref
+                    .read(profileNotifierProvider.notifier)
                     .changeIsProfieEditableState(true);
               },
               width: 320,

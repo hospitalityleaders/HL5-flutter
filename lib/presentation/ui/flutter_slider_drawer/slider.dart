@@ -90,7 +90,6 @@ class SliderDrawerState extends State<SliderDrawer>
           sliderMenu: MobileSlideMenu(onCloseTap: closeSlider),
           sliderMenuOpenSize: widget.sliderOpenSize,
         ),
-
         if (widget.sliderShadow != null) ...[
           _Shadow(
             animationDrawerController: _animationDrawerController,
@@ -100,14 +99,15 @@ class SliderDrawerState extends State<SliderDrawer>
             sliderShadow: widget.sliderShadow!,
           ),
         ],
-
         //Child
         AnimatedBuilder(
           animation: _animationDrawerController!,
           builder: (_, child) {
             return Transform.translate(
               offset: Utils.getOffsetValues(
-                  widget.slideDirection, _animation.value),
+                widget.slideDirection,
+                _animation.value,
+              ),
               child: child,
             );
           },

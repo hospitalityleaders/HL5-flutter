@@ -13,29 +13,29 @@ class AppNotificationState with _$AppNotificationState {
 }
 
 class ProfileProvider extends ChangeNotifier {
-  bool isProfileEditable;
-  bool showProfileLoading;
+  // bool isProfileEditable;
+  // bool showProfileLoading;
   bool showConectionRequestPopo;
   bool showProfileSubMenus;
   bool profileSubMenuClicked;
   // int currentTabIndex;
   int percentageProfileCompleted;
-  AppNotificationState appNotificationState;
+  // AppNotificationState appNotificationState;
   ProfileProvider({
     this.showConectionRequestPopo = false,
     this.showProfileSubMenus = false,
-    this.isProfileEditable = false,
-    this.showProfileLoading = false,
+    // this.isProfileEditable = false,
+    // this.showProfileLoading = false,
     this.profileSubMenuClicked = false,
     this.percentageProfileCompleted = 20,
     // this.currentTabIndex = 0,
-    this.appNotificationState = const AppNotificationState.profileCompletion(),
+    // this.appNotificationState = const AppNotificationState.profileCompletion(),
   });
 
-  void changeAppNotificationState(AppNotificationState appNotificationState) {
-    this.appNotificationState = appNotificationState;
-    notifyListeners();
-  }
+  // void changeAppNotificationState(AppNotificationState appNotificationState) {
+  //   this.appNotificationState = appNotificationState;
+  //   notifyListeners();
+  // }
 
   void changeUserProfilePercentage(bool isLoggedIn) {
     int _percentage = 20;
@@ -70,11 +70,11 @@ class ProfileProvider extends ChangeNotifier {
     }
   }
 
-  void changeShowProfileLoadingState(bool showLoading) {
-    showProfileLoading = showLoading;
+  // void changeShowProfileLoadingState(bool showLoading) {
+  //   showProfileLoading = showLoading;
 
-    notifyListeners();
-  }
+  //   notifyListeners();
+  // }
 
   // void changeCurrentTabIndex(int currentTabIndex) {
   //   this.currentTabIndex = currentTabIndex;
@@ -118,8 +118,8 @@ class ProfileProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void changeIsProfieEditableState(bool isEditable) {
-    isProfileEditable = isEditable;
-    notifyListeners();
-  }
+  // void changeIsProfieEditableState(bool isEditable) {
+  //   isProfileEditable = isEditable;
+  //   notifyListeners();
+  // }
 }

@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:holedo/application/shared/providers.dart';
 import 'package:holedo/db_data.dart';
-import 'package:holedo/models/models.dart';
-import 'package:holedo/presentation/providers/profile_provider.dart';
 import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/presentation/ui/components/person_avatar.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/responsive.dart';
 import 'package:holedo/presentation/utill/styles.dart';
-import 'package:provider/provider.dart';
 
 class ProfileTabbar extends StatelessWidget {
   const ProfileTabbar({
@@ -23,7 +22,7 @@ class ProfileTabbar extends StatelessWidget {
   final void Function(int)? onTap;
   @override
   Widget build(BuildContext context) {
-    final isEditable = Provider.of<ProfileProvider>(context).isProfileEditable;
+    // final isEditable = Provider.of<ProfileProvider>(context).isProfileEditable;
     final getUserProfileData = DbData.getUserProfileData;
     final bool isTab = isTablet(context);
     final double fontSize = isTab ? 12.5 : 14;
@@ -139,7 +138,7 @@ class ProfileTabbar extends StatelessWidget {
   }
 }
 
-class EditProfileButton extends StatelessWidget {
+class EditProfileButton extends ConsumerWidget {
   const EditProfileButton({
     Key? key,
     this.width,
@@ -148,24 +147,24 @@ class EditProfileButton extends StatelessWidget {
   final double? width;
 
   @override
-  Widget build(BuildContext context) {
-    return Consumer<ProfileProvider>(
-        builder: (context, profileProvider, child) {
-      return CustomElevatedButton(
-        width: width,
-        text: profileProvider.isProfileEditable ? "Done Editing" : null,
-        backgroundColor: profileProvider.isProfileEditable ? Cr.green1 : null,
-        icon: profileProvider.isProfileEditable
-            ? const Icon(
-                Icons.check,
-                size: Di.FSD,
-              )
-            : null,
-        onPressed: () {
-          Provider.of<ProfileProvider>(context, listen: false)
-              .changeIsProfieEditableState(!profileProvider.isProfileEditable);
-        },
-      );
-    });
+  Widget build(BuildContext context, ref) {
+    final isProfileEditable =
+        ref.watch(profileNotifierProvider).isProfileEditable;
+    return CustomElevatedButton(
+      width: width,
+      text: isProfileEditable ? "Done Editing" : null,
+      backgroundColor: isProfileEditable ? Cr.green1 : null,
+      icon: isProfileEditable
+          ? const Icon(
+              Icons.check,
+              size: Di.FSD,
+            )
+          : null,
+      onPressed: () {
+        ref
+            .read(profileNotifierProvider.notifier)
+            .changeIsProfieEditableState(!isProfileEditable);
+      },
+    );
   }
 }

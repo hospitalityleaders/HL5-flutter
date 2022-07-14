@@ -1,18 +1,13 @@
 export 'package:get/get.dart';
 export 'holedoapi/holedoapi.dart';
-
 import 'package:flutter/material.dart';
-
 import 'package:get_storage/get_storage.dart';
-
 import 'package:get/get.dart';
 import 'package:holedo/main.dart';
 export 'package:provider/provider.dart';
 import 'package:holedo/models/holedoapi/article.dart';
 import 'package:holedo/models/holedoapi/article_category.dart';
-
 import 'package:holedo/models/holedoapi/holedoapi.dart';
-
 import 'package:holedo/models/holedoapi/job.dart';
 import 'package:holedo/models/holedoapi/menu_item.dart';
 import 'package:holedo/services/holedo_api_services.dart';

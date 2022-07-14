@@ -19,7 +19,6 @@ class _$ProfileStateTearOff {
   _ProfileState call(
       {bool isProfileEditable = false,
       bool showProfileLoading = false,
-      bool showConectionRequestPopo = false,
       bool showProfileSubMenus = false,
       bool profileSubMenuClicked = false,
       int currentTabIndex = 0,
@@ -29,7 +28,6 @@ class _$ProfileStateTearOff {
     return _ProfileState(
       isProfileEditable: isProfileEditable,
       showProfileLoading: showProfileLoading,
-      showConectionRequestPopo: showConectionRequestPopo,
       showProfileSubMenus: showProfileSubMenus,
       profileSubMenuClicked: profileSubMenuClicked,
       currentTabIndex: currentTabIndex,
@@ -45,8 +43,8 @@ const $ProfileState = _$ProfileStateTearOff();
 /// @nodoc
 mixin _$ProfileState {
   bool get isProfileEditable => throw _privateConstructorUsedError;
-  bool get showProfileLoading => throw _privateConstructorUsedError;
-  bool get showConectionRequestPopo => throw _privateConstructorUsedError;
+  bool get showProfileLoading =>
+      throw _privateConstructorUsedError; // @Default(false) bool showConectionRequestPopo,
   bool get showProfileSubMenus => throw _privateConstructorUsedError;
   bool get profileSubMenuClicked => throw _privateConstructorUsedError;
   int get currentTabIndex => throw _privateConstructorUsedError;
@@ -67,7 +65,6 @@ abstract class $ProfileStateCopyWith<$Res> {
   $Res call(
       {bool isProfileEditable,
       bool showProfileLoading,
-      bool showConectionRequestPopo,
       bool showProfileSubMenus,
       bool profileSubMenuClicked,
       int currentTabIndex,
@@ -89,7 +86,6 @@ class _$ProfileStateCopyWithImpl<$Res> implements $ProfileStateCopyWith<$Res> {
   $Res call({
     Object? isProfileEditable = freezed,
     Object? showProfileLoading = freezed,
-    Object? showConectionRequestPopo = freezed,
     Object? showProfileSubMenus = freezed,
     Object? profileSubMenuClicked = freezed,
     Object? currentTabIndex = freezed,
@@ -104,10 +100,6 @@ class _$ProfileStateCopyWithImpl<$Res> implements $ProfileStateCopyWith<$Res> {
       showProfileLoading: showProfileLoading == freezed
           ? _value.showProfileLoading
           : showProfileLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showConectionRequestPopo: showConectionRequestPopo == freezed
-          ? _value.showConectionRequestPopo
-          : showConectionRequestPopo // ignore: cast_nullable_to_non_nullable
               as bool,
       showProfileSubMenus: showProfileSubMenus == freezed
           ? _value.showProfileSubMenus
@@ -151,7 +143,6 @@ abstract class _$ProfileStateCopyWith<$Res>
   $Res call(
       {bool isProfileEditable,
       bool showProfileLoading,
-      bool showConectionRequestPopo,
       bool showProfileSubMenus,
       bool profileSubMenuClicked,
       int currentTabIndex,
@@ -176,7 +167,6 @@ class __$ProfileStateCopyWithImpl<$Res> extends _$ProfileStateCopyWithImpl<$Res>
   $Res call({
     Object? isProfileEditable = freezed,
     Object? showProfileLoading = freezed,
-    Object? showConectionRequestPopo = freezed,
     Object? showProfileSubMenus = freezed,
     Object? profileSubMenuClicked = freezed,
     Object? currentTabIndex = freezed,
@@ -191,10 +181,6 @@ class __$ProfileStateCopyWithImpl<$Res> extends _$ProfileStateCopyWithImpl<$Res>
       showProfileLoading: showProfileLoading == freezed
           ? _value.showProfileLoading
           : showProfileLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      showConectionRequestPopo: showConectionRequestPopo == freezed
-          ? _value.showConectionRequestPopo
-          : showConectionRequestPopo // ignore: cast_nullable_to_non_nullable
               as bool,
       showProfileSubMenus: showProfileSubMenus == freezed
           ? _value.showProfileSubMenus
@@ -226,7 +212,6 @@ class _$_ProfileState extends _ProfileState {
   const _$_ProfileState(
       {this.isProfileEditable = false,
       this.showProfileLoading = false,
-      this.showConectionRequestPopo = false,
       this.showProfileSubMenus = false,
       this.profileSubMenuClicked = false,
       this.currentTabIndex = 0,
@@ -242,10 +227,7 @@ class _$_ProfileState extends _ProfileState {
   @override
   final bool showProfileLoading;
   @JsonKey(defaultValue: false)
-  @override
-  final bool showConectionRequestPopo;
-  @JsonKey(defaultValue: false)
-  @override
+  @override // @Default(false) bool showConectionRequestPopo,
   final bool showProfileSubMenus;
   @JsonKey(defaultValue: false)
   @override
@@ -262,7 +244,7 @@ class _$_ProfileState extends _ProfileState {
 
   @override
   String toString() {
-    return 'ProfileState(isProfileEditable: $isProfileEditable, showProfileLoading: $showProfileLoading, showConectionRequestPopo: $showConectionRequestPopo, showProfileSubMenus: $showProfileSubMenus, profileSubMenuClicked: $profileSubMenuClicked, currentTabIndex: $currentTabIndex, percentageProfileCompleted: $percentageProfileCompleted, appNotificationState: $appNotificationState)';
+    return 'ProfileState(isProfileEditable: $isProfileEditable, showProfileLoading: $showProfileLoading, showProfileSubMenus: $showProfileSubMenus, profileSubMenuClicked: $profileSubMenuClicked, currentTabIndex: $currentTabIndex, percentageProfileCompleted: $percentageProfileCompleted, appNotificationState: $appNotificationState)';
   }
 
   @override
@@ -275,11 +257,6 @@ class _$_ProfileState extends _ProfileState {
             (identical(other.showProfileLoading, showProfileLoading) ||
                 const DeepCollectionEquality()
                     .equals(other.showProfileLoading, showProfileLoading)) &&
-            (identical(
-                    other.showConectionRequestPopo, showConectionRequestPopo) ||
-                const DeepCollectionEquality().equals(
-                    other.showConectionRequestPopo,
-                    showConectionRequestPopo)) &&
             (identical(other.showProfileSubMenus, showProfileSubMenus) ||
                 const DeepCollectionEquality()
                     .equals(other.showProfileSubMenus, showProfileSubMenus)) &&
@@ -304,7 +281,6 @@ class _$_ProfileState extends _ProfileState {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(isProfileEditable) ^
       const DeepCollectionEquality().hash(showProfileLoading) ^
-      const DeepCollectionEquality().hash(showConectionRequestPopo) ^
       const DeepCollectionEquality().hash(showProfileSubMenus) ^
       const DeepCollectionEquality().hash(profileSubMenuClicked) ^
       const DeepCollectionEquality().hash(currentTabIndex) ^
@@ -321,7 +297,6 @@ abstract class _ProfileState extends ProfileState {
   const factory _ProfileState(
       {bool isProfileEditable,
       bool showProfileLoading,
-      bool showConectionRequestPopo,
       bool showProfileSubMenus,
       bool profileSubMenuClicked,
       int currentTabIndex,
@@ -333,9 +308,7 @@ abstract class _ProfileState extends ProfileState {
   bool get isProfileEditable => throw _privateConstructorUsedError;
   @override
   bool get showProfileLoading => throw _privateConstructorUsedError;
-  @override
-  bool get showConectionRequestPopo => throw _privateConstructorUsedError;
-  @override
+  @override // @Default(false) bool showConectionRequestPopo,
   bool get showProfileSubMenus => throw _privateConstructorUsedError;
   @override
   bool get profileSubMenuClicked => throw _privateConstructorUsedError;

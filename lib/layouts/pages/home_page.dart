@@ -113,31 +113,31 @@ class _HomePage extends State<HomePage> {
                   ),
                 ),
               ),
-              SliverToBoxAdapter(
-                child: Container(
-                  // margin:
-                  //     EdgeInsets.symmetric(horizontal: Get.width * 0.2),
-                  height: Get.height * 0.06,
-                  width: Get.width,
-                  decoration: BoxDecoration(
-                      border: Border(
-                          bottom:
-                              BorderSide(color: Color(0xFFBDC4C7), width: 2))),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      for (final category in Get.put(HoledoDatabase())
-                          .articleCategories
-                          .where((category) => category.menuItem == true))
-                        NavigationBox(
-                          title: category.title.toString(),
-                          path: '/news/${category.slug}',
-                          inDrawer: false,
-                        ),
-                    ],
-                  ),
-                ),
-              ),
+              // SliverToBoxAdapter(
+              //   child: Container(
+              //     // margin:
+              //     //     EdgeInsets.symmetric(horizontal: Get.width * 0.2),
+              //     height: Get.height * 0.06,
+              //     width: Get.width,
+              //     decoration: BoxDecoration(
+              //         border: Border(
+              //             bottom:
+              //                 BorderSide(color: Color(0xFFBDC4C7), width: 2))),
+              //     child: Row(
+              //       mainAxisAlignment: MainAxisAlignment.center,
+              //       children: [
+              //         for (final category in Get.put(HoledoDatabase())
+              //             .articleCategories
+              //             .where((category) => category.menuItem == true))
+              //           NavigationBox(
+              //             title: category.title.toString(),
+              //             path: '/news/${category.slug}',
+              //             inDrawer: false,
+              //           ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
               SliverToBoxAdapter(
                 child: Container(),
               ),

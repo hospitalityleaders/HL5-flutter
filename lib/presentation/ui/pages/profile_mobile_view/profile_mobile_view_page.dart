@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart' hide Provider;
 import 'package:holedo/db_data.dart';
 import 'package:holedo/models/models.dart';
 import 'package:holedo/presentation/data/presentation_data.dart';
-import 'package:holedo/presentation/providers/profile_provider.dart';
 import 'package:holedo/presentation/ui/components/person_avatar.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_image_banner.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_tabbar.dart';
@@ -17,7 +17,7 @@ import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/responsive.dart';
 import 'package:holedo/presentation/utill/styles.dart';
 
-class ProfileMobileViewPage extends StatefulWidget {
+class ProfileMobileViewPage extends ConsumerStatefulWidget {
   const ProfileMobileViewPage({
     Key? key,
     required this.userProfileData,
@@ -30,10 +30,11 @@ class ProfileMobileViewPage extends StatefulWidget {
   final int currentTabIndex;
   final TabController tabController;
   @override
-  State<ProfileMobileViewPage> createState() => _ProfileMobileViewPageState();
+  ConsumerState<ProfileMobileViewPage> createState() =>
+      _ProfileMobileViewPageState();
 }
 
-class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
+class _ProfileMobileViewPageState extends ConsumerState<ProfileMobileViewPage> {
   bool showMenu = false;
   bool showCardSubMenu = false;
 
@@ -42,7 +43,7 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
     final bool isMobilePhn = isMobilePhone(context);
     final bool isTablt = isTablet(context);
     final User getUserProfileData = DbData.getUserProfileData;
-    final isEditable = Provider.of<ProfileProvider>(context).isProfileEditable;
+    // final isEditable = ref.watch(profileNotifierProvider).isProfileEditable;
     final appState = Provider.of<AppState>(context);
     final bool isMine = appState.isLoginnedAndEditable(widget.userProfileData);
 

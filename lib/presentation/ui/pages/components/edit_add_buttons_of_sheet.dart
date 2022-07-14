@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:holedo/presentation/providers/profile_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:holedo/application/shared/providers.dart';
 import 'package:holedo/presentation/ui/components/edit_icon_buttton.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
-import 'package:provider/provider.dart';
 
 class EditAddButtonOfSheet extends StatelessWidget {
   const EditAddButtonOfSheet(
@@ -17,9 +17,9 @@ class EditAddButtonOfSheet extends StatelessWidget {
   @override
   Widget build(_) {
     // return Di.ESB;
-    return Consumer<ProfileProvider>(
-      builder: (context, profileProvider, child) {
-        if (profileProvider.isProfileEditable) {
+    return Consumer(
+      builder: (context, ref, child) {
+        if (ref.watch(profileNotifierProvider).isProfileEditable) {
           return Center(
             child: SizedBox(
               width: 200,

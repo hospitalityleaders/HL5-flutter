@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:holedo/presentation/providers/profile_provider.dart';
+import 'package:holedo/application/shared/providers.dart';
 import 'package:holedo/presentation/ui/components/onhover.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/images.dart';
 import 'package:holedo/presentation/utill/styles.dart';
-import 'package:provider/provider.dart';
 
-class ViewTimeEditProfileSubmenu extends StatelessWidget {
+class ViewTimeEditProfileSubmenu extends ConsumerWidget {
   const ViewTimeEditProfileSubmenu({
     Key? key,
     required this.hideSubMenuCallback,
@@ -21,7 +21,7 @@ class ViewTimeEditProfileSubmenu extends StatelessWidget {
   final String editText;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return CustomSubMenu(
       customSubMenuItems: [
         if (!donotShowTimeline)
@@ -44,7 +44,8 @@ class ViewTimeEditProfileSubmenu extends StatelessWidget {
           ),
         CustomSubmenuItem(
           onTap: () {
-            Provider.of<ProfileProvider>(context, listen: false)
+            ref
+                .read(profileNotifierProvider.notifier)
                 .changeIsProfieEditableState(true);
             hideSubMenuCallback();
           },
