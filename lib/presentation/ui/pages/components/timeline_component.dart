@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:holedo/application/shared/providers.dart';
 import 'package:holedo/db_data.dart';
 import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
@@ -7,13 +9,13 @@ import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/images.dart';
 import 'package:holedo/presentation/utill/styles.dart';
 
-class TimelineComponent extends StatelessWidget {
+class TimelineComponent extends ConsumerWidget {
   const TimelineComponent({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
     return Container(
       decoration: Styles.boxDecoration.copyWith(color: const Color(0xff0D9BDC)),
       // padding: const EdgeInsets.all(Di.PSD),
@@ -115,8 +117,9 @@ class TimelineComponent extends StatelessWidget {
                   Di.SBHS,
                   CustomElevatedButton(
                     onPressed: () {
-                      // Provider.of<ProfileProvider>(context, listen: false)
-                      //     .changeCurrentTabIndex(1);
+                      ref
+                          .read(profileNotifierProvider.notifier)
+                          .changeCurrentTabIndex(1);
                     },
                     width: 200,
                     height: 35,

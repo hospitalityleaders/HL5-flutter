@@ -27,8 +27,9 @@ class ViewTimeEditProfileSubmenu extends ConsumerWidget {
         if (!donotShowTimeline)
           CustomSubmenuItem(
             onTap: () {
-              // Provider.of<ProfileProvider>(context, listen: false)
-              //     .changeCurrentTabIndex(1);
+              ref
+                  .read(profileNotifierProvider.notifier)
+                  .changeCurrentTabIndex(1);
             },
             width: 245,
             textIconColor: Cr.accentBlue1,
