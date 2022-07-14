@@ -54,9 +54,9 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage>
 
   @override
   void didChangeDependencies() {
-    setState(() {
-      _tabController.index = ref.watch(profileNotifierProvider).currentTabIndex;
-    });
+    // setState(() {
+    //   _tabController.index = ref.watch(profileNotifierProvider).currentTabIndex;
+    // });
     Provider.of<ProfileProvider>(context, listen: false)
         .changeUserProfilePercentage(Provider.of<AppState>(context).isLoggedIn);
     super.didChangeDependencies();
@@ -68,11 +68,17 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage>
     super.dispose();
   }
 
+  _updateTabController() {
+    setState(() {
+      _tabController.index = ref.watch(profileNotifierProvider).currentTabIndex;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final currentTabIndex = ref.watch(profileNotifierProvider).currentTabIndex;
     print("userProfileData: is  ${widget.userProfileData.toString()} ");
-
+    _updateTabController();
     print('app $isEditable');
     return TapCanvas(
       child: Container(
