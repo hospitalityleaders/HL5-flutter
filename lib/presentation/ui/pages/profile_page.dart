@@ -1,5 +1,5 @@
-import 'package:holedo/presentation/providers/profile_provider.dart';
-import 'package:holedo/presentation/ui/components/appbar_notification_widget.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:holedo/application/shared/providers.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_image_banner.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_tabbar.dart';
 import 'package:holedo/presentation/ui/pages/profile_mobile_view/profile_mobile_view_page.dart';
@@ -9,7 +9,6 @@ import 'package:holedo/presentation/ui/pages/sections/page_overview/page_overvie
 import 'package:holedo/presentation/ui/pages/sections/reference_section/reference_section.dart';
 import 'package:holedo/presentation/ui/pages/sections/timeline_section/timeline_section.dart';
 import 'package:tap_canvas/tap_canvas.dart';
-
 import 'package:flutter/material.dart';
 import 'package:holedo/models/models.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
@@ -17,7 +16,7 @@ import 'package:holedo/presentation/utill/dimensions.dart';
 
 enum CarType { sedan, suv, truck }
 
-class UserProfilePage extends StatefulWidget {
+class UserProfilePage extends ConsumerStatefulWidget {
   final User userProfileData;
 
   const UserProfilePage({
@@ -26,10 +25,10 @@ class UserProfilePage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<UserProfilePage> createState() => _UserProfilePageState();
+  ConsumerState<UserProfilePage> createState() => _UserProfilePageState();
 }
 
-class _UserProfilePageState extends State<UserProfilePage>
+class _UserProfilePageState extends ConsumerState<UserProfilePage>
     with TickerProviderStateMixin {
   bool isEditable = false;
 
@@ -41,9 +40,8 @@ class _UserProfilePageState extends State<UserProfilePage>
     newIndex == 5
         ? _tabController.animateTo(0)
         : _tabController.animateTo(newIndex);
-
-    Provider.of<ProfileProvider>(context, listen: false)
-        .changeCurrentTabIndex(newIndex);
+//todo
+    ref.read(profileNotifierProvider.notifier).changeCurrentTabIndex(newIndex);
   }
 
   @override
@@ -55,11 +53,10 @@ class _UserProfilePageState extends State<UserProfilePage>
   @override
   void didChangeDependencies() {
     setState(() {
-      _tabController.index =
-          Provider.of<ProfileProvider>(context).currentTabIndex;
+      _tabController.index = ref.watch(profileNotifierProvider).currentTabIndex;
     });
-    Provider.of<ProfileProvider>(context, listen: false)
-        .changeUserProfilePercentage(Provider.of<AppState>(context).isLoggedIn);
+    // Provider.of<ProfileProvider>(context, listen: false)
+    //     .changeUserProfilePercentage(Provider.of<AppState>(context).isLoggedIn);
     super.didChangeDependencies();
   }
 
@@ -71,11 +68,12 @@ class _UserProfilePageState extends State<UserProfilePage>
 
   @override
   Widget build(BuildContext context) {
+    final currentTabIndex = ref.watch(profileNotifierProvider).currentTabIndex;
     print("userProfileData: is  ${widget.userProfileData.toString()} ");
-    final appState = Provider.of<AppState>(context);
-    final userProfileProvider = Provider.of<ProfileProvider>(context);
-    final userProfileProviderNotListener =
-        Provider.of<ProfileProvider>(context, listen: false);
+    // final appState = Provider.of<AppState>(context);
+    // final userProfileProvider = Provider.of<ProfileProvider>(context);
+    // final userProfileProviderNotListener =
+    //     Provider.of<ProfileProvider>(context, listen: false);
     print('app $isEditable');
     return TapCanvas(
       child: Container(
@@ -84,8 +82,7 @@ class _UserProfilePageState extends State<UserProfilePage>
             // if (ResponsiveWrapper.of(context).isSmallerThan(MOBILE))
             Di.getScreenSize(context).width < 1000
                 ? ProfileMobileViewPage(
-                    currentTabIndex:
-                        Provider.of<ProfileProvider>(context).currentTabIndex,
+                    currentTabIndex: currentTabIndex,
                     changeCurrentIndex: changeCurrentIndex,
                     userProfileData: widget.userProfileData,
                     tabController: _tabController,
@@ -98,41 +95,42 @@ class _UserProfilePageState extends State<UserProfilePage>
                     child: ListView(
                       shrinkWrap: true,
                       children: [
-                        userProfileProvider.appNotificationState.map(
-                          showNothing: (_) => Di.ESB,
-                          profileCompletion: (notification) =>
-                              userProfileProvider.percentageProfileCompleted ==
-                                      100
-                                  ? Di.ESB
-                                  : AppbarNotificationWidget(
-                                      title:
-                                          "Your profile is only ${userProfileProvider.percentageProfileCompleted}% complete. Complete it now to earn first Hospitality Leader grade.",
-                                      onButtonPressed: () {
-                                        userProfileProviderNotListener
-                                            .changeIsProfieEditableState(true);
-                                      },
-                                    ),
-                          sucess: (notification) => AppbarNotificationWidget(
-                            appbarNotificationColor:
-                                AppbarNotificationColor.green,
-                            buttonText: "View profile",
-                            title:
-                                "Your profile has been successfully updated.",
-                            onButtonPressed: () {
-                              userProfileProviderNotListener
-                                ..changeIsProfieEditableState(false)
-                                ..changeAppNotificationState(
-                                  AppNotificationState.showNothing(),
-                                );
-                            },
-                          ),
-                        ),
+                        // userProfileProvider.appNotificationState.map(
+                        //   showNothing: (_) => Di.ESB,
+                        //   profileCompletion: (notification) =>
+                        //       userProfileProvider.percentageProfileCompleted ==
+                        //               100
+                        //           ? Di.ESB
+                        //           : AppbarNotificationWidget(
+                        //               title:
+                        //                   "Your profile is only ${userProfileProvider.percentageProfileCompleted}% complete. Complete it now to earn first Hospitality Leader grade.",
+                        //               onButtonPressed: () {
+                        //                 userProfileProviderNotListener
+                        //                     .changeIsProfieEditableState(true);
+                        //               },
+                        //             ),
+                        //   sucess: (notification) => AppbarNotificationWidget(
+                        //     appbarNotificationColor:
+                        //         AppbarNotificationColor.green,
+                        //     buttonText: "View profile",
+                        //     title:
+                        //         "Your profile has been successfully updated.",
+                        //     onButtonPressed: () {
+                        //       userProfileProviderNotListener
+                        //         ..changeIsProfieEditableState(false)
+                        //         ..changeAppNotificationState(
+                        //           AppNotificationState.showNothing(),
+                        //         );
+                        //     },
+                        //   ),
+                        // ),
                         ProfileImageBanner(
                           userProfileData: widget.userProfileData,
                         ),
                         ProfileTabbar(
                           onTap: changeCurrentIndex,
-                          isMine: appState.isLoggedIn,
+                          // isMine: appState.isLoggedIn,
+                          isMine: true,
                           tabController: _tabController,
                         ),
                         Di.SBHEL,
@@ -146,8 +144,7 @@ class _UserProfilePageState extends State<UserProfilePage>
                             ArticlesSection(),
                             ActivitySection(),
                             ReferenceSection(),
-                          ][Provider.of<ProfileProvider>(context)
-                              .currentTabIndex],
+                          ][currentTabIndex],
                         ),
                         Di.SBHOTL,
                       ],

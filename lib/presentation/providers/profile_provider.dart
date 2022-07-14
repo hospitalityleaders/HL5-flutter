@@ -18,7 +18,7 @@ class ProfileProvider extends ChangeNotifier {
   bool showConectionRequestPopo;
   bool showProfileSubMenus;
   bool profileSubMenuClicked;
-  int currentTabIndex;
+  // int currentTabIndex;
   int percentageProfileCompleted;
   AppNotificationState appNotificationState;
   ProfileProvider({
@@ -28,7 +28,7 @@ class ProfileProvider extends ChangeNotifier {
     this.showProfileLoading = false,
     this.profileSubMenuClicked = false,
     this.percentageProfileCompleted = 20,
-    this.currentTabIndex = 0,
+    // this.currentTabIndex = 0,
     this.appNotificationState = const AppNotificationState.profileCompletion(),
   });
 
@@ -76,11 +76,11 @@ class ProfileProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void changeCurrentTabIndex(int currentTabIndex) {
-    this.currentTabIndex = currentTabIndex;
+  // void changeCurrentTabIndex(int currentTabIndex) {
+  //   this.currentTabIndex = currentTabIndex;
 
-    notifyListeners();
-  }
+  //   notifyListeners();
+  // }
 
   void changeConectionRequestPopupState(bool showPopup) {
     if (showPopup == true && showConectionRequestPopo == false) {
