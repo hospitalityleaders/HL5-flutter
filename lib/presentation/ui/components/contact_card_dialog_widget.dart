@@ -129,9 +129,6 @@ class ContactCardDialogWidget extends StatelessWidget {
                 FontAwesomeIcons.twitter,
               ),
               ProfileSquareCard(
-                FontAwesomeIcons.googlePlusG,
-              ),
-              ProfileSquareCard(
                 FontAwesomeIcons.linkedin,
               ),
               ProfileSquareCard(

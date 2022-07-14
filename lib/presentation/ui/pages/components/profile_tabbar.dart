@@ -132,11 +132,7 @@ class ProfileTabbar extends StatelessWidget {
               ],
             ),
           ),
-          isMine
-              ? EditProfileButton(
-                  isEditable: isEditable,
-                )
-              : Di.ESB,
+          isMine ? EditProfileButton() : Di.ESB,
         ],
       ),
     );
@@ -146,33 +142,30 @@ class ProfileTabbar extends StatelessWidget {
 class EditProfileButton extends StatelessWidget {
   const EditProfileButton({
     Key? key,
-    required this.isEditable,
     this.width,
   }) : super(key: key);
 
-  final bool isEditable;
   final double? width;
 
   @override
   Widget build(BuildContext context) {
-    return CustomElevatedButton(
-      width: width,
-      text: Provider.of<ProfileProvider>(context).isProfileEditable
-          ? "Done Editing"
-          : null,
-      backgroundColor: Provider.of<ProfileProvider>(context).isProfileEditable
-          ? Cr.green1
-          : null,
-      icon: Provider.of<ProfileProvider>(context).isProfileEditable
-          ? const Icon(
-              Icons.check,
-              size: Di.FSD,
-            )
-          : null,
-      onPressed: () {
-        Provider.of<ProfileProvider>(context, listen: false)
-            .changeIsProfieEditableState(!isEditable);
-      },
-    );
+    return Consumer<ProfileProvider>(
+        builder: (context, profileProvider, child) {
+      return CustomElevatedButton(
+        width: width,
+        text: profileProvider.isProfileEditable ? "Done Editing" : null,
+        backgroundColor: profileProvider.isProfileEditable ? Cr.green1 : null,
+        icon: profileProvider.isProfileEditable
+            ? const Icon(
+                Icons.check,
+                size: Di.FSD,
+              )
+            : null,
+        onPressed: () {
+          Provider.of<ProfileProvider>(context, listen: false)
+              .changeIsProfieEditableState(!profileProvider.isProfileEditable);
+        },
+      );
+    });
   }
 }

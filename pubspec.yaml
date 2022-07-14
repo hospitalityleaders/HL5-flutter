@@ -47,6 +47,7 @@ dependencies:
   form_field_validator: ^1.1.0
   freezed_annotation: ^0.15.0
   intercom_flutter: ^7.3.0
+  flutter_riverpod: ^1.0.4
 
 dev_dependencies:
   integration_test:
@@ -55,7 +56,7 @@ dev_dependencies:
     sdk: flutter
   flutter_driver:
     sdk: flutter
-  build_runner: ^2.1.11
+  build_runner:
   freezed: ^0.14.2
   # json_serializable: ^6.1.5
 

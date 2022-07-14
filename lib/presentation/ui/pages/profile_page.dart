@@ -8,7 +8,6 @@ import 'package:holedo/presentation/ui/pages/sections/articles_section/articles_
 import 'package:holedo/presentation/ui/pages/sections/page_overview/page_overview_section.dart';
 import 'package:holedo/presentation/ui/pages/sections/reference_section/reference_section.dart';
 import 'package:holedo/presentation/ui/pages/sections/timeline_section/timeline_section.dart';
-import 'package:holedo/presentation/utill/responsive.dart';
 import 'package:tap_canvas/tap_canvas.dart';
 
 import 'package:flutter/material.dart';
@@ -36,16 +35,15 @@ class _UserProfilePageState extends State<UserProfilePage>
 
   int tabBar = 0;
   late TabController _tabController;
-  int currentTabIndex = 0;
   bool showNotifications = true;
 
   void changeCurrentIndex(int newIndex) {
     newIndex == 5
         ? _tabController.animateTo(0)
         : _tabController.animateTo(newIndex);
-    setState(() {
-      currentTabIndex = newIndex;
-    });
+
+    Provider.of<ProfileProvider>(context, listen: false)
+        .changeCurrentTabIndex(newIndex);
   }
 
   @override
@@ -56,8 +54,12 @@ class _UserProfilePageState extends State<UserProfilePage>
 
   @override
   void didChangeDependencies() {
+    setState(() {
+      _tabController.index =
+          Provider.of<ProfileProvider>(context).currentTabIndex;
+    });
     Provider.of<ProfileProvider>(context, listen: false)
-        .changeUserProfilePercentage(Provider.of<AppState>(context));
+        .changeUserProfilePercentage(Provider.of<AppState>(context).isLoggedIn);
     super.didChangeDependencies();
   }
 
@@ -65,12 +67,6 @@ class _UserProfilePageState extends State<UserProfilePage>
   void dispose() {
     _tabController.dispose();
     super.dispose();
-  }
-
-  void onTabBarTap(int value) {
-    setState(() {
-      currentTabIndex = _tabController.index;
-    });
   }
 
   @override
@@ -86,13 +82,17 @@ class _UserProfilePageState extends State<UserProfilePage>
         color: Cr.backgroundColor,
         child:
             // if (ResponsiveWrapper.of(context).isSmallerThan(MOBILE))
-            isTableOrMobile(context)
+            Di.getScreenSize(context).width < 1000
                 ? ProfileMobileViewPage(
-                    currentTabIndex: currentTabIndex,
+                    currentTabIndex:
+                        Provider.of<ProfileProvider>(context).currentTabIndex,
                     changeCurrentIndex: changeCurrentIndex,
                     userProfileData: widget.userProfileData,
                     tabController: _tabController,
-                    onTabBarTap: onTabBarTap,
+                    // onTabBarTap: (value) {
+                    //   Provider.of<ProfileProvider>(context, listen: false)
+                    //       .changeCurrentTabIndex(value);
+                    // },
                   )
                 : Center(
                     child: ListView(
@@ -129,10 +129,9 @@ class _UserProfilePageState extends State<UserProfilePage>
                         ),
                         ProfileImageBanner(
                           userProfileData: widget.userProfileData,
-                          onEditButtonPressed: () {},
                         ),
                         ProfileTabbar(
-                          onTap: onTabBarTap,
+                          onTap: changeCurrentIndex,
                           isMine: appState.isLoggedIn,
                           tabController: _tabController,
                         ),
@@ -147,7 +146,8 @@ class _UserProfilePageState extends State<UserProfilePage>
                             ArticlesSection(),
                             ActivitySection(),
                             ReferenceSection(),
-                          ][_tabController.index],
+                          ][Provider.of<ProfileProvider>(context)
+                              .currentTabIndex],
                         ),
                         Di.SBHOTL,
                       ],

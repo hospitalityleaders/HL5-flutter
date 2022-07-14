@@ -24,13 +24,11 @@ class ProfileMobileViewPage extends StatefulWidget {
     required this.currentTabIndex,
     required this.changeCurrentIndex,
     required this.tabController,
-    required this.onTabBarTap,
   }) : super(key: key);
   final User userProfileData;
   final void Function(int newIndex) changeCurrentIndex;
   final int currentTabIndex;
   final TabController tabController;
-  final void Function(int) onTabBarTap;
   @override
   State<ProfileMobileViewPage> createState() => _ProfileMobileViewPageState();
 }
@@ -65,7 +63,7 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
             ),
           if (isTablt)
             ProfileTabbar(
-              onTap: widget.onTabBarTap,
+              onTap: widget.changeCurrentIndex,
               isMine: isMine,
               tabController: widget.tabController,
             ),
@@ -159,17 +157,10 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                                         Text(
                                           widget.userProfileData.area ??
                                               "" +
-                                                  " " +
-                                                  (widget.userProfileData
-                                                              .countryId !=
-                                                          null
-                                                      ? (PresentationData
-                                                                  .countries[
-                                                              widget
-                                                                  .userProfileData
-                                                                  .countryId!] ??
-                                                          "")
-                                                      : ""),
+                                                  (PresentationData.countries[
+                                                          widget.userProfileData
+                                                              .countryId] ??
+                                                      ""),
                                           // " Cape Town, South Africa",
                                           textAlign: TextAlign.center,
                                           style: bodyLarge.copyWith(
@@ -371,9 +362,7 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                                         Di.SBHES,
                                         isMine
                                             ? EditProfileButton(
-                                                width: double.infinity,
-                                                isEditable: isEditable,
-                                              )
+                                                width: double.infinity)
                                             : Di.ESB,
                                       ],
                                     ),

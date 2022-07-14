@@ -1,5 +1,4 @@
 import 'package:holedo/db_data.dart';
-import 'package:holedo/models/models.dart';
 // This file is "main.dart"
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
@@ -19,6 +18,7 @@ class ProfileProvider extends ChangeNotifier {
   bool showConectionRequestPopo;
   bool showProfileSubMenus;
   bool profileSubMenuClicked;
+  int currentTabIndex;
   int percentageProfileCompleted;
   AppNotificationState appNotificationState;
   ProfileProvider({
@@ -28,6 +28,7 @@ class ProfileProvider extends ChangeNotifier {
     this.showProfileLoading = false,
     this.profileSubMenuClicked = false,
     this.percentageProfileCompleted = 20,
+    this.currentTabIndex = 0,
     this.appNotificationState = const AppNotificationState.profileCompletion(),
   });
 
@@ -36,9 +37,9 @@ class ProfileProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void changeUserProfilePercentage(AppState appState) {
-    int _percentage = 0;
-    if (appState.isLoggedIn) {
+  void changeUserProfilePercentage(bool isLoggedIn) {
+    int _percentage = 20;
+    if (isLoggedIn) {
       final userProfileData = DbData.getUserProfileData;
       final bool experienceAdded = (userProfileData.experiences != null ||
           userProfileData.experiences!.isNotEmpty);
@@ -71,6 +72,12 @@ class ProfileProvider extends ChangeNotifier {
 
   void changeShowProfileLoadingState(bool showLoading) {
     showProfileLoading = showLoading;
+
+    notifyListeners();
+  }
+
+  void changeCurrentTabIndex(int currentTabIndex) {
+    this.currentTabIndex = currentTabIndex;
 
     notifyListeners();
   }

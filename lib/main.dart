@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart' as fr;
 import 'package:intercom_flutter/intercom_flutter.dart';
 import 'package:holedo/layouts/page_scaffold.dart';
 import 'package:holedo/layouts/pages/content_page.dart';
@@ -231,52 +232,55 @@ class HoledoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (context) => ProfileProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => AppState(
-              username: holedoDatabase.getModel().user?.fullName,
-              profile: holedoDatabase.getModel().user),
-        ),
-      ],
-      child: MaterialApp.router(
-        title: 'Holedo',
-        builder: (context, child) => ResponsiveWrapper.builder(
-          ClampingScrollWrapper.builder(context, child!),
-          breakpoints: [
-            const ResponsiveBreakpoint.autoScaleDown(450, name: "SmallMobile"),
-            const ResponsiveBreakpoint.resize(460, name: "Mobile"),
-            const ResponsiveBreakpoint.resize(750, name: MOBILE),
-            const ResponsiveBreakpoint.resize(1000, name: TABLET),
-            const ResponsiveBreakpoint.resize(1300, name: DESKTOP),
-            const ResponsiveBreakpoint.autoScale(1301, name: "Desktop"),
-          ],
-        ),
-        debugShowCheckedModeBanner: false,
-        theme: lightTheme,
-        // theme: ThemeData(
-        //   primaryColor: Color(0xFF131921),
-        //   elevatedButtonTheme: ElevatedButtonThemeData(
-        //     style: ElevatedButton.styleFrom(
-        //       primary: Color(0xfffebd68),
-        //       onPrimary: Color(0xff333333),
-        //     ),
-        //   ),
-        //   platform: TargetPlatform.macOS,
-        // ),
-        routeInformationParser: const RoutemasterParser(),
-        routeInformationProvider: routeInformationProvider,
-        routerDelegate: RoutemasterDelegate(
-          routesBuilder: (context) {
-            final state = Provider.of<AppState>(context);
-            // Provider.of<AppState>(context).profile = Get.put(HoledoDatabase()).getModel().user ?? null;
-            return siteBlockedWithoutLogin && !state.isLoggedIn
-                ? loggedOutRouteMap
-                : _buildRouteMap(context);
-          },
+    return fr.ProviderScope(
+      child: MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+            create: (context) => ProfileProvider(),
+          ),
+          ChangeNotifierProvider(
+            create: (_) => AppState(
+                username: Get.put(HoledoDatabase()).getModel().user?.fullName,
+                profile: Get.put(HoledoDatabase()).getModel().user),
+          ),
+        ],
+        child: MaterialApp.router(
+          title: 'Holedo',
+          builder: (context, child) => ResponsiveWrapper.builder(
+            ClampingScrollWrapper.builder(context, child!),
+            breakpoints: [
+              const ResponsiveBreakpoint.autoScaleDown(450,
+                  name: "SmallMobile"),
+              const ResponsiveBreakpoint.resize(460, name: "Mobile"),
+              const ResponsiveBreakpoint.resize(750, name: MOBILE),
+              const ResponsiveBreakpoint.resize(1000, name: TABLET),
+              const ResponsiveBreakpoint.resize(1300, name: DESKTOP),
+              const ResponsiveBreakpoint.autoScale(1301, name: "Desktop"),
+            ],
+          ),
+          debugShowCheckedModeBanner: false,
+          theme: lightTheme,
+          // theme: ThemeData(
+          //   primaryColor: Color(0xFF131921),
+          //   elevatedButtonTheme: ElevatedButtonThemeData(
+          //     style: ElevatedButton.styleFrom(
+          //       primary: Color(0xfffebd68),
+          //       onPrimary: Color(0xff333333),
+          //     ),
+          //   ),
+          //   platform: TargetPlatform.macOS,
+          // ),
+          routeInformationParser: const RoutemasterParser(),
+          routeInformationProvider: routeInformationProvider,
+          routerDelegate: RoutemasterDelegate(
+            routesBuilder: (context) {
+              final state = Provider.of<AppState>(context);
+              // Provider.of<AppState>(context).profile = Get.put(HoledoDatabase()).getModel().user ?? null;
+              return siteBlockedWithoutLogin && !state.isLoggedIn
+                  ? loggedOutRouteMap
+                  : _buildRouteMap(context);
+            },
+          ),
         ),
       ),
     );
