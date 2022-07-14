@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' hide Provider;
 import 'package:flutter_svg/svg.dart';
-import 'package:holedo/application/shared/providers.dart';
+import 'package:holedo/db_data.dart';
 import 'package:holedo/models/models.dart' hide Provider;
+import 'package:holedo/presentation/providers/profile_provider.dart';
 import 'package:holedo/presentation/ui/components/appbar_textfield.dart';
 import 'package:holedo/presentation/ui/components/custom_icon_button.dart';
 import 'package:holedo/presentation/ui/components/custom_text_button.dart';
@@ -31,7 +33,6 @@ class CustomAppbar extends StatefulWidget {
 class _CustomAppbarState extends State<CustomAppbar> {
   @override
   Widget build(BuildContext context) {
-    // final appState = Provider.of<AppState>(context);
     final menuItems = Get.put(HoledoDatabase()).menuItems;
     final isSmallerThanDesltop =
         ResponsiveWrapper.of(context).isSmallerThan(DESKTOP);
@@ -143,13 +144,15 @@ class AppbarEmailButton extends StatelessWidget {
   }
 }
 
-class _ProfileWithSubMenu extends ConsumerWidget {
+class _ProfileWithSubMenu extends StatelessWidget {
   const _ProfileWithSubMenu({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context, ref) {
+  Widget build(BuildContext context) {
+    final appState = Provider.of<AppState>(context);
+
     return Row(
       children: [
         ProfileSideHover(),
@@ -161,8 +164,7 @@ class _ProfileWithSubMenu extends ConsumerWidget {
             InkWell(
               onTap: () {},
               onHover: (hover) async {
-                ref
-                    .read(profileNotifierProvider.notifier)
+                Provider.of<ProfileProvider>(context, listen: false)
                     .changeSubMenusPopupState(hover);
               },
               child: Padding(
@@ -170,12 +172,18 @@ class _ProfileWithSubMenu extends ConsumerWidget {
                 child: Container(
                   width: 26,
                   height: 26,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage("assets/images/avatar.png"),
-                      fit: BoxFit.fill,
-                    ),
-                  ),
+                  child: (appState.isLoggedIn)
+                      ? CircleAvatar(
+                          radius: 26,
+                          backgroundImage: NetworkImage(
+                            DbData.getUserProfileData.avatar!,
+                          ),
+                        )
+                      : Icon(
+                          CupertinoIcons.profile_circled,
+                          size: 26,
+                          color: Colors.grey,
+                        ),
                 ),
               ),
             )
@@ -206,7 +214,7 @@ class AppbarConnectionRequestButton extends StatelessWidget {
             InkWell(
               onTap: () {},
               onHover: (hover) async {
-                Provider.of(context, listen: false)
+                Provider.of<ProfileProvider>(context, listen: false)
                     .changeConectionRequestPopupState(hover);
               },
               child: Row(
@@ -247,7 +255,7 @@ class SizedboxWithHover extends ConsumerWidget {
     return InkWell(
       onTap: () {},
       onHover: (hover) {
-        Provider.of(context, listen: false)
+        Provider.of<ProfileProvider>(context, listen: false)
             .changeConectionRequestPopup2State(false);
       },
       child: isInHorizantal
@@ -261,7 +269,7 @@ class SizedboxWithHover extends ConsumerWidget {
   }
 }
 
-class ProfileSideHover extends ConsumerWidget {
+class ProfileSideHover extends StatelessWidget {
   const ProfileSideHover({
     Key? key,
     this.isInHorizantal = false,
@@ -269,12 +277,11 @@ class ProfileSideHover extends ConsumerWidget {
   final bool isInHorizantal;
 
   @override
-  Widget build(BuildContext contex, ref) {
+  Widget build(BuildContext context) {
     return InkWell(
       onTap: () {},
       onHover: (hover) {
-        ref
-            .read(profileNotifierProvider.notifier)
+        Provider.of<ProfileProvider>(context, listen: false)
             .changeSubMenusPopup2State(false);
       },
       child: isInHorizantal

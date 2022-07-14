@@ -16,26 +16,26 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    final UsersController controller = Get.put(HoledoDatabase().users);
-    return FutureBuilder<User>(
-      future: controller.getProfileData(
-        context: context,
-        slug: widget.slug,
-        id: widget.id ?? 3829.toString(),
-      ),
-      builder: (context, AsyncSnapshot<User> snapshot) {
-        if (!snapshot.hasData) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        } else
-          return PageScaffold(
-            title: snapshot.data!.fullName.toString(),
-            body: UserProfilePage(
+    //final UsersController controller = ;
+    print('profie? ${widget.slug},  ${widget.id}');
+    return PageScaffold(
+      title: 'Profile',
+      body: FutureBuilder<User>(
+        future: Get.put(HoledoDatabase())
+            .users
+            .getProfileData(context: context, slug: widget.slug, id: widget.id),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData ||
+              snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else
+            return UserProfilePage(
               userProfileData: snapshot.data!,
-            ),
-          );
-      },
+            );
+        },
+      ),
     );
   }
 }

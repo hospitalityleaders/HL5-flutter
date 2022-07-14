@@ -73,8 +73,8 @@ class Achievement {
   DateTime? dateReceived;
   dynamic description;
   DateTime? created;
-  DateTime? modified;
-  AchievementType? achievementType;
+  // DateTime? modified;
+  //AchievementType? achievementType;
   String? dateIssued;
 
   Achievement({
@@ -87,8 +87,8 @@ class Achievement {
     this.dateReceived,
     this.description,
     this.created,
-    this.modified,
-    this.achievementType,
+    //this.modified,
+    //this.achievementType,
     this.dateIssued,
   });
 
@@ -106,13 +106,13 @@ class Achievement {
         created: json['created'] == null
             ? null
             : DateTime.parse(json['created'] as String),
-        modified: json['modified'] == null
+        /*    modified: json['modified'] == null
             ? null
             : DateTime.parse(json['modified'] as String),
         achievementType: json['achievement_type'] == null
             ? null
             : AchievementType.fromJson(
-                json['achievement_type'] as Map<String, dynamic>),
+                json['achievement_type'] as Map<String, dynamic>),*/
         dateIssued: json['date_issued'] as String?,
       );
 
@@ -126,8 +126,8 @@ class Achievement {
         'date_received': dateReceived?.toIso8601String(),
         'description': description,
         'created': created?.toIso8601String(),
-        'modified': modified?.toIso8601String(),
-        'achievement_type': achievementType?.toJson(),
+        /*'modified': modified?.toIso8601String(),
+        'achievement_type': achievementType?.toJson(),*/
         'date_issued': dateIssued,
       };
 }
