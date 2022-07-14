@@ -61,6 +61,7 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage>
     ref.watch(profileNotifierProvider.notifier).changeUserProfilePercentage(
           p.Provider.of<AppState>(context).isLoggedIn,
         );
+
     setState(() {
       _tabController.index = ref.watch(profileNotifierProvider).currentTabIndex;
     });
