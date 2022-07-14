@@ -153,7 +153,8 @@ class _ProfileCoverImageDialogExpandedTileState
                 height: 240,
                 child: pickedImage ??
                     Image.network(
-                      userProfileData.banner ?? "",
+                      userProfileData.banner ??
+                          "https://images.pexels.com/photos/269077/pexels-photo-269077.jpeg",
                       fit: BoxFit.cover,
                     ),
               ),

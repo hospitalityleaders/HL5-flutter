@@ -15,7 +15,7 @@ class ProfileState with _$ProfileState {
     @Default(false) bool showProfileSubMenus,
     @Default(false) bool profileSubMenuClicked,
     @Default(0) int currentTabIndex,
-    @Default(0) int percentageProfileCompleted,
+    // @Default(0) int percentageProfileCompleted,
     @Default(AppNotificationState.profileCompletion())
         AppNotificationState appNotificationState,
   }) = _ProfileState;
@@ -86,36 +86,37 @@ class ProfileNotifier extends StateNotifier<ProfileState> {
     );
   }
 
-  void changeUserProfilePercentage(bool isLoggedIn) {
-    int _percentage = 20;
-    if (isLoggedIn) {
-      final bool experienceAdded = (userProfileData.experiences != null ||
-          userProfileData.experiences!.isNotEmpty);
-      final bool qualificationAdded = ((userProfileData.educations == null ||
-              userProfileData.educations!.isNotEmpty) ||
-          (userProfileData.educations!.first.qualification == null ||
-              userProfileData.educations!.first.qualification != null));
-      final bool expertiseAdded = (userProfileData.expertise == null ||
-          userProfileData.expertise!.isNotEmpty);
-      final bool languagesAdded = (userProfileData.languages == null ||
-          userProfileData.languages!.isNotEmpty);
+  // void changeUserProfilePercentage(bool isLoggedIn) {
+  //   int _percentage = 20;
+  //   if (isLoggedIn) {
+  //     final bool experienceAdded = (userProfileData.experiences != null ||
+  //         userProfileData.experiences!.isNotEmpty);
+  //     final bool qualificationAdded = ((userProfileData.educations == null ||
+  //             userProfileData.educations!.isNotEmpty) ||
+  //         (userProfileData.educations!.first.qualification == null ||
+  //             userProfileData.educations!.first.qualification != null));
+  //     final bool expertiseAdded = (userProfileData.expertise == null ||
+  //         userProfileData.expertise!.isNotEmpty);
+  //     final bool languagesAdded = (userProfileData.languages == null ||
+  //         userProfileData.languages!.isNotEmpty);
 
-      if (experienceAdded) {
-        _percentage += 20;
-      }
-      if (qualificationAdded) {
-        _percentage += 20;
-      }
-      if (expertiseAdded) {
-        _percentage += 20;
-      }
+  //     if (experienceAdded) {
+  //       _percentage += 20;
+  //     }
+  //     if (qualificationAdded) {
+  //       _percentage += 20;
+  //     }
+  //     if (expertiseAdded) {
+  //       _percentage += 20;
+  //     }
 
-      if (languagesAdded) {
-        _percentage += 20;
-      }
-      state = state.copyWith(
-        percentageProfileCompleted: _percentage,
-      );
-    }
-  }
+  //     if (languagesAdded) {
+  //       _percentage += 20;
+  //     }
+  //     state = state.copyWith(
+  //       percentageProfileCompleted: _percentage,
+  //     );
+  //   }
+  // }
+
 }
