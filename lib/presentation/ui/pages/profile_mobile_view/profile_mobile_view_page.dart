@@ -392,7 +392,8 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                               height: 75,
                               decoration: Styles.boxDecorationRounded.copyWith(
                                 image: const DecorationImage(
-                                  image: AssetImage("assets/images/avatar.png"),
+                                  image:
+                                      AssetImage("/assets/images/avatar.png"),
                                   fit: BoxFit.cover,
                                 ),
                               ),

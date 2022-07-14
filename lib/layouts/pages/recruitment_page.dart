@@ -1,4 +1,3 @@
-import 'package:holedo/models/holedoapi/user.dart';
 import 'package:holedo/models/models.dart';
 import 'package:holedo/layouts/page_scaffold.dart';
 import 'package:flutter/material.dart';

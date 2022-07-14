@@ -1,7 +1,5 @@
-import 'package:holedo/models/holedoapi/data.dart';
 import 'package:holedo/models/models.dart';
 import 'package:holedo/layouts/page_scaffold.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:holedo/utils/validator.dart';
 import 'package:routemaster/routemaster.dart';
@@ -54,14 +52,12 @@ class _LoginPageState extends State<LoginPage> {
             password: _passwordController.text);
         print('cjec: ${usersControler.isLogin.value}');
 
-        if (response != null) {
-          Provider.of<AppState>(context, listen: false).username =
-              _usernameController.text;
-          Provider.of<AppState>(context, listen: false).profile = response;
-          var redirect = widget.redirectTo;
-          if (redirect == null) redirect = '/profile/${response.slug}';
-          Routemaster.of(context).push(redirect);
-        }
+        Provider.of<AppState>(context, listen: false).username =
+            _usernameController.text;
+        Provider.of<AppState>(context, listen: false).profile = response;
+        var redirect = widget.redirectTo;
+        if (redirect == null) redirect = '/profile/${response.slug}';
+        Routemaster.of(context).push(redirect);
       }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(

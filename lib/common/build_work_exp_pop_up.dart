@@ -37,16 +37,17 @@ class BuildWorkExpPopUp {
                     'General Manager',
                     style: FontTextStyle.kBlueDark116W700SSP,
                   ),
-                  subtitle: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'Fairmont Zimbali Resort · Cape Town',
                         style: FontTextStyle.kBlueLight114W400SSP,
-                      ), Text(
+                      ),
+                      Text(
                         'February 2012 – January 2013 (11 months)',
                         style: FontTextStyle.kGreyLight514W400SSP,
                       ),
-
                     ],
                   ),
                   trailing: isExperienceEditable

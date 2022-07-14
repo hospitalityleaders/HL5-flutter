@@ -30,8 +30,7 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
   bool isExperienceShowCard = false;
   int indexExp = 1;
 
-
-  BuildWorkExpPopUp _buildWorkExpPopUp=BuildWorkExpPopUp();
+  BuildWorkExpPopUp _buildWorkExpPopUp = BuildWorkExpPopUp();
 
   Future<String?> buildAddyourworkexperiencePopUpCard() {
     return showDialog(
@@ -43,16 +42,17 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
               child: Container(
                 color: ColorPicker.kGreyLight3,
                 width: Responsive.isDesktop(context)
-                    ? SS.sW(context) * .50 as double
+                    ? SS.sW(context) * .50
                     : Responsive.isMobile(context)
-                    ? SS.sW(context) * .90 as double
-                    : SS.sW(context) * .60 as double,
+                        ? SS.sW(context) * .90
+                        : SS.sW(context) * .60,
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
                       PopUpHeadMenu.popUpHead('Work experience', context),
                       isVisibleExperience
-                          ? _buildWorkExpPopUp.buildExpInnerCard(false, true, indexExp)
+                          ? _buildWorkExpPopUp.buildExpInnerCard(
+                              false, true, indexExp)
                           : Padding(
                               padding: EdgeInsets.all(8.0),
                               child: CircleAvatar(
@@ -72,8 +72,10 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                                 ),
                               ),
                             ),
-                      _buildWorkExpPopUp.buildExpInnerCard(true, isExperienceShowCard, indexExp),
-                      _buildWorkExpPopUp.buildExpInnerCard(true, isExperienceShowCard, indexExp),
+                      _buildWorkExpPopUp.buildExpInnerCard(
+                          true, isExperienceShowCard, indexExp),
+                      _buildWorkExpPopUp.buildExpInnerCard(
+                          true, isExperienceShowCard, indexExp),
                     ],
                   ),
                 ),
@@ -101,17 +103,17 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
               child: Container(
                 color: ColorPicker.kGreyLight8,
                 width: Responsive.isDesktop(context)
-                    ? SS.sW(context) * .50 as double
+                    ? SS.sW(context) * .50
                     : Responsive.isMobile(context)
-                    ? SS.sW(context) * .90 as double
-                    : SS.sW(context) * .60 as double,
+                        ? SS.sW(context) * .90
+                        : SS.sW(context) * .60,
                 // height: 375,
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
                       PopUpHeadMenu.popUpHead('Expertise', context),
                       SizedBox(
-                        height: SS.sH(context) * .05 as double,
+                        height: SS.sH(context) * .05,
                       ),
                       Padding(
                         padding: EdgeInsets.all(16.0),
@@ -120,10 +122,10 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                             Container(
                               color: ColorPicker.kWhite,
                               width: Responsive.isDesktop(context)
-                                  ? SS.sW(context) * .50 as double
+                                  ? SS.sW(context) * .50
                                   : Responsive.isMobile(context)
-                                  ? SS.sW(context) * .90 as double
-                                  : SS.sW(context) * .60 as double,
+                                      ? SS.sW(context) * .90
+                                      : SS.sW(context) * .60,
                               child: Padding(
                                 padding: EdgeInsets.all(20),
                                 child: Column(
@@ -206,8 +208,7 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                                                         color: ColorPicker
                                                             .kBlueLight3)),
                                                 alignment: Alignment.center,
-                                                width: SS.sW(context) * .091
-                                                    as double,
+                                                width: SS.sW(context) * .091,
                                                 height: 36,
                                                 child: Text(
                                                   'Add to list',
@@ -269,11 +270,19 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                                       children: [
                                         OutlinedButton(
                                             onPressed: () {},
-                                            child: Text('Cancel',style: FontTextStyle.kBlueLight114W400SSP,)),
+                                            child: Text(
+                                              'Cancel',
+                                              style: FontTextStyle
+                                                  .kBlueLight114W400SSP,
+                                            )),
                                         SS.sB(0, 10),
                                         ElevatedButton(
                                             onPressed: () {},
-                                            child: Text('Save',style: FontTextStyle.kWhite14W400SSP,))
+                                            child: Text(
+                                              'Save',
+                                              style:
+                                                  FontTextStyle.kWhite14W400SSP,
+                                            ))
                                       ],
                                     ),
                                   ),
@@ -308,8 +317,8 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
         context: context,
         builder: (BuildContext context) {
           return StatefulBuilder(builder: (BuildContext context, setState) {
-            List<Widget> textField = List.generate(langIndex,
-                (int i) => TextFieldAndFieldName.buildTextField());
+            List<Widget> textField = List.generate(
+                langIndex, (int i) => TextFieldAndFieldName.buildTextField());
             List<Widget> menuItem = List.generate(
                 langIndex,
                 (int i) => DropDownButton(
@@ -320,10 +329,10 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
               child: Container(
                 color: ColorPicker.kGreyLight3,
                 width: Responsive.isDesktop(context)
-                    ? SS.sW(context) * .50 as double
+                    ? SS.sW(context) * .50
                     : Responsive.isMobile(context)
-                    ? SS.sW(context) * .90 as double
-                    : SS.sW(context) * .60 as double,
+                        ? SS.sW(context) * .90
+                        : SS.sW(context) * .60,
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -333,10 +342,10 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                         padding: EdgeInsets.all(16.0),
                         child: Container(
                           width: Responsive.isDesktop(context)
-                              ? SS.sW(context) * .50 as double
+                              ? SS.sW(context) * .50
                               : Responsive.isMobile(context)
-                              ? SS.sW(context) * .90 as double
-                              : SS.sW(context) * .60 as double,
+                                  ? SS.sW(context) * .90
+                                  : SS.sW(context) * .60,
                           color: ColorPicker.kWhite,
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -363,8 +372,16 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                                             langIndex++;
                                           });
                                         },
-                                        icon: Icon(Icons.add,color: ColorPicker.kBlueLight1,size: 8,),
-                                        label: Text('Add another',style: FontTextStyle.kBlueLight114W400SSP,),
+                                        icon: Icon(
+                                          Icons.add,
+                                          color: ColorPicker.kBlueLight1,
+                                          size: 8,
+                                        ),
+                                        label: Text(
+                                          'Add another',
+                                          style: FontTextStyle
+                                              .kBlueLight114W400SSP,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -623,7 +640,7 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                     onPressed: () {},
                     child: Padding(
                       padding: EdgeInsets.symmetric(
-                        vertical: SS.sH(context) * 0.010 as double,
+                        vertical: SS.sH(context) * 0.010,
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -634,7 +651,7 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                             size: 12,
                           ),
                           SizedBox(
-                            width: SS.sW(context) * .01 as double,
+                            width: SS.sW(context) * .01,
                           ),
                           AutoSizeText(
                             'Grow your network',

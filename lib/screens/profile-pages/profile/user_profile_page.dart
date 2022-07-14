@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:holedo/layouts/pages/profile-pages/profile/header_card.dart';
 import 'package:holedo/layouts/pages/profile-pages/timeline/timeline.dart';
@@ -217,8 +216,8 @@ class _UserProfilePageState extends State<UserProfilePage>
                     hCardApiData: widget.userProfileData,
                   ),
                   Container(
-                    height: SS.sH(context) * 0.065 as double,
-                    width: SS.sW(context) as double,
+                    height: SS.sH(context) * 0.065,
+                    width: SS.sW(context),
                     decoration: BoxDecoration(
                       color: ColorPicker.kWhite,
                       border: Border(
@@ -227,7 +226,7 @@ class _UserProfilePageState extends State<UserProfilePage>
                     ),
                     child: Padding(
                       padding: EdgeInsets.symmetric(
-                          horizontal: SS.sW(context) * .080 as double),
+                          horizontal: SS.sW(context) * .080),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -329,7 +328,7 @@ class _UserProfilePageState extends State<UserProfilePage>
                     ),
                   ),
                   SizedBox(
-                    height: SS.sH(context) * 1.9 as double,
+                    height: SS.sH(context) * 1.9,
                     child: TabBarView(
                         controller: _tabController,
                         children: <Widget>[

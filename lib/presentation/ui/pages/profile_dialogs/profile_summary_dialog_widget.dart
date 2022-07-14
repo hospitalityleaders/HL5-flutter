@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:holedo/models/holedoapi/holedoapi.dart';
+import 'package:holedo/models/models.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/dialog_widgets.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
@@ -91,9 +91,10 @@ class _ProfileSummaryDialogWidgetState
                       makeWidthNull: true,
                       onPressed: () async {
                         Nav.pop(context);
-                        await User(
+                        await Provider.of<AppState>(context, listen: false)
+                            .saveProfile(new User(
                           profileSummary: _profileSummaryController.text,
-                        ).save(widget.userProfileData);
+                        ));
                       },
                       height: 36,
                       donotShowIcon: true,

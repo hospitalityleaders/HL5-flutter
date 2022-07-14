@@ -12,6 +12,7 @@ class ProfileSubMenuPopup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appState = Provider.of<AppState>(context);
     final userProfileProviderNotListener =
         Provider.of<ProfileProvider>(context, listen: false);
     return Provider.of<ProfileProvider>(context).profileSubMenuClicked
@@ -28,33 +29,46 @@ class ProfileSubMenuPopup extends StatelessWidget {
               height: 220,
               child: ListView(
                 shrinkWrap: true,
-                children: [
-                  const PopupArrow(),
-                  const _SubMenuWidget(
-                    text: "View profile",
-                  ),
-                  const _SubMenuWidget(
-                    text: "Account settings",
-                  ),
-                  const _SubMenuWidget(
-                    text: "Privacy settings",
-                  ),
-                  _SubMenuWidget(
-                    text: "Log out",
-                    onTap: () async {
-                      Provider.of<ProfileProvider>(context, listen: false)
-                          .changeProfileSubMenuClicked(true);
-                      print("loging out");
-                      Routemaster.of(context).push("/login");
+                children: (appState.isLoggedIn)
+                    ? [
+                        const PopupArrow(),
+                        const _SubMenuWidget(
+                          text: "View profile",
+                        ),
+                        const _SubMenuWidget(
+                          text: "Account settings",
+                        ),
+                        const _SubMenuWidget(
+                          text: "Privacy settings",
+                        ),
+                        _SubMenuWidget(
+                          text: "Log out",
+                          onTap: () async {
+                            Provider.of<ProfileProvider>(context, listen: false)
+                                .changeProfileSubMenuClicked(true);
+                            print("loging out");
+                            Routemaster.of(context).push("/logout");
 
-                      // ApiServices _apiServices = ApiServices();
-                      // await _apiServices.logout(
-                      //     '${Get.put(AuthController()).restoreModel().token}');
-                      // Routemaster.of(context).push("/login");
-                      print("loging out ss");
-                    },
-                  ),
-                ],
+                            // ApiServices _apiServices = ApiServices();
+                            // await _apiServices.logout(
+                            //     '${Get.put(AuthController()).restoreModel().token}');
+                            // Routemaster.of(context).push("/login");
+                            print("loging out ss");
+                          },
+                        ),
+                      ]
+                    : [
+                        const PopupArrow(),
+                        _SubMenuWidget(
+                          text: "Login",
+                          onTap: () async {
+                            Provider.of<ProfileProvider>(context, listen: false)
+                                .changeProfileSubMenuClicked(true);
+
+                            Routemaster.of(context).push("/login");
+                          },
+                        ),
+                      ],
               ),
             ),
           );

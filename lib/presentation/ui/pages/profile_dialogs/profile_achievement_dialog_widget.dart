@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:holedo/db_data.dart';
+import 'package:holedo/main.dart';
 import 'package:holedo/models/holedoapi/achievement.dart';
-import 'package:holedo/models/holedoapi/holedoapi.dart';
+
+import 'package:holedo/models/models.dart';
 import 'package:holedo/presentation/data/presentation_data.dart';
 
 import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
@@ -150,24 +152,42 @@ class __SingleAchievementState extends State<_SingleAchievement> {
   late bool isExpanded;
   String currentAchivement = achievementTypeMap.keys.first;
   String? currentYear;
-
+  late Map<String, dynamic>? achievementTypes =
+      holedoDatabase.getModel().settings?.achievementTypes;
   @override
   void initState() {
     isExpanded = widget.isExpanded;
     achievement = widget.achievement ?? Achievement();
     _achievementTitleController = TextEditingController(text: achievement.title)
       ..addListener(() {
-        setState(() {});
+        setState(() {
+          achievement.title = _achievementTitleController.text.toString();
+        });
       });
     _issuingEntityController =
         TextEditingController(text: achievement.issuingEntity)
           ..addListener(() {
-            setState(() {});
+            setState(() {
+              achievement.issuingEntity =
+                  _issuingEntityController.text.toString();
+            });
           });
 
-    _awardWebsiteController = TextEditingController(text: achievement.website);
+    _awardWebsiteController = TextEditingController(text: achievement.website)
+      ..addListener(() {
+        setState(() {
+          achievement.website = _awardWebsiteController.text.toString();
+        });
+      });
+
     _descriptionController =
-        TextEditingController(text: achievement.description);
+        TextEditingController(text: achievement.description)
+          ..addListener(() {
+            setState(() {
+              achievement.description = _descriptionController.text.toString();
+            });
+          });
+
     super.initState();
 
     currentYear = achievement.dateReceived?.year.toString();
@@ -184,6 +204,7 @@ class __SingleAchievementState extends State<_SingleAchievement> {
 
   @override
   Widget build(BuildContext context) {
+    // print('type: ${achievementTypes.toString()}');
     return CustomExpandedTile(
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -234,168 +255,181 @@ class __SingleAchievementState extends State<_SingleAchievement> {
       content: Container(
         color: Cr.whiteColor,
         padding: const EdgeInsets.all(Di.PSL),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const DialogLabelTextFormField(customLabel: "Achievement type"),
-                Di.SBHES,
-                DialogDropDownTextField(
-                  width: double.infinity,
-                  initialValue: currentAchivement,
-                  alignHintTextStart: true,
-                  onChanged: (value) {
-                    setState(() {
-                      currentAchivement = value ?? currentAchivement;
-                    });
-                  },
-                  // iconsList: achievementTypeList
-                  //     .map(
-                  //         (achievementT) => SvgPicture.asset(achievementT.icon))
-                  //     .toList(),
-                  hintText: 'Choose',
-                  dataList: achievementTypeMap.keys.toList(),
-                ),
-                Di.SBCH(18),
-                const DialogLabelTextFormField(
-                  customLabel: "Achievement title",
-                ),
-                Di.SBHES,
-                DialogTextFieldForm(
-                  textEditingController: _achievementTitleController,
-                ),
-                Di.SBCH(18),
-                const DialogLabelTextFormField(
-                  isImportant: false,
-                  customLabel: "Issuing entity",
-                ),
-                Di.SBHES,
-                DialogTextFieldForm(
-                  textEditingController: _issuingEntityController,
-                ),
-                Di.SBCH(18),
-                const DialogLabelTextFormField(
-                  isImportant: false,
-                  customLabel: "Award/Website link",
-                ),
-                Di.SBHES,
-                DialogTextFieldForm(
-                  hintText: "www.website.com",
-                  textEditingController: _awardWebsiteController,
-                ),
-                Di.SBCH(18),
-                const DialogLabelTextFormField(customLabel: "Date received"),
-                Di.SBHES,
-                DialogDropDownTextField(
-                  width: 72,
-                  alignHintTextStart: true,
-                  onChanged: (value) {
-                    setState(() {
-                      currentYear = value;
-                    });
-                  },
-                  // iconsList: achievementTypeList
-                  //     .map(
-                  //         (achievementT) => SvgPicture.asset(achievementT.icon))
-                  //     .toList(),
-                  hintText: 'Year',
-                  dataList: PresentationData.yearsList,
-                ),
-                Di.SBCH(18),
-              ],
-            ),
-            Di.SBCH(18),
-            const DialogLabelTextFormField(
-              customLabel: "Job description",
-              isImportant: false,
-            ),
-            Di.SBHES,
-            DialogMultiLineTextField(
-              textEditingController: _descriptionController,
-              width: 575,
-            ),
-            Di.SBCH(28),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    // setState(() {
-                    //   qualificationList.add('');
-                    // });
-                  },
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      SvgPicture.asset(
-                        Svgs.delete,
-                        color: Cr.red1,
-                        width: 14,
-                      ),
-                      Di.SBWETS,
-                      Text(
-                        "Delete",
-                        style: bodySmallRegular.copyWith(
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const DialogLabelTextFormField(
+                      customLabel: "Achievement type"),
+                  Di.SBHES,
+                  DialogDropDownTextField(
+                    width: double.infinity,
+                    initialValue: currentAchivement,
+                    alignHintTextStart: true,
+                    onChanged: (value) {
+                      setState(() {
+                        currentAchivement = value ?? currentAchivement;
+                        achievement.achievementTypeId = value as int;
+                      });
+                    },
+                    // iconsList: achievementTypeList
+                    //     .map(
+                    //         (achievementT) => SvgPicture.asset(achievementT.icon))
+                    //     .toList(),
+                    hintText: 'Choose',
+                    //mapList: (achievementTypes as Map<String, dynamic>),
+                    dataList: achievementTypeMap.keys.toList(),
+                  ),
+                  Di.SBCH(18),
+                  const DialogLabelTextFormField(
+                    customLabel: "Achievement title",
+                  ),
+                  Di.SBHES,
+                  DialogTextFieldForm(
+                    textEditingController: _achievementTitleController,
+                  ),
+                  Di.SBCH(18),
+                  const DialogLabelTextFormField(
+                    isImportant: false,
+                    customLabel: "Issuing entity",
+                  ),
+                  Di.SBHES,
+                  DialogTextFieldForm(
+                    textEditingController: _issuingEntityController,
+                  ),
+                  Di.SBCH(18),
+                  const DialogLabelTextFormField(
+                    isImportant: false,
+                    customLabel: "Award/Website link",
+                  ),
+                  Di.SBHES,
+                  DialogTextFieldForm(
+                    hintText: "www.website.com",
+                    textEditingController: _awardWebsiteController,
+                  ),
+                  Di.SBCH(18),
+                  const DialogLabelTextFormField(customLabel: "Date received"),
+                  Di.SBHES,
+                  DialogDropDownTextField(
+                    width: 72,
+                    alignHintTextStart: true,
+                    onChanged: (value) {
+                      setState(() {
+                        currentYear = value;
+                        achievement.dateReceived = DateTime.parse(
+                            '${value.toString()}-07-01T19:10:35+02:00');
+                        print(
+                            'date ${DateTime.parse('${value.toString()}-07-01T19:10:35+02:00')}');
+                      });
+                    },
+                    // iconsList: achievementTypeList
+                    //     .map(
+                    //         (achievementT) => SvgPicture.asset(achievementT.icon))
+                    //     .toList(),
+                    hintText: 'Year',
+                    dataList: PresentationData.yearsList,
+                  ),
+                  Di.SBCH(18),
+                ],
+              ),
+              Di.SBCH(18),
+              const DialogLabelTextFormField(
+                customLabel: "Job description",
+                isImportant: false,
+              ),
+              Di.SBHES,
+              DialogMultiLineTextField(
+                textEditingController: _descriptionController,
+                width: 575,
+              ),
+              Di.SBCH(28),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      // setState(() {
+                      //   qualificationList.add('');
+                      // });
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SvgPicture.asset(
+                          Svgs.delete,
                           color: Cr.red1,
+                          width: 14,
+                        ),
+                        Di.SBWETS,
+                        Text(
+                          "Delete",
+                          style: bodySmallRegular.copyWith(
+                            color: Cr.red1,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      CustomElevatedButton(
+                        borderColor: Cr.accentBlue2,
+                        makeWidthNull: true,
+                        onPressed: () => Nav.pop(context),
+                        height: 36,
+                        donotShowIcon: true,
+                        backgroundColor: Cr.accentBlue3,
+                        child: Text(
+                          "Cancel",
+                          style: bodySmallRegular.copyWith(
+                            color: Cr.accentBlue1,
+                          ),
+                        ),
+                      ),
+                      Di.SBWES,
+                      CustomElevatedButton(
+                        borderColor: Cr.accentBlue2,
+                        makeWidthNull: true,
+                        onPressed: () async {
+                          showCircularProgressIndicator(context);
+                          final userProfileData = DbData.getUserProfileData;
+                          List<Achievement> _achievementList =
+                              DbData.getUserProfileData.achievements ?? [];
+                          if (widget.index != null) {
+                            _achievementList[widget.index!] = achievement;
+                          } else {
+                            _achievementList.add(achievement);
+                          }
+
+                          await Provider.of<AppState>(context, listen: false)
+                              .saveProfile(new User(
+                            achievements: _achievementList,
+                          ));
+
+                          //Nav.pop(context);
+                          //Nav.pop(context);
+                        },
+                        height: 36,
+                        donotShowIcon: true,
+                        backgroundColor: Cr.accentBlue1,
+                        child: Text(
+                          "Save",
+                          style: bodySmallRegular.copyWith(
+                            color: Cr.whiteColor,
+                          ),
                         ),
                       ),
                     ],
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    CustomElevatedButton(
-                      borderColor: Cr.accentBlue2,
-                      makeWidthNull: true,
-                      onPressed: () => Nav.pop(context),
-                      height: 36,
-                      donotShowIcon: true,
-                      backgroundColor: Cr.accentBlue3,
-                      child: Text(
-                        "Cancel",
-                        style: bodySmallRegular.copyWith(
-                          color: Cr.accentBlue1,
-                        ),
-                      ),
-                    ),
-                    Di.SBWES,
-                    CustomElevatedButton(
-                      borderColor: Cr.accentBlue2,
-                      makeWidthNull: true,
-                      onPressed: () async {
-                        showCircularProgressIndicator(context);
-                        final userProfileData = DbData.getUserProfileData;
-                        List<Achievement> _achievementList =
-                            DbData.getUserProfileData.achievements ?? [];
-                        if (widget.index != null) {
-                          _achievementList[widget.index!] = achievement;
-                        } else {
-                          _achievementList.add(achievement);
-                        }
-                        await User(
-                          achievements: _achievementList,
-                        ).save(userProfileData);
-                        Nav.pop(context);
-                        Nav.pop(context);
-                      },
-                      height: 36,
-                      donotShowIcon: true,
-                      backgroundColor: Cr.accentBlue1,
-                      child: Text(
-                        "Save",
-                        style: bodySmallRegular.copyWith(
-                          color: Cr.whiteColor,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            )
-          ],
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

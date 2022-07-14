@@ -3,6 +3,7 @@ import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/constant/sizedbox.dart';
 import 'package:holedo/common/common_widget.dart';
+import 'package:holedo/presentation/utill/images.dart';
 import '../../models/models.dart';
 
 class AppBarTopMobile extends AppBar {
@@ -205,7 +206,7 @@ class AppBarTopMobile extends AppBar {
                     height: 26,
                     width: 26,
                     child: Image(
-                      image: AssetImage('assets/images/avatar.png'),
+                      image: AssetImage(Images.avatar),
                     ),
                   ),
                 ),
@@ -423,7 +424,7 @@ class AppBarTop extends AppBar {
                     height: 26,
                     width: 26,
                     child: Image(
-                      image: AssetImage('assets/images/avatar.png'),
+                      image: AssetImage(Images.avatar),
                     ),
                   ),
                 ),

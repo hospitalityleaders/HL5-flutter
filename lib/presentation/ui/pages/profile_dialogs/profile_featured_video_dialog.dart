@@ -83,27 +83,28 @@ class __CoverDialogExpandedTileState extends State<_CoverDialogExpandedTile> {
     expandedTileController = ExpandedTileController(
       isExpanded: widget.isExpanded,
     );
-    _videoLinkController = TextEditingController(
-      text: widget.userProfileData.profileVideoUrl,
-    )..addListener(() {
-        setState(() {});
-        setState(() async {
-          await Future.delayed(const Duration(milliseconds: 200));
-          _videoPlayerController = VideoPlayerController.network(
-            _videoLinkController.text,
-          );
-          _videoPlayerController!.initialize().then((value) {
-            setState(() {});
+    if (widget.userProfileData.profileVideoUrl != null) {
+      _videoLinkController = TextEditingController(
+        text: widget.userProfileData.profileVideoUrl,
+      )..addListener(() {
+          setState(() {});
+          setState(() async {
+            await Future.delayed(const Duration(milliseconds: 200));
+            _videoPlayerController = VideoPlayerController.network(
+              _videoLinkController.text,
+            );
+            _videoPlayerController!.initialize().then((value) {
+              setState(() {});
+            });
           });
         });
-      });
-    _videoTitleController = TextEditingController(
-      text: widget.userProfileData.profileVideoTitle,
-    );
-    _videoDescriptionController = TextEditingController(
-      text: widget.userProfileData.profileVideoDescription,
-    );
-    if (widget.userProfileData.profileVideoUrl != null) {
+      _videoTitleController = TextEditingController(
+        text: widget.userProfileData.profileVideoTitle,
+      );
+      _videoDescriptionController = TextEditingController(
+        text: widget.userProfileData.profileVideoDescription,
+      );
+
       _videoPlayerController =
           VideoPlayerController.network(widget.userProfileData.profileVideoUrl!)
             ..addListener(() {

@@ -536,7 +536,7 @@
 //                               image: DecorationImage(
 //                                   fit: BoxFit.cover,
 //                                   image:
-//                                       AssetImage('assets/images/profile.png')),
+//                                       AssetImage(Images.profile)),
 //                               borderRadius: BorderRadius.circular(5)),
 //                         ),
 //                         Expanded(
@@ -2947,7 +2947,7 @@
 //                                 image: DecorationImage(
 //                                     fit: BoxFit.cover,
 //                                     image: AssetImage(
-//                                         'assets/images/profile.png')),
+//                                         Images.profile)),
 //                                 borderRadius: BorderRadius.circular(5)),
 //                           ),
 //                           Expanded(
@@ -3274,6 +3274,7 @@ import 'package:get/get.dart';
 import 'package:holedo/controller/menu_controller.dart';
 import 'package:holedo/layouts/pages/news/update/widget/update_news_widget.dart';
 import 'package:holedo/layouts/pages/profile_page.dart';
+import 'package:holedo/presentation/utill/images.dart';
 
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import '../../../../common/common_widget.dart';
@@ -4147,8 +4148,7 @@ class _UpdateNewsState extends State<UpdateNews>
                           decoration: BoxDecoration(
                               image: DecorationImage(
                                   fit: BoxFit.cover,
-                                  image:
-                                      AssetImage('assets/images/profile.png')),
+                                  image: AssetImage(Images.profile)),
                               borderRadius: BorderRadius.circular(5)),
                         ),
                         Expanded(
@@ -6561,8 +6561,7 @@ class _UpdateNewsState extends State<UpdateNews>
                             decoration: BoxDecoration(
                                 image: DecorationImage(
                                     fit: BoxFit.cover,
-                                    image: AssetImage(
-                                        'assets/images/profile.png')),
+                                    image: AssetImage(Images.profile)),
                                 borderRadius: BorderRadius.circular(5)),
                           ),
                           Expanded(

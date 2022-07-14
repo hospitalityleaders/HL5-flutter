@@ -5,6 +5,7 @@ import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/sizedbox.dart';
 import 'package:holedo/common/common_widget.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
+import 'package:holedo/presentation/utill/images.dart';
 import 'package:holedo/responsive/responsive.dart';
 
 import '../../../../common/common_widget.dart';
@@ -328,8 +329,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                     decoration: BoxDecoration(
                                         image: DecorationImage(
                                             fit: BoxFit.cover,
-                                            image: AssetImage(
-                                                'assets/images/profile.png'))),
+                                            image: AssetImage(Images.profile))),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(10),
@@ -1071,8 +1071,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                     color: Colors.green,
                                     image: DecorationImage(
                                         fit: BoxFit.cover,
-                                        image: AssetImage(
-                                            'assets/images/avatar.png'))),
+                                        image: AssetImage(Images.avatar))),
                               ),
                               SizedBox(
                                 width: 20,
@@ -1175,8 +1174,8 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                             color: Colors.green,
                                             image: DecorationImage(
                                                 fit: BoxFit.cover,
-                                                image: AssetImage(
-                                                    'assets/images/avatar.png'))),
+                                                image:
+                                                    AssetImage(Images.avatar))),
                                       ),
                                       SizedBox(
                                         width: Get.width * 0.01,
@@ -1279,8 +1278,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                     color: Colors.green,
                                     image: DecorationImage(
                                         fit: BoxFit.cover,
-                                        image: AssetImage(
-                                            'assets/images/avatar.png'))),
+                                        image: AssetImage(Images.avatar))),
                               ),
                               SizedBox(
                                 width: 20,
@@ -1911,7 +1909,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                       height: 26,
                       width: 26,
                       child: Image(
-                        image: AssetImage('assets/images/avatar.png'),
+                        image: AssetImage(Images.avatar),
                       ),
                     ),
                   ),
@@ -2041,7 +2039,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
                                         image: AssetImage(
-                                            "assets/images/avatar.png"),
+                                            "/assets/images/avatar.png"),
                                         fit: BoxFit.cover)),
                               ),
                               SizedBox(
@@ -2770,8 +2768,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                 color: Colors.green,
                                 image: DecorationImage(
                                     fit: BoxFit.cover,
-                                    image: AssetImage(
-                                        'assets/images/avatar.png'))),
+                                    image: AssetImage(Images.avatar))),
                           ),
                           SB.SW20(),
                           Column(
@@ -2874,8 +2871,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                         color: Colors.green,
                                         image: DecorationImage(
                                             fit: BoxFit.cover,
-                                            image: AssetImage(
-                                                'assets/images/avatar.png'))),
+                                            image: AssetImage(Images.avatar))),
                                   ),
                                   SizedBox(
                                     width: Get.width * 0.01,
@@ -2982,8 +2978,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                 color: Colors.green,
                                 image: DecorationImage(
                                     fit: BoxFit.cover,
-                                    image: AssetImage(
-                                        'assets/images/avatar.png'))),
+                                    image: AssetImage(Images.avatar))),
                           ),
                           // SizedBox(
                           //   width: 20,

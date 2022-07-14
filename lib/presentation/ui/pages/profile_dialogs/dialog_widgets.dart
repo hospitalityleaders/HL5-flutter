@@ -180,6 +180,7 @@ class DialogDropDownTextField extends StatefulWidget {
     Key? key,
     this.width,
     required this.dataList,
+    this.mapList,
     required this.hintText,
     this.disable = false,
     this.prefixIcon,
@@ -193,6 +194,7 @@ class DialogDropDownTextField extends StatefulWidget {
 
   final double? width;
   final List<String> dataList;
+  final Map<String, dynamic>? mapList;
   final List<IconData>? iconDataList;
   final List<Widget>? iconsList;
   final String hintText;
@@ -273,7 +275,7 @@ class _DialogDropDownTextFieldState extends State<DialogDropDownTextField> {
                           Di.SBWS,
                         ],
                         Text(
-                          item,
+                          widget.mapList != null ? widget.mapList![item] : item,
                           style: bodySmallRegular.copyWith(
                             color: widget.disable ? Cr.grey2 : Cr.darkGrey1,
                           ),

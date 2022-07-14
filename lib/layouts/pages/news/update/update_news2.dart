@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
+import 'package:holedo/presentation/utill/images.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 import 'package:holedo/common/common_widget.dart';
@@ -193,7 +194,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                                 image: DecorationImage(
                                                     fit: BoxFit.cover,
                                                     image: AssetImage(
-                                                        'assets/images/profile.png')),
+                                                        Images.profile)),
                                                 borderRadius:
                                                     BorderRadius.circular(5)),
                                           ),

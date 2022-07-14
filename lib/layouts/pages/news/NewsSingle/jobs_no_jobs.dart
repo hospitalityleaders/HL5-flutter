@@ -6,6 +6,7 @@ import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/common/common_widget.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/constant/sizedbox.dart';
+import 'package:holedo/presentation/utill/images.dart';
 import 'package:holedo/responsive/responsive.dart';
 import '../../../../common/common_widget.dart';
 import '../../../../constant/fontStyle/font_style.dart';
@@ -398,7 +399,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                             height: 26,
                             width: 26,
                             child: Image(
-                              image: AssetImage('assets/images/avatar.png'),
+                              image: AssetImage(Images.avatar),
                             ),
                           ),
                         ),
@@ -471,7 +472,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                                           decoration: BoxDecoration(
                                               image: DecorationImage(
                                                   image: AssetImage(
-                                                      "assets/images/avatar.png"),
+                                                      "/assets/images/avatar.png"),
                                                   fit: BoxFit.cover)),
                                         ),
                                         SizedBox(
@@ -911,7 +912,7 @@ class _NewsSingleJobsState extends State<NewsSingleJobs> {
                     width: Get.width,
                     child: PageView.builder(
                       onPageChanged: (value) {
-                        print('-value----${value}');
+                        print('-value----$value');
                       },
                       itemCount: 3,
                       itemBuilder: (context, index) {

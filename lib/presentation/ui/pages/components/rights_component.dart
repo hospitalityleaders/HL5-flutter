@@ -77,13 +77,13 @@ class RightsComponent extends StatelessWidget {
   }
 }
 
-  //  decoration: BoxDecoration(
-  //       borderRadius: BorderRadius.circular(2),
-  //       boxShadow: [
-  //         BoxShadow(
-  //           blurRadius: 2,
-  //           color: Color.fromARGB(64, 0, 0, 0),
-  //           offset: Offset(0, 0),
-  //         ),
-  //       ],
-  //     ),
+//  decoration: BoxDecoration(
+//       borderRadius: BorderRadius.circular(2),
+//       boxShadow: [
+//         BoxShadow(
+//           blurRadius: 2,
+//           color: Color.fromARGB(64, 0, 0, 0),
+//           offset: Offset(0, 0),
+//         ),
+//       ],
+//     ),

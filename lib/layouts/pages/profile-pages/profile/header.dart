@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:holedo/controller/menu_controller.dart';
+import 'package:holedo/presentation/utill/images.dart';
 import '../../../../common/common_widget.dart';
 import '../../../../constant/colorPicker/color_picker.dart';
 import '../../../../constant/fontStyle/font_style.dart';
@@ -261,7 +262,7 @@ class _HeaderState extends State<Header> {
                 height: 26,
                 width: 26,
                 child: Image(
-                  image: AssetImage('assets/images/avatar.png'),
+                  image: AssetImage(Images.avatar),
                 ),
               ),
             ),

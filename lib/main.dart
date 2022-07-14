@@ -88,7 +88,7 @@ RouteMap _buildRouteMap(BuildContext context) {
           appState.username = null;
           appState.profile = null;
         }
-        return Redirect('/login', queryParameters: {'redirectTo': route.path});
+        return Redirect('/login');
       },
       '/recruitments': (route) =>
           NoAnimationPage(child: const RecruitmentPage()),
@@ -238,8 +238,8 @@ class HoledoApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => AppState(
-              username: Get.put(HoledoDatabase()).getModel().user?.fullName,
-              profile: Get.put(HoledoDatabase()).getModel().user),
+              username: holedoDatabase.getModel().user?.fullName,
+              profile: holedoDatabase.getModel().user),
         ),
       ],
       child: MaterialApp.router(

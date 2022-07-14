@@ -206,7 +206,7 @@ class _UserProfilePageState extends State<UserProfilePage>
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context);
     final bool isMine = appState.isLoginnedAndEditable(widget.userProfileData);
-    print('app ${isEditable}');
+    print('app $isEditable');
     return Responsive.isDesktop(context)
         ? Container(
             decoration: BoxDecoration(color: ColorPicker.kBG),

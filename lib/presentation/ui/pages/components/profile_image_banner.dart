@@ -293,5 +293,3 @@ class _ProfileImageBannerState extends State<ProfileImageBanner> {
 // "assets/svgicons/card-account-phone.svg",
 // "Contact card",
 //
-
-

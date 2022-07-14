@@ -60,9 +60,9 @@ class _ProfileOverviewSecondColumnState
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          FeaturedVideoComponent(
-            userProfileData: widget.userProfileData,
-          ),
+          //FeaturedVideoComponent(
+          //   userProfileData: widget.userProfileData,
+          //),
           Di.SBHL,
           ProfileWorkExperienceComponent(
             userProfileData: widget.userProfileData,

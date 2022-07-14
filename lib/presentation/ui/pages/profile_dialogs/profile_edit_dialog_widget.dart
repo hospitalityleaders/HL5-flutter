@@ -745,9 +745,10 @@ class __ProfilePictureDialogExpandedTileState
                           margin: EdgeInsets.zero,
                           folder: "avatar",
                           uploadedImgCallback: (String imgUrl) async {
-                            await User(
+                            await Provider.of<AppState>(context, listen: false)
+                                .saveProfile(new User(
                               avatar: imgUrl,
-                            ).save(userProfileData);
+                            ));
                           },
                           pickedImgCallback: (Image image) {
                             setState(() {
@@ -784,9 +785,10 @@ class __ProfilePictureDialogExpandedTileState
                   } else if (userProfileData.avatar != null) {
                     await ImageUploadFunctions()
                         .deleteImageFromCloudnary(userProfileData.avatar!);
-                    await User(
+                    await Provider.of<AppState>(context, listen: false)
+                        .saveProfile(new User(
                       avatar: null,
-                    ).save(userProfileData);
+                    ));
                     // Csd.customSuccessrDialog(context, "Avatar is deleted");
                   }
                   Nav.pop(context);

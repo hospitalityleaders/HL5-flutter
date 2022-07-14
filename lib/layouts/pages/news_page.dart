@@ -90,7 +90,7 @@ class NewsPageASD extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('slug:?? ${slug}');
+    print('slug:?? $slug');
 
     final featuredNews = holedoDatabase.news.fetchArticles(context: context);
     final tabs = Get.put(HoledoDatabase())
@@ -102,7 +102,7 @@ class NewsPageASD extends StatelessWidget {
     print('categoriess: ${tabs.toString()}');
     return PageScaffold(
       title: 'ASDASDe',
-      body: Text('slug:?? ${slug} '),
+      body: Text('slug:?? $slug '),
     );
   }
 }

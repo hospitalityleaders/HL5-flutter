@@ -1257,7 +1257,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                       width: Get.width,
                       child: PageView.builder(
                         onPageChanged: (value) {
-                          print('-value----${value}');
+                          print('-value----$value');
                           setState(() {
                             indexCircle = value;
                           });

@@ -63,7 +63,7 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
         builder: (context, setState) => Dialog(
           child: Container(
             color: ColorPicker.kGreyLight3,
-            width: (SS.sW(context) as double) * .50,
+            width: (SS.sW(context)) * .50,
             child: SingleChildScrollView(
               child: Column(
                 children: [

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:holedo/presentation/utill/images.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:holedo/common/common_widget.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
@@ -919,8 +920,8 @@ class HomeWidget {
                                         decoration: BoxDecoration(
                                             color: ColorPicker.kRed,
                                             image: DecorationImage(
-                                                image: AssetImage(
-                                                    'assets/images/profile.png')),
+                                                image:
+                                                    AssetImage(Images.profile)),
                                             borderRadius:
                                                 BorderRadius.circular(5)),
                                       ),
@@ -1184,8 +1185,8 @@ class HomeWidget {
                                         decoration: BoxDecoration(
                                             color: ColorPicker.kRed,
                                             image: DecorationImage(
-                                                image: AssetImage(
-                                                    'assets/images/profile.png')),
+                                                image:
+                                                    AssetImage(Images.profile)),
                                             borderRadius:
                                                 BorderRadius.circular(5)),
                                       ),

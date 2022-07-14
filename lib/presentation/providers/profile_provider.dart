@@ -42,7 +42,7 @@ class ProfileProvider extends ChangeNotifier {
       final userProfileData = DbData.getUserProfileData;
       final bool experienceAdded = (userProfileData.experiences != null ||
           userProfileData.experiences!.isNotEmpty);
-      final bool qualificationAdded = ((userProfileData.educations == null ||
+      final bool qualificationAdded = ((userProfileData.educations != null ||
               userProfileData.educations!.isNotEmpty) ||
           (userProfileData.educations!.first.qualification == null ||
               userProfileData.educations!.first.qualification != null));

@@ -261,7 +261,7 @@
 //                 height: 26,
 //                 width: 26,
 //                 child: Image(
-//                   image: AssetImage('assets/images/avatar.png'),
+//                   image: AssetImage(Images.avatar),
 //                 ),
 //               ),
 //             ),

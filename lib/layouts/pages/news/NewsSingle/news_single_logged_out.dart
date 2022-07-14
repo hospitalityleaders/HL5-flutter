@@ -4,6 +4,7 @@ import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/common/common_widget.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/constant/sizedbox.dart';
+import 'package:holedo/presentation/utill/images.dart';
 import 'package:holedo/responsive/responsive.dart';
 
 import '../../../../common/common_widget.dart';
@@ -398,7 +399,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                             height: 26,
                             width: 26,
                             child: Image(
-                              image: AssetImage('assets/images/avatar.png'),
+                              image: AssetImage(Images.avatar),
                             ),
                           ),
                         ),
@@ -522,7 +523,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                       decoration: BoxDecoration(
                                           image: DecorationImage(
                                               image: AssetImage(
-                                                  "assets/images/avatar.png"),
+                                                  "/assets/images/avatar.png"),
                                               fit: BoxFit.cover)),
                                     ),
                                     SizedBox(
@@ -978,7 +979,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                             height: 26,
                             width: 26,
                             child: Image(
-                              image: AssetImage('assets/images/avatar.png'),
+                              image: AssetImage(Images.avatar),
                             ),
                           ),
                         ),
@@ -996,7 +997,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                     width: Get.width,
                     child: PageView.builder(
                       onPageChanged: (value) {
-                        print('-value----${value}');
+                        print('-value----$value');
                         // setState(() {
                         //   indexCircle = value;
                         // });

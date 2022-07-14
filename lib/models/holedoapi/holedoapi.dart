@@ -20,7 +20,6 @@ class Holedoapi {
             : DataModel.fromJson(json['data'] as Map<String, dynamic>),
       );
 
-  get articles => null;
   get getDataModel => data;
   Map<String, dynamic> toJson() => {
         'success': success,

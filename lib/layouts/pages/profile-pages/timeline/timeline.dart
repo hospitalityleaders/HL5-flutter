@@ -145,8 +145,7 @@ class _TimeLineState extends State<TimeLine> {
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.symmetric(
-            horizontal: SS.sW(context) * 0.070 as double,
-            vertical: SS.sH(context) * .02 as double),
+            horizontal: SS.sW(context) * 0.070, vertical: SS.sH(context) * .02),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.start,

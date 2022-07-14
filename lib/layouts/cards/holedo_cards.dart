@@ -247,7 +247,7 @@ class FooterLinkCard extends StatelessWidget {
     return LinkCard(
       onTap: () {
         Routemaster.of(context)
-            .push(pathBuilder != null ? pathBuilder!('${path}') : '${path}');
+            .push(pathBuilder != null ? pathBuilder!('$path') : '$path');
       },
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,

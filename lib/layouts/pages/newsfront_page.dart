@@ -1,4 +1,3 @@
-import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';

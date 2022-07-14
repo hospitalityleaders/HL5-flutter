@@ -113,7 +113,7 @@ class ConnectionRequestAppbarComponent extends StatelessWidget {
             height: 65,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/images/avatar.png"),
+                image: AssetImage("/assets/images/avatar.png"),
                 fit: BoxFit.fill,
               ),
             ),
@@ -158,8 +158,6 @@ class ConnectionRequestAppbarComponent extends StatelessWidget {
     );
   }
 }
-
-
 
 // Future<Object?> showProfileHoverSubmenu(BuildContext context) {
 //   return showPopover(

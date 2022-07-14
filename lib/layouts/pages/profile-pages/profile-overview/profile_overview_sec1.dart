@@ -53,7 +53,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
         "id": id,
         "profile_summary": profileSummaryController
       };
-      print('usser: ${userData}');
+      print('usser: $userData');
       dynamic res = await _apiServices.updateUserProfile();
       if (res?.success as bool) {
         Navigator.pop(context);

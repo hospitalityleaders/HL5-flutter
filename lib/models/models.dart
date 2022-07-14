@@ -60,6 +60,17 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<DataModel> saveProfile(User data) async {
+    data.id = _profile?.id;
+    // ignore: unused_local_variable
+
+    //data.slug = _profile?.slug;
+    //this.token = profile.token;
+    var dataModel = await Get.put(HoledoDatabase().users).saveProfile(data);
+    _profile = dataModel.user as User;
+    return dataModel;
+  }
+
   NewsController get news => Get.put(NewsController());
 }
 
@@ -161,7 +172,7 @@ class HoledoDatabase extends GetxController {
 
   Future<void> init() async {
     await GetStorage.init();
-    //this.resetModel();
+    this.resetModel();
     print('starting website... ');
 
     final model = await this.fetchSettings();
@@ -221,7 +232,10 @@ class HoledoDatabase extends GetxController {
 
       if (data.articleCategories?.length == null) {
         print('getting new settings: $data');
-        var response = await _api.GET(target: '/site-settings/?type=2');
+        var response = await _api.GET(
+          target: '/site-settings/v2?type=2',
+        );
+        print('res: ${response.data?.toJson().toString()}');
         data = response.data as DataModel;
       }
 
@@ -296,13 +310,9 @@ class UsersController extends GetxController {
         print('login: ${api.data!.user!.email.toString()}');
         isLogin.value = true;
         token.value = api.data?.token as String;
-
         user = api.data?.user as User;
-
-        model.token = api.data?.token;
-        model.user = user;
-        print('db save: ${model.user}');
-        Get.find<HoledoDatabase>().setModel(model);
+        model.user?.token = api.data?.token;
+        this.saveUserToModel(user, api.data?.token);
       } else {
         DB.snackBarMessage(context, 'error', api.errors.toString());
       }
@@ -313,7 +323,7 @@ class UsersController extends GetxController {
   }
 
   String? getToken(slug) {
-    final model = Get.put(HoledoDatabase()).getModel();
+    final model = holedoDatabase.getModel();
     if (model.token != null && model.user?.slug == slug) {
       print('match: $slug token: ${model.token}');
       return model.token;
@@ -321,12 +331,21 @@ class UsersController extends GetxController {
     return null;
   }
 
+  DataModel getModel() {
+    final model = holedoDatabase.getModel();
+    if (model.user != null) {
+      print('match: ${model.user?.slug} token: ${model.token}');
+    }
+    return model;
+  }
+
   void saveUserToModel(User user, String? token) {
-    final model = Get.put(HoledoDatabase()).getModel();
+    final model = holedoDatabase.getModel();
     model.token = token;
     model.user = user;
     print('update user: ${model.user}');
     Get.find<HoledoDatabase>().setModel(model);
+    //holedoDatabase.setModel(model);
   }
 
   Future<User> getProfileData({
@@ -411,6 +430,50 @@ class UsersController extends GetxController {
       var response = await _api.getUserData(id: id, slug: slug);
       print('log: $response');
       user = response;
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  Future<DataModel> saveProfile(User user) async {
+    try {
+      isLoading(true);
+      var dataModel = this.getModel();
+      var token = dataModel.token;
+
+      if (user.id != null) {
+        if (dataModel.user!.id == null) {
+          dataModel.messages = 'User Id Not matched';
+          return dataModel;
+        }
+        user.id = dataModel.user?.id;
+      }
+      if (token == null) {
+        dataModel.messages = 'Token Not matched';
+        return dataModel;
+      }
+      var userJson = user.toApiJson();
+
+      var update = await _api.POST(
+        target: '/users/update/',
+        data: userJson,
+        token: token,
+      );
+      print('Succes: ${update.success} ');
+      print('Message: ${update.messages.toString()} ');
+      // ignore: unnecessary_null_comparison
+      if (update.data != null) {
+        var response =
+            await _api.GET(target: '/users/get/', data: {'slug': user.slug});
+        //print('log: ${response.data}');
+        dataModel = response.data as DataModel;
+        print('log: ${dataModel.user?.firstName}');
+
+        dataModel.user?.token = token;
+        this.saveUserToModel(dataModel.user as User, token);
+      }
+      // isLoading(false);
+      return dataModel;
     } finally {
       isLoading(false);
     }
