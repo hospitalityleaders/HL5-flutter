@@ -517,11 +517,6 @@ class NewsController extends GetxController {
   var page = 1;
   var limit = 10;
   final ApiServices _api = ApiServices();
-  //@override
-  //void onInit() {
-  //fetch();
-  //super.onInit();
-  //r}
 
   Future<Article> getArticle({String? slug, String? id}) async {
     try {
