@@ -150,14 +150,9 @@ class _ProfileWithSubMenu extends StatelessWidget {
   }) : super(key: key);
 
   @override
-<<<<<<< HEAD
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context);
 
-=======
-  Widget build(BuildContext context, ref) {
-    final appState = Provider.of<AppState>(context);
->>>>>>> 654d0f1996369e0363e9c4c9476d33aabd3a86dd
     return Row(
       children: [
         ProfileSideHover(),
