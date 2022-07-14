@@ -7,6 +7,7 @@ import 'package:holedo/controller/auth_controller.dart';
 //import 'package:holedo/controller/auth_controller.dart';
 import 'package:holedo/models/holedoapi/article.dart';
 import 'package:holedo/models/holedoapi/job.dart';
+
 import 'package:holedo/models/models.dart';
 //import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart' as dio;
@@ -29,17 +30,17 @@ class ApiServices {
       String? token}) async {
     try {
       var model = new Holedoapi();
-      token = token == null ? Get.put(HoledoDatabase()).apiKey : token;
-      var header = headers == null
-          ? <String, dynamic>{
-              'AuthApi': 'Bearer ${token}',
-              'Content-Type': 'application/json',
-              'Accept': 'application/json',
-              'Device': 'Holedo_Flutter'
-            }
-          : headers;
+      token = token == null ? Get.put(HoledoDatabase()).token : token;
+      var header = headers ??
+          <String, dynamic>{
+            'AuthApi': 'Bearer $token',
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Accept': 'application/json',
+            'Device': 'Holedo_Flutter'
+          };
+
       dio.Response response = await _dio.post(
-        '${baseUrl}${target}',
+        '$baseUrl$target',
         data: data,
         options: dio.Options(
           headers: header,
@@ -47,7 +48,7 @@ class ApiServices {
         queryParameters: {'apikey': token},
       );
 
-      print('POST URL: ${target}');
+      print('POST URL: $target');
       print('POST headers: ${header.toString()}');
       print('POST data:${data.toString()} ');
       //print('POST respomse: ${response}');
@@ -67,30 +68,42 @@ class ApiServices {
       String? token}) async {
     try {
       var model = new Holedoapi();
-      token = token == null ? Get.put(HoledoDatabase()).apiKey : token;
-      headers == null
-          ? <String, dynamic>{
-              'AuthApi': 'Bearer ${token}',
-              'Content-Type': 'application/json; charset=UTF-8',
-              'Accept': 'application/json',
-              'Device': 'Holedo_Flutter'
-            }
-          : headers;
+      token = token ?? Get.put(HoledoDatabase()).token;
+      var header = headers ??
+          <String, dynamic>{
+            'AuthApi': 'Bearer $token',
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Accept': 'application/json',
+            'Device': 'Holedo_Flutter'
+          };
+
       dio.Response response = await _dio.get(
-        '${baseUrl}${target}',
+        '$baseUrl$target',
         options: dio.Options(
-          headers: headers,
+          headers: header,
         ),
         queryParameters: data,
       );
-      print('GET URL: ${target}');
-      print('GET headers: ${headers.toString()}');
-      print('GET data: ${data.toString()}');
+      print('GET URL: $target');
+      print('GET headers: ${header.toString()}');
+      //if (target == '/site-settings/v2?type=2')
+      print('GET data: ${response.statusCode.toString()}');
       if (response.statusCode == 200 && response.data != null) {
         if (response.data.runtimeType == 'String') {
           response.data = jsonDecode(response.data.toString());
         }
-        model = Holedoapi.fromJson(response.data as Map<String, dynamic>);
+        if (response.data['data'] != null &&
+            target == '/site-settings/v2?type=2') {
+          //print(
+          //    'model : ${response.data['data']['settings']['achievement_types'].toString()}');
+          // Settings ty = Settings.fromJson(response.data['data']['settings']);
+
+          // Settings test = ty;
+
+          // print('model : ${ty.toJson().toString()}');
+        }
+        model = Holedoapi.fromJson(response.data);
+        // print('model : ${model.toString()}');
       }
       return model;
     } catch (e) {
@@ -247,7 +260,7 @@ class ApiServices {
   Future<Holedoapi> login(
       {required String email, required String password}) async {
     //try {
-    var url = '${baseUrl}' + '/users/login';
+    var url = '$baseUrl' + '/users/login';
     var data;
     dio.Response response = await _dio.post(
       url,
@@ -257,7 +270,7 @@ class ApiServices {
       },
       queryParameters: {'apikey': Get.put(HoledoDatabase()).apiKey},
     );
-    print('URL: ${url}');
+    print('URL: $url');
 
     if (response.statusCode == 200 && response.data['success'] == true) {
       //user = User.fromJson(
@@ -280,7 +293,7 @@ class ApiServices {
     String? id,
     String? token,
   }) async {
-    var url = "${baseUrl}" + "/users/get";
+    var url = "$baseUrl" + "/users/get";
     var data;
     //url += id != null ? 'id=${id}' : '';
     //url += slug != null ? 'slug=${slug}' : '';
@@ -291,7 +304,7 @@ class ApiServices {
         queryParameters: {'id': id, 'slug': slug},
         options: dio.Options(
           headers: {
-            'AuthApi': 'Bearer ${token}',
+            'AuthApi': 'Bearer $token',
             'Content-Type': 'application/json; charset=UTF-8',
             'Accept': 'application/json',
           },
@@ -314,9 +327,9 @@ class ApiServices {
       required int limit,
       required int page}) async {
     try {
-      var url = "${baseUrl}" +
-          "/articles/index?limit=${limit}&page=${page}&category=${category}&type=${type}";
-      print('URL: ${url}');
+      var url = "$baseUrl" +
+          "/articles/index?limit=$limit&page=$page&category=$category&type=$type";
+      print('URL: $url');
       dio.Response response =
           await _dio.get(url, options: buildCacheOptions(Duration(days: 7)));
 
@@ -334,11 +347,11 @@ class ApiServices {
   }
 
   Future<Holedoapi> getArticle({String? id, String? slug}) async {
-    var url = "${baseUrl}" + "/articles/get?";
-    url += id != null ? 'id=${id}' : '';
-    url += slug != null ? 'slug=${slug}' : '';
+    var url = "$baseUrl" + "/articles/get?";
+    url += id != null ? 'id=$id' : '';
+    url += slug != null ? 'slug=$slug' : '';
 
-    print('URL: ${url}');
+    print('URL: $url');
     dio.Response response =
         await _dio.get(url, options: buildCacheOptions(Duration(days: 7)));
     if (response.statusCode == 200 && response.data['success'] == true) {
@@ -352,10 +365,10 @@ class ApiServices {
   Future<Holedoapi> getSettings() async {
     try {
       var data = new Holedoapi();
-      var url = "${baseUrl}" + "/site-settings/v2?type=2";
+      var url = "$baseUrl" + "/site-settings/v2?type=2";
       //_dio.interceptors.add(DioCacheManager(CacheConfig(baseUrl: "http://www.google.com")).interceptor);
       dio.Response response = await _dio.get(url);
-      print('URL: ${url}');
+      print('URL: $url');
       if (response.statusCode == 200 && response.data['success'] == true) {
         data = Holedoapi.fromJson(response.data as Map<String, dynamic>);
       }
@@ -370,18 +383,18 @@ class ApiServices {
       String? type,
       required int limit,
       required int page}) async {
-    var url = "${baseUrl}" +
-        "/jobs/index?limit=${limit}&page=${page}&category=${category}&type=${type}";
+    var url = "$baseUrl" +
+        "/jobs/index?limit=$limit&page=$page&category=$category&type=$type";
     var token = 'Bearer ${Get.put(HoledoDatabase()).token}';
     dio.Response response = await _dio.get(url,
         options: dio.Options(
           headers: {
-            'AuthApi': '${token}',
+            'AuthApi': '$token',
             'Content-Type': 'application/json; charset=UTF-8',
             'Accept': 'application/json',
           },
         ));
-    print('URL: ${url}');
+    print('URL: $url');
     if (response.statusCode == 200) {
       var data = response.data as Map<String, dynamic>;
 
@@ -394,16 +407,16 @@ class ApiServices {
   }
 
   Future<Holedoapi> getJob({String? id, String? slug}) async {
-    var url = "${baseUrl}" + "/jobs/get?";
-    url += id != null ? 'id=${id}' : '';
-    url += slug != null ? 'slug=${slug}' : '';
+    var url = "$baseUrl" + "/jobs/get?";
+    url += id != null ? 'id=$id' : '';
+    url += slug != null ? 'slug=$slug' : '';
 
-    print('URL: ${url}');
+    print('URL: $url');
     var token = 'Bearer ${Get.put(HoledoDatabase()).token}';
     dio.Response response = await _dio.get(url,
         options: dio.Options(
           headers: {
-            'AuthApi': '${token}',
+            'AuthApi': '$token',
             'Content-Type': 'application/json; charset=UTF-8',
             'Accept': 'application/json',
           },
