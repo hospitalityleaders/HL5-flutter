@@ -12,9 +12,9 @@ import 'includes/url_strategy.dart';
 
 void main() async {
   usePathUrlStrategy();
-
-  await Get.put(HoledoDatabase()).init();
   WidgetsFlutterBinding.ensureInitialized();
+  await Get.put(HoledoDatabase()).init();
+
   // await testingMain();
   await Intercom.instance.initialize('c6v4qg56',
       iosApiKey: 'ios_sdk-3a9bbf8f38e388199f2031358d7f8c350c2a4e39',
@@ -185,8 +185,18 @@ RouteMap _buildRouteMap(BuildContext context) {
         }
         return Redirect('/login', queryParameters: {'redirectTo': route.path});
       },
-      '/profile/:id': (route) =>
-          NoAnimationPage(child: ProfilePage(slug: route.pathParameters['id'])),
+      '/profile/:slug': (route) {
+        final appState = Provider.of<AppState>(context, listen: false);
+        if (appState.isLoggedIn &&
+            route.pathParameters['slug'] == appState.profile?.slug) {
+          return NoAnimationPage(
+              child: ProfilePage(
+                  id: appState.profile?.id.toString(),
+                  slug: appState.profile?.slug));
+        }
+        return NoAnimationPage(
+            child: ProfilePage(slug: route.pathParameters['slug']));
+      },
       //'/profile/add': (route) => AddProfilePage(),
       '/interactive/:id': (route) {
         final appState = Provider.of<AppState>(context, listen: false);

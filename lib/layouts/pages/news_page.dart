@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:holedo/layouts/pages/news/NewsSingle/jobs_no_jobs.dart';
+import 'package:holedo/layouts/pages/news/NewsSingle/news_single_logged_in.dart';
+import 'package:holedo/layouts/pages/news/NewsSingle/news_single_logged_out.dart';
 import 'package:holedo/main.dart';
 import 'package:holedo/models/holedoapi/article.dart';
 import 'package:holedo/models/models.dart';
@@ -10,8 +13,27 @@ class NewsPage extends StatelessWidget {
   final String? id;
   final String? slug;
   const NewsPage({Key? key, this.id, this.slug}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    final newsController = holedoDatabase.news;
+    final featuredNews =
+        newsController.fetchArticles(context: context, type: 'featured');
+
+    final categories = Get.put(HoledoDatabase())
+        .articleCategories
+        .where((category) => category.menuItem == true);
+    final appState = Provider.of<AppState>(context, listen: false);
+    return PageScaffold(
+      title: 'Home Page',
+      body: !appState.isLoggedIn
+          ? NewsSingleLoggedOutScreen()
+          : NewsSingleLoggedInScreen(), //NewsSingleJobs(),
+    );
+  }
+
+  @override
+  Widget build2(BuildContext context) {
     return PageScaffold(
       title: 'News Article',
       body: FutureBuilder(

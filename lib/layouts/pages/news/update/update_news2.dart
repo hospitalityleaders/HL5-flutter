@@ -32,9 +32,6 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
     return Scaffold(
       backgroundColor:
           Responsive.isDesktop(context) ? ColorPicker.kBG : Colors.white,
-      appBar: Responsive.isDesktop(context)
-          ? CommonWidget.descktopAppBar()
-          : CommonWidget.tabletAppBar(),
       body: SingleChildScrollView(
         child: Responsive.isDesktop(context)
             ? Column(
