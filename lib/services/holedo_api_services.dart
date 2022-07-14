@@ -35,6 +35,7 @@ class ApiServices {
               'AuthApi': 'Bearer ${token}',
               'Content-Type': 'application/json',
               'Accept': 'application/json',
+              'Device': 'Holedo_Flutter'
             }
           : headers;
       dio.Response response = await _dio.post(
@@ -72,6 +73,7 @@ class ApiServices {
               'AuthApi': 'Bearer ${token}',
               'Content-Type': 'application/json; charset=UTF-8',
               'Accept': 'application/json',
+              'Device': 'Holedo_Flutter'
             }
           : headers;
       dio.Response response = await _dio.get(
