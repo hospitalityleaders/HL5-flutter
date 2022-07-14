@@ -1,4 +1,4 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart' hide Provider;
 import 'package:holedo/application/shared/providers.dart';
 import 'package:holedo/presentation/providers/profile_provider.dart';
 import 'package:holedo/presentation/ui/components/appbar_notification_widget.dart';
@@ -57,8 +57,8 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage>
     setState(() {
       _tabController.index = ref.watch(profileNotifierProvider).currentTabIndex;
     });
-    // Provider.of<ProfileProvider>(context, listen: false)
-    //     .changeUserProfilePercentage(Provider.of<AppState>(context).isLoggedIn);
+    Provider.of<ProfileProvider>(context, listen: false)
+        .changeUserProfilePercentage(Provider.of<AppState>(context).isLoggedIn);
     super.didChangeDependencies();
   }
 
@@ -95,21 +95,22 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage>
                             .appNotificationState
                             .map(
                               showNothing: (_) => Di.ESB,
-                              profileCompletion: (notification) => ref
-                                          .watch(profileNotifierProvider)
-                                          .percentageProfileCompleted ==
-                                      100
-                                  ? Di.ESB
-                                  : AppbarNotificationWidget(
-                                      title:
-                                          "Your profile is only ${ref.watch(profileNotifierProvider).percentageProfileCompleted}% complete. Complete it now to earn first Hospitality Leader grade.",
-                                      onButtonPressed: () {
-                                        ref
-                                            .watch(profileNotifierProvider
-                                                .notifier)
-                                            .changeIsProfieEditableState(true);
-                                      },
-                                    ),
+                              profileCompletion: (notification) =>
+                                  Provider.of<ProfileProvider>(context)
+                                              .percentageProfileCompleted ==
+                                          100
+                                      ? Di.ESB
+                                      : AppbarNotificationWidget(
+                                          title:
+                                              "Your profile is only ${Provider.of<ProfileProvider>(context).percentageProfileCompleted}% complete. Complete it now to earn first Hospitality Leader grade.",
+                                          onButtonPressed: () {
+                                            ref
+                                                .watch(profileNotifierProvider
+                                                    .notifier)
+                                                .changeIsProfieEditableState(
+                                                    true);
+                                          },
+                                        ),
                               sucess: (notification) =>
                                   AppbarNotificationWidget(
                                 appbarNotificationColor:

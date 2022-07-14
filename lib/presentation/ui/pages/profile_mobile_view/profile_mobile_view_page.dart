@@ -93,8 +93,9 @@ class _ProfileMobileViewPageState extends ConsumerState<ProfileMobileViewPage> {
                           height: 76,
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                              image: NetworkImage(
-                                  widget.userProfileData.banner ?? ""),
+                              image: NetworkImage(widget
+                                      .userProfileData.banner ??
+                                  "https://images.pexels.com/photos/269077/pexels-photo-269077.jpeg"),
                               fit: BoxFit.cover,
                             ),
                           ),
