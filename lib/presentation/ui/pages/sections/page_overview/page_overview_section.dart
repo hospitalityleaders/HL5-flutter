@@ -33,14 +33,12 @@ class _PageOverviewSectionState extends State<PageOverviewSection> {
         children: [
           Flexible(
             child: ProfileOverviewFirstColumn(
-              sec1IsEditable: widget.isEditable,
               userProfileData: widget.userProfileData,
             ),
           ),
           Di.SBWEL,
           Flexible(
             child: ProfileOverviewSecondColumn(
-              sec2IsEditable: widget.isEditable,
               userProfileData: widget.userProfileData,
             ),
           ),
