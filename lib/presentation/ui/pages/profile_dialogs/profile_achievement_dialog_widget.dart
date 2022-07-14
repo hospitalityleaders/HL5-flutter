@@ -152,8 +152,9 @@ class __SingleAchievementState extends State<_SingleAchievement> {
   late bool isExpanded;
   String currentAchivement = achievementTypeMap.keys.first;
   String? currentYear;
-  late Map<String, dynamic>? achievementTypes =
+  final Map<String, dynamic>? achievementTypes =
       holedoDatabase.getModel().settings?.achievementTypes;
+
   @override
   void initState() {
     isExpanded = widget.isExpanded;
@@ -189,7 +190,10 @@ class __SingleAchievementState extends State<_SingleAchievement> {
           });
 
     super.initState();
-
+    achievement.achievementTypeId = 1;
+    if (achievement.dateReceived == null) {
+      achievement.dateReceived = DateTime.now();
+    }
     currentYear = achievement.dateReceived?.year.toString();
   }
 
@@ -273,7 +277,12 @@ class __SingleAchievementState extends State<_SingleAchievement> {
                     onChanged: (value) {
                       setState(() {
                         currentAchivement = value ?? currentAchivement;
-                        achievement.achievementTypeId = value as int;
+                        int selection = int.parse(achievementTypes?.keys
+                            .firstWhere((k) => achievementTypes![k] == value,
+                                orElse: () => '1') as String);
+                        print(
+                            'sle: ${achievementTypes?.keys.firstWhere((k) => achievementTypes![k] == value, orElse: () => '1')}');
+                        achievement.achievementTypeId = selection;
                       });
                     },
                     // iconsList: achievementTypeList
@@ -320,10 +329,13 @@ class __SingleAchievementState extends State<_SingleAchievement> {
                     onChanged: (value) {
                       setState(() {
                         currentYear = value;
+                        //DateTime now =
+                        //   DateTime.parse('${value.toString()}-07-01');
                         achievement.dateReceived =
                             DateTime.parse('${value.toString()}-07-01');
-                        print(
-                            'date ${DateTime.parse('${value.toString()}-07-01T19:10:35+02:00')}');
+                        //DateFormat('yyyy-MM-dd').format(now) as DateTime?;
+
+                        //print('date ${DateTime('${value.toString()}-07-25')}');
                       });
                     },
                     // iconsList: achievementTypeList
@@ -407,12 +419,14 @@ class __SingleAchievementState extends State<_SingleAchievement> {
                           }
 
                           await Provider.of<AppState>(context, listen: false)
-                              .saveProfile(new User(
-                            achievements: _achievementList,
-                          ));
+                              .saveProfile(
+                                  context,
+                                  new User(
+                                    achievements: _achievementList,
+                                  ));
 
-                          //Nav.pop(context);
-                          //Nav.pop(context);
+                          Nav.pop(context);
+                          Nav.pop(context);
                         },
                         height: 36,
                         donotShowIcon: true,

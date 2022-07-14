@@ -1,5 +1,6 @@
 export 'package:get/get.dart';
 export 'holedoapi/holedoapi.dart';
+export 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:get/get.dart';
@@ -61,13 +62,14 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<DataModel> saveProfile(User data) async {
+  Future<DataModel> saveProfile(context, User data) async {
     data.id = _profile?.id;
     // ignore: unused_local_variable
 
-    //data.slug = _profile?.slug;
+    data.slug = _profile?.slug;
     //this.token = profile.token;
-    var dataModel = await Get.put(HoledoDatabase().users).saveProfile(data);
+    var dataModel =
+        await Get.put(HoledoDatabase().users).saveProfile(context, data);
     _profile = dataModel.user as User;
     return dataModel;
   }
@@ -330,10 +332,10 @@ class UsersController extends GetxController {
         isLogin.value = true;
         token.value = api.data?.token as String;
         user = api.data?.user as User;
-        model.user?.token = api.data?.token;
-        this.saveUserToModel(user, api.data?.token);
+        model.user!.token = api.data!.token;
+        this.saveUserToModel(user, api.data!.token as String);
       } else {
-        //DB.snackBarMessage(context, 'error', api.errors.toString());
+        DB.snackBarMessage(context, 'error', api.errors.toString());
       }
       return user;
     } finally {
@@ -345,7 +347,10 @@ class UsersController extends GetxController {
     final model = holedoDatabase.getModel();
     print('matchING: $slug USER: ${model.user?.slug}');
     if (model.user?.slug == slug) {
-      if (model.token != null) return model.token;
+      if (model.token != null) {
+        print('match: $slug token: ${model.token}');
+        return model.token;
+      }
       print('match: $slug token: ${model.user?.token}');
       return model.user?.token;
     }
@@ -360,7 +365,7 @@ class UsersController extends GetxController {
     return model;
   }
 
-  void saveUserToModel(User user, String? token) {
+  void saveUserToModel(User user, String token) {
     final model = holedoDatabase.getModel();
     model.token = token;
     model.user = user;
@@ -402,7 +407,7 @@ class UsersController extends GetxController {
       if (token != null) {
         print('user: ${user.firstName} token: log: ${token}');
         user.token = token;
-        saveUserToModel(user, user.token);
+        saveUserToModel(user, user.token as String);
       }
       //print('user: ${user.toJson().toString()}');
       return user;
@@ -468,21 +473,23 @@ class UsersController extends GetxController {
     }
   }
 
-  Future<DataModel> saveProfile(User user) async {
+  Future<DataModel> saveProfile(context, User user) async {
     try {
       isLoading(true);
       var dataModel = this.getModel();
-      var token = dataModel.token;
+      var token = this.getToken(user.slug);
 
       if (user.id != null) {
         if (dataModel.user!.id == null) {
           dataModel.messages = 'User Id Not matched';
+          DB.snackBarMessage(context, 'info', dataModel.messages);
           return dataModel;
         }
         user.id = dataModel.user?.id;
       }
       if (token == null) {
         dataModel.messages = 'Token Not matched';
+        DB.snackBarMessage(context, 'info', dataModel.messages);
         return dataModel;
       }
       var userJson = user.toApiJson();
@@ -532,7 +539,7 @@ class UsersController extends GetxController {
         print('log: ${user.firstName}');
 
         user.token = token;
-        saveUserToModel(user, token);
+        saveUserToModel(user, token as String);
       }
       // isLoading(false);
       return user;
