@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' hide Provider;
 import 'package:flutter_svg/svg.dart';
@@ -170,12 +171,18 @@ class _ProfileWithSubMenu extends ConsumerWidget {
                 child: Container(
                   width: 26,
                   height: 26,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage("assets/images/avatar.png"),
-                      fit: BoxFit.fill,
-                    ),
-                  ),
+                  child: (appState.isLoggedIn &&
+                          appState.profile?.avatarCdn != null)
+                      ? CircleAvatar(
+                          radius: 26,
+                          backgroundImage: NetworkImage(
+                              appState.profile!.avatarCdn.toString()),
+                        )
+                      : Icon(
+                          CupertinoIcons.profile_circled,
+                          size: 26,
+                          color: Colors.grey,
+                        ),
                 ),
               ),
             )

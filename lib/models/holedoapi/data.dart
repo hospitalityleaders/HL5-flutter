@@ -10,10 +10,8 @@ import 'article.dart';
 import 'article_category.dart';
 import 'block.dart';
 import 'job.dart';
+
 import 'settings.dart';
-import 'user.dart';
-import 'page.dart';
-import 'company.dart';
 
 List<DataModel> dataFromJson(Iterable<dynamic> data) => List<DataModel>.from(
     data.map((x) => DataModel.fromJson(x as Map<String, dynamic>)));
@@ -22,6 +20,8 @@ String dataToJson(List<DataModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class DataModel {
+  bool? success;
+  String? messages;
   Settings? settings;
   Block? block;
   List<ArticleCategory>? articleCategories;
@@ -37,7 +37,9 @@ class DataModel {
   List<Company>? companies;
 
   DataModel(
-      {this.settings,
+      {this.success,
+      this.messages,
+      this.settings,
       this.block,
       this.articleCategories,
       this.count,
@@ -52,6 +54,8 @@ class DataModel {
       this.companies});
 
   factory DataModel.fromJson(Map<String, dynamic> json) => DataModel(
+        success: json['success'] == null ? false : true,
+        messages: json['messages'],
         settings: json['Settings'] == null
             ? null
             : Settings.fromJson(json['Settings'] as Map<String, dynamic>),
@@ -94,6 +98,8 @@ class DataModel {
       );
 
   Map<String, dynamic> toJson() => {
+        'Success': success,
+        'Messages': messages.toString(),
         'Settings': settings?.toJson(),
         'Block': block?.toJson(),
         'ArticleCategories': articleCategories?.map((e) => e.toJson()).toList(),

@@ -799,6 +799,25 @@ class User {
       token: token ?? this.token,
     );
   }
+
+  Map<String, dynamic> toApiJson() {
+    User data = this;
+    var userJson = data.toJson();
+    userJson.removeWhere((k, v) => v == null || v.toString().length == 0);
+    print('js: ${userJson.toString()}');
+    var lists = ['achievements', 'educations', 'experiences', 'expertise'];
+    for (final l in lists) {
+      if (userJson[l] != null && userJson[l].length > 0) {
+        for (int i = 0; i < userJson[l].length; i++) {
+          userJson[l][i].removeWhere((k, v) => v == null);
+        }
+      }
+    }
+
+    //var userJson = data.toJson();
+    //print('jz: ${userJson.toString()}');
+    return userJson;
+  }
 }
 
 

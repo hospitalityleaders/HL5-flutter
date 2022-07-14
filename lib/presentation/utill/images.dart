@@ -1,8 +1,9 @@
 class Images {
   static const String image = 'assets/icons/imageAddess.png';
   static const String logo1 = 'assets/icons/logo1.png';
-  static const String profilePic = 'assets/images/profilePic.png';
-  // static const String profilePic = 'assets/icons/profilePic.png';
+  static const String profilePic = 'assets/images/avatar.png';
+  static const String profile = 'assets/images/avatar.png';
+  static const String avatar = 'assets/images/avatar.png';
   // static const String profilePic = 'assets/icons/profilePic.png';
   // static const String profilePic = 'assets/icons/profilePic.png';
   // static const String profilePic = 'assets/icons/profilePic.png';
