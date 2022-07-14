@@ -32,7 +32,6 @@ class CustomAppbar extends StatefulWidget {
 class _CustomAppbarState extends State<CustomAppbar> {
   @override
   Widget build(BuildContext context) {
-    // final appState = Provider.of<AppState>(context);
     final menuItems = Get.put(HoledoDatabase()).menuItems;
     final isSmallerThanDesltop =
         ResponsiveWrapper.of(context).isSmallerThan(DESKTOP);
@@ -151,6 +150,7 @@ class _ProfileWithSubMenu extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
+    final appState = Provider.of<AppState>(context);
     return Row(
       children: [
         ProfileSideHover(),
