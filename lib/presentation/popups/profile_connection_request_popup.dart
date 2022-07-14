@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:holedo/presentation/providers/profile_provider.dart';
 import 'package:holedo/presentation/ui/components/submenus.dart';
 import 'package:holedo/presentation/ui/components/text_with_background.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
@@ -16,7 +17,7 @@ class ProfileConnectionRequestPopup extends StatelessWidget {
       onTap: () {},
       onHover: (hover) {
         if (hover == false) {
-          Provider.of(context, listen: false)
+          Provider.of<ProfileProvider>(context, listen: false)
               .changeConectionRequestPopup2State(hover);
         }
       },

@@ -12,15 +12,14 @@ class ProfileSubMenuPopup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userProfileProviderNotListener =
-        Provider.of<ProfileProvider>(context, listen: false);
     return Provider.of<ProfileProvider>(context).profileSubMenuClicked
         ? Di.ESB
         : InkWell(
             onTap: () {},
             onHover: (hover) {
               if (hover == false) {
-                userProfileProviderNotListener.changeSubMenusPopup2State(hover);
+                Provider.of<ProfileProvider>(context, listen: false)
+                    .changeSubMenusPopup2State(hover);
               }
             },
             child: SizedBox(
