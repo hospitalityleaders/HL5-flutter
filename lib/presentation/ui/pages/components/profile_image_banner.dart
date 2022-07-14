@@ -44,7 +44,8 @@ class _ProfileImageBannerState extends ConsumerState<ProfileImageBanner> {
           decoration: BoxDecoration(
             image: DecorationImage(
               image: NetworkImage(
-                widget.userProfileData.banner ?? "",
+                widget.userProfileData.banner ??
+                    "https://images.pexels.com/photos/269077/pexels-photo-269077.jpeg",
               ),
               fit: BoxFit.cover,
               colorFilter: ColorFilter.mode(
