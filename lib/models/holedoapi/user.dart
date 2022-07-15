@@ -552,7 +552,7 @@ class User {
   Future<User> save(User profile) async {
     //var data = profile.toJson() as Map<String, dynamic>;
     //var newElements = [];
-    //print('this ${this.toJson()}');
+    //debugPrint('this ${this.toJson()}');
     // this.id = profile.id;
     // this.slug = profile.slug;
     id = profile.id;
@@ -573,10 +573,10 @@ class User {
     int? companyRoleId,
     int? countryId,
     int? userTitleTypesId,
-    dynamic? currencyId,
-    dynamic? contactNumberTypesId,
-    dynamic? maritalStatusId,
-    dynamic? genderId,
+    dynamic currencyId,
+    dynamic contactNumberTypesId,
+    dynamic maritalStatusId,
+    dynamic genderId,
     int? currentMembershipGradeId,
     int? nextMembershipGradeId,
     String? slug,
@@ -584,7 +584,7 @@ class User {
     String? lastName,
     String? email,
     int? emailVisibility,
-    dynamic? dateOfBirth,
+    dynamic dateOfBirth,
     String? avatar,
     String? banner,
     String? professionalTitle,
@@ -593,9 +593,9 @@ class User {
     bool? contactNumberVisibility,
     int? contactableWhatsapp,
     int? contactableSms,
-    dynamic? website,
+    dynamic website,
     bool? websiteVisibility,
-    dynamic? skype,
+    dynamic skype,
     bool? skypeVisibility,
     String? facebook,
     bool? facebookVisibility,
@@ -607,16 +607,16 @@ class User {
     bool? xingVisibility,
     String? linkedin,
     bool? linkedinVisibility,
-    dynamic? proxycurlWhodis,
+    dynamic proxycurlWhodis,
     bool? allowRecruiterAccess,
-    dynamic? address1,
-    dynamic? address2,
-    dynamic? addressPostalCode,
-    dynamic? addressArea,
-    dynamic? workPermits,
+    dynamic address1,
+    dynamic address2,
+    dynamic addressPostalCode,
+    dynamic addressArea,
+    dynamic workPermits,
     bool? relocate,
-    dynamic? nextJob,
-    dynamic? salaryExpectation,
+    dynamic nextJob,
+    dynamic salaryExpectation,
     String? profileSummary,
     bool? active,
     String? profileVideoTitle,
@@ -626,8 +626,8 @@ class User {
     int? membershipGradeNeededLeaderPoints,
     int? membershipGradePercentAccomplished,
     bool? membershipGradeEligibility,
-    dynamic? matrixUid,
-    dynamic? matrixRoomSync,
+    dynamic matrixUid,
+    dynamic matrixRoomSync,
     bool? allowApiLogin,
     List<dynamic>? savedSearches,
     NextMembershipGrade? nextMembershipGrade,
@@ -654,18 +654,18 @@ class User {
     List<dynamic>? likes,
     List<dynamic>? jobApplications,
     List<dynamic>? invites,
-    dynamic? gender,
-    dynamic? maritalStatus,
+    dynamic gender,
+    dynamic maritalStatus,
     List<UserTag>? userTags,
     List<Achievement>? achievements,
     List<Expertise>? expertise,
     List<dynamic>? comments,
     List<dynamic>? articles,
-    dynamic? contactNumberType,
-    dynamic? currency,
+    dynamic contactNumberType,
+    dynamic currency,
     CompanyRole? companyRole,
     List<Experience>? experiences,
-    dynamic? currentExperience,
+    dynamic currentExperience,
     List<Education>? educations,
     List<dynamic>? userLanguagesProficiencies,
     Country? country,
@@ -808,7 +808,7 @@ class User {
     final User data = this;
     final Map<String, dynamic> userJson = data.toJson();
     userJson.removeWhere((k, v) => v == null || v.toString().isEmpty);
-    print('js: ${userJson.toString()}');
+    debugPrint('js: ${userJson.toString()}');
     final lists = ['achievements', 'educations', 'experiences', 'expertise'];
     for (final l in lists) {
       if (userJson[l] != null && (userJson[l] as List).isNotEmpty) {
@@ -819,7 +819,7 @@ class User {
     }
 
     //var userJson = data.toJson();
-    //print('jz: ${userJson.toString()}');
+    //debugPrint('jz: ${userJson.toString()}');
     return userJson;
   }
 }
@@ -1395,7 +1395,7 @@ class User {
 //   Future<User> save(User profile) async {
 //     //var data = profile.toJson() as Map<String, dynamic>;
 //     //var newElements = [];
-//     //print('this ${this.toJson()}');
+//     //debugPrint('this ${this.toJson()}');
 //     // this.id = profile.id;
 //     // this.slug = profile.slug;
 //     this.id = profile.id;
@@ -1416,10 +1416,10 @@ class User {
 //     int? companyRoleId,
 //     int? countryId,
 //     int? userTitleTypesId,
-//     dynamic? currencyId,
-//     dynamic? contactNumberTypesId,
-//     dynamic? maritalStatusId,
-//     dynamic? genderId,
+//     dynamic currencyId,
+//     dynamic contactNumberTypesId,
+//     dynamic maritalStatusId,
+//     dynamic genderId,
 //     int? currentMembershipGradeId,
 //     int? nextMembershipGradeId,
 //     String? slug,
@@ -1427,7 +1427,7 @@ class User {
 //     String? lastName,
 //     String? email,
 //     int? emailVisibility,
-//     dynamic? dateOfBirth,
+//     dynamic dateOfBirth,
 //     String? avatar,
 //     String? banner,
 //     String? professionalTitle,
@@ -1436,9 +1436,9 @@ class User {
 //     bool? contactNumberVisibility,
 //     int? contactableWhatsapp,
 //     int? contactableSms,
-//     dynamic? website,
+//     dynamic website,
 //     bool? websiteVisibility,
-//     dynamic? skype,
+//     dynamic skype,
 //     bool? skypeVisibility,
 //     String? facebook,
 //     bool? facebookVisibility,
@@ -1450,16 +1450,16 @@ class User {
 //     bool? xingVisibility,
 //     String? linkedin,
 //     bool? linkedinVisibility,
-//     dynamic? proxycurlWhodis,
+//     dynamic proxycurlWhodis,
 //     bool? allowRecruiterAccess,
-//     dynamic? address1,
-//     dynamic? address2,
-//     dynamic? addressPostalCode,
-//     dynamic? addressArea,
-//     dynamic? workPermits,
+//     dynamic address1,
+//     dynamic address2,
+//     dynamic addressPostalCode,
+//     dynamic addressArea,
+//     dynamic workPermits,
 //     bool? relocate,
-//     dynamic? nextJob,
-//     dynamic? salaryExpectation,
+//     dynamic nextJob,
+//     dynamic salaryExpectation,
 //     String? profileSummary,
 //     bool? active,
 //     String? profileVideoTitle,
@@ -1469,8 +1469,8 @@ class User {
 //     int? membershipGradeNeededLeaderPoints,
 //     int? membershipGradePercentAccomplished,
 //     bool? membershipGradeEligibility,
-//     dynamic? matrixUid,
-//     dynamic? matrixRoomSync,
+//     dynamic matrixUid,
+//     dynamic matrixRoomSync,
 //     bool? allowApiLogin,
 //     List<dynamic>? savedSearches,
 //     NextMembershipGrade? nextMembershipGrade,
@@ -1497,18 +1497,18 @@ class User {
 //     List<dynamic>? likes,
 //     List<dynamic>? jobApplications,
 //     List<dynamic>? invites,
-//     dynamic? gender,
-//     dynamic? maritalStatus,
+//     dynamic gender,
+//     dynamic maritalStatus,
 //     List<UserTag>? userTags,
 //     List<Achievement>? achievements,
 //     List<Expertise>? expertise,
 //     List<dynamic>? comments,
 //     List<dynamic>? articles,
-//     dynamic? contactNumberType,
-//     dynamic? currency,
+//     dynamic contactNumberType,
+//     dynamic currency,
 //     CompanyRole? companyRole,
 //     List<Experience>? experiences,
-//     dynamic? currentExperience,
+//     dynamic currentExperience,
 //     List<Education>? educations,
 //     List<dynamic>? userLanguagesProficiencies,
 //     Country? country,

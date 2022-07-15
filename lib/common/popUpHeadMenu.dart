@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 
-import '../constant/colorPicker/color_picker.dart';
-import '../constant/fontStyle/font_style.dart';
-import '../constant/sizedbox.dart';
+import 'package:holedo/constant/colorPicker/color_picker.dart';
+import 'package:holedo/constant/fontStyle/font_style.dart';
+import 'package:holedo/constant/sizedbox.dart';
 
 class PopUpHeadMenu {
   static Container popUpHead(String headName, BuildContext context) {
@@ -32,13 +32,14 @@ class PopUpHeadMenu {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: Icon(
-                      Icons.close,
-                      color: ColorPicker.kBlueLight,
-                    )),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(
+                    Icons.close,
+                    color: ColorPicker.kBlueLight,
+                  ),
+                ),
               ],
             ),
           )
@@ -51,9 +52,8 @@ class PopUpHeadMenu {
 
   static bool isOpen1 = false;
   static bool isOpen2 = false;
-  static String refContent =
-      '''Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-
+  static String refContent = '''
+Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
 Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.''';
 
   static Future<String?> buildReferencesCardPopUp(BuildContext context) {
@@ -63,14 +63,16 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
         builder: (context, setState) => Dialog(
           child: Container(
             color: ColorPicker.kGreyLight3,
-            width: (SS.sW(context) as double) * .50,
+            width: (SS.sW(context)) * .50,
             child: SingleChildScrollView(
               child: Column(
                 children: [
                   PopUpHeadMenu.popUpHead('My references', context),
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 12),
+                      horizontal: 20,
+                      vertical: 12,
+                    ),
                     child: Column(
                       children: [
                         Text(
@@ -94,7 +96,8 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                                 builder: (context, setState) => OutlinedButton(
                                   onPressed: () {},
                                   style: OutlinedButton.styleFrom(
-                                      backgroundColor: Colors.transparent),
+                                    backgroundColor: Colors.transparent,
+                                  ),
                                   child: Text(
                                     'Approve Reference',
                                     style: FontTextStyle.kWhite14W600PR,
@@ -112,24 +115,29 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: ListTile(
-                                  leading: Image(
+                                  leading: const Image(
                                     image: NetworkImage(
-                                        'https://images.pexels.com/photos/789822/pexels-photo-789822.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'),
+                                      'https://images.pexels.com/photos/789822/pexels-photo-789822.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+                                    ),
                                     height: 50,
                                     width: 50,
                                     fit: BoxFit.cover,
                                   ),
                                   title: RichText(
-                                    text: TextSpan(children: [
-                                      TextSpan(
+                                    text: TextSpan(
+                                      children: [
+                                        TextSpan(
                                           text: 'Ealasiad Wang',
-                                          style: FontTextStyle
-                                              .kBlueDark116W700SSP),
-                                      TextSpan(
+                                          style:
+                                              FontTextStyle.kBlueDark116W700SSP,
+                                        ),
+                                        TextSpan(
                                           text: ' MHL',
-                                          style: FontTextStyle
-                                              .kBlueDark112W700SSP),
-                                    ]),
+                                          style:
+                                              FontTextStyle.kBlueDark112W700SSP,
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                   subtitle: Text(
                                     'Recruiter, Top Talent Recruiters',
@@ -138,22 +146,25 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                                   trailing: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      Card(
-                                          child: Icon(
-                                        Icons.remove_red_eye_outlined,
-                                        color: ColorPicker.kRedlight,
-                                      )),
+                                      const Card(
+                                        child: Icon(
+                                          Icons.remove_red_eye_outlined,
+                                          color: ColorPicker.kRedlight,
+                                        ),
+                                      ),
                                       InkWell(
                                         onTap: () {},
-                                        child: Card(
-                                            child: Icon(Icons
-                                                .arrow_drop_down_outlined)),
+                                        child: const Card(
+                                          child: Icon(
+                                            Icons.arrow_drop_down_outlined,
+                                          ),
+                                        ),
                                       ),
                                     ],
                                   ),
                                 ),
                               ),
-                              Divider(
+                              const Divider(
                                 height: 0.1,
                                 color: ColorPicker.kGreyLight3,
                               ),
@@ -167,29 +178,34 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                                           CrossAxisAlignment.start,
                                       children: [
                                         AnimatedContainer(
-                                            height: isOpen1 ? 120 : 0,
-                                            color: ColorPicker.kWhite,
-                                            duration: Duration(seconds: 1),
-                                            alignment: isOpen1
-                                                ? Alignment.topCenter
-                                                : Alignment.bottomCenter,
-                                            curve: Curves.fastOutSlowIn,
-                                            child: SingleChildScrollView(
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Text(refContent,
-                                                    style: FontTextStyle
-                                                        .kGreyLight516W400SSP),
+                                          height: isOpen1 ? 120 : 0,
+                                          color: ColorPicker.kWhite,
+                                          duration: const Duration(seconds: 1),
+                                          alignment: isOpen1
+                                              ? Alignment.topCenter
+                                              : Alignment.bottomCenter,
+                                          curve: Curves.fastOutSlowIn,
+                                          child: SingleChildScrollView(
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Text(
+                                                refContent,
+                                                style: FontTextStyle
+                                                    .kGreyLight516W400SSP,
                                               ),
-                                            )),
+                                            ),
+                                          ),
+                                        ),
                                         TextButton.icon(
-                                          label: Text(isOpen1
-                                              ? 'Hide reference'
-                                              : 'Show reference'),
-                                          icon: Icon(isOpen1
-                                              ? Icons.remove
-                                              : Icons.add),
+                                          label: Text(
+                                            isOpen1
+                                                ? 'Hide reference'
+                                                : 'Show reference',
+                                          ),
+                                          icon: Icon(
+                                            isOpen1 ? Icons.remove : Icons.add,
+                                          ),
                                           onPressed: () {
                                             setState(() {
                                               isOpen1 = !isOpen1;
@@ -213,24 +229,29 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: ListTile(
-                                  leading: Image(
+                                  leading: const Image(
                                     image: NetworkImage(
-                                        'https://images.pexels.com/photos/789822/pexels-photo-789822.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'),
+                                      'https://images.pexels.com/photos/789822/pexels-photo-789822.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+                                    ),
                                     height: 50,
                                     width: 50,
                                     fit: BoxFit.cover,
                                   ),
                                   title: RichText(
-                                    text: TextSpan(children: [
-                                      TextSpan(
+                                    text: TextSpan(
+                                      children: [
+                                        TextSpan(
                                           text: 'Ealasiad Wang',
-                                          style: FontTextStyle
-                                              .kBlueDark116W700SSP),
-                                      TextSpan(
+                                          style:
+                                              FontTextStyle.kBlueDark116W700SSP,
+                                        ),
+                                        TextSpan(
                                           text: ' MHL',
-                                          style: FontTextStyle
-                                              .kBlueDark112W700SSP),
-                                    ]),
+                                          style:
+                                              FontTextStyle.kBlueDark112W700SSP,
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                   subtitle: Text(
                                     'Recruiter, Top Talent Recruiters',
@@ -239,22 +260,25 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                                   trailing: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      Card(
-                                          child: Icon(
-                                        Icons.remove_red_eye_outlined,
-                                        color: ColorPicker.kRedlight,
-                                      )),
+                                      const Card(
+                                        child: Icon(
+                                          Icons.remove_red_eye_outlined,
+                                          color: ColorPicker.kRedlight,
+                                        ),
+                                      ),
                                       InkWell(
                                         onTap: () {},
-                                        child: Card(
-                                            child: Icon(Icons
-                                                .arrow_drop_down_outlined)),
+                                        child: const Card(
+                                          child: Icon(
+                                            Icons.arrow_drop_down_outlined,
+                                          ),
+                                        ),
                                       ),
                                     ],
                                   ),
                                 ),
                               ),
-                              Divider(
+                              const Divider(
                                 height: 0.1,
                                 color: ColorPicker.kGreyLight3,
                               ),
@@ -270,7 +294,7 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                                         AnimatedContainer(
                                           height: isOpen2 ? 120 : 0,
                                           color: ColorPicker.kWhite,
-                                          duration: Duration(seconds: 1),
+                                          duration: const Duration(seconds: 1),
                                           alignment: isOpen2
                                               ? Alignment.topCenter
                                               : Alignment.bottomCenter,
@@ -279,19 +303,23 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
                                             child: Padding(
                                               padding:
                                                   const EdgeInsets.all(8.0),
-                                              child: Text(refContent,
-                                                  style: FontTextStyle
-                                                      .kGreyLight516W400SSP),
+                                              child: Text(
+                                                refContent,
+                                                style: FontTextStyle
+                                                    .kGreyLight516W400SSP,
+                                              ),
                                             ),
                                           ),
                                         ),
                                         TextButton.icon(
-                                          label: Text(isOpen2
-                                              ? 'Hide reference'
-                                              : 'Show reference'),
-                                          icon: Icon(isOpen2
-                                              ? Icons.remove
-                                              : Icons.add),
+                                          label: Text(
+                                            isOpen2
+                                                ? 'Hide reference'
+                                                : 'Show reference',
+                                          ),
+                                          icon: Icon(
+                                            isOpen2 ? Icons.remove : Icons.add,
+                                          ),
                                           onPressed: () {
                                             setState(() {
                                               isOpen2 = !isOpen2;

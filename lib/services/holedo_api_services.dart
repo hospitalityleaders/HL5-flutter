@@ -3,6 +3,7 @@ import 'dart:convert';
 //import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart' as dio;
 import 'package:dio_http_cache/dio_http_cache.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart' as Store;
 import 'package:holedo/controller/auth_controller.dart';
 //import 'package:get_storage/get_storage.dart';
@@ -47,10 +48,10 @@ class ApiServices {
         queryParameters: {'apikey': token},
       );
 
-      print('POST URL: $target');
-      print('POST headers: ${header.toString()}');
-      print('POST data:${data.toString()} ');
-      //print('POST respomse: ${response}');
+      debugPrint('POST URL: $target');
+      debugPrint('POST headers: ${header.toString()}');
+      debugPrint('POST data:${data.toString()} ');
+      //debugPrint('POST respomse: ${response}');
       if (response.statusCode == 200 && response.data != null) {
         model = Holedoapi.fromJson(response.data as Map<String, dynamic>);
       }
@@ -84,30 +85,30 @@ class ApiServices {
         ),
         queryParameters: data,
       );
-      print('GET URL: $target');
-      print('GET headers: ${header.toString()}');
+      debugPrint('GET URL: $target');
+      debugPrint('GET headers: ${header.toString()}');
       //if (target == '/site-settings/v2?type=2')
-      print('GET data: ${response.statusCode.toString()}');
+      debugPrint('GET data: ${response.statusCode.toString()}');
       if (response.statusCode == 200 && response.data != null) {
         if (response.data.runtimeType == 'String') {
           response.data = jsonDecode(response.data.toString());
         }
         if (response.data['data'] != null &&
             target == '/site-settings/v2?type=2') {
-          //print(
+          //debugPrint(
           //    'model : ${response.data['data']['settings']['achievement_types'].toString()}');
           // Settings ty = Settings.fromJson(response.data['data']['settings']);
 
           // Settings test = ty;
 
-          // print('model : ${ty.toJson().toString()}');
+          // debugPrint('model : ${ty.toJson().toString()}');
         }
         model = Holedoapi.fromJson(response.data as Map<String, dynamic>);
-        // print('model : ${model.toString()}');
+        // debugPrint('model : ${model.toString()}');
       }
       return model;
     } catch (e) {
-      print('e: ${e.toString()}');
+      debugPrint('e: ${e.toString()}');
       throw Exception();
     }
   }
@@ -235,14 +236,14 @@ class ApiServices {
         },
         queryParameters: {'apikey': Get.put(HoledoDatabase()).apiKey},
       );
-      print('URL: $url');
+      debugPrint('URL: $url');
 
       if (response.statusCode == 200 && response.data['success'] == true) {
         //user = User.fromJson(
         //    response.data!['data']!['user'] as Map<String, dynamic>);
 
-        //print('res: ${user}');
-        print(
+        //debugPrint('res: ${user}');
+        debugPrint(
           'data: ${response.data!['data']!['user'] as Map<String, dynamic>}',
         );
         //return User.fromJson(response.data.user as Map<String, dynamic>);
@@ -278,12 +279,12 @@ class ApiServices {
         },
       ),
     );
-    print('URL: ${response.statusCode}');
-    print('URL: ${response.data['success']}');
+    debugPrint('URL: ${response.statusCode}');
+    debugPrint('URL: ${response.data['success']}');
     if (response.statusCode == 200 && response.data['success'] == true) {
       data = response.data['data']['user'];
     } else {
-      print('errr: ');
+      debugPrint('errr: ');
 
       /// throw Exception();
     }
@@ -299,7 +300,7 @@ class ApiServices {
     try {
       final url =
           "$baseUrl/articles/index?limit=$limit&page=$page&category=$category&type=$type";
-      print('URL: $url');
+      debugPrint('URL: $url');
       final dio.Response response = await _dio.get(
         url,
         options: buildCacheOptions(const Duration(days: 7)),
@@ -323,7 +324,7 @@ class ApiServices {
     url += id != null ? 'id=$id' : '';
     url += slug != null ? 'slug=$slug' : '';
 
-    print('URL: $url');
+    debugPrint('URL: $url');
     final dio.Response response = await _dio.get(
       url,
       options: buildCacheOptions(const Duration(days: 7)),
@@ -342,7 +343,7 @@ class ApiServices {
       final url = "$baseUrl/site-settings/v2?type=2";
       //_dio.interceptors.add(DioCacheManager(CacheConfig(baseUrl: "http://www.google.com")).interceptor);
       final dio.Response response = await _dio.get(url);
-      print('URL: $url');
+      debugPrint('URL: $url');
       if (response.statusCode == 200 && response.data['success'] == true) {
         data = Holedoapi.fromJson(response.data as Map<String, dynamic>);
       }
@@ -371,7 +372,7 @@ class ApiServices {
         },
       ),
     );
-    print('URL: $url');
+    debugPrint('URL: $url');
     if (response.statusCode == 200) {
       final data = response.data as Map<String, dynamic>;
 
@@ -388,7 +389,7 @@ class ApiServices {
     url += id != null ? 'id=$id' : '';
     url += slug != null ? 'slug=$slug' : '';
 
-    print('URL: $url');
+    debugPrint('URL: $url');
     final token = 'Bearer ${Get.put(HoledoDatabase()).token}';
     final dio.Response response = await _dio.get(
       url,

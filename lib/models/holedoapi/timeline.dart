@@ -26,9 +26,9 @@ class Timeline {
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id == null ? null : id,
-        "title": title == null ? null : title,
-        "type": type == null ? null : type,
+        "id": id,
+        "title": title,
+        "type": type,
         "date_from": dateFrom == null
             ? null
             : "${dateFrom!.year.toString().padLeft(4, '0')}-${dateFrom!.month.toString().padLeft(2, '0')}-${dateFrom!.day.toString().padLeft(2, '0')}",

@@ -21,7 +21,7 @@ class EditBlueCardSheet extends StatelessWidget {
   final void Function()? onAddPressed;
 
   @override
-  Widget build(_) {
+  Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, child) {
         if (ref.watch(profileNotifierProvider).isProfileEditable) {
@@ -66,7 +66,7 @@ class EditBlueCardSheet extends StatelessWidget {
                         child: Container(
                           width: 60,
                           height: 60,
-                          decoration: Styles.boxDecorationCircle.copyWith(
+                          decoration: boxDecorationCircle.copyWith(
                             color: Cr.green1,
                           ),
                           child: const Icon(

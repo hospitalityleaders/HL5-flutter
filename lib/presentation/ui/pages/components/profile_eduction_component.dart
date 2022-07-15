@@ -37,7 +37,6 @@ class _EducationComponentState extends State<EducationComponent> {
   Widget build(BuildContext context) {
     final List<Education>? education = DbData.getUserProfileData.educations;
     final bool hasData = education != null ? education.isNotEmpty : false;
-    final bool showMore = false;
     bool showSubMenu = false;
 
     return Container(
@@ -76,9 +75,9 @@ class _EducationComponentState extends State<EducationComponent> {
                                             : Di.PSS,
                                   ),
                                   width: widget.isMobile ? null : 360,
-                                  decoration: Styles.boxDecoration.copyWith(
+                                  decoration: boxDecoration.copyWith(
                                     color: Cr.whiteColor,
-                                    boxShadow: Styles.defaultBoxShadow,
+                                    boxShadow: defaultBoxShadow,
                                   ),
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.end,

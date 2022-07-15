@@ -57,8 +57,7 @@ class _ProfileReferenceSingleComponentState
           margin: const EdgeInsets.only(
             bottom: Di.PSL,
           ),
-          decoration:
-              Styles.boxDecorationWithShadow.copyWith(color: Cr.whiteColor),
+          decoration: boxDecorationWithShadow.copyWith(color: Cr.whiteColor),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -107,7 +106,7 @@ class _ProfileReferenceSingleComponentState
                     Container(
                       width: Di.FSOTL,
                       height: Di.FSOTL,
-                      decoration: Styles.boxDecoration.copyWith(
+                      decoration: boxDecoration.copyWith(
                         color: Cr.accentBlue1,
                       ),
                       child: const Icon(
@@ -136,7 +135,6 @@ class _ProfileReferenceSingleComponentState
                 AnimatedCrossFade(
                   firstChild: _ShowMoreWIdget(
                     getDescription: getDescription,
-                    showMore: false,
                   ),
                   secondChild: _ShowMoreWIdget(
                     getDescription: getDescription,
@@ -223,7 +221,7 @@ class _ProfileReferenceSingleComponentState
             //           Container(
             //             width: Di.FSOTL,
             //             height: Di.FSOTL,
-            //             decoration: Styles.boxDecoration.copyWith(
+            //             decoration: boxDecoration.copyWith(
             //               color: Cr.accentBlue1,
             //             ),
             //             child: Icon(

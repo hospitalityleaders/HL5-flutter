@@ -38,7 +38,7 @@ class AppState extends ChangeNotifier {
   }
 
   bool isLoginnedAndEditable(User data) {
-    print('p: ${profile?.slug} ${data.slug}');
+    debugPrint('p: ${profile?.slug} ${data.slug}');
     if (profile?.slug != null) {
       if (data.slug == profile?.slug) {
         return true;
@@ -181,17 +181,17 @@ class HoledoDatabase extends GetxController {
   Future<void> init() async {
     await GetStorage.init();
     //this.resetModel();
-    print('starting website... ');
+    debugPrint('starting website... ');
 
     await fetchSettings();
     final model = getModel();
     if (model.token != null || model.user?.fullName != null) {
-      print(
+      debugPrint(
         'cached user: ${model.user?.id} ${model.user?.fullName} ${model.user?.token}',
       );
     }
 
-    print('finish Init');
+    debugPrint('finish Init');
   }
 
   void setModel(DataModel model) {
@@ -204,7 +204,7 @@ class HoledoDatabase extends GetxController {
   }
 
   DataModel getModel() {
-    //print('model: ${box.read('model')}');
+    //debugPrint('model: ${box.read('model')}');
     final map = box.read('model');
 
     return map != null
@@ -220,7 +220,7 @@ class HoledoDatabase extends GetxController {
       final page = data.pages
           ?.firstWhere((e) => e.slug == slug); //, orElse: () => null);
       if (page != null) {
-        print('page: ${page.toString()} ');
+        debugPrint('page: ${page.toString()} ');
       }
       return page;
     } finally {
@@ -235,13 +235,13 @@ class HoledoDatabase extends GetxController {
       var data = getModel();
 
       if (data.articleCategories?.length != null) {
-        print(
+        debugPrint(
           'Cache articles cat: ${data.articleCategories?.length}  pages: ${data.pages?.length} companies: ${data.companies?.length} ',
         );
       }
 
       if (data.articleCategories?.length == null) {
-        print('getting new settings: $data');
+        debugPrint('getting new settings: $data');
         final response = await _api.GET(
           target: '/site-settings/v2?type=2',
         );
@@ -250,13 +250,13 @@ class HoledoDatabase extends GetxController {
       }
 
       if ((data.pages?.isEmpty ?? true) || data.pages?.length == null) {
-        print('getting pages');
+        debugPrint('getting pages');
         final response = await _api.GET(target: '/site-settings/pages?type=2');
         data.pages = response.data!.pages;
       }
 
       if ((data.pages?.isEmpty ?? true) || data.companies?.length == null) {
-        print('getting companies');
+        debugPrint('getting companies');
         final response =
             await _api.GET(target: '/site-settings/companies?type=2');
         data.companies = response.data!.companies;
@@ -283,7 +283,7 @@ class HoledoDatabase extends GetxController {
     this.appState = appState;
     this.context = context;
     snackBarMessage(context, 'info', 'AppState Loaded');
-    print('test ${appState.username}');
+    debugPrint('test ${appState.username}');
     if (getModel().user!.token != null) {
       final user = getModel().user;
       snackBarMessage(
@@ -329,7 +329,7 @@ class UsersController extends GetxController {
       );
 
       if (api.success == true) {
-        print('login: ${api.data!.user!.email.toString()}');
+        debugPrint('login: ${api.data!.user!.email.toString()}');
         isLogin.value = true;
         token.value = api.data?.token as String;
         user = api.data?.user as User;
@@ -346,10 +346,10 @@ class UsersController extends GetxController {
 
   String? getToken(slug) {
     final model = holedoDatabase.getModel();
-    print('matchING: $slug USER: ${model.user?.slug}');
+    debugPrint('matchING: $slug USER: ${model.user?.slug}');
     if (model.user?.slug == slug) {
       if (model.token != null) return model.token;
-      print('match: $slug token: ${model.user?.token}');
+      debugPrint('match: $slug token: ${model.user?.token}');
       return model.user?.token;
     }
     return null;
@@ -358,7 +358,7 @@ class UsersController extends GetxController {
   DataModel getModel() {
     final model = holedoDatabase.getModel();
     if (model.user != null) {
-      print('match: ${model.user?.slug} token: ${model.token}');
+      debugPrint('match: ${model.user?.slug} token: ${model.token}');
     }
     return model;
   }
@@ -367,7 +367,7 @@ class UsersController extends GetxController {
     final model = holedoDatabase.getModel();
     model.token = token;
     model.user = user;
-    //print('update user: ${model.user.toString()} token $token');
+    //debugPrint('update user: ${model.user.toString()} token $token');
     //Get.find<HoledoDatabase>().setModel(model);
     holedoDatabase.setModel(model);
   }
@@ -394,7 +394,7 @@ class UsersController extends GetxController {
         headers.addEntries(auth.entries);
       }
       final params = {'id': id, 'slug': slug, 'token': token};
-      print('params: ${headers.toString()}');
+      debugPrint('params: ${headers.toString()}');
       params.removeWhere((k, v) => v == null);
 
       final response = await _api.GET(
@@ -402,15 +402,15 @@ class UsersController extends GetxController {
         data: params,
         headers: headers,
       );
-      //print('log: ${response.data}');
+      //debugPrint('log: ${response.data}');
       user = response.data?.user as User;
 
       if (token != null) {
-        print('user: ${user.firstName} token: log: $token');
+        debugPrint('user: ${user.firstName} token: log: $token');
         user.token = token;
         saveUserToModel(user, user.token);
       }
-      //print('user: ${user.toJson().toString()}');
+      //debugPrint('user: ${user.toJson().toString()}');
       return user;
     } finally {
       isLoading(false);
@@ -429,7 +429,7 @@ class UsersController extends GetxController {
   //   if (Holedoapi.data != null) {
   //     Holedoapi.data.settings.generalSettings
   //   } else {
-  //     print("No data found");
+  //     debugPrint("No data found");
   //   }
   // }
 
@@ -453,7 +453,7 @@ class UsersController extends GetxController {
       };
 
       params.removeWhere((k, v) => v == null);
-      print('context: $context type: $type cat: $category');
+      debugPrint('context: $context type: $type cat: $category');
       final response = await _api.GET(target: '/users/index', data: params);
 
       userList.value = response.data!.users as List<User>;
@@ -468,7 +468,7 @@ class UsersController extends GetxController {
     try {
       isLoading(true);
       final response = await _api.getUserData(id: id, slug: slug);
-      print('log: $response');
+      debugPrint('log: $response');
       user = response;
     } finally {
       isLoading(false);
@@ -499,8 +499,8 @@ class UsersController extends GetxController {
         data: userJson,
         token: token,
       );
-      print('Succes: ${update.success} ');
-      print('Message: ${update.messages.toString()} ');
+      debugPrint('Succes: ${update.success} ');
+      debugPrint('Message: ${update.messages.toString()} ');
       // ignore: unnecessary_null_comparison
       if (update.data != null) {
         final response = await _api.GET(
@@ -508,9 +508,9 @@ class UsersController extends GetxController {
           data: {'slug': user.slug},
           token: token,
         );
-        //print('log: ${response.data}');
+        //debugPrint('log: ${response.data}');
         dataModel = response.data as DataModel;
-        print('log: ${dataModel.user?.firstName}');
+        debugPrint('log: ${dataModel.user?.firstName}');
 
         dataModel.user?.token = token;
         saveUserToModel(dataModel.user as User, token);
@@ -537,9 +537,9 @@ class UsersController extends GetxController {
       if (update.data != null) {
         final response =
             await _api.GET(target: '/users/get/', data: {'slug': user.slug});
-        //print('log: ${response.data}');
+        //debugPrint('log: ${response.data}');
         user = response.data?.user as User;
-        print('log: ${user.firstName}');
+        debugPrint('log: ${user.firstName}');
 
         user.token = token;
         saveUserToModel(user, token);
@@ -568,7 +568,7 @@ class NewsController extends GetxController {
       //var response2 = await _api.getArticle(id: id, slug: slug);
       final response = await _api
           .GET(target: '/articles/get/', data: {'id': id, 'slug': slug});
-      print('res: ${response.data?.article}');
+      debugPrint('res: ${response.data?.article}');
 
       if (response.success == true) {
         article.value = response.data!.article as Article;
@@ -599,24 +599,24 @@ class NewsController extends GetxController {
       };
       params.removeWhere((k, v) => v == null);
 
-      print('context: $context type: $type cat: $category');
+      debugPrint('context: $context type: $type cat: $category');
       final response = await _api.GET(target: '/articles/index', data: params);
 
       if (response.success == true) {
         final list = response.data!.articles as List<Article>;
         dataList.value = list;
 
-        //print('log: ${list}');
+        //debugPrint('log: ${list}');
         for (final data in list) {
           //articleList.add(data);
-          // print('c ${data.id} ${(articleList.any((e) => e.id == data.id))}');
+          // debugPrint('c ${data.id} ${(articleList.any((e) => e.id == data.id))}');
 
           if ((articleList.any((e) => e.id == data.id)) != true) {
-            // print('adding ${data.id}');
+            // debugPrint('adding ${data.id}');
             articleList.add(data);
           }
         }
-        print('localcache: count: ${articleList.length}');
+        debugPrint('localcache: count: ${articleList.length}');
       }
       return dataList.value as List<Article>;
     } finally {
@@ -665,7 +665,7 @@ class JobsController extends GetxController {
       };
       params.removeWhere((k, v) => v == null);
 
-      print('context: $context type: $type company: $company');
+      debugPrint('context: $context type: $type company: $company');
       final response = await _api.GET(target: '/jobs/index', data: params);
 
       if (response.success == true) {
@@ -673,11 +673,11 @@ class JobsController extends GetxController {
         dataList.value = list;
         for (final data in list) {
           if ((jobList.any((e) => e.id == data.id)) != true) {
-            // print('adding ${data.id}');
+            // debugPrint('adding ${data.id}');
             jobList.add(data);
           }
         }
-        print('localcache: count: ${jobList.length}');
+        debugPrint('localcache: count: ${jobList.length}');
       }
       return dataList.value as List<Job>;
     } finally {

@@ -5,10 +5,13 @@ import 'package:holedo/constant/sizedbox.dart';
 
 class DropDownButton extends StatefulWidget {
   final List menuList;
-  final hintText;
+  final String? hintText;
 
-  DropDownButton({Key? key, this.hintText, required this.menuList})
-      : super(key: key);
+  DropDownButton({
+    Key? key,
+    this.hintText,
+    required this.menuList,
+  }) : super(key: key);
 
   @override
   State<DropDownButton> createState() => _DropDownButtonState();

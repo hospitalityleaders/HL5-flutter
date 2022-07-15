@@ -31,7 +31,7 @@
 //     return GestureDetector(
 //       onTap: () {
 //         _controller.setIndex(index);
-//         print('$index');
+//         debugPrint('$index');
 //       },
 //       child: Text(menuName, style: _fontStyle),
 //     );

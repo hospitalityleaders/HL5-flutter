@@ -89,47 +89,45 @@ class SliderDrawerState extends State<SliderDrawer>
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constrain) {
-        return Container(
-          child: Stack(
-            children: <Widget>[
-              SliderBar(
+        return Stack(
+          children: <Widget>[
+            SliderBar(
+              slideDirection: widget.slideDirection,
+              sliderMenu: MobileSlideMenu(onCloseTap: closeSlider),
+              sliderMenuOpenSize: widget.sliderOpenSize,
+            ),
+            if (widget.sliderShadow != null) ...[
+              _Shadow(
+                animationDrawerController: _animationDrawerController,
                 slideDirection: widget.slideDirection,
-                sliderMenu: MobileSlideMenu(onCloseTap: closeSlider),
-                sliderMenuOpenSize: widget.sliderOpenSize,
-              ),
-              if (widget.sliderShadow != null) ...[
-                _Shadow(
-                  animationDrawerController: _animationDrawerController,
-                  slideDirection: widget.slideDirection,
-                  sliderOpenSize: widget.sliderOpenSize,
-                  animation: _animation,
-                  sliderShadow: widget.sliderShadow!,
-                ),
-              ],
-              //Child
-              AnimatedBuilder(
-                animation: _animationDrawerController!,
-                builder: (_, child) {
-                  return Transform.translate(
-                    offset: getOffsetValues(
-                      widget.slideDirection,
-                      _animation.value,
-                    ),
-                    child: child,
-                  );
-                },
-                child: Column(
-                  children: <Widget>[
-                    ProfileMobileAppbar(
-                      onMenuTap: () => toggle(),
-                      onSearch: (onSearch) {},
-                    ),
-                    Expanded(child: widget.child),
-                  ],
-                ),
+                sliderOpenSize: widget.sliderOpenSize,
+                animation: _animation,
+                sliderShadow: widget.sliderShadow!,
               ),
             ],
-          ),
+            //Child
+            AnimatedBuilder(
+              animation: _animationDrawerController!,
+              builder: (_, child) {
+                return Transform.translate(
+                  offset: getOffsetValues(
+                    widget.slideDirection,
+                    _animation.value,
+                  ),
+                  child: child,
+                );
+              },
+              child: Column(
+                children: <Widget>[
+                  ProfileMobileAppbar(
+                    onMenuTap: () => toggle(),
+                    onSearch: (onSearch) {},
+                  ),
+                  Expanded(child: widget.child),
+                ],
+              ),
+            ),
+          ],
         );
       },
     );
@@ -141,7 +139,7 @@ class SliderDrawerState extends State<SliderDrawer>
     _animationDrawerController!.dispose();
   }
 
-  openOrClose() {
+  void openOrClose() {
     if (_percent > 0.3) {
       openSlider();
     } else {

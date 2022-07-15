@@ -35,7 +35,6 @@ class _MobileProfileTimelineSectionState
     extends State<MobileProfileTimelineSection> {
   @override
   Widget build(BuildContext context) {
-    // final userProfileData = DbData.getUserProfileData;
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: Di.PSS,
@@ -86,6 +85,7 @@ class _MobileTimelineSection extends StatefulWidget {
 class _MobileTimelineSectionState extends State<_MobileTimelineSection> {
   @override
   Widget build(BuildContext context) {
+    // final userProfileData = DbData.getUserProfileData;
     // return _ProfileMobileTimelineTile(
     //   jobDescriptionInHtml: jobDescriptionInHtml,
     //   showComments: showComments,

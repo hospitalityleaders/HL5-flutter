@@ -7,9 +7,9 @@ import 'package:holedo/common/common_widget.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/responsive/responsive.dart';
 
-import '../../../../common/common_widget.dart';
-import '../../../../constant/fontStyle/font_style.dart';
-import '../../../../responsive/responsive.dart';
+import 'package:holedo/common/common_widget.dart';
+import 'package:holedo/constant/fontStyle/font_style.dart';
+import 'package:holedo/responsive/responsive.dart';
 
 class NewsSingleLoggedInScreen extends StatefulWidget {
   static const String route = '/category_details';
@@ -183,95 +183,99 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
   ];
 
   int currentIndex = 0;
-  PageController _controller = PageController();
+  final PageController _controller = PageController();
   @override
   Widget build(BuildContext context) {
     // CarouselController buttonCarouselController = CarouselController();
 
-    print('${Get.width}');
+    debugPrint('${Get.width}');
     return Responsive.isDesktop(context) ? desktopView() : mobileVew(context);
   }
 
   Scaffold mobileVew(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(46),
+        preferredSize: const Size.fromHeight(46),
         child: Container(
-            height: 46,
-            width: Get.width,
-            color: ColorPicker.kPrimaryLight1,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Image(
-                    image: AssetImage('assets/icons/logo1.png'),
+          height: 46,
+          width: Get.width,
+          color: ColorPicker.kPrimaryLight1,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Image(
+                  image: AssetImage('assets/icons/logo1.png'),
+                ),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              Expanded(
+                child: Container(
+                  margin: const EdgeInsets.all(4),
+                  decoration: BoxDecoration(
+                    color: ColorPicker.kPrimaryLight1,
+                    borderRadius: BorderRadius.circular(8),
                   ),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Expanded(
-                  child: Container(
-                    margin: EdgeInsets.all(4),
-                    decoration: BoxDecoration(
-                        color: ColorPicker.kPrimaryLight1,
-                        borderRadius: BorderRadius.circular(8)),
-                    child: TextFormField(
-                      cursorColor: ColorPicker.kWhite,
-                      style: FontTextStyle.kWhite16W400SSP,
-                      decoration: InputDecoration(
-                        hintStyle: FontTextStyle.kPrimaryLightBlue16W400SSP,
-                        filled: true,
-                        fillColor: ColorPicker.kPrimaryLight,
-                        hintText: "Search",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
-                          borderSide:
-                              BorderSide(color: ColorPicker.kTransparent),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
-                          borderSide:
-                              BorderSide(color: ColorPicker.kTransparent),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
-                          borderSide:
-                              BorderSide(color: ColorPicker.kTransparent),
-                        ),
-                        prefixIcon: Icon(
-                          Icons.search,
-                          color: ColorPicker.kPrimaryLightBlue,
-                        ),
+                  child: TextFormField(
+                    cursorColor: ColorPicker.kWhite,
+                    style: FontTextStyle.kWhite16W400SSP,
+                    decoration: InputDecoration(
+                      hintStyle: FontTextStyle.kPrimaryLightBlue16W400SSP,
+                      filled: true,
+                      fillColor: ColorPicker.kPrimaryLight,
+                      hintText: "Search",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide:
+                            const BorderSide(color: ColorPicker.kTransparent),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide:
+                            const BorderSide(color: ColorPicker.kTransparent),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide:
+                            const BorderSide(color: ColorPicker.kTransparent),
+                      ),
+                      prefixIcon: const Icon(
+                        Icons.search,
+                        color: ColorPicker.kPrimaryLightBlue,
                       ),
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: Get.width * 0.01,
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/icons/menu.png',
-                      height: 18,
-                      width: 25,
-                      fit: BoxFit.cover,
-                      color: ColorPicker.kPrimaryLightBlue,
-                    ),
-                    SizedBox(height: 5),
-                    CommonWidget.text('MENU',
-                        style: FontTextStyle.kPrimaryLight29W700SSP),
-                  ],
-                ),
-                SizedBox(
-                  width: Get.width * 0.01,
-                ),
-              ],
-            )),
+              ),
+              SizedBox(
+                width: Get.width * 0.01,
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/icons/menu.png',
+                    height: 18,
+                    width: 25,
+                    fit: BoxFit.cover,
+                    color: ColorPicker.kPrimaryLightBlue,
+                  ),
+                  const SizedBox(height: 5),
+                  CommonWidget.text(
+                    'MENU',
+                    style: FontTextStyle.kPrimaryLight29W700SSP,
+                  ),
+                ],
+              ),
+              SizedBox(
+                width: Get.width * 0.01,
+              ),
+            ],
+          ),
+        ),
       ),
       backgroundColor: ColorPicker.kBg1,
       body: SingleChildScrollView(
@@ -279,102 +283,108 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
           padding: const EdgeInsets.all(6),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Stack(
                 children: [
                   Container(
-                    margin: EdgeInsets.only(bottom: 120),
+                    margin: const EdgeInsets.only(bottom: 120),
                     child: SizedBox(
-                        width: Get.width,
-                        child: Image.asset(
-                          'assets/images/slider1.png',
-                          fit: BoxFit.cover,
-                        )),
+                      width: Get.width,
+                      child: Image.asset(
+                        'assets/images/slider1.png',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
                   Positioned(
-                      top: Get.width * 0.28,
-                      child: Container(
-                        width: Get.width * 0.92,
-                        height: Get.height * 0.4,
-                        color: Colors.white,
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 20, top: 20, right: 20),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CommonWidget.text(
-                                'RESOURCES',
-                                style: FontTextStyle.kGreyLight512W700SSP,
-                              ),
-                              SizedBox(
-                                height: Get.height * 0.01,
-                              ),
-                              CommonWidget.text(
-                                '5 Steps for Travel Brands to Build a Brand Ambassador Program',
-                                style: FontTextStyle.kBlueDark126W400SSP,
-                              ),
-                              SizedBox(
-                                height: Get.height * 0.01,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Container(
-                                    height: 50,
-                                    width: 50,
-                                    decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                            fit: BoxFit.cover,
-                                            image: AssetImage(
-                                                'assets/images/profile.png'))),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(10),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            CommonWidget.text(
-                                              'By',
-                                              style: TextStyle(
-                                                fontSize: 17,
-                                                color: ColorPicker.kGreyLight5,
-                                              ),
-                                            ),
-                                            CommonWidget.text(
-                                              ': Pam Carrol',
-                                              style: TextStyle(
-                                                  color:
-                                                      ColorPicker.kGreyLight5,
-                                                  fontSize: 17,
-                                                  fontWeight: FontWeight.w500),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: Get.height * 0.005,
-                                        ),
-                                        CommonWidget.text(
-                                          '26 August 2015 • 10:40',
-                                          style: TextStyle(
-                                            fontSize: 17,
-                                            color: ColorPicker.kGreyLight5,
-                                          ),
-                                        ),
-                                      ],
+                    top: Get.width * 0.28,
+                    child: Container(
+                      width: Get.width * 0.92,
+                      height: Get.height * 0.4,
+                      color: Colors.white,
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          left: 20,
+                          top: 20,
+                          right: 20,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CommonWidget.text(
+                              'RESOURCES',
+                              style: FontTextStyle.kGreyLight512W700SSP,
+                            ),
+                            SizedBox(
+                              height: Get.height * 0.01,
+                            ),
+                            CommonWidget.text(
+                              '5 Steps for Travel Brands to Build a Brand Ambassador Program',
+                              style: FontTextStyle.kBlueDark126W400SSP,
+                            ),
+                            SizedBox(
+                              height: Get.height * 0.01,
+                            ),
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Container(
+                                  height: 50,
+                                  width: 50,
+                                  decoration: const BoxDecoration(
+                                    image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: AssetImage(
+                                        'assets/images/profile.png',
+                                      ),
                                     ),
                                   ),
-                                ],
-                              ),
-                            ],
-                          ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          CommonWidget.text(
+                                            'By',
+                                            style: const TextStyle(
+                                              fontSize: 17,
+                                              color: ColorPicker.kGreyLight5,
+                                            ),
+                                          ),
+                                          CommonWidget.text(
+                                            ': Pam Carrol',
+                                            style: const TextStyle(
+                                              color: ColorPicker.kGreyLight5,
+                                              fontSize: 17,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: Get.height * 0.005,
+                                      ),
+                                      CommonWidget.text(
+                                        '26 August 2015 • 10:40',
+                                        style: const TextStyle(
+                                          fontSize: 17,
+                                          color: ColorPicker.kGreyLight5,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
-                      )),
+                      ),
+                    ),
+                  ),
                 ],
               ),
               Container(
@@ -388,43 +398,54 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Padding(
+                            const Padding(
                               padding: EdgeInsets.only(
-                                  right: 7, left: 7, bottom: 20),
+                                right: 7,
+                                left: 7,
+                                bottom: 20,
+                              ),
                               child: Divider(
                                 color: Color(0xffDEE1E3),
                                 thickness: 2,
                               ),
                             ),
                             CommonWidget.text(
-                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 22)),
+                              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
+                              style: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 22,
+                              ),
+                            ),
                             SizedBox(
                               height: Get.height * 0.03,
                             ),
                             CommonWidget.text(
-                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-                                style: TextStyle(
-                                  color: ColorPicker.kGreyLight5,
-                                  fontSize: 17,
-                                )),
+                              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+                              style: const TextStyle(
+                                color: ColorPicker.kGreyLight5,
+                                fontSize: 17,
+                              ),
+                            ),
                             SizedBox(
                               height: Get.height * 0.03,
                             ),
                             CommonWidget.text(
-                                'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
-                                style: TextStyle(
-                                    color: ColorPicker.kGreyLight5,
-                                    fontSize: 17)),
+                              'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
+                              style: const TextStyle(
+                                color: ColorPicker.kGreyLight5,
+                                fontSize: 17,
+                              ),
+                            ),
                             SizedBox(
                               height: Get.height * 0.03,
                             ),
                             CommonWidget.text(
-                                'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.',
-                                style: TextStyle(
-                                    color: ColorPicker.kGreyLight5,
-                                    fontSize: 17)),
+                              'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.',
+                              style: const TextStyle(
+                                color: ColorPicker.kGreyLight5,
+                                fontSize: 17,
+                              ),
+                            ),
                             SizedBox(
                               height: Get.height * 0.03,
                             ),
@@ -433,13 +454,12 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                               height: Get.height * 0.5,
                               // width: 712,
 
-                              color: Color(0xffF6F7F8),
+                              color: const Color(0xffF6F7F8),
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Flexible(
-                                    child: Container(
+                                    child: SizedBox(
                                       // color: Colors.red,
                                       // height: 332,
                                       width: Get.width,
@@ -449,8 +469,9 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                           PageView.builder(
                                             controller: _controller,
                                             onPageChanged: (value) {
-                                              print(
-                                                  '-value----${_controller.page}');
+                                              debugPrint(
+                                                '-value----${_controller.page}',
+                                              );
                                               setState(() {
                                                 // currentIndex = value;
                                               });
@@ -462,12 +483,14 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                                 width: Get.width,
                                                 // width: 200,
 
-                                                decoration: BoxDecoration(
-                                                    image: DecorationImage(
-                                                  image: AssetImage(
-                                                      'assets/images/slider2.png'),
-                                                  fit: BoxFit.cover,
-                                                )),
+                                                decoration: const BoxDecoration(
+                                                  image: DecorationImage(
+                                                    image: AssetImage(
+                                                      'assets/images/slider2.png',
+                                                    ),
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
 
                                                 // child: Image(
                                                 //   image: AssetImage('image/25-3/cover_image.png'),
@@ -481,19 +504,19 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                             child: Container(
                                               height: 50,
                                               width: 50,
-                                              color: Color(0xFF272E41)
+                                              color: const Color(0xFF272E41)
                                                   .withOpacity(0.4),
                                               child: Center(
                                                 child: IconButton(
                                                   onPressed: () {
                                                     _controller.previousPage(
-                                                      duration:
-                                                          Duration(seconds: 1),
+                                                      duration: const Duration(
+                                                          seconds: 1),
                                                       curve: Curves.easeIn,
                                                     );
                                                     // Use the controller to change the current page
                                                   },
-                                                  icon: Icon(
+                                                  icon: const Icon(
                                                     Icons.chevron_left,
                                                     size: 21,
                                                     color: Colors.white,
@@ -507,7 +530,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                             child: Container(
                                               height: 50,
                                               width: 50,
-                                              color: Color(0xFF272E41)
+                                              color: const Color(0xFF272E41)
                                                   .withOpacity(0.4),
                                               child: Center(
                                                 child: Center(
@@ -515,12 +538,14 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                                     onPressed: () {
                                                       // Use the controller to change the current page
                                                       _controller.nextPage(
-                                                        duration: Duration(
-                                                            seconds: 1),
+                                                        duration:
+                                                            const Duration(
+                                                          seconds: 1,
+                                                        ),
                                                         curve: Curves.easeIn,
                                                       );
                                                     },
-                                                    icon: Icon(
+                                                    icon: const Icon(
                                                       Icons.chevron_right,
                                                       color: Colors.white,
                                                       size: 21,
@@ -538,7 +563,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                     padding: const EdgeInsets.only(top: 2),
                                     child: Stack(
                                       children: [
-                                        Container(
+                                        SizedBox(
                                           height: 100,
                                           width: Get.width,
                                           // color: Colors.green,
@@ -553,11 +578,14 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                                   height: 80,
                                                   width: 150,
                                                   decoration: BoxDecoration(
-                                                      color: Colors.red,
-                                                      image: DecorationImage(
-                                                          image: AssetImage(
-                                                              "${data[index]['img']}"),
-                                                          fit: BoxFit.cover)),
+                                                    color: Colors.red,
+                                                    image: DecorationImage(
+                                                      image: AssetImage(
+                                                        "${data[index]['img']}",
+                                                      ),
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
                                                 ),
                                               );
                                             },
@@ -571,7 +599,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                             width: 30,
                                             color:
                                                 Colors.black.withOpacity(0.3),
-                                            child: Icon(
+                                            child: const Icon(
                                               Icons.chevron_right,
                                               color: Colors.white,
                                             ),
@@ -666,58 +694,72 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                             SizedBox(
                               height: Get.height * 0.03,
                             ),
-                            CommonWidget.text('Lorem ipsum dolor sit amet',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.bold)),
+                            CommonWidget.text(
+                              'Lorem ipsum dolor sit amet',
+                              style: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                             SizedBox(
                               height: Get.height * 0.03,
                             ),
                             CommonWidget.text(
-                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-                                style: TextStyle(
-                                    color: ColorPicker.kGreyLight5,
-                                    fontSize: 17)),
+                              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+                              style: const TextStyle(
+                                color: ColorPicker.kGreyLight5,
+                                fontSize: 17,
+                              ),
+                            ),
                             SizedBox(
                               height: Get.height * 0.03,
                             ),
                             CommonWidget.text(
-                                'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
-                                style: TextStyle(
-                                    color: ColorPicker.kGreyLight5,
-                                    fontSize: 17)),
+                              'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
+                              style: const TextStyle(
+                                color: ColorPicker.kGreyLight5,
+                                fontSize: 17,
+                              ),
+                            ),
                             SizedBox(
                               height: Get.height * 0.03,
                             ),
-                            CommonWidget.text('Numbered List',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.bold)),
+                            CommonWidget.text(
+                              'Numbered List',
+                              style: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                             SizedBox(
                               height: Get.height * 0.03,
                             ),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Padding(
-                                  padding: EdgeInsets.only(bottom: 60),
-                                  child: CommonWidget.text('1.',
-                                      style: TextStyle(
-                                          color: ColorPicker.kGreyLight5,
-                                          fontSize: 17)),
+                                  padding: const EdgeInsets.only(bottom: 60),
+                                  child: CommonWidget.text(
+                                    '1.',
+                                    style: const TextStyle(
+                                      color: ColorPicker.kGreyLight5,
+                                      fontSize: 17,
+                                    ),
+                                  ),
                                 ),
                                 SizedBox(
                                   width: Get.width * 0.03,
                                 ),
-                                Container(
+                                SizedBox(
                                   width: Get.height * 0.37,
                                   child: CommonWidget.text(
-                                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut	labore et dolore magna aliqua.',
-                                      style: TextStyle(
-                                          color: ColorPicker.kGreyLight5,
-                                          fontSize: 17)),
+                                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut	labore et dolore magna aliqua.',
+                                    style: const TextStyle(
+                                      color: ColorPicker.kGreyLight5,
+                                      fontSize: 17,
+                                    ),
+                                  ),
                                 )
                               ],
                             ),
@@ -725,25 +767,29 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                               height: Get.height * 0.02,
                             ),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Padding(
-                                  padding: EdgeInsets.only(bottom: 60),
-                                  child: CommonWidget.text('2.',
-                                      style: TextStyle(
-                                          color: ColorPicker.kGreyLight5,
-                                          fontSize: 17)),
+                                  padding: const EdgeInsets.only(bottom: 60),
+                                  child: CommonWidget.text(
+                                    '2.',
+                                    style: const TextStyle(
+                                      color: ColorPicker.kGreyLight5,
+                                      fontSize: 17,
+                                    ),
+                                  ),
                                 ),
                                 SizedBox(
                                   width: Get.width * 0.03,
                                 ),
-                                Container(
+                                SizedBox(
                                   width: Get.height * 0.37,
                                   child: CommonWidget.text(
-                                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut	labore et dolore magna aliqua.',
-                                      style: TextStyle(
-                                          color: ColorPicker.kGreyLight5,
-                                          fontSize: 17)),
+                                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut	labore et dolore magna aliqua.',
+                                    style: const TextStyle(
+                                      color: ColorPicker.kGreyLight5,
+                                      fontSize: 17,
+                                    ),
+                                  ),
                                 )
                               ],
                             ),
@@ -751,111 +797,70 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                               height: Get.height * 0.02,
                             ),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Padding(
-                                  padding: EdgeInsets.only(bottom: 60),
-                                  child: CommonWidget.text('3.',
-                                      style: TextStyle(
-                                          color: ColorPicker.kGreyLight5,
-                                          fontSize: 17)),
+                                  padding: const EdgeInsets.only(bottom: 60),
+                                  child: CommonWidget.text(
+                                    '3.',
+                                    style: const TextStyle(
+                                      color: ColorPicker.kGreyLight5,
+                                      fontSize: 17,
+                                    ),
+                                  ),
                                 ),
                                 SizedBox(
                                   width: Get.width * 0.02,
                                 ),
-                                Container(
+                                SizedBox(
                                   width: Get.height * 0.37,
                                   child: CommonWidget.text(
-                                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut	labore et dolore magna aliqua.',
-                                      style: TextStyle(
-                                          color: ColorPicker.kGreyLight5,
-                                          fontSize: 17)),
+                                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut	labore et dolore magna aliqua.',
+                                    style: const TextStyle(
+                                      color: ColorPicker.kGreyLight5,
+                                      fontSize: 17,
+                                    ),
+                                  ),
                                 )
                               ],
                             ),
                             SizedBox(
                               height: Get.height * 0.02,
                             ),
-                            CommonWidget.text('Bulleted List',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.bold)),
+                            CommonWidget.text(
+                              'Bulleted List',
+                              style: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                             SizedBox(
                               height: Get.height * 0.03,
                             ),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Padding(
-                                  padding: EdgeInsets.only(bottom: 60),
-                                  child: CommonWidget.text('•',
-                                      style: TextStyle(
-                                          color: ColorPicker.kGreyLight5,
-                                          fontSize: 30)),
+                                  padding: const EdgeInsets.only(bottom: 60),
+                                  child: CommonWidget.text(
+                                    '•',
+                                    style: const TextStyle(
+                                      color: ColorPicker.kGreyLight5,
+                                      fontSize: 30,
+                                    ),
+                                  ),
                                 ),
                                 SizedBox(
                                   width: Get.width * 0.03,
                                 ),
-                                Container(
-                                  width: Get.height * 0.37,
-                                  child: CommonWidget.text(
-                                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut	labore et dolore magna aliqua.',
-                                      style: TextStyle(
-                                          color: ColorPicker.kGreyLight5,
-                                          fontSize: 17)),
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              height: Get.height * 0.02,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(bottom: 60),
-                                  child: CommonWidget.text('•',
-                                      style: TextStyle(
-                                          color: ColorPicker.kGreyLight5,
-                                          fontSize: 30)),
-                                ),
                                 SizedBox(
-                                  width: Get.width * 0.03,
-                                ),
-                                Container(
                                   width: Get.height * 0.37,
                                   child: CommonWidget.text(
-                                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut	labore et dolore magna aliqua.',
-                                      style: TextStyle(
-                                          color: ColorPicker.kGreyLight5,
-                                          fontSize: 17)),
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              height: Get.height * 0.02,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(bottom: 60),
-                                  child: CommonWidget.text('•',
-                                      style: TextStyle(
-                                          color: ColorPicker.kGreyLight5,
-                                          fontSize: 30)),
-                                ),
-                                SizedBox(
-                                  width: Get.width * 0.03,
-                                ),
-                                Container(
-                                  width: Get.height * 0.37,
-                                  child: CommonWidget.text(
-                                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut	labore et dolore magna aliqua.',
-                                      style: TextStyle(
-                                          color: ColorPicker.kGreyLight5,
-                                          fontSize: 17)),
+                                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut	labore et dolore magna aliqua.',
+                                    style: const TextStyle(
+                                      color: ColorPicker.kGreyLight5,
+                                      fontSize: 17,
+                                    ),
+                                  ),
                                 )
                               ],
                             ),
@@ -865,21 +870,84 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                             Row(
                               children: [
                                 Padding(
-                                  padding: EdgeInsets.only(bottom: 150),
+                                  padding: const EdgeInsets.only(bottom: 60),
+                                  child: CommonWidget.text(
+                                    '•',
+                                    style: const TextStyle(
+                                      color: ColorPicker.kGreyLight5,
+                                      fontSize: 30,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: Get.width * 0.03,
+                                ),
+                                SizedBox(
+                                  width: Get.height * 0.37,
+                                  child: CommonWidget.text(
+                                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut	labore et dolore magna aliqua.',
+                                    style: const TextStyle(
+                                      color: ColorPicker.kGreyLight5,
+                                      fontSize: 17,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              height: Get.height * 0.02,
+                            ),
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 60),
+                                  child: CommonWidget.text(
+                                    '•',
+                                    style: const TextStyle(
+                                      color: ColorPicker.kGreyLight5,
+                                      fontSize: 30,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: Get.width * 0.03,
+                                ),
+                                SizedBox(
+                                  width: Get.height * 0.37,
+                                  child: CommonWidget.text(
+                                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut	labore et dolore magna aliqua.',
+                                    style: const TextStyle(
+                                      color: ColorPicker.kGreyLight5,
+                                      fontSize: 17,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              height: Get.height * 0.02,
+                            ),
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 150),
                                   child: Image.asset('assets/icons/invot1.png'),
                                 ),
                                 Padding(
-                                    padding: EdgeInsets.all(10),
-                                    child: Container(
-                                      width: Get.height * 0.36,
-                                      child: CommonWidget.text(
-                                          'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex',
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 20)),
-                                    )),
+                                  padding: const EdgeInsets.all(10),
+                                  child: SizedBox(
+                                    width: Get.height * 0.36,
+                                    child: CommonWidget.text(
+                                      'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex',
+                                      style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ),
+                                ),
                                 Padding(
-                                  padding: EdgeInsets.only(top: 150),
+                                  padding: const EdgeInsets.only(top: 150),
                                   child: Image.asset('assets/icons/invot.png'),
                                 ),
                               ],
@@ -888,107 +956,127 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                               height: Get.height * 0.02,
                             ),
                             CommonWidget.text(
-                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-                                style: TextStyle(
-                                    color: ColorPicker.kGreyLight5,
-                                    fontSize: 18)),
+                              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+                              style: const TextStyle(
+                                color: ColorPicker.kGreyLight5,
+                                fontSize: 18,
+                              ),
+                            ),
                             SizedBox(
                               height: Get.height * 0.02,
                             ),
-                            CommonWidget.text('TAGS:',
-                                style: TextStyle(
-                                    color: Color(0xffB5BDC2),
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.bold)),
+                            CommonWidget.text(
+                              'TAGS:',
+                              style: const TextStyle(
+                                color: Color(0xffB5BDC2),
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                             SizedBox(
                               height: Get.height * 0.02,
                             ),
-                            Container(
-                                height: Get.height * 0.13,
-                                width: Get.width * 0.9,
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        tag(
-                                            title: '#Hospital',
-                                            height: Get.height * 0.04,
-                                            width: Get.width * 0.2),
-                                        tag(
-                                            title: '#Brand',
-                                            height: Get.height * 0.04,
-                                            width: Get.width * 0.16),
-                                        tag(
-                                            title: '#Ambassador',
-                                            height: Get.height * 0.04,
-                                            width: Get.width * 0.25),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        tag(
-                                            title: '#Hotal',
-                                            height: Get.height * 0.04,
-                                            width: Get.width * 0.16),
-                                        tag(
-                                            title: '#Icon',
-                                            height: Get.height * 0.04,
-                                            width: Get.width * 0.15),
-                                        tag(
-                                            title: '#Travel',
-                                            height: Get.height * 0.04,
-                                            width: Get.width * 0.15),
-                                      ],
-                                    ),
-                                  ],
-                                )),
-                            CommonWidget.text('SHARE THIS ARTICLE:',
-                                style: TextStyle(
-                                    color: Color(0xffB5BDC2),
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.bold)),
+                            SizedBox(
+                              height: Get.height * 0.13,
+                              width: Get.width * 0.9,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      tag(
+                                        title: '#Hospital',
+                                        height: Get.height * 0.04,
+                                        width: Get.width * 0.2,
+                                      ),
+                                      tag(
+                                        title: '#Brand',
+                                        height: Get.height * 0.04,
+                                        width: Get.width * 0.16,
+                                      ),
+                                      tag(
+                                        title: '#Ambassador',
+                                        height: Get.height * 0.04,
+                                        width: Get.width * 0.25,
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      tag(
+                                        title: '#Hotal',
+                                        height: Get.height * 0.04,
+                                        width: Get.width * 0.16,
+                                      ),
+                                      tag(
+                                        title: '#Icon',
+                                        height: Get.height * 0.04,
+                                        width: Get.width * 0.15,
+                                      ),
+                                      tag(
+                                        title: '#Travel',
+                                        height: Get.height * 0.04,
+                                        width: Get.width * 0.15,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            CommonWidget.text(
+                              'SHARE THIS ARTICLE:',
+                              style: const TextStyle(
+                                color: Color(0xffB5BDC2),
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                             SizedBox(
                               height: Get.height * 0.02,
                             ),
                             Row(
                               children: [
                                 box(
-                                    color: Color(0xff04595B),
-                                    image: 'assets/icons/x.png'),
+                                  color: const Color(0xff04595B),
+                                  image: 'assets/icons/x.png',
+                                ),
                                 SizedBox(
                                   width: Get.width * 0.01,
                                 ),
                                 box(
-                                    color: Color(0xff1C86BC),
-                                    image: 'assets//icons/linkdin.png'),
+                                  color: const Color(0xff1C86BC),
+                                  image: 'assets//icons/linkdin.png',
+                                ),
                                 SizedBox(
                                   width: Get.width * 0.01,
                                 ),
                                 box(
-                                    color: Color(0xffD63B30),
-                                    image: 'assets/icons/gp.png'),
+                                  color: const Color(0xffD63B30),
+                                  image: 'assets/icons/gp.png',
+                                ),
                                 SizedBox(
                                   width: Get.width * 0.01,
                                 ),
                                 box(
-                                    color: Color(0xff00ABF0),
-                                    image: 'assets/icons/twitter.png'),
+                                  color: const Color(0xff00ABF0),
+                                  image: 'assets/icons/twitter.png',
+                                ),
                                 SizedBox(
                                   width: Get.width * 0.01,
                                 ),
                                 box(
-                                    color: Color(0xff344F8D),
-                                    image: 'assets/icons/fb.png'),
+                                  color: const Color(0xff344F8D),
+                                  image: 'assets/icons/fb.png',
+                                ),
                               ],
                             ),
                             SizedBox(
                               height: Get.height * 0.015,
                             ),
-                            Divider(
+                            const Divider(
                               thickness: 2,
                               color: Color(0xffDEE1E3),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 5,
                             ),
                             Row(
@@ -998,24 +1086,28 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                 (index) => Row(
                                   children: [
                                     Image(
-                                      image: AssetImage(likeCommentShare[index]
-                                          ['img'] as String),
+                                      image: AssetImage(
+                                        likeCommentShare[index]['img']
+                                            as String,
+                                      ),
                                       height: 15,
                                       width: 16,
                                       fit: BoxFit.cover,
                                     ),
-                                    SizedBox(width: 5),
+                                    const SizedBox(width: 5),
                                     CommonWidget.text(
                                       likeCommentShare[index]['title']
                                           as String,
                                       style: FontTextStyle.kBlueLight116W400SSP,
                                     ),
-                                    SizedBox(width: 5),
+                                    const SizedBox(width: 5),
                                     Container(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 8, vertical: 5),
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 8,
+                                        vertical: 5,
+                                      ),
                                       decoration: BoxDecoration(
-                                        color: Color(0xFFCCE8FE),
+                                        color: const Color(0xFFCCE8FE),
                                         borderRadius: BorderRadius.circular(2),
                                       ),
                                       child: Center(
@@ -1035,7 +1127,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                         ),
                       ),
                     ),
-                    Divider(
+                    const Divider(
                       thickness: 2,
                       color: Color(0xffDEE1E3),
                     ),
@@ -1043,13 +1135,13 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                       padding: const EdgeInsets.all(15),
                       child: Row(
                         children: [
-                          Image(
+                          const Image(
                             image: AssetImage('assets/icons/comment.png'),
                             height: 15,
                             width: 16,
                             fit: BoxFit.cover,
                           ),
-                          SizedBox(width: 5),
+                          const SizedBox(width: 5),
                           CommonWidget.text(
                             'Show previous comments',
                             style: FontTextStyle.kBlueLight114W600PR,
@@ -1067,101 +1159,106 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                               Container(
                                 height: 40,
                                 width: 40,
-                                decoration: BoxDecoration(
-                                    color: Colors.green,
-                                    image: DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image: AssetImage(
-                                            'assets/images/avatar.png'))),
+                                decoration: const BoxDecoration(
+                                  color: Colors.green,
+                                  image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: AssetImage(
+                                      'assets/images/avatar.png',
+                                    ),
+                                  ),
+                                ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 20,
                               ),
                               Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Container(
                                     child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          SizedBox(
-                                            width: Get.width * 0.4,
-                                            child: RichText(
-                                              text: TextSpan(
-                                                text: "Jad Limacino",
-                                                style: FontTextStyle
-                                                    .kBlackPure16W600PR,
-                                                children: <TextSpan>[
-                                                  TextSpan(
-                                                    text: 'MHL',
-                                                    style: TextStyle(
-                                                        textBaseline:
-                                                            TextBaseline
-                                                                .ideographic,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        fontSize: 12),
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        SizedBox(
+                                          width: Get.width * 0.4,
+                                          child: RichText(
+                                            text: TextSpan(
+                                              text: "Jad Limacino",
+                                              style: FontTextStyle
+                                                  .kBlackPure16W600PR,
+                                              children: const <TextSpan>[
+                                                TextSpan(
+                                                  text: 'MHL',
+                                                  style: TextStyle(
+                                                    textBaseline: TextBaseline
+                                                        .ideographic,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 12,
                                                   ),
-                                                  TextSpan(
-                                                    text:
-                                                        "  Very interesting indeed. I’ll be watching this very closely as they expand further into Asia.",
-                                                    style: TextStyle(
-                                                        textBaseline:
-                                                            TextBaseline
-                                                                .ideographic,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        color: Colors.grey,
-                                                        fontSize: 16),
+                                                ),
+                                                TextSpan(
+                                                  text:
+                                                      "  Very interesting indeed. I’ll be watching this very closely as they expand further into Asia.",
+                                                  style: TextStyle(
+                                                    textBaseline: TextBaseline
+                                                        .ideographic,
+                                                    fontWeight: FontWeight.w400,
+                                                    color: Colors.grey,
+                                                    fontSize: 16,
                                                   ),
-                                                ],
-                                              ),
+                                                ),
+                                              ],
                                             ),
                                           ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            children: [
-                                              CommonWidget.text(
-                                                'like • ',
-                                                style: TextStyle(
-                                                    color: Colors.blue,
-                                                    fontSize: 14),
-                                              ),
-                                              CommonWidget.text(
-                                                'Reply • ',
-                                                style: TextStyle(
-                                                    color: Colors.blue,
-                                                    fontSize: 14),
-                                              ),
-                                              Icon(
-                                                Icons.thumb_up_alt,
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            CommonWidget.text(
+                                              'like • ',
+                                              style: const TextStyle(
                                                 color: Colors.blue,
+                                                fontSize: 14,
                                               ),
-                                              CommonWidget.text(
-                                                ' 12',
-                                                style: TextStyle(
-                                                    color: Colors.blue,
-                                                    fontSize: 14),
+                                            ),
+                                            CommonWidget.text(
+                                              'Reply • ',
+                                              style: const TextStyle(
+                                                color: Colors.blue,
+                                                fontSize: 14,
                                               ),
-                                              CommonWidget.text(
-                                                ' • 5 hours ago',
-                                                style: TextStyle(
-                                                    color: Colors.grey,
-                                                    fontSize: 14),
+                                            ),
+                                            const Icon(
+                                              Icons.thumb_up_alt,
+                                              color: Colors.blue,
+                                            ),
+                                            CommonWidget.text(
+                                              ' 12',
+                                              style: const TextStyle(
+                                                color: Colors.blue,
+                                                fontSize: 14,
                                               ),
-                                            ],
-                                          ),
-                                        ]),
+                                            ),
+                                            CommonWidget.text(
+                                              ' • 5 hours ago',
+                                              style: const TextStyle(
+                                                color: Colors.grey,
+                                                fontSize: 14,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
                                   Row(
@@ -1171,58 +1268,60 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                       Container(
                                         height: 40,
                                         width: 40,
-                                        decoration: BoxDecoration(
-                                            color: Colors.green,
-                                            image: DecorationImage(
-                                                fit: BoxFit.cover,
-                                                image: AssetImage(
-                                                    'assets/images/avatar.png'))),
+                                        decoration: const BoxDecoration(
+                                          color: Colors.green,
+                                          image: DecorationImage(
+                                            fit: BoxFit.cover,
+                                            image: AssetImage(
+                                              'assets/images/avatar.png',
+                                            ),
+                                          ),
+                                        ),
                                       ),
                                       SizedBox(
                                         width: Get.width * 0.01,
                                       ),
                                       Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
                                           SizedBox(
                                             width: Get.width * 0.4,
                                             child: RichText(
-                                              text: TextSpan(
+                                              text: const TextSpan(
                                                 text: "Jad Limacino",
                                                 style: TextStyle(
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 16),
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 16,
+                                                ),
                                                 children: <TextSpan>[
                                                   TextSpan(
                                                     text: ' MHL',
                                                     style: TextStyle(
-                                                        textBaseline:
-                                                            TextBaseline
-                                                                .ideographic,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        fontSize: 12),
+                                                      textBaseline: TextBaseline
+                                                          .ideographic,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      fontSize: 12,
+                                                    ),
                                                   ),
                                                   TextSpan(
                                                     text:
                                                         "  Very interesting indeed. I’ll be watching this very closely as they expand further into Asia.",
                                                     style: TextStyle(
-                                                        textBaseline:
-                                                            TextBaseline
-                                                                .ideographic,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        color: Colors.grey,
-                                                        fontSize: 16),
+                                                      textBaseline: TextBaseline
+                                                          .ideographic,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      color: Colors.grey,
+                                                      fontSize: 16,
+                                                    ),
                                                   ),
                                                 ],
                                               ),
                                             ),
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 10,
                                           ),
                                           Row(
@@ -1231,35 +1330,39 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                             children: [
                                               CommonWidget.text(
                                                 'like • ',
-                                                style: TextStyle(
-                                                    color: Colors.blue,
-                                                    fontSize: 14),
+                                                style: const TextStyle(
+                                                  color: Colors.blue,
+                                                  fontSize: 14,
+                                                ),
                                               ),
                                               CommonWidget.text(
                                                 'Reply • ',
-                                                style: TextStyle(
-                                                    color: Colors.blue,
-                                                    fontSize: 14),
+                                                style: const TextStyle(
+                                                  color: Colors.blue,
+                                                  fontSize: 14,
+                                                ),
                                               ),
-                                              Icon(
+                                              const Icon(
                                                 Icons.thumb_up_alt,
                                                 color: Colors.blue,
                                               ),
                                               CommonWidget.text(
                                                 ' 12',
-                                                style: TextStyle(
-                                                    color: Colors.blue,
-                                                    fontSize: 14),
+                                                style: const TextStyle(
+                                                  color: Colors.blue,
+                                                  fontSize: 14,
+                                                ),
                                               ),
                                               CommonWidget.text(
                                                 ' • 5 hours ago',
-                                                style: TextStyle(
-                                                    color: Colors.grey,
-                                                    fontSize: 14),
+                                                style: const TextStyle(
+                                                  color: Colors.grey,
+                                                  fontSize: 14,
+                                                ),
                                               ),
                                             ],
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 20,
                                           ),
                                         ],
@@ -1275,39 +1378,45 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                               Container(
                                 height: 40,
                                 width: 40,
-                                decoration: BoxDecoration(
-                                    color: Colors.green,
-                                    image: DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image: AssetImage(
-                                            'assets/images/avatar.png'))),
+                                decoration: const BoxDecoration(
+                                  color: Colors.green,
+                                  image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: AssetImage(
+                                      'assets/images/avatar.png',
+                                    ),
+                                  ),
+                                ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 20,
                               ),
                               Flexible(
                                 child: Container(
-                                    // height: 40,
-                                    // width: Get.width,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(4),
-                                        border: Border.all(
-                                            color: Color(0xFFDEE1E3))),
-                                    child: TextField(
-                                      decoration: InputDecoration(
-                                          contentPadding:
-                                              EdgeInsets.only(left: 10),
-                                          border: InputBorder.none,
-                                          hintText: 'Leave a comment'),
-                                    )),
+                                  // height: 40,
+                                  // width: Get.width,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(4),
+                                    border: Border.all(
+                                      color: const Color(0xFFDEE1E3),
+                                    ),
+                                  ),
+                                  child: const TextField(
+                                    decoration: InputDecoration(
+                                      contentPadding: EdgeInsets.only(left: 10),
+                                      border: InputBorder.none,
+                                      hintText: 'Leave a comment',
+                                    ),
+                                  ),
+                                ),
                               )
                             ],
                           ),
                         ],
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 15),
                       child: Divider(
                         thickness: 2,
                         color: Color(0xffDEE1E3),
@@ -1316,41 +1425,43 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               Row(
                 children: [
                   Flexible(
-                      child: Divider(
-                    endIndent: 10,
-                    color: ColorPicker.kGreyLight5.withOpacity(0.2),
-                  )),
+                    child: Divider(
+                      endIndent: 10,
+                      color: ColorPicker.kGreyLight5.withOpacity(0.2),
+                    ),
+                  ),
                   CommonWidget.text(
                     'SUGGESTED NEWS',
                     style: FontTextStyle.kGreyLight513W700PR,
                   ),
                   Flexible(
-                      child: Divider(
-                    indent: 10,
-                    color: ColorPicker.kGreyLight5.withOpacity(0.2),
-                  )),
+                    child: Divider(
+                      indent: 10,
+                      color: ColorPicker.kGreyLight5.withOpacity(0.2),
+                    ),
+                  ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
-              Container(
+              SizedBox(
                 height: 300,
                 // width: 400,
                 child: ListView.builder(
                   itemCount: suggestNewsData.length,
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
                     return Container(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       height: 300,
                       width: 400,
                       color: Colors.white,
@@ -1366,38 +1477,40 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                           ),
                           Flexible(
                             child: Container(
-                                child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                CommonWidget.text(
-                                  '${suggestNewsData[index]['text1']}',
-                                  style: FontTextStyle.kBlackPure18W700PR,
-                                ),
-                                CommonWidget.text(
-                                  '${suggestNewsData[index]['text3']}',
-                                  style: FontTextStyle.kGreyLight514W600PR,
-                                ),
-                                suggestNewsData[index]['text2']
-                                        .toString()
-                                        .isEmpty
-                                    ? SizedBox()
-                                    : Container(
-                                        padding: EdgeInsets.all(5),
-                                        child: CommonWidget.text(
-                                          'MEMBERS ONLY',
-                                          style: FontTextStyle.kRed10W400PR,
-                                        ),
-                                        decoration: BoxDecoration(
-                                          color: Color(0xFFFECDCC),
-                                          borderRadius:
-                                              BorderRadius.circular(2),
-                                        ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  CommonWidget.text(
+                                    '${suggestNewsData[index]['text1']}',
+                                    style: FontTextStyle.kBlackPure18W700PR,
+                                  ),
+                                  CommonWidget.text(
+                                    '${suggestNewsData[index]['text3']}',
+                                    style: FontTextStyle.kGreyLight514W600PR,
+                                  ),
+                                  if (suggestNewsData[index]['text2']
+                                      .toString()
+                                      .isEmpty)
+                                    SizedBox()
+                                  else
+                                    Container(
+                                      padding: EdgeInsets.all(5),
+                                      child: CommonWidget.text(
+                                        'MEMBERS ONLY',
+                                        style: FontTextStyle.kRed10W400PR,
                                       ),
-                              ],
-                            )),
+                                      decoration: BoxDecoration(
+                                        color: Color(0xFFFECDCC),
+                                        borderRadius: BorderRadius.circular(2),
+                                      ),
+                                    ),
+                                ],
+                              ),
+                            ),
                           ),
-                          Divider(
+                          const Divider(
                             height: 0,
                           ),
                         ],
@@ -1408,27 +1521,28 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
               ),
               SB.SH20(),
               Container(
-                  alignment: Alignment.center,
-                  height: 15,
-                  width: Get.width,
-                  // color: Colors.red,
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 3,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: CircleAvatar(
-                          radius: 8,
-                          // foregroundColor: Colors.red,
-                          backgroundColor: index == 0
-                              ? Color(0xFF33A3FE)
-                              : Color(0xFF33A3FE).withOpacity(0.19),
-                        ),
-                      );
-                    },
-                  )),
+                alignment: Alignment.center,
+                height: 15,
+                width: Get.width,
+                // color: Colors.red,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 3,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: CircleAvatar(
+                        radius: 8,
+                        // foregroundColor: Colors.red,
+                        backgroundColor: index == 0
+                            ? const Color(0xFF33A3FE)
+                            : const Color(0xFF33A3FE).withOpacity(0.19),
+                      ),
+                    );
+                  },
+                ),
+              ),
               SB.SH20(),
               Container(
                 height: 310,
@@ -1439,16 +1553,17 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                     Positioned(
                       top: -1,
                       left: 0,
-                      child: Container(
+                      child: SizedBox(
                         // height: Get.height * 0.3,
                         width: 100,
-                        child: Image(
-                            image: AssetImage('assets/images/round2.png'),
-                            fit: BoxFit.fitWidth),
+                        child: const Image(
+                          image: AssetImage('assets/images/round2.png'),
+                          fit: BoxFit.fitWidth,
+                        ),
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(
+                      padding: const EdgeInsets.only(
                         left: 20,
                         top: 40,
                         bottom: 10,
@@ -1463,7 +1578,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                   // mainAxisAlignment:
                                   //     MainAxisAlignment.start,
                                   children: [
-                                    Icon(
+                                    const Icon(
                                       Icons.apartment_rounded,
                                       color: Colors.white,
                                     ),
@@ -1475,7 +1590,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                   ],
                                 ),
                               ),
-                              SizedBox(width: 20),
+                              const SizedBox(width: 20),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -1503,11 +1618,11 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                   // mainAxisAlignment:
                                   //     MainAxisAlignment.start,
                                   children: [
-                                    Icon(
+                                    const Icon(
                                       Icons.reduce_capacity_sharp,
                                       color: Colors.white,
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 10,
                                     ),
                                     Container(
@@ -1518,7 +1633,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                   ],
                                 ),
                               ),
-                              SizedBox(width: 20),
+                              const SizedBox(width: 20),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -1526,17 +1641,17 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                   Container(
                                     height: 36,
                                     width: 205,
-                                    color: Color(0xffCCE8FE),
+                                    color: const Color(0xffCCE8FE),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        Icon(
+                                        const Icon(
                                           Icons.message,
                                           color: Colors.blue,
                                           size: 10,
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 8,
                                         ),
                                         CommonWidget.text(
@@ -1559,11 +1674,11 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
               ),
               SB.SH20(),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
                 height: 50,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   border: Border(
-                    bottom: BorderSide(width: 1, color: ColorPicker.kBorder1),
+                    bottom: BorderSide(color: ColorPicker.kBorder1),
                   ),
                   color: Colors.white,
                 ),
@@ -1572,17 +1687,17 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                   children: [
                     CommonWidget.text(
                       'Categories',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
+                      style: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.w400),
                     ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.asset('assets/icons/menu.png'),
-                        SizedBox(height: 3),
+                        const SizedBox(height: 3),
                         CommonWidget.text(
                           'menu',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 9,
                             color: ColorPicker.kBlueLight1,
                             fontWeight: FontWeight.w700,
@@ -1599,9 +1714,9 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                 child: Column(
                   children: [
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
                       height: 50,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Colors.white,
                       ),
                       child: Row(
@@ -1609,8 +1724,10 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                         children: [
                           CommonWidget.text(
                             'Latest news',
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.w400),
+                            style: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
                         ],
                       ),
@@ -1621,7 +1738,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                       itemBuilder: (context, index) => Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Divider(),
+                          const Divider(),
                           Container(
                             padding: EdgeInsets.all(Get.width * 0.01),
                             child: Padding(
@@ -1629,7 +1746,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                   const EdgeInsets.symmetric(horizontal: 10),
                               child: Row(
                                 children: [
-                                  Container(
+                                  SizedBox(
                                     height: 50,
                                     width: 50,
                                     child: Image(
@@ -1637,7 +1754,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                           AssetImage('${data1[index]['img']}'),
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 10,
                                   ),
                                   Flexible(
@@ -1661,15 +1778,19 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                 height: 290,
                 width: Get.width,
                 color: Colors.white,
-                padding: EdgeInsets.all(15),
+                padding: const EdgeInsets.all(15),
                 child: Center(
                   child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage(
-                                  'assets/images/Bannerimage.png')))),
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: AssetImage(
+                          'assets/images/Bannerimage.png',
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ),
               SB.SH20(),
@@ -1682,7 +1803,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
           padding: EdgeInsets.zero,
           children: [
             DrawerHeader(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.blue,
               ),
               child: CommonWidget.text('Drawer Header'),
@@ -1708,107 +1829,130 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
   Scaffold desktopView() {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(46),
+        preferredSize: const Size.fromHeight(46),
         child: Container(
-            height: 46,
-            color: ColorPicker.kPrimaryLight1,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Padding(
-                  padding: EdgeInsets.all(4.0),
-                  child: Image(
-                    image: AssetImage('assets/icons/logo1.png'),
-                  ),
+          height: 46,
+          color: ColorPicker.kPrimaryLight1,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Padding(
+                padding: EdgeInsets.all(4.0),
+                child: Image(
+                  image: AssetImage('assets/icons/logo1.png'),
                 ),
-                SB.SW10(),
-                // SizedBox(
-                //   width: 10,
-                // ),
-                Container(
-                  width: Get.width * 0.2,
-                  decoration: BoxDecoration(
-                      color: ColorPicker.kWhite,
-                      borderRadius: BorderRadius.circular(5)),
-                  margin: EdgeInsets.all(3),
-                  child: TextFormField(
-                    cursorColor: ColorPicker.kWhite,
-                    style: FontTextStyle.kWhite16W400SSP,
-                    decoration: InputDecoration(
-                      hintStyle: FontTextStyle.kPrimaryLightBlue16W400SSP,
-                      filled: true,
-                      fillColor: ColorPicker.kPrimaryLight,
-                      hintText: "Search",
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(color: ColorPicker.kPrimary),
-                          borderRadius: BorderRadius.circular(5)),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: ColorPicker.kPrimary),
-                          borderRadius: BorderRadius.circular(5)),
-                      enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: ColorPicker.kPrimary),
-                          borderRadius: BorderRadius.circular(5)),
-                      prefixIcon: Icon(
-                        Icons.search,
-                        color: ColorPicker.kPrimaryLightBlue,
+              ),
+              SB.SW10(),
+              // SizedBox(
+              //   width: 10,
+              // ),
+              Container(
+                width: Get.width * 0.2,
+                decoration: BoxDecoration(
+                  color: ColorPicker.kWhite,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                margin: const EdgeInsets.all(3),
+                child: TextFormField(
+                  cursorColor: ColorPicker.kWhite,
+                  style: FontTextStyle.kWhite16W400SSP,
+                  decoration: InputDecoration(
+                    hintStyle: FontTextStyle.kPrimaryLightBlue16W400SSP,
+                    filled: true,
+                    fillColor: ColorPicker.kPrimaryLight,
+                    hintText: "Search",
+                    border: OutlineInputBorder(
+                      borderSide: const BorderSide(color: ColorPicker.kPrimary),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(color: ColorPicker.kPrimary),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(color: ColorPicker.kPrimary),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    prefixIcon: const Icon(
+                      Icons.search,
+                      color: ColorPicker.kPrimaryLightBlue,
+                    ),
+                    suffixIcon: Container(
+                      margin:
+                          const EdgeInsets.only(right: 5, bottom: 5, top: 5),
+                      height: 40,
+                      width: Get.width * 0.045,
+                      decoration: BoxDecoration(
+                        color: ColorPicker.kPrimaryLight1,
+                        borderRadius: BorderRadius.circular(5),
                       ),
-                      suffixIcon: Container(
-                        margin: EdgeInsets.only(right: 5, bottom: 5, top: 5),
-                        height: 40,
-                        width: Get.width * 0.045,
-                        decoration: BoxDecoration(
-                          color: ColorPicker.kPrimaryLight1,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Center(
-                          child: CommonWidget.text(
-                            'People',
-                            style: FontTextStyle.kPrimaryLightBlue16W400SSP,
-                          ),
+                      child: Center(
+                        child: CommonWidget.text(
+                          'People',
+                          style: FontTextStyle.kPrimaryLightBlue16W400SSP,
                         ),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: Get.width * 0.02,
+              ),
+              SizedBox(
+                width: Get.width * 0.02,
+              ),
+              SizedBox(
+                width: 380,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CommonWidget.text(
+                      'Home',
+                      style: FontTextStyle.kWhite16W400SSP,
+                    ),
+                    CommonWidget.text(
+                      'Profile',
+                      style: FontTextStyle.kPrimaryLightBlue16W400SSP,
+                    ),
+                    CommonWidget.text(
+                      'News',
+                      style: FontTextStyle.kPrimaryLightBlue16W400SSP,
+                    ),
+                    CommonWidget.text(
+                      'Jobs',
+                      style: FontTextStyle.kPrimaryLightBlue16W400SSP,
+                    ),
+                    CommonWidget.text(
+                      'Recruitment',
+                      style: FontTextStyle.kPrimaryLightBlue16W400SSP,
+                    ),
+                    CommonWidget.text(
+                      'Help',
+                      style: FontTextStyle.kPrimaryLightBlue16W400SSP,
+                    ),
+                  ],
                 ),
-                Container(
-                  width: 380,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      CommonWidget.text('Home',
-                          style: FontTextStyle.kWhite16W400SSP),
-                      CommonWidget.text('Profile',
-                          style: FontTextStyle.kPrimaryLightBlue16W400SSP),
-                      CommonWidget.text('News',
-                          style: FontTextStyle.kPrimaryLightBlue16W400SSP),
-                      CommonWidget.text('Jobs',
-                          style: FontTextStyle.kPrimaryLightBlue16W400SSP),
-                      CommonWidget.text('Recruitment',
-                          style: FontTextStyle.kPrimaryLightBlue16W400SSP),
-                      CommonWidget.text('Help',
-                          style: FontTextStyle.kPrimaryLightBlue16W400SSP),
-                    ],
+              ),
+              SizedBox(
+                width: Get.width * 0.02,
+              ),
+              Container(
+                width: Get.width * 0.05,
+                decoration: const BoxDecoration(
+                  border: Border(
+                    left: BorderSide(
+                      color: ColorPicker.kPrimaryLight,
+                      width: 3,
+                    ),
+                    right: BorderSide(
+                      color: ColorPicker.kPrimaryLight,
+                      width: 3,
+                    ),
                   ),
                 ),
-                SizedBox(
-                  width: Get.width * 0.02,
-                ),
-                Container(
-                  width: Get.width * 0.05,
-                  decoration: BoxDecoration(
-                      border: Border(
-                          left: BorderSide(
-                              color: ColorPicker.kPrimaryLight, width: 3),
-                          right: BorderSide(
-                              color: ColorPicker.kPrimaryLight, width: 3))),
-                  child: Center(
-                      child: Stack(
+                child: Center(
+                  child: Stack(
                     //overflow: Overflow.visible,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.email,
                         color: ColorPicker.kPrimaryLightBlue,
                       ),
@@ -1831,19 +1975,24 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                         ),
                       ),
                     ],
-                  )),
+                  ),
                 ),
-                Container(
-                  width: Get.width * 0.05,
-                  decoration: BoxDecoration(
-                      border: Border(
-                          right: BorderSide(
-                              color: ColorPicker.kPrimaryLight, width: 3))),
-                  child: Center(
-                      child: Stack(
+              ),
+              Container(
+                width: Get.width * 0.05,
+                decoration: const BoxDecoration(
+                  border: Border(
+                    right: BorderSide(
+                      color: ColorPicker.kPrimaryLight,
+                      width: 3,
+                    ),
+                  ),
+                ),
+                child: Center(
+                  child: Stack(
                     //overflow: Overflow.visible,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.flag,
                         color: ColorPicker.kPrimaryLightBlue,
                       ),
@@ -1866,58 +2015,71 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                         ),
                       ),
                     ],
-                  )),
+                  ),
                 ),
-                Container(
-                  width: 90,
-                  decoration: BoxDecoration(
-                      border: Border(
-                          right: BorderSide(
-                              color: ColorPicker.kPrimaryLight, width: 3))),
-                  child: Center(
-                      child: Row(
+              ),
+              Container(
+                width: 90,
+                decoration: const BoxDecoration(
+                  border: Border(
+                    right: BorderSide(
+                      color: ColorPicker.kPrimaryLight,
+                      width: 3,
+                    ),
+                  ),
+                ),
+                child: Center(
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.person_add,
                         color: ColorPicker.kPrimaryLightBlue,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 5,
                       ),
                       Container(
                         height: 20,
                         width: 30,
                         decoration: BoxDecoration(
-                          color: Color(0xff546088),
+                          color: const Color(0xff546088),
                           borderRadius: BorderRadius.circular(3),
                         ),
                         child: Center(
-                          child: CommonWidget.text('352',
-                              style: FontTextStyle.kPrimaryLight10W700SSP),
+                          child: CommonWidget.text(
+                            '352',
+                            style: FontTextStyle.kPrimaryLight10W700SSP,
+                          ),
                         ),
                       ),
                     ],
-                  )),
+                  ),
                 ),
-                Container(
-                  width: Get.width * 0.05,
-                  decoration: BoxDecoration(
-                      border: Border(
-                          right: BorderSide(
-                              color: ColorPicker.kPrimaryLight, width: 3))),
-                  child: Center(
-                    child: Container(
-                      height: 26,
-                      width: 26,
-                      child: Image(
-                        image: AssetImage('assets/images/avatar.png'),
-                      ),
+              ),
+              Container(
+                width: Get.width * 0.05,
+                decoration: const BoxDecoration(
+                  border: Border(
+                    right: BorderSide(
+                      color: ColorPicker.kPrimaryLight,
+                      width: 3,
                     ),
                   ),
                 ),
-              ],
-            )),
+                child: Center(
+                  child: SizedBox(
+                    height: 26,
+                    width: 26,
+                    child: const Image(
+                      image: AssetImage('assets/images/avatar.png'),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -1927,10 +2089,9 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
             Container(
               height: Get.height * 0.05,
               width: Get.width,
-              color: Color(0xffCCE8FE),
+              color: const Color(0xffCCE8FE),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   // SizedBox(
                   //   width: Get.width * 0.25,
@@ -1948,17 +2109,19 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                     width: Get.width * 0.01,
                   ),
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
                     height: Get.height * 0.032,
                     // width: Get.width * 0.08,
                     decoration: BoxDecoration(
-                        color: Color(0xff32A3FD),
-                        borderRadius: BorderRadius.circular(2)),
+                      color: const Color(0xff32A3FD),
+                      borderRadius: BorderRadius.circular(2),
+                    ),
                     child: Center(
-                        child: CommonWidget.text(
-                      "Join now. It’s free",
-                      style: FontTextStyle.kWhite14W400SSP,
-                    )),
+                      child: CommonWidget.text(
+                        "Join now. It’s free",
+                        style: FontTextStyle.kWhite14W400SSP,
+                      ),
+                    ),
                   ),
                   // SizedBox(
                   //   width: Get.width * 0.25,
@@ -1974,16 +2137,18 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                   height: Get.height * 0.5,
                   width: Get.width,
                   // color: Colors.green,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage("assets/images/slider1.png"),
-                          fit: BoxFit.cover)),
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("assets/images/slider1.png"),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                   child: Column(
                     children: [
                       Container(
                         height: 30,
                         width: Get.width,
-                        color: Color(0xff272E41).withOpacity(0.25),
+                        color: const Color(0xff272E41).withOpacity(0.25),
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Padding(
@@ -2004,18 +2169,17 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                   child: Container(
                     // height: Get.height * 0.22,
                     width: Get.width * 0.6,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: ColorPicker.kWhite,
                       border: Border(
                         bottom: BorderSide(
-                          width: 1,
                           color: ColorPicker.kGreyLight8,
                         ),
                       ),
                     ),
                     child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 10),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -2038,11 +2202,14 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                               Container(
                                 height: Get.height * 0.05,
                                 width: Get.width * 0.023,
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        image: AssetImage(
-                                            "assets/images/avatar.png"),
-                                        fit: BoxFit.cover)),
+                                decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                      "assets/images/avatar.png",
+                                    ),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                               ),
                               SizedBox(
                                 width: Get.width * 0.009,
@@ -2077,9 +2244,9 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                               SizedBox(
                                 width: Get.width * 0.01,
                               ),
-                              Container(
+                              SizedBox(
                                 height: 20,
-                                child: VerticalDivider(
+                                child: const VerticalDivider(
                                   // width: 2,
                                   thickness: 1,
                                   color: ColorPicker.kGreyLight6,
@@ -2088,7 +2255,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                               SizedBox(
                                 width: Get.width * 0.02,
                               ),
-                              Container(
+                              SizedBox(
                                 width: Get.width * 0.35,
                                 // color: Colors.grey,
                                 child: Row(
@@ -2099,15 +2266,16 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                       height: 36,
                                       width: 36,
                                       decoration: BoxDecoration(
-                                          color: ColorPicker.kBg3,
-                                          borderRadius:
-                                              BorderRadius.circular(5)),
+                                        color: ColorPicker.kBg3,
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
                                       child: Center(
                                         child: SvgPicture.asset(
-                                            'assets/icons/svg/facebook.svg',
-                                            height: 13,
-                                            width: 13,
-                                            fit: BoxFit.cover),
+                                          'assets/icons/svg/facebook.svg',
+                                          height: 13,
+                                          width: 13,
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
                                     ),
                                     CommonWidget.text(
@@ -2118,15 +2286,16 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                       height: 36,
                                       width: 36,
                                       decoration: BoxDecoration(
-                                          color: ColorPicker.kBg3,
-                                          borderRadius:
-                                              BorderRadius.circular(5)),
+                                        color: ColorPicker.kBg3,
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
                                       child: Center(
                                         child: SvgPicture.asset(
-                                            'assets/icons/svg/twitter.svg',
-                                            height: 13,
-                                            width: 13,
-                                            fit: BoxFit.cover),
+                                          'assets/icons/svg/twitter.svg',
+                                          height: 13,
+                                          width: 13,
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
                                     ),
                                     CommonWidget.text(
@@ -2137,15 +2306,16 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                       height: 36,
                                       width: 36,
                                       decoration: BoxDecoration(
-                                          color: ColorPicker.kBg3,
-                                          borderRadius:
-                                              BorderRadius.circular(5)),
+                                        color: ColorPicker.kBg3,
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
                                       child: Center(
                                         child: SvgPicture.asset(
-                                            'assets/icons/svg/googleplus.svg',
-                                            height: 13,
-                                            width: 13,
-                                            fit: BoxFit.cover),
+                                          'assets/icons/svg/googleplus.svg',
+                                          height: 13,
+                                          width: 13,
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
                                     ),
                                     CommonWidget.text(
@@ -2156,15 +2326,16 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                       height: 36,
                                       width: 36,
                                       decoration: BoxDecoration(
-                                          color: ColorPicker.kBg3,
-                                          borderRadius:
-                                              BorderRadius.circular(5)),
+                                        color: ColorPicker.kBg3,
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
                                       child: Center(
                                         child: SvgPicture.asset(
-                                            'assets/icons/svg/linkdin.svg',
-                                            height: 13,
-                                            width: 13,
-                                            fit: BoxFit.cover),
+                                          'assets/icons/svg/linkdin.svg',
+                                          height: 13,
+                                          width: 13,
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
                                     ),
                                     CommonWidget.text(
@@ -2175,15 +2346,16 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                       height: 36,
                                       width: 36,
                                       decoration: BoxDecoration(
-                                          color: ColorPicker.kBg3,
-                                          borderRadius:
-                                              BorderRadius.circular(5)),
+                                        color: ColorPicker.kBg3,
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
                                       child: Center(
                                         child: SvgPicture.asset(
-                                            'assets/icons/svg/any.svg',
-                                            height: 13,
-                                            width: 13,
-                                            fit: BoxFit.cover),
+                                          'assets/icons/svg/any.svg',
+                                          height: 13,
+                                          width: 13,
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
                                     ),
                                     CommonWidget.text(
@@ -2252,12 +2424,11 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                       Container(
                         // height: 434,
                         // width: 712,
-                        color: Color(0xffF6F7F8),
+                        color: const Color(0xffF6F7F8),
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Container(
+                            SizedBox(
                               height: 332,
                               width: Get.width,
                               child: Stack(
@@ -2266,7 +2437,8 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                   PageView.builder(
                                     controller: _controller,
                                     onPageChanged: (value) {
-                                      print('-value----${_controller.page}');
+                                      debugPrint(
+                                          '-value----${_controller.page}');
                                       setState(() {
                                         // currentIndex = value;
                                       });
@@ -2282,12 +2454,14 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                         width: Get.width,
                                         // width: 200,
 
-                                        decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                          image: AssetImage(
-                                              'assets/images/slider2.png'),
-                                          fit: BoxFit.fitWidth,
-                                        )),
+                                        decoration: const BoxDecoration(
+                                          image: DecorationImage(
+                                            image: AssetImage(
+                                              'assets/images/slider2.png',
+                                            ),
+                                            fit: BoxFit.fitWidth,
+                                          ),
+                                        ),
 
                                         // child: Image(
                                         //   image: AssetImage('image/25-3/cover_image.png'),
@@ -2301,17 +2475,19 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                     child: Container(
                                       height: 50,
                                       width: 50,
-                                      color: Color(0xFF272E41).withOpacity(0.4),
+                                      color: const Color(0xFF272E41)
+                                          .withOpacity(0.4),
                                       child: Center(
                                         child: IconButton(
                                           onPressed: () {
                                             _controller.previousPage(
-                                              duration: Duration(seconds: 1),
+                                              duration:
+                                                  const Duration(seconds: 1),
                                               curve: Curves.easeIn,
                                             );
                                             // Use the controller to change the current page
                                           },
-                                          icon: Icon(
+                                          icon: const Icon(
                                             Icons.chevron_left,
                                             size: 21,
                                             color: Colors.white,
@@ -2325,18 +2501,20 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                     child: Container(
                                       height: 50,
                                       width: 50,
-                                      color: Color(0xFF272E41).withOpacity(0.4),
+                                      color: const Color(0xFF272E41)
+                                          .withOpacity(0.4),
                                       child: Center(
                                         child: Center(
                                           child: IconButton(
                                             onPressed: () {
                                               // Use the controller to change the current page
                                               _controller.nextPage(
-                                                duration: Duration(seconds: 1),
+                                                duration:
+                                                    const Duration(seconds: 1),
                                                 curve: Curves.easeIn,
                                               );
                                             },
-                                            icon: Icon(
+                                            icon: const Icon(
                                               Icons.chevron_right,
                                               color: Colors.white,
                                               size: 21,
@@ -2353,7 +2531,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                               padding: const EdgeInsets.only(left: 5, top: 2),
                               child: Stack(
                                 children: [
-                                  Container(
+                                  SizedBox(
                                     height: 100,
                                     width: Get.width,
                                     // color: Colors.green,
@@ -2367,11 +2545,14 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                             height: 80,
                                             width: 150,
                                             decoration: BoxDecoration(
-                                                color: Colors.red,
-                                                image: DecorationImage(
-                                                    image: AssetImage(
-                                                        "${data[index]['img']}"),
-                                                    fit: BoxFit.cover)),
+                                              color: Colors.red,
+                                              image: DecorationImage(
+                                                image: AssetImage(
+                                                  "${data[index]['img']}",
+                                                ),
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
                                           ),
                                         );
                                       },
@@ -2384,7 +2565,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                     child: Container(
                                       width: 30,
                                       color: Colors.black.withOpacity(0.3),
-                                      child: Icon(
+                                      child: const Icon(
                                         Icons.chevron_right,
                                         color: Colors.white,
                                       ),
@@ -2399,11 +2580,11 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                       SizedBox(
                         height: Get.height * 0.01,
                       ),
-                      Divider(
+                      const Divider(
                         color: ColorPicker.kGreyLight8,
                         thickness: 2,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       CommonWidget.text(
@@ -2411,7 +2592,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                         style: FontTextStyle.kBlueDark118W700SSP
                             .copyWith(height: 1.5),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       CommonWidget.text(
@@ -2420,7 +2601,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                         style: FontTextStyle.kGreyLight516W400SSP
                             .copyWith(height: 1.5),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       CommonWidget.text(
@@ -2428,7 +2609,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                         style: FontTextStyle.kBlueDark118W700SSP
                             .copyWith(height: 1.5),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       ListTile(
@@ -2470,7 +2651,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                               .copyWith(height: 1.5),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       CommonWidget.text(
@@ -2478,7 +2659,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                         style: FontTextStyle.kBlueDark118W700SSP
                             .copyWith(height: 1.5),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       ListTile(
@@ -2520,13 +2701,13 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                               .copyWith(height: 1.5),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       Row(
                         // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Container(
+                          SizedBox(
                             width: 30,
                             child: CommonWidget.text(
                               '"',
@@ -2540,7 +2721,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                   .copyWith(height: 1.5),
                             ),
                           ),
-                          Container(
+                          SizedBox(
                             width: 10,
                             child: CommonWidget.text(
                               '"',
@@ -2549,7 +2730,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       CommonWidget.text(
@@ -2557,7 +2738,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                         style: FontTextStyle.kGreyLight516W400SSP
                             .copyWith(height: 1.5),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       CommonWidget.text(
@@ -2565,18 +2746,17 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                         style: FontTextStyle.kGreyLight612W700SSP
                             .copyWith(height: 1.5),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       Padding(
-                        padding: EdgeInsets.only(left: 8.0),
+                        padding: const EdgeInsets.only(left: 8.0),
                         child: Wrap(
                           crossAxisAlignment: WrapCrossAlignment.end,
-                          alignment: WrapAlignment.start,
                           children: List.generate(
                             5,
                             (index) => Padding(
-                              padding: EdgeInsets.only(right: 8.0),
+                              padding: const EdgeInsets.only(right: 8.0),
                               child: CommonWidget.text(
                                 '#Hospitality',
                                 style: FontTextStyle.kGreyLight614W400SSP
@@ -2594,141 +2774,151 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                       ),
                       SB.SH20(),
                       Padding(
-                        padding: EdgeInsets.only(left: 8.0),
+                        padding: const EdgeInsets.only(left: 8.0),
                         child: Wrap(
                           crossAxisAlignment: WrapCrossAlignment.end,
-                          alignment: WrapAlignment.start,
                           children: List.generate(
                             5,
                             (index) => Container(
-                              margin: EdgeInsets.only(right: 10),
+                              margin: const EdgeInsets.only(right: 10),
                               width: 100,
                               height: 36,
-                              child: Image(
-                                  image: AssetImage(
-                                      '${buttonData[index]['img']}')),
                               decoration: BoxDecoration(
                                 color: buttonData[index]['color'] as Color,
                                 borderRadius: BorderRadius.circular(2),
                               ),
+                              child: Image(
+                                  image: AssetImage(
+                                      '${buttonData[index]['img']}')),
                             ),
                           ),
                         ),
                       ),
-                      Divider(
+                      const Divider(
                         thickness: 2,
                         color: ColorPicker.kGreyLight8,
                       ),
                       Row(
                         children: [
                           Container(
-                            padding: EdgeInsets.symmetric(vertical: 10),
-                            margin: EdgeInsets.only(right: 20),
-                            child: Row(children: [
-                              const Image(
-                                image: AssetImage('assets/icons/like.png'),
-                                height: 11,
-                                width: 10,
-                                fit: BoxFit.cover,
-                              ),
-                              SB.SW5(),
-                              CommonWidget.text(
-                                'Like',
-                                style: FontTextStyle.kBlueLight114W400SSP
-                                    .copyWith(height: 1.5),
-                              ),
-                              SB.SW5(),
-                              Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 5, vertical: 2),
-                                decoration: BoxDecoration(
-                                  color: Color(0xFFCCE8FE),
-                                  borderRadius: BorderRadius.circular(2),
-                                ),
-                                child: CommonWidget.text(
-                                  '12',
-                                  style: FontTextStyle.kBlueLight112W700SSP
-                                      .copyWith(height: 1.5),
-                                ),
-                              )
-                            ]),
-                          ),
-                          Container(
-                            // width: 100,
-                            // height: 50,
-                            // color: Colors.red,
-                            padding: EdgeInsets.symmetric(vertical: 10),
-                            margin: EdgeInsets.only(right: 20),
-                            child: Row(children: [
-                              Image(
-                                image: AssetImage('assets/icons/comment.png'),
-                                height: 11,
-                                width: 10,
-                                fit: BoxFit.cover,
-                              ),
-                              SizedBox(width: 5),
-                              CommonWidget.text(
-                                'Comment',
-                                style: FontTextStyle.kBlueLight114W400SSP
-                                    .copyWith(height: 1.5),
-                              ),
-                              SB.SW5(),
-                              Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 5, vertical: 2),
-                                decoration: BoxDecoration(
-                                  color: Color(0xFFCCE8FE),
-                                  borderRadius: BorderRadius.circular(2),
-                                ),
-                                child: CommonWidget.text(
-                                  '5',
-                                  style: FontTextStyle.kBlueLight112W700SSP
-                                      .copyWith(height: 1.5),
-                                ),
-                              )
-                            ]),
-                          ),
-                          Container(
-                            // width: 100,
-                            // height: 50,
-                            // color: Colors.red,
-                            padding: EdgeInsets.symmetric(vertical: 10),
-                            margin: EdgeInsets.only(right: 20),
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            margin: const EdgeInsets.only(right: 20),
                             child: Row(
-                                // mainAxisAlignment:
-                                //     MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Image(
-                                    image: AssetImage('assets/icons/share.png'),
-                                    height: 11,
-                                    width: 10,
-                                    fit: BoxFit.cover,
+                              children: [
+                                const Image(
+                                  image: AssetImage('assets/icons/like.png'),
+                                  height: 11,
+                                  width: 10,
+                                  fit: BoxFit.cover,
+                                ),
+                                SB.SW5(),
+                                CommonWidget.text(
+                                  'Like',
+                                  style: FontTextStyle.kBlueLight114W400SSP
+                                      .copyWith(height: 1.5),
+                                ),
+                                SB.SW5(),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 5,
+                                    vertical: 2,
                                   ),
-                                  SizedBox(width: 5),
-                                  CommonWidget.text(
-                                    'Share',
-                                    style: FontTextStyle.kBlueLight114W400SSP
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFFCCE8FE),
+                                    borderRadius: BorderRadius.circular(2),
+                                  ),
+                                  child: CommonWidget.text(
+                                    '12',
+                                    style: FontTextStyle.kBlueLight112W700SSP
                                         .copyWith(height: 1.5),
                                   ),
-                                  SizedBox(width: 5),
-                                  Container(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 5, vertical: 2),
-                                    decoration: BoxDecoration(
-                                      color: Color(0xFFCCE8FE),
-                                      borderRadius: BorderRadius.circular(2),
-                                    ),
-                                    child: CommonWidget.text(
-                                      '0',
-                                      style: FontTextStyle.kBlueLight112W700SSP
-                                          .copyWith(height: 1.5),
-                                    ),
-                                  )
-                                ]),
+                                )
+                              ],
+                            ),
+                          ),
+                          Container(
+                            // width: 100,
+                            // height: 50,
+                            // color: Colors.red,
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            margin: const EdgeInsets.only(right: 20),
+                            child: Row(
+                              children: [
+                                const Image(
+                                  image: AssetImage('assets/icons/comment.png'),
+                                  height: 11,
+                                  width: 10,
+                                  fit: BoxFit.cover,
+                                ),
+                                const SizedBox(width: 5),
+                                CommonWidget.text(
+                                  'Comment',
+                                  style: FontTextStyle.kBlueLight114W400SSP
+                                      .copyWith(height: 1.5),
+                                ),
+                                SB.SW5(),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 5,
+                                    vertical: 2,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFFCCE8FE),
+                                    borderRadius: BorderRadius.circular(2),
+                                  ),
+                                  child: CommonWidget.text(
+                                    '5',
+                                    style: FontTextStyle.kBlueLight112W700SSP
+                                        .copyWith(height: 1.5),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          Container(
+                            // width: 100,
+                            // height: 50,
+                            // color: Colors.red,
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            margin: const EdgeInsets.only(right: 20),
+                            child: Row(
+                              // mainAxisAlignment:
+                              //     MainAxisAlignment.spaceEvenly,
+                              children: [
+                                const Image(
+                                  image: AssetImage('assets/icons/share.png'),
+                                  height: 11,
+                                  width: 10,
+                                  fit: BoxFit.cover,
+                                ),
+                                const SizedBox(width: 5),
+                                CommonWidget.text(
+                                  'Share',
+                                  style: FontTextStyle.kBlueLight114W400SSP
+                                      .copyWith(height: 1.5),
+                                ),
+                                const SizedBox(width: 5),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 5,
+                                    vertical: 2,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFFCCE8FE),
+                                    borderRadius: BorderRadius.circular(2),
+                                  ),
+                                  child: CommonWidget.text(
+                                    '0',
+                                    style: FontTextStyle.kBlueLight112W700SSP
+                                        .copyWith(height: 1.5),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ],
                       ),
-                      Divider(
+                      const Divider(
                         thickness: 2,
                         color: Color(0xFFDEE1E3),
                       ),
@@ -2737,17 +2927,17 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                         // width: 100,
                         // height: 50,
                         // color: Colors.red,
-                        padding: EdgeInsets.symmetric(vertical: 10),
-                        margin: EdgeInsets.only(right: 20),
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        margin: const EdgeInsets.only(right: 20),
                         child: Row(
                           children: [
-                            Image(
+                            const Image(
                               image: AssetImage('assets/icons/comment.png'),
                               height: 15,
                               width: 16,
                               fit: BoxFit.cover,
                             ),
-                            SizedBox(width: 5),
+                            const SizedBox(width: 5),
                             CommonWidget.text(
                               'Show previous comments',
                               style: FontTextStyle.kBlueLight114W600SSP
@@ -2766,102 +2956,104 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                           Container(
                             height: 40,
                             width: 40,
-                            decoration: BoxDecoration(
-                                color: Colors.green,
-                                image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: AssetImage(
-                                        'assets/images/avatar.png'))),
+                            decoration: const BoxDecoration(
+                              color: Colors.green,
+                              image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: AssetImage(
+                                  'assets/images/avatar.png',
+                                ),
+                              ),
+                            ),
                           ),
                           SB.SW20(),
                           Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
                                 child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      SizedBox(
-                                        width: Get.width * 0.4,
-                                        child: RichText(
-                                          text: TextSpan(
-                                            text: "Jad Limacino",
-                                            style: FontTextStyle
-                                                .kBlueDark116W700SSP
-                                                .copyWith(height: 1.5),
-                                            children: <TextSpan>[
-                                              TextSpan(
-                                                text: ' MHL',
-                                                style: FontTextStyle
-                                                    .kBlueDark112W700SSP
-                                                    .copyWith(
-                                                  height: 1.5,
-                                                  textBaseline:
-                                                      TextBaseline.ideographic,
-                                                ),
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    SizedBox(
+                                      width: Get.width * 0.4,
+                                      child: RichText(
+                                        text: TextSpan(
+                                          text: "Jad Limacino",
+                                          style: FontTextStyle
+                                              .kBlueDark116W700SSP
+                                              .copyWith(height: 1.5),
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                              text: ' MHL',
+                                              style: FontTextStyle
+                                                  .kBlueDark112W700SSP
+                                                  .copyWith(
+                                                height: 1.5,
+                                                textBaseline:
+                                                    TextBaseline.ideographic,
                                               ),
-                                              TextSpan(
-                                                text:
-                                                    "  Very interesting indeed. I’ll be watching this very closely as they expand further into Asia.",
-                                                style: FontTextStyle
-                                                    .kGreyLight516W400SSP
-                                                    .copyWith(
-                                                  height: 1.5,
-                                                  textBaseline:
-                                                      TextBaseline.ideographic,
-                                                ),
+                                            ),
+                                            TextSpan(
+                                              text:
+                                                  "  Very interesting indeed. I’ll be watching this very closely as they expand further into Asia.",
+                                              style: FontTextStyle
+                                                  .kGreyLight516W400SSP
+                                                  .copyWith(
+                                                height: 1.5,
+                                                textBaseline:
+                                                    TextBaseline.ideographic,
                                               ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        children: [
-                                          CommonWidget.text(
-                                            'like • ',
-                                            style: FontTextStyle
-                                                .kBlueLight114W400SSP
-                                                .copyWith(height: 1.5),
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        CommonWidget.text(
+                                          'like • ',
+                                          style: FontTextStyle
+                                              .kBlueLight114W400SSP
+                                              .copyWith(height: 1.5),
+                                        ),
+                                        CommonWidget.text(
+                                          'Reply • ',
+                                          style: FontTextStyle
+                                              .kBlueLight114W400SSP
+                                              .copyWith(height: 1.5),
+                                        ),
+                                        const Image(
+                                          image: AssetImage(
+                                            'assets/icons/like.png',
                                           ),
-                                          CommonWidget.text(
-                                            'Reply • ',
-                                            style: FontTextStyle
-                                                .kBlueLight114W400SSP
-                                                .copyWith(height: 1.5),
-                                          ),
-                                          Image(
-                                            image: AssetImage(
-                                                'assets/icons/like.png'),
-                                            height: 11,
-                                            width: 10,
-                                            fit: BoxFit.cover,
-                                          ),
-                                          CommonWidget.text(
-                                            ' 12',
-                                            style: FontTextStyle
-                                                .kBlueLight114W400SSP
-                                                .copyWith(height: 1.5),
-                                          ),
-                                          CommonWidget.text(
-                                            ' • 5 hours ago',
-                                            style: FontTextStyle
-                                                .kGreyLight614W400SSP
-                                                .copyWith(height: 1.5),
-                                          ),
-                                        ],
-                                      ),
-                                    ]),
+                                          height: 11,
+                                          width: 10,
+                                          fit: BoxFit.cover,
+                                        ),
+                                        CommonWidget.text(
+                                          ' 12',
+                                          style: FontTextStyle
+                                              .kBlueLight114W400SSP
+                                              .copyWith(height: 1.5),
+                                        ),
+                                        CommonWidget.text(
+                                          ' • 5 hours ago',
+                                          style: FontTextStyle
+                                              .kGreyLight614W400SSP
+                                              .copyWith(height: 1.5),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               Row(
@@ -2870,18 +3062,20 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                   Container(
                                     height: 40,
                                     width: 40,
-                                    decoration: BoxDecoration(
-                                        color: Colors.green,
-                                        image: DecorationImage(
-                                            fit: BoxFit.cover,
-                                            image: AssetImage(
-                                                'assets/images/avatar.png'))),
+                                    decoration: const BoxDecoration(
+                                      color: Colors.green,
+                                      image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: AssetImage(
+                                          'assets/images/avatar.png',
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                   SizedBox(
                                     width: Get.width * 0.01,
                                   ),
                                   Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
@@ -2918,7 +3112,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                           ),
                                         ),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 10,
                                       ),
                                       Row(
@@ -2978,12 +3172,15 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                           Container(
                             height: 40,
                             width: 40,
-                            decoration: BoxDecoration(
-                                color: Colors.green,
-                                image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: AssetImage(
-                                        'assets/images/avatar.png'))),
+                            decoration: const BoxDecoration(
+                              color: Colors.green,
+                              image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: AssetImage(
+                                  'assets/images/avatar.png',
+                                ),
+                              ),
+                            ),
                           ),
                           // SizedBox(
                           //   width: 20,
@@ -2991,20 +3188,23 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                           SB.SW20(),
                           Flexible(
                             child: Container(
-                                // height: 40,
-                                // width: Get.width,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(4),
-                                    border:
-                                        Border.all(color: Color(0xFFDEE1E3))),
-                                child: TextField(
-                                  decoration: InputDecoration(
-                                      contentPadding: EdgeInsets.only(left: 10),
-                                      border: InputBorder.none,
-                                      hintStyle:
-                                          FontTextStyle.kGreyLight514W400SSP,
-                                      hintText: 'Leave a comment'),
-                                )),
+                              // height: 40,
+                              // width: Get.width,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4),
+                                border:
+                                    Border.all(color: const Color(0xFFDEE1E3)),
+                              ),
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  contentPadding:
+                                      const EdgeInsets.only(left: 10),
+                                  border: InputBorder.none,
+                                  hintStyle: FontTextStyle.kGreyLight514W400SSP,
+                                  hintText: 'Leave a comment',
+                                ),
+                              ),
+                            ),
                           )
                         ],
                       ),
@@ -3012,43 +3212,46 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                       //   height: 10,
                       // ),
                       SB.SH10(),
-                      Divider(thickness: 2, color: ColorPicker.kGreyLight10),
+                      const Divider(
+                          thickness: 2, color: ColorPicker.kGreyLight10),
                       SB.SH20(),
                       Row(
                         children: [
                           Flexible(
-                              child: Divider(
-                            endIndent: 10,
-                            color: ColorPicker.kGreyLight5.withOpacity(0.2),
-                          )),
+                            child: Divider(
+                              endIndent: 10,
+                              color: ColorPicker.kGreyLight5.withOpacity(0.2),
+                            ),
+                          ),
                           CommonWidget.text(
                             'SUGGESTED NEWS',
                             style: FontTextStyle.kGreyLight513W700SSP
                                 .copyWith(height: 1.5),
                           ),
                           Flexible(
-                              child: Divider(
-                            indent: 10,
-                            color: ColorPicker.kGreyLight5.withOpacity(0.2),
-                          )),
+                            child: Divider(
+                              indent: 10,
+                              color: ColorPicker.kGreyLight5.withOpacity(0.2),
+                            ),
+                          ),
                         ],
                       ),
                       SB.SH20(),
                       // SizedBox(
                       //   height: 20,
                       // ),
-                      Container(
+                      SizedBox(
                         height: 400,
                         // width: 400,
                         child: ListView.builder(
                           itemCount: suggestNewsData.length,
                           shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
-                          physics: BouncingScrollPhysics(),
+                          physics: const BouncingScrollPhysics(),
                           itemBuilder: (context, index) {
                             return Container(
-                              padding: EdgeInsets.all(10),
-                              margin: EdgeInsets.only(bottom: 10),
+                              padding: const EdgeInsets.all(10),
+                              margin: const EdgeInsets.only(bottom: 10),
                               height: 400,
                               width: 400,
                               color: ColorPicker.kWhite,
@@ -3057,7 +3260,8 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                 children: [
                                   Image(
                                     image: AssetImage(
-                                        '${suggestNewsData[index]['img']}'),
+                                      '${suggestNewsData[index]['img']}',
+                                    ),
                                     height: 200,
                                     width: 400,
                                     fit: BoxFit.cover,
@@ -3065,85 +3269,86 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                   SB.SH10(),
                                   Flexible(
                                     child: Container(
-                                        child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        CommonWidget.text(
-                                          '${suggestNewsData[index]['text1']}',
-                                          style: FontTextStyle
-                                              .kBlueDark118W700SSP
-                                              .copyWith(height: 1.5),
-                                        ),
-                                        SB.SH10(),
-                                        Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            RichText(
-                                              text: TextSpan(
-                                                text: "By: ",
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          CommonWidget.text(
+                                            '${suggestNewsData[index]['text1']}',
+                                            style: FontTextStyle
+                                                .kBlueDark118W700SSP
+                                                .copyWith(height: 1.5),
+                                          ),
+                                          SB.SH10(),
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              RichText(
+                                                text: TextSpan(
+                                                  text: "By: ",
+                                                  style: FontTextStyle
+                                                      .kGreyLight514W400SSP
+                                                      .copyWith(height: 1.5),
+                                                  children: [
+                                                    TextSpan(
+                                                      text:
+                                                          '${suggestNewsData[index]['text3']}',
+                                                      style: FontTextStyle
+                                                          .kGreyLight514W600SSP
+                                                          .copyWith(
+                                                              height: 1.5),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: Get.height * 0.005,
+                                              ),
+                                              CommonWidget.text(
+                                                "26 August 2015  •  10:40",
                                                 style: FontTextStyle
                                                     .kGreyLight514W400SSP
                                                     .copyWith(height: 1.5),
-                                                children: [
-                                                  TextSpan(
-                                                    text:
-                                                        '${suggestNewsData[index]['text3']}',
-                                                    style: FontTextStyle
-                                                        .kGreyLight514W600SSP
-                                                        .copyWith(height: 1.5),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: Get.height * 0.005,
-                                            ),
-                                            CommonWidget.text(
-                                              "26 August 2015  •  10:40",
-                                              style: FontTextStyle
-                                                  .kGreyLight514W400SSP
-                                                  .copyWith(height: 1.5),
-                                            )
-                                          ],
-                                        ),
+                                              )
+                                            ],
+                                          ),
 
-                                        // CommonWidget.text(
-                                        //   '${suggestNewsData[index]['text3']}',
-                                        //   style: FontTextStyle
-                                        //       .kGreyLight514W600PR,
-                                        // ),
-                                        // suggestNewsData[index]['text2']
-                                        //         .toString()
-                                        //         .isEmpty
-                                        //     ? SizedBox()
-                                        //     : Container(
-                                        //         padding:
-                                        //             EdgeInsets.all(5),
-                                        //         child: CommonWidget.text(
-                                        //           'MEMBERS ONLY',
-                                        //           style: FontTextStyle
-                                        //               .kRed10W400PR,
-                                        //         ),
-                                        //         decoration: BoxDecoration(
-                                        //           color:
-                                        //               Color(0xFFFECDCC),
-                                        //           borderRadius:
-                                        //               BorderRadius
-                                        //                   .circular(2),
-                                        //         ),
-                                        //       ),
-                                      ],
-                                    )),
+                                          // CommonWidget.text(
+                                          //   '${suggestNewsData[index]['text3']}',
+                                          //   style: FontTextStyle
+                                          //       .kGreyLight514W600PR,
+                                          // ),
+                                          // suggestNewsData[index]['text2']
+                                          //         .toString()
+                                          //         .isEmpty
+                                          //     ? SizedBox()
+                                          //     : Container(
+                                          //         padding:
+                                          //             EdgeInsets.all(5),
+                                          //         child: CommonWidget.text(
+                                          //           'MEMBERS ONLY',
+                                          //           style: FontTextStyle
+                                          //               .kRed10W400PR,
+                                          //         ),
+                                          //         decoration: BoxDecoration(
+                                          //           color:
+                                          //               Color(0xFFFECDCC),
+                                          //           borderRadius:
+                                          //               BorderRadius
+                                          //                   .circular(2),
+                                          //         ),
+                                          //       ),
+                                        ],
+                                      ),
+                                    ),
                                   ),
-                                  Divider(
-                                      thickness: 2,
-                                      color: ColorPicker.kGreyLight10),
+                                  const Divider(
+                                    thickness: 2,
+                                    color: ColorPicker.kGreyLight10,
+                                  ),
                                 ],
                               ),
                             );
@@ -3170,17 +3375,17 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                             Positioned(
                               top: -1,
                               left: 0,
-                              child: Container(
+                              child: SizedBox(
                                 // height: Get.height * 0.3,
                                 width: 100,
-                                child: Image(
-                                    image:
-                                        AssetImage('assets/images/round2.png'),
-                                    fit: BoxFit.fitWidth),
+                                child: const Image(
+                                  image: AssetImage('assets/images/round2.png'),
+                                  fit: BoxFit.fitWidth,
+                                ),
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.only(
+                              padding: const EdgeInsets.only(
                                 left: 20,
                                 top: 40,
                                 bottom: 10,
@@ -3196,7 +3401,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                           // mainAxisAlignment:
                                           //     MainAxisAlignment.start,
                                           children: [
-                                            Icon(
+                                            const Icon(
                                               Icons.apartment_rounded,
                                               // color: Colors.white,
                                               color: ColorPicker.kWhite,
@@ -3209,7 +3414,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                           ],
                                         ),
                                       ),
-                                      SizedBox(width: 20),
+                                      const SizedBox(width: 20),
                                       Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -3241,11 +3446,11 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                           // mainAxisAlignment:
                                           //     MainAxisAlignment.start,
                                           children: [
-                                            Icon(
+                                            const Icon(
                                               Icons.reduce_capacity_sharp,
                                               color: ColorPicker.kWhite,
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               height: 10,
                                             ),
                                             Container(
@@ -3256,7 +3461,7 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                           ],
                                         ),
                                       ),
-                                      SizedBox(width: 20),
+                                      const SizedBox(width: 20),
                                       Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -3270,13 +3475,13 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: [
-                                                Icon(
+                                                const Icon(
                                                   Icons.message,
                                                   color:
                                                       ColorPicker.kBlueLight1,
                                                   size: 10,
                                                 ),
-                                                SizedBox(
+                                                const SizedBox(
                                                   width: 8,
                                                 ),
                                                 CommonWidget.text(
@@ -3297,22 +3502,23 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                           ],
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
-                      Container(
+                      SizedBox(
                         height: 290,
                         width: Get.width,
-                        child: Image(
+                        child: const Image(
                           fit: BoxFit.cover,
                           image: AssetImage('assets/images/Bannerimage.png'),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       CommonWidget.categoriesDesktop(),
-                      Divider(thickness: 2, color: ColorPicker.kGreyLight10),
+                      const Divider(
+                          thickness: 2, color: ColorPicker.kGreyLight10),
                       SB.SH20(),
                       Container(
                         width: Get.width,
@@ -3322,9 +3528,10 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                           children: [
                             Container(
                               padding: EdgeInsets.only(
-                                  top: Get.width * 0.01,
-                                  right: Get.width * 0.01,
-                                  left: Get.width * 0.01),
+                                top: Get.width * 0.01,
+                                right: Get.width * 0.01,
+                                left: Get.width * 0.01,
+                              ),
                               child: CommonWidget.text(
                                 'Latest news',
                                 style: FontTextStyle.kBlackPure20W400SSP
@@ -3337,21 +3544,23 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
                               itemBuilder: (context, index) => Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Divider(),
+                                  const Divider(),
                                   Container(
                                     padding: EdgeInsets.only(
-                                        top: Get.width * 0.01,
-                                        right: Get.width * 0.01,
-                                        bottom: Get.width * 0.01,
-                                        left: Get.width * 0.01),
+                                      top: Get.width * 0.01,
+                                      right: Get.width * 0.01,
+                                      bottom: Get.width * 0.01,
+                                      left: Get.width * 0.01,
+                                    ),
                                     child: Row(
                                       children: [
-                                        Container(
+                                        SizedBox(
                                           height: 50,
                                           width: 50,
                                           child: Image(
                                             image: AssetImage(
-                                                '${data1[index]['img']}'),
+                                              '${data1[index]['img']}',
+                                            ),
                                           ),
                                         ),
                                         SB.SW10(),
@@ -3385,23 +3594,24 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
 
   Widget box({Color? color, String? image}) {
     return Container(
-        height: Get.height * 0.06,
-        width: Get.width * 0.17,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          color: color,
-        ),
-        child: Column(
-          children: [
-            Center(
-              child: SizedBox(
-                height: Get.height * 0.06,
-                width: Get.width * 0.07,
-                child: Image.asset(image!),
-              ),
-            )
-          ],
-        ));
+      height: Get.height * 0.06,
+      width: Get.width * 0.17,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(5),
+        color: color,
+      ),
+      child: Column(
+        children: [
+          Center(
+            child: SizedBox(
+              height: Get.height * 0.06,
+              width: Get.width * 0.07,
+              child: Image.asset(image!),
+            ),
+          )
+        ],
+      ),
+    );
   }
 
   Widget vector({String? image, String? title}) {
@@ -3409,12 +3619,14 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
       children: [
         Image.asset(image!),
         Padding(
-          padding: EdgeInsets.only(left: 4, top: 7),
-          child: CommonWidget.text(title!,
-              style: TextStyle(
-                color: Color(0xff32A3FD),
-                fontSize: 15,
-              )),
+          padding: const EdgeInsets.only(left: 4, top: 7),
+          child: CommonWidget.text(
+            title!,
+            style: const TextStyle(
+              color: Color(0xff32A3FD),
+              fontSize: 15,
+            ),
+          ),
         ),
         SizedBox(
           width: Get.width * 0.04,
@@ -3425,18 +3637,21 @@ class _NewsSingleLoggedInScreenState extends State<NewsSingleLoggedInScreen> {
 
   Widget tag({required String title, double? height, double? width}) {
     return Padding(
-        padding: EdgeInsets.all(5),
-        child: Container(
-          child: Center(
-            child: CommonWidget.text(title,
-                style: TextStyle(
-                  color: Color(0xffB5BDC2),
-                )),
-          ),
-          width: width,
-          height: height,
-          decoration: BoxDecoration(
-              color: Color(0xffF6F7F8), borderRadius: BorderRadius.circular(3)),
-        ));
+      padding: const EdgeInsets.all(5),
+      child: Container(
+        width: width,
+        height: height,
+        decoration: BoxDecoration(
+          color: const Color(0xffF6F7F8),
+          borderRadius: BorderRadius.circular(3),
+        ),
+        child: Center(
+          child: CommonWidget.text(title,
+              style: TextStyle(
+                color: Color(0xffB5BDC2),
+              )),
+        ),
+      ),
+    );
   }
 }

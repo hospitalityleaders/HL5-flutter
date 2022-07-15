@@ -41,7 +41,7 @@ class _HeaderCardState extends State<HeaderCard> {
       children: [
         RichText(
           text: TextSpan(
-              text: '$fieldName',
+              text: fieldName,
               style: FontTextStyle.kBlueDark114W700SSP,
               children: [
                 TextSpan(
@@ -53,12 +53,11 @@ class _HeaderCardState extends State<HeaderCard> {
     );
   }
 
-  Widget buildTextField(
-      [String? hintText, TextEditingController? _controller]) {
+  Widget buildTextField([String? hintText, TextEditingController? controller]) {
     return Column(
       children: [
         TextFormField(
-          controller: _controller,
+          controller: controller,
           decoration: InputDecoration(
             hintText: hintText,
             isDense: true,
@@ -96,7 +95,7 @@ class _HeaderCardState extends State<HeaderCard> {
         "professional_title": professionalTitleController,
         "area": areaController
       };
-      print('usser profile: $profileData');
+      debugPrint('usser profile: $profileData');
       dynamic res = await _apiServices.updateUserProfile();
 
       if (res?.success as bool) {
@@ -127,11 +126,11 @@ class _HeaderCardState extends State<HeaderCard> {
   final ImagePicker picker = ImagePicker();
 
   Future<void> _pickImage(ImageSource source) async {
-    final _pickedFile = await picker.pickImage(source: source);
+    final pickedFile = await picker.pickImage(source: source);
 
-    if (_pickedFile != null) {
+    if (pickedFile != null) {
       setState(() {
-        image = XFile(_pickedFile.path);
+        image = XFile(pickedFile.path);
       });
     }
   }
@@ -142,11 +141,11 @@ class _HeaderCardState extends State<HeaderCard> {
       required String lName,
       required String professionalTitle,
       required String area}) {
-    TextEditingController _fNameController = TextEditingController(text: fName);
-    TextEditingController _lNameController = TextEditingController(text: lName);
-    TextEditingController _professionalTitleController =
+    TextEditingController fNameController = TextEditingController(text: fName);
+    TextEditingController lNameController = TextEditingController(text: lName);
+    TextEditingController professionalTitleController =
         TextEditingController(text: professionalTitle);
-    TextEditingController _areaController = TextEditingController(text: area);
+    TextEditingController areaController = TextEditingController(text: area);
 
     return showDialog<String>(
       context: context,
@@ -526,15 +525,15 @@ class _HeaderCardState extends State<HeaderCard> {
                                           children: [
                                             buildFieldName('Name', '*'),
                                             buildTextField(
-                                                'Name', _fNameController),
+                                                'Name', fNameController),
                                             buildFieldName('Surname', '*'),
                                             buildTextField(
-                                                'Surname', _lNameController),
+                                                'Surname', lNameController),
                                             buildFieldName(
                                                 'Professional title' '?'),
                                             buildTextField(
                                                 'Business development manager, recruiter and hotel specialist',
-                                                _professionalTitleController),
+                                                professionalTitleController),
                                             Row(
                                               children: [
                                                 Expanded(
@@ -547,7 +546,7 @@ class _HeaderCardState extends State<HeaderCard> {
                                                           'City / Area  / Region',
                                                           '*'),
                                                       buildTextField(
-                                                          '', _areaController)
+                                                          '', areaController)
                                                     ],
                                                   ),
                                                 ),
@@ -586,13 +585,13 @@ class _HeaderCardState extends State<HeaderCard> {
                                                         onPressed: () {
                                                           updateProfileCard(
                                                               id,
-                                                              _fNameController
+                                                              fNameController
                                                                   .text,
-                                                              _lNameController
+                                                              lNameController
                                                                   .text,
-                                                              _professionalTitleController
+                                                              professionalTitleController
                                                                   .text,
-                                                              _areaController
+                                                              areaController
                                                                   .text);
                                                         },
                                                         child: Text('Save'))
@@ -1918,7 +1917,7 @@ class _HeaderCardState extends State<HeaderCard> {
                                         onTap: () {
                                           setState(() {
                                             isShowing = !isShowing;
-                                            print(isShowing);
+                                            debugPrint(isShowing.toString());
                                           });
                                         },
                                         child: Container(

@@ -6,7 +6,7 @@ import 'package:holedo/presentation/ui/pages/sections/page_overview/page_overvie
 import 'package:holedo/presentation/utill/dimensions.dart';
 
 class PageOverviewSection extends StatefulWidget {
-  final isEditable;
+  final bool isEditable;
 
   final User userProfileData;
   final VoidCallback? editProfileBtn;

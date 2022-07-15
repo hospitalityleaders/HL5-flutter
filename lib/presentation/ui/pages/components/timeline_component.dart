@@ -17,7 +17,7 @@ class TimelineComponent extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      decoration: Styles.boxDecoration.copyWith(color: const Color(0xff0D9BDC)),
+      decoration: boxDecoration.copyWith(color: const Color(0xff0D9BDC)),
       // padding: const EdgeInsets.all(Di.PSD),
       height: 305,
       child: Stack(
@@ -53,7 +53,7 @@ class TimelineComponent extends ConsumerWidget {
                 Container(
                   width: 2,
                   height: 25,
-                  decoration: Styles.boxDecorationRounded.copyWith(
+                  decoration: boxDecorationRounded.copyWith(
                     color: Cr.accentBlue2,
                   ),
                 ),
@@ -67,7 +67,7 @@ class TimelineComponent extends ConsumerWidget {
                 Container(
                   width: 2,
                   height: 130,
-                  decoration: Styles.boxDecorationRounded.copyWith(
+                  decoration: boxDecorationRounded.copyWith(
                     color: Cr.accentBlue2,
                   ),
                 ),
@@ -81,7 +81,7 @@ class TimelineComponent extends ConsumerWidget {
                 Container(
                   width: 2,
                   height: 43,
-                  decoration: Styles.boxDecorationRounded.copyWith(
+                  decoration: boxDecorationRounded.copyWith(
                     color: Cr.accentBlue2,
                   ),
                 ),

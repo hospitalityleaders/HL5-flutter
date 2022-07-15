@@ -36,7 +36,7 @@ class ProfileCompletionComponent extends ConsumerWidget {
 
     return Container(
       padding: const EdgeInsets.all(Di.PSD),
-      decoration: Styles.boxDecoration.copyWith(color: Cr.darkBlue6),
+      decoration: boxDecoration.copyWith(color: Cr.darkBlue6),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

@@ -20,7 +20,7 @@ class ContainerWithIcon extends StatelessWidget {
     return Container(
       width: size ?? Di.FSOTL,
       height: size ?? Di.FSOTL,
-      decoration: Styles.boxDecoration.copyWith(
+      decoration: boxDecoration.copyWith(
         color: Cr.accentBlue1,
       ),
       child: Center(

@@ -66,7 +66,7 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage>
     super.dispose();
   }
 
-  _updateTabController() {
+  void _updateTabController() {
     setState(() {
       _tabController.index = ref.watch(profileNotifierProvider).currentTabIndex;
     });
@@ -75,9 +75,9 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage>
   @override
   Widget build(BuildContext context) {
     final currentTabIndex = ref.watch(profileNotifierProvider).currentTabIndex;
-    print("userProfileData: is  ${widget.userProfileData.toString()} ");
+    debugPrint("userProfileData: is  ${widget.userProfileData.toString()} ");
     _updateTabController();
-    print('app $isEditable');
+    debugPrint('app $isEditable');
     return TapCanvas(
       child: Container(
         color: Cr.backgroundColor,

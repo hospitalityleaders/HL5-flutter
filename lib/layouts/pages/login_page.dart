@@ -51,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
           email: _usernameController.text,
           password: _passwordController.text,
         );
-        print('cjec: ${usersControler.isLogin.value}');
+        debugPrint('cjec: ${usersControler.isLogin.value}');
 
         Provider.of<AppState>(context, listen: false).username =
             _usernameController.text;

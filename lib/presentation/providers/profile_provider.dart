@@ -1,7 +1,8 @@
-import 'package:holedo/db_data.dart';
+import 'package:flutter/foundation.dart';
 // This file is "main.dart"
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:flutter/foundation.dart';
+import 'package:holedo/db_data.dart';
+
 part 'profile_provider.freezed.dart';
 
 @freezed

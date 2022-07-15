@@ -11,7 +11,7 @@ class ProfileAdsComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: Styles.boxDecoration.copyWith(color: Cr.whiteColor),
+      decoration: boxDecoration.copyWith(color: Cr.whiteColor),
       padding: const EdgeInsets.all(Di.PSD),
       child: Column(
         children: [

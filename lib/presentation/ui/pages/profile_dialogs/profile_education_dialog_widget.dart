@@ -125,7 +125,7 @@ class __SingleEducationState extends State<_SingleEducation> {
   late final TextEditingController _educationalInstituteController;
   late final TextEditingController _qualificationTitleController;
   late final TextEditingController _descriptionController;
-  final _formKey = GlobalKey<FormState>();
+  // final _formKey = GlobalKey<FormState>();
   late Education education;
   List<String> qualificationList = [""];
   String? selectedValue;

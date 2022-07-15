@@ -33,7 +33,7 @@ class _ProfileReferenceComponentState extends State<ProfileReferenceComponent> {
     final List<ReceivedReference>? receivedReferences =
         DbData.getUserProfileData.receivedReferences;
     return DecoratedBox(
-      decoration: Styles.boxDecoration.copyWith(color: Cr.whiteColor),
+      decoration: boxDecoration.copyWith(color: Cr.whiteColor),
       child: Column(
         children: [
           Column(
@@ -65,8 +65,8 @@ class _ProfileReferenceComponentState extends State<ProfileReferenceComponent> {
                                   padding: const EdgeInsets.symmetric(
                                     horizontal: Di.PSS,
                                   ),
-                                  decoration: Styles.boxDecoration
-                                      .copyWith(color: Cr.whiteColor),
+                                  decoration: boxDecoration.copyWith(
+                                      color: Cr.whiteColor),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -107,7 +107,7 @@ class _ProfileReferenceComponentState extends State<ProfileReferenceComponent> {
                                               width: Di.FSOTL,
                                               height: Di.FSOTL,
                                               decoration:
-                                                  Styles.boxDecoration.copyWith(
+                                                  boxDecoration.copyWith(
                                                 color: Cr.accentBlue1,
                                               ),
                                               child: const Icon(
@@ -201,95 +201,95 @@ class _ProfileReferenceComponentState extends State<ProfileReferenceComponent> {
   }
 }
 
-class _ProfileReferenceListTile extends StatelessWidget {
-  const _ProfileReferenceListTile({
-    Key? key,
-  }) : super(key: key);
+// class _ProfileReferenceListTile extends StatelessWidget {
+//   const _ProfileReferenceListTile({
+//     Key? key,
+//   }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 360,
-      padding: const EdgeInsets.symmetric(horizontal: Di.PSS),
-      decoration: Styles.boxDecoration.copyWith(color: Cr.whiteColor),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ListTile(
-            leading: const PersonAvatar(
-              avatarSize: Di.FSOTL + 10,
-            ),
-            title: Row(
-              children: const [
-                Text(
-                  "Sarah Lee",
-                  style: h4Bold,
-                ),
-                Di.SBWES,
-                Text(
-                  "MHL",
-                  style: dividerTextSmall,
-                )
-              ],
-            ),
-            subtitle: Text(
-              "General Manager, One & Only Hotel",
-              style: bodySmallRegular.copyWith(
-                color: Cr.darkGrey1,
-              ),
-            ),
-          ),
-          Di.SBHES,
-          Container(
-            height: Di.FSOTL + 10,
-            padding: const EdgeInsets.symmetric(horizontal: Di.PSD),
-            child: Row(
-              children: [
-                Container(
-                  width: Di.FSOTL,
-                  height: Di.FSOTL,
-                  decoration: Styles.boxDecoration.copyWith(
-                    color: Cr.accentBlue1,
-                  ),
-                  child: const Icon(
-                    Icons.format_quote,
-                    color: Cr.whiteColor,
-                  ),
-                ),
-                Di.SBWD,
-                Expanded(
-                  // width: 100,
-                  child: SizedBox(
-                    height: Di.FSOTL + 6,
-                    child: Text(
-                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-                      style: bodyLarge.copyWith(
-                        color: Cr.darkGrey1,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Di.SBHETS,
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: Di.PSD),
-            child: Text(
-              "incididunt ut labore et dolore magna aliqua.",
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: bodyLarge.copyWith(
-                color: Cr.darkGrey1,
-              ),
-            ),
-          ),
-          const CustomTextButton(
-            text: "  + Show more",
-          ),
-          Di.SBHD,
-        ],
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       width: 360,
+//       padding: const EdgeInsets.symmetric(horizontal: Di.PSS),
+//       decoration: boxDecoration.copyWith(color: Cr.whiteColor),
+//       child: Column(
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         children: [
+//           ListTile(
+//             leading: const PersonAvatar(
+//               avatarSize: Di.FSOTL + 10,
+//             ),
+//             title: Row(
+//               children: const [
+//                 Text(
+//                   "Sarah Lee",
+//                   style: h4Bold,
+//                 ),
+//                 Di.SBWES,
+//                 Text(
+//                   "MHL",
+//                   style: dividerTextSmall,
+//                 )
+//               ],
+//             ),
+//             subtitle: Text(
+//               "General Manager, One & Only Hotel",
+//               style: bodySmallRegular.copyWith(
+//                 color: Cr.darkGrey1,
+//               ),
+//             ),
+//           ),
+//           Di.SBHES,
+//           Container(
+//             height: Di.FSOTL + 10,
+//             padding: const EdgeInsets.symmetric(horizontal: Di.PSD),
+//             child: Row(
+//               children: [
+//                 Container(
+//                   width: Di.FSOTL,
+//                   height: Di.FSOTL,
+//                   decoration: boxDecoration.copyWith(
+//                     color: Cr.accentBlue1,
+//                   ),
+//                   child: const Icon(
+//                     Icons.format_quote,
+//                     color: Cr.whiteColor,
+//                   ),
+//                 ),
+//                 Di.SBWD,
+//                 Expanded(
+//                   // width: 100,
+//                   child: SizedBox(
+//                     height: Di.FSOTL + 6,
+//                     child: Text(
+//                       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+//                       style: bodyLarge.copyWith(
+//                         color: Cr.darkGrey1,
+//                       ),
+//                     ),
+//                   ),
+//                 ),
+//               ],
+//             ),
+//           ),
+//           Di.SBHETS,
+//           Padding(
+//             padding: const EdgeInsets.symmetric(horizontal: Di.PSD),
+//             child: Text(
+//               "incididunt ut labore et dolore magna aliqua.",
+//               maxLines: 1,
+//               overflow: TextOverflow.ellipsis,
+//               style: bodyLarge.copyWith(
+//                 color: Cr.darkGrey1,
+//               ),
+//             ),
+//           ),
+//           const CustomTextButton(
+//             text: "  + Show more",
+//           ),
+//           Di.SBHD,
+//         ],
+//       ),
+//     );
+//   }
+// }

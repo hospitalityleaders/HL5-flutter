@@ -16,7 +16,7 @@ class ProfileArticleTimelineComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: Styles.boxDecorationBorder.copyWith(color: Cr.whiteColor),
+      decoration: boxDecorationBorder.copyWith(color: Cr.whiteColor),
       height: 720,
       child: Stack(
         children: [
@@ -58,7 +58,7 @@ class ProfileArticleTimelineComponent extends StatelessWidget {
           //       Container(
           //         width: 2.5,
           //         height: 27,
-          //         decoration: Styles.boxDecorationRounded.copyWith(
+          //         decoration: boxDecorationRounded.copyWith(
           //           color: Cr.darkBlue7,
           //         ),
           //       ),
@@ -72,7 +72,7 @@ class ProfileArticleTimelineComponent extends StatelessWidget {
           //       Container(
           //         width: 2.5,
           //         height: 100,
-          //         decoration: Styles.boxDecorationRounded.copyWith(
+          //         decoration: boxDecorationRounded.copyWith(
           //           color: Cr.darkBlue7,
           //         ),
           //       ),
@@ -86,7 +86,7 @@ class ProfileArticleTimelineComponent extends StatelessWidget {
           //       Container(
           //         width: 2.5,
           //         height: 43,
-          //         decoration: Styles.boxDecorationRounded.copyWith(
+          //         decoration: boxDecorationRounded.copyWith(
           //           color: Cr.darkBlue7,
           //         ),
           //       ),
@@ -100,7 +100,7 @@ class ProfileArticleTimelineComponent extends StatelessWidget {
             child: Container(
               width: 2.5,
               height: 675,
-              decoration: Styles.boxDecorationRounded.copyWith(
+              decoration: boxDecorationRounded.copyWith(
                 color: Cr.darkBlue7,
               ),
             ),
@@ -370,7 +370,7 @@ class ProfileArticleTimelineComponent extends StatelessWidget {
 
     // Container(
     //   padding: EdgeInsets.all(Di.PSD),
-    //   decoration: Styles.boxDecoration.copyWith(color: Cr.darkBlue5),
+    //   decoration: boxDecoration.copyWith(color: Cr.darkBlue5),
     //   child: Column(
     //     mainAxisSize: MainAxisSize.min,
     //     children: [

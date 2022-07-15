@@ -57,8 +57,7 @@ class ImageUploadFunctions {
   }
 
 // Pick image from gallery
-  static Future<XFile?> pickImageFromGallery() async =>
-      await ImagePicker().pickImage(
+  static Future<XFile?> pickImageFromGallery() async => ImagePicker().pickImage(
         source: ImageSource.gallery,
       );
 }

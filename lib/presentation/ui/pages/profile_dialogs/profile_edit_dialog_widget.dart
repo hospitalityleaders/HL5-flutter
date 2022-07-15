@@ -29,7 +29,7 @@ class ProfileEditDialogWidget extends StatefulWidget {
 }
 
 class _ProfileEditDialogWidgetState extends State<ProfileEditDialogWidget> {
-  final _formKey = GlobalKey<FormState>();
+  // final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
