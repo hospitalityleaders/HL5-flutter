@@ -397,7 +397,7 @@ class __SingleAchievementState extends State<_SingleAchievement> {
                         makeWidthNull: true,
                         onPressed: () async {
                           showCircularProgressIndicator(context);
-                          final userProfileData = DbData.getUserProfileData;
+                          // final userProfileData = DbData.getUserProfileData;
                           List<Achievement> _achievementList =
                               DbData.getUserProfileData.achievements ?? [];
                           if (widget.index != null) {
@@ -407,12 +407,12 @@ class __SingleAchievementState extends State<_SingleAchievement> {
                           }
 
                           await Provider.of<AppState>(context, listen: false)
-                              .saveProfile(new User(
+                              .saveProfile(User(
                             achievements: _achievementList,
                           ));
-
-                          //Nav.pop(context);
-                          //Nav.pop(context);
+                          Nav.pop(context);
+                          // Nav.profile(context);
+                          Nav.pop(context);
                         },
                         height: 36,
                         donotShowIcon: true,
