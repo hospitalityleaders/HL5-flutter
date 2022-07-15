@@ -21,8 +21,15 @@ class Auth {
   dynamic data;
   bool isLogined;
 
-  Auth(this.apiHost, this.apiKey, this.sott, this.name, this.token,
-      this.isLogined, this.data);
+  Auth(
+    this.apiHost,
+    this.apiKey,
+    this.sott,
+    this.name,
+    this.token,
+    this.isLogined,
+    this.data,
+  );
 
   dynamic get setToken => token;
 
@@ -77,7 +84,7 @@ class AuthController extends GetxController {
 
   void authModel(Auth model) {
     box.write('model', model.toJson());
-    //print('model update: ${box.read('model')}');
+    //debugPrint('model update: ${box.read('model')}');
   }
 
   void resetModel() {
@@ -85,13 +92,13 @@ class AuthController extends GetxController {
   }
 
   Auth restoreModel() {
-    //print('model: ${box.read('model')}');
+    //debugPrint('model: ${box.read('model')}');
     final map = box.read('model') ?? myJson;
     return Auth.fromJson(map as Map);
   }
 }
 
-var AuthData = Get.put(AuthController()).restoreModel();
+Auth AuthData = Get.put(AuthController()).restoreModel();
 
 /* notes:
  To log out:

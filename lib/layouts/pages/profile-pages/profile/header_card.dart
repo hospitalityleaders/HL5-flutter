@@ -2,16 +2,16 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:holedo/common/clipper.dart';
+import 'package:holedo/common/dropDownButton.dart';
 import 'package:holedo/common/popUpHeadMenu.dart';
+import 'package:holedo/common/textfield_fieldname.dart';
+import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
+import 'package:holedo/constant/sizedbox.dart';
+import 'package:holedo/layouts/pages/profile-pages/profile-edit/profile_edit.dart';
 import 'package:holedo/responsive/responsive.dart';
+import 'package:holedo/services/holedo_api_services.dart';
 import 'package:image_picker/image_picker.dart';
-import '../../../../common/dropDownButton.dart';
-import '../../../../common/textfield_fieldname.dart';
-import '../../../../constant/colorPicker/color_picker.dart';
-import '../../../../constant/sizedbox.dart';
-import '../../../../services/holedo_api_services.dart';
-import '../profile-edit/profile_edit.dart';
 //Header card
 
 class HeaderCard extends StatefulWidget {
@@ -21,14 +21,14 @@ class HeaderCard extends StatefulWidget {
   final headerCard_W;
   final hCardApiData;
 
-  const HeaderCard(
-      {Key? key,
-      required this.isEditable,
-      required this.headerCardKey,
-      this.headerCard_H,
-      this.headerCard_W,
-      this.hCardApiData})
-      : super(key: key);
+  const HeaderCard({
+    Key? key,
+    required this.isEditable,
+    required this.headerCardKey,
+    this.headerCard_H,
+    this.headerCard_W,
+    this.hCardApiData,
+  }) : super(key: key);
 
   @override
   _HeaderCardState createState() => _HeaderCardState();
@@ -81,25 +81,26 @@ class _HeaderCardState extends State<HeaderCard> {
   bool isUpdating = false;
 
   Future<void> updateProfileCard(
-      dynamic id,
-      String fNameController,
-      String lNameController,
-      String professionalTitleController,
-      String areaController) async {
+    dynamic id,
+    String fNameController,
+    String lNameController,
+    String professionalTitleController,
+    String areaController,
+  ) async {
     setState(() {
       isUpdating = true;
     });
 
     if (fNameController.toString() != '' && lNameController.toString() != '') {
-      Map<String, dynamic> profileData = {
+      final Map<String, dynamic> profileData = {
         "id": id,
         "first_name": fNameController,
         "last_name": lNameController,
         "professional_title": professionalTitleController,
         "area": areaController
       };
-      print('usser profile: $profileData');
-      dynamic res = await _apiServices.updateUserProfile();
+      debugPrint('usser profile: $profileData');
+      final dynamic res = await _apiServices.updateUserProfile();
 
       if (res?.success as bool) {
         Navigator.pop(context);
@@ -138,17 +139,21 @@ class _HeaderCardState extends State<HeaderCard> {
     }
   }
 
-  Future buildProfileCardPopUp(
-      {required dynamic id,
-      required String fName,
-      required String lName,
-      required String professionalTitle,
-      required String area}) {
-    TextEditingController fNameController = TextEditingController(text: fName);
-    TextEditingController lNameController = TextEditingController(text: lName);
-    TextEditingController professionalTitleController =
+  Future buildProfileCardPopUp({
+    required dynamic id,
+    required String fName,
+    required String lName,
+    required String professionalTitle,
+    required String area,
+  }) {
+    final TextEditingController fNameController =
+        TextEditingController(text: fName);
+    final TextEditingController lNameController =
+        TextEditingController(text: lName);
+    final TextEditingController professionalTitleController =
         TextEditingController(text: professionalTitle);
-    TextEditingController areaController = TextEditingController(text: area);
+    final TextEditingController areaController =
+        TextEditingController(text: area);
 
     return showDialog<String>(
       context: context,
@@ -170,7 +175,9 @@ class _HeaderCardState extends State<HeaderCard> {
                     SS.sB(15),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 5, horizontal: 16),
+                        vertical: 5,
+                        horizontal: 16,
+                      ),
                       child: Container(
                         width: Responsive.isDesktop(context)
                             ? SS.sW(context) * .50
@@ -186,15 +193,16 @@ class _HeaderCardState extends State<HeaderCard> {
                                 height: 50,
                                 width: 50,
                                 color: ColorPicker.kBlueLight1,
-                                child: Icon(
+                                child: const Icon(
                                   Icons.photo_camera,
                                   color: ColorPicker.kWhite,
                                   size: 18,
                                 ),
                               ),
-                              title: Text('Profile details'),
-                              subtitle: Text(
-                                  'Your name, surname, professional title and location.'),
+                              title: const Text('Profile details'),
+                              subtitle: const Text(
+                                'Your name, surname, professional title and location.',
+                              ),
                               trailing: IconButton(
                                 onPressed: () {
                                   setState(() {
@@ -203,12 +211,12 @@ class _HeaderCardState extends State<HeaderCard> {
                                   });
                                 },
                                 icon: isPorfileDetailShowCard
-                                    ? Icon(
+                                    ? const Icon(
                                         Icons.remove,
                                         size: 10,
                                         color: ColorPicker.kBlueLight1,
                                       )
-                                    : Icon(
+                                    : const Icon(
                                         Icons.add,
                                         size: 10,
                                         color: ColorPicker.kBlueLight1,
@@ -220,407 +228,263 @@ class _HeaderCardState extends State<HeaderCard> {
                               color: ColorPicker.kGreyLight3,
                             ),
                             Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Responsive.isDesktop(context)
-                                    ? Row(
-                                        children: [
-                                          Expanded(
-                                            flex: 1,
-                                            child: Column(
-                                              children: [
-                                                image != null
-                                                    ? (Image.network(
-                                                        image!.path,
-                                                        height: 150,
-                                                        width: 150,
-                                                        fit: BoxFit.cover,
-                                                      ))
-                                                    : Image(
-                                                        image: NetworkImage(
-                                                            widget.hCardApiData
-                                                                .avatar
-                                                                .toString()),
-                                                        height: 150,
-                                                        width: 150,
-                                                        fit: BoxFit.cover,
-                                                      ),
-                                                TextButton.icon(
-                                                  onPressed: () {},
-                                                  icon: Icon(
-                                                    Icons.delete,
-                                                    color: ColorPicker.kRed2,
-                                                    size: 15,
-                                                  ),
-                                                  label: Text(
-                                                    'Delete Photo',
-                                                    style: FontTextStyle
-                                                        .kRed214W400SSP,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          Expanded(
-                                            flex: 3,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Container(
-                                                  color:
-                                                      ColorPicker.kGreyLight9,
-                                                  child: Padding(
-                                                    padding: const EdgeInsets
-                                                            .symmetric(
-                                                        vertical: 10,
-                                                        horizontal: 8),
-                                                    child: Row(
-                                                      children: [
-                                                        Expanded(
-                                                          flex: 3,
-                                                          child: Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              OutlinedButton(
-                                                                onPressed: () {
-                                                                  _pickImage(
-                                                                      ImageSource
-                                                                          .gallery);
-                                                                },
-                                                                child: Text(
-                                                                  'Choose Pic',
-                                                                  style: FontTextStyle
-                                                                      .kBlueDark114W400SSP,
-                                                                ),
-                                                              ),
-                                                              SS.sB(0, 10),
-                                                              image != null
-                                                                  ? Text(image!
-                                                                      .name
-                                                                      .toString())
-                                                                  : Text(
-                                                                      'No file choosen',
-                                                                      style: FontTextStyle
-                                                                          .kGreyLight514W400SSP,
-                                                                    ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        Expanded(
-                                                          flex: 1,
-                                                          child: ElevatedButton(
-                                                              onPressed: () {
-                                                                setState(() {});
-                                                              },
-                                                              child: Text(
-                                                                  'Upload')),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                                SS.sB(15),
-                                                Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                        '''Upload an image from your computer in either JPG, GIF or PNG format. Maximum file size can not exceed 3MB. Make sure you look good on Hospitality Leaders? Upload a photo that's at least 150px in width and height. ''',
-                                                        style: FontTextStyle
-                                                            .kGreyLight514W400SSP),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      )
-                                    : Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          image != null
-                                              ? (Image.network(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Responsive.isDesktop(context)
+                                  ? Row(
+                                      children: [
+                                        Expanded(
+                                          child: Column(
+                                            children: [
+                                              if (image != null)
+                                                Image.network(
                                                   image!.path,
                                                   height: 150,
                                                   width: 150,
                                                   fit: BoxFit.cover,
-                                                ))
-                                              : Image(
-                                                  image: NetworkImage(widget
-                                                      .hCardApiData.avatar
-                                                      .toString()),
+                                                )
+                                              else
+                                                Image(
+                                                  image: NetworkImage(
+                                                    widget.hCardApiData.avatar
+                                                        .toString(),
+                                                  ),
                                                   height: 150,
                                                   width: 150,
                                                   fit: BoxFit.cover,
                                                 ),
-                                          SS.sB(5),
-                                          TextButton.icon(
-                                            onPressed: () {},
-                                            icon: Icon(
-                                              Icons.delete,
-                                              color: ColorPicker.kRed2,
-                                              size: 15,
-                                            ),
-                                            label: Text(
-                                              'Delete Photo',
-                                              style:
-                                                  FontTextStyle.kRed214W400SSP,
-                                            ),
+                                              TextButton.icon(
+                                                onPressed: () {},
+                                                icon: const Icon(
+                                                  Icons.delete,
+                                                  color: ColorPicker.kRed2,
+                                                  size: 15,
+                                                ),
+                                                label: Text(
+                                                  'Delete Photo',
+                                                  style: FontTextStyle
+                                                      .kRed214W400SSP,
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  width: 0.4,
-                                                  color:
-                                                      ColorPicker.kGreyLight8),
-                                              borderRadius:
-                                                  BorderRadius.circular(4),
-                                              color: ColorPicker.kGreyLight9,
-                                            ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(12.0),
-                                              child: Column(
+                                        ),
+                                        Expanded(
+                                          flex: 3,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                color: ColorPicker.kGreyLight9,
+                                                child: Padding(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(
+                                                    vertical: 10,
+                                                    horizontal: 8,
+                                                  ),
+                                                  child: Row(
+                                                    children: [
+                                                      Expanded(
+                                                        flex: 3,
+                                                        child: Row(
+                                                          children: [
+                                                            OutlinedButton(
+                                                              onPressed: () {
+                                                                _pickImage(
+                                                                  ImageSource
+                                                                      .gallery,
+                                                                );
+                                                              },
+                                                              child: Text(
+                                                                'Choose Pic',
+                                                                style: FontTextStyle
+                                                                    .kBlueDark114W400SSP,
+                                                              ),
+                                                            ),
+                                                            SS.sB(0, 10),
+                                                            if (image != null)
+                                                              Text(
+                                                                image!.name
+                                                                    .toString(),
+                                                              )
+                                                            else
+                                                              Text(
+                                                                'No file choosen',
+                                                                style: FontTextStyle
+                                                                    .kGreyLight514W400SSP,
+                                                              ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        child: ElevatedButton(
+                                                          onPressed: () {
+                                                            setState(() {});
+                                                          },
+                                                          child: const Text(
+                                                            'Upload',
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                              SS.sB(15),
+                                              Column(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
-                                                  Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    children: [
-                                                      OutlinedButton(
-                                                        onPressed: () {
-                                                          _pickImage(ImageSource
-                                                              .gallery);
-                                                        },
-                                                        child: Text(
-                                                          'Choose Pic',
-                                                          style: FontTextStyle
-                                                              .kBlueDark114W400SSP,
-                                                        ),
-                                                      ),
-                                                      SS.sB(0, 10),
-                                                      image != null
-                                                          ? Text(image!.name
-                                                              .toString())
-                                                          : Text(
-                                                              'No file choosen',
-                                                              style: FontTextStyle
-                                                                  .kGreyLight514W400SSP,
-                                                            ),
-                                                    ],
+                                                  Text(
+                                                    '''Upload an image from your computer in either JPG, GIF or PNG format. Maximum file size can not exceed 3MB. Make sure you look good on Hospitality Leaders? Upload a photo that's at least 150px in width and height. ''',
+                                                    style: FontTextStyle
+                                                        .kGreyLight514W400SSP,
                                                   ),
-                                                  SS.sB(5),
-                                                  GestureDetector(
-                                                      onTap: () {
-                                                        setState(() {});
-                                                      },
-                                                      child: Container(
-                                                        height: 35,
-                                                        decoration: BoxDecoration(
-                                                            color: ColorPicker
-                                                                .kBlueLight1,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        4)),
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(8.0),
-                                                          child: Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              Text(
-                                                                'Upload',
-                                                                style: FontTextStyle
-                                                                    .kWhite14W400SSP,
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .center,
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      )),
                                                 ],
                                               ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  : Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        if (image != null)
+                                          Image.network(
+                                            image!.path,
+                                            height: 150,
+                                            width: 150,
+                                            fit: BoxFit.cover,
+                                          )
+                                        else
+                                          Image(
+                                            image: NetworkImage(
+                                              widget.hCardApiData.avatar
+                                                  .toString(),
+                                            ),
+                                            height: 150,
+                                            width: 150,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        SS.sB(5),
+                                        TextButton.icon(
+                                          onPressed: () {},
+                                          icon: const Icon(
+                                            Icons.delete,
+                                            color: ColorPicker.kRed2,
+                                            size: 15,
+                                          ),
+                                          label: Text(
+                                            'Delete Photo',
+                                            style: FontTextStyle.kRed214W400SSP,
+                                          ),
+                                        ),
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                              width: 0.4,
+                                              color: ColorPicker.kGreyLight8,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            color: ColorPicker.kGreyLight9,
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(12.0),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    OutlinedButton(
+                                                      onPressed: () {
+                                                        _pickImage(
+                                                          ImageSource.gallery,
+                                                        );
+                                                      },
+                                                      child: Text(
+                                                        'Choose Pic',
+                                                        style: FontTextStyle
+                                                            .kBlueDark114W400SSP,
+                                                      ),
+                                                    ),
+                                                    SS.sB(0, 10),
+                                                    if (image != null)
+                                                      Text(
+                                                        image!.name.toString(),
+                                                      )
+                                                    else
+                                                      Text(
+                                                        'No file choosen',
+                                                        style: FontTextStyle
+                                                            .kGreyLight514W400SSP,
+                                                      ),
+                                                  ],
+                                                ),
+                                                SS.sB(5),
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    setState(() {});
+                                                  },
+                                                  child: Container(
+                                                    height: 35,
+                                                    decoration: BoxDecoration(
+                                                      color: ColorPicker
+                                                          .kBlueLight1,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                        4,
+                                                      ),
+                                                    ),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                        8.0,
+                                                      ),
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Text(
+                                                            'Upload',
+                                                            style: FontTextStyle
+                                                                .kWhite14W400SSP,
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ),
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Text(
-                                                '''Upload an image from your computer in either JPG, GIF or PNG format. Maximum file size can not exceed 3MB. Make sure you look good on Hospitality Leaders? Upload a photo that's at least 150px in width and height. ''',
-                                                style: FontTextStyle
-                                                    .kGreyLight514W400SSP),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(
+                                            '''Upload an image from your computer in either JPG, GIF or PNG format. Maximum file size can not exceed 3MB. Make sure you look good on Hospitality Leaders? Upload a photo that's at least 150px in width and height. ''',
+                                            style: FontTextStyle
+                                                .kGreyLight514W400SSP,
                                           ),
-                                        ],
-                                      )),
+                                        ),
+                                      ],
+                                    ),
+                            ),
                           ],
                         ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 5, horizontal: 16),
-                      child: Container(
-                        width: Responsive.isDesktop(context)
-                            ? SS.sW(context) * .50
-                            : Responsive.isMobile(context)
-                                ? SS.sW(context) * .90
-                                : SS.sW(context) * .60,
-                        color: ColorPicker.kWhite,
-                        child: Column(
-                          children: [
-                            ListTile(
-                                leading: Container(
-                                  alignment: Alignment.center,
-                                  height: 50,
-                                  width: 50,
-                                  color: ColorPicker.kBlueLight1,
-                                  child: Icon(
-                                    Icons.photo_camera,
-                                    color: ColorPicker.kWhite,
-                                    size: 18,
-                                  ),
-                                ),
-                                title: Text('Profile details'),
-                                subtitle: Text(
-                                    'Your name, surname, professional title and location.'),
-                                trailing: IconButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      isPorfileDetailShowCard =
-                                          !isPorfileDetailShowCard;
-                                    });
-                                  },
-                                  icon: isPorfileDetailShowCard
-                                      ? Icon(
-                                          Icons.remove,
-                                          size: 10,
-                                          color: ColorPicker.kBlueLight1,
-                                        )
-                                      : Icon(
-                                          Icons.add,
-                                          size: 10,
-                                          color: ColorPicker.kBlueLight1,
-                                        ),
-                                )),
-                            isPorfileDetailShowCard
-                                ? Column(
-                                    children: [
-                                      Divider(
-                                        height: SS.sH(context) * 0.01,
-                                        color: ColorPicker.kGreyLight3,
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.all(16.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            TextFieldAndFieldName
-                                                .buildFieldName('Name', '*'),
-                                            TextFieldAndFieldName
-                                                .buildTextField(
-                                                    'Name', fNameController),
-                                            TextFieldAndFieldName
-                                                .buildFieldName('Surname', '*'),
-                                            TextFieldAndFieldName
-                                                .buildTextField(
-                                                    'Surname', lNameController),
-                                            TextFieldAndFieldName
-                                                .buildFieldName(
-                                                    'Professional title' '?'),
-                                            TextFieldAndFieldName.buildTextField(
-                                                'Business development manager, recruiter and hotel specialist',
-                                                professionalTitleController),
-                                            Row(
-                                              children: [
-                                                Expanded(
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      TextFieldAndFieldName
-                                                          .buildFieldName(
-                                                              'City / Area  / Region',
-                                                              '*'),
-                                                      TextFieldAndFieldName
-                                                          .buildTextField('',
-                                                              areaController)
-                                                    ],
-                                                  ),
-                                                ),
-                                                SS.sB(0, SS.sW(context) * 0.02),
-                                                Expanded(
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      TextFieldAndFieldName
-                                                          .buildFieldName(
-                                                              'Country', '*'),
-                                                      DropDownButton(
-                                                        menuList:
-                                                            countryNameList,
-                                                        hintText: '',
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.end,
-                                              children: [
-                                                OutlinedButton(
-                                                    onPressed: () {
-                                                      Navigator.pop(context);
-                                                    },
-                                                    child: Text('Cancel')),
-                                                SS.sB(0, 10),
-                                                isUpdating
-                                                    ? CircularProgressIndicator()
-                                                    : ElevatedButton(
-                                                        onPressed: () {
-                                                          updateProfileCard(
-                                                              id,
-                                                              fNameController
-                                                                  .text,
-                                                              lNameController
-                                                                  .text,
-                                                              professionalTitleController
-                                                                  .text,
-                                                              areaController
-                                                                  .text);
-                                                        },
-                                                        child: Text('Save'))
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                : Container(),
-                          ],
-                        ),
+                        vertical: 5,
+                        horizontal: 16,
                       ),
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 5, horizontal: 16),
                       child: Container(
                         width: Responsive.isDesktop(context)
                             ? SS.sW(context) * .50
@@ -636,15 +500,182 @@ class _HeaderCardState extends State<HeaderCard> {
                                 height: 50,
                                 width: 50,
                                 color: ColorPicker.kBlueLight1,
-                                child: Icon(
+                                child: const Icon(
                                   Icons.photo_camera,
                                   color: ColorPicker.kWhite,
                                   size: 18,
                                 ),
                               ),
-                              title: Text('Contact details'),
-                              subtitle: Text(
-                                  'Your contact numbers, email address, website link and social profiles.'),
+                              title: const Text('Profile details'),
+                              subtitle: const Text(
+                                'Your name, surname, professional title and location.',
+                              ),
+                              trailing: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    isPorfileDetailShowCard =
+                                        !isPorfileDetailShowCard;
+                                  });
+                                },
+                                icon: isPorfileDetailShowCard
+                                    ? const Icon(
+                                        Icons.remove,
+                                        size: 10,
+                                        color: ColorPicker.kBlueLight1,
+                                      )
+                                    : const Icon(
+                                        Icons.add,
+                                        size: 10,
+                                        color: ColorPicker.kBlueLight1,
+                                      ),
+                              ),
+                            ),
+                            if (isPorfileDetailShowCard)
+                              Column(
+                                children: [
+                                  Divider(
+                                    height: SS.sH(context) * 0.01,
+                                    color: ColorPicker.kGreyLight3,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        TextFieldAndFieldName.buildFieldName(
+                                          'Name',
+                                          '*',
+                                        ),
+                                        TextFieldAndFieldName.buildTextField(
+                                          'Name',
+                                          fNameController,
+                                        ),
+                                        TextFieldAndFieldName.buildFieldName(
+                                          'Surname',
+                                          '*',
+                                        ),
+                                        TextFieldAndFieldName.buildTextField(
+                                          'Surname',
+                                          lNameController,
+                                        ),
+                                        TextFieldAndFieldName.buildFieldName(
+                                          'Professional title' '?',
+                                        ),
+                                        TextFieldAndFieldName.buildTextField(
+                                          'Business development manager, recruiter and hotel specialist',
+                                          professionalTitleController,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  TextFieldAndFieldName
+                                                      .buildFieldName(
+                                                    'City / Area  / Region',
+                                                    '*',
+                                                  ),
+                                                  TextFieldAndFieldName
+                                                      .buildTextField(
+                                                    '',
+                                                    areaController,
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                            SS.sB(0, SS.sW(context) * 0.02),
+                                            Expanded(
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  TextFieldAndFieldName
+                                                      .buildFieldName(
+                                                    'Country',
+                                                    '*',
+                                                  ),
+                                                  DropDownButton(
+                                                    menuList: countryNameList,
+                                                    hintText: '',
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            OutlinedButton(
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                              child: const Text('Cancel'),
+                                            ),
+                                            SS.sB(0, 10),
+                                            if (isUpdating)
+                                              const CircularProgressIndicator()
+                                            else
+                                              ElevatedButton(
+                                                onPressed: () {
+                                                  updateProfileCard(
+                                                    id,
+                                                    fNameController.text,
+                                                    lNameController.text,
+                                                    professionalTitleController
+                                                        .text,
+                                                    areaController.text,
+                                                  );
+                                                },
+                                                child: const Text('Save'),
+                                              )
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              )
+                            else
+                              Container(),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 5,
+                        horizontal: 16,
+                      ),
+                      child: Container(
+                        width: Responsive.isDesktop(context)
+                            ? SS.sW(context) * .50
+                            : Responsive.isMobile(context)
+                                ? SS.sW(context) * .90
+                                : SS.sW(context) * .60,
+                        color: ColorPicker.kWhite,
+                        child: Column(
+                          children: [
+                            ListTile(
+                              leading: Container(
+                                alignment: Alignment.center,
+                                height: 50,
+                                width: 50,
+                                color: ColorPicker.kBlueLight1,
+                                child: const Icon(
+                                  Icons.photo_camera,
+                                  color: ColorPicker.kWhite,
+                                  size: 18,
+                                ),
+                              ),
+                              title: const Text('Contact details'),
+                              subtitle: const Text(
+                                'Your contact numbers, email address, website link and social profiles.',
+                              ),
                               trailing: IconButton(
                                 onPressed: () {
                                   setState(() {
@@ -653,62 +684,63 @@ class _HeaderCardState extends State<HeaderCard> {
                                   });
                                 },
                                 icon: isContactDetailShowCard
-                                    ? Icon(
+                                    ? const Icon(
                                         Icons.remove,
                                         size: 10,
                                         color: ColorPicker.kBlueLight1,
                                       )
-                                    : Icon(
+                                    : const Icon(
                                         Icons.add,
                                         size: 10,
                                         color: ColorPicker.kBlueLight1,
                                       ),
                               ),
                             ),
-                            isContactDetailShowCard
-                                ? Column(
-                                    children: [
-                                      Divider(
-                                        height: SS.sH(context) * 0.01,
-                                        color: ColorPicker.kGreyLight3,
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(16.0),
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      width: 0.2,
-                                                      color: ColorPicker
-                                                          .kGreyLight5)),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(12.0),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      'Who gets to see my contact details?',
-                                                      style: FontTextStyle
-                                                          .kGreyLight514W700SSP,
-                                                    ),
-                                                    Text(
-                                                      'Your contact details are not only useful for other connections to contact you, but with your consent, can also be made available to recruiters to inform you of exciting indistry opportunities. You can select which information is seen by who by selecting the privacy setting for each contact detail.',
-                                                      style: FontTextStyle
-                                                          .kGreyLight514W400SSP,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
+                            if (isContactDetailShowCard)
+                              Column(
+                                children: [
+                                  Divider(
+                                    height: SS.sH(context) * 0.01,
+                                    color: ColorPicker.kGreyLight3,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                              width: 0.2,
+                                              color: ColorPicker.kGreyLight5,
                                             ),
-                                          ],
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(12.0),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  'Who gets to see my contact details?',
+                                                  style: FontTextStyle
+                                                      .kGreyLight514W700SSP,
+                                                ),
+                                                Text(
+                                                  'Your contact details are not only useful for other connections to contact you, but with your consent, can also be made available to recruiters to inform you of exciting indistry opportunities. You can select which information is seen by who by selecting the privacy setting for each contact detail.',
+                                                  style: FontTextStyle
+                                                      .kGreyLight514W400SSP,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  )
-                                : Container()
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              )
+                            else
+                              Container()
                           ],
                         ),
                       ),
@@ -752,73 +784,83 @@ class _HeaderCardState extends State<HeaderCard> {
   bool isHoveringInnerCard = false;
 
   Widget buildContactCardPopUpInnerCard(
-      IconData icon, String title, bool isHoveringInnerCard) {
-    return StatefulBuilder(builder: (context, setState) {
-      return InkWell(
-        onHover: (value) {
-          setState(() {
-            isHoveringCard = value;
-          });
-        },
-        onTap: () {},
-        child: Container(
-          color: ColorPicker.kWhite,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Card(
-              color: isHoveringCard
-                  ? ColorPicker.kBlueLight2
-                  : ColorPicker.kGreyLight9,
-              child: Padding(
-                padding: const EdgeInsets.all(7.0),
-                child: ListTile(
-                  leading: Icon(
-                    icon,
-                    color: ColorPicker.kBlueLight1,
-                  ),
-                  title: Text(
-                    title,
-                    style: FontTextStyle.kBlueLight116W400SSP,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-      );
-    });
-  }
-
-  Widget buildSocialButton(bool isHoveringCard, IconData btnIcon) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: StatefulBuilder(builder: (context, setState) {
+    IconData icon,
+    String title,
+    bool isHoveringInnerCard,
+  ) {
+    return StatefulBuilder(
+      builder: (context, setState) {
         return InkWell(
-          onTap: () {},
           onHover: (value) {
             setState(() {
               isHoveringCard = value;
             });
           },
+          onTap: () {},
           child: Container(
-            alignment: Alignment.center,
-            height: 38,
-            width: 38,
-            color:
-                isHoveringCard ? ColorPicker.kWhite : ColorPicker.kGreyLight9,
-            child: FaIcon(
-              btnIcon,
-              color: ColorPicker.kBlueLight1,
-              size: 12,
+            color: ColorPicker.kWhite,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Card(
+                color: isHoveringCard
+                    ? ColorPicker.kBlueLight2
+                    : ColorPicker.kGreyLight9,
+                child: Padding(
+                  padding: const EdgeInsets.all(7.0),
+                  child: ListTile(
+                    leading: Icon(
+                      icon,
+                      color: ColorPicker.kBlueLight1,
+                    ),
+                    title: Text(
+                      title,
+                      style: FontTextStyle.kBlueLight116W400SSP,
+                    ),
+                  ),
+                ),
+              ),
             ),
           ),
         );
-      }),
+      },
     );
   }
 
-  Widget buildInnerSocialButton(bool isHoveringCard, IconData btnIcon,
-      [Uri? url]) {
+  Widget buildSocialButton(bool isHoveringCard, IconData btnIcon) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: StatefulBuilder(
+        builder: (context, setState) {
+          return InkWell(
+            onTap: () {},
+            onHover: (value) {
+              setState(() {
+                isHoveringCard = value;
+              });
+            },
+            child: Container(
+              alignment: Alignment.center,
+              height: 38,
+              width: 38,
+              color:
+                  isHoveringCard ? ColorPicker.kWhite : ColorPicker.kGreyLight9,
+              child: FaIcon(
+                btnIcon,
+                color: ColorPicker.kBlueLight1,
+                size: 12,
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget buildInnerSocialButton(
+    bool isHoveringCard,
+    IconData btnIcon, [
+    Uri? url,
+  ]) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: StatefulBuilder(
@@ -868,13 +910,13 @@ class _HeaderCardState extends State<HeaderCard> {
                     Row(
                       children: [
                         Expanded(
-                          flex: 1,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Image(
                                 image: NetworkImage(
-                                    widget.hCardApiData.avatar.toString()),
+                                  widget.hCardApiData.avatar.toString(),
+                                ),
                                 // fit: BoxFit.cover,
                                 height: 85,
                                 width: 85,
@@ -900,11 +942,9 @@ class _HeaderCardState extends State<HeaderCard> {
                           ),
                         ),
                         Expanded(
-                          flex: 1,
                           child: Padding(
                             padding: const EdgeInsets.only(right: 10),
                             child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 GestureDetector(
@@ -912,7 +952,7 @@ class _HeaderCardState extends State<HeaderCard> {
                                     Navigator.pop(context);
                                   },
                                   child: Container(
-                                    child: Icon(
+                                    child: const Icon(
                                       Icons.close,
                                       color: ColorPicker.kBlueLight,
                                     ),
@@ -924,82 +964,106 @@ class _HeaderCardState extends State<HeaderCard> {
                         ),
                       ],
                     ),
-                    Divider(
+                    const Divider(
                       height: 0.5,
                       color: ColorPicker.kGreyLight5,
                     ),
                     SS.sB(20),
-                    buildContactCardPopUpInnerCard(Icons.mail,
-                        widget.hCardApiData.email.toString(), isHoveringCard),
+                    buildContactCardPopUpInnerCard(
+                      Icons.mail,
+                      widget.hCardApiData.email.toString(),
+                      isHoveringCard,
+                    ),
                     //custom card
-                    StatefulBuilder(builder: (context, setState) {
-                      return InkWell(
-                        onHover: (value) {
-                          setState(() {
-                            isHoveringCard = value;
-                          });
-                        },
-                        onTap: () {},
-                        child: Container(
-                          color: ColorPicker.kWhite,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: Card(
-                              color: isHoveringCard
-                                  ? ColorPicker.kBlueLight2
-                                  : ColorPicker.kGreyLight9,
-                              child: Padding(
-                                padding: const EdgeInsets.all(7.0),
-                                child: ListTile(
-                                  leading: Icon(
-                                    Icons.mail,
-                                    color: ColorPicker.kBlueLight1,
-                                  ),
-                                  title: Text(
-                                    widget.hCardApiData.contactNumber
-                                        .toString(),
-                                    style: FontTextStyle.kBlueLight116W400SSP,
-                                  ),
-                                  trailing: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      buildInnerSocialButton(
-                                          isHoveringInnerCard, Icons.call),
-                                      buildInnerSocialButton(
+                    StatefulBuilder(
+                      builder: (context, setState) {
+                        return InkWell(
+                          onHover: (value) {
+                            setState(() {
+                              isHoveringCard = value;
+                            });
+                          },
+                          onTap: () {},
+                          child: Container(
+                            color: ColorPicker.kWhite,
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
+                              child: Card(
+                                color: isHoveringCard
+                                    ? ColorPicker.kBlueLight2
+                                    : ColorPicker.kGreyLight9,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(7.0),
+                                  child: ListTile(
+                                    leading: const Icon(
+                                      Icons.mail,
+                                      color: ColorPicker.kBlueLight1,
+                                    ),
+                                    title: Text(
+                                      widget.hCardApiData.contactNumber
+                                          .toString(),
+                                      style: FontTextStyle.kBlueLight116W400SSP,
+                                    ),
+                                    trailing: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        buildInnerSocialButton(
                                           isHoveringInnerCard,
-                                          FontAwesomeIcons.whatsappSquare),
-                                      buildInnerSocialButton(
+                                          Icons.call,
+                                        ),
+                                        buildInnerSocialButton(
                                           isHoveringInnerCard,
-                                          FontAwesomeIcons.commentSms),
-                                    ],
+                                          FontAwesomeIcons.whatsappSquare,
+                                        ),
+                                        buildInnerSocialButton(
+                                          isHoveringInnerCard,
+                                          FontAwesomeIcons.commentSms,
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                      );
-                    }),
-                    buildContactCardPopUpInnerCard(FontAwesomeIcons.skype,
-                        widget.hCardApiData.skype.toString(), isHoveringCard),
+                        );
+                      },
+                    ),
                     buildContactCardPopUpInnerCard(
-                        FontAwesomeIcons.link,
-                        widget.hCardApiData.holedoUrl.toString(),
-                        isHoveringCard),
+                      FontAwesomeIcons.skype,
+                      widget.hCardApiData.skype.toString(),
+                      isHoveringCard,
+                    ),
+                    buildContactCardPopUpInnerCard(
+                      FontAwesomeIcons.link,
+                      widget.hCardApiData.holedoUrl.toString(),
+                      isHoveringCard,
+                    ),
                     SS.sB(30),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         buildSocialButton(
-                            isHoveringCard, FontAwesomeIcons.facebookSquare),
+                          isHoveringCard,
+                          FontAwesomeIcons.facebookSquare,
+                        ),
                         buildSocialButton(
-                            isHoveringCard, FontAwesomeIcons.twitterSquare),
+                          isHoveringCard,
+                          FontAwesomeIcons.twitterSquare,
+                        ),
                         buildSocialButton(
-                            isHoveringCard, FontAwesomeIcons.googlePlusSquare),
+                          isHoveringCard,
+                          FontAwesomeIcons.googlePlusSquare,
+                        ),
                         buildSocialButton(
-                            isHoveringCard, FontAwesomeIcons.linkedin),
+                          isHoveringCard,
+                          FontAwesomeIcons.linkedin,
+                        ),
                         buildSocialButton(
-                            isHoveringCard, FontAwesomeIcons.xingSquare),
+                          isHoveringCard,
+                          FontAwesomeIcons.xingSquare,
+                        ),
                       ],
                     ),
                   ],
@@ -1036,9 +1100,11 @@ class _HeaderCardState extends State<HeaderCard> {
                   padding:
                       const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
                   child: PopUpHeadMenu.popUpHead(
-                      'Send conection request', context),
+                    'Send conection request',
+                    context,
+                  ),
                 ),
-                Divider(
+                const Divider(
                   color: ColorPicker.kGreyLight4,
                   thickness: 0.5,
                 ),
@@ -1050,7 +1116,8 @@ class _HeaderCardState extends State<HeaderCard> {
                       TextFieldAndFieldName.buildFieldName('Send to'),
                       Container(
                         decoration: BoxDecoration(
-                            border: Border.all(color: ColorPicker.kGreyLight8)),
+                          border: Border.all(color: ColorPicker.kGreyLight8),
+                        ),
                         child: ListTile(
                           leading: Image.network(
                             widget.hCardApiData.avatar.toString(),
@@ -1070,14 +1137,11 @@ class _HeaderCardState extends State<HeaderCard> {
                         'Send a message along with your connection request.',
                         style: FontTextStyle.kGreyLight514W400SSP,
                       ),
-                      TextField(
-                        autocorrect: true,
+                      const TextField(
                         minLines: 6,
                         maxLines: 8,
                         decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(),
-                          ),
+                          border: OutlineInputBorder(),
                         ),
                       ),
                       SS.sB(15),
@@ -1090,12 +1154,15 @@ class _HeaderCardState extends State<HeaderCard> {
                               alignment: Alignment.center,
                               height: SS.sH(context) * .05,
                               decoration: BoxDecoration(
-                                  color: ColorPicker.kBlueLight1,
-                                  borderRadius: BorderRadius.circular(4)),
+                                color: ColorPicker.kBlueLight1,
+                                borderRadius: BorderRadius.circular(4),
+                              ),
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Text('Send Request',
-                                    style: FontTextStyle.kWhite14W400SSP),
+                                child: Text(
+                                  'Send Request',
+                                  style: FontTextStyle.kWhite14W400SSP,
+                                ),
                               ),
                             ),
                           ),
@@ -1135,7 +1202,7 @@ class _HeaderCardState extends State<HeaderCard> {
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                   child: PopUpHeadMenu.popUpHead('Write a reference', context),
                 ),
-                Divider(
+                const Divider(
                   color: ColorPicker.kGreyLight4,
                   height: .5,
                 ),
@@ -1152,11 +1219,14 @@ class _HeaderCardState extends State<HeaderCard> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               TextFieldAndFieldName.buildFieldName(
-                                  'Reference recipient'),
+                                'Reference recipient',
+                              ),
                               Container(
                                 decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: ColorPicker.kGreyLight8)),
+                                  border: Border.all(
+                                    color: ColorPicker.kGreyLight8,
+                                  ),
+                                ),
                                 child: ListTile(
                                   leading: Image.network(
                                     widget.hCardApiData.avatar.toString(),
@@ -1181,14 +1251,11 @@ class _HeaderCardState extends State<HeaderCard> {
                                   ),
                                 ],
                               ),
-                              TextField(
-                                autocorrect: true,
+                              const TextField(
                                 minLines: 6,
                                 maxLines: 8,
                                 decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide(),
-                                  ),
+                                  border: OutlineInputBorder(),
                                 ),
                               ),
                               SS.sB(15),
@@ -1201,14 +1268,15 @@ class _HeaderCardState extends State<HeaderCard> {
                                       alignment: Alignment.center,
                                       height: SS.sH(context) * .05,
                                       decoration: BoxDecoration(
-                                          color: ColorPicker.kBlueLight1,
-                                          borderRadius:
-                                              BorderRadius.circular(4)),
+                                        color: ColorPicker.kBlueLight1,
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
-                                        child: Text('Submit Reference',
-                                            style:
-                                                FontTextStyle.kWhite14W400SSP),
+                                        child: Text(
+                                          'Submit Reference',
+                                          style: FontTextStyle.kWhite14W400SSP,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -1244,14 +1312,14 @@ class _HeaderCardState extends State<HeaderCard> {
                                       style: FontTextStyle.kWhite36W400SSP,
                                     ),
                                   ),
-                                  Expanded(flex: 1, child: Container())
+                                  Expanded(child: Container())
                                 ],
                               ),
                               SS.sB(20),
                               RichText(
                                 text: TextSpan(
                                   children: [
-                                    WidgetSpan(
+                                    const WidgetSpan(
                                       child: Icon(
                                         Icons.check_circle,
                                         color: ColorPicker.kWhite,
@@ -1259,9 +1327,10 @@ class _HeaderCardState extends State<HeaderCard> {
                                       ),
                                     ),
                                     TextSpan(
-                                        text:
-                                            ''' Your professional relationship''',
-                                        style: FontTextStyle.kWhite16W700SSP)
+                                      text:
+                                          ''' Your professional relationship''',
+                                      style: FontTextStyle.kWhite16W700SSP,
+                                    )
                                   ],
                                 ),
                               ),
@@ -1273,7 +1342,7 @@ class _HeaderCardState extends State<HeaderCard> {
                               RichText(
                                 text: TextSpan(
                                   children: [
-                                    WidgetSpan(
+                                    const WidgetSpan(
                                       child: Icon(
                                         Icons.check_circle,
                                         color: ColorPicker.kWhite,
@@ -1281,14 +1350,16 @@ class _HeaderCardState extends State<HeaderCard> {
                                       ),
                                     ),
                                     TextSpan(
-                                        text: ''' An endorsement''',
-                                        style: FontTextStyle.kWhite16W700SSP),
+                                      text: ''' An endorsement''',
+                                      style: FontTextStyle.kWhite16W700SSP,
+                                    ),
                                   ],
                                 ),
                               ),
                               Text(
-                                  '''Explain the reason for your recommendation? What are the person’s skills, attributes and personality traits that you are recommending?''',
-                                  style: FontTextStyle.kWhite16W400SSP),
+                                '''Explain the reason for your recommendation? What are the person’s skills, attributes and personality traits that you are recommending?''',
+                                style: FontTextStyle.kWhite16W400SSP,
+                              ),
                               SS.sB(35),
                             ],
                           ),
@@ -1328,7 +1399,7 @@ class _HeaderCardState extends State<HeaderCard> {
                       const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
                   child: PopUpHeadMenu.popUpHead('Send message', context),
                 ),
-                Divider(
+                const Divider(
                   color: ColorPicker.kGreyLight4,
                   thickness: 0.5,
                 ),
@@ -1340,7 +1411,8 @@ class _HeaderCardState extends State<HeaderCard> {
                       TextFieldAndFieldName.buildFieldName('Send to'),
                       Container(
                         decoration: BoxDecoration(
-                            border: Border.all(color: ColorPicker.kGreyLight8)),
+                          border: Border.all(color: ColorPicker.kGreyLight8),
+                        ),
                         child: ListTile(
                           leading: Image.network(
                             widget.hCardApiData.avatar.toString(),
@@ -1356,14 +1428,11 @@ class _HeaderCardState extends State<HeaderCard> {
                       ),
                       SS.sB(20),
                       TextFieldAndFieldName.buildFieldName('Message'),
-                      TextField(
-                        autocorrect: true,
+                      const TextField(
                         minLines: 6,
                         maxLines: 8,
                         decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(),
-                          ),
+                          border: OutlineInputBorder(),
                         ),
                       ),
                       SS.sB(15),
@@ -1376,12 +1445,15 @@ class _HeaderCardState extends State<HeaderCard> {
                               alignment: Alignment.center,
                               height: SS.sH(context) * .05,
                               decoration: BoxDecoration(
-                                  color: ColorPicker.kBlueLight1,
-                                  borderRadius: BorderRadius.circular(4)),
+                                color: ColorPicker.kBlueLight1,
+                                borderRadius: BorderRadius.circular(4),
+                              ),
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Text('Send Request',
-                                    style: FontTextStyle.kWhite14W400SSP),
+                                child: Text(
+                                  'Send Request',
+                                  style: FontTextStyle.kWhite14W400SSP,
+                                ),
                               ),
                             ),
                           ),
@@ -1406,140 +1478,148 @@ class _HeaderCardState extends State<HeaderCard> {
   Future buildBannerImagePopUpCard() {
     return showDialog(
       context: context,
-      builder: (BuildContext context) =>
-          StatefulBuilder(builder: (context, setState) {
-        return Dialog(
-          child: Container(
-            color: ColorPicker.kGreyLight3,
-            width: Responsive.isDesktop(context)
-                ? SS.sW(context) * .45
-                : Responsive.isMobile(context)
-                    ? SS.sW(context) * .90
-                    : SS.sW(context) * .60,
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  PopUpHeadMenu.popUpHead('Cover image', context),
-                  SS.sB(15),
-                  Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
-                    child: Container(
-                      width: Responsive.isDesktop(context)
-                          ? SS.sW(context) * .50
-                          : Responsive.isMobile(context)
-                              ? SS.sW(context) * .90
-                              : SS.sW(context) * .60,
-                      color: ColorPicker.kWhite,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          ListTile(
-                            leading: Container(
-                              alignment: Alignment.center,
-                              height: 50,
-                              width: 50,
-                              color: ColorPicker.kBlueLight1,
-                              child: Icon(
-                                Icons.photo_camera,
-                                color: ColorPicker.kWhite,
-                                size: 18,
+      builder: (BuildContext context) => StatefulBuilder(
+        builder: (context, setState) {
+          return Dialog(
+            child: Container(
+              color: ColorPicker.kGreyLight3,
+              width: Responsive.isDesktop(context)
+                  ? SS.sW(context) * .45
+                  : Responsive.isMobile(context)
+                      ? SS.sW(context) * .90
+                      : SS.sW(context) * .60,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    PopUpHeadMenu.popUpHead('Cover image', context),
+                    SS.sB(15),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 5,
+                        horizontal: 16,
+                      ),
+                      child: Container(
+                        width: Responsive.isDesktop(context)
+                            ? SS.sW(context) * .50
+                            : Responsive.isMobile(context)
+                                ? SS.sW(context) * .90
+                                : SS.sW(context) * .60,
+                        color: ColorPicker.kWhite,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ListTile(
+                              leading: Container(
+                                alignment: Alignment.center,
+                                height: 50,
+                                width: 50,
+                                color: ColorPicker.kBlueLight1,
+                                child: const Icon(
+                                  Icons.photo_camera,
+                                  color: ColorPicker.kWhite,
+                                  size: 18,
+                                ),
+                              ),
+                              title: const Text('Cover image'),
+                              subtitle: const Text(
+                                'Your cover image will be used on your profile.',
                               ),
                             ),
-                            title: Text('Cover image'),
-                            subtitle: Text(
-                                'Your cover image will be used on your profile.'),
-                          ),
-                          Image(
-                            image: NetworkImage(
-                              widget.hCardApiData.banner.toString(),
+                            Image(
+                              image: NetworkImage(
+                                widget.hCardApiData.banner.toString(),
+                              ),
+                              fit: BoxFit.cover,
+                              height: 235,
                             ),
-                            fit: BoxFit.cover,
-                            height: 235,
-                          ),
-                          SS.sB(20),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 0),
-                            child: Container(
-                              color: ColorPicker.kGreyLight8,
-                              child: Padding(
-                                padding: const EdgeInsets.all(18.0),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      flex: 3,
-                                      child: Row(
-                                        children: [
-                                          OutlinedButton(
-                                            style: OutlinedButton.styleFrom(
+                            SS.sB(20),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 20,
+                              ),
+                              child: Container(
+                                color: ColorPicker.kGreyLight8,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(18.0),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        flex: 3,
+                                        child: Row(
+                                          children: [
+                                            OutlinedButton(
+                                              style: OutlinedButton.styleFrom(
                                                 backgroundColor:
-                                                    ColorPicker.kWhite),
-                                            onPressed: () {
-                                              _pickImage(ImageSource.gallery);
-                                            },
-                                            child: Text(
-                                              'Choose file',
-                                              style: FontTextStyle
-                                                  .kBlueDark114W400SSP,
+                                                    ColorPicker.kWhite,
+                                              ),
+                                              onPressed: () {
+                                                _pickImage(ImageSource.gallery);
+                                              },
+                                              child: Text(
+                                                'Choose file',
+                                                style: FontTextStyle
+                                                    .kBlueDark114W400SSP,
+                                              ),
                                             ),
-                                          ),
-                                          SS.sB(0, 10),
-                                          Text(
-                                            'No file choosen',
-                                            style: FontTextStyle
-                                                .kGreyLight514W400SSP,
-                                          ),
-                                        ],
+                                            SS.sB(0, 10),
+                                            Text(
+                                              'No file choosen',
+                                              style: FontTextStyle
+                                                  .kGreyLight514W400SSP,
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                    Expanded(
-                                      flex: 1,
-                                      child: ElevatedButton(
+                                      Expanded(
+                                        child: ElevatedButton(
                                           onPressed: () {
                                             setState(() {});
                                           },
-                                          child: Text('Upload')),
-                                    ),
-                                  ],
+                                          child: const Text('Upload'),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 20),
-                            child: Text(
-                              '''Upload an image from your computer in either JPG, GIF or PNG format. Maximum file size can not exceed 8MB. Make sure your cover image looks good on Hospitality Leaders? Upload a photo that's at least 1280px in width and 640 in height.''',
-                              style: FontTextStyle.kGreyLight514W400SSP,
-                            ),
-                          ),
-                          Padding(
-                            padding:
-                                const EdgeInsets.only(left: 22.5, bottom: 20),
-                            child: TextButton.icon(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.delete,
-                                color: ColorPicker.kRed2,
-                                size: 15,
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 10,
+                                horizontal: 20,
                               ),
-                              label: Text(
-                                'Delete Photo',
-                                style: FontTextStyle.kRed214W400SSP,
+                              child: Text(
+                                '''Upload an image from your computer in either JPG, GIF or PNG format. Maximum file size can not exceed 8MB. Make sure your cover image looks good on Hospitality Leaders? Upload a photo that's at least 1280px in width and 640 in height.''',
+                                style: FontTextStyle.kGreyLight514W400SSP,
                               ),
                             ),
-                          ),
-                        ],
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 22.5, bottom: 20),
+                              child: TextButton.icon(
+                                onPressed: () {},
+                                icon: const Icon(
+                                  Icons.delete,
+                                  color: ColorPicker.kRed2,
+                                  size: 15,
+                                ),
+                                label: Text(
+                                  'Delete Photo',
+                                  style: FontTextStyle.kRed214W400SSP,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-        );
-      }),
+          );
+        },
+      ),
     );
   }
 
@@ -1568,744 +1648,767 @@ class _HeaderCardState extends State<HeaderCard> {
       child: Stack(
         alignment: AlignmentDirectional.topCenter,
         children: [
-          Responsive.isDesktop(context)
-              ? Padding(
-                  padding: EdgeInsets.only(
-                    top: SS.sH(context) * .18,
-                    bottom: SS.sH(context) * .18,
-                  ),
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        key: widget.headerCardKey as Key,
-                        width: SS.sW(context) * .4,
-                        color: ColorPicker.kWhite,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
+          if (Responsive.isDesktop(context))
+            Padding(
+              padding: EdgeInsets.only(
+                top: SS.sH(context) * .18,
+                bottom: SS.sH(context) * .18,
+              ),
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    key: widget.headerCardKey as Key,
+                    width: SS.sW(context) * .4,
+                    color: ColorPicker.kWhite,
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: OutlinedButton.icon(
+                                style: const ButtonStyle(),
+                                onPressed: () {
+                                  buildContactCardPopUp(
+                                    isHoveringCard,
+                                  );
+                                },
+                                label: Text(
+                                  'contact card',
+                                  style: FontTextStyle.kGreyLight514W400SSP,
+                                ),
+                                icon: const Icon(
+                                  Icons.contact_phone_outlined,
+                                  color: Colors.grey,
+                                  size: 12,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    isVisible = !isVisible;
+                                  });
+                                },
+                                onHover: (value) {
+                                  setState(() {
+                                    isHovering = value;
+                                  });
+                                },
+                                child: Container(
+                                  clipBehavior: Clip.antiAlias,
+                                  height: SS.sH(context) * 0.050,
+                                  width: SS.sW(context) * 0.033,
+                                  decoration: BoxDecoration(
+                                    borderRadius: isHovering
+                                        ? BorderRadius.circular(3)
+                                        : BorderRadius.circular(0),
+                                    border: isHovering
+                                        ? Border.all(
+                                            color: Colors.grey,
+                                          )
+                                        : Border.all(
+                                            width: 0,
+                                            color: Colors.transparent,
+                                          ),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: const [
+                                      Icon(
+                                        Icons.menu_outlined,
+                                        color: ColorPicker.kGreyLight3,
+                                        size: 18,
+                                      ),
+                                      Icon(
+                                        Icons.arrow_drop_down_outlined,
+                                        color: ColorPicker.kGreyLight3,
+                                        size: 18,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: Text(
+                            headerCardData.fullName.toString(),
+                            textAlign: TextAlign.center,
+                            style: FontTextStyle.kBlueDark140W400SSP,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: Text(
+                            'Business development manager,recruiter and hotel specialist',
+                            style: FontTextStyle.kGreyLight516W400SSP,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: RichText(
+                            text: TextSpan(
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: OutlinedButton.icon(
-                                    style: const ButtonStyle(),
-                                    onPressed: () {
-                                      buildContactCardPopUp(
-                                        isHoveringCard,
-                                      );
-                                    },
-                                    label: Text(
-                                      'contact card',
-                                      style: FontTextStyle.kGreyLight514W400SSP,
-                                    ),
-                                    icon: const Icon(
-                                      Icons.contact_phone_outlined,
-                                      color: Colors.grey,
-                                      size: 12,
+                                WidgetSpan(
+                                  child: Container(
+                                    padding: const EdgeInsets.only(right: 4.0),
+                                    child: const Icon(
+                                      Icons.location_on,
+                                      color: Color(
+                                        0xFF8f9ea6,
+                                      ),
+                                      size: 18,
                                     ),
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        isVisible = !isVisible;
-                                      });
-                                    },
-                                    onHover: (value) {
-                                      setState(() {
-                                        isHovering = value;
-                                      });
-                                    },
+                                TextSpan(
+                                  text: headerCardData.area.toString(),
+                                  style: FontTextStyle.kGreyLight514W400SSP,
+                                )
+                              ],
+                              style: const TextStyle(
+                                color: Color(0xFF8f9ea6),
+                              ),
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            buildSendConnReqPopUpCard();
+                          },
+                          child: Container(
+                            alignment: Alignment.center,
+                            // height: SS.sH(context) * .06,
+                            // width: SS.sW(context) * .21,
+                            height: 52,
+                            width: 285,
+                            decoration: BoxDecoration(
+                              color: ColorPicker.kBlueLight1,
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Icon(
+                                  Icons.person_add,
+                                  color: ColorPicker.kWhite,
+                                  size: 12,
+                                ),
+                                SS.sB(0, 6.5),
+                                Text(
+                                  'SEND CONNECTION REQUEST',
+                                  style: FontTextStyle.kWhite14W400SSP,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SB.SH5(),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            OutlinedButton.icon(
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(
+                                  const Color(0xFFe5f4fb),
+                                ),
+                              ),
+                              onPressed: () {
+                                buildWriteRefPopUPCard();
+                              },
+                              label: const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 10),
+                                child: AutoSizeText(
+                                  'Write reference',
+                                  minFontSize: 10,
+                                  maxLines: 1,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 14,
+                                    color: Color(0xFF32A3FD),
+                                  ),
+                                ),
+                              ),
+                              icon: const Icon(
+                                Icons.done_outlined,
+                                size: 16,
+                                color: Color(0xFF32A3FD),
+                              ),
+                            ),
+                            SS.sB(0, 2),
+                            OutlinedButton.icon(
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(
+                                  const Color(0xFFe5f4fb),
+                                ),
+                              ),
+                              onPressed: () {
+                                buildRecommendPopUpCard();
+                              },
+                              label: const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 10),
+                                child: AutoSizeText(
+                                  'Recommend',
+                                  maxLines: 1,
+                                  minFontSize: 10,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 14,
+                                    color: Color(0xFF32A3FD),
+                                  ),
+                                ),
+                              ),
+                              icon: const Icon(
+                                Icons.thumb_up_alt_outlined,
+                                size: 16,
+                                color: Color(0xFF32A3FD),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SS.sB(30),
+                        Divider(
+                          height: 1,
+                          color: Colors.grey.shade300,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 12,
+                            horizontal: 4,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              cardDataLoad('250+', 'CONNECTIONS'),
+                              cardDataLoad('14k', 'LEADER POINTS'),
+                              CircleAvatar(
+                                radius: 30,
+                                backgroundImage: NetworkImage(
+                                  widget.hCardApiData.avatarCdn.toString(),
+                                ),
+                                // backgroundImage: NetworkImage(
+                                //     'https://cdn.pixabay.com/photo/2012/11/26/15/07/earth-67359__340.jpg'),
+                              ),
+                              cardDataLoad('3', 'REFERENCES'),
+                              cardDataLoad('312', 'RECOMMENDATIONS')
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            )
+          else
+            Padding(
+              padding: EdgeInsets.only(
+                top: SS.sH(context) * .18,
+              ),
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Container(
+                    width: SS.sW(context),
+                    key: widget.headerCardKey as Key,
+                    color: ColorPicker.kWhite,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          SS.sB(29),
+                          Text(
+                            widget.hCardApiData.fullName.toString(),
+                            textAlign: TextAlign.center,
+                            style: FontTextStyle.kBlueDark136W400SSP,
+                          ),
+                          SS.sB(5),
+                          Card(
+                            child: Text(
+                              widget.hCardApiData.userTitleTypesId.toString(),
+                              style: FontTextStyle.kGreyLight514W400SSP,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: Text(
+                              'Business development manager,recruiter and hotel specialist',
+                              style: FontTextStyle.kGreyLight516W400SSP,
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: RichText(
+                              text: TextSpan(
+                                children: [
+                                  WidgetSpan(
                                     child: Container(
-                                      clipBehavior: Clip.antiAlias,
-                                      height: SS.sH(context) * 0.050,
-                                      width: SS.sW(context) * 0.033,
-                                      decoration: BoxDecoration(
-                                          borderRadius: isHovering
-                                              ? BorderRadius.circular(3)
-                                              : BorderRadius.circular(0),
-                                          border: isHovering
-                                              ? Border.all(
-                                                  width: 1, color: Colors.grey)
-                                              : Border.all(
-                                                  width: 0,
-                                                  color: Colors.transparent)),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
+                                      padding:
+                                          const EdgeInsets.only(right: 4.0),
+                                      child: const Icon(
+                                        Icons.location_on,
+                                        color: ColorPicker.kGreyLight5,
+                                        size: 16,
+                                      ),
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: headerCardData.area.toString(),
+                                    style: FontTextStyle.kGreyLight514W400SSP,
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: InkWell(
+                                  onTap: () {
+                                    buildContactCardPopUp(isHoveringCard);
+                                  },
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    height: 30,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        width: 2,
+                                        color: ColorPicker.kGreyLight9,
+                                      ),
+                                    ),
+                                    child: RichText(
+                                      text: TextSpan(
                                         children: [
-                                          Icon(
-                                            Icons.menu_outlined,
-                                            color: ColorPicker.kGreyLight3,
-                                            size: 18,
+                                          const WidgetSpan(
+                                            child: Padding(
+                                              padding: EdgeInsets.all(1.0),
+                                              child: Icon(
+                                                Icons.contact_phone_outlined,
+                                                color: Colors.grey,
+                                                size: 14,
+                                              ),
+                                            ),
                                           ),
-                                          Icon(
-                                            Icons.arrow_drop_down_outlined,
-                                            color: ColorPicker.kGreyLight3,
-                                            size: 18,
+                                          TextSpan(
+                                            text: ' contact card ',
+                                            style: FontTextStyle
+                                                .kGreyLight514W400SSP,
                                           ),
                                         ],
                                       ),
                                     ),
                                   ),
                                 ),
-                              ],
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(4.0),
-                              child: Text(
-                                headerCardData.fullName.toString(),
-                                textAlign: TextAlign.center,
-                                style: FontTextStyle.kBlueDark140W400SSP,
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(4.0),
-                              child: Text(
-                                'Business development manager,recruiter and hotel specialist',
-                                style: FontTextStyle.kGreyLight516W400SSP,
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(4.0),
-                              child: RichText(
-                                text: TextSpan(
-                                  children: [
-                                    WidgetSpan(
-                                      child: Container(
-                                        padding:
-                                            const EdgeInsets.only(right: 4.0),
-                                        child: const Icon(
-                                          Icons.location_on,
-                                          color: Color(
-                                            0xFF8f9ea6,
-                                          ),
-                                          size: 18,
-                                        ),
-                                      ),
-                                    ),
-                                    TextSpan(
-                                        text: headerCardData.area.toString(),
-                                        style:
-                                            FontTextStyle.kGreyLight514W400SSP)
-                                  ],
-                                  style: const TextStyle(
-                                    color: Color(0xFF8f9ea6),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            InkWell(
-                              onTap: () {
-                                buildSendConnReqPopUpCard();
-                              },
-                              child: Container(
-                                alignment: Alignment.center,
-                                // height: SS.sH(context) * .06,
-                                // width: SS.sW(context) * .21,
-                                height: 52,
-                                width: 285,
-                                decoration: BoxDecoration(
-                                    color: ColorPicker.kBlueLight1,
-                                    borderRadius: BorderRadius.circular(4)),
-                                child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.person_add,
-                                        color: ColorPicker.kWhite,
-                                        size: 12,
-                                      ),
-                                      SS.sB(0, 6.5),
-                                      Text(
-                                        'SEND CONNECTION REQUEST',
-                                        style: FontTextStyle.kWhite14W400SSP,
-                                      ),
-                                    ]),
-                              ),
-                            ),
-                            SB.SH5(),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                OutlinedButton.icon(
-                                  style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all(
-                                      const Color(0xFFe5f4fb),
-                                    ),
-                                  ),
-                                  onPressed: () {
-                                    buildWriteRefPopUPCard();
-                                  },
-                                  label: const Padding(
-                                    padding: EdgeInsets.symmetric(vertical: 10),
-                                    child: AutoSizeText(
-                                      'Write reference',
-                                      minFontSize: 10,
-                                      maxLines: 1,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 14,
-                                          color: Color(0xFF32A3FD)),
-                                    ),
-                                  ),
-                                  icon: const Icon(
-                                    Icons.done_outlined,
-                                    size: 16,
-                                    color: Color(0xFF32A3FD),
-                                  ),
-                                ),
-                                SS.sB(0, 2),
-                                OutlinedButton.icon(
-                                  style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all(
-                                      const Color(0xFFe5f4fb),
-                                    ),
-                                  ),
-                                  onPressed: () {
-                                    buildRecommendPopUpCard();
-                                  },
-                                  label: const Padding(
-                                    padding: EdgeInsets.symmetric(vertical: 10),
-                                    child: AutoSizeText(
-                                      'Recommend',
-                                      maxLines: 1,
-                                      minFontSize: 10,
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 14,
-                                        color: Color(0xFF32A3FD),
-                                      ),
-                                    ),
-                                  ),
-                                  icon: const Icon(
-                                    Icons.thumb_up_alt_outlined,
-                                    size: 16,
-                                    color: Color(0xFF32A3FD),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SS.sB(30),
-                            Divider(
-                              height: 1,
-                              color: Colors.grey.shade300,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 12, horizontal: 4),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  cardDataLoad('250+', 'CONNECTIONS'),
-                                  cardDataLoad('14k', 'LEADER POINTS'),
-                                  CircleAvatar(
-                                    radius: 30,
-                                    backgroundImage: NetworkImage(widget
-                                        .hCardApiData.avatarCdn
-                                        .toString()),
-                                    // backgroundImage: NetworkImage(
-                                    //     'https://cdn.pixabay.com/photo/2012/11/26/15/07/earth-67359__340.jpg'),
-                                  ),
-                                  cardDataLoad('3', 'REFERENCES'),
-                                  cardDataLoad('312', 'RECOMMENDATIONS')
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                )
-              : Padding(
-                  padding: EdgeInsets.only(
-                    top: SS.sH(context) * .18,
-                  ),
-                  child: Center(
-                    child: Padding(
-                      padding: EdgeInsets.all(8),
-                      child: Container(
-                        width: SS.sW(context),
-                        key: widget.headerCardKey as Key,
-                        color: ColorPicker.kWhite,
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              SS.sB(29),
-                              Text(
-                                widget.hCardApiData.fullName.toString(),
-                                textAlign: TextAlign.center,
-                                style: FontTextStyle.kBlueDark136W400SSP,
-                              ),
-                              SS.sB(5),
-                              Card(
-                                child: Text(
-                                  widget.hCardApiData.userTitleTypesId
-                                      .toString(),
-                                  style: FontTextStyle.kGreyLight514W400SSP,
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.all(4.0),
-                                child: Text(
-                                  'Business development manager,recruiter and hotel specialist',
-                                  style: FontTextStyle.kGreyLight516W400SSP,
-                                  textAlign: TextAlign.center,
-                                ),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(4.0),
-                                child: RichText(
-                                  text: TextSpan(
-                                    children: [
-                                      WidgetSpan(
-                                        child: Container(
-                                          padding:
-                                              const EdgeInsets.only(right: 4.0),
-                                          child: Icon(
-                                            Icons.location_on,
-                                            color: ColorPicker.kGreyLight5,
-                                            size: 16,
-                                          ),
-                                        ),
-                                      ),
-                                      TextSpan(
-                                          text: headerCardData.area.toString(),
-                                          style: FontTextStyle
-                                              .kGreyLight514W400SSP)
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(4.0),
-                                    child: InkWell(
-                                      onTap: () {
-                                        buildContactCardPopUp(isHoveringCard);
-                                      },
-                                      child: Container(
-                                        alignment: Alignment.center,
-                                        height: 30,
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                width: 2,
-                                                color:
-                                                    ColorPicker.kGreyLight9)),
-                                        child: RichText(
-                                          text: TextSpan(
-                                            children: [
-                                              WidgetSpan(
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(1.0),
-                                                  child: Icon(
-                                                    Icons
-                                                        .contact_phone_outlined,
-                                                    color: Colors.grey,
-                                                    size: 14,
-                                                  ),
-                                                ),
-                                              ),
-                                              TextSpan(
-                                                  text: ' contact card ',
-                                                  style: FontTextStyle
-                                                      .kGreyLight514W400SSP),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                      padding: const EdgeInsets.all(4.0),
-                                      child: InkWell(
-                                        onTap: () {
-                                          setState(() {
-                                            isShowing = !isShowing;
-                                            print(isShowing);
-                                          });
-                                        },
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  width: 2,
-                                                  color:
-                                                      ColorPicker.kGreyLight9)),
-                                          height: 30,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            children: [
-                                              Icon(
-                                                Icons.menu_outlined,
-                                                color: ColorPicker.kGreyLight3,
-                                                size: 18,
-                                              ),
-                                              Icon(
-                                                Icons.arrow_drop_down_outlined,
-                                                color: ColorPicker.kGreyLight3,
-                                                size: 18,
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      )),
-                                ],
-                              ),
-                              Visibility(
-                                visible: isShowing,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        color: ColorPicker.kBlueLight2,
-                                        height: 40,
-                                        child: Row(
-                                          children: [
-                                            SS.sB(0, 15),
-                                            Icon(
-                                              Icons.contact_phone_outlined,
-                                              color: ColorPicker.kBlueLight1,
-                                              size: 12,
-                                            ),
-                                            SS.sB(0, 6),
-                                            Text(
-                                              'Share profile',
-                                              style: FontTextStyle
-                                                  .kBlueLight114W400SSP,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      InkWell(
-                                        onTap: () {
-                                          setState(() {
-                                            isShowing = !isShowing;
-                                          });
-                                        },
-                                        child: Container(
-                                          height: 40,
-                                          child: Row(
-                                            children: [
-                                              SS.sB(0, 17.5),
-                                              Icon(
-                                                Icons.close,
-                                                color: ColorPicker.kBlueLight1,
-                                                size: 12,
-                                              ),
-                                              SS.sB(0, 8.5),
-                                              Text('Cancel connection',
-                                                  style: FontTextStyle
-                                                      .kBlueLight114W400SSP),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: ElevatedButton.icon(
-                                  onPressed: () {
-                                    buildSendConnReqPopUpCard();
+                                child: InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      isShowing = !isShowing;
+                                      debugPrint(isShowing.toString());
+                                    });
                                   },
-                                  icon: const Icon(
-                                    Icons.person_add,
-                                    size: 10,
-                                    color: ColorPicker.kWhite,
-                                  ),
-                                  label: const Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        vertical: 14, horizontal: 18),
-                                    child: AutoSizeText(
-                                      'SEND CONNECTION REQUEST',
-                                      maxLines: 1,
-                                      style: TextStyle(
-                                          fontSize: 14,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                  ),
-                                  style: ElevatedButton.styleFrom(
-                                    primary: const Color(0xFF0d9bdc),
-                                  ),
-                                ),
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  OutlinedButton.icon(
-                                    style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                        const Color(0xFFe5f4fb),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        width: 2,
+                                        color: ColorPicker.kGreyLight9,
                                       ),
                                     ),
-                                    onPressed: () {
-                                      buildWriteRefPopUPCard();
-                                    },
-                                    label: const Padding(
-                                      padding:
-                                          EdgeInsets.symmetric(vertical: 10),
-                                      child: AutoSizeText(
-                                        'Write reference',
-                                        minFontSize: 10,
-                                        maxLines: 1,
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 14,
-                                            color: Color(0xFF32A3FD)),
-                                      ),
-                                    ),
-                                    icon: const Icon(
-                                      Icons.done_outlined,
-                                      size: 16,
-                                      color: Color(0xFF32A3FD),
-                                    ),
-                                  ),
-                                  SS.sB(0, 2),
-                                  OutlinedButton.icon(
-                                    style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                        const Color(0xFFe5f4fb),
-                                      ),
-                                    ),
-                                    onPressed: () {
-                                      buildRecommendPopUpCard();
-                                    },
-                                    label: const Padding(
-                                      padding:
-                                          EdgeInsets.symmetric(vertical: 10),
-                                      child: AutoSizeText(
-                                        'Recommend',
-                                        maxLines: 1,
-                                        minFontSize: 10,
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 14,
-                                          color: Color(0xFF32A3FD),
+                                    height: 30,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: const [
+                                        Icon(
+                                          Icons.menu_outlined,
+                                          color: ColorPicker.kGreyLight3,
+                                          size: 18,
                                         ),
-                                      ),
-                                    ),
-                                    icon: const Icon(
-                                      Icons.thumb_up_alt_outlined,
-                                      size: 16,
-                                      color: Color(0xFF32A3FD),
+                                        Icon(
+                                          Icons.arrow_drop_down_outlined,
+                                          color: ColorPicker.kGreyLight3,
+                                          size: 18,
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                ],
-                              ),
-                              SS.sB(30),
-                              CircleAvatar(
-                                radius: 30,
-                                backgroundImage: NetworkImage(
-                                    'https://cdn.pixabay.com/photo/2012/11/26/15/07/earth-67359__340.jpg'),
-                              ),
-                              Divider(
-                                height: 3,
-                                color: Colors.grey,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 12, horizontal: 4),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    cardDataLoad('250+', 'CONNECTIONS'),
-                                    cardDataLoad('14k', 'LEADER POINTS'),
-                                    cardDataLoad('3', 'REFERENCES'),
-                                    cardDataLoad('312', 'RECOMMENDATIONS')
-                                  ],
                                 ),
                               ),
                             ],
                           ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-          Responsive.isDesktop(context)
-              ? Positioned(
-                  top: SS.sH(context) * 0.15,
-                  child: Center(
-                    child: Container(
-                      height: 76,
-                      width: 76,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
-                        image: DecorationImage(
-                            image: NetworkImage(
-                                widget.hCardApiData.avatar.toString()),
-                            filterQuality: FilterQuality.high,
-                            fit: BoxFit.cover),
-                      ),
-                    ),
-                  ),
-                )
-              : Positioned(
-                  top: SS.sH(context) * 0.13,
-                  child: Center(
-                    child: Container(
-                      height: 76,
-                      width: 76,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
-                        image: DecorationImage(
-                            image: NetworkImage(
-                                widget.hCardApiData.avatar.toString()),
-                            filterQuality: FilterQuality.high,
-                            fit: BoxFit.cover),
-                      ),
-                    ),
-                  ),
-                ),
-          isVisible
-              ? Column(
-                  children: [
-                    SS.sB(SS.sH(context) * .26),
-                    Align(
-                      alignment: Alignment(.35, 0),
-                      child: ClipPath(
-                        clipper: ArrowClipper(),
-                        child: Container(
-                          height: 15,
-                          width: 12,
-                          decoration: BoxDecoration(
-                            color: ColorPicker.kGreyLight7.withOpacity(0.5),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment(.25, 0),
-                      child: Container(
-                        width: 244,
-                        decoration: BoxDecoration(
-                          color: ColorPicker.kWhite,
-                          border: Border.all(
-                              width: 0.5, color: ColorPicker.kGreyLight7),
-                        ),
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 38,
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      Icons.contact_phone_outlined,
-                                      color: ColorPicker.kBlueLight1,
-                                      size: 12,
+                          Visibility(
+                            visible: isShowing,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    color: ColorPicker.kBlueLight2,
+                                    height: 40,
+                                    child: Row(
+                                      children: [
+                                        SS.sB(0, 15),
+                                        const Icon(
+                                          Icons.contact_phone_outlined,
+                                          color: ColorPicker.kBlueLight1,
+                                          size: 12,
+                                        ),
+                                        SS.sB(0, 6),
+                                        Text(
+                                          'Share profile',
+                                          style: FontTextStyle
+                                              .kBlueLight114W400SSP,
+                                        ),
+                                      ],
                                     ),
-                                    SS.sB(0, 6),
-                                    Text(
-                                      'Share profile',
-                                      style: FontTextStyle.kBlueLight114W400SSP,
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        isShowing = !isShowing;
+                                      });
+                                    },
+                                    child: SizedBox(
+                                      height: 40,
+                                      child: Row(
+                                        children: [
+                                          SS.sB(0, 17.5),
+                                          const Icon(
+                                            Icons.close,
+                                            color: ColorPicker.kBlueLight1,
+                                            size: 12,
+                                          ),
+                                          SS.sB(0, 8.5),
+                                          Text(
+                                            'Cancel connection',
+                                            style: FontTextStyle
+                                                .kBlueLight114W400SSP,
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                             ),
-                            Divider(
-                              thickness: .5,
-                              color: ColorPicker.kGreyLight5,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                setState(() {
-                                  isVisible = !isVisible;
-                                });
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ElevatedButton.icon(
+                              onPressed: () {
+                                buildSendConnReqPopUpCard();
                               },
-                              child: Container(
-                                height: 38,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 12.5, vertical: 9),
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        Icons.close,
-                                        color: ColorPicker.kBlueLight1,
-                                        size: 12,
-                                      ),
-                                      SS.sB(0, 8.5),
-                                      Text('Cancel connection',
-                                          style: FontTextStyle
-                                              .kBlueLight114W400SSP),
-                                    ],
+                              icon: const Icon(
+                                Icons.person_add,
+                                size: 10,
+                                color: ColorPicker.kWhite,
+                              ),
+                              label: const Padding(
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 14,
+                                  horizontal: 18,
+                                ),
+                                child: AutoSizeText(
+                                  'SEND CONNECTION REQUEST',
+                                  maxLines: 1,
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w400,
                                   ),
                                 ),
                               ),
+                              style: ElevatedButton.styleFrom(
+                                primary: const Color(0xFF0d9bdc),
+                              ),
                             ),
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
-                )
-              : Container(),
-          widget.isEditable as bool
-              ? Positioned(
-                  bottom: 10,
-                  right: 10,
-                  child: GestureDetector(
-                    onTap: () {
-                      buildBannerImagePopUpCard();
-                    },
-                    child: CircleAvatar(
-                      radius: 25,
-                      backgroundColor: ColorPicker.kBlueLight1,
-                      child: Icon(
-                        Icons.camera_alt,
-                        color: ColorPicker.kWhite,
-                        size: 25,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              OutlinedButton.icon(
+                                style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all(
+                                    const Color(0xFFe5f4fb),
+                                  ),
+                                ),
+                                onPressed: () {
+                                  buildWriteRefPopUPCard();
+                                },
+                                label: const Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 10),
+                                  child: AutoSizeText(
+                                    'Write reference',
+                                    minFontSize: 10,
+                                    maxLines: 1,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 14,
+                                      color: Color(0xFF32A3FD),
+                                    ),
+                                  ),
+                                ),
+                                icon: const Icon(
+                                  Icons.done_outlined,
+                                  size: 16,
+                                  color: Color(0xFF32A3FD),
+                                ),
+                              ),
+                              SS.sB(0, 2),
+                              OutlinedButton.icon(
+                                style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all(
+                                    const Color(0xFFe5f4fb),
+                                  ),
+                                ),
+                                onPressed: () {
+                                  buildRecommendPopUpCard();
+                                },
+                                label: const Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 10),
+                                  child: AutoSizeText(
+                                    'Recommend',
+                                    maxLines: 1,
+                                    minFontSize: 10,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 14,
+                                      color: Color(0xFF32A3FD),
+                                    ),
+                                  ),
+                                ),
+                                icon: const Icon(
+                                  Icons.thumb_up_alt_outlined,
+                                  size: 16,
+                                  color: Color(0xFF32A3FD),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SS.sB(30),
+                          const CircleAvatar(
+                            radius: 30,
+                            backgroundImage: NetworkImage(
+                              'https://cdn.pixabay.com/photo/2012/11/26/15/07/earth-67359__340.jpg',
+                            ),
+                          ),
+                          const Divider(
+                            height: 3,
+                            color: Colors.grey,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 12,
+                              horizontal: 4,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                cardDataLoad('250+', 'CONNECTIONS'),
+                                cardDataLoad('14k', 'LEADER POINTS'),
+                                cardDataLoad('3', 'REFERENCES'),
+                                cardDataLoad('312', 'RECOMMENDATIONS')
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
-                )
-              : Container(),
-          widget.isEditable as bool
-              ? Padding(
-                  padding: EdgeInsets.only(
-                    top: SS.sH(context) * .18,
-                    bottom: Responsive.isDesktop(context)
-                        ? SS.sH(context) * .16
-                        : 0 as double,
+                ),
+              ),
+            ),
+          if (Responsive.isDesktop(context))
+            Positioned(
+              top: SS.sH(context) * 0.15,
+              child: Center(
+                child: Container(
+                  height: 76,
+                  width: 76,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4),
+                    image: DecorationImage(
+                      image:
+                          NetworkImage(widget.hCardApiData.avatar.toString()),
+                      filterQuality: FilterQuality.high,
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                  child: ProfileEdit.buildProfileEdit(
-                      width: widget.headerCard_W as double,
-                      height: widget.headerCard_H as double,
-                      popUpEdit: () {
-                        buildProfileCardPopUp(
-                            id: headerCardData.id,
-                            fName: headerCardData.firstName.toString(),
-                            lName: headerCardData.lastName.toString(),
-                            professionalTitle:
-                                headerCardData.professionalTitle.toString(),
-                            area: headerCardData.area.toString());
-                      },
-                      showAddButton: false),
+                ),
+              ),
+            )
+          else
+            Positioned(
+              top: SS.sH(context) * 0.13,
+              child: Center(
+                child: Container(
+                  height: 76,
+                  width: 76,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4),
+                    image: DecorationImage(
+                      image:
+                          NetworkImage(widget.hCardApiData.avatar.toString()),
+                      filterQuality: FilterQuality.high,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          if (isVisible)
+            Column(
+              children: [
+                SS.sB(SS.sH(context) * .26),
+                Align(
+                  alignment: const Alignment(.35, 0),
+                  child: ClipPath(
+                    clipper: ArrowClipper(),
+                    child: Container(
+                      height: 15,
+                      width: 12,
+                      decoration: BoxDecoration(
+                        color: ColorPicker.kGreyLight7.withOpacity(0.5),
+                      ),
+                    ),
+                  ),
+                ),
+                Align(
+                  alignment: const Alignment(.25, 0),
+                  child: Container(
+                    width: 244,
+                    decoration: BoxDecoration(
+                      color: ColorPicker.kWhite,
+                      border: Border.all(
+                        width: 0.5,
+                        color: ColorPicker.kGreyLight7,
+                      ),
+                    ),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 38,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Row(
+                              children: [
+                                const Icon(
+                                  Icons.contact_phone_outlined,
+                                  color: ColorPicker.kBlueLight1,
+                                  size: 12,
+                                ),
+                                SS.sB(0, 6),
+                                Text(
+                                  'Share profile',
+                                  style: FontTextStyle.kBlueLight114W400SSP,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        const Divider(
+                          thickness: .5,
+                          color: ColorPicker.kGreyLight5,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              isVisible = !isVisible;
+                            });
+                          },
+                          child: SizedBox(
+                            height: 38,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12.5,
+                                vertical: 9,
+                              ),
+                              child: Row(
+                                children: [
+                                  const Icon(
+                                    Icons.close,
+                                    color: ColorPicker.kBlueLight1,
+                                    size: 12,
+                                  ),
+                                  SS.sB(0, 8.5),
+                                  Text(
+                                    'Cancel connection',
+                                    style: FontTextStyle.kBlueLight114W400SSP,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 )
-              : Container(),
+              ],
+            )
+          else
+            Container(),
+          if (widget.isEditable as bool)
+            Positioned(
+              bottom: 10,
+              right: 10,
+              child: GestureDetector(
+                onTap: () {
+                  buildBannerImagePopUpCard();
+                },
+                child: const CircleAvatar(
+                  radius: 25,
+                  backgroundColor: ColorPicker.kBlueLight1,
+                  child: Icon(
+                    Icons.camera_alt,
+                    color: ColorPicker.kWhite,
+                    size: 25,
+                  ),
+                ),
+              ),
+            )
+          else
+            Container(),
+          if (widget.isEditable as bool)
+            Padding(
+              padding: EdgeInsets.only(
+                top: SS.sH(context) * .18,
+                bottom: Responsive.isDesktop(context)
+                    ? SS.sH(context) * .16
+                    : 0 as double,
+              ),
+              child: ProfileEdit.buildProfileEdit(
+                width: widget.headerCard_W as double,
+                height: widget.headerCard_H as double,
+                popUpEdit: () {
+                  buildProfileCardPopUp(
+                    id: headerCardData.id,
+                    fName: headerCardData.firstName.toString(),
+                    lName: headerCardData.lastName.toString(),
+                    professionalTitle:
+                        headerCardData.professionalTitle.toString(),
+                    area: headerCardData.area.toString(),
+                  );
+                },
+                showAddButton: false,
+              ),
+            )
+          else
+            Container(),
         ],
       ),
     );

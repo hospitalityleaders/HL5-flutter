@@ -6,10 +6,10 @@ import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/constant/sizedbox.dart';
 import 'package:holedo/responsive/responsive.dart';
 
-import '../../../../common/common_widget.dart';
-import '../../../../constant/fontStyle/font_style.dart';
-import '../../../../constant/sizedbox.dart';
-import '../../../../responsive/responsive.dart';
+import 'package:holedo/common/common_widget.dart';
+import 'package:holedo/constant/fontStyle/font_style.dart';
+import 'package:holedo/constant/sizedbox.dart';
+import 'package:holedo/responsive/responsive.dart';
 
 class NewsSingleLoggedOutScreen extends StatefulWidget {
   @override
@@ -145,11 +145,11 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
     },
   ];
   List buttonData = [
-    {'img': "assets/icons/fb.png", 'color': Color(0xFF344F8D)},
-    {'img': "assets/icons/twitter.png", 'color': Color(0xFF00ABF0)},
-    {'img': "assets/icons/gp.png", 'color': Color(0xFFD63B30)},
-    {'img': "assets/icons/linkdin.png", 'color': Color(0xFF1C86BC)},
-    {'img': "assets/icons/x.png", 'color': Color(0xFF04595B)},
+    {'img': "assets/icons/fb.png", 'color': const Color(0xFF344F8D)},
+    {'img': "assets/icons/twitter.png", 'color': const Color(0xFF00ABF0)},
+    {'img': "assets/icons/gp.png", 'color': const Color(0xFFD63B30)},
+    {'img': "assets/icons/linkdin.png", 'color': const Color(0xFF1C86BC)},
+    {'img': "assets/icons/x.png", 'color': const Color(0xFF04595B)},
   ];
 
   List likeCommentShare = [
@@ -171,127 +171,142 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
   ];
 
   int currentIndex = 0;
-  PageController _controller = PageController();
+  final PageController _controller = PageController();
   @override
   Widget build(BuildContext context) {
     // CarouselController buttonCarouselController = CarouselController();
 
-    // print('${Get.width}');
+    // debugPrint('${Get.width}');
     return Responsive.isDesktop(context)
         ? Scaffold(
             appBar: PreferredSize(
-              preferredSize: Size.fromHeight(46),
+              preferredSize: const Size.fromHeight(46),
               child: Container(
-                  height: 46,
-                  color: ColorPicker.kPrimaryLight1,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Image(
-                          image: AssetImage('assets/icons/logo1.png'),
-                        ),
+                height: 46,
+                color: ColorPicker.kPrimaryLight1,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.all(4.0),
+                      child: Image(
+                        image: AssetImage('assets/icons/logo1.png'),
                       ),
-                      SB.SW10(),
-                      // SizedBox(
-                      //   width: 10,
-                      // ),
-                      Container(
-                        width: Get.width * 0.2,
-                        decoration: BoxDecoration(
-                            color: ColorPicker.kWhite,
-                            borderRadius: BorderRadius.circular(5)),
-                        margin: EdgeInsets.all(3),
-                        child: TextFormField(
-                          cursorColor: ColorPicker.kWhite,
-                          style: FontTextStyle.kWhite16W400SSP,
-                          decoration: InputDecoration(
-                            hintStyle: FontTextStyle.kPrimaryLightBlue16W400SSP,
-                            filled: true,
-                            fillColor: ColorPicker.kPrimaryLight,
-                            hintText: "Search",
-                            border: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: ColorPicker.kPrimary),
-                                borderRadius: BorderRadius.circular(5)),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: ColorPicker.kPrimary),
-                                borderRadius: BorderRadius.circular(5)),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: ColorPicker.kPrimary),
-                                borderRadius: BorderRadius.circular(5)),
-                            prefixIcon: Icon(
-                              Icons.search,
-                              color: ColorPicker.kPrimaryLightBlue,
+                    ),
+                    SB.SW10(),
+                    // SizedBox(
+                    //   width: 10,
+                    // ),
+                    Container(
+                      width: Get.width * 0.2,
+                      decoration: BoxDecoration(
+                        color: ColorPicker.kWhite,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      margin: const EdgeInsets.all(3),
+                      child: TextFormField(
+                        cursorColor: ColorPicker.kWhite,
+                        style: FontTextStyle.kWhite16W400SSP,
+                        decoration: InputDecoration(
+                          hintStyle: FontTextStyle.kPrimaryLightBlue16W400SSP,
+                          filled: true,
+                          fillColor: ColorPicker.kPrimaryLight,
+                          hintText: "Search",
+                          border: OutlineInputBorder(
+                            borderSide:
+                                const BorderSide(color: ColorPicker.kPrimary),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                const BorderSide(color: ColorPicker.kPrimary),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide:
+                                const BorderSide(color: ColorPicker.kPrimary),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          prefixIcon: const Icon(
+                            Icons.search,
+                            color: ColorPicker.kPrimaryLightBlue,
+                          ),
+                          suffixIcon: Container(
+                            margin: const EdgeInsets.only(
+                                right: 5, bottom: 5, top: 5),
+                            height: 40,
+                            width: Get.width * 0.045,
+                            decoration: BoxDecoration(
+                              color: ColorPicker.kPrimaryLight1,
+                              borderRadius: BorderRadius.circular(5),
                             ),
-                            suffixIcon: Container(
-                              margin:
-                                  EdgeInsets.only(right: 5, bottom: 5, top: 5),
-                              height: 40,
-                              width: Get.width * 0.045,
-                              decoration: BoxDecoration(
-                                color: ColorPicker.kPrimaryLight1,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Center(
-                                child: CommonWidget.text(
-                                  'People',
-                                  style:
-                                      FontTextStyle.kPrimaryLightBlue16W400SSP,
-                                ),
+                            child: Center(
+                              child: CommonWidget.text(
+                                'People',
+                                style: FontTextStyle.kPrimaryLightBlue16W400SSP,
                               ),
                             ),
                           ),
                         ),
                       ),
-                      SizedBox(
-                        width: Get.width * 0.02,
+                    ),
+                    SizedBox(
+                      width: Get.width * 0.02,
+                    ),
+                    SizedBox(
+                      width: 380,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CommonWidget.text(
+                            'Home',
+                            style: FontTextStyle.kWhite16W400SSP,
+                          ),
+                          CommonWidget.text(
+                            'Profile',
+                            style: FontTextStyle.kPrimaryLightBlue16W400SSP,
+                          ),
+                          CommonWidget.text(
+                            'News',
+                            style: FontTextStyle.kPrimaryLightBlue16W400SSP,
+                          ),
+                          CommonWidget.text(
+                            'Jobs',
+                            style: FontTextStyle.kPrimaryLightBlue16W400SSP,
+                          ),
+                          CommonWidget.text(
+                            'Recruitment',
+                            style: FontTextStyle.kPrimaryLightBlue16W400SSP,
+                          ),
+                          CommonWidget.text(
+                            'Help',
+                            style: FontTextStyle.kPrimaryLightBlue16W400SSP,
+                          ),
+                        ],
                       ),
-                      Container(
-                        width: 380,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            CommonWidget.text('Home',
-                                style: FontTextStyle.kWhite16W400SSP),
-                            CommonWidget.text('Profile',
-                                style:
-                                    FontTextStyle.kPrimaryLightBlue16W400SSP),
-                            CommonWidget.text('News',
-                                style:
-                                    FontTextStyle.kPrimaryLightBlue16W400SSP),
-                            CommonWidget.text('Jobs',
-                                style:
-                                    FontTextStyle.kPrimaryLightBlue16W400SSP),
-                            CommonWidget.text('Recruitment',
-                                style:
-                                    FontTextStyle.kPrimaryLightBlue16W400SSP),
-                            CommonWidget.text('Help',
-                                style:
-                                    FontTextStyle.kPrimaryLightBlue16W400SSP),
-                          ],
+                    ),
+                    SizedBox(
+                      width: Get.width * 0.02,
+                    ),
+                    Container(
+                      width: Get.width * 0.05,
+                      decoration: const BoxDecoration(
+                        border: Border(
+                          left: BorderSide(
+                            color: ColorPicker.kPrimaryLight,
+                            width: 3,
+                          ),
+                          right: BorderSide(
+                            color: ColorPicker.kPrimaryLight,
+                            width: 3,
+                          ),
                         ),
                       ),
-                      SizedBox(
-                        width: Get.width * 0.02,
-                      ),
-                      Container(
-                        width: Get.width * 0.05,
-                        decoration: BoxDecoration(
-                            border: Border(
-                                left: BorderSide(
-                                    color: ColorPicker.kPrimaryLight, width: 3),
-                                right: BorderSide(
-                                    color: ColorPicker.kPrimaryLight,
-                                    width: 3))),
-                        child: Center(
-                            child: Stack(
+                      child: Center(
+                        child: Stack(
                           //overflow: Overflow.visible,
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.email,
                               color: ColorPicker.kPrimaryLightBlue,
                             ),
@@ -314,20 +329,24 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                               ),
                             ),
                           ],
-                        )),
+                        ),
                       ),
-                      Container(
-                        width: Get.width * 0.05,
-                        decoration: BoxDecoration(
-                            border: Border(
-                                right: BorderSide(
-                                    color: ColorPicker.kPrimaryLight,
-                                    width: 3))),
-                        child: Center(
-                            child: Stack(
+                    ),
+                    Container(
+                      width: Get.width * 0.05,
+                      decoration: const BoxDecoration(
+                        border: Border(
+                          right: BorderSide(
+                            color: ColorPicker.kPrimaryLight,
+                            width: 3,
+                          ),
+                        ),
+                      ),
+                      child: Center(
+                        child: Stack(
                           //overflow: Overflow.visible,
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.flag,
                               color: ColorPicker.kPrimaryLightBlue,
                             ),
@@ -350,61 +369,71 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                               ),
                             ),
                           ],
-                        )),
+                        ),
                       ),
-                      Container(
-                        width: 90,
-                        decoration: BoxDecoration(
-                            border: Border(
-                                right: BorderSide(
-                                    color: ColorPicker.kPrimaryLight,
-                                    width: 3))),
-                        child: Center(
-                            child: Row(
+                    ),
+                    Container(
+                      width: 90,
+                      decoration: const BoxDecoration(
+                        border: Border(
+                          right: BorderSide(
+                            color: ColorPicker.kPrimaryLight,
+                            width: 3,
+                          ),
+                        ),
+                      ),
+                      child: Center(
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.person_add,
                               color: ColorPicker.kPrimaryLightBlue,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 5,
                             ),
                             Container(
                               height: 20,
                               width: 30,
                               decoration: BoxDecoration(
-                                color: Color(0xff546088),
+                                color: const Color(0xff546088),
                                 borderRadius: BorderRadius.circular(3),
                               ),
                               child: Center(
-                                child: CommonWidget.text('352',
-                                    style:
-                                        FontTextStyle.kPrimaryLight10W700SSP),
+                                child: CommonWidget.text(
+                                  '352',
+                                  style: FontTextStyle.kPrimaryLight10W700SSP,
+                                ),
                               ),
                             ),
                           ],
-                        )),
+                        ),
                       ),
-                      Container(
-                        width: Get.width * 0.05,
-                        decoration: BoxDecoration(
-                            border: Border(
-                                right: BorderSide(
-                                    color: ColorPicker.kPrimaryLight,
-                                    width: 3))),
-                        child: Center(
-                          child: Container(
-                            height: 26,
-                            width: 26,
-                            child: Image(
-                              image: AssetImage('assets/images/avatar.png'),
-                            ),
+                    ),
+                    Container(
+                      width: Get.width * 0.05,
+                      decoration: const BoxDecoration(
+                        border: Border(
+                          right: BorderSide(
+                            color: ColorPicker.kPrimaryLight,
+                            width: 3,
                           ),
                         ),
                       ),
-                    ],
-                  )),
+                      child: Center(
+                        child: SizedBox(
+                          height: 26,
+                          width: 26,
+                          child: const Image(
+                            image: AssetImage('assets/images/avatar.png'),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
             body: SingleChildScrollView(
               child: Column(
@@ -414,10 +443,9 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                   Container(
                     height: Get.height * 0.05,
                     width: Get.width,
-                    color: Color(0xffCCE8FE),
+                    color: const Color(0xffCCE8FE),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SizedBox(
                           width: Get.width * 0.25,
@@ -438,13 +466,15 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                           height: Get.height * 0.032,
                           width: Get.width * 0.08,
                           decoration: BoxDecoration(
-                              color: Color(0xff32A3FD),
-                              borderRadius: BorderRadius.circular(2)),
+                            color: const Color(0xff32A3FD),
+                            borderRadius: BorderRadius.circular(2),
+                          ),
                           child: Center(
-                              child: CommonWidget.text(
-                            "Join now. It’s free",
-                            style: FontTextStyle.kWhite12W400PR,
-                          )),
+                            child: CommonWidget.text(
+                              "Join now. It’s free",
+                              style: FontTextStyle.kWhite12W400PR,
+                            ),
+                          ),
                         ),
                         SizedBox(
                           width: Get.width * 0.25,
@@ -460,10 +490,12 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                         height: Get.height * 0.5,
                         width: Get.width,
                         // color: Colors.green,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage("assets/images/slider1.png"),
-                                fit: BoxFit.cover)),
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage("assets/images/slider1.png"),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                         child: Column(
                           children: [
                             Container(
@@ -474,7 +506,9 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                 alignment: Alignment.topLeft,
                                 child: Padding(
                                   padding: const EdgeInsets.only(
-                                      left: 120.0, top: 7),
+                                    left: 120.0,
+                                    top: 7,
+                                  ),
                                   child: CommonWidget.text(
                                     "Send news to: editor@hospitality.pro ",
                                     style: FontTextStyle.kWhite12W400PR,
@@ -491,12 +525,15 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                         child: Container(
                           height: Get.height * 0.18,
                           width: Get.width * 0.6,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              border: Border(bottom: BorderSide(width: 0.1))),
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            border: Border(bottom: BorderSide(width: 0.1)),
+                          ),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 10),
+                              horizontal: 10,
+                              vertical: 10,
+                            ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -519,11 +556,14 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                     Container(
                                       height: Get.height * 0.05,
                                       width: Get.width * 0.023,
-                                      decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                              image: AssetImage(
-                                                  "assets/images/avatar.png"),
-                                              fit: BoxFit.cover)),
+                                      decoration: const BoxDecoration(
+                                        image: DecorationImage(
+                                          image: AssetImage(
+                                            "assets/images/avatar.png",
+                                          ),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
                                     ),
                                     SizedBox(
                                       width: Get.width * 0.009,
@@ -618,7 +658,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                             ),
                             SB.SH20(),
                             Padding(
-                              padding: EdgeInsets.only(left: 8.0),
+                              padding: const EdgeInsets.only(left: 8.0),
                               child: Row(
                                 children: List.generate(
                                   5,
@@ -626,12 +666,12 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                     padding: const EdgeInsets.all(8.0),
                                     child: Container(
                                       height: 26,
-                                      decoration: BoxDecoration(
-                                          color: Color(0xffF6F7F8)),
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 12),
+                                      decoration: const BoxDecoration(
+                                        color: Color(0xffF6F7F8),
+                                      ),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 12),
                                       child: Align(
-                                        alignment: Alignment.center,
                                         child: CommonWidget.text(
                                           '#Hospitality',
                                           style: FontTextStyle
@@ -646,21 +686,23 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                             Row(
                               children: [
                                 Flexible(
-                                    child: Divider(
-                                  endIndent: 10,
-                                  color:
-                                      ColorPicker.kGreyLight5.withOpacity(0.2),
-                                )),
+                                  child: Divider(
+                                    endIndent: 10,
+                                    color: ColorPicker.kGreyLight5
+                                        .withOpacity(0.2),
+                                  ),
+                                ),
                                 CommonWidget.text(
                                   'SUGGESTED NEWS',
                                   style: FontTextStyle.kGreyLight513W700SSP,
                                 ),
                                 Flexible(
-                                    child: Divider(
-                                  indent: 10,
-                                  color:
-                                      ColorPicker.kGreyLight5.withOpacity(0.2),
-                                )),
+                                  child: Divider(
+                                    indent: 10,
+                                    color: ColorPicker.kGreyLight5
+                                        .withOpacity(0.2),
+                                  ),
+                                ),
                               ],
                             ),
                             SB.SH20(),
@@ -671,11 +713,11 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                 itemCount: suggestNewsData.length,
                                 shrinkWrap: true,
                                 scrollDirection: Axis.horizontal,
-                                physics: BouncingScrollPhysics(),
+                                physics: const BouncingScrollPhysics(),
                                 itemBuilder: (context, index) {
                                   return Container(
-                                    padding: EdgeInsets.all(10),
-                                    margin: EdgeInsets.only(bottom: 10),
+                                    padding: const EdgeInsets.all(10),
+                                    margin: const EdgeInsets.only(bottom: 10),
                                     height: 400,
                                     width: 400,
                                     color: Colors.white,
@@ -685,51 +727,54 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                       children: [
                                         Image(
                                           image: AssetImage(
-                                              '${suggestNewsData[index]['img']}'),
+                                            '${suggestNewsData[index]['img']}',
+                                          ),
                                           height: 200,
                                           width: 400,
                                           fit: BoxFit.cover,
                                         ),
                                         Flexible(
                                           child: Container(
-                                              child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            children: [
-                                              CommonWidget.text(
-                                                '${suggestNewsData[index]['text1']}',
-                                                style: FontTextStyle
-                                                    .kBlueDark118W700SSP,
-                                              ),
-                                              CommonWidget.text(
-                                                '${suggestNewsData[index]['text3']}',
-                                                style: FontTextStyle
-                                                    .kGreyLight514W600SSP,
-                                              ),
-                                              suggestNewsData[index]['text2']
-                                                      .toString()
-                                                      .isEmpty
-                                                  ? SizedBox()
-                                                  : Container(
-                                                      padding:
-                                                          EdgeInsets.all(5),
-                                                      child: CommonWidget.text(
-                                                        'MEMBERS ONLY',
-                                                        style: FontTextStyle
-                                                            .kRed210W700SSP,
-                                                      ),
-                                                      decoration: BoxDecoration(
-                                                        color: ColorPicker
-                                                            .kRedlight,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(2),
-                                                      ),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              children: [
+                                                CommonWidget.text(
+                                                  '${suggestNewsData[index]['text1']}',
+                                                  style: FontTextStyle
+                                                      .kBlueDark118W700SSP,
+                                                ),
+                                                CommonWidget.text(
+                                                  '${suggestNewsData[index]['text3']}',
+                                                  style: FontTextStyle
+                                                      .kGreyLight514W600SSP,
+                                                ),
+                                                if (suggestNewsData[index]
+                                                        ['text2']
+                                                    .toString()
+                                                    .isEmpty)
+                                                  SizedBox()
+                                                else
+                                                  Container(
+                                                    padding: EdgeInsets.all(5),
+                                                    child: CommonWidget.text(
+                                                      'MEMBERS ONLY',
+                                                      style: FontTextStyle
+                                                          .kRed210W700SSP,
                                                     ),
-                                            ],
-                                          )),
+                                                    decoration: BoxDecoration(
+                                                      color:
+                                                          ColorPicker.kRedlight,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              2),
+                                                    ),
+                                                  ),
+                                              ],
+                                            ),
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -744,16 +789,19 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                         width: Get.width * 0.4,
                         // color: Colors.red,
                         padding: const EdgeInsets.only(
-                            left: 100, bottom: 420, right: 70),
+                          left: 100,
+                          bottom: 420,
+                          right: 70,
+                        ),
                         child: Column(
                           children: [
                             SB.SH20(),
                             CommonWidget.blueLightSignUp(),
                             SB.SH20(),
-                            Container(
+                            SizedBox(
                               height: 290,
                               width: Get.width,
-                              child: Image(
+                              child: const Image(
                                 fit: BoxFit.cover,
                                 image:
                                     AssetImage('assets/images/Bannerimage.png'),
@@ -775,103 +823,113 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
           )
         : Scaffold(
             appBar: PreferredSize(
-              preferredSize: Size.fromHeight(46),
+              preferredSize: const Size.fromHeight(46),
               child: Container(
-                  height: 46,
-                  color: ColorPicker.kPrimaryLight1,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Image(
-                          image: AssetImage('assets/icons/logo1.png'),
-                        ),
+                height: 46,
+                color: ColorPicker.kPrimaryLight1,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.all(4.0),
+                      child: Image(
+                        image: AssetImage('assets/icons/logo1.png'),
                       ),
-                      SB.SW10(),
-                      // SizedBox(
-                      //   width: 10,
-                      // ),
-                      Container(
-                        width: Get.width * 0.2,
-                        decoration: BoxDecoration(
-                            color: ColorPicker.kWhite,
-                            borderRadius: BorderRadius.circular(5)),
-                        margin: EdgeInsets.all(3),
-                        child: TextFormField(
-                          cursorColor: ColorPicker.kWhite,
-                          style: FontTextStyle.kWhite16W400SSP,
-                          decoration: InputDecoration(
-                            hintStyle: FontTextStyle.kPrimaryLightBlue16W400SSP,
-                            filled: true,
-                            fillColor: ColorPicker.kPrimaryLight,
-                            hintText: "Search",
-                            prefixIcon: Icon(
-                              Icons.search,
-                              color: ColorPicker.kPrimaryLightBlue,
+                    ),
+                    SB.SW10(),
+                    // SizedBox(
+                    //   width: 10,
+                    // ),
+                    Container(
+                      width: Get.width * 0.2,
+                      decoration: BoxDecoration(
+                        color: ColorPicker.kWhite,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      margin: const EdgeInsets.all(3),
+                      child: TextFormField(
+                        cursorColor: ColorPicker.kWhite,
+                        style: FontTextStyle.kWhite16W400SSP,
+                        decoration: InputDecoration(
+                          hintStyle: FontTextStyle.kPrimaryLightBlue16W400SSP,
+                          filled: true,
+                          fillColor: ColorPicker.kPrimaryLight,
+                          hintText: "Search",
+                          prefixIcon: const Icon(
+                            Icons.search,
+                            color: ColorPicker.kPrimaryLightBlue,
+                          ),
+                          suffixIcon: Container(
+                            margin: const EdgeInsets.only(right: 5),
+                            height: 40,
+                            width: Get.width * 0.045,
+                            decoration: BoxDecoration(
+                              color: ColorPicker.kPrimaryLight1,
+                              borderRadius: BorderRadius.circular(5),
                             ),
-                            suffixIcon: Container(
-                              margin: EdgeInsets.only(right: 5),
-                              height: 40,
-                              width: Get.width * 0.045,
-                              decoration: BoxDecoration(
-                                color: ColorPicker.kPrimaryLight1,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Center(
-                                child: CommonWidget.text(
-                                  'People',
-                                  style:
-                                      FontTextStyle.kPrimaryLightBlue16W400SSP,
-                                ),
+                            child: Center(
+                              child: CommonWidget.text(
+                                'People',
+                                style: FontTextStyle.kPrimaryLightBlue16W400SSP,
                               ),
                             ),
                           ),
                         ),
                       ),
-                      SizedBox(
-                        width: Get.width * 0.02,
+                    ),
+                    SizedBox(
+                      width: Get.width * 0.02,
+                    ),
+                    SizedBox(
+                      width: 380,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CommonWidget.text(
+                            'Home',
+                            style: FontTextStyle.kWhite16W400SSP,
+                          ),
+                          CommonWidget.text(
+                            'Profile',
+                            style: FontTextStyle.kPrimaryLightBlue16W400SSP,
+                          ),
+                          CommonWidget.text(
+                            'News',
+                            style: FontTextStyle.kPrimaryLightBlue16W400SSP,
+                          ),
+                          CommonWidget.text(
+                            'Jobs',
+                            style: FontTextStyle.kPrimaryLightBlue16W400SSP,
+                          ),
+                          CommonWidget.text(
+                            'Recruitment',
+                            style: FontTextStyle.kPrimaryLightBlue16W400SSP,
+                          ),
+                          CommonWidget.text(
+                            'Help',
+                            style: FontTextStyle.kPrimaryLightBlue16W400SSP,
+                          ),
+                        ],
                       ),
-                      Container(
-                        width: 380,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            CommonWidget.text('Home',
-                                style: FontTextStyle.kWhite16W400SSP),
-                            CommonWidget.text('Profile',
-                                style:
-                                    FontTextStyle.kPrimaryLightBlue16W400SSP),
-                            CommonWidget.text('News',
-                                style:
-                                    FontTextStyle.kPrimaryLightBlue16W400SSP),
-                            CommonWidget.text('Jobs',
-                                style:
-                                    FontTextStyle.kPrimaryLightBlue16W400SSP),
-                            CommonWidget.text('Recruitment',
-                                style:
-                                    FontTextStyle.kPrimaryLightBlue16W400SSP),
-                            CommonWidget.text('Help',
-                                style:
-                                    FontTextStyle.kPrimaryLightBlue16W400SSP),
-                          ],
+                    ),
+                    SizedBox(
+                      width: Get.width * 0.02,
+                    ),
+                    Container(
+                      width: Get.width * 0.05,
+                      decoration: const BoxDecoration(
+                        border: Border.symmetric(
+                          vertical: BorderSide(
+                            color: ColorPicker.kPrimaryLight,
+                            width: 3,
+                          ),
                         ),
                       ),
-                      SizedBox(
-                        width: Get.width * 0.02,
-                      ),
-                      Container(
-                        width: Get.width * 0.05,
-                        decoration: BoxDecoration(
-                            border: Border.symmetric(
-                          vertical: BorderSide(
-                              color: ColorPicker.kPrimaryLight, width: 3),
-                        )),
-                        child: Center(
-                            child: Stack(
+                      child: Center(
+                        child: Stack(
                           //overflow: Overflow.visible,
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.email,
                               color: ColorPicker.kPrimaryLightBlue,
                             ),
@@ -894,20 +952,24 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                               ),
                             ),
                           ],
-                        )),
+                        ),
                       ),
-                      Container(
-                        width: Get.width * 0.05,
-                        decoration: BoxDecoration(
-                            border: Border.symmetric(
+                    ),
+                    Container(
+                      width: Get.width * 0.05,
+                      decoration: const BoxDecoration(
+                        border: Border.symmetric(
                           vertical: BorderSide(
-                              color: ColorPicker.kPrimaryLight, width: 3),
-                        )),
-                        child: Center(
-                            child: Stack(
+                            color: ColorPicker.kPrimaryLight,
+                            width: 3,
+                          ),
+                        ),
+                      ),
+                      child: Center(
+                        child: Stack(
                           //overflow: Overflow.visible,
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.flag,
                               color: ColorPicker.kPrimaryLightBlue,
                             ),
@@ -930,73 +992,83 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                               ),
                             ),
                           ],
-                        )),
+                        ),
                       ),
-                      Container(
-                        width: 90,
-                        decoration: BoxDecoration(
-                            border: Border.symmetric(
+                    ),
+                    Container(
+                      width: 90,
+                      decoration: const BoxDecoration(
+                        border: Border.symmetric(
                           vertical: BorderSide(
-                              color: ColorPicker.kPrimaryLight, width: 3),
-                        )),
-                        child: Center(
-                            child: Row(
+                            color: ColorPicker.kPrimaryLight,
+                            width: 3,
+                          ),
+                        ),
+                      ),
+                      child: Center(
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.person_add,
                               color: ColorPicker.kPrimaryLightBlue,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 5,
                             ),
                             Container(
                               height: 20,
                               width: 30,
                               decoration: BoxDecoration(
-                                color: Color(0xff546088),
+                                color: const Color(0xff546088),
                                 borderRadius: BorderRadius.circular(3),
                               ),
                               child: Center(
-                                child: CommonWidget.text('352',
-                                    style:
-                                        FontTextStyle.kPrimaryLight10W700SSP),
+                                child: CommonWidget.text(
+                                  '352',
+                                  style: FontTextStyle.kPrimaryLight10W700SSP,
+                                ),
                               ),
                             ),
                           ],
-                        )),
+                        ),
                       ),
-                      Container(
-                        width: Get.width * 0.05,
-                        decoration: BoxDecoration(
-                            border: Border.symmetric(
+                    ),
+                    Container(
+                      width: Get.width * 0.05,
+                      decoration: const BoxDecoration(
+                        border: Border.symmetric(
                           vertical: BorderSide(
-                              color: ColorPicker.kPrimaryLight, width: 3),
-                        )),
-                        child: Center(
-                          child: Container(
-                            height: 26,
-                            width: 26,
-                            child: Image(
-                              image: AssetImage('assets/images/avatar.png'),
-                            ),
+                            color: ColorPicker.kPrimaryLight,
+                            width: 3,
                           ),
                         ),
                       ),
-                    ],
-                  )),
+                      child: Center(
+                        child: SizedBox(
+                          height: 26,
+                          width: 26,
+                          child: const Image(
+                            image: AssetImage('assets/images/avatar.png'),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
             backgroundColor: ColorPicker.kBg1,
             body: SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               child: Column(
                 children: [
-                  Container(
+                  SizedBox(
                     height: Get.width * 0.8,
                     width: Get.width,
                     child: PageView.builder(
                       onPageChanged: (value) {
-                        print('-value----${value}');
+                        debugPrint('-value----$value');
                         // setState(() {
                         //   indexCircle = value;
                         // });
@@ -1012,18 +1084,19 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                           width: Get.width,
                           // width: 200,
 
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                            image: AssetImage('assets/images/slider1.png'),
-                            fit: BoxFit.fitHeight,
-                          )),
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage('assets/images/slider1.png'),
+                              fit: BoxFit.fitHeight,
+                            ),
+                          ),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.end,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               CommonWidget.text(
                                 'RESOURCES',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w700,
                                   color: Colors.white,
@@ -1031,10 +1104,10 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                               ),
                               SizedBox(height: Get.width * 0.02),
                               Padding(
-                                padding: EdgeInsets.only(right: 8.0),
+                                padding: const EdgeInsets.only(right: 8.0),
                                 child: CommonWidget.text(
                                   '5 Steps for Travel Brands to Build a Brand Ambassador Program',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 26,
                                     fontWeight: FontWeight.w400,
                                     color: Colors.white,
@@ -1043,7 +1116,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                               ),
                               SizedBox(height: Get.width * 0.02),
                               RichText(
-                                text: TextSpan(
+                                text: const TextSpan(
                                   children: [
                                     TextSpan(
                                       text: 'By: ',
@@ -1067,7 +1140,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                               SizedBox(height: Get.width * 0.015),
                               CommonWidget.text(
                                 '26 August 2015 • 10:40',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
                                   color: Colors.white,
@@ -1080,8 +1153,8 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(vertical: 10),
-                    padding: EdgeInsets.symmetric(vertical: 1),
+                    margin: const EdgeInsets.symmetric(vertical: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 1),
                     alignment: Alignment.center,
                     height: 15,
                     width: Get.width,
@@ -1095,7 +1168,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                           // foregroundColor: Colors.red,
                           backgroundColor: index == 1
                               ? ColorPicker.kBlueLight
-                              : Color(0xFFB5BDC2),
+                              : const Color(0xFFB5BDC2),
                         );
                       },
                     ),
@@ -1111,8 +1184,8 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                     children: [
                       Container(
                         alignment: Alignment.centerLeft,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 15),
                         width: 200,
                         child: CommonWidget.text(
                           'Hotels and resorts',
@@ -1121,8 +1194,8 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                       ),
                       Container(
                         alignment: Alignment.centerLeft,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 15),
                         width: 200,
                         child: CommonWidget.text(
                           'Food and beverage',
@@ -1131,8 +1204,8 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                       ),
                       Container(
                         alignment: Alignment.centerLeft,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 15),
                         width: 200,
                         child: CommonWidget.text(
                           'Spa',
@@ -1141,8 +1214,8 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                       ),
                       Container(
                         alignment: Alignment.centerLeft,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 15),
                         width: 200,
                         child: CommonWidget.text(
                           'Tourism',
@@ -1151,8 +1224,8 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                       ),
                       Container(
                         alignment: Alignment.centerLeft,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 15),
                         width: 200,
                         child: CommonWidget.text(
                           'Apartments',
@@ -1161,8 +1234,8 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                       ),
                       Container(
                         alignment: Alignment.centerLeft,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 15),
                         width: 200,
                         child: CommonWidget.text(
                           'Tours',
@@ -1171,8 +1244,8 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                       ),
                       Container(
                         alignment: Alignment.centerLeft,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 15),
                         width: 200,
                         child: CommonWidget.text(
                           'Leisure',
@@ -1181,8 +1254,8 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                       ),
                       Container(
                         alignment: Alignment.centerLeft,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 15),
                         width: 200,
                         child: CommonWidget.text(
                           'Boutique Hotels',
@@ -1191,8 +1264,8 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                       ),
                       Container(
                         alignment: Alignment.centerLeft,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 15),
                         width: 200,
                         child: CommonWidget.text(
                           '+ Show more',
@@ -1201,7 +1274,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Container(
                     // height: Get.height,
                     width: Get.width,
@@ -1211,18 +1284,20 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                         Positioned(
                           top: 0,
                           left: 0,
-                          child: Container(
+                          child: SizedBox(
                             // height: Get.height * 0.3,
                             width: Get.width * 0.3,
-                            child: Image(
-                                image: AssetImage('assets/images/round.png'),
-                                fit: BoxFit.fitWidth),
+                            child: const Image(
+                              image: AssetImage('assets/images/round.png'),
+                              fit: BoxFit.fitWidth,
+                            ),
                           ),
                         ),
                         Padding(
                           padding: EdgeInsets.symmetric(
-                              horizontal: Get.width * 0.08,
-                              vertical: Get.width * 0.15),
+                            horizontal: Get.width * 0.08,
+                            vertical: Get.width * 0.15,
+                          ),
                           child: Column(
                             children: [
                               Row(
@@ -1233,14 +1308,14 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                       // mainAxisAlignment:
                                       //     MainAxisAlignment.start,
                                       children: [
-                                        Icon(
+                                        const Icon(
                                           Icons.apartment_rounded,
                                           color: Color(0xFF546088),
                                         ),
                                         Container(
                                           width: 2,
                                           height: Get.height * 0.09,
-                                          color: Color(0xFF546088),
+                                          color: const Color(0xFF546088),
                                         ),
                                       ],
                                     ),
@@ -1252,7 +1327,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                     children: [
                                       CommonWidget.text(
                                         'SIGN UP TO JOIN',
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontWeight: FontWeight.w700,
                                           fontSize: 12,
                                           color: Colors.white,
@@ -1262,7 +1337,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                         width: Get.width * 0.7,
                                         child: CommonWidget.text(
                                           'Get priority news access',
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontWeight: FontWeight.w400,
                                             fontSize: 36,
                                             color: Colors.white,
@@ -1281,14 +1356,14 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                     // mainAxisAlignment:
                                     //     MainAxisAlignment.start,
                                     children: [
-                                      Icon(
+                                      const Icon(
                                         Icons.verified,
                                         color: Color(0xFF546088),
                                       ),
                                       Container(
                                         width: 2,
                                         height: Get.height * 0.078,
-                                        color: Color(0xFF546088),
+                                        color: const Color(0xFF546088),
                                       ),
                                     ],
                                   ),
@@ -1299,7 +1374,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                     children: [
                                       CommonWidget.text(
                                         'All the latest news',
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontWeight: FontWeight.w700,
                                           fontSize: 16,
                                           color: Colors.white,
@@ -1309,7 +1384,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                         width: Get.width * 0.7,
                                         child: CommonWidget.text(
                                           'Stay up to date with news from the tourism and hospitality industry.',
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontWeight: FontWeight.w400,
                                             fontSize: 14,
                                             color: Colors.white,
@@ -1328,14 +1403,14 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                     // mainAxisAlignment:
                                     //     MainAxisAlignment.start,
                                     children: [
-                                      Icon(
+                                      const Icon(
                                         Icons.verified,
                                         color: Color(0xFF546088),
                                       ),
                                       Container(
                                         width: 2,
                                         height: Get.height * 0.078,
-                                        color: Color(0xFF546088),
+                                        color: const Color(0xFF546088),
                                       ),
                                     ],
                                   ),
@@ -1346,7 +1421,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                     children: [
                                       CommonWidget.text(
                                         'Credible sources',
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontWeight: FontWeight.w700,
                                           fontSize: 16,
                                           color: Colors.white,
@@ -1382,7 +1457,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                       Container(
                                         width: 2,
                                         height: Get.height * 0.078,
-                                        color: Color(0xFF546088),
+                                        color: const Color(0xFF546088),
                                       ),
                                     ],
                                   ),
@@ -1393,7 +1468,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                     children: [
                                       CommonWidget.text(
                                         'Wide scope of research',
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontWeight: FontWeight.w700,
                                           fontSize: 16,
                                           color: Colors.white,
@@ -1403,7 +1478,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                         width: Get.width * 0.7,
                                         child: CommonWidget.text(
                                           'We cover all aspects of the tourism and hospitality sectors including airlines, tour operators, hotels, education, research and more.',
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontWeight: FontWeight.w400,
                                             fontSize: 14,
                                             color: Colors.white,
@@ -1421,40 +1496,43 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                     // mainAxisAlignment:
                                     //     MainAxisAlignment.start,
                                     children: [
-                                      SizedBox(width: 24),
+                                      const SizedBox(width: 24),
                                       Container(
                                         width: 2,
                                         height: Get.height * 0.078,
-                                        color: Color(0xFF546088),
+                                        color: const Color(0xFF546088),
                                       ),
                                     ],
                                   ),
                                   SizedBox(width: Get.width * 0.03),
                                   Container(
-                                      height: 36,
-                                      width: Get.width * 0.6,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(2),
-                                      ),
-                                      child: Center(
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            const Icon(Icons.person_add,
-                                                size: 15),
-                                            CommonWidget.text(
-                                              'Sign up now. It’s free',
-                                              style: const TextStyle(
-                                                color: ColorPicker.kGreyLight5,
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w600,
-                                              ),
+                                    height: 36,
+                                    width: Get.width * 0.6,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(2),
+                                    ),
+                                    child: Center(
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          const Icon(
+                                            Icons.person_add,
+                                            size: 15,
+                                          ),
+                                          CommonWidget.text(
+                                            'Sign up now. It’s free',
+                                            style: const TextStyle(
+                                              color: ColorPicker.kGreyLight5,
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w600,
                                             ),
-                                          ],
-                                        ),
-                                      )),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
                                 ],
                               ),
                               SB.SH10(),
@@ -1464,7 +1542,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                   Column(
                                     // mainAxisAlignment:
                                     //     MainAxisAlignment.start,
-                                    children: [
+                                    children: const [
                                       Icon(
                                         Icons.download_rounded,
                                         color: Color(0xFF546088),
@@ -1480,7 +1558,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                         width: Get.width * 0.7,
                                         child: CommonWidget.text(
                                           'OR IMPORT YOUR DETAILS FROM',
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontWeight: FontWeight.w700,
                                             fontSize: 16,
                                             color: Colors.white,
@@ -1499,11 +1577,11 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                     // mainAxisAlignment:
                                     //     MainAxisAlignment.start,
                                     children: [
-                                      SizedBox(width: 24),
+                                      const SizedBox(width: 24),
                                       Container(
                                         width: 2,
                                         height: Get.height * 0.078,
-                                        color: Color(0xFF546088),
+                                        color: const Color(0xFF546088),
                                       ),
                                     ],
                                   ),
@@ -1516,43 +1594,46 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                                           child: Container(
                                             height: Get.height * 0.05,
                                             decoration: BoxDecoration(
-                                              color: Color(0xFF344F8D),
+                                              color: const Color(0xFF344F8D),
                                               borderRadius:
                                                   BorderRadius.circular(2),
                                             ),
                                             child: Center(
                                               child: Image.asset(
-                                                  'assets/icons/fb.png'),
+                                                'assets/icons/fb.png',
+                                              ),
                                             ),
                                           ),
                                         ),
-                                        SizedBox(width: 5),
+                                        const SizedBox(width: 5),
                                         Flexible(
                                           child: Container(
                                             height: Get.height * 0.05,
                                             decoration: BoxDecoration(
-                                              color: Color(0xFFD63B30),
+                                              color: const Color(0xFFD63B30),
                                               borderRadius:
                                                   BorderRadius.circular(2),
                                             ),
                                             child: Center(
                                               child: Image.asset(
-                                                  'assets/icons/gp.png'),
+                                                'assets/icons/gp.png',
+                                              ),
                                             ),
                                           ),
                                         ),
-                                        SizedBox(width: 5),
+                                        const SizedBox(width: 5),
                                         Flexible(
                                           child: Container(
                                             height: Get.height * 0.05,
                                             decoration: BoxDecoration(
-                                              color: Color(0xFF04595B),
+                                              color: const Color(0xFF04595B),
                                               borderRadius:
                                                   BorderRadius.circular(2),
                                             ),
                                             child: Center(
                                               child: Image.asset(
-                                                  'assets/icons/x.png'),
+                                                'assets/icons/x.png',
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -1567,15 +1648,15 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   ListView.builder(
                     itemCount: data.length,
                     shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
                       return Container(
-                        padding: EdgeInsets.all(10),
-                        margin: EdgeInsets.only(bottom: 10),
+                        padding: const EdgeInsets.all(10),
+                        margin: const EdgeInsets.only(bottom: 10),
                         height: Get.width * 0.8,
                         width: Get.width,
                         color: Colors.white,
@@ -1590,54 +1671,59 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                             ),
                             Flexible(
                               child: Container(
-                                  child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  CommonWidget.text(
-                                    '${data[index]['text1']}',
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w700,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    CommonWidget.text(
+                                      '${data[index]['text1']}',
+                                      style: const TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w700,
+                                      ),
                                     ),
-                                  ),
-                                  CommonWidget.text(
-                                    '${data[index]['text3']}',
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w600,
-                                      color: ColorPicker.kGreyLight5,
+                                    CommonWidget.text(
+                                      '${data[index]['text3']}',
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w600,
+                                        color: ColorPicker.kGreyLight5,
+                                      ),
                                     ),
-                                  ),
-                                  data[index]['text2'].toString().isEmpty
-                                      ? SizedBox()
-                                      : Container(
-                                          padding: EdgeInsets.all(5),
-                                          child: CommonWidget.text(
-                                              'MEMBERS ONLY',
-                                              style: TextStyle(
-                                                  fontSize: 10,
-                                                  fontWeight: FontWeight.w400,
-                                                  color: Colors.red)),
-                                          decoration: BoxDecoration(
-                                            color: Color(0xFFFECDCC),
-                                            borderRadius:
-                                                BorderRadius.circular(2),
-                                          ),
+                                    if (data[index]['text2'].toString().isEmpty)
+                                      SizedBox()
+                                    else
+                                      Container(
+                                        padding: EdgeInsets.all(5),
+                                        child: CommonWidget.text('MEMBERS ONLY',
+                                            style: TextStyle(
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.w400,
+                                                color: Colors.red)),
+                                        decoration: BoxDecoration(
+                                          color: Color(0xFFFECDCC),
+                                          borderRadius:
+                                              BorderRadius.circular(2),
                                         ),
-                                ],
-                              )),
+                                      ),
+                                  ],
+                                ),
+                              ),
                             ),
                           ],
                         ),
                       );
                     },
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Container(
                     height: 52,
                     width: 119,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF32A3FD),
+                      borderRadius: BorderRadius.circular(2),
+                    ),
                     child: Center(
                         child: CommonWidget.text(
                       'LOAD MORE',
@@ -1647,18 +1733,15 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                         color: Colors.white,
                       ),
                     )),
-                    decoration: BoxDecoration(
-                        color: Color(0xFF32A3FD),
-                        borderRadius: BorderRadius.circular(2)),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Container(
-                    padding: EdgeInsets.all(10),
-                    margin: EdgeInsets.only(bottom: 10),
+                    padding: const EdgeInsets.all(10),
+                    margin: const EdgeInsets.only(bottom: 10),
                     height: Get.width * 0.8,
                     width: Get.width,
                     color: Colors.white,
-                    child: Image(
+                    child: const Image(
                       image: AssetImage('assets/images/BannerImage.png'),
                       fit: BoxFit.cover,
                     ),
@@ -1671,7 +1754,7 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
                 padding: EdgeInsets.zero,
                 children: [
                   DrawerHeader(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.blue,
                     ),
                     child: CommonWidget.text('Drawer Header'),
@@ -1696,23 +1779,24 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
 
   Widget box({Color? color, String? image}) {
     return Container(
-        height: Get.height * 0.06,
-        width: Get.width * 0.17,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          color: color,
-        ),
-        child: Column(
-          children: [
-            Center(
-              child: SizedBox(
-                height: Get.height * 0.06,
-                width: Get.width * 0.07,
-                child: Image.asset(image!),
-              ),
-            )
-          ],
-        ));
+      height: Get.height * 0.06,
+      width: Get.width * 0.17,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(5),
+        color: color,
+      ),
+      child: Column(
+        children: [
+          Center(
+            child: SizedBox(
+              height: Get.height * 0.06,
+              width: Get.width * 0.07,
+              child: Image.asset(image!),
+            ),
+          )
+        ],
+      ),
+    );
   }
 
   Widget vector({String? image, String? title}) {
@@ -1720,12 +1804,14 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
       children: [
         Image.asset(image!),
         Padding(
-          padding: EdgeInsets.only(left: 4, top: 7),
-          child: CommonWidget.text(title!,
-              style: TextStyle(
-                color: Color(0xff32A3FD),
-                fontSize: 15,
-              )),
+          padding: const EdgeInsets.only(left: 4, top: 7),
+          child: CommonWidget.text(
+            title!,
+            style: const TextStyle(
+              color: Color(0xff32A3FD),
+              fontSize: 15,
+            ),
+          ),
         ),
         SizedBox(
           width: Get.width * 0.04,
@@ -1736,18 +1822,21 @@ class _NewsSingleLoggedOutScreenState extends State<NewsSingleLoggedOutScreen> {
 
   Widget tag({required String title, double? height, double? width}) {
     return Padding(
-        padding: EdgeInsets.all(5),
-        child: Container(
-          child: Center(
-            child: CommonWidget.text(title,
-                style: TextStyle(
-                  color: Color(0xffB5BDC2),
-                )),
-          ),
-          width: width,
-          height: height,
-          decoration: BoxDecoration(
-              color: Color(0xffF6F7F8), borderRadius: BorderRadius.circular(3)),
-        ));
+      padding: const EdgeInsets.all(5),
+      child: Container(
+        width: width,
+        height: height,
+        decoration: BoxDecoration(
+          color: const Color(0xffF6F7F8),
+          borderRadius: BorderRadius.circular(3),
+        ),
+        child: Center(
+          child: CommonWidget.text(title,
+              style: TextStyle(
+                color: Color(0xffB5BDC2),
+              )),
+        ),
+      ),
+    );
   }
 }

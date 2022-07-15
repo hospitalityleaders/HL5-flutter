@@ -4,9 +4,9 @@ import 'package:holedo/common/popUpHeadMenu.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/constant/sizedbox.dart';
-import '../../../../responsive/responsive.dart';
-import '../../../../services/holedo_api_services.dart';
-import '../profile-edit/profile_edit.dart';
+import 'package:holedo/responsive/responsive.dart';
+import 'package:holedo/services/holedo_api_services.dart';
+import 'package:holedo/layouts/pages/profile-pages/profile-edit/profile_edit.dart';
 
 class ProfileOverviewSec1 extends StatefulWidget {
   final sec1IsEditable;
@@ -21,7 +21,7 @@ class ProfileOverviewSec1 extends StatefulWidget {
   final profileOverviewSec1References_W;
   final pOApiDataSec1;
 
-  ProfileOverviewSec1({
+  const ProfileOverviewSec1({
     Key? key,
     required this.sec1IsEditable,
     this.profileOverviewSec1ProSummKey,
@@ -49,12 +49,12 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
       isUpdating = true;
     });
     if (profileSummaryController.toString() != '') {
-      Map<String, dynamic> userData = {
+      final Map<String, dynamic> userData = {
         "id": id,
         "profile_summary": profileSummaryController
       };
-      print('usser: $userData');
-      dynamic res = await _apiServices.updateUserProfile();
+      debugPrint('usser: $userData');
+      final dynamic res = await _apiServices.updateUserProfile();
       if (res?.success as bool) {
         Navigator.pop(context);
       } else {
@@ -80,7 +80,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
         ),
       ),
       onPressed: () {},
-      icon: Padding(
+      icon: const Padding(
         padding: EdgeInsets.symmetric(vertical: 12.0),
         child: Icon(
           Icons.check_circle,
@@ -96,10 +96,15 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
   }
 
   ///references card
-  Widget buildReferencesCard(String img, String title, String userId,
-      String subTitle, String description) {
+  Widget buildReferencesCard(
+    String img,
+    String title,
+    String userId,
+    String subTitle,
+    String description,
+  ) {
     return Container(
-      padding: EdgeInsets.all(6),
+      padding: const EdgeInsets.all(6),
       color: ColorPicker.kWhite,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -112,34 +117,39 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
               fit: BoxFit.cover,
             ),
             title: RichText(
-              text: TextSpan(children: [
-                TextSpan(text: title, style: FontTextStyle.kBlueDark116W700SSP),
-                TextSpan(text: userId, style: FontTextStyle.kBlueDark112W700SSP)
-              ]),
+              text: TextSpan(
+                children: [
+                  TextSpan(
+                      text: title, style: FontTextStyle.kBlueDark116W700SSP),
+                  TextSpan(
+                      text: userId, style: FontTextStyle.kBlueDark112W700SSP)
+                ],
+              ),
             ),
             subtitle: Padding(
-              padding: EdgeInsets.only(right: 30.0),
+              padding: const EdgeInsets.only(right: 30.0),
               child: Text(subTitle, style: FontTextStyle.kGreyLight514W400SSP),
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: RichText(
               text: TextSpan(
-                style: TextStyle(color: Colors.black, fontSize: 30),
+                style: const TextStyle(color: Colors.black, fontSize: 30),
                 children: [
                   WidgetSpan(
                     child: SizedBox(
                       height: 50,
                       width: 50,
                       child: Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 2.0, vertical: 2),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 2.0, vertical: 2),
                         child: Card(
                           color: Colors.blue,
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(1.0)),
-                          child: Icon(
+                            borderRadius: BorderRadius.circular(1.0),
+                          ),
+                          child: const Icon(
                             Icons.format_quote_rounded,
                             color: Colors.white,
                           ),
@@ -155,22 +165,22 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               TextButton.icon(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.add,
-                    color: ColorPicker.kBlueLight1,
-                  ),
-                  label: Text(
-                    'Show more',
-                    style: FontTextStyle.kBlueLight114W400SSP,
-                  )),
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.add,
+                  color: ColorPicker.kBlueLight1,
+                ),
+                label: Text(
+                  'Show more',
+                  style: FontTextStyle.kBlueLight114W400SSP,
+                ),
+              ),
             ],
           ),
         ],
@@ -182,9 +192,11 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
 
   ///Profile summary pop up start
 
-  Future<String?> buildProfileCardPopUp(
-      {required dynamic id, required String profileSummary}) {
-    TextEditingController profileCtrl =
+  Future<String?> buildProfileCardPopUp({
+    required dynamic id,
+    required String profileSummary,
+  }) {
+    final TextEditingController profileCtrl =
         TextEditingController(text: profileSummary);
     return showDialog<String>(
       context: context,
@@ -202,27 +214,26 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                 children: [
                   PopUpHeadMenu.popUpHead('Profile Summary', context),
                   Padding(
-                    padding: EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(16.0),
                     child: Container(
                       color: ColorPicker.kWhite,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: EdgeInsets.all(4.0),
+                            padding: const EdgeInsets.all(4.0),
                             child: Text(
                               'Summary',
                               style: FontTextStyle.kBlueDark114W700SSP,
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(8.0),
                             child: TextField(
                               controller: profileCtrl,
-                              autocorrect: true,
                               minLines: 4,
                               maxLines: 6,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 border: OutlineInputBorder(
                                   borderSide: BorderSide(),
                                 ),
@@ -230,27 +241,28 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.all(4.0),
+                            padding: const EdgeInsets.all(4.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 Padding(
-                                  padding: EdgeInsets.all(4.0),
+                                  padding: const EdgeInsets.all(4.0),
                                   child: OutlinedButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                      child: Text('Cancel')),
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Text('Cancel'),
+                                  ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(8.0),
                                   child: isUpdating
-                                      ? CircularProgressIndicator()
+                                      ? const CircularProgressIndicator()
                                       : ElevatedButton(
                                           onPressed: () {
                                             updateUsers(id, profileCtrl.text);
                                           },
-                                          child: Text('Save'),
+                                          child: const Text('Save'),
                                         ),
                                 ),
                               ],
@@ -300,14 +312,14 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                         height: SS.sH(context) * .05,
                       ),
                       Padding(
-                        padding: EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.all(16.0),
                         child: Column(
                           children: [
                             Container(
                               color: ColorPicker.kWhite,
                               width: double.infinity,
                               child: Padding(
-                                padding: EdgeInsets.all(20),
+                                padding: const EdgeInsets.all(20),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -315,14 +327,15 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                                       text: TextSpan(
                                         children: [
                                           TextSpan(
-                                              text:
-                                                  'What are your areas of expertise ',
-                                              style: FontTextStyle
-                                                  .kBlueDark114W700SSP),
+                                            text:
+                                                'What are your areas of expertise ',
+                                            style: FontTextStyle
+                                                .kBlueDark114W700SSP,
+                                          ),
                                           WidgetSpan(
                                             child: GestureDetector(
                                               onTap: () {},
-                                              child: Icon(
+                                              child: const Icon(
                                                 Icons.help,
                                                 size: 15,
                                                 color: ColorPicker.kBlueLight1,
@@ -334,14 +347,10 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                                     ),
                                     SS.sB(5),
                                     Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
                                       children: [
                                         Expanded(
                                           flex: 3,
                                           child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
                                             children: [
                                               SizedBox(
                                                 height: 36,
@@ -351,7 +360,8 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                                                     border: OutlineInputBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
-                                                              1),
+                                                        1,
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
@@ -360,7 +370,6 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                                           ),
                                         ),
                                         Expanded(
-                                          flex: 1,
                                           child: InkWell(
                                             onTap: () {
                                               setState(
@@ -376,19 +385,23 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                                             },
                                             onHover: (value) {},
                                             child: Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 6),
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                horizontal: 6,
+                                              ),
                                               child: Container(
                                                 decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            2),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                    2,
+                                                  ),
+                                                  color:
+                                                      ColorPicker.kBlueLight2,
+                                                  border: Border.all(
                                                     color:
-                                                        ColorPicker.kBlueLight2,
-                                                    border: Border.all(
-                                                        width: 1,
-                                                        color: ColorPicker
-                                                            .kBlueLight3)),
+                                                        ColorPicker.kBlueLight3,
+                                                  ),
+                                                ),
                                                 alignment: Alignment.center,
                                                 width: SS.sW(context) * .091,
                                                 height: 36,
@@ -414,7 +427,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                               child: Column(
                                 children: [
                                   Padding(
-                                    padding: EdgeInsets.all(8.0),
+                                    padding: const EdgeInsets.all(8.0),
                                     child: SingleChildScrollView(
                                       child: Wrap(
                                         spacing: 3.0,
@@ -425,11 +438,15 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                                               backgroundColor: Colors.white,
                                               elevation: 0.5,
                                               shadowColor: Colors.black,
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: 15, horizontal: 5),
-                                              shape: RoundedRectangleBorder(),
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                vertical: 15,
+                                                horizontal: 5,
+                                              ),
+                                              shape:
+                                                  const RoundedRectangleBorder(),
                                               label: Text(i.toString()),
-                                              deleteIcon: Icon(
+                                              deleteIcon: const Icon(
                                                 Icons.close,
                                                 color: ColorPicker.kBlueLight1,
                                                 size: 10,
@@ -438,7 +455,8 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                                                 setState(
                                                   () {
                                                     chipList.removeAt(
-                                                        chipList.indexOf(i));
+                                                      chipList.indexOf(i),
+                                                    );
                                                   },
                                                 );
                                               },
@@ -448,17 +466,19 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.all(20),
+                                    padding: const EdgeInsets.all(20),
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
                                         OutlinedButton(
-                                            onPressed: () {},
-                                            child: Text('Cancel')),
+                                          onPressed: () {},
+                                          child: const Text('Cancel'),
+                                        ),
                                         SS.sB(0, 10),
                                         ElevatedButton(
-                                            onPressed: () {},
-                                            child: Text('Save'))
+                                          onPressed: () {},
+                                          child: const Text('Save'),
+                                        )
                                       ],
                                     ),
                                   ),
@@ -546,7 +566,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
         Stack(
           children: [
             Padding(
-              padding: EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8),
               child: Container(
                 key: widget.profileOverviewSec1AreaOfExpKey as Key,
                 child: Column(
@@ -556,8 +576,12 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                       width: SS.sW(context),
                       color: Colors.white,
                       child: Padding(
-                        padding: EdgeInsets.only(
-                            right: 20, left: 20, bottom: 13, top: 13),
+                        padding: const EdgeInsets.only(
+                          right: 20,
+                          left: 20,
+                          bottom: 13,
+                          top: 13,
+                        ),
                         child: AutoSizeText(
                           'Areas of expertise',
                           style: FontTextStyle.kBlueDark120W400SSP,
@@ -581,13 +605,13 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                         buildAreaOfExpertiseButton('Public speaking'),
                         ElevatedButton.icon(
                           style: ElevatedButton.styleFrom(
-                            primary: Color(0xFFe5f4fb),
+                            primary: const Color(0xFFe5f4fb),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(1),
                             ),
                           ),
                           onPressed: () {},
-                          icon: Padding(
+                          icon: const Padding(
                             padding: EdgeInsets.symmetric(vertical: 12.0),
                             child: Icon(
                               Icons.add,
@@ -596,9 +620,11 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                             ),
                           ),
                           label: Padding(
-                            padding: EdgeInsets.all(1.0),
-                            child: Text('Show all',
-                                style: FontTextStyle.kBlueLight114W400SSP),
+                            padding: const EdgeInsets.all(1.0),
+                            child: Text(
+                              'Show all',
+                              style: FontTextStyle.kBlueLight114W400SSP,
+                            ),
                           ),
                         ),
                       ],
@@ -607,18 +633,19 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                 ),
               ),
             ),
-            widget.sec1IsEditable as bool
-                ? ProfileEdit.buildProfileEdit(
-                    width: widget.profileOverviewSec1AreaOfExp_W as double,
-                    height: widget.profileOverviewSec1AreaOfExp_H as double,
-                    popUpEdit: () {
-                      buildAreaOfExpePopUp(context);
-                    },
-                    showAddButton: true,
-                    popUpAdd: () {
-                      buildAreaOfExpePopUp(context);
-                    })
-                : Container(),
+            if (widget.sec1IsEditable as bool)
+              ProfileEdit.buildProfileEdit(
+                  width: widget.profileOverviewSec1AreaOfExp_W as double,
+                  height: widget.profileOverviewSec1AreaOfExp_H as double,
+                  popUpEdit: () {
+                    buildAreaOfExpePopUp(context);
+                  },
+                  showAddButton: true,
+                  popUpAdd: () {
+                    buildAreaOfExpePopUp(context);
+                  })
+            else
+              Container(),
           ],
         ),
         SS.sB(10, 0),
@@ -627,7 +654,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
         Stack(
           children: [
             Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Container(
                 key: widget.profileOverviewSec1ReferencesKey as Key,
                 color: ColorPicker.kWhite,
@@ -635,15 +662,19 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(
-                          right: 20, left: 20, bottom: 5, top: 13),
+                      padding: const EdgeInsets.only(
+                        right: 20,
+                        left: 20,
+                        bottom: 5,
+                        top: 13,
+                      ),
                       child: Text(
                         'References',
                         style: FontTextStyle.kBlueDark120W400SSP,
                       ),
                     ),
                     SS.sB(8, 0),
-                    Divider(color: Colors.grey, height: 1),
+                    const Divider(color: Colors.grey, height: 1),
                     buildReferencesCard(
                       'https://images.pexels.com/photos/712521/pexels-photo-712521.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
                       'Sarah Lee',
@@ -652,7 +683,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
                     ),
 
-                    Divider(
+                    const Divider(
                       height: 1,
                       color: Colors.grey,
                     ),
@@ -669,18 +700,19 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                 ),
               ),
             ),
-            widget.sec1IsEditable as bool
-                ? ProfileEdit.buildProfileEdit(
-                    width: widget.profileOverviewSec1References_W as double,
-                    height: widget.profileOverviewSec1References_H as double,
-                    popUpEdit: () {
-                      PopUpHeadMenu.buildReferencesCardPopUp(context);
-                    },
-                    showAddButton: true,
-                    popUpAdd: () {
-                      PopUpHeadMenu.buildReferencesCardPopUp(context);
-                    })
-                : Container(),
+            if (widget.sec1IsEditable as bool)
+              ProfileEdit.buildProfileEdit(
+                  width: widget.profileOverviewSec1References_W as double,
+                  height: widget.profileOverviewSec1References_H as double,
+                  popUpEdit: () {
+                    PopUpHeadMenu.buildReferencesCardPopUp(context);
+                  },
+                  showAddButton: true,
+                  popUpAdd: () {
+                    PopUpHeadMenu.buildReferencesCardPopUp(context);
+                  })
+            else
+              Container(),
           ],
         ),
         SS.sB(50, 0)

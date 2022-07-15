@@ -70,7 +70,7 @@ class DialogTitleWidget extends StatelessWidget {
       height: 46,
       decoration: BoxDecoration(
         color: Cr.whiteColor,
-        boxShadow: Styles.defaultBoxShadow,
+        boxShadow: defaultBoxShadow,
       ),
       child: Center(
         child: Padding(
@@ -128,7 +128,7 @@ class DialogTextFieldForm extends StatelessWidget {
         style: bodySmallRegular.copyWith(
           color: Cr.darkGrey1,
         ),
-        decoration: Styles.popUpDialogTextFieldInputDecoration.copyWith(
+        decoration: popUpDialogTextFieldInputDecoration.copyWith(
           hintText: hintText,
           errorStyle: const TextStyle(fontSize: Di.FSES),
           hintStyle: bodySmallRegular.copyWith(color: Cr.darkGrey4),
@@ -221,7 +221,7 @@ class _DialogDropDownTextFieldState extends State<DialogDropDownTextField> {
               (widget.selectedSocialMediaIndex != null
                   ? widget.dataList[widget.selectedSocialMediaIndex!]
                   : null),
-          decoration: Styles.popUpDialogTextFieldInputDecorationFunction(
+          decoration: popUpDialogTextFieldInputDecorationFunction(
             widget.disable ? Cr.lightGrey2 : null,
             widget.prefixIcon,
           ),
@@ -263,8 +263,8 @@ class _DialogDropDownTextFieldState extends State<DialogDropDownTextField> {
                       if (widget.iconsList != null)
                         widget.iconsList![widget.dataList.indexOf(item)]
                       else if (widget.iconDataList != null
-                          ? widget.iconDataList!.length ==
-                              widget.dataList.length
+                          ? (widget.iconDataList!.length ==
+                              widget.dataList.length)
                           : false) ...[
                         Icon(
                           widget.iconDataList![widget.dataList.indexOf(item)],
@@ -355,7 +355,7 @@ class DialogMultiLineTextField extends StatelessWidget {
         maxLines: 100,
         // expands: true,
         minLines: minLines ?? 5,
-        decoration: Styles.popUpDialogTextFieldInputDecoration.copyWith(
+        decoration: popUpDialogTextFieldInputDecoration.copyWith(
           hintText: hintText,
           hintStyle:
               hintStyle ?? bodySmallRegular.copyWith(color: Cr.darkGrey4),

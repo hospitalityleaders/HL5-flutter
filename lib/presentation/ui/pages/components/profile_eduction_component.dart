@@ -75,9 +75,9 @@ class _EducationComponentState extends State<EducationComponent> {
                                             : Di.PSS,
                                   ),
                                   width: widget.isMobile ? null : 360,
-                                  decoration: Styles.boxDecoration.copyWith(
+                                  decoration: boxDecoration.copyWith(
                                     color: Cr.whiteColor,
-                                    boxShadow: Styles.defaultBoxShadow,
+                                    boxShadow: defaultBoxShadow,
                                   ),
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.end,

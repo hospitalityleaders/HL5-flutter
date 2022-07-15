@@ -45,7 +45,7 @@ class _ProfileExpertiseDialogWidgetState
             height: 46,
             decoration: BoxDecoration(
               color: Cr.whiteColor,
-              boxShadow: Styles.defaultBoxShadow,
+              boxShadow: defaultBoxShadow,
             ),
             child: Center(
               child: Padding(
@@ -112,8 +112,7 @@ class _ProfileExpertiseDialogWidgetState
                           style: bodySmallRegular.copyWith(
                             color: Cr.darkGrey1,
                           ),
-                          decoration:
-                              Styles.popUpDialogTextFieldInputDecoration,
+                          decoration: popUpDialogTextFieldInputDecoration,
                         ),
                       ),
                     ),

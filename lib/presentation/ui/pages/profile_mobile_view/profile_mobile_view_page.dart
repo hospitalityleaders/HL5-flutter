@@ -79,7 +79,7 @@ class _ProfileMobileViewPageState extends ConsumerState<ProfileMobileViewPage> {
               children: [
                 if (isMobilePhn)
                   SizedBox(
-                    // decoration: Styles.boxDecorationWithShadow.copyWith(),
+                    // decoration: boxDecorationWithShadow.copyWith(),
                     height: showMenu
                         ? showCardSubMenu
                             ? 1070
@@ -110,7 +110,7 @@ class _ProfileMobileViewPageState extends ConsumerState<ProfileMobileViewPage> {
                                 right: Di.PSL,
                               ),
                               width: Di.getScreenSize(context).width * .96,
-                              decoration: Styles.boxDecorationWithShadow,
+                              decoration: boxDecorationWithShadow,
                               child: Column(
                                 // crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -362,7 +362,8 @@ class _ProfileMobileViewPageState extends ConsumerState<ProfileMobileViewPage> {
                                         Di.SBHES,
                                         if (isMine)
                                           const EditProfileButton(
-                                              width: double.infinity)
+                                            width: double.infinity,
+                                          )
                                         else
                                           Di.ESB,
                                       ],
@@ -380,7 +381,7 @@ class _ProfileMobileViewPageState extends ConsumerState<ProfileMobileViewPage> {
                             child: Container(
                               width: 75,
                               height: 75,
-                              decoration: Styles.boxDecorationRounded.copyWith(
+                              decoration: boxDecorationRounded.copyWith(
                                 image: const DecorationImage(
                                   image: AssetImage("assets/images/avatar.png"),
                                   fit: BoxFit.cover,

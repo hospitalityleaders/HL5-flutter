@@ -17,7 +17,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     //final UsersController controller = ;
-    print('profie? ${widget.slug},  ${widget.id}');
+    debugPrint('profie? ${widget.slug},  ${widget.id}');
     return PageScaffold(
       title: 'Profile',
       body: FutureBuilder<User>(
@@ -27,13 +27,14 @@ class _ProfilePageState extends State<ProfilePage> {
         builder: (context, snapshot) {
           if (!snapshot.hasData ||
               snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
-          } else
+          } else {
             return UserProfilePage(
               userProfileData: snapshot.data!,
             );
+          }
         },
       ),
     );

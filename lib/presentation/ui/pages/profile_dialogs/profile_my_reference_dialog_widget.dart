@@ -21,7 +21,7 @@ class ProfileMyReferenceDialogWidget extends StatefulWidget {
 
 class _ProfileWriteReferenceDialogWidgetState
     extends State<ProfileMyReferenceDialogWidget> {
-  final _formKey = GlobalKey<FormState>();
+  // final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -239,29 +239,29 @@ class _DialogExpandedTileState extends State<DialogExpandedTile> {
   }
 }
 
-class _ShowMoreWIdget extends StatelessWidget {
-  const _ShowMoreWIdget({
-    Key? key,
-    required this.description,
-  }) : super(key: key);
+// class _ShowMoreWIdget extends StatelessWidget {
+//   const _ShowMoreWIdget({
+//     Key? key,
+//     required this.description,
+//   }) : super(key: key);
 
-  final String description;
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        left: Di.PSL,
-        right: Di.PSL,
-        top: Di.PSS,
-        bottom: 12,
-      ),
-      child: Text(
-        description,
-        overflow: TextOverflow.fade,
-        style: bodyLarge.copyWith(
-          color: Cr.darkGrey1,
-        ),
-      ),
-    );
-  }
-}
+//   final String description;
+//   @override
+//   Widget build(BuildContext context) {
+//     return Padding(
+//       padding: const EdgeInsets.only(
+//         left: Di.PSL,
+//         right: Di.PSL,
+//         top: Di.PSS,
+//         bottom: 12,
+//       ),
+//       child: Text(
+//         description,
+//         overflow: TextOverflow.fade,
+//         style: bodyLarge.copyWith(
+//           color: Cr.darkGrey1,
+//         ),
+//       ),
+//     );
+//   }
+// }

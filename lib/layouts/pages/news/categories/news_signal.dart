@@ -8,14 +8,14 @@ import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/constant/sizedbox.dart';
 import 'package:holedo/layouts/pages/profile-pages/profile/header.dart';
 import 'package:holedo/responsive/responsive.dart';
-import '../../../../common/common_widget.dart';
-import '../../../../constant/colorPicker/color_picker.dart';
-import '../../../../constant/fontStyle/font_style.dart';
-import '../../../../constant/sizedbox.dart';
-import '../../../../responsive/responsive.dart';
+import 'package:holedo/common/common_widget.dart';
+import 'package:holedo/constant/colorPicker/color_picker.dart';
+import 'package:holedo/constant/fontStyle/font_style.dart';
+import 'package:holedo/constant/sizedbox.dart';
+import 'package:holedo/responsive/responsive.dart';
 
-import '../../profile-pages/profile/header.dart';
-import '../NewsSingle/news_single_logged_in.dart';
+import 'package:holedo/layouts/pages/profile-pages/profile/header.dart';
+import 'package:holedo/layouts/pages/news/NewsSingle/news_single_logged_in.dart';
 
 class NewsSingleScreen extends StatefulWidget {
   static const String route = '/category';
@@ -27,9 +27,10 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
     with SingleTickerProviderStateMixin {
   CarouselController buttonCarouselController = CarouselController();
   TabController? _tabController;
-  int _current = 0;
+  final int _current = 0;
   int tabBar = 0;
   int indexCircle = 0;
+  @override
   void initState() {
     _tabController = TabController(length: 5, vsync: this);
     super.initState();
@@ -113,13 +114,22 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
     },
   ];
 
-  buildHeaderGesture(
-      String menuName, _fontStyle, BuildContext context, routeName) {
+  GestureDetector buildHeaderGesture(
+    String menuName,
+    _fontStyle,
+    BuildContext context,
+    routeName,
+  ) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (BuildContext) {
-          return routeName as Widget;
-        }));
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (BuildContext) {
+              return routeName as Widget;
+            },
+          ),
+        );
       },
       child: Text(menuName, style: _fontStyle as TextStyle),
     );
@@ -129,101 +139,95 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 4,
-      initialIndex: 0,
       child: Responsive.isDesktop(context)
           ? Scaffold(
               body: NestedScrollView(
-              headerSliverBuilder: (context, innerBoxIsScrolled) {
-                return [
-                  SliverToBoxAdapter(
-                    child: Header(),
-                  ),
-                  SliverToBoxAdapter(
-                    child: Container(
-                      height: Get.height * 0.50,
-                      width: Get.width,
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          CarouselSlider(
-                            options: CarouselOptions(
-                              height: Get.height * 0.50,
-                              viewportFraction: 1.0,
-                              initialPage: 3,
-                              enableInfiniteScroll: true,
-                              reverse: false,
-                              autoPlay: false,
-                              autoPlayInterval: Duration(seconds: 3),
-                              autoPlayAnimationDuration:
-                                  Duration(milliseconds: 800),
-                              autoPlayCurve: Curves.fastOutSlowIn,
-                              enlargeCenterPage: true,
-                              scrollDirection: Axis.horizontal,
-                            ),
-                            carouselController: buttonCarouselController,
-                            items: [
-                              Container(
-                                height: Get.height * 0.05,
-                                width: Get.width,
-                                child: Image(
-                                  fit: BoxFit.cover,
-                                  image:
-                                      AssetImage('assets/images/slider1.png'),
-                                ),
+                headerSliverBuilder: (context, innerBoxIsScrolled) {
+                  return [
+                    const SliverToBoxAdapter(
+                      child: Header(),
+                    ),
+                    SliverToBoxAdapter(
+                      child: SizedBox(
+                        height: Get.height * 0.50,
+                        width: Get.width,
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            CarouselSlider(
+                              options: CarouselOptions(
+                                height: Get.height * 0.50,
+                                viewportFraction: 1.0,
+                                initialPage: 3,
+                                autoPlayInterval: const Duration(seconds: 3),
+                                autoPlayAnimationDuration:
+                                    const Duration(milliseconds: 800),
+                                enlargeCenterPage: true,
                               ),
-                              // RaisedButton(
-                              //   onPressed: () => buttonCarouselController.nextPage(
-                              //       duration: Duration(milliseconds: 300),
-                              //       curve: Curves.linear),
-                              //   child: Text('→'),
-                              // )
-                            ],
-                          ),
-                          Positioned(
-                            left: 0,
-                            child: Container(
-                              height: 50,
-                              width: 50,
-                              color: ColorPicker.kBlueDark1.withOpacity(0.4),
-                              child: Center(
-                                child: IconButton(
-                                  onPressed: () {
-                                    // Use the controller to change the current page
-                                    buttonCarouselController.previousPage();
-                                  },
-                                  icon: Icon(
-                                    Icons.chevron_left,
-                                    size: 21,
-                                    color: Colors.white,
+                              carouselController: buttonCarouselController,
+                              items: [
+                                SizedBox(
+                                  height: Get.height * 0.05,
+                                  width: Get.width,
+                                  child: const Image(
+                                    fit: BoxFit.cover,
+                                    image:
+                                        AssetImage('assets/images/slider1.png'),
                                   ),
                                 ),
-                              ),
+                                // RaisedButton(
+                                //   onPressed: () => buttonCarouselController.nextPage(
+                                //       duration: Duration(milliseconds: 300),
+                                //       curve: Curves.linear),
+                                //   child: Text('→'),
+                                // )
+                              ],
                             ),
-                          ),
-                          Positioned(
-                            right: 0,
-                            child: Container(
-                              height: 50,
-                              width: 50,
-                              color: ColorPicker.kGreyLight5.withOpacity(0.4),
-                              child: Center(
+                            Positioned(
+                              left: 0,
+                              child: Container(
+                                height: 50,
+                                width: 50,
+                                color: ColorPicker.kBlueDark1.withOpacity(0.4),
                                 child: Center(
                                   child: IconButton(
                                     onPressed: () {
                                       // Use the controller to change the current page
-                                      buttonCarouselController.nextPage();
+                                      buttonCarouselController.previousPage();
                                     },
-                                    icon: Icon(
-                                      Icons.chevron_right,
-                                      color: Colors.white,
+                                    icon: const Icon(
+                                      Icons.chevron_left,
                                       size: 21,
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                          Positioned(
+                            Positioned(
+                              right: 0,
+                              child: Container(
+                                height: 50,
+                                width: 50,
+                                color: ColorPicker.kGreyLight5.withOpacity(0.4),
+                                child: Center(
+                                  child: Center(
+                                    child: IconButton(
+                                      onPressed: () {
+                                        // Use the controller to change the current page
+                                        buttonCarouselController.nextPage();
+                                      },
+                                      icon: const Icon(
+                                        Icons.chevron_right,
+                                        color: Colors.white,
+                                        size: 21,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Positioned(
                               left: Get.width * 0.05,
                               bottom: Get.width * 0.02,
                               child: Column(
@@ -233,14 +237,14 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                     'RESOURCES',
                                     style: FontTextStyle.kWhite12W700SSP,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 5,
                                   ),
                                   Text(
                                     '5 Steps for Travel Brands to Build a Brand\nAmbassador Program',
                                     style: FontTextStyle.kWhite36W400SSP,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 5,
                                   ),
                                   Text(
@@ -248,792 +252,633 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                     style: FontTextStyle.kWhite14W400SSP,
                                   ),
                                 ],
-                              )),
-                        ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  SliverToBoxAdapter(
-                    child: Container(
-                      // margin:
-                      //     EdgeInsets.symmetric(horizontal: Get.width * 0.2),
-                      height: Get.height * 0.06,
-                      width: Get.width,
-                      decoration: BoxDecoration(
+                    SliverToBoxAdapter(
+                      child: Container(
+                        // margin:
+                        //     EdgeInsets.symmetric(horizontal: Get.width * 0.2),
+                        height: Get.height * 0.06,
+                        width: Get.width,
+                        decoration: const BoxDecoration(
                           border: Border(
-                              bottom: BorderSide(
-                                  color: Color(0xFFBDC4C7), width: 2))),
-                      child: TabBar(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: Get.width * 0.3),
-                        unselectedLabelColor: ColorPicker.kGreyLight7,
-                        labelColor: ColorPicker.kBlueLight1,
-                        controller: _tabController,
-                        physics: NeverScrollableScrollPhysics(),
-                        labelStyle: FontTextStyle.kBlueLight114W600SSP,
-                        tabs: [
-                          Tab(
-                            text: "Resources",
+                            bottom: BorderSide(
+                              color: Color(0xFFBDC4C7),
+                              width: 2,
+                            ),
                           ),
-                          Tab(
-                            text: "Travel",
-                          ),
-                          Tab(
-                            text: "Developments",
-                          ),
-                          Tab(
-                            text: "International",
-                          ),
-                          Tab(
-                            text: "Investments",
-                          ),
-                        ],
+                        ),
+                        child: TabBar(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: Get.width * 0.3),
+                          unselectedLabelColor: ColorPicker.kGreyLight7,
+                          labelColor: ColorPicker.kBlueLight1,
+                          controller: _tabController,
+                          physics: const NeverScrollableScrollPhysics(),
+                          labelStyle: FontTextStyle.kBlueLight114W600SSP,
+                          tabs: const [
+                            Tab(
+                              text: "Resources",
+                            ),
+                            Tab(
+                              text: "Travel",
+                            ),
+                            Tab(
+                              text: "Developments",
+                            ),
+                            Tab(
+                              text: "International",
+                            ),
+                            Tab(
+                              text: "Investments",
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ];
-              },
-              body: TabBarView(
-                controller: _tabController,
-                physics: NeverScrollableScrollPhysics(),
-                children: [
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 10),
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.vertical,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: Get.width * 0.55,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  height: Get.height * 0.03,
-                                ),
-                                Container(
-                                  width: Get.width,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    border: Border.symmetric(
+                  ];
+                },
+                body: TabBarView(
+                  controller: _tabController,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 10),
+                      child: SingleChildScrollView(
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: Get.width * 0.55,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    height: Get.height * 0.03,
+                                  ),
+                                  Container(
+                                    width: Get.width,
+                                    decoration: const BoxDecoration(
+                                      color: Colors.white,
+                                      border: Border.symmetric(
                                         vertical:
-                                            BorderSide(color: Colors.white)),
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      SizedBox(
-                                        height: Get.height * 0.01,
+                                            BorderSide(color: Colors.white),
                                       ),
-                                      Container(
-                                        height: Get.height * 0.40,
-                                        width: Get.width,
-                                        child: Image(
-                                          fit: BoxFit.cover,
-                                          image: AssetImage(
-                                              'assets/images/news1.png'),
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        SizedBox(
+                                          height: Get.height * 0.01,
                                         ),
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Text(
-                                        'RESOURCES',
-                                        style:
-                                            FontTextStyle.kGreyLight712W700SSP,
-                                      ),
-                                      Text(
-                                        'Moxy Hotels Makes Some Movies, Well Youtube Ones',
-                                        style:
-                                            FontTextStyle.kBlueDark136W400SSP,
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      IntrinsicHeight(
-                                        child: Row(
-                                          children: [
-                                            RichText(
-                                              text: TextSpan(
-                                                text: "by",
-                                                style: FontTextStyle
-                                                    .kGreyLight5146W400SSP,
-                                                children: [
-                                                  TextSpan(
-                                                      text: "  Pam Carrol •",
-                                                      style: FontTextStyle
-                                                          .kGreyLight5146W400SSP),
-                                                  TextSpan(
-                                                      text:
-                                                          "  26 August 2015 •",
-                                                      style: FontTextStyle
-                                                          .kGreyLight5146W400SSP),
-                                                  TextSpan(
-                                                      text: "  10:40",
-                                                      style: FontTextStyle
-                                                          .kGreyLight5146W400SSP),
-                                                ],
-                                              ),
+                                        SizedBox(
+                                          height: Get.height * 0.40,
+                                          width: Get.width,
+                                          child: const Image(
+                                            fit: BoxFit.cover,
+                                            image: AssetImage(
+                                              'assets/images/news1.png',
                                             ),
-                                            SizedBox(
-                                              width: Get.width * 0.01,
-                                            ),
-                                            VerticalDivider(
-                                              thickness: 1,
-                                            ),
-                                            SizedBox(
-                                              width: Get.width * 0.01,
-                                            ),
-                                            Container(
-                                              child: Row(
-                                                children: [
-                                                  SvgPicture.asset(
-                                                      'assets/icons/svg/facebook.svg'),
-                                                  Text(
-                                                    '  • 112',
-                                                    style: FontTextStyle
-                                                        .kGreyLight5146W400SSP,
-                                                  ),
-                                                  SizedBox(
-                                                    width: Get.width * 0.01,
-                                                  ),
-                                                  SvgPicture.asset(
-                                                      'assets/icons/svg/twitter.svg'),
-                                                  Text('  • 56',
-                                                      style: FontTextStyle
-                                                          .kGreyLight5146W400SSP),
-                                                  SizedBox(
-                                                    width: Get.width * 0.01,
-                                                  ),
-                                                  SvgPicture.asset(
-                                                      'assets/icons/svg/googleplus.svg'),
-                                                  Text(
-                                                    '  • 321',
-                                                    style: FontTextStyle
-                                                        .kGreyLight5146W400SSP,
-                                                  ),
-                                                  SizedBox(
-                                                    width: Get.width * 0.01,
-                                                  ),
-                                                  Image.asset(
-                                                      'assets/icons/svg/linkdin.png',
-                                                      height: 20),
-                                                  Text(
-                                                    '  • 22',
-                                                    style: FontTextStyle
-                                                        .kGreyLight5146W400SSP,
-                                                  ),
-                                                  SizedBox(
-                                                    width: Get.width * 0.01,
-                                                  ),
-                                                  SvgPicture.asset(
-                                                      'assets/icons/svg/any.svg'),
-                                                  Text(
-                                                    '  • 13',
-                                                    style: FontTextStyle
-                                                        .kGreyLight5146W400SSP,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
+                                          ),
                                         ),
-                                      ),
-                                      SizedBox(
-                                        height: Get.height * 0.02,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: Get.height * 0.01,
-                                ),
-                                Container(
-                                  width: Get.width,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    border: Border.symmetric(
-                                        vertical:
-                                            BorderSide(color: Colors.white)),
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      SizedBox(
-                                        height: Get.height * 0.01,
-                                      ),
-                                      Container(
-                                        height: Get.height * 0.40,
-                                        width: Get.width,
-                                        child: Image(
-                                          fit: BoxFit.cover,
-                                          image: AssetImage(
-                                              'assets/images/news2.png'),
+                                        const SizedBox(
+                                          height: 10,
                                         ),
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Text(
-                                        'RESOURCES',
-                                        style:
-                                            FontTextStyle.kGreyLight513W700SSP,
-                                      ),
-                                      Text(
-                                        'Hotel on North opens in Pittsfield,\nMassachusetts',
-                                        style:
-                                            FontTextStyle.kGreyLight536W400SSP,
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      IntrinsicHeight(
-                                        child: Row(
-                                          children: [
-                                            RichText(
-                                              text: TextSpan(
-                                                text: "by",
-                                                style: FontTextStyle
-                                                    .kGreyLight5146W400SSP,
-                                                children: [
-                                                  TextSpan(
-                                                      text: "  Pam Carrol •",
-                                                      style: FontTextStyle
-                                                          .kGreyLight5146W400SSP),
-                                                  TextSpan(
-                                                      text:
-                                                          "  26 August 2015 •",
-                                                      style: FontTextStyle
-                                                          .kGreyLight5146W400SSP),
-                                                  TextSpan(
-                                                      text: "  10:40",
-                                                      style: FontTextStyle
-                                                          .kGreyLight5146W400SSP),
-                                                ],
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width: Get.width * 0.01,
-                                            ),
-                                            VerticalDivider(
-                                              thickness: 1,
-                                            ),
-                                            SizedBox(
-                                              width: Get.width * 0.01,
-                                            ),
-                                            Container(
-                                              child: Row(
-                                                children: [
-                                                  SvgPicture.asset(
-                                                      'assets/icons/svg/facebook.svg'),
-                                                  Text(
-                                                    '  • 112',
-                                                    style: FontTextStyle
-                                                        .kGreyLight5146W400SSP,
-                                                  ),
-                                                  SizedBox(
-                                                    width: Get.width * 0.01,
-                                                  ),
-                                                  SvgPicture.asset(
-                                                      'assets/icons/svg/twitter.svg'),
-                                                  Text(
-                                                    '  • 56',
-                                                    style: FontTextStyle
-                                                        .kGreyLight5146W400SSP,
-                                                  ),
-                                                  SizedBox(
-                                                    width: Get.width * 0.01,
-                                                  ),
-                                                  SvgPicture.asset(
-                                                      'assets/icons/svg/googleplus.svg'),
-                                                  Text(
-                                                    '  • 321',
-                                                    style: FontTextStyle
-                                                        .kGreyLight5146W400SSP,
-                                                  ),
-                                                  SizedBox(
-                                                    width: Get.width * 0.01,
-                                                  ),
-                                                  Image.asset(
-                                                      'assets/icons/svg/linkdin.png',
-                                                      height: 20),
-                                                  Text(
-                                                    '  • 22',
-                                                    style: FontTextStyle
-                                                        .kGreyLight5146W400SSP,
-                                                  ),
-                                                  SizedBox(
-                                                    width: Get.width * 0.01,
-                                                  ),
-                                                  SvgPicture.asset(
-                                                      'assets/icons/svg/any.svg'),
-                                                  Text(
-                                                    '  • 13',
-                                                    style: FontTextStyle
-                                                        .kGreyLight5146W400SSP,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
+                                        Text(
+                                          'RESOURCES',
+                                          style: FontTextStyle
+                                              .kGreyLight712W700SSP,
                                         ),
-                                      ),
-                                      SizedBox(
-                                        height: Get.height * 0.02,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: Get.height * 0.03,
-                                ),
-                                Container(
-                                  padding: EdgeInsets.all(10),
-                                  child: GridView.builder(
-                                    shrinkWrap: true,
-                                    physics: NeverScrollableScrollPhysics(),
-                                    gridDelegate:
-                                        SliverGridDelegateWithFixedCrossAxisCount(
-                                            childAspectRatio:
-                                                Get.width / (Get.height / 0.75),
-                                            crossAxisCount: 2,
-                                            mainAxisSpacing: 10,
-                                            crossAxisSpacing: 10),
-                                    itemCount: 10,
-                                    itemBuilder: (context, index) {
-                                      return GestureDetector(
-                                        onTap: () {
-                                          Navigator.of(context).pushNamed(
-                                              NewsSingleLoggedInScreen.route);
-                                        },
-                                        child: Container(
-                                          padding: EdgeInsets.all(8),
-                                          width: Get.width * 0.25,
-                                          decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              border: Border(
-                                                bottom: BorderSide(
-                                                    color: Colors.white,
-                                                    width: 4),
-                                              )),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                        Text(
+                                          'Moxy Hotels Makes Some Movies, Well Youtube Ones',
+                                          style:
+                                              FontTextStyle.kBlueDark136W400SSP,
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        IntrinsicHeight(
+                                          child: Row(
                                             children: [
-                                              Container(
-                                                height: Get.height * 0.20,
-                                                width: Get.width,
-                                                child: Image(
-                                                  fit: BoxFit.fill,
-                                                  image: AssetImage(
-                                                      '${data[index]['img']}'),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 7,
-                                              ),
-                                              Flexible(
-                                                child: Text(
-                                                  '${data[index]['text1']}',
-                                                  style: FontTextStyle
-                                                      .kBlueDark118W700SSP,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 7,
-                                              ),
                                               RichText(
                                                 text: TextSpan(
                                                   text: "by",
                                                   style: FontTextStyle
-                                                      .kGreyLight514W600PR,
+                                                      .kGreyLight5146W400SSP,
                                                   children: [
                                                     TextSpan(
-                                                        text: "  Pam Carrol •",
-                                                        style: FontTextStyle
-                                                            .kGreyLight514W600PR),
+                                                      text: "  Pam Carrol •",
+                                                      style: FontTextStyle
+                                                          .kGreyLight5146W400SSP,
+                                                    ),
                                                     TextSpan(
-                                                        text:
-                                                            "  26 August 2015 •",
-                                                        style: FontTextStyle
-                                                            .kGreyLight514W600PR),
+                                                      text:
+                                                          "  26 August 2015 •",
+                                                      style: FontTextStyle
+                                                          .kGreyLight5146W400SSP,
+                                                    ),
                                                     TextSpan(
-                                                        text: "  10:40",
-                                                        style: FontTextStyle
-                                                            .kGreyLight514W600PR),
+                                                      text: "  10:40",
+                                                      style: FontTextStyle
+                                                          .kGreyLight5146W400SSP,
+                                                    ),
                                                   ],
                                                 ),
                                               ),
                                               SizedBox(
-                                                height: 12,
+                                                width: Get.width * 0.01,
                                               ),
-                                              data[index]['text2']
-                                                      .toString()
-                                                      .isEmpty
-                                                  ? SizedBox()
-                                                  : Container(
-                                                      height: 20,
-                                                      width: 92,
-                                                      color: Color(0xFFFECDCC),
-                                                      child: Center(
-                                                        child: Text(
-                                                          '${data[index]['text2']}',
-                                                          style: FontTextStyle
-                                                              .kRed210W700SSP,
-                                                        ),
-                                                      ),
-                                                    )
-                                            ],
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: Get.height * 0.01,
-                                ),
-                                Align(
-                                  alignment: Alignment.center,
-                                  child: Container(
-                                    height: 52,
-                                    width: 119,
-                                    color: Color(0xFF32A3FD),
-                                    child: Center(
-                                      child: Text(
-                                        'LOAD MORE',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: Get.height * 0.03,
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            width: Get.width * 0.01,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                height: Get.height * 0.035,
-                              ),
-                              Container(
-                                height: 815, // height: Get.height,
-                                width: 373,
-
-                                color: ColorPicker.kPrimaryLight,
-                                child: Stack(
-                                  children: [
-                                    Positioned(
-                                      top: -1,
-                                      left: 0,
-                                      child: Container(
-                                        // height: Get.height * 0.3,
-                                        width: 100,
-                                        child: Image(
-                                            image: AssetImage(
-                                                'assets/images/round.png'),
-                                            fit: BoxFit.fitWidth),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 20,
-                                          vertical: Get.width * 0.025),
-                                      child: Column(
-                                        children: [
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              IntrinsicWidth(
-                                                child: Column(
-                                                  // mainAxisAlignment:
-                                                  //     MainAxisAlignment.start,
+                                              const VerticalDivider(
+                                                thickness: 1,
+                                              ),
+                                              SizedBox(
+                                                width: Get.width * 0.01,
+                                              ),
+                                              Container(
+                                                child: Row(
                                                   children: [
-                                                    Icon(
-                                                      Icons.apartment_rounded,
-                                                      color: Color(0xFF546088),
+                                                    SvgPicture.asset(
+                                                      'assets/icons/svg/facebook.svg',
                                                     ),
-                                                    Container(
-                                                      width: 2,
-                                                      height: 150,
-                                                      color: Color(0xFF546088),
+                                                    Text(
+                                                      '  • 112',
+                                                      style: FontTextStyle
+                                                          .kGreyLight5146W400SSP,
+                                                    ),
+                                                    SizedBox(
+                                                      width: Get.width * 0.01,
+                                                    ),
+                                                    SvgPicture.asset(
+                                                      'assets/icons/svg/twitter.svg',
+                                                    ),
+                                                    Text(
+                                                      '  • 56',
+                                                      style: FontTextStyle
+                                                          .kGreyLight5146W400SSP,
+                                                    ),
+                                                    SizedBox(
+                                                      width: Get.width * 0.01,
+                                                    ),
+                                                    SvgPicture.asset(
+                                                      'assets/icons/svg/googleplus.svg',
+                                                    ),
+                                                    Text(
+                                                      '  • 321',
+                                                      style: FontTextStyle
+                                                          .kGreyLight5146W400SSP,
+                                                    ),
+                                                    SizedBox(
+                                                      width: Get.width * 0.01,
+                                                    ),
+                                                    Image.asset(
+                                                      'assets/icons/svg/linkdin.png',
+                                                      height: 20,
+                                                    ),
+                                                    Text(
+                                                      '  • 22',
+                                                      style: FontTextStyle
+                                                          .kGreyLight5146W400SSP,
+                                                    ),
+                                                    SizedBox(
+                                                      width: Get.width * 0.01,
+                                                    ),
+                                                    SvgPicture.asset(
+                                                      'assets/icons/svg/any.svg',
+                                                    ),
+                                                    Text(
+                                                      '  • 13',
+                                                      style: FontTextStyle
+                                                          .kGreyLight5146W400SSP,
                                                     ),
                                                   ],
                                                 ),
                                               ),
-                                              SizedBox(width: 20),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  // SizedBox(height: 30),
-                                                  Text(
-                                                    'SIGN UP TO JOIN',
-                                                    style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      fontSize: 12,
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: Get.width * 0.15,
-                                                    child: Text(
-                                                      'Get priority news access',
-                                                      style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        fontSize: 36,
-                                                        color: Colors.white,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
                                             ],
                                           ),
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Column(
-                                                // mainAxisAlignment:
-                                                //     MainAxisAlignment.start,
-                                                children: [
-                                                  Icon(
-                                                    Icons.verified,
-                                                    color: Color(0xFF546088),
-                                                  ),
-                                                  Container(
-                                                    width: 2,
-                                                    height: Get.height * 0.078,
-                                                    color: Color(0xFF546088),
-                                                  ),
-                                                ],
-                                              ),
-                                              SizedBox(width: 20),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    'All the latest news',
-                                                    style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      fontSize: 16,
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: Get.width * 0.15,
-                                                    child: Text(
-                                                      'Stay up to date with news from the tourism and hospitality industry.',
-                                                      style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        fontSize: 14,
-                                                        color: Colors.white,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
+                                        ),
+                                        SizedBox(
+                                          height: Get.height * 0.02,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: Get.height * 0.01,
+                                  ),
+                                  Container(
+                                    width: Get.width,
+                                    decoration: const BoxDecoration(
+                                      color: Colors.white,
+                                      border: Border.symmetric(
+                                        vertical:
+                                            BorderSide(color: Colors.white),
+                                      ),
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        SizedBox(
+                                          height: Get.height * 0.01,
+                                        ),
+                                        SizedBox(
+                                          height: Get.height * 0.40,
+                                          width: Get.width,
+                                          child: const Image(
+                                            fit: BoxFit.cover,
+                                            image: AssetImage(
+                                              'assets/images/news2.png',
+                                            ),
                                           ),
-                                          SizedBox(height: 10),
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Text(
+                                          'RESOURCES',
+                                          style: FontTextStyle
+                                              .kGreyLight513W700SSP,
+                                        ),
+                                        Text(
+                                          'Hotel on North opens in Pittsfield,\nMassachusetts',
+                                          style: FontTextStyle
+                                              .kGreyLight536W400SSP,
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        IntrinsicHeight(
+                                          child: Row(
                                             children: [
-                                              Column(
-                                                // mainAxisAlignment:
-                                                //     MainAxisAlignment.start,
-                                                children: [
-                                                  Icon(
-                                                    Icons.verified,
-                                                    color: Color(0xFF546088),
-                                                  ),
-                                                  Container(
-                                                    width: 2,
-                                                    height: Get.height * 0.078,
-                                                    color: Color(0xFF546088),
-                                                  ),
-                                                ],
-                                              ),
-                                              SizedBox(width: 20),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    'Credible sources',
-                                                    style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      fontSize: 16,
-                                                      color: Colors.white,
+                                              RichText(
+                                                text: TextSpan(
+                                                  text: "by",
+                                                  style: FontTextStyle
+                                                      .kGreyLight5146W400SSP,
+                                                  children: [
+                                                    TextSpan(
+                                                      text: "  Pam Carrol •",
+                                                      style: FontTextStyle
+                                                          .kGreyLight5146W400SSP,
                                                     ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: Get.width * 0.15,
-                                                    child: Text(
-                                                      'I’ts gathered from hundreds of trusted sources and updates in real time.',
-                                                      style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        fontSize: 14,
-                                                        color: Colors.white,
-                                                      ),
+                                                    TextSpan(
+                                                      text:
+                                                          "  26 August 2015 •",
+                                                      style: FontTextStyle
+                                                          .kGreyLight5146W400SSP,
                                                     ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(height: 10),
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Column(
-                                                // mainAxisAlignment:
-                                                //     MainAxisAlignment.start,
-                                                children: [
-                                                  Icon(
-                                                    Icons.verified,
-                                                    color: Color(0xFF546088),
-                                                  ),
-                                                  Container(
-                                                    width: 2,
-                                                    height: Get.height * 0.078,
-                                                    color: Color(0xFF546088),
-                                                  ),
-                                                ],
-                                              ),
-                                              SizedBox(width: 20),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    'Wide scope of research',
-                                                    style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      fontSize: 16,
-                                                      color: Colors.white,
+                                                    TextSpan(
+                                                      text: "  10:40",
+                                                      style: FontTextStyle
+                                                          .kGreyLight5146W400SSP,
                                                     ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: Get.width * 0.15,
-                                                    child: Text(
-                                                      'We cover all aspects of the tourism and hospitality sectors including airlines, tour operators, hotels, education, research and more.',
-                                                      style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        fontSize: 14,
-                                                        color: Colors.white,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
+                                                  ],
+                                                ),
                                               ),
-                                            ],
-                                          ),
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Column(
-                                                // mainAxisAlignment:
-                                                //     MainAxisAlignment.start,
-                                                children: [
-                                                  SizedBox(width: 24),
-                                                  Container(
-                                                    width: 2,
-                                                    height: Get.height * 0.078,
-                                                    color: Color(0xFF546088),
-                                                  ),
-                                                ],
+                                              SizedBox(
+                                                width: Get.width * 0.01,
                                               ),
-                                              SizedBox(width: 20),
+                                              const VerticalDivider(
+                                                thickness: 1,
+                                              ),
+                                              SizedBox(
+                                                width: Get.width * 0.01,
+                                              ),
                                               Container(
-                                                  height: 36,
-                                                  width: 248,
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.white,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            2),
-                                                  ),
-                                                  child: Center(
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Icon(Icons.person_add,
-                                                            size: 15),
-                                                        Text(
-                                                          'Sign up now. It’s free',
-                                                          style: TextStyle(
-                                                            color: Color(
-                                                                0xFF272E41),
-                                                            fontSize: 14,
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                          ),
-                                                        ),
-                                                      ],
+                                                child: Row(
+                                                  children: [
+                                                    SvgPicture.asset(
+                                                      'assets/icons/svg/facebook.svg',
                                                     ),
-                                                  )),
+                                                    Text(
+                                                      '  • 112',
+                                                      style: FontTextStyle
+                                                          .kGreyLight5146W400SSP,
+                                                    ),
+                                                    SizedBox(
+                                                      width: Get.width * 0.01,
+                                                    ),
+                                                    SvgPicture.asset(
+                                                      'assets/icons/svg/twitter.svg',
+                                                    ),
+                                                    Text(
+                                                      '  • 56',
+                                                      style: FontTextStyle
+                                                          .kGreyLight5146W400SSP,
+                                                    ),
+                                                    SizedBox(
+                                                      width: Get.width * 0.01,
+                                                    ),
+                                                    SvgPicture.asset(
+                                                      'assets/icons/svg/googleplus.svg',
+                                                    ),
+                                                    Text(
+                                                      '  • 321',
+                                                      style: FontTextStyle
+                                                          .kGreyLight5146W400SSP,
+                                                    ),
+                                                    SizedBox(
+                                                      width: Get.width * 0.01,
+                                                    ),
+                                                    Image.asset(
+                                                      'assets/icons/svg/linkdin.png',
+                                                      height: 20,
+                                                    ),
+                                                    Text(
+                                                      '  • 22',
+                                                      style: FontTextStyle
+                                                          .kGreyLight5146W400SSP,
+                                                    ),
+                                                    SizedBox(
+                                                      width: Get.width * 0.01,
+                                                    ),
+                                                    SvgPicture.asset(
+                                                      'assets/icons/svg/any.svg',
+                                                    ),
+                                                    Text(
+                                                      '  • 13',
+                                                      style: FontTextStyle
+                                                          .kGreyLight5146W400SSP,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
                                             ],
                                           ),
-                                          SizedBox(height: 10),
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Column(
-                                                // mainAxisAlignment:
-                                                //     MainAxisAlignment.start,
-                                                children: [
-                                                  Icon(
-                                                    Icons.download_rounded,
-                                                    color: Color(0xFF546088),
-                                                  ),
-                                                  // Container(
-                                                  //   width: 2,
-                                                  //   height: Get.height * 0.01,
-                                                  //   color: Color(0xFF546088),
-                                                  // ),
-                                                ],
+                                        ),
+                                        SizedBox(
+                                          height: Get.height * 0.02,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: Get.height * 0.03,
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.all(10),
+                                    child: GridView.builder(
+                                      shrinkWrap: true,
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      gridDelegate:
+                                          SliverGridDelegateWithFixedCrossAxisCount(
+                                        childAspectRatio:
+                                            Get.width / (Get.height / 0.75),
+                                        crossAxisCount: 2,
+                                        mainAxisSpacing: 10,
+                                        crossAxisSpacing: 10,
+                                      ),
+                                      itemCount: 10,
+                                      itemBuilder: (context, index) {
+                                        return GestureDetector(
+                                          onTap: () {
+                                            Navigator.of(context).pushNamed(
+                                              NewsSingleLoggedInScreen.route,
+                                            );
+                                          },
+                                          child: Container(
+                                            padding: const EdgeInsets.all(8),
+                                            width: Get.width * 0.25,
+                                            decoration: const BoxDecoration(
+                                              color: Colors.white,
+                                              border: Border(
+                                                bottom: BorderSide(
+                                                  color: Colors.white,
+                                                  width: 4,
+                                                ),
                                               ),
-                                              SizedBox(width: 20),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  SizedBox(
-                                                    width: Get.width * 0.15,
-                                                    child: Text(
-                                                      'OR IMPORT YOUR DETAILS FROM',
+                                            ),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                SizedBox(
+                                                  height: Get.height * 0.20,
+                                                  width: Get.width,
+                                                  child: Image(
+                                                    fit: BoxFit.fill,
+                                                    image: AssetImage(
+                                                      '${data[index]['img']}',
+                                                    ),
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  height: 7,
+                                                ),
+                                                Flexible(
+                                                  child: Text(
+                                                    '${data[index]['text1']}',
+                                                    style: FontTextStyle
+                                                        .kBlueDark118W700SSP,
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  height: 7,
+                                                ),
+                                                RichText(
+                                                  text: TextSpan(
+                                                    text: "by",
+                                                    style: FontTextStyle
+                                                        .kGreyLight514W600PR,
+                                                    children: [
+                                                      TextSpan(
+                                                        text: "  Pam Carrol •",
+                                                        style: FontTextStyle
+                                                            .kGreyLight514W600PR,
+                                                      ),
+                                                      TextSpan(
+                                                        text:
+                                                            "  26 August 2015 •",
+                                                        style: FontTextStyle
+                                                            .kGreyLight514W600PR,
+                                                      ),
+                                                      TextSpan(
+                                                        text: "  10:40",
+                                                        style: FontTextStyle
+                                                            .kGreyLight514W600PR,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  height: 12,
+                                                ),
+                                                if (data[index]['text2']
+                                                    .toString()
+                                                    .isEmpty)
+                                                  SizedBox()
+                                                else
+                                                  Container(
+                                                    height: 20,
+                                                    width: 92,
+                                                    color: Color(0xFFFECDCC),
+                                                    child: Center(
+                                                      child: Text(
+                                                        '${data[index]['text2']}',
+                                                        style: FontTextStyle
+                                                            .kRed210W700SSP,
+                                                      ),
+                                                    ),
+                                                  )
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: Get.height * 0.01,
+                                  ),
+                                  Align(
+                                    child: Container(
+                                      height: 52,
+                                      width: 119,
+                                      color: const Color(0xFF32A3FD),
+                                      child: const Center(
+                                        child: Text(
+                                          'LOAD MORE',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: Get.height * 0.03,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              width: Get.width * 0.01,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: Get.height * 0.035,
+                                ),
+                                Container(
+                                  height: 815, // height: Get.height,
+                                  width: 373,
+
+                                  color: ColorPicker.kPrimaryLight,
+                                  child: Stack(
+                                    children: [
+                                      Positioned(
+                                        top: -1,
+                                        left: 0,
+                                        child: SizedBox(
+                                          // height: Get.height * 0.3,
+                                          width: 100,
+                                          child: const Image(
+                                            image: AssetImage(
+                                              'assets/images/round.png',
+                                            ),
+                                            fit: BoxFit.fitWidth,
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 20,
+                                          vertical: Get.width * 0.025,
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                IntrinsicWidth(
+                                                  child: Column(
+                                                    // mainAxisAlignment:
+                                                    //     MainAxisAlignment.start,
+                                                    children: [
+                                                      const Icon(
+                                                        Icons.apartment_rounded,
+                                                        color:
+                                                            Color(0xFF546088),
+                                                      ),
+                                                      Container(
+                                                        width: 2,
+                                                        height: 150,
+                                                        color: const Color(
+                                                            0xFF546088),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                const SizedBox(width: 20),
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    // SizedBox(height: 30),
+                                                    const Text(
+                                                      'SIGN UP TO JOIN',
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        fontSize: 12,
+                                                        color: Colors.white,
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: Get.width * 0.15,
+                                                      child: const Text(
+                                                        'Get priority news access',
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          fontSize: 36,
+                                                          color: Colors.white,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Column(
+                                                  // mainAxisAlignment:
+                                                  //     MainAxisAlignment.start,
+                                                  children: [
+                                                    const Icon(
+                                                      Icons.verified,
+                                                      color: Color(0xFF546088),
+                                                    ),
+                                                    Container(
+                                                      width: 2,
+                                                      height:
+                                                          Get.height * 0.078,
+                                                      color: const Color(
+                                                          0xFF546088),
+                                                    ),
+                                                  ],
+                                                ),
+                                                const SizedBox(width: 20),
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    const Text(
+                                                      'All the latest news',
                                                       style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.w700,
@@ -1041,223 +886,449 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                         color: Colors.white,
                                                       ),
                                                     ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(height: 10),
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Column(
-                                                // mainAxisAlignment:
-                                                //     MainAxisAlignment.start,
-                                                children: [
-                                                  SizedBox(width: 24),
-                                                  Container(
-                                                    width: 2,
-                                                    height: Get.height * 0.078,
-                                                    color: Color(0xFF546088),
-                                                  ),
-                                                ],
-                                              ),
-                                              SizedBox(width: 10),
-                                              SizedBox(
-                                                width: Get.width * 0.15,
-                                                child: Row(
-                                                  children: [
-                                                    Flexible(
-                                                      child: Container(
-                                                        height: 36,
-                                                        width: 80,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color:
-                                                              Color(0xFF344F8D),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(2),
-                                                        ),
-                                                        child: Center(
-                                                          child: Image(
-                                                            image: AssetImage(
-                                                                'assets/icons/fb.png'),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    SizedBox(width: 5),
-                                                    Flexible(
-                                                      child: Container(
-                                                        height: 36,
-                                                        width: 80,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color:
-                                                              Color(0xFFD63B30),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(2),
-                                                        ),
-                                                        child: Center(
-                                                          child: Image(
-                                                            image: AssetImage(
-                                                                'assets/icons/gp.png'),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    SizedBox(width: 5),
-                                                    Flexible(
-                                                      child: Container(
-                                                        height: 36,
-                                                        width: 80,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color:
-                                                              Color(0xFF04595B),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(2),
-                                                        ),
-                                                        child: Center(
-                                                          child: Image(
-                                                            image: AssetImage(
-                                                                'assets/icons/x.png'),
-                                                          ),
+                                                    SizedBox(
+                                                      width: Get.width * 0.15,
+                                                      child: const Text(
+                                                        'Stay up to date with news from the tourism and hospitality industry.',
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          fontSize: 14,
+                                                          color: Colors.white,
                                                         ),
                                                       ),
                                                     ),
                                                   ],
                                                 ),
-                                              )
-                                            ],
-                                          ),
-                                        ],
+                                              ],
+                                            ),
+                                            const SizedBox(height: 10),
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Column(
+                                                  // mainAxisAlignment:
+                                                  //     MainAxisAlignment.start,
+                                                  children: [
+                                                    const Icon(
+                                                      Icons.verified,
+                                                      color: Color(0xFF546088),
+                                                    ),
+                                                    Container(
+                                                      width: 2,
+                                                      height:
+                                                          Get.height * 0.078,
+                                                      color: const Color(
+                                                          0xFF546088),
+                                                    ),
+                                                  ],
+                                                ),
+                                                const SizedBox(width: 20),
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    const Text(
+                                                      'Credible sources',
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        fontSize: 16,
+                                                        color: Colors.white,
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: Get.width * 0.15,
+                                                      child: const Text(
+                                                        'I’ts gathered from hundreds of trusted sources and updates in real time.',
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          fontSize: 14,
+                                                          color: Colors.white,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(height: 10),
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Column(
+                                                  // mainAxisAlignment:
+                                                  //     MainAxisAlignment.start,
+                                                  children: [
+                                                    const Icon(
+                                                      Icons.verified,
+                                                      color: Color(0xFF546088),
+                                                    ),
+                                                    Container(
+                                                      width: 2,
+                                                      height:
+                                                          Get.height * 0.078,
+                                                      color: const Color(
+                                                          0xFF546088),
+                                                    ),
+                                                  ],
+                                                ),
+                                                const SizedBox(width: 20),
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    const Text(
+                                                      'Wide scope of research',
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        fontSize: 16,
+                                                        color: Colors.white,
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: Get.width * 0.15,
+                                                      child: const Text(
+                                                        'We cover all aspects of the tourism and hospitality sectors including airlines, tour operators, hotels, education, research and more.',
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          fontSize: 14,
+                                                          color: Colors.white,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Column(
+                                                  // mainAxisAlignment:
+                                                  //     MainAxisAlignment.start,
+                                                  children: [
+                                                    const SizedBox(width: 24),
+                                                    Container(
+                                                      width: 2,
+                                                      height:
+                                                          Get.height * 0.078,
+                                                      color: const Color(
+                                                          0xFF546088),
+                                                    ),
+                                                  ],
+                                                ),
+                                                const SizedBox(width: 20),
+                                                Container(
+                                                  height: 36,
+                                                  width: 248,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                      2,
+                                                    ),
+                                                  ),
+                                                  child: Center(
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: const [
+                                                        Icon(
+                                                          Icons.person_add,
+                                                          size: 15,
+                                                        ),
+                                                        Text(
+                                                          'Sign up now. It’s free',
+                                                          style: TextStyle(
+                                                            color: Color(
+                                                              0xFF272E41,
+                                                            ),
+                                                            fontSize: 14,
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(height: 10),
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Column(
+                                                  // mainAxisAlignment:
+                                                  //     MainAxisAlignment.start,
+                                                  children: const [
+                                                    Icon(
+                                                      Icons.download_rounded,
+                                                      color: Color(0xFF546088),
+                                                    ),
+                                                    // Container(
+                                                    //   width: 2,
+                                                    //   height: Get.height * 0.01,
+                                                    //   color: Color(0xFF546088),
+                                                    // ),
+                                                  ],
+                                                ),
+                                                const SizedBox(width: 20),
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    SizedBox(
+                                                      width: Get.width * 0.15,
+                                                      child: const Text(
+                                                        'OR IMPORT YOUR DETAILS FROM',
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          fontSize: 16,
+                                                          color: Colors.white,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(height: 10),
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Column(
+                                                  // mainAxisAlignment:
+                                                  //     MainAxisAlignment.start,
+                                                  children: [
+                                                    const SizedBox(width: 24),
+                                                    Container(
+                                                      width: 2,
+                                                      height:
+                                                          Get.height * 0.078,
+                                                      color: const Color(
+                                                          0xFF546088),
+                                                    ),
+                                                  ],
+                                                ),
+                                                const SizedBox(width: 10),
+                                                SizedBox(
+                                                  width: Get.width * 0.15,
+                                                  child: Row(
+                                                    children: [
+                                                      Flexible(
+                                                        child: Container(
+                                                          height: 36,
+                                                          width: 80,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: const Color(
+                                                                0xFF344F8D),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        2),
+                                                          ),
+                                                          child: const Center(
+                                                            child: Image(
+                                                              image: AssetImage(
+                                                                'assets/icons/fb.png',
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      const SizedBox(width: 5),
+                                                      Flexible(
+                                                        child: Container(
+                                                          height: 36,
+                                                          width: 80,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: const Color(
+                                                                0xFFD63B30),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        2),
+                                                          ),
+                                                          child: const Center(
+                                                            child: Image(
+                                                              image: AssetImage(
+                                                                'assets/icons/gp.png',
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      const SizedBox(width: 5),
+                                                      Flexible(
+                                                        child: Container(
+                                                          height: 36,
+                                                          width: 80,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: const Color(
+                                                                0xFF04595B),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        2),
+                                                          ),
+                                                          child: const Center(
+                                                            child: Image(
+                                                              image: AssetImage(
+                                                                'assets/icons/x.png',
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 25,
+                                ),
+                                SizedBox(
+                                  height: 280,
+                                  width: 336,
+                                  child: const Image(
+                                    fit: BoxFit.cover,
+                                    image: AssetImage(
+                                      'assets/images/Bannerimage.png',
                                     ),
-                                  ],
+                                  ),
                                 ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Container(),
+                    Container(),
+                    Container(),
+                    Container(),
+                  ],
+                ),
+              ),
+            )
+          : Scaffold(
+              appBar: PreferredSize(
+                preferredSize: const Size.fromHeight(46),
+                child: Container(
+                  height: 46,
+                  width: Get.width,
+                  color: ColorPicker.kPrimaryLight1,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Image(
+                          image: AssetImage('assets/icons/logo1.png'),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                        child: Container(
+                          margin: const EdgeInsets.all(4),
+                          decoration: BoxDecoration(
+                            color: ColorPicker.kPrimaryLight1,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: TextFormField(
+                            cursorColor: Colors.white,
+                            style: FontTextStyle.kWhitePR,
+                            decoration: InputDecoration(
+                              hintStyle: const TextStyle(
+                                color: ColorPicker.kPrimaryLightBlue,
                               ),
-                              SizedBox(
-                                height: 25,
+                              filled: true,
+                              fillColor: ColorPicker.kPrimaryLight,
+                              hintText: "Search",
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide:
+                                    const BorderSide(color: Colors.transparent),
                               ),
-                              Container(
-                                height: 280,
-                                width: 336,
-                                child: Image(
-                                  fit: BoxFit.cover,
-                                  image: AssetImage(
-                                      'assets/images/Bannerimage.png'),
-                                ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide:
+                                    const BorderSide(color: Colors.transparent),
                               ),
-                            ],
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide:
+                                    const BorderSide(color: Colors.transparent),
+                              ),
+                              prefixIcon: const Icon(
+                                Icons.search,
+                                color: ColorPicker.kPrimaryLightBlue,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: Get.width * 0.01,
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'assets/icons/menu.png',
+                            height: 18,
+                            width: 25,
+                            fit: BoxFit.cover,
+                            color: ColorPicker.kPrimaryLightBlue,
+                          ),
+                          SB.SH5(),
+                          CommonWidget.text(
+                            'MENU',
+                            style: FontTextStyle.kPrimaryLightBlue9W700SSP,
                           ),
                         ],
                       ),
-                    ),
+                      SizedBox(
+                        width: Get.width * 0.01,
+                      ),
+                    ],
                   ),
-                  Container(),
-                  Container(),
-                  Container(),
-                  Container(),
-                ],
-              ),
-            ))
-          : Scaffold(
-              appBar: PreferredSize(
-                preferredSize: Size.fromHeight(46),
-                child: Container(
-                    height: 46,
-                    width: Get.width,
-                    color: ColorPicker.kPrimaryLight1,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Image(
-                            image: AssetImage('assets/icons/logo1.png'),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Expanded(
-                          child: Container(
-                            margin: EdgeInsets.all(4),
-                            decoration: BoxDecoration(
-                                color: ColorPicker.kPrimaryLight1,
-                                borderRadius: BorderRadius.circular(8)),
-                            child: TextFormField(
-                              cursorColor: Colors.white,
-                              style: FontTextStyle.kWhitePR,
-                              decoration: InputDecoration(
-                                hintStyle: TextStyle(
-                                  color: ColorPicker.kPrimaryLightBlue,
-                                ),
-                                filled: true,
-                                fillColor: ColorPicker.kPrimaryLight,
-                                hintText: "Search",
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                  borderSide:
-                                      BorderSide(color: Colors.transparent),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                  borderSide:
-                                      BorderSide(color: Colors.transparent),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                  borderSide:
-                                      BorderSide(color: Colors.transparent),
-                                ),
-                                prefixIcon: Icon(
-                                  Icons.search,
-                                  color: ColorPicker.kPrimaryLightBlue,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: Get.width * 0.01,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              'assets/icons/menu.png',
-                              height: 18,
-                              width: 25,
-                              fit: BoxFit.cover,
-                              color: ColorPicker.kPrimaryLightBlue,
-                            ),
-                            SB.SH5(),
-                            CommonWidget.text('MENU',
-                                style: FontTextStyle.kPrimaryLightBlue9W700SSP),
-                          ],
-                        ),
-                        SizedBox(
-                          width: Get.width * 0.01,
-                        ),
-                      ],
-                    )),
+                ),
               ),
               body: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 child: Column(
                   children: [
-                    Container(
+                    SizedBox(
                       height: Get.width * 0.8,
                       width: Get.width,
                       child: PageView.builder(
                         onPageChanged: (value) {
-                          print('-value----${value}');
+                          debugPrint('-value----$value');
                           setState(() {
                             indexCircle = value;
                           });
@@ -1273,11 +1344,12 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                             width: Get.width,
                             // width: 200,
 
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                              image: AssetImage('assets/images/slider1.png'),
-                              fit: BoxFit.fitHeight,
-                            )),
+                            decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage('assets/images/slider1.png'),
+                                fit: BoxFit.fitHeight,
+                              ),
+                            ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.end,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -1288,7 +1360,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                 ),
                                 SizedBox(height: Get.width * 0.02),
                                 Padding(
-                                  padding: EdgeInsets.only(right: 8.0),
+                                  padding: const EdgeInsets.only(right: 8.0),
                                   child: CommonWidget.text(
                                     '5 Steps for Travel Brands to Build a Brand Ambassador Program',
                                     style: FontTextStyle.kWhite26W400SSP,
@@ -1321,25 +1393,26 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                       ),
                     ),
                     Container(
-                        margin: EdgeInsets.symmetric(vertical: 10),
-                        padding: EdgeInsets.symmetric(vertical: 1),
-                        alignment: Alignment.center,
-                        height: 15,
-                        width: Get.width,
-                        // color: Colors.red,
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          itemCount: 3,
-                          itemBuilder: (context, index) {
-                            return CircleAvatar(
-                              // foregroundColor: Colors.red,
-                              backgroundColor: index == indexCircle
-                                  ? Color(0xFF33A3FE)
-                                  : Color(0xFFB5BDC2),
-                            );
-                          },
-                        )),
+                      margin: const EdgeInsets.symmetric(vertical: 10),
+                      padding: const EdgeInsets.symmetric(vertical: 1),
+                      alignment: Alignment.center,
+                      height: 15,
+                      width: Get.width,
+                      // color: Colors.red,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemCount: 3,
+                        itemBuilder: (context, index) {
+                          return CircleAvatar(
+                            // foregroundColor: Colors.red,
+                            backgroundColor: index == indexCircle
+                                ? const Color(0xFF33A3FE)
+                                : const Color(0xFFB5BDC2),
+                          );
+                        },
+                      ),
+                    ),
                     ExpansionTile(
                       title: CommonWidget.text(
                         'Categories',
@@ -1351,8 +1424,10 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                       children: [
                         Container(
                           alignment: Alignment.centerLeft,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 15),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 15,
+                          ),
                           width: 200,
                           child: CommonWidget.text(
                             'Hotels and resorts',
@@ -1361,8 +1436,10 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                         ),
                         Container(
                           alignment: Alignment.centerLeft,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 15),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 15,
+                          ),
                           width: 200,
                           child: CommonWidget.text(
                             'Food and beverage',
@@ -1371,8 +1448,10 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                         ),
                         Container(
                           alignment: Alignment.centerLeft,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 15),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 15,
+                          ),
                           width: 200,
                           child: CommonWidget.text(
                             'Spa',
@@ -1381,8 +1460,10 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                         ),
                         Container(
                           alignment: Alignment.centerLeft,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 15),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 15,
+                          ),
                           width: 200,
                           child: CommonWidget.text(
                             'Tourism',
@@ -1391,8 +1472,10 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                         ),
                         Container(
                           alignment: Alignment.centerLeft,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 15),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 15,
+                          ),
                           width: 200,
                           child: CommonWidget.text(
                             'Apartments',
@@ -1401,8 +1484,10 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                         ),
                         Container(
                           alignment: Alignment.centerLeft,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 15),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 15,
+                          ),
                           width: 200,
                           child: CommonWidget.text(
                             'Tours',
@@ -1411,8 +1496,10 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                         ),
                         Container(
                           alignment: Alignment.centerLeft,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 15),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 15,
+                          ),
                           width: 200,
                           child: CommonWidget.text(
                             'Leisure',
@@ -1421,8 +1508,10 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                         ),
                         Container(
                           alignment: Alignment.centerLeft,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 15),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 15,
+                          ),
                           width: 200,
                           child: CommonWidget.text(
                             'Boutique Hotels',
@@ -1431,8 +1520,10 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                         ),
                         Container(
                           alignment: Alignment.centerLeft,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 15),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 15,
+                          ),
                           width: 200,
                           child: CommonWidget.text(
                             '+ Show more',
@@ -1451,18 +1542,20 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                           Positioned(
                             top: 0,
                             left: 0,
-                            child: Container(
+                            child: SizedBox(
                               // height: Get.height * 0.3,
                               width: Get.width * 0.3,
-                              child: Image(
-                                  image: AssetImage('assets/images/round.png'),
-                                  fit: BoxFit.fitWidth),
+                              child: const Image(
+                                image: AssetImage('assets/images/round.png'),
+                                fit: BoxFit.fitWidth,
+                              ),
                             ),
                           ),
                           Padding(
                             padding: EdgeInsets.symmetric(
-                                horizontal: Get.width * 0.08,
-                                vertical: Get.width * 0.15),
+                              horizontal: Get.width * 0.08,
+                              vertical: Get.width * 0.15,
+                            ),
                             child: Column(
                               children: [
                                 Row(
@@ -1473,7 +1566,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                         // mainAxisAlignment:
                                         //     MainAxisAlignment.start,
                                         children: [
-                                          Icon(
+                                          const Icon(
                                             Icons.apartment_rounded,
                                             color: ColorPicker.kPrimaryLight3,
                                           ),
@@ -1514,7 +1607,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                       // mainAxisAlignment:
                                       //     MainAxisAlignment.start,
                                       children: [
-                                        Icon(
+                                        const Icon(
                                           Icons.verified,
                                           color: ColorPicker.kPrimaryLight3,
                                         ),
@@ -1546,7 +1639,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: 10),
+                                const SizedBox(height: 10),
                                 Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -1554,7 +1647,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                       // mainAxisAlignment:
                                       //     MainAxisAlignment.start,
                                       children: [
-                                        Icon(
+                                        const Icon(
                                           Icons.verified,
                                           color: ColorPicker.kPrimaryLight3,
                                         ),
@@ -1586,7 +1679,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: 10),
+                                const SizedBox(height: 10),
                                 Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -1594,7 +1687,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                       // mainAxisAlignment:
                                       //     MainAxisAlignment.start,
                                       children: [
-                                        Icon(
+                                        const Icon(
                                           Icons.verified,
                                           color: ColorPicker.kPrimaryLight3,
                                         ),
@@ -1633,7 +1726,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                       // mainAxisAlignment:
                                       //     MainAxisAlignment.start,
                                       children: [
-                                        SizedBox(width: 24),
+                                        const SizedBox(width: 24),
                                         Container(
                                           width: 2,
                                           height: Get.height * 0.078,
@@ -1643,41 +1736,42 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                     ),
                                     SizedBox(width: Get.width * 0.03),
                                     Container(
-                                        height: 36,
-                                        width: Get.width * 0.6,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(2),
+                                      height: 36,
+                                      width: Get.width * 0.6,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(2),
+                                      ),
+                                      child: Center(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            const Icon(
+                                              Icons.person_add,
+                                              size: 15,
+                                              color: ColorPicker.kBlueDark1,
+                                            ),
+                                            SB.SW5(),
+                                            CommonWidget.text(
+                                              'Sign up now. It’s free',
+                                              style: FontTextStyle
+                                                  .kBlueDark114W600SSP,
+                                            ),
+                                          ],
                                         ),
-                                        child: Center(
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Icon(Icons.person_add,
-                                                  size: 15,
-                                                  color:
-                                                      ColorPicker.kBlueDark1),
-                                              SB.SW5(),
-                                              CommonWidget.text(
-                                                'Sign up now. It’s free',
-                                                style: FontTextStyle
-                                                    .kBlueDark114W600SSP,
-                                              ),
-                                            ],
-                                          ),
-                                        )),
+                                      ),
+                                    ),
                                   ],
                                 ),
-                                SizedBox(height: 10),
+                                const SizedBox(height: 10),
                                 Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Column(
                                       // mainAxisAlignment:
                                       //     MainAxisAlignment.start,
-                                      children: [
+                                      children: const [
                                         Icon(
                                           Icons.download_rounded,
                                           color: ColorPicker.kPrimaryLight3,
@@ -1732,7 +1826,8 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                               ),
                                               child: Center(
                                                 child: Image.asset(
-                                                    'assets/icons/fb.png'),
+                                                  'assets/icons/fb.png',
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -1747,7 +1842,8 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                               ),
                                               child: Center(
                                                 child: Image.asset(
-                                                    'assets/icons/gp.png'),
+                                                  'assets/icons/gp.png',
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -1756,13 +1852,14 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                             child: Container(
                                               height: Get.height * 0.05,
                                               decoration: BoxDecoration(
-                                                color: Color(0xFF04595B),
+                                                color: const Color(0xFF04595B),
                                                 borderRadius:
                                                     BorderRadius.circular(2),
                                               ),
                                               child: Center(
                                                 child: Image.asset(
-                                                    'assets/icons/x.png'),
+                                                  'assets/icons/x.png',
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -1781,17 +1878,17 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                     ListView.builder(
                       itemCount: data.length,
                       shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
                         return InkWell(
                           onTap: () {
-                            print('hello');
+                            debugPrint('hello');
                             Navigator.of(context)
                                 .pushNamed(NewsSingleLoggedInScreen.route);
                           },
                           child: Container(
-                            padding: EdgeInsets.all(10),
-                            margin: EdgeInsets.only(bottom: 10),
+                            padding: const EdgeInsets.all(10),
+                            margin: const EdgeInsets.only(bottom: 10),
                             color: Colors.white,
                             child: ListView(
                               shrinkWrap: true,
@@ -1834,20 +1931,20 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                       ),
                                     ),
                                     SB.SH10(),
-                                    data[index]['text2'].toString().isEmpty
-                                        ? SizedBox()
-                                        : Container(
-                                            padding: EdgeInsets.all(5),
-                                            child: CommonWidget.text(
-                                                'MEMBERS ONLY',
-                                                style: FontTextStyle
-                                                    .kRed210W700SSP),
-                                            decoration: BoxDecoration(
-                                              color: ColorPicker.kRedlight,
-                                              borderRadius:
-                                                  BorderRadius.circular(2),
-                                            ),
-                                          ),
+                                    if (data[index]['text2'].toString().isEmpty)
+                                      SizedBox()
+                                    else
+                                      Container(
+                                        padding: EdgeInsets.all(5),
+                                        child: CommonWidget.text('MEMBERS ONLY',
+                                            style:
+                                                FontTextStyle.kRed210W700SSP),
+                                        decoration: BoxDecoration(
+                                          color: ColorPicker.kRedlight,
+                                          borderRadius:
+                                              BorderRadius.circular(2),
+                                        ),
+                                      ),
                                   ],
                                 ),
                               ],
@@ -1862,25 +1959,26 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                     Container(
                       height: 52,
                       width: 119,
+                      decoration: BoxDecoration(
+                        color: ColorPicker.kBlueLight1,
+                        borderRadius: BorderRadius.circular(2),
+                      ),
                       child: Center(
                           child: CommonWidget.text(
                         'LOAD MORE',
                         style: FontTextStyle.kWhite14W600SSP,
                       )),
-                      decoration: BoxDecoration(
-                          color: ColorPicker.kBlueLight1,
-                          borderRadius: BorderRadius.circular(2)),
                     ),
                     SB.SH20(),
 
                     ///Banner Image
                     Container(
-                      padding: EdgeInsets.all(10),
-                      margin: EdgeInsets.only(bottom: 10),
+                      padding: const EdgeInsets.all(10),
+                      margin: const EdgeInsets.only(bottom: 10),
                       height: Get.width * 0.8,
                       width: Get.width,
                       color: Colors.white,
-                      child: Image(
+                      child: const Image(
                         image: AssetImage('assets/images/BannerImage.png'),
                         fit: BoxFit.cover,
                       ),

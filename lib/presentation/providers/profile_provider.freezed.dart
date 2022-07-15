@@ -10,7 +10,8 @@ part of 'profile_provider.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods',
+);
 
 /// @nodoc
 class _$AppNotificationStateTearOff {
@@ -68,9 +69,10 @@ mixin _$AppNotificationState {
 
 /// @nodoc
 abstract class $AppNotificationStateCopyWith<$Res> {
-  factory $AppNotificationStateCopyWith(AppNotificationState value,
-          $Res Function(AppNotificationState) then) =
-      _$AppNotificationStateCopyWithImpl<$Res>;
+  factory $AppNotificationStateCopyWith(
+    AppNotificationState value,
+    $Res Function(AppNotificationState) then,
+  ) = _$AppNotificationStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -86,8 +88,9 @@ class _$AppNotificationStateCopyWithImpl<$Res>
 /// @nodoc
 abstract class _$ShowNothingCopyWith<$Res> {
   factory _$ShowNothingCopyWith(
-          _ShowNothing value, $Res Function(_ShowNothing) then) =
-      __$ShowNothingCopyWithImpl<$Res>;
+    _ShowNothing value,
+    $Res Function(_ShowNothing) then,
+  ) = __$ShowNothingCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -95,8 +98,9 @@ class __$ShowNothingCopyWithImpl<$Res>
     extends _$AppNotificationStateCopyWithImpl<$Res>
     implements _$ShowNothingCopyWith<$Res> {
   __$ShowNothingCopyWithImpl(
-      _ShowNothing _value, $Res Function(_ShowNothing) _then)
-      : super(_value, (v) => _then(v as _ShowNothing));
+    _ShowNothing _value,
+    $Res Function(_ShowNothing) _then,
+  ) : super(_value, (v) => _then(v as _ShowNothing));
 
   @override
   _ShowNothing get _value => super._value as _ShowNothing;
@@ -279,8 +283,9 @@ abstract class _Sucess extends AppNotificationState {
 /// @nodoc
 abstract class _$ProfileCompletionCopyWith<$Res> {
   factory _$ProfileCompletionCopyWith(
-          _ProfileCompletion value, $Res Function(_ProfileCompletion) then) =
-      __$ProfileCompletionCopyWithImpl<$Res>;
+    _ProfileCompletion value,
+    $Res Function(_ProfileCompletion) then,
+  ) = __$ProfileCompletionCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -288,8 +293,9 @@ class __$ProfileCompletionCopyWithImpl<$Res>
     extends _$AppNotificationStateCopyWithImpl<$Res>
     implements _$ProfileCompletionCopyWith<$Res> {
   __$ProfileCompletionCopyWithImpl(
-      _ProfileCompletion _value, $Res Function(_ProfileCompletion) _then)
-      : super(_value, (v) => _then(v as _ProfileCompletion));
+    _ProfileCompletion _value,
+    $Res Function(_ProfileCompletion) _then,
+  ) : super(_value, (v) => _then(v as _ProfileCompletion));
 
   @override
   _ProfileCompletion get _value => super._value as _ProfileCompletion;
@@ -310,7 +316,8 @@ class _$_ProfileCompletion extends _ProfileCompletion
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties.add(
-        DiagnosticsProperty('type', 'AppNotificationState.profileCompletion'));
+      DiagnosticsProperty('type', 'AppNotificationState.profileCompletion'),
+    );
   }
 
   @override

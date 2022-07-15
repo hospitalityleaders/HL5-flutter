@@ -15,7 +15,7 @@ class ConnectionsComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: Styles.boxDecoration.copyWith(color: Cr.whiteColor),
+      decoration: boxDecoration.copyWith(color: Cr.whiteColor),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,

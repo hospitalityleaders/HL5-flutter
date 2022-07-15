@@ -251,8 +251,8 @@ final countries = {
 
 const List<String> monthList = <String>[
   "January",
-  "February"
-      "March",
+  "February",
+  "March",
   "April",
   "May",
   "June",

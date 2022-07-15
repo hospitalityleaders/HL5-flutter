@@ -45,7 +45,6 @@ class CustomExpandedTileThemeData {
   final EdgeInsetsGeometry? contentPadding;
   final double? contentRadius;
   const CustomExpandedTileThemeData({
-    key,
     this.headerColor = const Color(0xfffafafa),
     this.headerSplashColor = const Color(0xffeeeeee),
     this.headerPadding = const EdgeInsets.all(16.0),

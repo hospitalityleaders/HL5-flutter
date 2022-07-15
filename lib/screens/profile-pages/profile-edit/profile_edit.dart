@@ -99,7 +99,7 @@ class _EditButtonState extends State<EditButton> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        print('tap it');
+        debugPrint('tap it');
         widget.onChanged(widget.isEditable);
 
         widget.callBackHeader(

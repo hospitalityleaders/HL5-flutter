@@ -163,22 +163,21 @@ class __SingleAchievementState extends State<_SingleAchievement> {
     _achievementTitleController = TextEditingController(text: achievement.title)
       ..addListener(() {
         setState(() {
-          achievement.title = _achievementTitleController.text.toString();
+          achievement.title = _achievementTitleController.text;
         });
       });
     _issuingEntityController =
         TextEditingController(text: achievement.issuingEntity)
           ..addListener(() {
             setState(() {
-              achievement.issuingEntity =
-                  _issuingEntityController.text.toString();
+              achievement.issuingEntity = _issuingEntityController.text;
             });
           });
 
     _awardWebsiteController = TextEditingController(text: achievement.website)
       ..addListener(() {
         setState(() {
-          achievement.website = _awardWebsiteController.text.toString();
+          achievement.website = _awardWebsiteController.text;
         });
       });
 
@@ -213,7 +212,7 @@ class __SingleAchievementState extends State<_SingleAchievement> {
 
   @override
   Widget build(BuildContext context) {
-    // print('type: ${achievementTypes.toString()}');
+    // debugPrint('type: ${achievementTypes.toString()}');
     return CustomExpandedTile(
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -340,7 +339,7 @@ class __SingleAchievementState extends State<_SingleAchievement> {
 
                         achievement.dateReceived =
                             DateTime.parse('${value.toString()}-07-01');
-                        print(
+                        debugPrint(
                           'date ${DateTime.parse('${value.toString()}-07-01T19:10:35+02:00')}',
                         );
                       });

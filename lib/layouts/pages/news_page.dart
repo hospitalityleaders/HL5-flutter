@@ -40,10 +40,10 @@ class NewsPage extends StatelessWidget {
         future: Get.put(HoledoDatabase().news).getArticle(slug: slug),
         builder: (context, AsyncSnapshot<Article> snapshot) {
           if (!snapshot.hasData) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
-          } else
+          } else {
             return ListView.builder(
               itemCount: 1,
               itemBuilder: (BuildContext context, index) => Card(
@@ -53,14 +53,14 @@ class NewsPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      if (snapshot.data!.bannerImage!.length != 0)
+                      if (snapshot.data!.bannerImage!.isNotEmpty)
                         Container(
                           decoration: BoxDecoration(
                             image: DecorationImage(
                               image: NetworkImage(
-                                  snapshot.data!.bannerImage.toString()),
+                                snapshot.data!.bannerImage.toString(),
+                              ),
                               fit: BoxFit.cover,
-                              repeat: ImageRepeat.noRepeat,
                             ),
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(0),
@@ -68,37 +68,39 @@ class NewsPage extends StatelessWidget {
                           height: 300,
                           child: snapshot.data!.bannerImage != null
                               ? null
-                              : Icon(
+                              : const Icon(
                                   CupertinoIcons.news,
                                   size: 55,
                                   color: Colors.grey,
                                 ),
                         ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       Text(
                         snapshot.data!.title.toString(),
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       Text(
                         snapshot.data!.toString(),
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       SingleChildScrollView(
-                          child: Html(
-                        data: snapshot.data!.content,
-                      )),
+                        child: Html(
+                          data: snapshot.data!.content,
+                        ),
+                      ),
                     ],
                   ),
                 ),
               ),
             );
+          }
         },
       ),
     );
@@ -112,19 +114,19 @@ class NewsPageASD extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('slug:?? ${slug}');
+    debugPrint('slug:?? $slug');
 
     final featuredNews = holedoDatabase.news.fetchArticles(context: context);
     final tabs = Get.put(HoledoDatabase())
         .articleCategories
         .where((category) => category.menuItem == true);
 
-    print('articles: ${featuredNews.toString()}');
+    debugPrint('articles: ${featuredNews.toString()}');
 
-    print('categoriess: ${tabs.toString()}');
+    debugPrint('categoriess: ${tabs.toString()}');
     return PageScaffold(
       title: 'ASDASDe',
-      body: Text('slug:?? ${slug} '),
+      body: Text('slug:?? $slug '),
     );
   }
 }

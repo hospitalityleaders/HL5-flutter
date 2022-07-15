@@ -154,7 +154,7 @@ class _SingleExperienceWidgetState extends State<_SingleExperienceWidget> {
       padding: EdgeInsets.only(bottom: widget.isLast ? 0 : Di.PSS),
       child: Container(
         width: (widget.isTablet || widget.isMobile) ? double.infinity : 360,
-        decoration: Styles.boxDecoration.copyWith(color: Cr.whiteColor),
+        decoration: boxDecoration.copyWith(color: Cr.whiteColor),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

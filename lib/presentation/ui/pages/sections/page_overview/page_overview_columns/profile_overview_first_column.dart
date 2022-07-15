@@ -73,9 +73,9 @@ class _ProfileSummaryComponentState extends State<ProfileSummaryComponent> {
 
     return Container(
       margin: const EdgeInsets.only(bottom: Di.PSD),
-      decoration: Styles.boxDecoration.copyWith(
+      decoration: boxDecoration.copyWith(
         color: Cr.whiteColor,
-        boxShadow: Styles.defaultBoxShadow,
+        boxShadow: defaultBoxShadow,
       ),
       child: Stack(
         children: [
@@ -208,7 +208,7 @@ class _AreasOfExpertiseComponentsState
   Widget build(BuildContext context) {
     final expertise = DbData.getUserProfileData.expertise;
     return DecoratedBox(
-      decoration: Styles.boxDecorationWithShadow.copyWith(color: Cr.whiteColor),
+      decoration: boxDecorationWithShadow.copyWith(color: Cr.whiteColor),
       child: Stack(
         children: [
           Column(

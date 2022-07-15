@@ -234,11 +234,8 @@ class _ProfileImageBannerState extends ConsumerState<ProfileImageBanner> {
                 onPressed: () {
                   showCustomDialog(
                     context,
-                    Container(
-                      // margin: const EdgeInsets.symmetric(vertical: 100),
-                      child: ProfileEditDialogWidget(
-                        userProfileData: widget.userProfileData,
-                      ),
+                    ProfileEditDialogWidget(
+                      userProfileData: widget.userProfileData,
                     ),
                   );
                 },
@@ -277,7 +274,7 @@ class _ProfileImageBannerState extends ConsumerState<ProfileImageBanner> {
 //     return Container(
 //       width: doubleWidthHeight ?? 75,
 //       height: doubleWidthHeight ?? 75,
-//       decoration: Styles.boxDecorationRounded.copyWith(
+//       decoration: boxDecorationRounded.copyWith(
 //         image: DecorationImage(
 //           image:
 //               NetworkImage(DbData.getUserProfileData.avatar?.toString() ?? ""),
@@ -291,5 +288,3 @@ class _ProfileImageBannerState extends ConsumerState<ProfileImageBanner> {
 // "assets/svgicons/card-account-phone.svg",
 // "Contact card",
 //
-
-

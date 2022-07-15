@@ -30,4 +30,3 @@ bool isTableOrMobile(BuildContext context) {
 //   return Di.getScreenSize(context).width < 1000 &&
 //       Di.getScreenSize(context).width > 470;
 // }
-

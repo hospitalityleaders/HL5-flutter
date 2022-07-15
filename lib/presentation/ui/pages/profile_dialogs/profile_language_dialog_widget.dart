@@ -41,7 +41,7 @@ class _ProfileLanguagesDialogWidgetState
               height: 46,
               decoration: BoxDecoration(
                 color: Cr.whiteColor,
-                boxShadow: Styles.defaultBoxShadow,
+                boxShadow: defaultBoxShadow,
               ),
               child: Center(
                 child: Padding(
@@ -221,7 +221,7 @@ class _ProfileLanguagesDialogWidgetState
                   style: bodySmallRegular.copyWith(
                     color: Cr.darkGrey1,
                   ),
-                  decoration: Styles.popUpDialogTextFieldInputDecoration,
+                  decoration: popUpDialogTextFieldInputDecoration,
                 ),
               ),
               const SizedBox(width: 18),
@@ -229,7 +229,7 @@ class _ProfileLanguagesDialogWidgetState
                 width: 335,
                 height: 36,
                 child: DropdownButtonFormField2(
-                  decoration: Styles.popUpDialogTextFieldInputDecoration,
+                  decoration: popUpDialogTextFieldInputDecoration,
                   isExpanded: true,
                   hint: Text(
                     'Select Proficiency',

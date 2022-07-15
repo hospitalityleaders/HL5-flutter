@@ -5,7 +5,7 @@ import 'package:holedo/constant/sizedbox.dart';
 
 class DropDownButton extends StatefulWidget {
   final List menuList;
-  final hintText;
+  final String? hintText;
 
   DropDownButton({
     Key? key,

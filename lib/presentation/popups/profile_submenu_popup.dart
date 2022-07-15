@@ -43,14 +43,14 @@ class ProfileSubMenuPopup extends StatelessWidget {
                     onTap: () async {
                       Provider.of<ProfileProvider>(context, listen: false)
                           .changeProfileSubMenuClicked(true);
-                      print("loging out");
+                      debugPrint("loging out");
                       Routemaster.of(context).push("/login");
 
                       // ApiServices _apiServices = ApiServices();
                       // await _apiServices.logout(
                       //     '${Get.put(AuthController()).restoreModel().token}');
                       // Routemaster.of(context).push("/login");
-                      print("loging out ss");
+                      debugPrint("loging out ss");
                     },
                   ),
                 ],

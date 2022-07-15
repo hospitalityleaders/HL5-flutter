@@ -103,7 +103,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                                   onTap: () {
                                     setState(() {
                                       isShowingPopUpCard = !isShowingPopUpCard;
-                                      print(isShowingPopUpCard);
+                                      debugPrint(isShowingPopUpCard.toString());
                                     });
                                   },
                                   onHover: (value) {
@@ -243,50 +243,78 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
           ),
         ),
         showIcon
-            ? Positioned(top: 50,right: 10,
+            ? Positioned(
+                top: 50,
+                right: 10,
                 child: Visibility(
-                visible: isShowingPopUpCard,
-                child: Column(
-                  children: [
-
-                    Align(
-                      alignment: Alignment(.35, 0),
-                      child: ClipPath(
-                        clipper: ArrowClipper(),
-                        child: Container(
-                          height: 15,
-                          width: 12,
-                          decoration: BoxDecoration(
-                            color: ColorPicker.kGreyLight7.withOpacity(0.5),
+                  visible: isShowingPopUpCard,
+                  child: Column(
+                    children: [
+                      Align(
+                        alignment: Alignment(.35, 0),
+                        child: ClipPath(
+                          clipper: ArrowClipper(),
+                          child: Container(
+                            height: 15,
+                            width: 12,
+                            decoration: BoxDecoration(
+                              color: ColorPicker.kGreyLight7.withOpacity(0.5),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    Align(
-                      alignment: Alignment(.25, .12),
-                      child:Container(color: ColorPicker.kWhite,child: Column(children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            children: [
-                              Icon(Icons.menu,color: ColorPicker.kBlueLight1,size: 10,),
-                              SS.sB(0,7.5),
-                              Text('View in timeline',style: FontTextStyle.kBlueLight114W400SSP,),
-                            ],
-                          ),
-                        ),
-                       Divider(height: 0.5,color: Colors.grey,),
-                       Padding(
-                         padding: const EdgeInsets.all(8.0),
-                         child: Row(children: [ Icon(Icons.menu,color: ColorPicker.kBlueLight1,size: 10,),SS.sB(0,7.5),
-                           Text('View in timeline',style: FontTextStyle.kBlueLight114W400SSP,),],),
-                       )
-                      ],),)
-
-                    )
-                  ],
-                ),
-              ))
+                      Align(
+                          alignment: Alignment(.25, .12),
+                          child: Container(
+                            color: ColorPicker.kWhite,
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.menu,
+                                        color: ColorPicker.kBlueLight1,
+                                        size: 10,
+                                      ),
+                                      SS.sB(0, 7.5),
+                                      Text(
+                                        'View in timeline',
+                                        style:
+                                            FontTextStyle.kBlueLight114W400SSP,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Divider(
+                                  height: 0.5,
+                                  color: Colors.grey,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.menu,
+                                        color: ColorPicker.kBlueLight1,
+                                        size: 10,
+                                      ),
+                                      SS.sB(0, 7.5),
+                                      Text(
+                                        'View in timeline',
+                                        style:
+                                            FontTextStyle.kBlueLight114W400SSP,
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ))
+                    ],
+                  ),
+                ))
             : Container(),
         widget.sec2IsEditable as bool
             ? ProfileEdit.buildProfileEdit(
@@ -320,10 +348,10 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
         padding: EdgeInsets.symmetric(vertical: 5, horizontal: 16),
         child: Container(
           width: Responsive.isDesktop(context)
-              ? SS.sW(context) * .50 as double
+              ? SS.sW(context) * .50
               : Responsive.isMobile(context)
-                  ? SS.sW(context) * .90 as double
-                  : SS.sW(context) * .60 as double,
+                  ? SS.sW(context) * .90
+                  : SS.sW(context) * .60,
           color: ColorPicker.kWhite,
           child: SingleChildScrollView(
             child: Column(
@@ -362,7 +390,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                         child: Column(
                           children: [
                             Divider(
-                              height: SS.sH(context) * 0.01 as double,
+                              height: SS.sH(context) * 0.01,
                               color: ColorPicker.kGreyLight3,
                             ),
                             Padding(
@@ -371,19 +399,19 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   TextFieldAndFieldName.buildFieldName(
-                                      'Title / position', '*') as Widget,
+                                      'Title / position', '*'),
                                   TextFieldAndFieldName.buildTextField(
-                                      'General manager') as Widget,
+                                      'General manager'),
                                   TextFieldAndFieldName.buildFieldName(
-                                      'Company name', '*') as Widget,
+                                      'Company name', '*'),
                                   TextFieldAndFieldName.buildTextField(
-                                      'Fairmont Zimbali Resort') as Widget,
+                                      'Fairmont Zimbali Resort'),
                                   TextFieldAndFieldName.buildFieldName(
-                                      'Company website') as Widget,
+                                      'Company website'),
                                   TextFieldAndFieldName.buildTextField(
-                                      'www.fairmontzimbali.com') as Widget,
+                                      'www.fairmontzimbali.com'),
                                   TextFieldAndFieldName.buildFieldName(
-                                      'Job description') as Widget,
+                                      'Job description'),
                                   Padding(
                                     padding: EdgeInsets.all(8.0),
                                     child: TextField(
@@ -433,10 +461,10 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
               child: Container(
                 color: ColorPicker.kGreyLight3,
                 width: Responsive.isDesktop(context)
-                    ? SS.sW(context) * .50 as double
+                    ? SS.sW(context) * .50
                     : Responsive.isMobile(context)
-                        ? SS.sW(context) * .90 as double
-                        : SS.sW(context) * .60 as double,
+                        ? SS.sW(context) * .90
+                        : SS.sW(context) * .60,
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
@@ -489,18 +517,16 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
   Widget buildEduInnerCard(
       bool isEducationEditable, bool isEducationShowCard, int indexEdu) {
     return StatefulBuilder(builder: (context, setState) {
-      List<Widget> eduTextFieldGenerate = List.generate(
-          indexEdu,
-          (int i) =>
-              TextFieldAndFieldName.buildTextField('Course name') as Widget);
+      List<Widget> eduTextFieldGenerate = List.generate(indexEdu,
+          (int i) => TextFieldAndFieldName.buildTextField('Course name'));
       return Padding(
         padding: EdgeInsets.symmetric(vertical: 5, horizontal: 16),
         child: Container(
           width: Responsive.isDesktop(context)
-              ? SS.sW(context) * .50 as double
+              ? SS.sW(context) * .50
               : Responsive.isMobile(context)
-                  ? SS.sW(context) * .90 as double
-                  : SS.sW(context) * .60 as double,
+                  ? SS.sW(context) * .90
+                  : SS.sW(context) * .60,
           color: ColorPicker.kWhite,
           child: SingleChildScrollView(
             child: Column(
@@ -536,7 +562,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                         child: Column(
                           children: [
                             Divider(
-                              height: SS.sH(context) * 0.01 as double,
+                              height: SS.sH(context) * 0.01,
                               color: ColorPicker.kGreyLight3,
                             ),
                             Padding(
@@ -545,17 +571,15 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   TextFieldAndFieldName.buildFieldName(
-                                      'Educational institution', '*') as Widget,
-                                  TextFieldAndFieldName.buildTextField()
-                                      as Widget,
+                                      'Educational institution', '*'),
+                                  TextFieldAndFieldName.buildTextField(),
                                   TextFieldAndFieldName.buildFieldName(
-                                      'Course duration') as Widget,
+                                      'Course duration'),
                                   TextFieldAndFieldName.buildFieldName(
-                                      'Qualification title') as Widget,
-                                  TextFieldAndFieldName.buildTextField()
-                                      as Widget,
+                                      'Qualification title'),
+                                  TextFieldAndFieldName.buildTextField(),
                                   TextFieldAndFieldName.buildFieldName(
-                                      'Description') as Widget,
+                                      'Description'),
                                   TextField(
                                     autocorrect: true,
                                     minLines: 4,
@@ -568,7 +592,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                                   ),
                                   SS.sB(18),
                                   TextFieldAndFieldName.buildFieldName(
-                                      'Course outline') as Widget,
+                                      'Course outline'),
                                   Column(children: eduTextFieldGenerate),
                                   TextButton.icon(
                                     onPressed: () {
@@ -615,16 +639,16 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                 child: Container(
                   color: ColorPicker.kGreyLight3,
                   width: Responsive.isDesktop(context)
-                      ? SS.sW(context) * .50 as double
+                      ? SS.sW(context) * .50
                       : Responsive.isMobile(context)
-                          ? SS.sW(context) * .90 as double
-                          : SS.sW(context) * .60 as double,
+                          ? SS.sW(context) * .90
+                          : SS.sW(context) * .60,
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
                         PopUpHeadMenu.popUpHead('Education', context),
                         SS.sB(15),
-                        isVisibleEducation as bool
+                        isVisibleEducation
                             ? buildEduInnerCard(false, true, indexEdu)
                             : Padding(
                                 padding: EdgeInsets.all(8.0),
@@ -672,10 +696,10 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
         padding: EdgeInsets.symmetric(vertical: 5, horizontal: 16),
         child: Container(
           width: Responsive.isDesktop(context)
-              ? SS.sW(context) * .50 as double
+              ? SS.sW(context) * .50
               : Responsive.isMobile(context)
-                  ? SS.sW(context) * .90 as double
-                  : SS.sW(context) * .60 as double,
+                  ? SS.sW(context) * .90
+                  : SS.sW(context) * .60,
           color: ColorPicker.kWhite,
           child: SingleChildScrollView(
             child: Column(
@@ -710,7 +734,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                     ? Column(
                         children: [
                           Divider(
-                            height: SS.sH(context) * 0.01 as double,
+                            height: SS.sH(context) * 0.01,
                             color: ColorPicker.kGreyLight3,
                           ),
                           Padding(
@@ -720,24 +744,21 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 TextFieldAndFieldName.buildFieldName(
-                                    'Achievement type', '*') as Widget,
+                                    'Achievement type', '*'),
                                 DropDownButton(
                                     menuList: achiveList,
                                     hintText: 'Presentation'),
                                 TextFieldAndFieldName.buildFieldName(
-                                    'Achievement title') as Widget,
-                                TextFieldAndFieldName.buildTextField()
-                                    as Widget,
+                                    'Achievement title'),
+                                TextFieldAndFieldName.buildTextField(),
                                 TextFieldAndFieldName.buildFieldName(
-                                    'Issuing entity') as Widget,
-                                TextFieldAndFieldName.buildTextField()
-                                    as Widget,
+                                    'Issuing entity'),
+                                TextFieldAndFieldName.buildTextField(),
                                 TextFieldAndFieldName.buildFieldName(
-                                    'Award/Website link') as Widget,
-                                TextFieldAndFieldName.buildTextField()
-                                    as Widget,
+                                    'Award/Website link'),
+                                TextFieldAndFieldName.buildTextField(),
                                 TextFieldAndFieldName.buildFieldName(
-                                    'Date received') as Widget,
+                                    'Date received'),
                                 SizedBox(
                                   width: 100,
                                   child: DropDownButton(
@@ -779,10 +800,10 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
               child: Container(
                 color: ColorPicker.kGreyLight3,
                 width: Responsive.isDesktop(context)
-                    ? SS.sW(context) * .50 as double
+                    ? SS.sW(context) * .50
                     : Responsive.isMobile(context)
-                        ? SS.sW(context) * .90 as double
-                        : SS.sW(context) * .60 as double,
+                        ? SS.sW(context) * .90
+                        : SS.sW(context) * .60,
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
@@ -837,8 +858,8 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
       builder: (BuildContext context) {
         return StatefulBuilder(
           builder: (BuildContext context, setState) {
-            List<Widget> textField = List.generate(langIndex,
-                (int i) => TextFieldAndFieldName.buildTextField() as Widget);
+            List<Widget> textField = List.generate(
+                langIndex, (int i) => TextFieldAndFieldName.buildTextField());
             List<Widget> menuItem = List.generate(
                 langIndex,
                 (int i) => DropDownButton(
@@ -849,10 +870,10 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
               child: Container(
                 color: ColorPicker.kGreyLight3,
                 width: Responsive.isDesktop(context)
-                    ? SS.sW(context) * .50 as double
+                    ? SS.sW(context) * .50
                     : Responsive.isMobile(context)
-                        ? SS.sW(context) * .90 as double
-                        : SS.sW(context) * .60 as double,
+                        ? SS.sW(context) * .90
+                        : SS.sW(context) * .60,
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -862,10 +883,10 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                         padding: EdgeInsets.all(16.0),
                         child: Container(
                           width: Responsive.isDesktop(context)
-                              ? SS.sW(context) * .50 as double
+                              ? SS.sW(context) * .50
                               : Responsive.isMobile(context)
-                                  ? SS.sW(context) * .90 as double
-                                  : SS.sW(context) * .60 as double,
+                                  ? SS.sW(context) * .90
+                                  : SS.sW(context) * .60,
                           color: ColorPicker.kWhite,
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -881,7 +902,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       TextFieldAndFieldName.buildFieldName(
-                                          'Language', '*') as Widget,
+                                          'Language', '*'),
                                       SS.sB(10, 0),
                                       Column(
                                         children: textField,
@@ -909,7 +930,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       TextFieldAndFieldName.buildFieldName(
-                                          'Proficiency', '*') as Widget,
+                                          'Proficiency', '*'),
                                       SS.sB(10, 0),
                                       Column(
                                         children: menuItem,

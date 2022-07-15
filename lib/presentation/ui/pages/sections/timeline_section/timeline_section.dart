@@ -754,7 +754,6 @@ class CreatePath extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          margin: const EdgeInsets.only(),
           width: 16,
           height: 16,
           decoration: BoxDecoration(

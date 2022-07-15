@@ -2,149 +2,125 @@ import 'package:flutter/material.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 
-class Styles {
-  static final List<BoxShadow> defaultBoxShadow = [
-    const BoxShadow(
-      color: Cr.darkGrey3,
-      spreadRadius: -1,
-      offset: Offset(0, 2), // changes position of shadow
-    ),
-  ];
+final List<BoxShadow> defaultBoxShadow = [
+  const BoxShadow(
+    color: Cr.darkGrey3,
+    spreadRadius: -1,
+    offset: Offset(0, 2), // changes position of shadow
+  ),
+];
 
-  static final InputDecoration popUpDialogTextFieldInputDecoration =
-      InputDecoration(
-    isDense: true,
-    contentPadding: const EdgeInsets.symmetric(
-      vertical: 13.0,
-      horizontal: 10,
-    ),
+final InputDecoration popUpDialogTextFieldInputDecoration = InputDecoration(
+  isDense: true,
+  contentPadding: const EdgeInsets.symmetric(
+    vertical: 13.0,
+    horizontal: 10,
+  ),
 
-    // border: InputBorder.none,
-    border: OutlineInputBorder(
-      borderSide: const BorderSide(
-        width: 1,
-        color: Cr.darkGrey4,
-        style: BorderStyle.solid,
+  // border: InputBorder.none,
+  border: OutlineInputBorder(
+    borderSide: const BorderSide(
+      color: Cr.darkGrey4,
+    ),
+    borderRadius: BorderRadius.circular(2),
+  ),
+  enabledBorder: OutlineInputBorder(
+    borderSide: const BorderSide(
+      color: Cr.darkGrey4,
+    ),
+    borderRadius: BorderRadius.circular(2),
+  ),
+  focusedBorder: OutlineInputBorder(
+    borderSide: const BorderSide(
+      color: Cr.accentBlue1,
+    ),
+    borderRadius: BorderRadius.circular(2),
+  ),
+  disabledBorder: OutlineInputBorder(
+    borderSide: const BorderSide(
+      color: Cr.darkGrey4,
+    ),
+    borderRadius: BorderRadius.circular(2),
+  ),
+  errorBorder: OutlineInputBorder(
+    borderSide: const BorderSide(
+      color: Cr.darkGrey4,
+    ),
+    borderRadius: BorderRadius.circular(2),
+  ),
+);
+
+InputDecoration popUpDialogTextFieldInputDecorationFunction([
+  Color? borderColor,
+  Widget? prefixIcon,
+]) =>
+    InputDecoration(
+      isDense: true,
+      contentPadding: const EdgeInsets.symmetric(
+        vertical: 13.0,
+        horizontal: 10,
       ),
-      borderRadius: BorderRadius.circular(2),
-    ),
-    enabledBorder: OutlineInputBorder(
-      borderSide: const BorderSide(
-        width: 1,
-        color: Cr.darkGrey4,
-        style: BorderStyle.solid,
-      ),
-      borderRadius: BorderRadius.circular(2),
-    ),
-    focusedBorder: OutlineInputBorder(
-      borderSide: const BorderSide(
-        width: 1,
-        color: Cr.accentBlue1,
-        style: BorderStyle.solid,
-      ),
-      borderRadius: BorderRadius.circular(2),
-    ),
-    disabledBorder: OutlineInputBorder(
-      borderSide: const BorderSide(
-        width: 1,
-        color: Cr.darkGrey4,
-        style: BorderStyle.solid,
-      ),
-      borderRadius: BorderRadius.circular(2),
-    ),
-    errorBorder: OutlineInputBorder(
-      borderSide: const BorderSide(
-        width: 1,
-        color: Cr.darkGrey4,
-        style: BorderStyle.solid,
-      ),
-      borderRadius: BorderRadius.circular(2),
-    ),
-  );
+      prefixIcon: prefixIcon,
 
-  static InputDecoration popUpDialogTextFieldInputDecorationFunction([
-    Color? borderColor,
-    Widget? prefixIcon,
-  ]) =>
-      InputDecoration(
-        isDense: true,
-        contentPadding: const EdgeInsets.symmetric(
-          vertical: 13.0,
-          horizontal: 10,
+      // border: InputBorder.none,
+      border: OutlineInputBorder(
+        borderSide: const BorderSide(
+          color: Cr.darkGrey4,
         ),
-        prefixIcon: prefixIcon,
-
-        // border: InputBorder.none,
-        border: OutlineInputBorder(
-          borderSide: const BorderSide(
-            width: 1,
-            color: Cr.darkGrey4,
-            style: BorderStyle.solid,
-          ),
-          borderRadius: BorderRadius.circular(2),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(
-            width: 1,
-            color: Cr.darkGrey4,
-            style: BorderStyle.solid,
-          ),
-          borderRadius: BorderRadius.circular(2),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(
-            width: 1,
-            color: Cr.accentBlue1,
-            style: BorderStyle.solid,
-          ),
-          borderRadius: BorderRadius.circular(2),
-        ),
-        disabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(
-            width: 1,
-            color: Cr.darkGrey4,
-            style: BorderStyle.solid,
-          ),
-          borderRadius: BorderRadius.circular(2),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(
-            width: 1,
-            color: Cr.darkGrey4,
-            style: BorderStyle.solid,
-          ),
-          borderRadius: BorderRadius.circular(2),
-        ),
-      );
-
-  static const BoxDecoration boxDecorationBorder = BoxDecoration(
-    color: Cr.whiteColor,
-    border: Border(
-      bottom: BorderSide(
-        width: 1.0,
-        color: Cr.darkGrey1,
+        borderRadius: BorderRadius.circular(2),
       ),
+      enabledBorder: OutlineInputBorder(
+        borderSide: const BorderSide(
+          color: Cr.darkGrey4,
+        ),
+        borderRadius: BorderRadius.circular(2),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: const BorderSide(
+          color: Cr.accentBlue1,
+        ),
+        borderRadius: BorderRadius.circular(2),
+      ),
+      disabledBorder: OutlineInputBorder(
+        borderSide: const BorderSide(
+          color: Cr.darkGrey4,
+        ),
+        borderRadius: BorderRadius.circular(2),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderSide: const BorderSide(
+          color: Cr.darkGrey4,
+        ),
+        borderRadius: BorderRadius.circular(2),
+      ),
+    );
+
+const BoxDecoration boxDecorationBorder = BoxDecoration(
+  color: Cr.whiteColor,
+  border: Border(
+    bottom: BorderSide(
+      color: Cr.darkGrey1,
     ),
-  );
-  static final BoxDecoration boxDecorationRounded = BoxDecoration(
-    color: Cr.whiteColor,
-    borderRadius: BorderRadius.circular(4),
-  );
+  ),
+);
+final BoxDecoration boxDecorationRounded = BoxDecoration(
+  color: Cr.whiteColor,
+  borderRadius: BorderRadius.circular(4),
+);
 
-  static const BoxDecoration boxDecorationCircle = BoxDecoration(
-    color: Cr.whiteColor,
-    shape: BoxShape.circle,
-  );
+const BoxDecoration boxDecorationCircle = BoxDecoration(
+  color: Cr.whiteColor,
+  shape: BoxShape.circle,
+);
 
-  static final BoxDecoration boxDecoration = BoxDecoration(
-    color: Cr.whiteColor,
-    boxShadow: Styles.defaultBoxShadow,
-  );
-  static final BoxDecoration boxDecorationWithShadow = BoxDecoration(
-    color: Cr.whiteColor,
-    boxShadow: Styles.defaultBoxShadow,
-  );
-}
+final BoxDecoration boxDecoration = BoxDecoration(
+  color: Cr.whiteColor,
+  boxShadow: defaultBoxShadow,
+);
+final BoxDecoration boxDecorationWithShadow = BoxDecoration(
+  color: Cr.whiteColor,
+  boxShadow: defaultBoxShadow,
+);
 
 // Display
 const display1 = TextStyle(

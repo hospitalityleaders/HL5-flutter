@@ -1,8 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:holedo/common/textfield_fieldname.dart';
-import 'package:holedo/constant/colorPicker/color_picker.dart';
-import 'package:holedo/constant/sizedbox.dart';
 import 'package:holedo/db_data.dart';
 import 'package:holedo/models/holedoapi/achievement.dart';
 import 'package:holedo/models/holedoapi/holedoapi.dart';
@@ -21,7 +18,6 @@ import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/images.dart';
 import 'package:holedo/presentation/utill/styles.dart';
-import 'package:holedo/responsive/responsive.dart';
 import 'package:video_player/video_player.dart';
 import 'package:video_player_web/video_player_web.dart';
 
@@ -42,169 +38,30 @@ class _ProfileOverviewSecondColumnState
   late VideoPlayerPlugin videoPlayerPlugin;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // width: 360,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          FeaturedVideoComponent(
-            userProfileData: widget.userProfileData,
-          ),
-          Di.SBHL,
-          ProfileWorkExperienceComponent(
-            userProfileData: widget.userProfileData,
-          ),
-          Di.SBHL,
-          EducationComponent(
-            userProfileData: widget.userProfileData,
-          ),
-          Di.SBHL,
-          const AchievementComponent(),
-          Di.SBHEL,
-          // LanguagesComponent(
-          //   onEditPressed: () => buildLanguagePopUp(langIndex),
-          //   userProfileData: widget.userProfileData,
-          // ),
-          Di.SBHEL,
-        ],
-      ),
-    );
-  }
-
-  /// Education pop up edit functionality start
-
-  bool isVisibleEducation = false;
-  bool isEducationEditable = false;
-  bool isEducationShowCard = false;
-  int indexEdu = 1;
-
-  Widget buildEduInnerCard(
-    bool isEducationEditable,
-    bool isEducationShowCard,
-    int indexEdu,
-  ) {
-    return StatefulBuilder(
-      builder: (context, setState) {
-        final List<Widget> eduTextFieldGenerate = List.generate(
-          indexEdu,
-          (int i) => TextFieldAndFieldName.buildTextField('Course name'),
-        );
-        return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
-          child: Container(
-            width: Responsive.isDesktop(context)
-                ? SS.sW(context) * .50
-                : Responsive.isMobile(context)
-                    ? SS.sW(context) * .90
-                    : SS.sW(context) * .60,
-            color: ColorPicker.kWhite,
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ListTile(
-                    leading: Container(
-                      alignment: Alignment.center,
-                      height: 50,
-                      width: 50,
-                      color: ColorPicker.kBlueLight1,
-                      child: const Icon(
-                        Icons.school_rounded,
-                        color: ColorPicker.kWhite,
-                        size: 18,
-                      ),
-                    ),
-                    title: const Text(''),
-                    subtitle: const Text(''),
-                    trailing: isEducationEditable
-                        ? IconButton(
-                            onPressed: () {
-                              setState(() {
-                                isEducationShowCard = !isEducationShowCard;
-                              });
-                            },
-                            icon: const Icon(Icons.edit),
-                          )
-                        : null,
-                  ),
-                  if (isEducationShowCard)
-                    SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          Divider(
-                            height: SS.sH(context) * 0.01,
-                            color: ColorPicker.kGreyLight3,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                TextFieldAndFieldName.buildFieldName(
-                                  'Educational institution',
-                                  '*',
-                                ),
-                                TextFieldAndFieldName.buildTextField(),
-                                TextFieldAndFieldName.buildFieldName(
-                                  'Course duration',
-                                ),
-                                TextFieldAndFieldName.buildFieldName(
-                                  'Qualification title',
-                                ),
-                                TextFieldAndFieldName.buildTextField(),
-                                TextFieldAndFieldName.buildFieldName(
-                                  'Description',
-                                ),
-                                const TextField(
-                                  minLines: 4,
-                                  maxLines: 6,
-                                  decoration: InputDecoration(
-                                    border: OutlineInputBorder(),
-                                  ),
-                                ),
-                                SS.sB(18),
-                                TextFieldAndFieldName.buildFieldName(
-                                  'Course outline',
-                                ),
-                                Column(children: eduTextFieldGenerate),
-                                TextButton.icon(
-                                  onPressed: () {
-                                    setState(() {
-                                      indexEdu++;
-                                    });
-                                  },
-                                  icon: const Icon(Icons.add),
-                                  label: const Text('Add another'),
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    OutlinedButton(
-                                      onPressed: () {},
-                                      child: const Text('Cancel'),
-                                    ),
-                                    SS.sB(0, 10),
-                                    ElevatedButton(
-                                      onPressed: () {},
-                                      child: const Text('Save'),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  else
-                    Container(),
-                ],
-              ),
-            ),
-          ),
-        );
-      },
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        FeaturedVideoComponent(
+          userProfileData: widget.userProfileData,
+        ),
+        Di.SBHL,
+        ProfileWorkExperienceComponent(
+          userProfileData: widget.userProfileData,
+        ),
+        Di.SBHL,
+        EducationComponent(
+          userProfileData: widget.userProfileData,
+        ),
+        Di.SBHL,
+        const AchievementComponent(),
+        Di.SBHEL,
+        // LanguagesComponent(
+        //   onEditPressed: () => buildLanguagePopUp(langIndex),
+        //   userProfileData: widget.userProfileData,
+        // ),
+        Di.SBHEL,
+      ],
     );
   }
 }
@@ -225,7 +82,7 @@ class _ProfileOverviewSecondColumnState
 //     final bool hasData = languages != null ? languages.isNotEmpty : false;
 
 //     return Container(
-//       decoration: Styles.boxDecoration.copyWith(color: Cr.whiteColor),
+//       decoration: boxDecoration.copyWith(color: Cr.whiteColor),
 //       child: Column(
 //         mainAxisSize: MainAxisSize.min,
 //         children: [
@@ -249,7 +106,7 @@ class _ProfileOverviewSecondColumnState
 //                               Di.SBHS,
 //                               Container(
 //                                 width: 360,
-//                                 decoration: Styles.boxDecoration
+//                                 decoration: boxDecoration
 //                                     .copyWith(color: Cr.whiteColor),
 //                                 child: Column(
 //                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -332,7 +189,7 @@ class _AchievementComponentState extends State<AchievementComponent> {
     bool showSubMenu = false;
 
     return Container(
-      decoration: Styles.boxDecoration,
+      decoration: boxDecoration,
       child: Stack(
         children: [
           Column(
@@ -365,8 +222,8 @@ class _AchievementComponentState extends State<AchievementComponent> {
                                           ? 0
                                           : Di.PSS,
                                 ),
-                                decoration: Styles.boxDecoration
-                                    .copyWith(color: Cr.whiteColor),
+                                decoration: boxDecoration.copyWith(
+                                    color: Cr.whiteColor),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [

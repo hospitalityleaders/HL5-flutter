@@ -95,7 +95,7 @@ class _HeaderCardState extends State<HeaderCard> {
         "professional_title": professionalTitleController,
         "area": areaController
       };
-      print('usser profile: $profileData');
+      debugPrint('usser profile: $profileData');
       dynamic res = await _apiServices.updateUserProfile();
 
       if (res?.success as bool) {
@@ -1917,7 +1917,7 @@ class _HeaderCardState extends State<HeaderCard> {
                                         onTap: () {
                                           setState(() {
                                             isShowing = !isShowing;
-                                            print(isShowing);
+                                            debugPrint(isShowing.toString());
                                           });
                                         },
                                         child: Container(

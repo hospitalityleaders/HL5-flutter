@@ -66,10 +66,10 @@
 
 //   @override
 //   Widget build(BuildContext context) {
-//     print("userProfileData: is  ${widget.userProfileData.toString()} ");
+//     debugPrint("userProfileData: is  ${widget.userProfileData.toString()} ");
 //     final appState = Provider.of<AppState>(context);
 //     final bool isMine = appState.isLoginnedAndEditable(widget.userProfileData);
-//     print('app $isEditable');
+//     debugPrint('app $isEditable');
 //     return TapCanvas(
 //       child: Container(
 //         color: Cr.backgroundColor,

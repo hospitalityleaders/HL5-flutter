@@ -33,7 +33,7 @@ class _ProfileReferenceComponentState extends State<ProfileReferenceComponent> {
     final List<ReceivedReference>? receivedReferences =
         DbData.getUserProfileData.receivedReferences;
     return DecoratedBox(
-      decoration: Styles.boxDecoration.copyWith(color: Cr.whiteColor),
+      decoration: boxDecoration.copyWith(color: Cr.whiteColor),
       child: Column(
         children: [
           Column(
@@ -65,8 +65,8 @@ class _ProfileReferenceComponentState extends State<ProfileReferenceComponent> {
                                   padding: const EdgeInsets.symmetric(
                                     horizontal: Di.PSS,
                                   ),
-                                  decoration: Styles.boxDecoration
-                                      .copyWith(color: Cr.whiteColor),
+                                  decoration: boxDecoration.copyWith(
+                                      color: Cr.whiteColor),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -107,7 +107,7 @@ class _ProfileReferenceComponentState extends State<ProfileReferenceComponent> {
                                               width: Di.FSOTL,
                                               height: Di.FSOTL,
                                               decoration:
-                                                  Styles.boxDecoration.copyWith(
+                                                  boxDecoration.copyWith(
                                                 color: Cr.accentBlue1,
                                               ),
                                               child: const Icon(
@@ -211,7 +211,7 @@ class _ProfileReferenceComponentState extends State<ProfileReferenceComponent> {
 //     return Container(
 //       width: 360,
 //       padding: const EdgeInsets.symmetric(horizontal: Di.PSS),
-//       decoration: Styles.boxDecoration.copyWith(color: Cr.whiteColor),
+//       decoration: boxDecoration.copyWith(color: Cr.whiteColor),
 //       child: Column(
 //         crossAxisAlignment: CrossAxisAlignment.start,
 //         children: [
@@ -248,7 +248,7 @@ class _ProfileReferenceComponentState extends State<ProfileReferenceComponent> {
 //                 Container(
 //                   width: Di.FSOTL,
 //                   height: Di.FSOTL,
-//                   decoration: Styles.boxDecoration.copyWith(
+//                   decoration: boxDecoration.copyWith(
 //                     color: Cr.accentBlue1,
 //                   ),
 //                   child: const Icon(

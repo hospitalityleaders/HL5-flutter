@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
-import '../../../../constant/sizedbox.dart';
+import 'package:holedo/constant/sizedbox.dart';
 
 class ProfileEdit {
   static Padding buildProfileEdit({
@@ -32,20 +32,21 @@ class ProfileEdit {
                   ),
                 ),
               ),
-              SizedBox(width: 6),
-              showAddButton
-                  ? CircleAvatar(
-                      backgroundColor: ColorPicker.kBlueLight1,
-                      radius: 30,
-                      child: IconButton(
-                        onPressed: popUpAdd,
-                        icon: const Icon(
-                          Icons.add,
-                          color: Colors.white,
-                        ),
-                      ),
-                    )
-                  : Container()
+              const SizedBox(width: 6),
+              if (showAddButton)
+                CircleAvatar(
+                  backgroundColor: ColorPicker.kBlueLight1,
+                  radius: 30,
+                  child: IconButton(
+                    onPressed: popUpAdd,
+                    icon: const Icon(
+                      Icons.add,
+                      color: Colors.white,
+                    ),
+                  ),
+                )
+              else
+                Container()
             ],
           ),
         ),
@@ -55,7 +56,7 @@ class ProfileEdit {
 }
 
 class EditButton extends StatefulWidget {
-  late final ValueChanged onChanged;
+  final ValueChanged onChanged;
   final bool isEditable;
   final callBackHeader;
   final headerCardKey;
@@ -71,7 +72,7 @@ class EditButton extends StatefulWidget {
   final callBackReference;
   final referenceCardKey;
 
-  EditButton({
+  const EditButton({
     Key? key,
     required this.callBackHeader,
     this.headerCardKey,
@@ -99,7 +100,7 @@ class _EditButtonState extends State<EditButton> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        print('tap it');
+        debugPrint('tap it');
         widget.onChanged(widget.isEditable);
 
         widget.callBackHeader(
@@ -136,27 +137,29 @@ class _EditButtonState extends State<EditButton> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              widget.isEditable
-                  ? Icon(
-                      Icons.done,
-                      size: 9,
-                      color: ColorPicker.kWhite,
-                    )
-                  : Icon(
-                      Icons.edit,
-                      size: 9,
-                      color: ColorPicker.kWhite,
-                    ),
+              if (widget.isEditable)
+                const Icon(
+                  Icons.done,
+                  size: 9,
+                  color: ColorPicker.kWhite,
+                )
+              else
+                const Icon(
+                  Icons.edit,
+                  size: 9,
+                  color: ColorPicker.kWhite,
+                ),
               SS.sB(0, 7.5),
-              widget.isEditable
-                  ? Text(
-                      'Done editing',
-                      style: FontTextStyle.kWhite14W400SSP,
-                    )
-                  : Text(
-                      'Edit Profile',
-                      style: FontTextStyle.kWhite14W400SSP,
-                    ),
+              if (widget.isEditable)
+                Text(
+                  'Done editing',
+                  style: FontTextStyle.kWhite14W400SSP,
+                )
+              else
+                Text(
+                  'Edit Profile',
+                  style: FontTextStyle.kWhite14W400SSP,
+                ),
             ],
           ),
         ),

@@ -20,7 +20,7 @@ class SvgWithBackground extends StatelessWidget {
     return Container(
       width: size ?? 50,
       height: size ?? 50,
-      decoration: Styles.boxDecoration.copyWith(
+      decoration: boxDecoration.copyWith(
         color: Cr.accentBlue1,
       ),
       child: Center(

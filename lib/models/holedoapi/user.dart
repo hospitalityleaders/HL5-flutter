@@ -552,7 +552,7 @@ class User {
   Future<User> save(User profile) async {
     //var data = profile.toJson() as Map<String, dynamic>;
     //var newElements = [];
-    //print('this ${this.toJson()}');
+    //debugPrint('this ${this.toJson()}');
     // this.id = profile.id;
     // this.slug = profile.slug;
     id = profile.id;
@@ -808,7 +808,7 @@ class User {
     final User data = this;
     final Map<String, dynamic> userJson = data.toJson();
     userJson.removeWhere((k, v) => v == null || v.toString().isEmpty);
-    print('js: ${userJson.toString()}');
+    debugPrint('js: ${userJson.toString()}');
     final lists = ['achievements', 'educations', 'experiences', 'expertise'];
     for (final l in lists) {
       if (userJson[l] != null && (userJson[l] as List).isNotEmpty) {
@@ -819,7 +819,7 @@ class User {
     }
 
     //var userJson = data.toJson();
-    //print('jz: ${userJson.toString()}');
+    //debugPrint('jz: ${userJson.toString()}');
     return userJson;
   }
 }
@@ -1395,7 +1395,7 @@ class User {
 //   Future<User> save(User profile) async {
 //     //var data = profile.toJson() as Map<String, dynamic>;
 //     //var newElements = [];
-//     //print('this ${this.toJson()}');
+//     //debugPrint('this ${this.toJson()}');
 //     // this.id = profile.id;
 //     // this.slug = profile.slug;
 //     this.id = profile.id;

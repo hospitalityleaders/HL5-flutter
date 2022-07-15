@@ -134,8 +134,6 @@ class __CoverDialogExpandedTileState extends State<_CoverDialogExpandedTile> {
 
   @override
   Widget build(BuildContext context) {
-    final userProfileData = DbData.getUserProfileData;
-
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: Di.PSL),
       color: Cr.whiteColor,

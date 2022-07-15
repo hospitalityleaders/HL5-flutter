@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:holedo/common/dropDownButton.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
-import '../../../../common/build_work_exp_pop_up.dart';
-import '../../../../common/clipper.dart';
-import '../../../../common/popUpHeadMenu.dart';
-import '../../../../common/textfield_fieldname.dart';
-import '../../../../constant/colorPicker/color_picker.dart';
-import '../../../../constant/sizedbox.dart';
-import '../../../../responsive/responsive.dart';
-import '../profile-edit/profile_edit.dart';
+import 'package:holedo/common/build_work_exp_pop_up.dart';
+import 'package:holedo/common/clipper.dart';
+import 'package:holedo/common/popUpHeadMenu.dart';
+import 'package:holedo/common/textfield_fieldname.dart';
+import 'package:holedo/constant/colorPicker/color_picker.dart';
+import 'package:holedo/constant/sizedbox.dart';
+import 'package:holedo/responsive/responsive.dart';
+import 'package:holedo/layouts/pages/profile-pages/profile-edit/profile_edit.dart';
 
 class ProfileOverviewSec2 extends StatefulWidget {
   final sec2IsEditable;
@@ -27,7 +27,7 @@ class ProfileOverviewSec2 extends StatefulWidget {
   final profileOverviewSec2Languages_W;
   final pOApiDataSec2;
 
-  ProfileOverviewSec2({
+  const ProfileOverviewSec2({
     Key? key,
     required this.sec2IsEditable,
     this.profileOverviewSec2WorkExpKey,
@@ -77,7 +77,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
     return Stack(
       children: [
         Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0),
           child: Container(
             key: sec2Key as Key,
             color: ColorPicker.kWhite,
@@ -90,57 +90,63 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                   children: [
                     Expanded(
                       child: Padding(
-                        padding: EdgeInsets.only(left: 20, top: 13),
-                        child: Text(cardName,
-                            style: FontTextStyle.kBlueDark120W400SSP),
+                        padding: const EdgeInsets.only(left: 20, top: 13),
+                        child: Text(
+                          cardName,
+                          style: FontTextStyle.kBlueDark120W400SSP,
+                        ),
                       ),
                     ),
                     Expanded(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          showIcon
-                              ? InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      isShowingPopUpCard = !isShowingPopUpCard;
-                                      print(isShowingPopUpCard);
-                                    });
-                                  },
-                                  onHover: (value) {
-                                    setState(() {
-                                      isHovering = value;
-                                    });
-                                  },
-                                  child: Padding(
-                                    padding:
-                                        EdgeInsets.only(top: 13, right: 20),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius: isHovering
-                                              ? BorderRadius.circular(3)
-                                              : BorderRadius.circular(0),
-                                          border: isHovering
-                                              ? Border.all(
-                                                  width: 1, color: Colors.grey)
-                                              : Border.all(
-                                                  width: 0,
-                                                  color: Colors.transparent)),
-                                      child: Icon(
-                                        Icons.arrow_drop_down_sharp,
-                                        color: ColorPicker.kBlueDark1,
-                                      ),
-                                    ),
+                          if (showIcon)
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  isShowingPopUpCard = !isShowingPopUpCard;
+                                  debugPrint(isShowingPopUpCard.toString());
+                                });
+                              },
+                              onHover: (value) {
+                                setState(() {
+                                  isHovering = value;
+                                });
+                              },
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 13, right: 20),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: isHovering
+                                        ? BorderRadius.circular(3)
+                                        : BorderRadius.circular(0),
+                                    border: isHovering
+                                        ? Border.all(
+                                            color: Colors.grey,
+                                          )
+                                        : Border.all(
+                                            width: 0,
+                                            color: Colors.transparent,
+                                          ),
                                   ),
-                                )
-                              : Container(),
+                                  child: const Icon(
+                                    Icons.arrow_drop_down_sharp,
+                                    color: ColorPicker.kBlueDark1,
+                                  ),
+                                ),
+                              ),
+                            )
+                          else
+                            Container(),
                         ],
                       ),
                     ),
                   ],
                 ),
                 SS.sB(8),
-                Divider(
+                const Divider(
                   height: .5,
                   color: Color(0xFFE5E5E5),
                 ),
@@ -170,15 +176,18 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(cardTitle,
-                              style: FontTextStyle.kBlueDark116W700SSP),
+                          Text(
+                            cardTitle,
+                            style: FontTextStyle.kBlueDark116W700SSP,
+                          ),
                           SS.sB(5),
                           GestureDetector(
-                              child: Text(
-                                cardSubTitle,
-                                style: FontTextStyle.kBlueLight114W400SSP,
-                              ),
-                              onTap: () {}),
+                            child: Text(
+                              cardSubTitle,
+                              style: FontTextStyle.kBlueLight114W400SSP,
+                            ),
+                            onTap: () {},
+                          ),
                           SS.sB(5),
                           Text(
                             cardDate,
@@ -193,144 +202,150 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                 ),
                 SS.sB(5),
                 SingleChildScrollView(
-                  child: StatefulBuilder(builder: (context, setState) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        AnimatedContainer(
-                          height: isVisible ? 120 : 0,
-                          color: ColorPicker.kGreyLight2,
-                          duration: Duration(seconds: 1),
-                          alignment: isVisible
-                              ? Alignment.topCenter
-                              : Alignment.bottomCenter,
-                          curve: Curves.fastOutSlowIn,
-                          child: SingleChildScrollView(
-                            child: Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Text(
-                                description,
-                                style: FontTextStyle.kGreyLight516W400SSP,
+                  child: StatefulBuilder(
+                    builder: (context, setState) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          AnimatedContainer(
+                            height: isVisible ? 120 : 0,
+                            color: ColorPicker.kGreyLight2,
+                            duration: const Duration(seconds: 1),
+                            alignment: isVisible
+                                ? Alignment.topCenter
+                                : Alignment.bottomCenter,
+                            curve: Curves.fastOutSlowIn,
+                            child: SingleChildScrollView(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  description,
+                                  style: FontTextStyle.kGreyLight516W400SSP,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.all(5),
-                          color: ColorPicker.kGreyLight2,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              TextButton.icon(
-                                onPressed: () {
-                                  setState(() {
-                                    isVisible = !isVisible;
-                                  });
-                                },
-                                icon: Icon(
-                                  isVisible ? Icons.remove : Icons.add,
-                                  color: ColorPicker.kBlueLight1,
+                          Container(
+                            padding: const EdgeInsets.all(5),
+                            color: ColorPicker.kGreyLight2,
+                            child: Row(
+                              children: [
+                                TextButton.icon(
+                                  onPressed: () {
+                                    setState(() {
+                                      isVisible = !isVisible;
+                                    });
+                                  },
+                                  icon: Icon(
+                                    isVisible ? Icons.remove : Icons.add,
+                                    color: ColorPicker.kBlueLight1,
+                                  ),
+                                  label: Text(
+                                    isVisible ? 'Close' : cardBtn,
+                                    style: FontTextStyle.kBlueLight114W400SSP,
+                                  ),
                                 ),
-                                label: Text(isVisible ? 'Close' : cardBtn,
-                                    style: FontTextStyle.kBlueLight114W400SSP),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
-                    );
-                  }),
+                        ],
+                      );
+                    },
+                  ),
                 ),
               ],
             ),
           ),
         ),
-        showIcon
-            ? Positioned(
-                top: 50,
-                right: 10,
-                child: Visibility(
-                  visible: isShowingPopUpCard,
-                  child: Column(
-                    children: [
-                      Align(
-                        alignment: Alignment(.35, 0),
-                        child: ClipPath(
-                          clipper: ArrowClipper(),
-                          child: Container(
-                            height: 15,
-                            width: 12,
-                            decoration: BoxDecoration(
-                              color: ColorPicker.kGreyLight7.withOpacity(0.5),
-                            ),
-                          ),
+        if (showIcon)
+          Positioned(
+            top: 50,
+            right: 10,
+            child: Visibility(
+              visible: isShowingPopUpCard,
+              child: Column(
+                children: [
+                  Align(
+                    alignment: const Alignment(.35, 0),
+                    child: ClipPath(
+                      clipper: ArrowClipper(),
+                      child: Container(
+                        height: 15,
+                        width: 12,
+                        decoration: BoxDecoration(
+                          color: ColorPicker.kGreyLight7.withOpacity(0.5),
                         ),
                       ),
-                      Align(
-                          alignment: Alignment(.25, .12),
-                          child: Container(
-                            color: ColorPicker.kWhite,
-                            child: Column(
+                    ),
+                  ),
+                  Align(
+                    alignment: const Alignment(.25, .12),
+                    child: Container(
+                      color: ColorPicker.kWhite,
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        Icons.menu,
-                                        color: ColorPicker.kBlueLight1,
-                                        size: 10,
-                                      ),
-                                      SS.sB(0, 7.5),
-                                      Text(
-                                        'View in timeline',
-                                        style:
-                                            FontTextStyle.kBlueLight114W400SSP,
-                                      ),
-                                    ],
-                                  ),
+                                const Icon(
+                                  Icons.menu,
+                                  color: ColorPicker.kBlueLight1,
+                                  size: 10,
                                 ),
-                                Divider(
-                                  height: 0.5,
-                                  color: Colors.grey,
+                                SS.sB(0, 7.5),
+                                Text(
+                                  'View in timeline',
+                                  style: FontTextStyle.kBlueLight114W400SSP,
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        Icons.menu,
-                                        color: ColorPicker.kBlueLight1,
-                                        size: 10,
-                                      ),
-                                      SS.sB(0, 7.5),
-                                      Text(
-                                        'View in timeline',
-                                        style:
-                                            FontTextStyle.kBlueLight114W400SSP,
-                                      ),
-                                    ],
-                                  ),
-                                )
                               ],
                             ),
-                          ))
-                    ],
-                  ),
-                ))
-            : Container(),
-        widget.sec2IsEditable as bool
-            ? ProfileEdit.buildProfileEdit(
-                width: sec2W as double,
-                height: sec2H as double,
-                popUpEdit: () {
-                  popUpEditCards();
-                },
-                showAddButton: true,
-                popUpAdd: () {
-                  popUpAddCards();
-                })
-            : Container(),
+                          ),
+                          const Divider(
+                            height: 0.5,
+                            color: Colors.grey,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                const Icon(
+                                  Icons.menu,
+                                  color: ColorPicker.kBlueLight1,
+                                  size: 10,
+                                ),
+                                SS.sB(0, 7.5),
+                                Text(
+                                  'View in timeline',
+                                  style: FontTextStyle.kBlueLight114W400SSP,
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          )
+        else
+          Container(),
+        if (widget.sec2IsEditable as bool)
+          ProfileEdit.buildProfileEdit(
+            width: sec2W as double,
+            height: sec2H as double,
+            popUpEdit: () {
+              popUpEditCards();
+            },
+            showAddButton: true,
+            popUpAdd: () {
+              popUpAddCards();
+            },
+          )
+        else
+          Container(),
       ],
     );
   }
@@ -344,7 +359,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
   bool isExperienceShowCard = false;
   int indexExp = 1;
 
-  BuildWorkExpPopUp _buildWorkExpPopUp = BuildWorkExpPopUp();
+  final BuildWorkExpPopUp _buildWorkExpPopUp = BuildWorkExpPopUp();
 
   Future<String?> buildWorkExpPopUp() {
     return showDialog(
@@ -365,32 +380,41 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                     children: [
                       PopUpHeadMenu.popUpHead('Work experience', context),
                       SS.sB(15),
-                      isVisibleExperience
-                          ? _buildWorkExpPopUp.buildExpInnerCard(
-                              false, true, indexExp)
-                          : Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: CircleAvatar(
-                                radius: 30,
-                                backgroundColor: ColorPicker.kGreenNeon,
-                                child: IconButton(
-                                  color: ColorPicker.kWhite,
-                                  onPressed: () {
-                                    setState(
-                                      () {
-                                        isVisibleExperience =
-                                            !isVisibleExperience;
-                                      },
-                                    );
+                      if (isVisibleExperience)
+                        _buildWorkExpPopUp.buildExpInnerCard(
+                          false,
+                          true,
+                          indexExp,
+                        )
+                      else
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: CircleAvatar(
+                            radius: 30,
+                            backgroundColor: ColorPicker.kGreenNeon,
+                            child: IconButton(
+                              color: ColorPicker.kWhite,
+                              onPressed: () {
+                                setState(
+                                  () {
+                                    isVisibleExperience = !isVisibleExperience;
                                   },
-                                  icon: Icon(Icons.add),
-                                ),
-                              ),
+                                );
+                              },
+                              icon: const Icon(Icons.add),
                             ),
+                          ),
+                        ),
                       _buildWorkExpPopUp.buildExpInnerCard(
-                          true, isExperienceShowCard, indexExp),
+                        true,
+                        isExperienceShowCard,
+                        indexExp,
+                      ),
                       _buildWorkExpPopUp.buildExpInnerCard(
-                          true, isExperienceShowCard, indexExp),
+                        true,
+                        isExperienceShowCard,
+                        indexExp,
+                      ),
                       SS.sB(15)
                     ],
                   ),
@@ -413,13 +437,18 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
   int indexEdu = 1;
 
   Widget buildEduInnerCard(
-      bool isEducationEditable, bool isEducationShowCard, int indexEdu) {
+    bool isEducationEditable,
+    bool isEducationShowCard,
+    int indexEdu,
+  ) {
     return StatefulBuilder(
       builder: (context, setState) {
-        List<Widget> eduTextFieldGenerate = List.generate(indexEdu,
-            (int i) => TextFieldAndFieldName.buildTextField('Course name'));
+        final List<Widget> eduTextFieldGenerate = List.generate(
+          indexEdu,
+          (int i) => TextFieldAndFieldName.buildTextField('Course name'),
+        );
         return Padding(
-          padding: EdgeInsets.symmetric(vertical: 5, horizontal: 16),
+          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
           child: Container(
             width: Responsive.isDesktop(context)
                 ? SS.sW(context) * .50
@@ -437,14 +466,14 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                       height: 50,
                       width: 50,
                       color: ColorPicker.kBlueLight1,
-                      child: Icon(
+                      child: const Icon(
                         Icons.school_rounded,
                         color: ColorPicker.kWhite,
                         size: 18,
                       ),
                     ),
-                    title: Text(''),
-                    subtitle: Text(''),
+                    title: const Text(''),
+                    subtitle: const Text(''),
                     trailing: isEducationEditable
                         ? IconButton(
                             onPressed: () {
@@ -452,75 +481,83 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                                 isEducationShowCard = !isEducationShowCard;
                               });
                             },
-                            icon: Icon(Icons.edit),
+                            icon: const Icon(Icons.edit),
                           )
                         : null,
                   ),
-                  isEducationShowCard
-                      ? SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              Divider(
-                                  height: SS.sH(context) * 0.01,
-                                  color: ColorPicker.kGreyLight3),
-                              Padding(
-                                padding: EdgeInsets.all(16.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                  if (isEducationShowCard)
+                    SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Divider(
+                            height: SS.sH(context) * 0.01,
+                            color: ColorPicker.kGreyLight3,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                TextFieldAndFieldName.buildFieldName(
+                                  'Educational institution',
+                                  '*',
+                                ),
+                                TextFieldAndFieldName.buildTextField(),
+                                TextFieldAndFieldName.buildFieldName(
+                                  'Course duration',
+                                ),
+                                TextFieldAndFieldName.buildFieldName(
+                                  'Qualification title',
+                                ),
+                                TextFieldAndFieldName.buildTextField(),
+                                TextFieldAndFieldName.buildFieldName(
+                                  'Description',
+                                ),
+                                const TextField(
+                                  minLines: 4,
+                                  maxLines: 6,
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide(),
+                                    ),
+                                  ),
+                                ),
+                                SS.sB(18),
+                                TextFieldAndFieldName.buildFieldName(
+                                  'Course outline',
+                                ),
+                                Column(children: eduTextFieldGenerate),
+                                TextButton.icon(
+                                  onPressed: () {
+                                    setState(() {
+                                      indexEdu++;
+                                    });
+                                  },
+                                  icon: const Icon(Icons.add),
+                                  label: const Text('Add another'),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
-                                    TextFieldAndFieldName.buildFieldName(
-                                        'Educational institution', '*'),
-                                    TextFieldAndFieldName.buildTextField(),
-                                    TextFieldAndFieldName.buildFieldName(
-                                        'Course duration'),
-                                    TextFieldAndFieldName.buildFieldName(
-                                        'Qualification title'),
-                                    TextFieldAndFieldName.buildTextField(),
-                                    TextFieldAndFieldName.buildFieldName(
-                                        'Description'),
-                                    TextField(
-                                      autocorrect: true,
-                                      minLines: 4,
-                                      maxLines: 6,
-                                      decoration: InputDecoration(
-                                        border: OutlineInputBorder(
-                                          borderSide: BorderSide(),
-                                        ),
-                                      ),
+                                    OutlinedButton(
+                                      onPressed: () {},
+                                      child: const Text('Cancel'),
                                     ),
-                                    SS.sB(18),
-                                    TextFieldAndFieldName.buildFieldName(
-                                        'Course outline'),
-                                    Column(children: eduTextFieldGenerate),
-                                    TextButton.icon(
-                                      onPressed: () {
-                                        setState(() {
-                                          indexEdu++;
-                                        });
-                                      },
-                                      icon: Icon(Icons.add),
-                                      label: Text('Add another'),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        OutlinedButton(
-                                            onPressed: () {},
-                                            child: Text('Cancel')),
-                                        SS.sB(0, 10),
-                                        ElevatedButton(
-                                          onPressed: () {},
-                                          child: Text('Save'),
-                                        ),
-                                      ],
+                                    SS.sB(0, 10),
+                                    ElevatedButton(
+                                      onPressed: () {},
+                                      child: const Text('Save'),
                                     ),
                                   ],
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        )
-                      : Container(),
+                        ],
+                      ),
+                    )
+                  else
+                    Container(),
                 ],
               ),
             ),
@@ -532,9 +569,10 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
 
   Future<String?> buildEducationPopUp() {
     return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return StatefulBuilder(builder: (context, setState) {
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
             return SingleChildScrollView(
               child: Dialog(
                 child: Container(
@@ -549,24 +587,25 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                       children: [
                         PopUpHeadMenu.popUpHead('Education', context),
                         SS.sB(15),
-                        isVisibleEducation
-                            ? buildEduInnerCard(false, true, indexEdu)
-                            : Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: CircleAvatar(
-                                  radius: 30,
-                                  backgroundColor: ColorPicker.kGreenNeon,
-                                  child: IconButton(
-                                      color: ColorPicker.kWhite,
-                                      onPressed: () {
-                                        setState(() {
-                                          isVisibleEducation =
-                                              !isVisibleEducation;
-                                        });
-                                      },
-                                      icon: Icon(Icons.add)),
-                                ),
+                        if (isVisibleEducation)
+                          buildEduInnerCard(false, true, indexEdu)
+                        else
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: CircleAvatar(
+                              radius: 30,
+                              backgroundColor: ColorPicker.kGreenNeon,
+                              child: IconButton(
+                                color: ColorPicker.kWhite,
+                                onPressed: () {
+                                  setState(() {
+                                    isVisibleEducation = !isVisibleEducation;
+                                  });
+                                },
+                                icon: const Icon(Icons.add),
                               ),
+                            ),
+                          ),
                         buildEduInnerCard(true, isEducationShowCard, indexEdu),
                         buildEduInnerCard(true, isEducationShowCard, indexEdu),
                         SS.sB(15)
@@ -576,8 +615,10 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                 ),
               ),
             );
-          });
-        });
+          },
+        );
+      },
+    );
   }
 
   /// Education pop up edit functionality end
@@ -590,113 +631,132 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
   List achiveList = ['Award', 'Project', 'Presentation'];
   List achiveYearList = ['2010', '2011', '2012', '2013', '2014', '2015'];
 
-  Widget buildAchiveInnerCard(bool isArchiveEditable, bool isArchiveShowCard,
-      [String? title, String? subTitle, String? year]) {
-    return StatefulBuilder(builder: (context, setState) {
-      return Padding(
-        padding: EdgeInsets.symmetric(vertical: 5, horizontal: 16),
-        child: Container(
-          width: Responsive.isDesktop(context)
-              ? SS.sW(context) * .50
-              : Responsive.isMobile(context)
-                  ? SS.sW(context) * .90
-                  : SS.sW(context) * .60,
-          color: ColorPicker.kWhite,
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ListTile(
-                  leading: Container(
-                    alignment: Alignment.center,
-                    height: 50,
-                    width: 50,
-                    color: ColorPicker.kBlueLight1,
-                    child: FaIcon(
-                      Icons.verified_user_rounded,
-                      color: ColorPicker.kWhite,
-                      size: 18,
+  Widget buildAchiveInnerCard(
+    bool isArchiveEditable,
+    bool isArchiveShowCard, [
+    String? title,
+    String? subTitle,
+    String? year,
+  ]) {
+    return StatefulBuilder(
+      builder: (context, setState) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
+          child: Container(
+            width: Responsive.isDesktop(context)
+                ? SS.sW(context) * .50
+                : Responsive.isMobile(context)
+                    ? SS.sW(context) * .90
+                    : SS.sW(context) * .60,
+            color: ColorPicker.kWhite,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ListTile(
+                    leading: Container(
+                      alignment: Alignment.center,
+                      height: 50,
+                      width: 50,
+                      color: ColorPicker.kBlueLight1,
+                      child: const FaIcon(
+                        Icons.verified_user_rounded,
+                        color: ColorPicker.kWhite,
+                        size: 18,
+                      ),
                     ),
+                    title: const Text(''),
+                    subtitle: const Text(''),
+                    trailing: isArchiveEditable
+                        ? IconButton(
+                            onPressed: () {
+                              setState(() {
+                                isArchiveShowCard = !isArchiveShowCard;
+                              });
+                            },
+                            icon: const Icon(Icons.edit),
+                          )
+                        : null,
                   ),
-                  title: Text(''),
-                  subtitle: Text(''),
-                  trailing: isArchiveEditable
-                      ? IconButton(
-                          onPressed: () {
-                            setState(() {
-                              isArchiveShowCard = !isArchiveShowCard;
-                            });
-                          },
-                          icon: Icon(Icons.edit),
-                        )
-                      : null,
-                ),
-                isArchiveShowCard
-                    ? Column(
-                        children: [
-                          Divider(
-                            height: SS.sH(context) * 0.01,
-                            color: ColorPicker.kGreyLight3,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(16.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                TextFieldAndFieldName.buildFieldName(
-                                    'Achievement type', '*'),
-                                DropDownButton(
-                                    menuList: achiveList,
-                                    hintText: 'Presentation'),
-                                TextFieldAndFieldName.buildFieldName(
-                                    'Achievement title'),
-                                TextFieldAndFieldName.buildTextField(),
-                                TextFieldAndFieldName.buildFieldName(
-                                    'Issuing entity'),
-                                TextFieldAndFieldName.buildTextField(),
-                                TextFieldAndFieldName.buildFieldName(
-                                    'Award/Website link'),
-                                TextFieldAndFieldName.buildTextField(),
-                                TextFieldAndFieldName.buildFieldName(
-                                    'Date received'),
-                                SizedBox(
-                                  width: 100,
-                                  child: DropDownButton(
-                                    menuList: achiveYearList,
-                                    hintText: 'Year',
-                                  ),
+                  if (isArchiveShowCard)
+                    Column(
+                      children: [
+                        Divider(
+                          height: SS.sH(context) * 0.01,
+                          color: ColorPicker.kGreyLight3,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              TextFieldAndFieldName.buildFieldName(
+                                'Achievement type',
+                                '*',
+                              ),
+                              DropDownButton(
+                                menuList: achiveList,
+                                hintText: 'Presentation',
+                              ),
+                              TextFieldAndFieldName.buildFieldName(
+                                'Achievement title',
+                              ),
+                              TextFieldAndFieldName.buildTextField(),
+                              TextFieldAndFieldName.buildFieldName(
+                                'Issuing entity',
+                              ),
+                              TextFieldAndFieldName.buildTextField(),
+                              TextFieldAndFieldName.buildFieldName(
+                                'Award/Website link',
+                              ),
+                              TextFieldAndFieldName.buildTextField(),
+                              TextFieldAndFieldName.buildFieldName(
+                                'Date received',
+                              ),
+                              SizedBox(
+                                width: 100,
+                                child: DropDownButton(
+                                  menuList: achiveYearList,
+                                  hintText: 'Year',
                                 ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    OutlinedButton(
-                                        onPressed: () {},
-                                        child: Text('Cancel')),
-                                    SS.sB(0, 10),
-                                    ElevatedButton(
-                                        onPressed: () {}, child: Text('Save'))
-                                  ],
-                                )
-                              ],
-                            ),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  OutlinedButton(
+                                    onPressed: () {},
+                                    child: const Text('Cancel'),
+                                  ),
+                                  SS.sB(0, 10),
+                                  ElevatedButton(
+                                    onPressed: () {},
+                                    child: const Text('Save'),
+                                  )
+                                ],
+                              )
+                            ],
                           ),
-                        ],
-                      )
-                    : Container()
-              ],
+                        ),
+                      ],
+                    )
+                  else
+                    Container()
+                ],
+              ),
             ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 
   Future<String?> buildAchivementPopUp() {
     return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return StatefulBuilder(builder: (context, setState) {
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
             return Dialog(
               child: Container(
                 color: ColorPicker.kGreyLight3,
@@ -710,24 +770,25 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                     children: [
                       PopUpHeadMenu.popUpHead('Achievements', context),
                       SS.sB(15),
-                      isVisibleAchivement
-                          ? buildAchiveInnerCard(false, true)
-                          : Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: CircleAvatar(
-                                radius: 30,
-                                backgroundColor: ColorPicker.kGreenNeon,
-                                child: IconButton(
-                                    color: ColorPicker.kWhite,
-                                    onPressed: () {
-                                      setState(() {
-                                        isVisibleAchivement =
-                                            !isVisibleAchivement;
-                                      });
-                                    },
-                                    icon: Icon(Icons.add)),
-                              ),
+                      if (isVisibleAchivement)
+                        buildAchiveInnerCard(false, true)
+                      else
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: CircleAvatar(
+                            radius: 30,
+                            backgroundColor: ColorPicker.kGreenNeon,
+                            child: IconButton(
+                              color: ColorPicker.kWhite,
+                              onPressed: () {
+                                setState(() {
+                                  isVisibleAchivement = !isVisibleAchivement;
+                                });
+                              },
+                              icon: const Icon(Icons.add),
                             ),
+                          ),
+                        ),
                       buildAchiveInnerCard(true, isArchiveShowCard),
                       buildAchiveInnerCard(true, isArchiveShowCard),
                       SS.sB(15)
@@ -736,8 +797,10 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                 ),
               ),
             );
-          });
-        });
+          },
+        );
+      },
+    );
   }
 
   ///Achivement pop up edit functionality end
@@ -759,14 +822,17 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
       builder: (BuildContext context) {
         return StatefulBuilder(
           builder: (BuildContext context, setState) {
-            List<Widget> textField = List.generate(
-                langIndex, (int i) => TextFieldAndFieldName.buildTextField());
-            List<Widget> menuItem = List.generate(
-                langIndex,
-                (int i) => DropDownButton(
-                      menuList: langItem,
-                      hintText: 'Native or bilingual profiency',
-                    ));
+            final List<Widget> textField = List.generate(
+              langIndex,
+              (int i) => TextFieldAndFieldName.buildTextField(),
+            );
+            final List<Widget> menuItem = List.generate(
+              langIndex,
+              (int i) => DropDownButton(
+                menuList: langItem,
+                hintText: 'Native or bilingual profiency',
+              ),
+            );
             return Dialog(
               child: Container(
                 color: ColorPicker.kGreyLight3,
@@ -777,11 +843,10 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                         : SS.sW(context) * .60,
                 child: SingleChildScrollView(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       PopUpHeadMenu.popUpHead('Languages', context),
                       Padding(
-                        padding: EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.all(16.0),
                         child: Container(
                           width: Responsive.isDesktop(context)
                               ? SS.sW(context) * .50
@@ -791,19 +856,19 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                           color: ColorPicker.kWhite,
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               Expanded(
-                                flex: 1,
                                 child: Padding(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(8.0),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
                                       TextFieldAndFieldName.buildFieldName(
-                                          'Language', '*'),
+                                        'Language',
+                                        '*',
+                                      ),
                                       SS.sB(10, 0),
                                       Column(
                                         children: textField,
@@ -814,8 +879,8 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                                             langIndex++;
                                           });
                                         },
-                                        icon: Icon(Icons.add),
-                                        label: Text('Add another'),
+                                        icon: const Icon(Icons.add),
+                                        label: const Text('Add another'),
                                       ),
                                     ],
                                   ),
@@ -824,14 +889,15 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                               Expanded(
                                 flex: 2,
                                 child: Padding(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(8.0),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       TextFieldAndFieldName.buildFieldName(
-                                          'Proficiency', '*'),
+                                        'Proficiency',
+                                        '*',
+                                      ),
                                       SS.sB(10, 0),
                                       Column(
                                         children: menuItem,
@@ -842,14 +908,14 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                                         children: [
                                           OutlinedButton(
                                             onPressed: () {},
-                                            child: Text(
+                                            child: const Text(
                                               'Cancel',
                                             ),
                                           ),
                                           SS.sB(0, 10),
                                           ElevatedButton(
                                             onPressed: () {},
-                                            child: Text(
+                                            child: const Text(
                                               'Save',
                                             ),
                                           ),
@@ -959,7 +1025,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
         Stack(
           children: [
             Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Container(
                 key: widget.profileOverviewSec2LanguagesKey as Key,
                 color: ColorPicker.kWhite,
@@ -967,14 +1033,14 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(left: 20, top: 13),
+                      padding: const EdgeInsets.only(left: 20, top: 13),
                       child: Text(
                         'Languages',
                         style: FontTextStyle.kBlueDark120W400SSP,
                       ),
                     ),
                     SS.sB(8),
-                    Divider(
+                    const Divider(
                       height: .5,
                       color: Color(0xFFE5E5E5),
                     ),
@@ -990,7 +1056,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                                 height: 50,
                                 width: 50,
                                 color: ColorPicker.kBlueLight1,
-                                child: Icon(
+                                child: const Icon(
                                   Icons.language,
                                   color: ColorPicker.kWhite,
                                   size: 16.67,
@@ -1004,8 +1070,10 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(widget.pOApiDataSec2.toString(),
-                                  style: FontTextStyle.kBlueDark116W700SSP),
+                              Text(
+                                widget.pOApiDataSec2.toString(),
+                                style: FontTextStyle.kBlueDark116W700SSP,
+                              ),
                               SS.sB(5),
                               Text(
                                 'Native and bilingual profiency',
@@ -1019,7 +1087,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                       ],
                     ),
                     SS.sB(20),
-                    Divider(
+                    const Divider(
                       height: .5,
                       color: Color(0xFFE5E5E5),
                     ),
@@ -1035,7 +1103,7 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                                 height: 50,
                                 width: 50,
                                 color: ColorPicker.kBlueLight1,
-                                child: Icon(
+                                child: const Icon(
                                   Icons.language,
                                   color: ColorPicker.kWhite,
                                   size: 16.67,
@@ -1070,18 +1138,20 @@ class _ProfileOverviewSec2State extends State<ProfileOverviewSec2> {
                 ),
               ),
             ),
-            widget.sec2IsEditable as bool
-                ? ProfileEdit.buildProfileEdit(
-                    width: widget.profileOverviewSec2Languages_W as double,
-                    height: widget.profileOverviewSec2Languages_H as double,
-                    popUpEdit: () {
-                      buildLanguagePopUp(langIndex);
-                    },
-                    showAddButton: true,
-                    popUpAdd: () {
-                      buildLanguagePopUp(langIndex);
-                    })
-                : Container(),
+            if (widget.sec2IsEditable as bool)
+              ProfileEdit.buildProfileEdit(
+                width: widget.profileOverviewSec2Languages_W as double,
+                height: widget.profileOverviewSec2Languages_H as double,
+                popUpEdit: () {
+                  buildLanguagePopUp(langIndex);
+                },
+                showAddButton: true,
+                popUpAdd: () {
+                  buildLanguagePopUp(langIndex);
+                },
+              )
+            else
+              Container(),
           ],
         ),
       ],
