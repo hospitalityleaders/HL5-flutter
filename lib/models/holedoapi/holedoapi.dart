@@ -29,11 +29,11 @@ class Holedoapi {
         'data': data?.toJson(),
       };
 
-  Future<Holedoapi> login(
+  Future<User> login(
       {required String email,
       required String password,
       required BuildContext context}) async {
-    Holedoapi res = await Get.put(HoledoDatabase().users)
+    var res = await Get.put(HoledoDatabase().users)
         .login(email: email, password: password, context: context);
 
     return res;

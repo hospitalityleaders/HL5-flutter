@@ -49,7 +49,7 @@ class CustomIconButton extends StatelessWidget {
                         color: Cr.redTextColor,
                         borderRadius: BorderRadius.circular(Di.RSETS),
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           "2",
                           style: TextStyle(
@@ -61,7 +61,7 @@ class CustomIconButton extends StatelessWidget {
                       ),
                     ),
                   )
-                : SizedBox(),
+                : const SizedBox(),
           ],
         ),
       ),

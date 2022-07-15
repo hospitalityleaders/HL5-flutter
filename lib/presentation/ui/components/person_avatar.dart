@@ -20,9 +20,9 @@ class PersonAvatar extends StatelessWidget {
         image: isLogin
             ? DecorationImage(
                 image: NetworkImage(DbData.getUserProfileData.avatar ?? ""),
-                fit: BoxFit.fill,
+                fit: BoxFit.cover,
               )
-            : DecorationImage(
+            : const DecorationImage(
                 image: AssetImage("assetName"),
                 fit: BoxFit.fill,
               ),

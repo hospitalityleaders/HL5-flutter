@@ -60,17 +60,17 @@ class ArticlesSection extends StatelessWidget {
             child: SizedBox(
               width: 365,
               child: Column(
-                children: [
-                  const ProfileArticleTimelineComponent(),
+                children: const [
+                  ProfileArticleTimelineComponent(),
                   Di.SBHEL,
-                  const ProfileArticleWidget(
+                  ProfileArticleWidget(
                     showIsMemberOnly: true,
                   ),
-                  const ProfileArticleWidget(),
+                  ProfileArticleWidget(),
                   Di.SBHEL,
-                  const ConnectionsComponent(),
-                  const ProfileAdsComponent(),
-                  const RightsComponent(),
+                  ConnectionsComponent(),
+                  ProfileAdsComponent(),
+                  RightsComponent(),
                 ],
               ),
             ),

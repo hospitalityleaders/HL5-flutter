@@ -47,7 +47,7 @@ class SliderDrawer extends StatefulWidget {
 
 class SliderDrawerState extends State<SliderDrawer>
     with TickerProviderStateMixin {
-  double _percent = 0.0;
+  final double _percent = 0.0;
 
   AnimationController? _animationDrawerController;
   late Animation<double> _animation;
@@ -178,7 +178,7 @@ class _Shadow extends StatelessWidget {
             // soften the shadow
             spreadRadius: sliderShadow.shadowSpreadRadius,
             //extend the shadow
-            offset: Offset(
+            offset: const Offset(
               15.0, // Move to right 15  horizontally
               15.0, // Move to bottom 15 Vertically
             ),

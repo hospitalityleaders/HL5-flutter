@@ -82,8 +82,8 @@ class _ProfileOverviewState extends State<ProfileOverview> {
     return Responsive.isDesktop(context)
         ? Padding(
             padding: EdgeInsets.symmetric(
-                horizontal: SS.sW(context)! * 0.070 as double,
-                vertical: SS.sH(context) * .02 as double),
+                horizontal: SS.sW(context) * 0.070,
+                vertical: SS.sH(context) * .02),
             // Profile Overview Rows
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,25 +94,25 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                     profileOverviewSec1ProSummKey:
                         widget.profileOverviewSec1ProSummKey,
                     profileOverviewSec1ProSumm_H:
-                        widget.profileOverviewSec1ProSumm_H ,
+                        widget.profileOverviewSec1ProSumm_H,
                     profileOverviewSec1ProSumm_W:
-                        widget.profileOverviewSec1ProSumm_W ,
+                        widget.profileOverviewSec1ProSumm_W,
                     profileOverviewSec1AreaOfExpKey:
                         widget.profileOverviewSec1AreaOfExpKey,
                     profileOverviewSec1AreaOfExp_H:
-                        widget.profileOverviewSec1AreaOfExp_H ,
+                        widget.profileOverviewSec1AreaOfExp_H,
                     profileOverviewSec1AreaOfExp_W:
                         widget.profileOverviewSec1AreaOfExp_W,
                     profileOverviewSec1ReferencesKey:
                         widget.profileOverviewSec1ReferencesKey,
                     profileOverviewSec1References_H:
-                        widget.profileOverviewSec1References_H ,
+                        widget.profileOverviewSec1References_H,
                     profileOverviewSec1References_W:
-                        widget.profileOverviewSec1References_W ,
+                        widget.profileOverviewSec1References_W,
                     pOApiDataSec1: widget.pOApiData,
                   ),
                 ),
-                SS.sB(0, SS.sW(context) * 0.01 as double),
+                SS.sB(0, SS.sW(context) * 0.01),
                 Expanded(
                   child: ProfileOverviewSec2(
                     sec2IsEditable: widget.isEditable,
@@ -143,7 +143,7 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                     pOApiDataSec2: widget.pOApiData,
                   ),
                 ),
-                SS.sB(0, SS.sW(context) * 0.01 as double),
+                SS.sB(0, SS.sW(context) * 0.01),
                 StatefulBuilder(builder: (context, setState) {
                   return Expanded(
                     child: Column(
@@ -154,7 +154,7 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
-                            width: SS.sW(context) as double,
+                            width: SS.sW(context),
                             color: ColorPicker.kBlueLight3,
                             child: Padding(
                               padding: const EdgeInsets.all(25.0),

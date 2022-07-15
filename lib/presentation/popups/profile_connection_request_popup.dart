@@ -18,7 +18,7 @@ class ProfileConnectionRequestPopup extends StatelessWidget {
       onHover: (hover) {
         if (hover == false) {
           Provider.of<ProfileProvider>(context, listen: false)
-              .changeConectionRequestPopup2State(hover);
+              .changeConectionRequestPopup2State(false);
         }
       },
       child: SizedBox(

@@ -8,7 +8,7 @@ import 'package:holedo/presentation/providers/profile_provider.dart';
 import 'package:holedo/presentation/theme/light_theme.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:routemaster/routemaster.dart';
-import 'includes/url_strategy.dart';
+import 'package:holedo/includes/url_strategy.dart';
 
 void main() async {
   usePathUrlStrategy();
@@ -16,10 +16,12 @@ void main() async {
   await Get.put(HoledoDatabase()).init();
 
   // await testingMain();
-  await Intercom.instance.initialize('c6v4qg56',
-      iosApiKey: 'ios_sdk-3a9bbf8f38e388199f2031358d7f8c350c2a4e39',
-      androidApiKey: 'android_sdk-3c65cc36ee07675515866bac0090c30e84d03da6');
-  runApp(HoledoApp());
+  await Intercom.instance.initialize(
+    'c6v4qg56',
+    iosApiKey: 'ios_sdk-3a9bbf8f38e388199f2031358d7f8c350c2a4e39',
+    androidApiKey: 'android_sdk-3c65cc36ee07675515866bac0090c30e84d03da6',
+  );
+  runApp(const HoledoApp());
 }
 
 bool _isValidCategory(String? category) {
@@ -46,7 +48,7 @@ bool _isValidBookId(String? id) {
 }
 
 final holedoDatabase = Get.put(HoledoDatabase());
-var dataModel = holedoDatabase.getModel();
+DataModel dataModel = holedoDatabase.getModel();
 
 // ignore: prefer_expression_function_bodies
 RouteMap _buildRouteMap(BuildContext context) {
@@ -66,17 +68,19 @@ RouteMap _buildRouteMap(BuildContext context) {
       );
     },
     routes: {
-      '/': (route) => NoAnimationPage(child: const HomePage()),
-      '/home': (route) => NoAnimationPage(child: const HomePage()),
-      '/help': (route) => NoAnimationPage(child: const HomePage()),
+      '/': (route) => const NoAnimationPage(child: HomePage()),
+      '/home': (route) => const NoAnimationPage(child: HomePage()),
+      '/help': (route) => const NoAnimationPage(child: HomePage()),
       '/pages/:slug': (route) => _isValidPage(route.pathParameters['slug'])
           ? NoAnimationPage(
-              child: ContentPage(slug: route.pathParameters['slug']!))
+              child: ContentPage(slug: route.pathParameters['slug']!),
+            )
           : const NotFound(),
 
       '/:slug': (route) => _isValidPage(route.pathParameters['slug'])
           ? NoAnimationPage(
-              child: ContentPage(slug: route.pathParameters['slug']!))
+              child: ContentPage(slug: route.pathParameters['slug']!),
+            )
           : const Redirect('/'),
       '/login': (route) => NoAnimationPage(
             child: LoginPage(
@@ -92,7 +96,7 @@ RouteMap _buildRouteMap(BuildContext context) {
         return Redirect('/login', queryParameters: {'redirectTo': route.path});
       },
       '/recruitments': (route) =>
-          NoAnimationPage(child: const RecruitmentPage()),
+          const NoAnimationPage(child: RecruitmentPage()),
       '/recruitments/:id': (route) =>
           NoAnimationPage(child: ProfilePage(id: route.pathParameters['id']!)),
       '/news': (route) => TabPage(
@@ -110,12 +114,12 @@ RouteMap _buildRouteMap(BuildContext context) {
           _isValidCategory(route.pathParameters['category'])
               ? NoAnimationPage(
                   child: NewsfrontListPage(
-                      mode: route.pathParameters['category'] as String,
-                      category: Get.put(HoledoDatabase())
-                          .articleCategories
-                          .firstWhere(
-                            (e) => e.slug == route.pathParameters['category'],
-                          )),
+                    mode: route.pathParameters['category'] as String,
+                    category:
+                        Get.put(HoledoDatabase()).articleCategories.firstWhere(
+                              (e) => e.slug == route.pathParameters['category'],
+                            ),
+                  ),
                 )
               : const NotFound(),
       '/category/:category': (route) =>
@@ -132,19 +136,21 @@ RouteMap _buildRouteMap(BuildContext context) {
       '/article/:category/:slug': (route) =>
           NoAnimationPage(child: NewsPage(slug: route.pathParameters['slug'])),
       '/news2/:category/:id': (route) => _isValidCategory(
-              route.pathParameters['category'])
-          ? NoAnimationPage(child: NewsPage(id: route.pathParameters['id']!))
-          : const NotFound(),
+            route.pathParameters['category'],
+          )
+              ? NoAnimationPage(
+                  child: NewsPage(id: route.pathParameters['id']!))
+              : const NotFound(),
       '/jobs': (route) => TabPage(
             child: const JobsfrontPage(),
             paths: const ['all', 'premium'],
             pageBuilder: (child) => NoAnimationPage(child: child),
           ),
-      '/jobs/all': (route) => NoAnimationPage(
-            child: const JobsfrontListPage(mode: 'all'),
+      '/jobs/all': (route) => const NoAnimationPage(
+            child: JobsfrontListPage(mode: 'all'),
           ),
-      '/jobs/premium': (route) => NoAnimationPage(
-            child: const JobsfrontListPage(mode: 'premium'),
+      '/jobs/premium': (route) => const NoAnimationPage(
+            child: JobsfrontListPage(mode: 'premium'),
           ),
       '/jobs/all/:slug': (route) =>
           _isValidCompany(route.pathParameters['slug'])
@@ -171,13 +177,14 @@ RouteMap _buildRouteMap(BuildContext context) {
       '/job/:id': (route) =>
           NoAnimationPage(child: JobsPage(slug: route.pathParameters['id'])),
       '/search': (route) => NoAnimationPage(
-              child: SearchPage(
-            query: route.queryParameters['query'] ?? '',
-            sortOrder: SortOrder.values.firstWhere(
-              (e) => e.queryParam == route.queryParameters['sort'],
-              orElse: () => SortOrder.name,
+            child: SearchPage(
+              query: route.queryParameters['query'] ?? '',
+              sortOrder: SortOrder.values.firstWhere(
+                (e) => e.queryParam == route.queryParameters['sort'],
+                orElse: () => SortOrder.name,
+              ),
             ),
-          )),
+          ),
       '/profile': (route) {
         final appState = Provider.of<AppState>(context, listen: false);
         if (appState.isLoggedIn) {
@@ -190,12 +197,15 @@ RouteMap _buildRouteMap(BuildContext context) {
         if (appState.isLoggedIn &&
             route.pathParameters['slug'] == appState.profile?.slug) {
           return NoAnimationPage(
-              child: ProfilePage(
-                  id: appState.profile?.id.toString(),
-                  slug: appState.profile?.slug));
+            child: ProfilePage(
+              id: appState.profile?.id.toString(),
+              slug: appState.profile?.slug,
+            ),
+          );
         }
         return NoAnimationPage(
-            child: ProfilePage(slug: route.pathParameters['slug']));
+          child: ProfilePage(slug: route.pathParameters['slug']),
+        );
       },
       //'/profile/add': (route) => AddProfilePage(),
       '/interactive/:id': (route) {
@@ -215,7 +225,7 @@ RouteMap _buildRouteMap(BuildContext context) {
 
 final loggedOutRouteMap = RouteMap(
   routes: {
-    '/': (route) => NoAnimationPage(child: const LoginPage()),
+    '/': (route) => const NoAnimationPage(child: LoginPage()),
   },
 );
 
@@ -250,8 +260,9 @@ class HoledoApp extends StatelessWidget {
           ),
           ChangeNotifierProvider(
             create: (_) => AppState(
-                username: Get.put(HoledoDatabase()).getModel().user?.fullName,
-                profile: Get.put(HoledoDatabase()).getModel().user),
+              username: Get.put(HoledoDatabase()).getModel().user?.fullName,
+              profile: Get.put(HoledoDatabase()).getModel().user,
+            ),
           ),
         ],
         child: MaterialApp.router(
@@ -259,8 +270,10 @@ class HoledoApp extends StatelessWidget {
           builder: (context, child) => ResponsiveWrapper.builder(
             ClampingScrollWrapper.builder(context, child!),
             breakpoints: [
-              const ResponsiveBreakpoint.autoScaleDown(450,
-                  name: "SmallMobile"),
+              const ResponsiveBreakpoint.autoScaleDown(
+                450,
+                name: "SmallMobile",
+              ),
               const ResponsiveBreakpoint.resize(460, name: "Mobile"),
               const ResponsiveBreakpoint.resize(750, name: MOBILE),
               const ResponsiveBreakpoint.resize(1000, name: TABLET),

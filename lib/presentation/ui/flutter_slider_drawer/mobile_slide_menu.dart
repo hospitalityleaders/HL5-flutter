@@ -51,16 +51,16 @@ class _MobileSlideMenuState extends State<MobileSlideMenu> {
                 children: [
                   InkWell(
                     onTap: () {},
-                    child: AppbarEmailButton(),
+                    child: const AppbarEmailButton(),
                   ),
                   Di.DVZW,
-                  AppbarNotificationsButton(),
+                  const AppbarNotificationsButton(),
                   Di.DVZW,
-                  AppbarConnectionRequestButton(),
+                  const AppbarConnectionRequestButton(),
                   Di.DVZW,
                   CustomIconButton(
                     onTap: widget.onCloseTap,
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.close,
                       color: Cr.darkBlue9,
                     ),
@@ -71,7 +71,7 @@ class _MobileSlideMenuState extends State<MobileSlideMenu> {
             Di.SBHETS,
             Di.DHDT,
             Padding(
-              padding: EdgeInsets.only(
+              padding: const EdgeInsets.only(
                 left: Di.PSETS,
               ),
               child: SingleChildScrollView(
@@ -168,17 +168,17 @@ class _MobileSlideMenuState extends State<MobileSlideMenu> {
                       Di.DHDT,
                       if (appState.isLoggedIn == true)
                         Container(
-                          padding: EdgeInsets.only(
+                          padding: const EdgeInsets.only(
                             left: Di.PSD,
                           ),
-                          margin: EdgeInsets.only(right: Di.PSS),
+                          margin: const EdgeInsets.only(right: Di.PSS),
                           height: 77,
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              PersonAvatar(
+                              const PersonAvatar(
                                 avatarSize: 50,
                               ),
                               Column(
@@ -205,12 +205,12 @@ class _MobileSlideMenuState extends State<MobileSlideMenu> {
                           ),
                         ),
                       Di.DHDT,
-                      _MobileMenu(title: "Account settings"),
+                      const _MobileMenu(title: "Account settings"),
                       Di.DHDT,
-                      _MobileMenu(title: "Privacy settings"),
+                      const _MobileMenu(title: "Privacy settings"),
                       Di.DHDT,
                       Di.SBHS,
-                      TextWithBackground(
+                      const TextWithBackground(
                         padding: 10,
                         paddingHorizantal: 80,
                         backgroundColor: Cr.darkBlue5,

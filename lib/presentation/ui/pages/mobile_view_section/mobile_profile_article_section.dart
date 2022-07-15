@@ -36,9 +36,9 @@ class MobileProfileArticleSection extends StatelessWidget {
         horizontal: Di.PSS,
       ),
       child: Column(
-        children: [
+        children: const [
           Di.SBHL,
-          const Padding(
+          Padding(
             padding: EdgeInsets.symmetric(
               horizontal: Di.PSD,
             ),
@@ -46,35 +46,35 @@ class MobileProfileArticleSection extends StatelessWidget {
               isMobile: true,
             ),
           ),
-          const ProfileArticleWidget(
+          ProfileArticleWidget(
             isMobile: true,
             showIsMemberOnly: true,
           ),
-          const ProfileArticleWidget(
+          ProfileArticleWidget(
             isMobile: true,
           ),
-          const ProfileArticleWidget(
+          ProfileArticleWidget(
             isMobile: true,
           ),
-          const ProfileArticleWidget(
+          ProfileArticleWidget(
             isMobile: true,
           ),
-          const ProfileArticleWidget(
+          ProfileArticleWidget(
             isMobile: true,
           ),
-          const ProfileArticleWidget(
+          ProfileArticleWidget(
             isMobile: true,
           ),
-          const ProfileArticleWidget(
+          ProfileArticleWidget(
             isMobile: true,
           ),
-          const ConnectionsComponent(
+          ConnectionsComponent(
             isMobile: true,
           ),
           Di.SBHS,
-          const ProfileAdsComponent(),
+          ProfileAdsComponent(),
           Di.SBHS,
-          const RightsComponent(
+          RightsComponent(
             isMobile: true,
           ),
           Di.SBHOTL,

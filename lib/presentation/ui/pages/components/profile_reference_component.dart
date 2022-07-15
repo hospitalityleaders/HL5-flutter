@@ -75,13 +75,13 @@ class _ProfileReferenceComponentState extends State<ProfileReferenceComponent> {
                                           avatarSize: Di.FSOTL + 10,
                                         ),
                                         title: Row(
-                                          children: [
-                                            const Text(
+                                          children: const [
+                                            Text(
                                               "Name ",
                                               style: h4Bold,
                                             ),
                                             Di.SBWES,
-                                            const Text(
+                                            Text(
                                               "MHL",
                                               style: dividerTextSmall,
                                             )
@@ -217,13 +217,13 @@ class _ProfileReferenceListTile extends StatelessWidget {
               avatarSize: Di.FSOTL + 10,
             ),
             title: Row(
-              children: [
-                const Text(
+              children: const [
+                Text(
                   "Sarah Lee",
                   style: h4Bold,
                 ),
                 Di.SBWES,
-                const Text(
+                Text(
                   "MHL",
                   style: dividerTextSmall,
                 )

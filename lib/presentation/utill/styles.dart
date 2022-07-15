@@ -117,7 +117,7 @@ class Styles {
         ),
       );
 
-  static const BoxDecoration boxDecorationBorder = const BoxDecoration(
+  static const BoxDecoration boxDecorationBorder = BoxDecoration(
     color: Cr.whiteColor,
     border: Border(
       bottom: BorderSide(
@@ -131,7 +131,7 @@ class Styles {
     borderRadius: BorderRadius.circular(4),
   );
 
-  static const BoxDecoration boxDecorationCircle = const BoxDecoration(
+  static const BoxDecoration boxDecorationCircle = BoxDecoration(
     color: Cr.whiteColor,
     shape: BoxShape.circle,
   );

@@ -30,16 +30,14 @@ class _ProfileOverviewThirdColumnState
   Widget build(BuildContext context) {
     return Container(
       child: Column(
-        children: [
-          ////const ProfileCompletionComponent(),
-          // Di.SBHEL,
-          //const ConnectionsComponent(),
+        children: const [
+          ProfileCompletionComponent(),
           Di.SBHEL,
-          const TimelineComponent(),
+          ConnectionsComponent(),
           Di.SBHEL,
-          const ProfileAdsComponent(),
+          TimelineComponent(),
           Di.SBHL,
-          const RightsComponent(),
+          RightsComponent(),
         ],
       ),
     );
@@ -58,7 +56,7 @@ class ProfileAdsComponent extends StatelessWidget {
     print('set2: ${settings.ads.toString()}');
     final profileAd = settings.ads!['profile_right_side'];
 
-    final match = script.firstMatch(profileAd);
+    final match = script.firstMatch(profileAd as String);
     final future = FlutterWebviewPlugin().evalJavascript(match![1]!.toString());
     future.then((String? result) {
       print('eval $result');
@@ -66,7 +64,7 @@ class ProfileAdsComponent extends StatelessWidget {
       //_history.add('eval: $result');
       //});
     });
-    print('set22: ${future.toString()} ${match![1]!.toString()}');
+    print('set22: ${future.toString()} ${match[1]!.toString()}');
     return Container(
       decoration: Styles.boxDecoration.copyWith(color: Cr.whiteColor),
       padding: const EdgeInsets.all(Di.PSD),

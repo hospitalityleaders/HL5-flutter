@@ -37,12 +37,12 @@ class _ProfileWriteReferenceDialogWidgetState
       child: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          children: [
-            const DialogTitleWidget(
+          children: const [
+            DialogTitleWidget(
               title: "Cover image",
             ),
             Di.SBHL,
-            const ProfileCoverImageDialogExpandedTile(isExpanded: true),
+            ProfileCoverImageDialogExpandedTile(isExpanded: true),
             Di.SBHD,
           ],
         ),
@@ -153,7 +153,8 @@ class _ProfileCoverImageDialogExpandedTileState
                 height: 240,
                 child: pickedImage ??
                     Image.network(
-                      userProfileData.banner ?? "",
+                      userProfileData.banner ??
+                          "https://images.pexels.com/photos/269077/pexels-photo-269077.jpeg",
                       fit: BoxFit.cover,
                     ),
               ),

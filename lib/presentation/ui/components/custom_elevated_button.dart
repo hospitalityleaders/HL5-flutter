@@ -72,9 +72,9 @@ class CustomElevatedButton extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       donotShowIcon
-                          ? SizedBox()
+                          ? const SizedBox()
                           : icon ??
-                              Icon(
+                              const Icon(
                                 Icons.edit,
                                 color: Cr.whiteColor,
                                 size: Di.FSD,

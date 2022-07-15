@@ -1,5 +1,7 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart' hide Provider;
 import 'package:holedo/application/shared/providers.dart';
+import 'package:holedo/presentation/providers/profile_provider.dart';
+import 'package:holedo/presentation/ui/components/appbar_notification_widget.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_image_banner.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_tabbar.dart';
 import 'package:holedo/presentation/ui/pages/profile_mobile_view/profile_mobile_view_page.dart';
@@ -52,11 +54,11 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage>
 
   @override
   void didChangeDependencies() {
-    setState(() {
-      _tabController.index = ref.watch(profileNotifierProvider).currentTabIndex;
-    });
-    // Provider.of<ProfileProvider>(context, listen: false)
-    //     .changeUserProfilePercentage(Provider.of<AppState>(context).isLoggedIn);
+    // setState(() {
+    //   _tabController.index = ref.watch(profileNotifierProvider).currentTabIndex;
+    // });
+    Provider.of<ProfileProvider>(context, listen: false)
+        .changeUserProfilePercentage(Provider.of<AppState>(context).isLoggedIn);
     super.didChangeDependencies();
   }
 
@@ -66,14 +68,17 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage>
     super.dispose();
   }
 
+  _updateTabController() {
+    setState(() {
+      _tabController.index = ref.watch(profileNotifierProvider).currentTabIndex;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final currentTabIndex = ref.watch(profileNotifierProvider).currentTabIndex;
     print("userProfileData: is  ${widget.userProfileData.toString()} ");
-    // final appState = Provider.of<AppState>(context);
-    // final userProfileProvider = Provider.of<ProfileProvider>(context);
-    // final userProfileProviderNotListener =
-    //     Provider.of<ProfileProvider>(context, listen: false);
+    _updateTabController();
     print('app $isEditable');
     return TapCanvas(
       child: Container(
@@ -86,44 +91,51 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage>
                     changeCurrentIndex: changeCurrentIndex,
                     userProfileData: widget.userProfileData,
                     tabController: _tabController,
-                    // onTabBarTap: (value) {
-                    //   Provider.of<ProfileProvider>(context, listen: false)
-                    //       .changeCurrentTabIndex(value);
-                    // },
                   )
                 : Center(
                     child: ListView(
                       shrinkWrap: true,
                       children: [
-                        // userProfileProvider.appNotificationState.map(
-                        //   showNothing: (_) => Di.ESB,
-                        //   profileCompletion: (notification) =>
-                        //       userProfileProvider.percentageProfileCompleted ==
-                        //               100
-                        //           ? Di.ESB
-                        //           : AppbarNotificationWidget(
-                        //               title:
-                        //                   "Your profile is only ${userProfileProvider.percentageProfileCompleted}% complete. Complete it now to earn first Hospitality Leader grade.",
-                        //               onButtonPressed: () {
-                        //                 userProfileProviderNotListener
-                        //                     .changeIsProfieEditableState(true);
-                        //               },
-                        //             ),
-                        //   sucess: (notification) => AppbarNotificationWidget(
-                        //     appbarNotificationColor:
-                        //         AppbarNotificationColor.green,
-                        //     buttonText: "View profile",
-                        //     title:
-                        //         "Your profile has been successfully updated.",
-                        //     onButtonPressed: () {
-                        //       userProfileProviderNotListener
-                        //         ..changeIsProfieEditableState(false)
-                        //         ..changeAppNotificationState(
-                        //           AppNotificationState.showNothing(),
-                        //         );
-                        //     },
-                        //   ),
-                        // ),
+                        ref
+                            .watch(profileNotifierProvider)
+                            .appNotificationState
+                            .map(
+                              showNothing: (_) => Di.ESB,
+                              profileCompletion: (notification) =>
+                                  Provider.of<ProfileProvider>(context)
+                                              .percentageProfileCompleted ==
+                                          100
+                                      ? Di.ESB
+                                      : AppbarNotificationWidget(
+                                          title:
+                                              "Your profile is only ${Provider.of<ProfileProvider>(context).percentageProfileCompleted}% complete. Complete it now to earn first Hospitality Leader grade.",
+                                          onButtonPressed: () {
+                                            ref
+                                                .watch(
+                                                  profileNotifierProvider
+                                                      .notifier,
+                                                )
+                                                .changeIsProfieEditableState(
+                                                  true,
+                                                );
+                                          },
+                                        ),
+                              sucess: (notification) =>
+                                  AppbarNotificationWidget(
+                                appbarNotificationColor:
+                                    AppbarNotificationColor.green,
+                                buttonText: "View profile",
+                                title:
+                                    "Your profile has been successfully updated.",
+                                onButtonPressed: () {
+                                  ref.watch(profileNotifierProvider.notifier)
+                                    ..changeIsProfieEditableState(false)
+                                    ..changeAppNotificationState(
+                                      const AppNotificationState.showNothing(),
+                                    );
+                                },
+                              ),
+                            ),
                         ProfileImageBanner(
                           userProfileData: widget.userProfileData,
                         ),
@@ -140,10 +152,10 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage>
                               isEditable: isEditable,
                               userProfileData: widget.userProfileData,
                             ),
-                            TimelineSection(),
-                            ArticlesSection(),
-                            ActivitySection(),
-                            ReferenceSection(),
+                            const TimelineSection(),
+                            const ArticlesSection(),
+                            const ActivitySection(),
+                            const ReferenceSection(),
                           ][currentTabIndex],
                         ),
                         Di.SBHOTL,

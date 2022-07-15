@@ -8,7 +8,7 @@ class Nav {
     final appState = Provider.of<AppState>(context);
     final isLoggedIn = appState.isLoggedIn;
     Routemaster.of(context).push(
-        isLoggedIn ? "/profile/" + DbData.getUserProfileData.slug! : "/login");
+        isLoggedIn ? "/profile/${DbData.getUserProfileData.slug!}" : "/login");
   }
 
   static void profile(

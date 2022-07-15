@@ -29,7 +29,7 @@ class CustomCheckboxWithTitle extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Icon(
+              const Icon(
                 Icons.check_circle,
                 color: Cr.accentBlue1,
                 size: Di.FSL,
@@ -43,7 +43,7 @@ class CustomCheckboxWithTitle extends StatelessWidget {
           ),
           SizedBox(
             width: titleWidth + 30,
-            child: Divider(
+            child: const Divider(
               thickness: .7,
               color: Cr.darkGrey2,
             ),

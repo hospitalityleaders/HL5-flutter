@@ -14,10 +14,10 @@ void showCircularProgressIndicator(
 }) {
   showCustomDialog(
     context,
-    SizedBox(
+    const SizedBox(
       width: 100,
       height: 100,
-      child: const Center(
+      child: Center(
         child: CircularProgressIndicator(),
       ),
     ),

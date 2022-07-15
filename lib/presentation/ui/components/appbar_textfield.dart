@@ -24,7 +24,7 @@ class AppbarTextField extends StatelessWidget {
         color: ColorPicker.kWhite,
         borderRadius: BorderRadius.circular(5),
       ),
-      margin: EdgeInsets.all(2),
+      margin: const EdgeInsets.all(2),
       child: TextFormField(
         controller: searchController,
         onChanged: onSearchChange,
@@ -32,27 +32,27 @@ class AppbarTextField extends StatelessWidget {
         cursorColor: ColorPicker.kWhite,
         style: FontTextStyle.kWhite18W600PR,
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.all(4),
+          contentPadding: const EdgeInsets.all(4),
           hintStyle: FontTextStyle.kPrimaryLightBlue16W400SSP,
           filled: true,
           fillColor: ColorPicker.kPrimaryLight,
           hintText: "Search",
           border: OutlineInputBorder(
-              borderSide: BorderSide(color: ColorPicker.kPrimary),
+              borderSide: const BorderSide(color: ColorPicker.kPrimary),
               borderRadius: BorderRadius.circular(5)),
           focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: ColorPicker.kPrimary),
+              borderSide: const BorderSide(color: ColorPicker.kPrimary),
               borderRadius: BorderRadius.circular(5)),
           enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: ColorPicker.kPrimary),
+              borderSide: const BorderSide(color: ColorPicker.kPrimary),
               borderRadius: BorderRadius.circular(5)),
-          prefixIcon: Icon(
+          prefixIcon: const Icon(
             Icons.search,
             color: ColorPicker.kPrimaryLightBlue,
           ),
           suffixIcon: showPeopleButton
               ? Container(
-                  margin: EdgeInsets.only(right: 5, bottom: 5, top: 5),
+                  margin: const EdgeInsets.only(right: 5, bottom: 5, top: 5),
                   height: 40,
                   width: 87,
                   decoration: BoxDecoration(

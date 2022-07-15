@@ -20,7 +20,7 @@ Future<void> showProfileConnectionRequest(BuildContext context) {
               width: 200,
               color: Cr.colorPrimary,
               height: 38,
-              padding: EdgeInsets.symmetric(horizontal: Di.PSS),
+              padding: const EdgeInsets.symmetric(horizontal: Di.PSS),
               child: Center(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -35,7 +35,7 @@ Future<void> showProfileConnectionRequest(BuildContext context) {
                           style: h5Bold.copyWith(color: Cr.whiteColor),
                         ),
                         Di.SBWES,
-                        TextWithBackground(
+                        const TextWithBackground(
                           text: "2",
                           textColor: Cr.darkBlue9,
                           padding: 0,
@@ -49,7 +49,7 @@ Future<void> showProfileConnectionRequest(BuildContext context) {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         TextWithBackground(
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.mail,
                             color: Cr.whiteColor,
                             size: 16,
@@ -66,8 +66,8 @@ Future<void> showProfileConnectionRequest(BuildContext context) {
               ),
             ),
             Di.SBHES,
-            ConnectionRequestAppbarComponent(),
-            ConnectionRequestAppbarComponent(),
+            const ConnectionRequestAppbarComponent(),
+            const ConnectionRequestAppbarComponent(),
             Container(
               color: Cr.whiteColor,
               padding: const EdgeInsets.only(
@@ -105,13 +105,13 @@ class ConnectionRequestAppbarComponent extends StatelessWidget {
     return Container(
       color: Cr.whiteColor,
       height: 80,
-      padding: EdgeInsets.symmetric(horizontal: Di.PSL),
+      padding: const EdgeInsets.symmetric(horizontal: Di.PSL),
       child: Row(
         children: [
           Container(
             width: 65,
             height: 65,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage("assets/images/avatar.png"),
                 fit: BoxFit.fill,
@@ -126,7 +126,7 @@ class ConnectionRequestAppbarComponent extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
-                  children: [
+                  children: const [
                     Text(
                       "Sarah Lee",
                       style: h4Bold,

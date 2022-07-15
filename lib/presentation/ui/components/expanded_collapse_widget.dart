@@ -40,6 +40,7 @@ class ExpandedCollapseWidgetState extends State<ExpandedCollapseWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ExpandedSection(
+            expand: showMore,
             child: Padding(
               padding: const EdgeInsets.only(
                 top: 12,
@@ -56,13 +57,12 @@ class ExpandedCollapseWidgetState extends State<ExpandedCollapseWidget> {
                 ),
               ),
             ),
-            expand: showMore,
           ),
           Container(
             height: 40,
             width: double.infinity,
             color: Cr.lightGrey2,
-            padding: EdgeInsets.only(left: Di.PSL),
+            padding: const EdgeInsets.only(left: Di.PSL),
             child: Align(
               alignment: Alignment.centerLeft,
               child: AnimatedCrossFade(
@@ -116,7 +116,7 @@ class ExpandedCollapseWidgetState extends State<ExpandedCollapseWidget> {
                 crossFadeState: showMore
                     ? CrossFadeState.showSecond
                     : CrossFadeState.showFirst,
-                duration: Duration(milliseconds: 200),
+                duration: const Duration(milliseconds: 200),
               ),
             ),
           ),

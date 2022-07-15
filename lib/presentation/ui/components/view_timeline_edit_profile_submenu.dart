@@ -84,7 +84,7 @@ class HideFromProfileDeleteRefereneceSubmenu extends StatelessWidget {
           ),
           text: "Hide from my profile",
         ),
-        CustomSubmenuItem(
+        const CustomSubmenuItem(
           iconData: Icons.delete,
           text: "Delete",
         ),
@@ -114,7 +114,7 @@ class CustomSubMenu extends StatelessWidget {
         ),
         Container(
           decoration: BoxDecoration(
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                 offset: Offset(2, 2),
                 blurRadius: 2,

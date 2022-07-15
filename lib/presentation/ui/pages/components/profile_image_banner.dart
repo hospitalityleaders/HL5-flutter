@@ -58,7 +58,7 @@ class _ProfileImageBannerState extends ConsumerState<ProfileImageBanner> {
         Center(
           child: Container(
             width: 560,
-            margin: EdgeInsets.only(top: 50),
+            margin: const EdgeInsets.only(top: 50),
             color: Cr.whiteColor,
             padding: const EdgeInsets.all(Di.PSD),
             child: Stack(
@@ -145,11 +145,7 @@ class _ProfileImageBannerState extends ConsumerState<ProfileImageBanner> {
                           Text(
                             (widget.userProfileData.area ?? "") +
                                 (widget.userProfileData.countryId != null
-                                    ? (", " +
-                                        (PresentationData.countries[widget
-                                                .userProfileData.countryId!
-                                                .toString()] ??
-                                            ""))
+                                    ? (", ${PresentationData.countries[widget.userProfileData.countryId!.toString()] ?? ""}")
                                     : ""),
                             style: bodySmallRegular.copyWith(
                               color: Cr.darkGrey1,
@@ -159,9 +155,9 @@ class _ProfileImageBannerState extends ConsumerState<ProfileImageBanner> {
                       ),
                     ),
                     Di.SBHL,
-                    SizedBox(
+                    const SizedBox(
                       child: Center(
-                        child: const SendConnectionRequestButton(),
+                        child: SendConnectionRequestButton(),
                       ),
                     ),
                     Di.SBHES,
