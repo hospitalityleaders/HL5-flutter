@@ -16,10 +16,9 @@ import 'package:holedo/presentation/ui/pages/sections/page_overview/page_overvie
 import 'package:holedo/presentation/ui/pages/sections/page_overview/page_overview_columns/profile_overview_first_column.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
+import 'package:holedo/presentation/utill/images.dart';
 import 'package:holedo/presentation/utill/responsive.dart';
 import 'package:holedo/presentation/utill/styles.dart';
-
-import 'package:holedo/presentation/utill/images.dart';
 
 class MobileProfileOverviewSection extends StatelessWidget {
   const MobileProfileOverviewSection({
@@ -127,50 +126,51 @@ class _ProfileMobileAppbarState extends State<ProfileMobileAppbar> {
             width: isTablet(context) ? 250 : 300,
             showPeopleButton: false,
           ),
-          isTablet(context)
-              ? Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const VerticalDivider(
-                      thickness: 1.3,
-                      color: Cr.darkBlue5,
-                    ),
-                    CustomIconButton(
-                      icon: SvgPicture.asset(
-                        Svgs.emailOpen,
-                        color: Cr.darkBlue9,
-                      ),
-                      // iconData: Icons.mail_rounded,
-                      showNotification: true,
-                    ),
-                    const VerticalDivider(
-                      thickness: 1.3,
-                      color: Cr.darkBlue5,
-                    ),
-                    CustomIconButton(
-                      icon: SvgPicture.asset(
-                        Svgs.flag,
-                        color: Cr.darkBlue9,
-                      ),
-                      showNotification: true,
-                    ),
-                    const VerticalDivider(
-                      thickness: 1.3,
-                      color: Cr.darkBlue5,
-                    ),
-                    const AppbarConnectionRequestButton(),
-                    const VerticalDivider(
-                      thickness: 1.3,
-                      color: Cr.darkBlue5,
-                    ),
-                    const PersonAvatar(),
-                    const VerticalDivider(
-                      thickness: 1.3,
-                      color: Cr.darkBlue5,
-                    ),
-                  ],
-                )
-              : Di.ESB,
+          if (isTablet(context))
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const VerticalDivider(
+                  thickness: 1.3,
+                  color: Cr.darkBlue5,
+                ),
+                CustomIconButton(
+                  icon: SvgPicture.asset(
+                    Svgs.emailOpen,
+                    color: Cr.darkBlue9,
+                  ),
+                  // iconData: Icons.mail_rounded,
+                  showNotification: true,
+                ),
+                const VerticalDivider(
+                  thickness: 1.3,
+                  color: Cr.darkBlue5,
+                ),
+                CustomIconButton(
+                  icon: SvgPicture.asset(
+                    Svgs.flag,
+                    color: Cr.darkBlue9,
+                  ),
+                  showNotification: true,
+                ),
+                const VerticalDivider(
+                  thickness: 1.3,
+                  color: Cr.darkBlue5,
+                ),
+                const AppbarConnectionRequestButton(),
+                const VerticalDivider(
+                  thickness: 1.3,
+                  color: Cr.darkBlue5,
+                ),
+                const PersonAvatar(),
+                const VerticalDivider(
+                  thickness: 1.3,
+                  color: Cr.darkBlue5,
+                ),
+              ],
+            )
+          else
+            Di.ESB,
           Di.SBWD,
           Column(
             mainAxisAlignment: MainAxisAlignment.center,

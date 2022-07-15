@@ -139,36 +139,40 @@ class _ProfileOverviewSecondColumnState
                       child: Column(
                         children: [
                           Divider(
-                              height: SS.sH(context) * 0.01,
-                              color: ColorPicker.kGreyLight3),
+                            height: SS.sH(context) * 0.01,
+                            color: ColorPicker.kGreyLight3,
+                          ),
                           Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 TextFieldAndFieldName.buildFieldName(
-                                    'Educational institution', '*'),
+                                  'Educational institution',
+                                  '*',
+                                ),
                                 TextFieldAndFieldName.buildTextField(),
                                 TextFieldAndFieldName.buildFieldName(
-                                    'Course duration'),
+                                  'Course duration',
+                                ),
                                 TextFieldAndFieldName.buildFieldName(
-                                    'Qualification title'),
+                                  'Qualification title',
+                                ),
                                 TextFieldAndFieldName.buildTextField(),
                                 TextFieldAndFieldName.buildFieldName(
-                                    'Description'),
+                                  'Description',
+                                ),
                                 const TextField(
-                                  autocorrect: true,
                                   minLines: 4,
                                   maxLines: 6,
                                   decoration: InputDecoration(
-                                    border: OutlineInputBorder(
-                                      borderSide: BorderSide(),
-                                    ),
+                                    border: OutlineInputBorder(),
                                   ),
                                 ),
                                 SS.sB(18),
                                 TextFieldAndFieldName.buildFieldName(
-                                    'Course outline'),
+                                  'Course outline',
+                                ),
                                 Column(children: eduTextFieldGenerate),
                                 TextButton.icon(
                                   onPressed: () {
@@ -183,8 +187,9 @@ class _ProfileOverviewSecondColumnState
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     OutlinedButton(
-                                        onPressed: () {},
-                                        child: const Text('Cancel')),
+                                      onPressed: () {},
+                                      child: const Text('Cancel'),
+                                    ),
                                     SS.sB(0, 10),
                                     ElevatedButton(
                                       onPressed: () {},
@@ -488,7 +493,6 @@ class _FeaturedVideoComponentState extends State<FeaturedVideoComponent> {
           });
         }
       });
-
   }
 
   @override

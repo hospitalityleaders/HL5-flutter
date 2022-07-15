@@ -13,7 +13,7 @@ class RightsComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 18),
+      padding: const EdgeInsets.only(left: 18),
       width: isMobile ? Di.getScreenSize(context).width : 360,
       child: Align(
         alignment: Alignment.centerLeft,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_expanded_tile/flutter_expanded_tile.dart';
 import 'package:holedo/db_data.dart';
-
 import 'package:holedo/models/holedoapi/holedoapi.dart';
 import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/dialog_widgets.dart';
@@ -198,36 +197,37 @@ class __CoverDialogExpandedTileState extends State<_CoverDialogExpandedTile> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _videoPlayerController != null
-                  ? IntrinsicHeight(
-                      child: Stack(
-                        children: [
-                          SizedBox(
-                            width: double.infinity,
-                            height: 345,
-                            child: VideoPlayer(_videoPlayerController!),
-                          ),
-                          Center(
-                            child: FloatingActionButton(
-                              backgroundColor: Cr.accentBlue1,
-                              onPressed: () {
-                                setState(() {
-                                  _videoPlayerController!.value.isPlaying
-                                      ? _videoPlayerController!.pause()
-                                      : _videoPlayerController!.play();
-                                });
-                              },
-                              child: Icon(
-                                _videoPlayerController!.value.isPlaying
-                                    ? Icons.pause
-                                    : Icons.play_arrow,
-                              ),
-                            ),
-                          ),
-                        ],
+              if (_videoPlayerController != null)
+                IntrinsicHeight(
+                  child: Stack(
+                    children: [
+                      SizedBox(
+                        width: double.infinity,
+                        height: 345,
+                        child: VideoPlayer(_videoPlayerController!),
                       ),
-                    )
-                  : Di.ESB,
+                      Center(
+                        child: FloatingActionButton(
+                          backgroundColor: Cr.accentBlue1,
+                          onPressed: () {
+                            setState(() {
+                              _videoPlayerController!.value.isPlaying
+                                  ? _videoPlayerController!.pause()
+                                  : _videoPlayerController!.play();
+                            });
+                          },
+                          child: Icon(
+                            _videoPlayerController!.value.isPlaying
+                                ? Icons.pause
+                                : Icons.play_arrow,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              else
+                Di.ESB,
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: Di.PSL),
                 child: Form(

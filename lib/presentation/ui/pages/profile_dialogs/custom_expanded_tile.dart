@@ -14,7 +14,6 @@ class CustomExpandedTileController extends ChangeNotifier {
   }
 
   CustomExpandedTileController({
-    int? key,
     bool isExpanded = false,
   }) : _isExpanded = isExpanded;
 
@@ -181,49 +180,52 @@ class _CustomExpandedTileState extends State<CustomExpandedTile>
                     return widget.onLongTap!();
                   }
                 },
-          child: OnHover(builder: (isHovered) {
-            return Container(
-              decoration: BoxDecoration(
-                borderRadius:
-                    BorderRadius.circular(widget.theme!.headerRadius!),
-                color: isHovered ? Cr.accentBlue3 : Cr.whiteColor,
-              ),
-              padding: widget.theme!.headerPadding,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  widget.leading != null
-                      ? Padding(
-                          padding: widget.theme!.leadingPadding!,
-                          child: widget.leading,
-                        )
-                      : Container(),
-                  Expanded(
-                    child: Container(
-                      padding: widget.theme!.titlePadding,
-                      child: widget.title,
+          child: OnHover(
+            builder: (isHovered) {
+              return Container(
+                decoration: BoxDecoration(
+                  borderRadius:
+                      BorderRadius.circular(widget.theme!.headerRadius!),
+                  color: isHovered ? Cr.accentBlue3 : Cr.whiteColor,
+                ),
+                padding: widget.theme!.headerPadding,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    if (widget.leading != null)
+                      Padding(
+                        padding: widget.theme!.leadingPadding!,
+                        child: widget.leading,
+                      )
+                    else
+                      Container(),
+                    Expanded(
+                      child: Container(
+                        padding: widget.theme!.titlePadding,
+                        child: widget.title,
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: widget.theme!.trailingPadding!,
-                    child: _isExpanded
-                        ? SvgPicture.asset(
-                            Svgs.minus,
-                            width: 16,
-                            color: Cr.accentBlue1,
-                          )
-                        : isHovered
-                            ? SvgPicture.asset(
-                                Svgs.pencil,
-                                width: 16,
-                                color: Cr.accentBlue1,
-                              )
-                            : null,
-                  ),
-                ],
-              ),
-            );
-          }),
+                    Padding(
+                      padding: widget.theme!.trailingPadding!,
+                      child: _isExpanded
+                          ? SvgPicture.asset(
+                              Svgs.minus,
+                              width: 16,
+                              color: Cr.accentBlue1,
+                            )
+                          : isHovered
+                              ? SvgPicture.asset(
+                                  Svgs.pencil,
+                                  width: 16,
+                                  color: Cr.accentBlue1,
+                                )
+                              : null,
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
         ),
 
         //* Content

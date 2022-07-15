@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:holedo/models/holedoapi/article_category.dart';
-import 'package:holedo/models/holedoapi/article.dart';
-
-import 'package:holedo/models/models.dart';
 import 'package:holedo/layouts/page_scaffold.dart';
+import 'package:holedo/models/holedoapi/article.dart';
+import 'package:holedo/models/holedoapi/article_category.dart';
+import 'package:holedo/models/models.dart';
+import 'package:holedo/presentation/ui/flutter_slider_drawer/slider.dart';
 
 class CategoryPage extends StatefulWidget {
   final ArticleCategory category;

@@ -16,19 +16,19 @@ class ReferenceSection extends StatefulWidget {
 class _ReferenceSectionState extends State<ReferenceSection> {
   final GlobalKey _widgetKey = GlobalKey();
 
-  void _getScreenSize() {
-    final RenderBox renderBox =
-        _widgetKey.currentContext?.findRenderObject() as RenderBox;
+  // void _getScreenSize() {
+  //   final RenderBox renderBox =
+  //       _widgetKey.currentContext?.findRenderObject() as RenderBox;
 
-    final Size size = renderBox
-        .size; // or _widgetKey.currentContext?.size    print('Size: ${size.width}, ${size.height}');
-  }
+  //   final Size size = renderBox
+  //       .size; // or _widgetKey.currentContext?.size    print('Size: ${size.width}, ${size.height}');
+  // }
 
-  @override
-  void didUpdateWidget(covariant ReferenceSection oldWidget) {
-    _getScreenSize();
-    super.didUpdateWidget(oldWidget);
-  }
+  // @override
+  // void didUpdateWidget(covariant ReferenceSection oldWidget) {
+  //   _getScreenSize();
+  //   super.didUpdateWidget(oldWidget);
+  // }
   // @override
   // void didChangeDependencies() {
   //   _getScreenSize();

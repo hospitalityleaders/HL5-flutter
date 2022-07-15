@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:holedo/db_data.dart';
 import 'package:holedo/presentation/ui/components/profile_reference_single_compoenet.dart';
 import 'package:holedo/presentation/ui/pages/components/connection_component.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_completion_component.dart';
@@ -19,7 +18,7 @@ class MobileProfileReferenceSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userProfileData = DbData.getUserProfileData;
+    // final userProfileData = DbData.getUserProfileData;
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: Di.PSS,

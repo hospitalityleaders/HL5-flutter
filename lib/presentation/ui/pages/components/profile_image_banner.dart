@@ -134,7 +134,6 @@ class _ProfileImageBannerState extends ConsumerState<ProfileImageBanner> {
                     Center(
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           const Icon(
                             Icons.location_on,
@@ -145,7 +144,7 @@ class _ProfileImageBannerState extends ConsumerState<ProfileImageBanner> {
                           Text(
                             (widget.userProfileData.area ?? "") +
                                 (widget.userProfileData.countryId != null
-                                    ? (", ${PresentationData.countries[widget.userProfileData.countryId!.toString()] ?? ""}")
+                                    ? (", ${countries[widget.userProfileData.countryId!.toString()] ?? ""}")
                                     : ""),
                             style: bodySmallRegular.copyWith(
                               color: Cr.darkGrey1,
@@ -210,48 +209,49 @@ class _ProfileImageBannerState extends ConsumerState<ProfileImageBanner> {
             ),
           ),
 
-        ref.watch(profileNotifierProvider).isProfileEditable
-            ? Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const SizedBox(height: 50),
-                    Container(
-                      width: 560,
-                      height: 385,
-                      color: Cr.accentBlue2.withOpacity(.8),
-                      padding: const EdgeInsets.all(Di.PSD),
-                    ),
-                  ],
+        if (ref.watch(profileNotifierProvider).isProfileEditable)
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 50),
+                Container(
+                  width: 560,
+                  height: 385,
+                  color: Cr.accentBlue2.withOpacity(.8),
+                  padding: const EdgeInsets.all(Di.PSD),
                 ),
-              )
-            : Di.ESB,
+              ],
+            ),
+          )
+        else
+          Di.ESB,
 
-        ref.watch(profileNotifierProvider).isProfileEditable
-            ? Positioned.fill(
-                child: Align(
-                  alignment: Alignment.center,
-                  child: RoundeIconButton(
-                    onPressed: () {
-                      showCustomDialog(
-                        context,
-                        Container(
-                          // margin: const EdgeInsets.symmetric(vertical: 100),
-                          child: ProfileEditDialogWidget(
-                            userProfileData: widget.userProfileData,
-                          ),
-                        ),
-                      );
-                    },
-                    backgroundColor: Cr.accentBlue1,
-                    icon: const Icon(
-                      Icons.edit,
-                      color: Cr.whiteColor,
+        if (ref.watch(profileNotifierProvider).isProfileEditable)
+          Positioned.fill(
+            child: Align(
+              child: RoundeIconButton(
+                onPressed: () {
+                  showCustomDialog(
+                    context,
+                    Container(
+                      // margin: const EdgeInsets.symmetric(vertical: 100),
+                      child: ProfileEditDialogWidget(
+                        userProfileData: widget.userProfileData,
+                      ),
                     ),
-                  ),
+                  );
+                },
+                backgroundColor: Cr.accentBlue1,
+                icon: const Icon(
+                  Icons.edit,
+                  color: Cr.whiteColor,
                 ),
-              )
-            : Di.ESB,
+              ),
+            ),
+          )
+        else
+          Di.ESB,
         //     Positioned.fill(
         //   top: 10,
         //   child: Align(

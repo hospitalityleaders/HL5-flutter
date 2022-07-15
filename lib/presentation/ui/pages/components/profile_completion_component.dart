@@ -19,18 +19,18 @@ class ProfileCompletionComponent extends ConsumerWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context, ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final userProfileData = DbData.getUserProfileData;
-    final bool experienceAdded = (userProfileData.experiences != null ||
-        userProfileData.experiences!.isNotEmpty);
-    final bool qualificationAdded = ((userProfileData.educations == null ||
+    final bool experienceAdded = userProfileData.experiences != null ||
+        userProfileData.experiences!.isNotEmpty;
+    final bool qualificationAdded = (userProfileData.educations == null ||
             userProfileData.educations!.isNotEmpty) ||
         (userProfileData.educations!.first.qualification == null ||
-            userProfileData.educations!.first.qualification != null));
-    final bool expertiseAdded = (userProfileData.expertise == null ||
-        userProfileData.expertise!.isNotEmpty);
-    final bool languagesAdded = (userProfileData.languages == null ||
-        userProfileData.languages!.isNotEmpty);
+            userProfileData.educations!.first.qualification != null);
+    final bool expertiseAdded = userProfileData.expertise == null ||
+        userProfileData.expertise!.isNotEmpty;
+    final bool languagesAdded = userProfileData.languages == null ||
+        userProfileData.languages!.isNotEmpty;
     final percentage =
         Provider.of<ProfileProvider>(context).percentageProfileCompleted;
 
@@ -75,7 +75,7 @@ class ProfileCompletionComponent extends ConsumerWidget {
           SizedBox(
             width: double.infinity,
             child: Text(
-              "Your profile is only $percentage% complete. ${percentage != 100 ? 'Improve it now. Here\'s how.' : ''} ",
+              "Your profile is only $percentage% complete. ${percentage != 100 ? "Improve it now. Here's how." : ''} ",
               textAlign: TextAlign.center,
               style: h2Regular.copyWith(
                 color: Cr.whiteColor,

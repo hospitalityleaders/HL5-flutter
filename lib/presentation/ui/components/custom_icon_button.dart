@@ -38,30 +38,31 @@ class CustomIconButton extends StatelessWidget {
                     size: 20,
                   ),
             ),
-            showNotification
-                ? Positioned(
-                    right: 0,
-                    top: 4,
-                    child: Container(
-                      width: 17,
-                      height: 17,
-                      decoration: BoxDecoration(
-                        color: Cr.redTextColor,
-                        borderRadius: BorderRadius.circular(Di.RSETS),
-                      ),
-                      child: const Center(
-                        child: Text(
-                          "2",
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            color: Cr.whiteColor,
-                          ),
-                        ),
+            if (showNotification)
+              Positioned(
+                right: 0,
+                top: 4,
+                child: Container(
+                  width: 17,
+                  height: 17,
+                  decoration: BoxDecoration(
+                    color: Cr.redTextColor,
+                    borderRadius: BorderRadius.circular(Di.RSETS),
+                  ),
+                  child: const Center(
+                    child: Text(
+                      "2",
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: Cr.whiteColor,
                       ),
                     ),
-                  )
-                : const SizedBox(),
+                  ),
+                ),
+              )
+            else
+              const SizedBox(),
           ],
         ),
       ),

@@ -3,13 +3,12 @@ import 'package:holedo/db_data.dart';
 import 'package:holedo/models/holedoapi/expertise.dart';
 import 'package:holedo/models/holedoapi/holedoapi.dart';
 import 'package:holedo/presentation/ui/components/custom_checkbox_with_title.dart';
-
+import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
-import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
-
 import 'package:holedo/presentation/utill/nav.dart';
 import 'package:holedo/presentation/utill/styles.dart';
+import 'package:holedo/presentation/validators/form_validator.dart';
 
 class ProfileExpertiseDialogWidget extends StatefulWidget {
   const ProfileExpertiseDialogWidget({
@@ -91,7 +90,6 @@ class _ProfileExpertiseDialogWidgetState
                     ),
                     Di.SBWES,
                     Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
                       children: const [
                         Icon(
                           Icons.help,
@@ -109,6 +107,7 @@ class _ProfileExpertiseDialogWidgetState
                       child: Form(
                         key: _formKey,
                         child: TextFormField(
+                          validator: requiredValidator,
                           controller: _controller,
                           style: bodySmallRegular.copyWith(
                             color: Cr.darkGrey1,
@@ -127,7 +126,7 @@ class _ProfileExpertiseDialogWidgetState
                               expertise.add(
                                 expertise[0].copyWith(
                                   id: 2342,
-                                  title: _controller.text.toString(),
+                                  title: _controller.text,
                                 ),
                                 // Expertise(
                                 //   title: _controller.text.toString(),
@@ -166,7 +165,7 @@ class _ProfileExpertiseDialogWidgetState
                       (int idx) {
                         return Padding(
                           padding: const EdgeInsets.all(Di.PSES),
-                          child: CustomChoiceWithTrailingIcon(
+                          child: CustomCheckboxWithTitle(
                             title: expertise[idx].title ?? "",
                           ),
                         );

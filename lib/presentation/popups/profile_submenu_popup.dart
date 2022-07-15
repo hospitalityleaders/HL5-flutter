@@ -78,11 +78,11 @@ class _SubMenuWidgetState extends State<_SubMenuWidget> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onHover: ((value) => setState(
-            () {
-              isHovered = value;
-            },
-          )),
+      onHover: (value) => setState(
+        () {
+          isHovered = value;
+        },
+      ),
       onTap: widget.onTap ?? () {},
       child: Container(
         color: isHovered ? Cr.darkBlue7.withAlpha(220) : Cr.colorPrimary,

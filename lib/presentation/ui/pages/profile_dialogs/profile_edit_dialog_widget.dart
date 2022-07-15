@@ -162,7 +162,6 @@ class _ContactDetailsExpandedTileState
                     decoration: BoxDecoration(
                       border: Border.all(
                         color: Cr.darkGrey4,
-                        width: 1,
                       ),
                     ),
                     child: Column(
@@ -325,7 +324,7 @@ class _ContactDetailsExpandedTileState
   }
 
   List<Widget> getNewContactPhoneFields() {
-    var textField = <Widget>[];
+    final textField = <Widget>[];
     for (var i = 0; i < contactNumberList.length; i++) {
       textField.add(
         _ContactNumberField(
@@ -341,7 +340,7 @@ class _ContactDetailsExpandedTileState
   }
 
   List<Widget> getNewSocialProfilesFields() {
-    var textField = <Widget>[];
+    final textField = <Widget>[];
     for (var i = 0; i < socialProfilesList.length; i++) {
       textField.add(
         _SocialProfileField(
@@ -780,9 +779,7 @@ class __ProfilePictureDialogExpandedTileState
                   } else if (userProfileData.avatar != null) {
                     await ImageUploadFunctions()
                         .deleteImageFromCloudnary(userProfileData.avatar!);
-                    await User(
-                      avatar: null,
-                    ).save(userProfileData);
+                    await User().save(userProfileData);
                     // Csd.customSuccessrDialog(context, "Avatar is deleted");
                   }
                   Nav.pop(context);

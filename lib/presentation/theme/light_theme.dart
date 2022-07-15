@@ -18,11 +18,13 @@ ThemeData lightTheme = ThemeData(
       textStyle: const TextStyle(color: Colors.black),
     ),
   ),
-  pageTransitionsTheme: const PageTransitionsTheme(builders: {
-    TargetPlatform.android: ZoomPageTransitionsBuilder(),
-    TargetPlatform.iOS: ZoomPageTransitionsBuilder(),
-    TargetPlatform.fuchsia: ZoomPageTransitionsBuilder(),
-  }),
+  pageTransitionsTheme: const PageTransitionsTheme(
+    builders: {
+      TargetPlatform.android: ZoomPageTransitionsBuilder(),
+      TargetPlatform.iOS: ZoomPageTransitionsBuilder(),
+      TargetPlatform.fuchsia: ZoomPageTransitionsBuilder(),
+    },
+  ),
   textTheme: const TextTheme(
     button: TextStyle(color: Colors.white),
     headline1: TextStyle(fontWeight: FontWeight.w300, fontSize: Di.FSD),

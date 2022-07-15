@@ -6,16 +6,16 @@ class SliderBar extends StatelessWidget {
   final double sliderMenuOpenSize;
   final Widget sliderMenu;
 
-  const SliderBar(
-      {Key? key,
-      required this.slideDirection,
-      required this.sliderMenuOpenSize,
-      required this.sliderMenu})
-      : super(key: key);
+  const SliderBar({
+    Key? key,
+    required this.slideDirection,
+    required this.sliderMenuOpenSize,
+    required this.sliderMenu,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var container = SizedBox(
+    final container = SizedBox(
       width: sliderMenuOpenSize,
       child: sliderMenu,
     );

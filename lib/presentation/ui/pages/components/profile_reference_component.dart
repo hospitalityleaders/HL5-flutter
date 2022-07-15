@@ -63,7 +63,8 @@ class _ProfileReferenceComponentState extends State<ProfileReferenceComponent> {
                               .map(
                                 (value) => Container(
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: Di.PSS),
+                                    horizontal: Di.PSS,
+                                  ),
                                   decoration: Styles.boxDecoration
                                       .copyWith(color: Cr.whiteColor),
                                   child: Column(
@@ -98,7 +99,8 @@ class _ProfileReferenceComponentState extends State<ProfileReferenceComponent> {
                                       Container(
                                         height: Di.FSOTL + 10,
                                         padding: const EdgeInsets.symmetric(
-                                            horizontal: Di.PSD),
+                                          horizontal: Di.PSD,
+                                        ),
                                         child: Row(
                                           children: [
                                             Container(
@@ -132,7 +134,8 @@ class _ProfileReferenceComponentState extends State<ProfileReferenceComponent> {
                                       Di.SBHETS,
                                       Padding(
                                         padding: const EdgeInsets.symmetric(
-                                            horizontal: Di.PSD),
+                                          horizontal: Di.PSD,
+                                        ),
                                         child: Text(
                                           "incididunt ut labore et dolore magna aliqua.",
                                           maxLines: 1,

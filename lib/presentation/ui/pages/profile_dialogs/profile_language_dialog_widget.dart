@@ -1,9 +1,8 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
-
 import 'package:holedo/models/holedoapi/holedoapi.dart';
+import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/images.dart';
@@ -90,7 +89,6 @@ class _ProfileLanguagesDialogWidgetState
                             ),
                             Di.SBWES,
                             Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
                               children: const [
                                 Icon(
                                   Icons.star,
@@ -112,7 +110,6 @@ class _ProfileLanguagesDialogWidgetState
                           ),
                           Di.SBWES,
                           Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
                             children: const [
                               Icon(
                                 Icons.star,
@@ -211,7 +208,7 @@ class _ProfileLanguagesDialogWidgetState
   }
 
   List<Widget> getNewTextFormFields() {
-    var textField = <Widget>[];
+    final textField = <Widget>[];
     for (var i = 0; i < newTextField.length; i++) {
       textField.add(
         Padding(
@@ -255,15 +252,17 @@ class _ProfileLanguagesDialogWidgetState
                     "Native",
                     "Billingual",
                   ]
-                      .map((item) => DropdownMenuItem<String>(
-                            value: item,
-                            child: Text(
-                              item,
-                              style: bodySmallRegular.copyWith(
-                                color: Cr.darkGrey1,
-                              ),
+                      .map(
+                        (item) => DropdownMenuItem<String>(
+                          value: item,
+                          child: Text(
+                            item,
+                            style: bodySmallRegular.copyWith(
+                              color: Cr.darkGrey1,
                             ),
-                          ))
+                          ),
+                        ),
+                      )
                       .toList(),
                   validator: (value) {
                     if (value == null) {

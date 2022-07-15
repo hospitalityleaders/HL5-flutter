@@ -49,7 +49,8 @@ class _ProfileDetailsExpandedTileState
     _surnameController =
         TextEditingController(text: widget.userProfileData.lastName ?? "");
     _professionalTitleController = TextEditingController(
-        text: widget.userProfileData.professionalTitle ?? "");
+      text: widget.userProfileData.professionalTitle ?? "",
+    );
     _cityAreaController =
         TextEditingController(text: widget.userProfileData.area ?? "");
     expandedTileController = ExpandedTileController(
@@ -147,7 +148,6 @@ class _ProfileDetailsExpandedTileState
                   DialogLabelTextFormField(
                     customLabel: "Professional title",
                     icon: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         SvgPicture.asset(
                           Svgs.helpCircle,
@@ -190,13 +190,12 @@ class _ProfileDetailsExpandedTileState
                       ),
                       const SizedBox(width: 18),
                       DialogDropDownTextField(
-                        initialValue:
-                            PresentationData.countries[countryId.toString()],
+                        initialValue: countries[countryId.toString()],
                         onChanged: (value) {
                           if (value != null) {
                             final countryidString =
                                 HelperFunctions.findKeyByValueFromMap(
-                              PresentationData.countries,
+                              countries,
                               value,
                             );
 
@@ -209,7 +208,7 @@ class _ProfileDetailsExpandedTileState
                         },
                         alignHintTextStart: true,
                         hintText: 'Select Country',
-                        dataList: PresentationData.countries.values.toList(),
+                        dataList: countries.values.toList(),
                       ),
                     ],
                   ),
@@ -253,7 +252,8 @@ class _ProfileDetailsExpandedTileState
                           ref
                               .read(profileNotifierProvider.notifier)
                               .changeAppNotificationState(
-                                  const AppNotificationState.sucess());
+                                const AppNotificationState.sucess(),
+                              );
                           Nav.profile(context);
                           Nav.pop(context);
                           Nav.pop(context);

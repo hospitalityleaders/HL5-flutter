@@ -37,7 +37,7 @@ class _EducationComponentState extends State<EducationComponent> {
   Widget build(BuildContext context) {
     final List<Education>? education = DbData.getUserProfileData.educations;
     final bool hasData = education != null ? education.isNotEmpty : false;
-    bool showMore = false;
+    final bool showMore = false;
     bool showSubMenu = false;
 
     return Container(
@@ -69,11 +69,12 @@ class _EducationComponentState extends State<EducationComponent> {
                               .map(
                                 (singleEductaion) => Container(
                                   margin: EdgeInsets.only(
-                                      bottom:
-                                          education.indexOf(singleEductaion) ==
-                                                  (education.length - 1)
-                                              ? 0
-                                              : Di.PSS),
+                                    bottom:
+                                        education.indexOf(singleEductaion) ==
+                                                (education.length - 1)
+                                            ? 0
+                                            : Di.PSS,
+                                  ),
                                   width: widget.isMobile ? null : 360,
                                   decoration: Styles.boxDecoration.copyWith(
                                     color: Cr.whiteColor,

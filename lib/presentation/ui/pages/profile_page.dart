@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' hide Provider;
 import 'package:holedo/application/shared/providers.dart';
+import 'package:holedo/models/models.dart';
 import 'package:holedo/presentation/providers/profile_provider.dart';
 import 'package:holedo/presentation/ui/components/appbar_notification_widget.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_image_banner.dart';
@@ -10,13 +12,9 @@ import 'package:holedo/presentation/ui/pages/sections/articles_section/articles_
 import 'package:holedo/presentation/ui/pages/sections/page_overview/page_overview_section.dart';
 import 'package:holedo/presentation/ui/pages/sections/reference_section/reference_section.dart';
 import 'package:holedo/presentation/ui/pages/sections/timeline_section/timeline_section.dart';
-import 'package:tap_canvas/tap_canvas.dart';
-import 'package:flutter/material.dart';
-import 'package:holedo/models/models.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
-
-enum CarType { sedan, suv, truck }
+import 'package:tap_canvas/tap_canvas.dart';
 
 class UserProfilePage extends ConsumerStatefulWidget {
   final User userProfileData;

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:holedo/models/holedoapi/achievement.dart';
 import 'package:holedo/models/holedoapi/education.dart';
 import 'package:holedo/models/holedoapi/experience.dart';
+import 'package:holedo/presentation/classes.dart';
 import 'package:holedo/presentation/functions/helper_functions.dart';
-
 import 'package:holedo/presentation/ui/components/person_avatar.dart';
 import 'package:holedo/presentation/ui/components/svg_with_background.dart';
 import 'package:holedo/presentation/ui/pages/components/connection_component.dart';
@@ -11,7 +11,6 @@ import 'package:holedo/presentation/ui/pages/components/profile_completion_compo
 import 'package:holedo/presentation/ui/pages/components/rights_component.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/expanded_section.dart';
 import 'package:holedo/presentation/ui/pages/sections/page_overview/page_overview_columns/page_overview_third_columns.dart';
-import 'package:holedo/presentation/classes.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/images.dart';
@@ -165,8 +164,8 @@ class _AchievementTimeLineWidgetState extends State<AchievementTimeLineWidget> {
                   ),
                 _TimelineButtons(
                   showMore: showMore,
-                  collapsedButtonText: r"  + Description",
-                  expandedButtonText: r"  - Close",
+                  collapsedButtonText: "  + Description",
+                  expandedButtonText: "  - Close",
                   onCollpaseButtonPressed: () async {
                     setState(() {
                       showMore = !showMore;
@@ -178,9 +177,10 @@ class _AchievementTimeLineWidgetState extends State<AchievementTimeLineWidget> {
                     });
                   },
                 ),
-                widget.showComments
-                    ? const _TimelineCommentWidget()
-                    : const SizedBox(),
+                if (widget.showComments)
+                  const _TimelineCommentWidget()
+                else
+                  const SizedBox(),
               ],
             ),
           ),
@@ -242,8 +242,8 @@ class _ExperienceTimeLineWidgetState extends State<ExperienceTimeLineWidget> {
                   ),
                 _TimelineButtons(
                   showMore: showMore,
-                  collapsedButtonText: r"  + Description",
-                  expandedButtonText: r"  - Close",
+                  collapsedButtonText: "  + Description",
+                  expandedButtonText: "  - Close",
                   onCollpaseButtonPressed: () async {
                     setState(() {
                       showMore = !showMore;
@@ -255,9 +255,10 @@ class _ExperienceTimeLineWidgetState extends State<ExperienceTimeLineWidget> {
                     });
                   },
                 ),
-                widget.showComments
-                    ? const _TimelineCommentWidget()
-                    : const SizedBox(),
+                if (widget.showComments)
+                  const _TimelineCommentWidget()
+                else
+                  const SizedBox(),
               ],
             ),
           ),
@@ -317,8 +318,8 @@ class _EducationTimeLineWidgetState extends State<EducationTimeLineWidget> {
                   ),
                 _TimelineButtons(
                   showMore: showMore,
-                  collapsedButtonText: r"  + Description",
-                  expandedButtonText: r"  - Close",
+                  collapsedButtonText: "  + Description",
+                  expandedButtonText: "  - Close",
                   onCollpaseButtonPressed: () async {
                     setState(() {
                       showMore = !showMore;
@@ -330,9 +331,10 @@ class _EducationTimeLineWidgetState extends State<EducationTimeLineWidget> {
                     });
                   },
                 ),
-                widget.showComments
-                    ? const _TimelineCommentWidget()
-                    : const SizedBox(),
+                if (widget.showComments)
+                  const _TimelineCommentWidget()
+                else
+                  const SizedBox(),
               ],
             ),
           ),
@@ -374,7 +376,7 @@ class _TimelineButtons extends StatelessWidget {
               onTap: onCollpaseButtonPressed,
               child: Text(
                 collapsedButtonText,
-                style: (bodySmallRegular).copyWith(
+                style: bodySmallRegular.copyWith(
                   color: Cr.accentBlue1,
                 ),
               ),
@@ -383,7 +385,7 @@ class _TimelineButtons extends StatelessWidget {
               onTap: onExpandedButtonPressed,
               child: Text(
                 expandedButtonText,
-                style: (bodySmallRegular).copyWith(
+                style: bodySmallRegular.copyWith(
                   color: Cr.accentBlue1,
                 ),
               ),
@@ -752,7 +754,7 @@ class CreatePath extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          margin: const EdgeInsets.only(top: 0),
+          margin: const EdgeInsets.only(),
           width: 16,
           height: 16,
           decoration: BoxDecoration(
@@ -778,24 +780,29 @@ class CreatePath extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(orderStatus,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          )),
+                      Text(
+                        orderStatus,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
                       const SizedBox(
                         height: 4,
                       ),
-                      Text(date,
-                          style:
-                              TextStyle(color: Colors.grey[400], fontSize: 11)),
+                      Text(
+                        date,
+                        style: TextStyle(color: Colors.grey[400], fontSize: 11),
+                      ),
                       const SizedBox(
                         height: 8,
                       ),
-                      Text(orderDescription,
-                          style: const TextStyle(
-                            color: Cr.darkBlue1,
-                          )),
+                      Text(
+                        orderDescription,
+                        style: const TextStyle(
+                          color: Cr.darkBlue1,
+                        ),
+                      ),
                       const SizedBox(
                         height: 24,
                       )

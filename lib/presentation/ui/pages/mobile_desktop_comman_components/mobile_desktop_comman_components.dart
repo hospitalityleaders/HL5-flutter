@@ -40,7 +40,7 @@ class ContactCardMenuCommon extends StatelessWidget {
             color: Cr.darkGrey1,
           ),
         ),
-        isMobile ? Di.SBWS : Di.ESB,
+        if (isMobile) Di.SBWS else Di.ESB,
         CustomOutlinedButton(
           onPressed: onPressed ??
               () {
@@ -181,7 +181,7 @@ class StatsComman extends StatelessWidget {
               ),
             ],
           ),
-          isMobile ? Di.ESB : Image.asset("assets/images/badge.png"),
+          if (isMobile) Di.ESB else Image.asset("assets/images/badge.png"),
           Column(
             children: [
               Text(

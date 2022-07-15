@@ -45,7 +45,8 @@ class CustomElevatedButton extends StatelessWidget {
           padding: padding == null
               ? null
               : MaterialStateProperty.all<EdgeInsets>(
-                  customPadding ?? EdgeInsets.all(padding!)),
+                  customPadding ?? EdgeInsets.all(padding!),
+                ),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
               side: BorderSide(
@@ -71,14 +72,15 @@ class CustomElevatedButton extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      donotShowIcon
-                          ? const SizedBox()
-                          : icon ??
-                              const Icon(
-                                Icons.edit,
-                                color: Cr.whiteColor,
-                                size: Di.FSD,
-                              ),
+                      if (donotShowIcon)
+                        const SizedBox()
+                      else
+                        icon ??
+                            const Icon(
+                              Icons.edit,
+                              color: Cr.whiteColor,
+                              size: Di.FSD,
+                            ),
                       Di.SBWS,
                       Text(
                         text ?? "Edit Profile",

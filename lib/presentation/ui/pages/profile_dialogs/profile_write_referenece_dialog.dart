@@ -29,7 +29,6 @@ class _ProfileWriteReferenceDialogState
       width: 950,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
           const DialogTitleWidget(
@@ -55,7 +54,6 @@ class _ProfileWriteReferenceDialogState
                         decoration: BoxDecoration(
                           border: Border.all(
                             color: Cr.darkGrey4,
-                            width: 1,
                           ),
                           borderRadius: BorderRadius.circular(4),
                         ),
@@ -109,7 +107,9 @@ class _ProfileWriteReferenceDialogState
                 Expanded(
                   child: Container(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: Di.PSOL, vertical: 24),
+                      horizontal: Di.PSOL,
+                      vertical: 24,
+                    ),
                     color: Cr.accentBlue1,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

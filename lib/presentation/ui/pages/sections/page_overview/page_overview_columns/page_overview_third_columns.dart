@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:holedo/main.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:holedo/models/holedoapi/holedoapi.dart';
 import 'package:holedo/models/models.dart';
 import 'package:holedo/presentation/ui/pages/components/connection_component.dart';
@@ -9,8 +10,6 @@ import 'package:holedo/presentation/ui/pages/components/timeline_component.dart'
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/styles.dart';
-import 'package:flutter_html/flutter_html.dart';
-import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 class ProfileOverviewThirdColumn extends StatefulWidget {
   const ProfileOverviewThirdColumn({

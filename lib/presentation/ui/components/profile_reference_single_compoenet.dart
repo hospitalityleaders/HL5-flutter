@@ -35,7 +35,7 @@ class _ProfileReferenceSingleComponentState
     if (widget.description == null) {
       return ["", ""];
     } else {
-      List<String> descriptionList = HelperFunctions().splitText(
+      final List<String> descriptionList = HelperFunctions().splitText(
         widget.description!,
         (Di.getScreenSize(context).width / 1200 * 65).toInt(),
       );
@@ -132,30 +132,31 @@ class _ProfileReferenceSingleComponentState
                 ),
               ),
               Di.SBHETS,
-              widget.displayShowMoreHideButton
-                  ? AnimatedCrossFade(
-                      firstChild: _ShowMoreWIdget(
-                        getDescription: getDescription,
-                        showMore: false,
-                      ),
-                      secondChild: _ShowMoreWIdget(
-                        getDescription: getDescription,
-                        showMore: true,
-                      ),
-                      crossFadeState: showMore
-                          ? CrossFadeState.showFirst
-                          : CrossFadeState.showSecond,
-                      duration: const Duration(milliseconds: 300),
-                    )
-                  : Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: Di.PSD),
-                      child: Text(
-                        getDescription(context).last,
-                        style: bodyLarge.copyWith(
-                          color: Cr.darkGrey1,
-                        ),
-                      ),
+              if (widget.displayShowMoreHideButton)
+                AnimatedCrossFade(
+                  firstChild: _ShowMoreWIdget(
+                    getDescription: getDescription,
+                    showMore: false,
+                  ),
+                  secondChild: _ShowMoreWIdget(
+                    getDescription: getDescription,
+                    showMore: true,
+                  ),
+                  crossFadeState: showMore
+                      ? CrossFadeState.showFirst
+                      : CrossFadeState.showSecond,
+                  duration: const Duration(milliseconds: 300),
+                )
+              else
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: Di.PSD),
+                  child: Text(
+                    getDescription(context).last,
+                    style: bodyLarge.copyWith(
+                      color: Cr.darkGrey1,
                     ),
+                  ),
+                ),
               if (widget.displayShowMoreHideButton)
                 CustomTextButton(
                   onPressed: () {
@@ -166,13 +167,13 @@ class _ProfileReferenceSingleComponentState
                   textWidget: AnimatedCrossFade(
                     secondChild: Text(
                       "  + Show more",
-                      style: (bodySmallRegular).copyWith(
+                      style: bodySmallRegular.copyWith(
                         color: Cr.accentBlue1,
                       ),
                     ),
                     firstChild: Text(
                       "  - Show less",
-                      style: (bodySmallRegular).copyWith(
+                      style: bodySmallRegular.copyWith(
                         color: Cr.accentBlue1,
                       ),
                     ),
@@ -366,7 +367,6 @@ class CustomComponentDropdown extends StatelessWidget {
           color: Cr.whiteColor,
           borderRadius: BorderRadius.circular(2),
           border: Border.all(
-            width: 1,
             color: Cr.grey2,
           ),
         ),

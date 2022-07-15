@@ -93,9 +93,10 @@ class _ProfileMobileViewPageState extends ConsumerState<ProfileMobileViewPage> {
                           height: 76,
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                              image: NetworkImage(widget
-                                      .userProfileData.banner ??
-                                  "https://images.pexels.com/photos/269077/pexels-photo-269077.jpeg"),
+                              image: NetworkImage(
+                                widget.userProfileData.banner ??
+                                    "https://images.pexels.com/photos/269077/pexels-photo-269077.jpeg",
+                              ),
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -103,7 +104,6 @@ class _ProfileMobileViewPageState extends ConsumerState<ProfileMobileViewPage> {
                         Positioned.fill(
                           top: 55,
                           child: Align(
-                            alignment: Alignment.center,
                             child: Container(
                               padding: const EdgeInsets.only(
                                 left: Di.PSL,
@@ -158,7 +158,9 @@ class _ProfileMobileViewPageState extends ConsumerState<ProfileMobileViewPage> {
                                         ),
                                         Text(
                                           widget.userProfileData.area ??
-                                              "${PresentationData.countries[widget.userProfileData.countryId] ?? ""}",
+                                              countries[widget
+                                                  .userProfileData.countryId] ??
+                                              "",
                                           // " Cape Town, South Africa",
                                           textAlign: TextAlign.center,
                                           style: bodyLarge.copyWith(
@@ -358,10 +360,11 @@ class _ProfileMobileViewPageState extends ConsumerState<ProfileMobileViewPage> {
                                             ],
                                           ),
                                         Di.SBHES,
-                                        isMine
-                                            ? const EditProfileButton(
-                                                width: double.infinity)
-                                            : Di.ESB,
+                                        if (isMine)
+                                          const EditProfileButton(
+                                              width: double.infinity)
+                                        else
+                                          Di.ESB,
                                       ],
                                     ),
                                   ),

@@ -194,7 +194,6 @@ class ProfileSquareCard extends StatelessWidget {
           ? BoxDecoration(
               color: showBlue ? Cr.accentBlue3 : null,
               border: Border.all(
-                width: 1,
                 color: Cr.accentBlue2,
               ),
               borderRadius: BorderRadius.circular(2),
@@ -236,7 +235,6 @@ class ProfileCardListTile extends StatelessWidget {
               : const EdgeInsets.symmetric(vertical: 14, horizontal: Di.PSL),
           color: isHovered ? Cr.accentBlue3 : Cr.whiteColor,
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               icon ??
                   Icon(

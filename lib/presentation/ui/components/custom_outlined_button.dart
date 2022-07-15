@@ -24,7 +24,7 @@ class CustomOutlinedButton extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          icon != null ? icon! : Di.ESB,
+          if (icon != null) icon! else Di.ESB,
           Di.SBWES,
           textWidget ??
               Text(

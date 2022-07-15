@@ -29,7 +29,6 @@ class _ProfileSendConnectionRequestDialogState
       width: 560,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
           const DialogTitleWidget(
@@ -51,7 +50,6 @@ class _ProfileSendConnectionRequestDialogState
                   decoration: BoxDecoration(
                     border: Border.all(
                       color: Cr.darkGrey4,
-                      width: 1,
                     ),
                     borderRadius: BorderRadius.circular(4),
                   ),
