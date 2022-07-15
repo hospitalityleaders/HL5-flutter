@@ -139,7 +139,8 @@ RouteMap _buildRouteMap(BuildContext context) {
             route.pathParameters['category'],
           )
               ? NoAnimationPage(
-                  child: NewsPage(id: route.pathParameters['id']!))
+                  child: NewsPage(id: route.pathParameters['id']!),
+                )
               : const NotFound(),
       '/jobs': (route) => TabPage(
             child: const JobsfrontPage(),

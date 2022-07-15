@@ -8,7 +8,7 @@ import 'package:holedo/layouts/page_scaffold.dart';
 class CategoryPage extends StatefulWidget {
   final ArticleCategory category;
 
-  CategoryPage({
+  const CategoryPage({
     Key? key,
     required this.category,
   }) : super(key: key);
@@ -28,7 +28,7 @@ class _CategoryPageState extends State<CategoryPage> {
     futurecall = Provider.of<AppState>(context, listen: false)
         .news
         .fetchArticles(context: context, category: widget.category.slug);
-    print('init data: ${futurecall}');
+    print('init data: $futurecall');
   }
 
   @override
@@ -41,7 +41,7 @@ class _CategoryPageState extends State<CategoryPage> {
             future: futurecall,
             builder: (context, AsyncSnapshot<List<Article>> snapshot) {
               if (!snapshot.hasData) {
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               } else {
@@ -52,7 +52,9 @@ class _CategoryPageState extends State<CategoryPage> {
                   mainAxisSpacing: 16,
                   itemBuilder: (context, index) {
                     return NewsCard(
-                        article: snapshot.data![index], showReleaseDate: true);
+                      article: snapshot.data![index],
+                      showReleaseDate: true,
+                    );
                   },
 
                   //TileBuilder: (index) => StaggeredTile.fit(1),
