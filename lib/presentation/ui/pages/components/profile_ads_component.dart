@@ -13,12 +13,13 @@ class ProfileAdsComponent extends StatelessWidget {
     return Container(
       decoration: Styles.boxDecoration.copyWith(color: Cr.whiteColor),
       padding: const EdgeInsets.all(Di.PSD),
-      child: Center(
-        child: Image.asset(
+      child: Column(children: [
+        Text('test'),
+        Image.asset(
           "assets/images/profileAdsBanner.png",
           fit: BoxFit.cover,
         ),
-      ),
+      ]),
     );
   }
 }

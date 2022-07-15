@@ -153,8 +153,9 @@ class __SingleAchievementState extends State<_SingleAchievement> {
   late bool isExpanded;
   String currentAchivement = achievementTypeMap.keys.first;
   String? currentYear;
-  late Map<String, dynamic>? achievementTypes =
+  final Map<String, dynamic>? achievementTypes =
       holedoDatabase.getModel().settings?.achievementTypes;
+
   @override
   void initState() {
     isExpanded = widget.isExpanded;
@@ -193,8 +194,14 @@ class __SingleAchievementState extends State<_SingleAchievement> {
       });
 
     super.initState();
-
+    if (achievement.achievementTypeId == null) {
+      //achievement.achievementTypeId = 1;
+    }
+    if (achievement.dateReceived == null) {
+      achievement.dateReceived = DateTime.now();
+    }
     currentYear = achievement.dateReceived?.year.toString();
+    //currentAchivement = '${achievement.achievementTypeId as String}';
   }
 
   @override
@@ -273,12 +280,15 @@ class __SingleAchievementState extends State<_SingleAchievement> {
                   Di.SBHES,
                   DialogDropDownTextField(
                     width: double.infinity,
-                    initialValue: currentAchivement,
+                    initialValue: '${currentAchivement}',
                     alignHintTextStart: true,
                     onChanged: (value) {
                       setState(() {
                         currentAchivement = value ?? currentAchivement;
-                        achievement.achievementTypeId = value as int;
+                        int selection = int.parse(achievementTypes?.keys
+                            .firstWhere((k) => achievementTypes![k] == value,
+                                orElse: () => '1') as String);
+                        achievement.achievementTypeId = selection;
                       });
                     },
                     // iconsList: achievementTypeList
@@ -321,15 +331,18 @@ class __SingleAchievementState extends State<_SingleAchievement> {
                   Di.SBHES,
                   DialogDropDownTextField(
                     width: 72,
+                    initialValue: currentYear,
                     alignHintTextStart: true,
                     onChanged: (value) {
                       setState(() {
                         currentYear = value;
+
                         achievement.dateReceived =
                             DateTime.parse('${value.toString()}-07-01');
                         print(
                           'date ${DateTime.parse('${value.toString()}-07-01T19:10:35+02:00')}',
                         );
+
                       });
                     },
                     // iconsList: achievementTypeList
@@ -420,6 +433,7 @@ class __SingleAchievementState extends State<_SingleAchievement> {
                           );
                           Nav.pop(context);
                           // Nav.profile(context);
+
                           Nav.pop(context);
                         },
                         height: 36,

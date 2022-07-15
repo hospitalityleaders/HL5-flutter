@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:holedo/main.dart';
 import 'package:holedo/models/holedoapi/holedoapi.dart';
+import 'package:holedo/models/models.dart';
 import 'package:holedo/presentation/ui/pages/components/connection_component.dart';
 import 'package:holedo/presentation/ui/pages/components/profile_completion_component.dart';
 import 'package:holedo/presentation/ui/pages/components/rights_component.dart';
@@ -7,6 +9,8 @@ import 'package:holedo/presentation/ui/pages/components/timeline_component.dart'
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/styles.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 class ProfileOverviewThirdColumn extends StatefulWidget {
   const ProfileOverviewThirdColumn({
@@ -32,6 +36,7 @@ class _ProfileOverviewThirdColumnState
           ConnectionsComponent(),
           Di.SBHEL,
           TimelineComponent(),
+
           Di.SBHL,
           RightsComponent(),
         ],
@@ -47,14 +52,32 @@ class ProfileAdsComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final settings = Get.put(HoledoDatabase()).getModel().settings!;
+    final script = RegExp(r'<script>([\s\S]*)<\/script');
+    print('set2: ${settings.ads.toString()}');
+    final profileAd = settings.ads!['profile_right_side'];
+
+    final match = script.firstMatch(profileAd);
+    final future = FlutterWebviewPlugin().evalJavascript(match![1]!.toString());
+    future.then((String? result) {
+      print('eval $result');
+      // setState(() {
+      //_history.add('eval: $result');
+      //});
+    });
+    print('set22: ${future.toString()} ${match![1]!.toString()}');
     return Container(
       decoration: Styles.boxDecoration.copyWith(color: Cr.whiteColor),
       padding: const EdgeInsets.all(Di.PSD),
       child: Center(
-        child: Image.asset(
-          "assets/images/profileAdsBanner.png",
-          fit: BoxFit.cover,
-        ),
+        child: (profileAd != null)
+            ? Html(
+                data: profileAd,
+              )
+            : Image.asset(
+                "assets/images/profileAdsBanner.png",
+                fit: BoxFit.cover,
+              ),
       ),
     );
   }

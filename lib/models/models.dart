@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -63,13 +64,14 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<DataModel> saveProfile(User data) async {
+  Future<DataModel> saveProfile(context, User data) async {
     data.id = _profile?.id;
     // ignore: unused_local_variable
 
-    //data.slug = _profile?.slug;
+    data.slug = _profile?.slug;
     //this.token = profile.token;
     final dataModel = await Get.put(HoledoDatabase().users).saveProfile(data);
+
     _profile = dataModel.user as User;
     return dataModel;
   }
@@ -232,7 +234,7 @@ class HoledoDatabase extends GetxController {
     try {
       isLoading(true);
 
-      var data = getModel();
+      DataModel data = getModel();
 
       if (data.articleCategories?.length != null) {
         print(
@@ -245,8 +247,9 @@ class HoledoDatabase extends GetxController {
         final response = await _api.GET(
           target: '/site-settings/v2?type=2',
         );
-
-        data = response.data as DataModel;
+        data.settings = response.data?.settings;
+        data.articleCategories = response.data?.articleCategories;
+        data.block = response.data?.block;
       }
 
       if ((data.pages?.isEmpty ?? true) || data.pages?.length == null) {
@@ -291,6 +294,7 @@ class HoledoDatabase extends GetxController {
         'info',
         'Login: ${user?.fullName} on ${user?.dateOfBirth}',
       );
+
     }
   }
 }
@@ -328,8 +332,10 @@ class UsersController extends GetxController {
         },
       );
 
+
       if (api.success == true) {
-        print('login: ${api.data!.user!.email.toString()}');
+        user = api.data?.user as User;
+        print('login1: ${user.email.toString()} ${api.data?.token}');
         isLogin.value = true;
         token.value = api.data?.token as String;
         user = api.data?.user as User;
@@ -337,10 +343,13 @@ class UsersController extends GetxController {
         saveUserToModel(user, api.data?.token);
       } else {
         //DB.snackBarMessage(context, 'error', api.errors.toString());
+
       }
-      return user;
+
+      print('login: ${user.email.toString()}');
+      return api;
     } finally {
-      DB.isLoading(false);
+      this.isLoading(false);
     }
   }
 
@@ -348,7 +357,10 @@ class UsersController extends GetxController {
     final model = holedoDatabase.getModel();
     print('matchING: $slug USER: ${model.user?.slug}');
     if (model.user?.slug == slug) {
-      if (model.token != null) return model.token;
+      if (model.token != null) {
+        print('match: $slug token: ${model.token}');
+        return model.token;
+      }
       print('match: $slug token: ${model.user?.token}');
       return model.user?.token;
     }
@@ -363,13 +375,17 @@ class UsersController extends GetxController {
     return model;
   }
 
-  void saveUserToModel(User user, String? token) {
+  void saveUserToModel(User user, String token) {
     final model = holedoDatabase.getModel();
     model.token = token;
     model.user = user;
     //print('update user: ${model.user.toString()} token $token');
     //Get.find<HoledoDatabase>().setModel(model);
-    holedoDatabase.setModel(model);
+    try {
+      holedoDatabase.setModel(model);
+    } finally {
+      print('chec: ${holedoDatabase.getModel().user!.email}');
+    }
   }
 
   Future<User> getProfileData({
@@ -384,6 +400,7 @@ class UsersController extends GetxController {
       var user = User();
       final token = getToken(slug);
       final headers = <String, dynamic>{
+
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json',
         'Device': 'Holedo_Flutter'
@@ -408,7 +425,7 @@ class UsersController extends GetxController {
       if (token != null) {
         print('user: ${user.firstName} token: log: $token');
         user.token = token;
-        saveUserToModel(user, user.token);
+        saveUserToModel(user, user.token as String);
       }
       //print('user: ${user.toJson().toString()}');
       return user;
@@ -475,7 +492,7 @@ class UsersController extends GetxController {
     }
   }
 
-  Future<DataModel> saveProfile(User user) async {
+  Future<DataModel> saveProfile(context, User user) async {
     try {
       isLoading(true);
       var dataModel = getModel();
@@ -484,12 +501,14 @@ class UsersController extends GetxController {
       if (user.id != null) {
         if (dataModel.user!.id == null) {
           dataModel.messages = 'User Id Not matched';
+          DB.snackBarMessage(context, 'info', dataModel.messages);
           return dataModel;
         }
         user.id = dataModel.user?.id;
       }
       if (token == null) {
         dataModel.messages = 'Token Not matched';
+        DB.snackBarMessage(context, 'info', dataModel.messages);
         return dataModel;
       }
       final userJson = user.toApiJson();
@@ -542,7 +561,7 @@ class UsersController extends GetxController {
         print('log: ${user.firstName}');
 
         user.token = token;
-        saveUserToModel(user, token);
+        saveUserToModel(user, token as String);
       }
       // isLoading(false);
       return user;

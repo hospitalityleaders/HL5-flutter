@@ -488,6 +488,7 @@ class _FeaturedVideoComponentState extends State<FeaturedVideoComponent> {
           });
         }
       });
+
   }
 
   @override
