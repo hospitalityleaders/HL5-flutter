@@ -47,30 +47,31 @@ class ProfileArticleWidget extends StatelessWidget {
               ),
             ),
             Di.SBHS,
-            showIsMemberOnly
-                ? SizedBox(
-                    width: 90,
-                    height: 20,
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(2),
-                        color: Cr.red3,
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 4),
-                        child: Center(
-                          child: Text(
-                            "MEMBERS ONLY",
-                            textAlign: TextAlign.center,
-                            style: bodyExtraSmall.copyWith(
-                              color: Cr.red1,
-                            ),
-                          ),
+            if (showIsMemberOnly)
+              SizedBox(
+                width: 90,
+                height: 20,
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(2),
+                    color: Cr.red3,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                    child: Center(
+                      child: Text(
+                        "MEMBERS ONLY",
+                        textAlign: TextAlign.center,
+                        style: bodyExtraSmall.copyWith(
+                          color: Cr.red1,
                         ),
                       ),
                     ),
-                  )
-                : Di.ESB,
+                  ),
+                ),
+              )
+            else
+              Di.ESB,
           ],
         ),
       ),

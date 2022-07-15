@@ -50,40 +50,41 @@ class _ProfileEducationDialogWidgetState
               title: "Education",
             ),
             Di.SBHL,
-            addingToProfile
-                ? Container(
-                    padding: const EdgeInsets.only(bottom: Di.PSS),
-                    margin: const EdgeInsets.symmetric(horizontal: Di.PSL),
-                    child: _SingleEducation(
-                      isExpanded: true,
-                      educations: Education(),
-                    ),
-                  )
-                : Center(
-                    child: InkWell(
+            if (addingToProfile)
+              Container(
+                padding: const EdgeInsets.only(bottom: Di.PSS),
+                margin: const EdgeInsets.symmetric(horizontal: Di.PSL),
+                child: _SingleEducation(
+                  isExpanded: true,
+                  educations: Education(),
+                ),
+              )
+            else
+              Center(
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(30),
+                  onTap: () {
+                    setState(() {
+                      addingToProfile = true;
+                    });
+                  },
+                  child: Container(
+                    width: 60,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      color: Cr.green1,
                       borderRadius: BorderRadius.circular(30),
-                      onTap: () {
-                        setState(() {
-                          addingToProfile = true;
-                        });
-                      },
-                      child: Container(
-                        width: 60,
-                        height: 60,
-                        decoration: BoxDecoration(
-                          color: Cr.green1,
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        child: Center(
-                          child: SvgPicture.asset(
-                            Svgs.plus,
-                            color: Cr.whiteColor,
-                            width: 30,
-                          ),
-                        ),
+                    ),
+                    child: Center(
+                      child: SvgPicture.asset(
+                        Svgs.plus,
+                        color: Cr.whiteColor,
+                        width: 30,
                       ),
                     ),
                   ),
+                ),
+              ),
             Di.SBHL,
             ListView.builder(
               shrinkWrap: true,
@@ -177,9 +178,9 @@ class __SingleEducationState extends State<_SingleEducation> {
             ),
           ),
           Text(
-            ((education.durationFromDate != null)
+            (education.durationFromDate != null)
                 ? "${education.durationFromDate!.getMonthInString} ${education.durationFromDate!.year}${(education.durationToDate != null) ? " - ${education.durationToDate!.getMonthInString} ${education.durationToDate!.year} (${education.durationToDate!.month - education.durationFromDate!.month} months)" : ""}"
-                : ""),
+                : "",
             style: bodySmallRegular.copyWith(
               color: Cr.darkGrey1,
             ),
@@ -243,7 +244,7 @@ class __SingleEducationState extends State<_SingleEducation> {
                       // },
                       width: 122,
                       hintText: 'Select Month',
-                      dataList: PresentationData.monthList,
+                      dataList: monthList,
                     ),
                     Di.SBWES,
                     DialogDropDownTextField(
@@ -255,7 +256,7 @@ class __SingleEducationState extends State<_SingleEducation> {
                       },
                       width: 72,
                       hintText: 'Year',
-                      dataList: PresentationData.yearsList,
+                      dataList: yearsList,
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: Di.PSS),
@@ -275,7 +276,7 @@ class __SingleEducationState extends State<_SingleEducation> {
                       disable: currentlyWorkHere,
                       width: 122,
                       hintText: 'Select Month',
-                      dataList: PresentationData.monthList,
+                      dataList: monthList,
                     ),
                     Di.SBWES,
                     DialogDropDownTextField(
@@ -288,7 +289,7 @@ class __SingleEducationState extends State<_SingleEducation> {
                       disable: currentlyWorkHere,
                       width: 72,
                       hintText: 'Year',
-                      dataList: PresentationData.yearsList,
+                      dataList: yearsList,
                     ),
                   ],
                 ),
@@ -421,7 +422,7 @@ class __SingleEducationState extends State<_SingleEducation> {
   }
 
   List<Widget> getNewContactPhoneFields() {
-    var textField = <Widget>[];
+    final textField = <Widget>[];
     for (var i = 0; i < qualificationList.length; i++) {
       textField.add(
         _QualificationField(

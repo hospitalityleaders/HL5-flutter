@@ -29,7 +29,7 @@ class AppbarNotificationWidget extends ConsumerWidget {
   final String? buttonText;
   final AppbarNotificationColor appbarNotificationColor;
   @override
-  Widget build(BuildContext context, ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     late final Color bgColor;
     late final Color textAndButtonColor;
     switch (appbarNotificationColor) {

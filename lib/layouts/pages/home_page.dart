@@ -1,18 +1,12 @@
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/material.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
-import 'package:holedo/constant/fontStyle/font_style.dart';
-import 'package:holedo/layouts/pages/news/NewsSingle/jobs_no_jobs.dart';
-import 'package:holedo/layouts/pages/news/NewsSingle/news_single_logged_in.dart';
-import 'package:holedo/layouts/pages/news/NewsSingle/news_single_logged_out.dart';
-import 'package:holedo/layouts/pages/news/update/update_news.dart';
+import 'package:holedo/layouts/page_scaffold.dart';
 import 'package:holedo/layouts/pages/news/update/update_news2.dart';
 import 'package:holedo/main.dart';
 import 'package:holedo/models/holedoapi/article.dart';
 import 'package:holedo/models/models.dart';
-import 'package:holedo/layouts/page_scaffold.dart';
-import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_controller.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:holedo/presentation/ui/flutter_slider_drawer/mobile_slide_menu.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -33,7 +27,7 @@ class _HomePage extends State<HomePage> {
         .articleCategories
         .where((category) => category.menuItem == true);
 
-    return PageScaffold(
+    return const PageScaffold(
       title: 'Home Page',
       body: UpdateNewsSecond(),
     );
@@ -55,44 +49,42 @@ class _HomePage extends State<HomePage> {
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [
             SliverToBoxAdapter(
-              child: Container(
+              child: SizedBox(
                 height: Get.height * 0.50,
                 width: Get.width,
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
                     Obx(() {
-                      if (newsController.isLoading.value)
-                        return Center(child: CircularProgressIndicator());
-                      else {
-                        if (newsController.dataList.isEmpty)
-                          return Padding(
-                            padding: const EdgeInsets.all(30),
+                      if (newsController.isLoading.value) {
+                        return const Center(child: CircularProgressIndicator());
+                      } else {
+                        if (newsController.dataList.isEmpty) {
+                          return const Padding(
+                            padding: EdgeInsets.all(30),
                             child: Text('No results found'),
                           );
-                        else
+                        } else {
                           return CarouselSlider.builder(
-                              itemCount: newsController.dataList.length,
-                              options: CarouselOptions(
-                                height: Get.height * 0.50,
-                                viewportFraction: 1.0,
-                                initialPage: 1,
-                                enableInfiniteScroll: true,
-                                reverse: false,
-                                autoPlay: false,
-                                autoPlayInterval: Duration(seconds: 3),
-                                autoPlayAnimationDuration:
-                                    Duration(milliseconds: 800),
-                                autoPlayCurve: Curves.fastOutSlowIn,
-                                enlargeCenterPage: true,
-                                scrollDirection: Axis.horizontal,
-                              ),
-                              carouselController: buttonCarouselController,
-                              itemBuilder: (BuildContext context, int i,
-                                      int pageViewIndex) =>
-                                  NewsSliderCard(
-                                      data: newsController.dataList[i]
-                                          as Article));
+                            itemCount: newsController.dataList.length,
+                            options: CarouselOptions(
+                              height: Get.height * 0.50,
+                              viewportFraction: 1.0,
+                              initialPage: 1,
+                              autoPlayInterval: const Duration(seconds: 3),
+                              enlargeCenterPage: true,
+                            ),
+                            carouselController: buttonCarouselController,
+                            itemBuilder: (
+                              BuildContext context,
+                              int i,
+                              int pageViewIndex,
+                            ) =>
+                                NewsSliderCard(
+                              data: newsController.dataList[i] as Article,
+                            ),
+                          );
+                        }
                       }
                     }),
                     Positioned(
@@ -107,7 +99,7 @@ class _HomePage extends State<HomePage> {
                               // Use the controller to change the current page
                               buttonCarouselController.previousPage();
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.chevron_left,
                               size: 21,
                               color: Colors.white,
@@ -129,7 +121,7 @@ class _HomePage extends State<HomePage> {
                                 // Use the controller to change the current page
                                 buttonCarouselController.nextPage();
                               },
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.chevron_right,
                                 color: Colors.white,
                                 size: 21,
@@ -149,10 +141,11 @@ class _HomePage extends State<HomePage> {
                 //     EdgeInsets.symmetric(horizontal: Get.width * 0.2),
                 height: Get.height * 0.06,
                 width: Get.width,
-                decoration: BoxDecoration(
-                    border: Border(
-                        bottom:
-                            BorderSide(color: Color(0xFFBDC4C7), width: 2))),
+                decoration: const BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(color: Color(0xFFBDC4C7), width: 2),
+                  ),
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -169,14 +162,13 @@ class _HomePage extends State<HomePage> {
           ];
         },
         body: Container(
-          margin: EdgeInsets.symmetric(horizontal: 10),
+          margin: const EdgeInsets.symmetric(horizontal: 10),
           child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
+                SizedBox(
                   height: Get.height,
                   width: Get.width * 0.55,
                   child: Column(
@@ -192,18 +184,19 @@ class _HomePage extends State<HomePage> {
                           builder:
                               (context, AsyncSnapshot<List<Article>> snapshot) {
                             if (!snapshot.hasData) {
-                              return Center(
+                              return const Center(
                                 child: CircularProgressIndicator(),
                               );
-                            } else
+                            } else {
                               return CustomScrollView(
                                 slivers: <Widget>[
                                   SliverGrid(
                                     delegate: SliverChildBuilderDelegate(
                                       (context, index) {
                                         return NewsSingleCard(
-                                            article: snapshot.data![index],
-                                            showReleaseDate: true);
+                                          article: snapshot.data![index],
+                                          showReleaseDate: true,
+                                        );
                                       },
                                       childCount: snapshot.data!.length,
                                     ),
@@ -217,6 +210,7 @@ class _HomePage extends State<HomePage> {
                                   ),
                                 ],
                               );
+                            }
                           },
                         ),
                       )
@@ -226,7 +220,7 @@ class _HomePage extends State<HomePage> {
                 SizedBox(
                   width: Get.width * 0.01,
                 ),
-                NewsRightColumn()
+                const NewsRightColumn()
               ],
             ),
           ),

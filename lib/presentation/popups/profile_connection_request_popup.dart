@@ -34,11 +34,9 @@ class ProfileConnectionRequestPopup extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: Di.PSS),
               child: Center(
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
@@ -56,7 +54,6 @@ class ProfileConnectionRequestPopup extends StatelessWidget {
                       ],
                     ),
                     Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         TextWithBackground(

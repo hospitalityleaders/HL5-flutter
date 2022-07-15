@@ -15,7 +15,7 @@ class TimelineComponent extends ConsumerWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context, ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       decoration: Styles.boxDecoration.copyWith(color: const Color(0xff0D9BDC)),
       // padding: const EdgeInsets.all(Di.PSD),
@@ -108,7 +108,7 @@ class TimelineComponent extends ConsumerWidget {
                   SizedBox(
                     width: 240,
                     child: Text(
-                      "View ${DbData.getUserProfileData.fullName}\'s career timeline.",
+                      "View ${DbData.getUserProfileData.fullName}'s career timeline.",
                       style: display3.copyWith(
                         color: Cr.accentBlue3,
                       ),
@@ -127,15 +127,15 @@ class TimelineComponent extends ConsumerWidget {
                     icon: const Icon(Icons.menu),
                     child: Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.menu,
                           color: Cr.accentBlue1,
                           size: 16,
                         ),
                         Di.SBWETS,
                         Text(
-                          "View ${DbData.getUserProfileData.firstName}\'s timeline",
-                          style: TextStyle(
+                          "View ${DbData.getUserProfileData.firstName}'s timeline",
+                          style: const TextStyle(
                             color: Cr.accentBlue1,
                           ),
                         ),

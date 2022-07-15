@@ -5,8 +5,9 @@ class SliderShadow {
   final double shadowBlurRadius;
   final double shadowSpreadRadius;
 
-  SliderShadow(
-      {this.shadowColor = Colors.grey,
-      this.shadowBlurRadius = 25.0,
-      this.shadowSpreadRadius = 5.0});
+  SliderShadow({
+    this.shadowColor = Colors.grey,
+    this.shadowBlurRadius = 25.0,
+    this.shadowSpreadRadius = 5.0,
+  });
 }

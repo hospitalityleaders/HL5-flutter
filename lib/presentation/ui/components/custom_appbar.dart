@@ -49,18 +49,18 @@ class _CustomAppbarState extends State<CustomAppbar> {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              isSmallerThanDesltop ? Di.SBWES : Di.SBWD,
+              if (isSmallerThanDesltop) Di.SBWES else Di.SBWD,
               Image.asset(
                 Images.logo1,
                 width: 40,
               ),
-              isSmallerThanDesltop ? Di.SBWES : Di.SBWD,
+              if (isSmallerThanDesltop) Di.SBWES else Di.SBWD,
               AppbarTextField(
                 width: isSmallerThanDesltop ? 300 : null,
                 onSearchChange: widget.onSearch,
                 searchController: widget.searchController,
               ),
-              isSmallerThanDesltop ? Di.ESB : Di.SBWD,
+              if (isSmallerThanDesltop) Di.ESB else Di.SBWD,
               ListView.builder(
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
@@ -79,7 +79,7 @@ class _CustomAppbarState extends State<CustomAppbar> {
                   );
                 },
               ),
-              isSmallerThanDesltop ? Di.ESB : Di.SBWL,
+              if (isSmallerThanDesltop) Di.ESB else Di.SBWL,
             ],
           ),
 
@@ -251,7 +251,7 @@ class SizedboxWithHover extends ConsumerWidget {
   final bool isInHorizantal;
 
   @override
-  Widget build(BuildContext context, ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return InkWell(
       onTap: () {},
       onHover: (hover) {

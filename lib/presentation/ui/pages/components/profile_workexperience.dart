@@ -50,7 +50,7 @@ class _ProfileWorkExperienceComponentState
           mainAxisSize: MainAxisSize.min,
           children: [
             DecoratedBox(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Cr.whiteColor,
               ),
               child: ProfileComponentTitle(
@@ -160,7 +160,7 @@ class _SingleExperienceWidgetState extends State<_SingleExperienceWidget> {
           children: [
             Di.SBCH(18),
             ListTile(
-              leading: SvgWithBackground(
+              leading: const SvgWithBackground(
                 svg: Svgs.domain,
               ),
               title: Text(

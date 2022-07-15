@@ -123,8 +123,6 @@ class CustomSubMenu extends StatelessWidget {
             ],
             border: Border.all(
               color: Cr.grey3,
-              width: 1,
-              style: BorderStyle.solid,
             ),
           ),
           child: Column(
@@ -157,40 +155,42 @@ class CustomSubmenuItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OnHover(builder: (bool isHovered) {
-      return GestureDetector(
-        onTap: onTap,
-        child: Container(
-          decoration: BoxDecoration(
-            color: isHovered ? Cr.accentBlue3 : Cr.whiteColor,
+    return OnHover(
+      builder: (bool isHovered) {
+        return GestureDetector(
+          onTap: onTap,
+          child: Container(
+            decoration: BoxDecoration(
+              color: isHovered ? Cr.accentBlue3 : Cr.whiteColor,
+            ),
+            width: width ?? 180,
+            height: 38,
+            padding: const EdgeInsets.symmetric(
+              horizontal: Di.PSS,
+            ),
+            child: Row(
+              children: [
+                icon ??
+                    (iconData != null
+                        ? Icon(
+                            iconData,
+                            color: textIconColor ?? Cr.darkGrey1,
+                            size: 14,
+                          )
+                        : Di.ESB),
+                Di.SBCW(6.5),
+                Text(
+                  text,
+                  style: textStyle ??
+                      bodySmallSemibold.copyWith(
+                        color: textIconColor ?? Cr.darkGrey1,
+                      ),
+                )
+              ],
+            ),
           ),
-          width: width ?? 180,
-          height: 38,
-          padding: const EdgeInsets.symmetric(
-            horizontal: Di.PSS,
-          ),
-          child: Row(
-            children: [
-              icon ??
-                  (iconData != null
-                      ? Icon(
-                          iconData,
-                          color: textIconColor ?? Cr.darkGrey1,
-                          size: 14,
-                        )
-                      : Di.ESB),
-              Di.SBCW(6.5),
-              Text(
-                text,
-                style: textStyle ??
-                    bodySmallSemibold.copyWith(
-                      color: textIconColor ?? Cr.darkGrey1,
-                    ),
-              )
-            ],
-          ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 }

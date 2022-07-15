@@ -3,15 +3,16 @@ import 'package:holedo/presentation/classes.dart';
 
 class HelperFunctions {
   List<String> splitText(String text, int lenghtOfFirstString) {
-    List<String> result = [];
+    final List<String> result = [];
     // Getting first text from given string
     String firstText = text.substring(0, lenghtOfFirstString);
-    int lastWordsLenght = _getLenthOfLastWord(firstText);
+    final int lastWordsLenght = _getLenthOfLastWord(firstText);
     firstText = _removeLastWords(firstText);
 
     result.add(firstText);
     // Getting second text from given string
-    String secondText = text.substring(lenghtOfFirstString - lastWordsLenght);
+    final String secondText =
+        text.substring(lenghtOfFirstString - lastWordsLenght);
     result.add(secondText);
     // return the result
     return result;
@@ -25,7 +26,7 @@ class HelperFunctions {
   }
 
   int _getLenthOfLastWord(String text) {
-    List<String> wordsInList = text.split(" ");
+    final List<String> wordsInList = text.split(" ");
     int lenght = wordsInList.last.length;
 
     if (wordsInList.last.length > 3) {
@@ -36,7 +37,9 @@ class HelperFunctions {
   }
 
   static String? findKeyByValueFromMap(
-      Map<String, String> givenMap, String value) {
+    Map<String, String> givenMap,
+    String value,
+  ) {
     return givenMap.keys.firstWhere((k) => givenMap[k] == value);
   }
 
@@ -45,9 +48,9 @@ class HelperFunctions {
     final experiences = userProfileData.experiences;
     final achievements = userProfileData.achievements;
     final educations = userProfileData.educations;
-    List<TimelineClass> timelineClassList = <TimelineClass>[];
+    final List<TimelineClass> timelineClassList = <TimelineClass>[];
     if (experiences != null && experiences.isNotEmpty) {
-      for (var experience in experiences) {
+      for (final experience in experiences) {
         if (experience.fromDate != null) {
           timelineClassList.add(
             TimelineClass(
@@ -61,7 +64,7 @@ class HelperFunctions {
       }
     }
     if (achievements != null && achievements.isNotEmpty) {
-      for (var achievement in achievements) {
+      for (final achievement in achievements) {
         if (achievement.created != null) {
           timelineClassList.add(
             TimelineClass(
@@ -75,7 +78,7 @@ class HelperFunctions {
       }
     }
     if (educations != null && educations.isNotEmpty) {
-      for (var education in educations) {
+      for (final education in educations) {
         if (education.durationFromDate != null) {
           timelineClassList.add(
             TimelineClass(
@@ -88,7 +91,7 @@ class HelperFunctions {
         }
       }
     }
-    timelineClassList.sort(((a, b) => b.dateTime.compareTo(a.dateTime)));
+    timelineClassList.sort((a, b) => b.dateTime.compareTo(a.dateTime));
     return timelineClassList;
   }
 }

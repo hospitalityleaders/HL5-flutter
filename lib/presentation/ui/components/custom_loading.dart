@@ -12,7 +12,6 @@ class CustomLoading extends StatelessWidget {
       color: Colors.black.withOpacity(.7),
       child: const SpinKitChasingDots(
         color: Color(0xffFB8500),
-        size: 50.0,
       ),
     );
   }

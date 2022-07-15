@@ -6,7 +6,6 @@ import 'package:holedo/models/models.dart';
 import 'package:holedo/presentation/data/presentation_data.dart';
 import 'package:holedo/presentation/extensions/datetime_extension.dart';
 import 'package:holedo/presentation/functions/helper_functions.dart';
-
 import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/custom_expanded_tile.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/dialog_widgets.dart';
@@ -54,40 +53,41 @@ class _ProfileWorkExperienceDialogWidgetState
               title: "Work Experience",
             ),
             Di.SBHL,
-            addingToProfile
-                ? Container(
-                    padding: const EdgeInsets.only(bottom: Di.PSS),
-                    margin: const EdgeInsets.symmetric(horizontal: Di.PSL),
-                    child: _SingleWorkExperience(
-                      isExpanded: true,
-                      experience: Experience(),
-                    ),
-                  )
-                : Center(
-                    child: InkWell(
+            if (addingToProfile)
+              Container(
+                padding: const EdgeInsets.only(bottom: Di.PSS),
+                margin: const EdgeInsets.symmetric(horizontal: Di.PSL),
+                child: _SingleWorkExperience(
+                  isExpanded: true,
+                  experience: Experience(),
+                ),
+              )
+            else
+              Center(
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(30),
+                  onTap: () {
+                    setState(() {
+                      addingToProfile = true;
+                    });
+                  },
+                  child: Container(
+                    width: 60,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      color: Cr.green1,
                       borderRadius: BorderRadius.circular(30),
-                      onTap: () {
-                        setState(() {
-                          addingToProfile = true;
-                        });
-                      },
-                      child: Container(
-                        width: 60,
-                        height: 60,
-                        decoration: BoxDecoration(
-                          color: Cr.green1,
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        child: Center(
-                          child: SvgPicture.asset(
-                            Svgs.plus,
-                            color: Cr.whiteColor,
-                            width: 30,
-                          ),
-                        ),
+                    ),
+                    child: Center(
+                      child: SvgPicture.asset(
+                        Svgs.plus,
+                        color: Cr.whiteColor,
+                        width: 30,
                       ),
                     ),
                   ),
+                ),
+              ),
             Di.SBHL,
             ListView.builder(
               shrinkWrap: true,
@@ -151,10 +151,10 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
         setState(() {});
       });
     _companyWebsiteController = TextEditingController(
-        text: experience.companyWebsite != null
-            ? experience.companyWebsite.toString()
-            : "")
-      ..addListener(() {
+      text: experience.companyWebsite != null
+          ? experience.companyWebsite.toString()
+          : "",
+    )..addListener(() {
         setState(() {});
       });
     _cityController = TextEditingController(text: experience.area)
@@ -216,9 +216,9 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
             ),
           ),
           Text(
-            ((experience.fromDate != null)
+            (experience.fromDate != null)
                 ? "${experience.fromDate!.getMonthInString} ${experience.fromDate!.year}${(experience.toDate != null) ? " - ${experience.toDate!.getMonthInString} ${experience.toDate!.year} (${experience.toDate!.month - experience.fromDate!.month} months)" : ""}"
-                : ""),
+                : "",
             style: bodySmallRegular.copyWith(
               color: Cr.darkGrey1,
             ),
@@ -325,12 +325,12 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
                       DialogDropDownTextField(
                         initialValue: countryId == null
                             ? null
-                            : PresentationData.countries[countryId!.toString()],
+                            : countries[countryId!.toString()],
                         onChanged: (value) {
                           if (value != null) {
                             final countryidString =
                                 HelperFunctions.findKeyByValueFromMap(
-                              PresentationData.countries,
+                              countries,
                               value,
                             );
 
@@ -343,7 +343,7 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
                         },
                         alignHintTextStart: true,
                         hintText: 'Select Country',
-                        dataList: PresentationData.countries.values.toList(),
+                        dataList: countries.values.toList(),
                       ),
                     ],
                   ),
@@ -362,7 +362,7 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
                         },
                         width: 122,
                         hintText: 'Select Month',
-                        dataList: PresentationData.monthList,
+                        dataList: monthList,
                       ),
                       Di.SBWES,
                       DialogDropDownTextField(
@@ -374,7 +374,7 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
                         },
                         width: 72,
                         hintText: 'Year',
-                        dataList: PresentationData.yearsList,
+                        dataList: yearsList,
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: Di.PSS),
@@ -394,7 +394,7 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
                         disable: currentlyWorkHere,
                         width: 122,
                         hintText: 'Select Month',
-                        dataList: PresentationData.monthList,
+                        dataList: monthList,
                       ),
                       Di.SBWES,
                       DialogDropDownTextField(
@@ -407,7 +407,7 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
                         disable: currentlyWorkHere,
                         width: 72,
                         hintText: 'Year',
-                        dataList: PresentationData.yearsList,
+                        dataList: yearsList,
                       ),
                     ],
                   ),
@@ -435,7 +435,6 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
                   DialogLabelTextFormField(
                     customLabel: "Salary per annum",
                     icon: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         SvgPicture.asset(
                           Svgs.helpCircle,
@@ -475,7 +474,6 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
                   DialogLabelTextFormField(
                     customLabel: "Leave days per annum",
                     icon: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         SvgPicture.asset(
                           Svgs.helpCircle,
@@ -561,7 +559,7 @@ class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
                         onPressed: () async {
                           // if (_formKey.currentState!.validate()) {
                           showCircularProgressIndicator(context);
-                          List<Experience> experiences =
+                          final List<Experience> experiences =
                               userProfileData.experiences!;
 
                           experience.title = _titlePositionController.text;

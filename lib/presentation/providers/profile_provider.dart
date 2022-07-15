@@ -41,16 +41,16 @@ class ProfileProvider extends ChangeNotifier {
     int percentage = 20;
     if (isLoggedIn) {
       final userProfileData = DbData.getUserProfileData;
-      final bool experienceAdded = (userProfileData.experiences != null ||
-          userProfileData.experiences!.isNotEmpty);
-      final bool qualificationAdded = ((userProfileData.educations == null ||
+      final bool experienceAdded = userProfileData.experiences != null ||
+          userProfileData.experiences!.isNotEmpty;
+      final bool qualificationAdded = (userProfileData.educations == null ||
               userProfileData.educations!.isNotEmpty) ||
           (userProfileData.educations!.first.qualification == null ||
-              userProfileData.educations!.first.qualification != null));
-      final bool expertiseAdded = (userProfileData.expertise == null ||
-          userProfileData.expertise!.isNotEmpty);
-      final bool languagesAdded = (userProfileData.languages == null ||
-          userProfileData.languages!.isNotEmpty);
+              userProfileData.educations!.first.qualification != null);
+      final bool expertiseAdded = userProfileData.expertise == null ||
+          userProfileData.expertise!.isNotEmpty;
+      final bool languagesAdded = userProfileData.languages == null ||
+          userProfileData.languages!.isNotEmpty;
 
       if (experienceAdded) {
         percentage += 20;

@@ -83,7 +83,7 @@ class ExpandedCollapseWidgetState extends State<ExpandedCollapseWidget> {
                       Di.SBCW(6),
                       Text(
                         widget.showText ?? "Show more",
-                        style: (bodySmallRegular).copyWith(
+                        style: bodySmallRegular.copyWith(
                           color: Cr.accentBlue1,
                         ),
                       )
@@ -106,7 +106,7 @@ class ExpandedCollapseWidgetState extends State<ExpandedCollapseWidget> {
                       Di.SBCW(6),
                       Text(
                         widget.hideText ?? "Close",
-                        style: (bodySmallRegular).copyWith(
+                        style: bodySmallRegular.copyWith(
                           color: Cr.accentBlue1,
                         ),
                       )

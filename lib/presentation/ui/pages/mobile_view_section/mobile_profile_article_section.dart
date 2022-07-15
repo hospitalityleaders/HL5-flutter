@@ -6,7 +6,6 @@ import 'package:holedo/presentation/ui/pages/components/rights_component.dart';
 import 'package:holedo/presentation/ui/pages/sections/articles_section/articles_section.dart';
 import 'package:holedo/presentation/ui/pages/sections/page_overview/page_overview_columns/page_overview_third_columns.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
-
 import 'package:flutter_html/flutter_html.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:holedo/presentation/ui/components/custom_text_button.dart';
@@ -185,235 +184,237 @@ class _ProfileMobileTimelineTile extends StatelessWidget {
               ],
             ),
           ),
-          jobDescriptionInHtml != null
-              ? Container(
-                  // height: 123,
-                  width: 550,
-                  color: Cr.lightGrey2,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    // crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        width: 518,
-                        // height: 66,
-                        child: Html(
-                          data: jobDescriptionInHtml,
-                          style: {
-                            "h4": Style(
-                              color: Cr.darkGrey1,
-                            ),
-                            "p": Style(
-                              color: Cr.darkGrey1,
-                              backgroundColor: Cr.lightGrey2,
-                            ),
-                            "li": Style(
-                              color: Cr.darkGrey1,
-                              backgroundColor: Cr.lightGrey2,
-                            ),
-                          },
+          if (jobDescriptionInHtml != null)
+            Container(
+              // height: 123,
+              width: 550,
+              color: Cr.lightGrey2,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                // crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 518,
+                    // height: 66,
+                    child: Html(
+                      data: jobDescriptionInHtml,
+                      style: {
+                        "h4": Style(
+                          color: Cr.darkGrey1,
                         ),
-                        // child: Text(
-                        //   jobDescriptionInHtml!,
-                        //   style: bodyLarge.copyWith(
-                        //     color: Cr.darkGrey1,
-                        //   ),
-                        // ),
-                      ),
-                      Di.SBHES,
-                      const Align(
-                        alignment: Alignment.centerLeft,
-                        child: CustomTextButton(
-                          text: "  - Close",
+                        "p": Style(
+                          color: Cr.darkGrey1,
+                          backgroundColor: Cr.lightGrey2,
                         ),
-                      ),
-                      const SizedBox(
-                        height: Di.PSS,
-                      ),
-                    ],
+                        "li": Style(
+                          color: Cr.darkGrey1,
+                          backgroundColor: Cr.lightGrey2,
+                        ),
+                      },
+                    ),
+                    // child: Text(
+                    //   jobDescriptionInHtml!,
+                    //   style: bodyLarge.copyWith(
+                    //     color: Cr.darkGrey1,
+                    //   ),
+                    // ),
                   ),
-                )
-              : Container(
-                  width: double.infinity,
-                  height: 40,
-                  color: Cr.lightGrey2,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: Di.PSL,
-                      vertical: Di.PSS,
+                  Di.SBHES,
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: CustomTextButton(
+                      text: "  - Close",
                     ),
-                    child: Text(
-                      "  + Job Description",
-                      style: bodySmallRegular.copyWith(
-                        color: Cr.accentBlue1,
-                      ),
-                    ),
+                  ),
+                  const SizedBox(
+                    height: Di.PSS,
+                  ),
+                ],
+              ),
+            )
+          else
+            Container(
+              width: double.infinity,
+              height: 40,
+              color: Cr.lightGrey2,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: Di.PSL,
+                  vertical: Di.PSS,
+                ),
+                child: Text(
+                  "  + Job Description",
+                  style: bodySmallRegular.copyWith(
+                    color: Cr.accentBlue1,
                   ),
                 ),
-          showComments
-              ? Container(
-                  height: 120,
-                  color: Cr.whiteColor,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: Di.PSL,
-                    vertical: Di.PSS,
-                  ),
-                  child: Column(
+              ),
+            ),
+          if (showComments)
+            Container(
+              height: 120,
+              color: Cr.whiteColor,
+              padding: const EdgeInsets.symmetric(
+                horizontal: Di.PSL,
+                vertical: Di.PSS,
+              ),
+              child: Column(
+                children: [
+                  Row(
                     children: [
                       Row(
                         children: [
-                          Row(
-                            children: [
-                              const Icon(
-                                Icons.thumb_up,
-                                size: 12,
-                                color: Cr.accentBlue1,
-                              ),
-                              Di.SBWES,
-                              Text(
-                                "Like",
-                                style: bodySmallRegular.copyWith(
-                                  color: Cr.accentBlue1,
-                                ),
-                              ),
-                              Di.SBWES,
-                              DecoratedBox(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(1),
-                                  color: Cr.accentBlue3,
-                                ),
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 4),
-                                  child: Center(
-                                    child: Text(
-                                      "12",
-                                      style: dividerTextSmall.copyWith(
-                                        color: Cr.accentBlue1,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
+                          const Icon(
+                            Icons.thumb_up,
+                            size: 12,
+                            color: Cr.accentBlue1,
                           ),
-                          Di.SBWOL,
-                          Row(
-                            children: [
-                              const Icon(
-                                Icons.comment,
-                                size: 12,
-                                color: Cr.accentBlue1,
-                              ),
-                              Di.SBWES,
-                              Text(
-                                "Comment",
-                                style: bodySmallRegular.copyWith(
-                                  color: Cr.accentBlue1,
-                                ),
-                              ),
-                              Di.SBWES,
-                              DecoratedBox(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(1),
-                                  color: Cr.accentBlue3,
-                                ),
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 4),
-                                  child: Center(
-                                    child: Text(
-                                      "12",
-                                      style: dividerTextSmall.copyWith(
-                                        color: Cr.accentBlue1,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
+                          Di.SBWES,
+                          Text(
+                            "Like",
+                            style: bodySmallRegular.copyWith(
+                              color: Cr.accentBlue1,
+                            ),
                           ),
-                          Di.SBWOL,
-                          Row(
-                            children: [
-                              const Icon(
-                                Icons.share,
-                                size: 12,
-                                color: Cr.accentBlue1,
-                              ),
-                              Di.SBWES,
-                              Text(
-                                "Share",
-                                style: bodySmallRegular.copyWith(
-                                  color: Cr.accentBlue1,
-                                ),
-                              ),
-                              Di.SBWES,
-                              DecoratedBox(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(1),
-                                  color: Cr.accentBlue3,
-                                ),
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 4),
-                                  child: Center(
-                                    child: Text(
-                                      "12",
-                                      style: dividerTextSmall.copyWith(
-                                        color: Cr.accentBlue1,
-                                      ),
-                                    ),
+                          Di.SBWES,
+                          DecoratedBox(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(1),
+                              color: Cr.accentBlue3,
+                            ),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 4),
+                              child: Center(
+                                child: Text(
+                                  "12",
+                                  style: dividerTextSmall.copyWith(
+                                    color: Cr.accentBlue1,
                                   ),
                                 ),
                               ),
-                            ],
+                            ),
                           ),
                         ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(Di.PSL),
-                        child: Row(
-                          children: [
-                            const PersonAvatar(
-                              avatarSize: 40,
+                      Di.SBWOL,
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.comment,
+                            size: 12,
+                            color: Cr.accentBlue1,
+                          ),
+                          Di.SBWES,
+                          Text(
+                            "Comment",
+                            style: bodySmallRegular.copyWith(
+                              color: Cr.accentBlue1,
                             ),
-                            Di.SBWL,
-                            SizedBox(
-                              width: 360,
-                              height: 40,
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                  isDense: true,
-                                  hintText: "Leave a comment",
-                                  hintStyle: bodySmallRegular.copyWith(
-                                    color: Cr.darkGrey1,
-                                  ),
-                                  border: const OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Cr.darkGrey4,
-                                    ),
-                                  ),
-                                  enabledBorder: const OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Cr.darkGrey4,
-                                    ),
-                                  ),
-                                  focusedBorder: const OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Cr.darkGrey4,
-                                    ),
+                          ),
+                          Di.SBWES,
+                          DecoratedBox(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(1),
+                              color: Cr.accentBlue3,
+                            ),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 4),
+                              child: Center(
+                                child: Text(
+                                  "12",
+                                  style: dividerTextSmall.copyWith(
+                                    color: Cr.accentBlue1,
                                   ),
                                 ),
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
+                      ),
+                      Di.SBWOL,
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.share,
+                            size: 12,
+                            color: Cr.accentBlue1,
+                          ),
+                          Di.SBWES,
+                          Text(
+                            "Share",
+                            style: bodySmallRegular.copyWith(
+                              color: Cr.accentBlue1,
+                            ),
+                          ),
+                          Di.SBWES,
+                          DecoratedBox(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(1),
+                              color: Cr.accentBlue3,
+                            ),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 4),
+                              child: Center(
+                                child: Text(
+                                  "12",
+                                  style: dividerTextSmall.copyWith(
+                                    color: Cr.accentBlue1,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                )
-              : const SizedBox(),
+                  Padding(
+                    padding: const EdgeInsets.all(Di.PSL),
+                    child: Row(
+                      children: [
+                        const PersonAvatar(
+                          avatarSize: 40,
+                        ),
+                        Di.SBWL,
+                        SizedBox(
+                          width: 360,
+                          height: 40,
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              isDense: true,
+                              hintText: "Leave a comment",
+                              hintStyle: bodySmallRegular.copyWith(
+                                color: Cr.darkGrey1,
+                              ),
+                              border: const OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Cr.darkGrey4,
+                                ),
+                              ),
+                              enabledBorder: const OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Cr.darkGrey4,
+                                ),
+                              ),
+                              focusedBorder: const OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Cr.darkGrey4,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            )
+          else
+            const SizedBox(),
         ],
       ),
     );

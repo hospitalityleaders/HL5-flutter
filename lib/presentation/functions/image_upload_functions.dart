@@ -2,13 +2,11 @@ import 'package:cloudinary_sdk/cloudinary_sdk.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-class CloudinaryInstance {
-  static Cloudinary get instance => Cloudinary.full(
-        apiKey: "932669714294851",
-        apiSecret: "i4Vv1wjaFGLbhcg_qGUjpviPbzk",
-        cloudName: "dgj5m6kvt",
-      );
-}
+Cloudinary get _cloudinaryInstance => Cloudinary.full(
+      apiKey: "932669714294851",
+      apiSecret: "i4Vv1wjaFGLbhcg_qGUjpviPbzk",
+      cloudName: "dgj5m6kvt",
+    );
 
 class ImageUploadFunctions {
   /// Will upload image, if it become successfull then returns uploaded image url
@@ -16,7 +14,7 @@ class ImageUploadFunctions {
     XFile image, {
     required String folder,
   }) async {
-    final cloudinary = CloudinaryInstance.instance;
+    final cloudinary = _cloudinaryInstance;
     final response = await cloudinary.uploadResource(
       CloudinaryUploadResource(
         filePath: image.path,
@@ -31,7 +29,7 @@ class ImageUploadFunctions {
   }
 
   Future<bool> deleteImageFromCloudnary(String imgUrl) async {
-    final cloudinary = CloudinaryInstance.instance;
+    final cloudinary = _cloudinaryInstance;
     final response = await cloudinary.deleteResource(
       url: imgUrl,
       resourceType: CloudinaryResourceType.image,

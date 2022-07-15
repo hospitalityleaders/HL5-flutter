@@ -49,20 +49,21 @@ class TextWithBackground extends StatelessWidget {
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            (icon == null && iconData == null)
-                ? Di.ESB
-                : (icon ??
-                    Icon(
-                      iconData,
-                      size: 12,
-                      color: Cr.accentBlue1,
-                    )),
-            (icon != null || iconData != null)
-                ? sizedBoxBetweenIconText ?? Di.SBWD
-                : Di.ESB,
+            if (icon == null && iconData == null)
+              Di.ESB
+            else
+              icon ??
+                  Icon(
+                    iconData,
+                    size: 12,
+                    color: Cr.accentBlue1,
+                  ),
+            if (icon != null || iconData != null)
+              sizedBoxBetweenIconText ?? Di.SBWD
+            else
+              Di.ESB,
             Text(
               text,
               style: textStyle ??

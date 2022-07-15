@@ -28,7 +28,7 @@ class ProfileTabbar extends StatelessWidget {
     final double fontSize = isTab ? 12.5 : 14;
 
     final EdgeInsets tabPadding = isTab
-        ? const EdgeInsets.symmetric(horizontal: 0, vertical: 10)
+        ? const EdgeInsets.symmetric(vertical: 10)
         : const EdgeInsets.all(10);
     return Container(
       decoration: BoxDecoration(
@@ -37,14 +37,13 @@ class ProfileTabbar extends StatelessWidget {
       ),
       height: 50,
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              PersonAvatar(avatarSize: (isTab) ? 24 : null),
-              isTab ? Di.SBWS : Di.SBWD,
+              PersonAvatar(avatarSize: isTab ? 24 : null),
+              if (isTab) Di.SBWS else Di.SBWD,
               Text(
                 getUserProfileData.fullName ?? "",
                 // "Noberto Holden",
@@ -73,7 +72,6 @@ class ProfileTabbar extends StatelessWidget {
                   controller: tabController,
                   physics: const NeverScrollableScrollPhysics(),
                   isScrollable: true,
-                  automaticIndicatorColorAdjustment: true,
                   tabs: [
                     Padding(
                       padding: tabPadding,
@@ -87,23 +85,25 @@ class ProfileTabbar extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                        padding: tabPadding,
-                        child: Text(
-                          'Timeline',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontFamily: 'SourceSansPro',
-                            fontSize: fontSize,
-                          ),
-                        )),
+                      padding: tabPadding,
+                      child: Text(
+                        'Timeline',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontFamily: 'SourceSansPro',
+                          fontSize: fontSize,
+                        ),
+                      ),
+                    ),
                     Padding(
                       padding: tabPadding,
                       child: Text(
                         'Articles',
                         style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontFamily: 'SourceSansPro',
-                            fontSize: fontSize),
+                          fontWeight: FontWeight.w600,
+                          fontFamily: 'SourceSansPro',
+                          fontSize: fontSize,
+                        ),
                       ),
                     ),
                     Padding(
@@ -111,9 +111,10 @@ class ProfileTabbar extends StatelessWidget {
                       child: Text(
                         'Activity',
                         style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontFamily: 'SourceSansPro',
-                            fontSize: fontSize),
+                          fontWeight: FontWeight.w600,
+                          fontFamily: 'SourceSansPro',
+                          fontSize: fontSize,
+                        ),
                       ),
                     ),
                     Padding(
@@ -121,9 +122,10 @@ class ProfileTabbar extends StatelessWidget {
                       child: Text(
                         'References',
                         style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontFamily: 'SourceSansPro',
-                            fontSize: fontSize),
+                          fontWeight: FontWeight.w600,
+                          fontFamily: 'SourceSansPro',
+                          fontSize: fontSize,
+                        ),
                       ),
                     ),
                   ],
@@ -131,7 +133,7 @@ class ProfileTabbar extends StatelessWidget {
               ],
             ),
           ),
-          isMine ? const EditProfileButton() : Di.ESB,
+          if (isMine) const EditProfileButton() else Di.ESB,
         ],
       ),
     );
@@ -147,7 +149,7 @@ class EditProfileButton extends ConsumerWidget {
   final double? width;
 
   @override
-  Widget build(BuildContext context, ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final isProfileEditable =
         ref.watch(profileNotifierProvider).isProfileEditable;
     return CustomElevatedButton(

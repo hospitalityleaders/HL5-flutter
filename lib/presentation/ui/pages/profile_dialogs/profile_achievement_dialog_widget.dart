@@ -350,7 +350,7 @@ class __SingleAchievementState extends State<_SingleAchievement> {
                     //         (achievementT) => SvgPicture.asset(achievementT.icon))
                     //     .toList(),
                     hintText: 'Year',
-                    dataList: PresentationData.yearsList,
+                    dataList: yearsList,
                   ),
                   Di.SBCH(18),
                 ],

@@ -254,33 +254,35 @@ class _DialogDropDownTextFieldState extends State<DialogDropDownTextField> {
             borderRadius: BorderRadius.circular(4),
           ),
           items: widget.dataList
-              .map((item) => DropdownMenuItem<String>(
-                    value: item as String,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        if (widget.iconsList != null)
-                          widget.iconsList![widget.dataList.indexOf(item)]
-                        else if (widget.iconDataList != null
-                            ? widget.iconDataList!.length ==
-                                widget.dataList.length
-                            : false) ...[
-                          Icon(
-                            widget.iconDataList![widget.dataList.indexOf(item)],
-                            color: Cr.darkGrey1,
-                            size: 15,
-                          ),
-                          Di.SBWS,
-                        ],
-                        Text(
-                          item,
-                          style: bodySmallRegular.copyWith(
-                            color: widget.disable ? Cr.grey2 : Cr.darkGrey1,
-                          ),
+              .map(
+                (item) => DropdownMenuItem<String>(
+                  value: item,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      if (widget.iconsList != null)
+                        widget.iconsList![widget.dataList.indexOf(item)]
+                      else if (widget.iconDataList != null
+                          ? widget.iconDataList!.length ==
+                              widget.dataList.length
+                          : false) ...[
+                        Icon(
+                          widget.iconDataList![widget.dataList.indexOf(item)],
+                          color: Cr.darkGrey1,
+                          size: 15,
                         ),
+                        Di.SBWS,
                       ],
-                    ),
-                  ))
+                      Text(
+                        item,
+                        style: bodySmallRegular.copyWith(
+                          color: widget.disable ? Cr.grey2 : Cr.darkGrey1,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
               .toList(),
           // validator: (value) {
           //   if (value == null) {
@@ -376,10 +378,11 @@ class CheckboxDialog extends StatelessWidget {
     return Theme(
       data: ThemeData.light().copyWith(
         checkboxTheme: CheckboxThemeData(
-          side: MaterialStateBorderSide.resolveWith((_) => const BorderSide(
-                width: 1,
-                color: Cr.darkGrey4,
-              )),
+          side: MaterialStateBorderSide.resolveWith(
+            (_) => const BorderSide(
+              color: Cr.darkGrey4,
+            ),
+          ),
           fillColor: MaterialStateProperty.all(Colors.white),
           checkColor: MaterialStateProperty.all(Cr.accentBlue1),
         ),

@@ -13,7 +13,6 @@ class BlueEditStack extends StatelessWidget {
   Widget build(BuildContext context) {
     return Positioned.fill(
       child: Align(
-        alignment: Alignment.center,
         child: Container(
           // width: 560,
           // height: 385,

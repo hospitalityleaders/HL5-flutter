@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:holedo/models/holedoapi/holedoapi.dart';
+import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/presentation/ui/pages/profile_dialogs/dialog_widgets.dart';
 import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
-import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
-
 import 'package:holedo/presentation/utill/nav.dart';
 import 'package:holedo/presentation/utill/styles.dart';
 

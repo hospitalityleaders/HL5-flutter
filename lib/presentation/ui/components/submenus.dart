@@ -23,11 +23,9 @@ Future<void> showProfileConnectionRequest(BuildContext context) {
               padding: const EdgeInsets.symmetric(horizontal: Di.PSS),
               child: Center(
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
@@ -45,7 +43,6 @@ Future<void> showProfileConnectionRequest(BuildContext context) {
                       ],
                     ),
                     Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         TextWithBackground(

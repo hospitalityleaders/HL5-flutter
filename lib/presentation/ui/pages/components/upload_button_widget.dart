@@ -42,7 +42,6 @@ class _UploadButtonWidgetState extends State<UploadButtonWidget> {
       decoration: BoxDecoration(
         border: Border.all(
           color: Cr.darkGrey4,
-          width: 1,
         ),
       ),
       margin: widget.margin ??
@@ -74,18 +73,18 @@ class _UploadButtonWidgetState extends State<UploadButtonWidget> {
               width: 80,
               height: 20,
               decoration: BoxDecoration(
-                  boxShadow: const [
-                    BoxShadow(
-                      offset: Offset(2, 2),
-                      blurRadius: 2,
-                      color: Color.fromARGB(13, 0, 0, 0),
-                    )
-                  ],
-                  borderRadius: BorderRadius.circular(4),
-                  border: Border.all(
-                    width: 1,
-                    color: Cr.darkGrey4,
-                  )),
+                boxShadow: const [
+                  BoxShadow(
+                    offset: Offset(2, 2),
+                    blurRadius: 2,
+                    color: Color.fromARGB(13, 0, 0, 0),
+                  )
+                ],
+                borderRadius: BorderRadius.circular(4),
+                border: Border.all(
+                  color: Cr.darkGrey4,
+                ),
+              ),
               child: Center(
                 child: Text(
                   "Choose file",

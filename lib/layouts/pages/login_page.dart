@@ -1,6 +1,6 @@
-import 'package:holedo/models/models.dart';
-import 'package:holedo/layouts/page_scaffold.dart';
 import 'package:flutter/material.dart';
+import 'package:holedo/layouts/page_scaffold.dart';
+import 'package:holedo/models/models.dart';
 import 'package:holedo/utils/validator.dart';
 import 'package:routemaster/routemaster.dart';
 
@@ -36,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
-  void _login() async {
+  Future<void> _login() async {
     if (_formKey.currentState!.validate()) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -45,18 +45,19 @@ class _LoginPageState extends State<LoginPage> {
         ),
       );
       if (_usernameController.text.isNotEmpty) {
-        var api = new Holedoapi();
-        var response = await api.login(
-            context: context,
-            email: _usernameController.text,
-            password: _passwordController.text);
+        final api = Holedoapi();
+        final response = await api.login(
+          context: context,
+          email: _usernameController.text,
+          password: _passwordController.text,
+        );
         print('cjec: ${usersControler.isLogin.value}');
 
         Provider.of<AppState>(context, listen: false).username =
             _usernameController.text;
         Provider.of<AppState>(context, listen: false).profile = response;
         var redirect = widget.redirectTo;
-        if (redirect == null) redirect = '/profile/${response.slug}';
+        redirect ??= '/profile/${response.slug}';
         Routemaster.of(context).push(redirect);
       }
     } else {
@@ -71,7 +72,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
     return PageScaffold(
       title: 'Log in',
       body: Form(
@@ -82,7 +83,6 @@ class _LoginPageState extends State<LoginPage> {
               width: size.width,
               height: size.height,
               child: Align(
-                alignment: Alignment.center,
                 child: Container(
                   width: size.width * 0.85,
                   padding:
@@ -133,7 +133,8 @@ class _LoginPageState extends State<LoginPage> {
                               suffixIcon: GestureDetector(
                                 onTap: () {
                                   setState(
-                                      () => _showPassword = !_showPassword);
+                                    () => _showPassword = !_showPassword,
+                                  );
                                 },
                                 child: Icon(
                                   _showPassword
@@ -157,12 +158,15 @@ class _LoginPageState extends State<LoginPage> {
                                 child: ElevatedButton(
                                   onPressed: _login,
                                   style: ElevatedButton.styleFrom(
-                                      primary: Colors.indigo,
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 40, vertical: 15)),
+                                    primary: Colors.indigo,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 40,
+                                      vertical: 15,
+                                    ),
+                                  ),
                                   child: const Text(
                                     "Login",
                                     style: TextStyle(

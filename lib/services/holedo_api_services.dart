@@ -29,7 +29,7 @@ class ApiServices {
   }) async {
     try {
       var model = Holedoapi();
-      token = token ?? Get.put(HoledoDatabase()).token;
+      token ??= Get.put(HoledoDatabase()).token;
       final header = headers ??
           <String, dynamic>{
             'AuthApi': 'Bearer $token',
@@ -68,7 +68,7 @@ class ApiServices {
   }) async {
     try {
       var model = Holedoapi();
-      token = token ?? Get.put(HoledoDatabase()).token;
+      token ??= Get.put(HoledoDatabase()).token;
       final header = headers ??
           <String, dynamic>{
             'AuthApi': 'Bearer $token',
@@ -182,42 +182,6 @@ class ApiServices {
     required Map<String, dynamic> profileData,
   }) async {
     try {
-<<<<<<< HEAD
-      final response = await http.get(
-          Uri.parse('https://${AuthData.apiHost}/rest/users/get/'),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-            'Accept': 'application/json',
-            'AuthApi': 'Bearer ${userData.read('token')}'
-            // 'AuthApi': 'Bearer ${AuthData.token}'
-          });
-      var data = jsonDecode(response.body);
-
-      if (response.statusCode == 200) {
-        return HoledoProfileModel.fromJson(data);
-      } else {
-        return Future.error('Server Error !');
-      }
-    } catch (SocketException) {
-      return Future.error('Error Fetching Data !');
-    }
-  }
-
-  /// update data
-  Future<HoledoProfileModel?> updateUserProfile(
-      {required Map<String, dynamic> profileData}) async {
-    try {
-      final response = await http.post(
-        Uri.parse('https://${AuthData.apiHost}/rest/users/update'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-          'apikey': AuthData.apiKey,
-          'Accept': 'application/json',
-          'AuthApi': 'Bearer ${userData.read('token')}'
-          // 'AuthApi': 'Bearer ${AuthData.token}'
-        },
-        body: jsonEncode(profileData),
-=======
       Response response = await _dio.post(
         'https://${AuthData.apiHost}/rest/users/update',
         data: profileData,
@@ -225,7 +189,6 @@ class ApiServices {
         options: dio.Options(
           headers: {'AuthApi': 'Bearer ${AuthData.token}'},
         ),
->>>>>>> 95209db0a577d43c2a004d0f78d5a93b376ad6a9
       );
       return response.data;
     } on DioError catch (e) {
@@ -280,7 +243,8 @@ class ApiServices {
 
         //print('res: ${user}');
         print(
-            'data: ${response.data!['data']!['user'] as Map<String, dynamic>}');
+          'data: ${response.data!['data']!['user'] as Map<String, dynamic>}',
+        );
         //return User.fromJson(response.data.user as Map<String, dynamic>);
         return Holedoapi.fromJson(response.data as Map<String, dynamic>);
       }
@@ -297,11 +261,11 @@ class ApiServices {
     String? token,
   }) async {
     final url = "$baseUrl/users/get";
-    var data;
+    late final data;
     //url += id != null ? 'id=${id}' : '';
     //url += slug != null ? 'slug=${slug}' : '';
 
-    token = token ?? Get.put(HoledoDatabase()).token;
+    token ??= Get.put(HoledoDatabase()).token;
 
     final dio.Response response = await _dio.get(
       url,

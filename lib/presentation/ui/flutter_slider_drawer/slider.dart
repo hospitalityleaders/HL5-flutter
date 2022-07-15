@@ -5,18 +5,19 @@ import 'package:holedo/presentation/ui/flutter_slider_drawer/mobile_slide_menu.d
 import 'package:holedo/presentation/ui/flutter_slider_drawer/slider_bar.dart';
 import 'package:holedo/presentation/ui/flutter_slider_drawer/slider_direction.dart';
 import 'package:holedo/presentation/ui/pages/mobile_view_section/mobile_profile_overview_section.dart';
+
 export 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 export 'package:holedo/layouts/cards/holedo_cards.dart';
-export 'package:holedo/layouts/pages/home_page.dart';
-export 'package:holedo/layouts/pages/recruitment_page.dart';
-export 'package:holedo/layouts/pages/profile_page.dart';
 export 'package:holedo/layouts/pages/category_page.dart';
-export 'package:holedo/layouts/pages/search_page.dart';
-export 'package:holedo/layouts/pages/login_page.dart';
-export 'package:holedo/layouts/pages/newsfront_page.dart';
-export 'package:holedo/layouts/pages/news_page.dart';
-export 'package:holedo/layouts/pages/jobsfront_page.dart';
+export 'package:holedo/layouts/pages/home_page.dart';
 export 'package:holedo/layouts/pages/jobs_page.dart';
+export 'package:holedo/layouts/pages/jobsfront_page.dart';
+export 'package:holedo/layouts/pages/login_page.dart';
+export 'package:holedo/layouts/pages/news_page.dart';
+export 'package:holedo/layouts/pages/newsfront_page.dart';
+export 'package:holedo/layouts/pages/profile_page.dart';
+export 'package:holedo/layouts/pages/recruitment_page.dart';
+export 'package:holedo/layouts/pages/search_page.dart';
 
 class SliderDrawer extends StatefulWidget {
   final Widget? slider;
@@ -28,18 +29,18 @@ class SliderDrawer extends StatefulWidget {
   final Color splashColor;
   final SliderShadow? sliderShadow;
   final SlideDirection slideDirection;
-  const SliderDrawer(
-      {Key? key,
-      this.slider,
-      required this.child,
-      this.animationDuration = 400,
-      this.sliderOpenSize = 265,
-      this.splashColor = Colors.transparent,
-      this.sliderCloseSize = 0,
-      this.slideDirection = SlideDirection.RIGHT_TO_LEFT,
-      this.sliderShadow,
-      this.appBar})
-      : super(key: key);
+  const SliderDrawer({
+    Key? key,
+    this.slider,
+    required this.child,
+    this.animationDuration = 400,
+    this.sliderOpenSize = 265,
+    this.splashColor = Colors.transparent,
+    this.sliderCloseSize = 0,
+    this.slideDirection = SlideDirection.RIGHT_TO_LEFT,
+    this.sliderShadow,
+    this.appBar,
+  }) : super(key: key);
 
   @override
   SliderDrawerState createState() => SliderDrawerState();
@@ -69,60 +70,69 @@ class SliderDrawerState extends State<SliderDrawer>
     super.initState();
 
     _animationDrawerController = AnimationController(
-        vsync: this,
-        duration: Duration(milliseconds: widget.animationDuration));
+      vsync: this,
+      duration: Duration(milliseconds: widget.animationDuration),
+    );
 
     _animation =
         Tween<double>(begin: widget.sliderCloseSize, end: widget.sliderOpenSize)
-            .animate(CurvedAnimation(
-                parent: _animationDrawerController!,
-                curve: Curves.decelerate,
-                reverseCurve: Curves.decelerate));
+            .animate(
+      CurvedAnimation(
+        parent: _animationDrawerController!,
+        curve: Curves.decelerate,
+        reverseCurve: Curves.decelerate,
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constrain) {
-      return Container(
-          child: Stack(children: <Widget>[
-        SliderBar(
-          slideDirection: widget.slideDirection,
-          sliderMenu: MobileSlideMenu(onCloseTap: closeSlider),
-          sliderMenuOpenSize: widget.sliderOpenSize,
-        ),
-        if (widget.sliderShadow != null) ...[
-          _Shadow(
-            animationDrawerController: _animationDrawerController,
-            slideDirection: widget.slideDirection,
-            sliderOpenSize: widget.sliderOpenSize,
-            animation: _animation,
-            sliderShadow: widget.sliderShadow!,
-          ),
-        ],
-        //Child
-        AnimatedBuilder(
-          animation: _animationDrawerController!,
-          builder: (_, child) {
-            return Transform.translate(
-              offset: Utils.getOffsetValues(
-                widget.slideDirection,
-                _animation.value,
-              ),
-              child: child,
-            );
-          },
-          child: Column(
+    return LayoutBuilder(
+      builder: (context, constrain) {
+        return Container(
+          child: Stack(
             children: <Widget>[
-              ProfileMobileAppbar(
-                onMenuTap: () => toggle(),
-                onSearch: (onSearch) {},
+              SliderBar(
+                slideDirection: widget.slideDirection,
+                sliderMenu: MobileSlideMenu(onCloseTap: closeSlider),
+                sliderMenuOpenSize: widget.sliderOpenSize,
               ),
-              Expanded(child: widget.child),
+              if (widget.sliderShadow != null) ...[
+                _Shadow(
+                  animationDrawerController: _animationDrawerController,
+                  slideDirection: widget.slideDirection,
+                  sliderOpenSize: widget.sliderOpenSize,
+                  animation: _animation,
+                  sliderShadow: widget.sliderShadow!,
+                ),
+              ],
+              //Child
+              AnimatedBuilder(
+                animation: _animationDrawerController!,
+                builder: (_, child) {
+                  return Transform.translate(
+                    offset: getOffsetValues(
+                      widget.slideDirection,
+                      _animation.value,
+                    ),
+                    child: child,
+                  );
+                },
+                child: Column(
+                  children: <Widget>[
+                    ProfileMobileAppbar(
+                      onMenuTap: () => toggle(),
+                      onSearch: (onSearch) {},
+                    ),
+                    Expanded(child: widget.child),
+                  ],
+                ),
+              ),
             ],
           ),
-        ),
-      ]));
-    });
+        );
+      },
+    );
   }
 
   @override
@@ -163,27 +173,32 @@ class _Shadow extends StatelessWidget {
       animation: _animationDrawerController!,
       builder: (_, child) {
         return Transform.translate(
-          offset: Utils.getOffsetValueForShadow(
-              slideDirection, animation.value, sliderOpenSize),
+          offset: getOffsetValueForShadow(
+            slideDirection,
+            animation.value,
+            sliderOpenSize,
+          ),
           child: child,
         );
       },
       child: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: BoxDecoration(shape: BoxShape.rectangle, boxShadow: [
-          BoxShadow(
-            color: sliderShadow.shadowColor,
-            blurRadius: sliderShadow.shadowBlurRadius,
-            // soften the shadow
-            spreadRadius: sliderShadow.shadowSpreadRadius,
-            //extend the shadow
-            offset: const Offset(
-              15.0, // Move to right 15  horizontally
-              15.0, // Move to bottom 15 Vertically
-            ),
-          )
-        ]),
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: sliderShadow.shadowColor,
+              blurRadius: sliderShadow.shadowBlurRadius,
+              // soften the shadow
+              spreadRadius: sliderShadow.shadowSpreadRadius,
+              //extend the shadow
+              offset: const Offset(
+                15.0, // Move to right 15  horizontally
+                15.0, // Move to bottom 15 Vertically
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

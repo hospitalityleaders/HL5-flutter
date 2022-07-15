@@ -38,14 +38,17 @@ class AppbarTextField extends StatelessWidget {
           fillColor: ColorPicker.kPrimaryLight,
           hintText: "Search",
           border: OutlineInputBorder(
-              borderSide: const BorderSide(color: ColorPicker.kPrimary),
-              borderRadius: BorderRadius.circular(5)),
+            borderSide: const BorderSide(color: ColorPicker.kPrimary),
+            borderRadius: BorderRadius.circular(5),
+          ),
           focusedBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: ColorPicker.kPrimary),
-              borderRadius: BorderRadius.circular(5)),
+            borderSide: const BorderSide(color: ColorPicker.kPrimary),
+            borderRadius: BorderRadius.circular(5),
+          ),
           enabledBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: ColorPicker.kPrimary),
-              borderRadius: BorderRadius.circular(5)),
+            borderSide: const BorderSide(color: ColorPicker.kPrimary),
+            borderRadius: BorderRadius.circular(5),
+          ),
           prefixIcon: const Icon(
             Icons.search,
             color: ColorPicker.kPrimaryLightBlue,

@@ -67,7 +67,6 @@ class CustomTextField extends StatelessWidget {
         controller: controller,
         initialValue: initialValue,
         keyboardType: keyboardType,
-        autofocus: false,
         focusNode: focusNode,
         enabled: enabled ?? true,
         obscureText: obscureText ?? false,

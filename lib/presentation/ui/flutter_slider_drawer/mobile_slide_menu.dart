@@ -9,18 +9,19 @@ import 'package:holedo/presentation/utill/color_resources.dart';
 import 'package:holedo/presentation/utill/dimensions.dart';
 import 'package:holedo/presentation/utill/styles.dart';
 import 'package:routemaster/routemaster.dart';
+
 export 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 export 'package:holedo/layouts/cards/holedo_cards.dart';
-export 'package:holedo/layouts/pages/home_page.dart';
-export 'package:holedo/layouts/pages/recruitment_page.dart';
-export 'package:holedo/layouts/pages/profile_page.dart';
 export 'package:holedo/layouts/pages/category_page.dart';
-export 'package:holedo/layouts/pages/search_page.dart';
-export 'package:holedo/layouts/pages/login_page.dart';
-export 'package:holedo/layouts/pages/newsfront_page.dart';
-export 'package:holedo/layouts/pages/news_page.dart';
-export 'package:holedo/layouts/pages/jobsfront_page.dart';
+export 'package:holedo/layouts/pages/home_page.dart';
 export 'package:holedo/layouts/pages/jobs_page.dart';
+export 'package:holedo/layouts/pages/jobsfront_page.dart';
+export 'package:holedo/layouts/pages/login_page.dart';
+export 'package:holedo/layouts/pages/news_page.dart';
+export 'package:holedo/layouts/pages/newsfront_page.dart';
+export 'package:holedo/layouts/pages/profile_page.dart';
+export 'package:holedo/layouts/pages/recruitment_page.dart';
+export 'package:holedo/layouts/pages/search_page.dart';
 
 class MobileSlideMenu extends StatefulWidget {
   const MobileSlideMenu({Key? key, this.onCloseTap}) : super(key: key);
@@ -36,7 +37,7 @@ class _MobileSlideMenuState extends State<MobileSlideMenu> {
   @override
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context);
-    final menuItems = Get.put(HoledoDatabase()).menuItems;
+    // final menuItems = Get.put(HoledoDatabase()).menuItems;
 
     return Container(
       color: Cr.colorPrimary,
@@ -76,159 +77,158 @@ class _MobileSlideMenuState extends State<MobileSlideMenu> {
               ),
               child: SingleChildScrollView(
                 child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      _MobileMenu(
-                        title: "Home",
-                        onTap: () {
-                          Routemaster.of(context).push("/home");
-                        },
-                      ),
-                      Di.DHDT,
-                      _MenuWithSubMenu(
-                        title: "Profile",
-                        subMenus: [
-                          _MobileSubMenu(
-                            title: "View profile",
-                            onTap: () {
-                              Routemaster.of(context).push("/profile");
-                            },
-                          ),
-                          _MobileSubMenu(
-                            title: "Edit profile",
-                            onTap: () {
-                              //sdflkadsfl
-                            },
-                          ),
-                          _MobileSubMenu(
-                            title: "Membership grade",
-                            onTap: () {
-                              //sdflkadsfl
-                            },
-                          ),
-                          _MobileSubMenu(
-                            title: "References",
-                            onTap: () {
-                              //sdflkadsfl
-                            },
-                          ),
-                          _MobileSubMenu(
-                            title: "Recommendations",
-                            onTap: () {
-                              //sdflkadsfl
-                            },
-                          ),
-                          _MobileSubMenu(
-                            title: "Network activity",
-                            onTap: () {
-                              //sdflkadsfl
-                            },
-                          ),
-                        ],
-                      ),
-                      Di.DHDT,
-                      _MobileMenu(
-                        title: "News",
-                        onTap: () {
-                          Routemaster.of(context).push("/news");
-                        },
-                      ),
-                      Di.DHDT,
-                      _MenuWithSubMenu(
-                        title: "Job",
-                        subMenus: [
-                          _MobileSubMenu(
-                            title: "Find a job",
-                            onTap: () {
-                              Routemaster.of(context).push("/jobs");
-                            },
-                          ),
-                          _MobileSubMenu(
-                            title: "Post a job",
-                            onTap: () {
-                              Routemaster.of(context).push("/jobs");
-                            },
-                          ),
-                        ],
-                      ),
-                      Di.DHDT,
-                      _MobileMenu(
-                        title: "Recruitments",
-                        onTap: () {
-                          Routemaster.of(context).push("/recruitments");
-                        },
-                      ),
-                      Di.DHDT,
-                      _MobileMenu(
-                        title: "Help",
-                        onTap: () {
-                          Routemaster.of(context).push("/help");
-                        },
-                      ),
-                      Di.DHDT,
-                      if (appState.isLoggedIn == true)
-                        Container(
-                          padding: const EdgeInsets.only(
-                            left: Di.PSD,
-                          ),
-                          margin: const EdgeInsets.only(right: Di.PSS),
-                          height: 77,
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              const PersonAvatar(
-                                avatarSize: 50,
-                              ),
-                              Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                    DbData.getUserProfileData.fullName ?? "",
-                                    style: bodySmallRegular.copyWith(
-                                        color: Cr.grey1),
-                                  ),
-                                  Text(
-                                    DbData.getUserProfileData.fullName ?? "",
-                                    style: bodySmallRegular.copyWith(
-                                        color: Cr.grey1),
-                                  ),
-                                  Text(
-                                    DbData.getUserProfileData.fullName ?? "",
-                                    style: bodySmallRegular.copyWith(
-                                        color: Cr.grey1),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      Di.DHDT,
-                      const _MobileMenu(title: "Account settings"),
-                      Di.DHDT,
-                      const _MobileMenu(title: "Privacy settings"),
-                      Di.DHDT,
-                      Di.SBHS,
-                      const TextWithBackground(
-                        padding: 10,
-                        paddingHorizantal: 80,
-                        backgroundColor: Cr.darkBlue5,
-                        text: "Log out",
-                        textColor: Cr.whiteColor,
-                        icon: Icon(
-                          Icons.lock,
-                          color: Cr.whiteColor,
-                          size: 12,
-                        ),
-                      ),
-                    ]
-
-                    // _buildNavBarChildren(
-                    //     inDrawer: true,
-                    //     isLogin: appState.isLoggedIn),
-
+                  children: [
+                    _MobileMenu(
+                      title: "Home",
+                      onTap: () {
+                        Routemaster.of(context).push("/home");
+                      },
                     ),
+                    Di.DHDT,
+                    _MenuWithSubMenu(
+                      title: "Profile",
+                      subMenus: [
+                        _MobileSubMenu(
+                          title: "View profile",
+                          onTap: () {
+                            Routemaster.of(context).push("/profile");
+                          },
+                        ),
+                        _MobileSubMenu(
+                          title: "Edit profile",
+                          onTap: () {
+                            //sdflkadsfl
+                          },
+                        ),
+                        _MobileSubMenu(
+                          title: "Membership grade",
+                          onTap: () {
+                            //sdflkadsfl
+                          },
+                        ),
+                        _MobileSubMenu(
+                          title: "References",
+                          onTap: () {
+                            //sdflkadsfl
+                          },
+                        ),
+                        _MobileSubMenu(
+                          title: "Recommendations",
+                          onTap: () {
+                            //sdflkadsfl
+                          },
+                        ),
+                        _MobileSubMenu(
+                          title: "Network activity",
+                          onTap: () {
+                            //sdflkadsfl
+                          },
+                        ),
+                      ],
+                    ),
+                    Di.DHDT,
+                    _MobileMenu(
+                      title: "News",
+                      onTap: () {
+                        Routemaster.of(context).push("/news");
+                      },
+                    ),
+                    Di.DHDT,
+                    _MenuWithSubMenu(
+                      title: "Job",
+                      subMenus: [
+                        _MobileSubMenu(
+                          title: "Find a job",
+                          onTap: () {
+                            Routemaster.of(context).push("/jobs");
+                          },
+                        ),
+                        _MobileSubMenu(
+                          title: "Post a job",
+                          onTap: () {
+                            Routemaster.of(context).push("/jobs");
+                          },
+                        ),
+                      ],
+                    ),
+                    Di.DHDT,
+                    _MobileMenu(
+                      title: "Recruitments",
+                      onTap: () {
+                        Routemaster.of(context).push("/recruitments");
+                      },
+                    ),
+                    Di.DHDT,
+                    _MobileMenu(
+                      title: "Help",
+                      onTap: () {
+                        Routemaster.of(context).push("/help");
+                      },
+                    ),
+                    Di.DHDT,
+                    if (appState.isLoggedIn == true)
+                      Container(
+                        padding: const EdgeInsets.only(
+                          left: Di.PSD,
+                        ),
+                        margin: const EdgeInsets.only(right: Di.PSS),
+                        height: 77,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const PersonAvatar(
+                              avatarSize: 50,
+                            ),
+                            Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  DbData.getUserProfileData.fullName ?? "",
+                                  style: bodySmallRegular.copyWith(
+                                    color: Cr.grey1,
+                                  ),
+                                ),
+                                Text(
+                                  DbData.getUserProfileData.fullName ?? "",
+                                  style: bodySmallRegular.copyWith(
+                                    color: Cr.grey1,
+                                  ),
+                                ),
+                                Text(
+                                  DbData.getUserProfileData.fullName ?? "",
+                                  style: bodySmallRegular.copyWith(
+                                    color: Cr.grey1,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    Di.DHDT,
+                    const _MobileMenu(title: "Account settings"),
+                    Di.DHDT,
+                    const _MobileMenu(title: "Privacy settings"),
+                    Di.DHDT,
+                    Di.SBHS,
+                    const TextWithBackground(
+                      padding: 10,
+                      paddingHorizantal: 80,
+                      backgroundColor: Cr.darkBlue5,
+                      text: "Log out",
+                      textColor: Cr.whiteColor,
+                      icon: Icon(
+                        Icons.lock,
+                        color: Cr.whiteColor,
+                        size: 12,
+                      ),
+                    ),
+                  ],
+
+                  // _buildNavBarChildren(
+                  //     inDrawer: true,
+                  //     isLogin: appState.isLoggedIn),
+                ),
               ),
             ),
             Di.ESB,
