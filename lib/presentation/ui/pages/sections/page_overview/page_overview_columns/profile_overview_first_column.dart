@@ -46,12 +46,12 @@ class _ProfileOverviewFirstColumnState
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const ProfileSummaryComponent(),
+        children: const [
+          ProfileSummaryComponent(),
           Di.SBHETS,
-          const AreasOfExpertiseComponents(),
+          AreasOfExpertiseComponents(),
           Di.SBHL,
-          const ProfileReferenceComponent(),
+          ProfileReferenceComponent(),
         ],
       ),
     );
@@ -580,7 +580,7 @@ class _ProfileSummaryComponentState extends State<ProfileSummaryComponent> {
                             isMobile: widget.isMobile,
                           )
                         : Padding(
-                            padding: EdgeInsets.only(
+                            padding: const EdgeInsets.only(
                               left: Di.PSD,
                               right: Di.PSD,
                               top: Di.PSD,

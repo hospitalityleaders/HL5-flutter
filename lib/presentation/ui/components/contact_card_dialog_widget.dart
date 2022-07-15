@@ -27,7 +27,7 @@ class ContactCardDialogWidget extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              PersonAvatar(
+              const PersonAvatar(
                 avatarSize: 85,
               ),
               Di.SBCW(18),
@@ -41,18 +41,18 @@ class ContactCardDialogWidget extends StatelessWidget {
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+                  children: const [
                     _FullName(),
                     _ProfessionalTitle(),
                   ],
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               Padding(
                 padding: const EdgeInsets.only(top: Di.PSL),
                 child: GestureDetector(
                   onTap: () => Nav.pop(context),
-                  child: Icon(
+                  child: const Icon(
                     Icons.close,
                     color: Cr.accentBlue1,
                   ),
@@ -63,7 +63,7 @@ class ContactCardDialogWidget extends StatelessWidget {
           ),
           Di.DWZH,
           Container(
-            padding: EdgeInsets.all(Di.PSL),
+            padding: const EdgeInsets.all(Di.PSL),
             child: Column(
               children: [
                 if (userProfileData.fullName != null)
@@ -78,11 +78,11 @@ class ContactCardDialogWidget extends StatelessWidget {
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        ProfileSquareCard(
+                        const ProfileSquareCard(
                           Icons.phone,
                           showBlue: true,
                         ),
-                        ProfileSquareCard(
+                        const ProfileSquareCard(
                           Icons.whatsapp,
                           showBlue: true,
                         ),
@@ -121,7 +121,7 @@ class ContactCardDialogWidget extends StatelessWidget {
           Di.SBHD,
           Row(
             mainAxisSize: MainAxisSize.min,
-            children: [
+            children: const [
               ProfileSquareCard(
                 Icons.facebook,
               ),
@@ -200,7 +200,7 @@ class ProfileSquareCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(2),
             )
           : null,
-      margin: EdgeInsets.only(left: Di.PSES),
+      margin: const EdgeInsets.only(left: Di.PSES),
       child: icon ??
           Icon(
             iconData,
@@ -233,7 +233,7 @@ class ProfileCardListTile extends StatelessWidget {
         return Container(
           padding: removePadding
               ? EdgeInsets.zero
-              : EdgeInsets.symmetric(vertical: 14, horizontal: Di.PSL),
+              : const EdgeInsets.symmetric(vertical: 14, horizontal: Di.PSL),
           color: isHovered ? Cr.accentBlue3 : Cr.whiteColor,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -252,7 +252,7 @@ class ProfileCardListTile extends StatelessWidget {
                 ),
               ),
               if (trailing != null) ...[
-                Spacer(),
+                const Spacer(),
                 trailing!,
               ]
             ],

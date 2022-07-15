@@ -62,7 +62,7 @@ class ConnectionsComponent extends StatelessWidget {
             child: SizedBox(
               width: isMobile ? Di.getScreenSize(context).width - 52 : 320,
               height: 35,
-              child: TextWithBackground(
+              child: const TextWithBackground(
                 sizedBoxBetweenIconText: Di.SBWES,
                 text: "Grow your network",
                 iconData: Icons.person_add,

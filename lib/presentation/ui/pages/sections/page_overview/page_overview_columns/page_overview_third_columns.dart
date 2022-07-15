@@ -26,14 +26,14 @@ class _ProfileOverviewThirdColumnState
   Widget build(BuildContext context) {
     return Container(
       child: Column(
-        children: [
-          const ProfileCompletionComponent(),
+        children: const [
+          ProfileCompletionComponent(),
           Di.SBHEL,
-          const ConnectionsComponent(),
+          ConnectionsComponent(),
           Di.SBHEL,
-          const TimelineComponent(),
+          TimelineComponent(),
           Di.SBHL,
-          const RightsComponent(),
+          RightsComponent(),
         ],
       ),
     );

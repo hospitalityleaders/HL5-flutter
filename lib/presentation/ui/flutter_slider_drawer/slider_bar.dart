@@ -15,7 +15,7 @@ class SliderBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var container = Container(
+    var container = SizedBox(
       width: sliderMenuOpenSize,
       child: sliderMenu,
     );

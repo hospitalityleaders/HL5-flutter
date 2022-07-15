@@ -38,7 +38,7 @@ class ProfileProvider extends ChangeNotifier {
   // }
 
   void changeUserProfilePercentage(bool isLoggedIn) {
-    int _percentage = 20;
+    int percentage = 20;
     if (isLoggedIn) {
       final userProfileData = DbData.getUserProfileData;
       final bool experienceAdded = (userProfileData.experiences != null ||
@@ -53,19 +53,19 @@ class ProfileProvider extends ChangeNotifier {
           userProfileData.languages!.isNotEmpty);
 
       if (experienceAdded) {
-        _percentage += 20;
+        percentage += 20;
       }
       if (qualificationAdded) {
-        _percentage += 20;
+        percentage += 20;
       }
       if (expertiseAdded) {
-        _percentage += 20;
+        percentage += 20;
       }
 
       if (languagesAdded) {
-        _percentage += 20;
+        percentage += 20;
       }
-      percentageProfileCompleted = _percentage;
+      percentageProfileCompleted = percentage;
       notifyListeners();
     }
   }

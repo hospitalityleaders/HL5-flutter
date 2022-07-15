@@ -51,10 +51,10 @@ class _ProfileReferenceSingleComponentState
       children: [
         Container(
           width: widget.isMobile ? null : 360,
-          padding: EdgeInsets.symmetric(
+          padding: const EdgeInsets.symmetric(
             horizontal: Di.PSS,
           ),
-          margin: EdgeInsets.only(
+          margin: const EdgeInsets.only(
             bottom: Di.PSL,
           ),
           decoration:
@@ -63,11 +63,11 @@ class _ProfileReferenceSingleComponentState
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ListTile(
-                leading: PersonAvatar(
+                leading: const PersonAvatar(
                   avatarSize: Di.FSOTL + 10,
                 ),
                 title: Row(
-                  children: [
+                  children: const [
                     Text(
                       "Sarah Lee",
                       style: h4Bold,
@@ -110,7 +110,7 @@ class _ProfileReferenceSingleComponentState
                       decoration: Styles.boxDecoration.copyWith(
                         color: Cr.accentBlue1,
                       ),
-                      child: Icon(
+                      child: const Icon(
                         Icons.format_quote,
                         color: Cr.whiteColor,
                         size: 18,
@@ -145,7 +145,7 @@ class _ProfileReferenceSingleComponentState
                       crossFadeState: showMore
                           ? CrossFadeState.showFirst
                           : CrossFadeState.showSecond,
-                      duration: Duration(milliseconds: 300),
+                      duration: const Duration(milliseconds: 300),
                     )
                   : Padding(
                       padding: const EdgeInsets.symmetric(horizontal: Di.PSD),
@@ -179,7 +179,7 @@ class _ProfileReferenceSingleComponentState
                     crossFadeState: showMore
                         ? CrossFadeState.showFirst
                         : CrossFadeState.showSecond,
-                    duration: Duration(milliseconds: 200),
+                    duration: const Duration(milliseconds: 200),
                   ),
                 ),
               Di.SBHD,
@@ -303,7 +303,7 @@ class _ProfileReferenceSingleComponentState
           ),
         ),
         if (showSubMenu)
-          Positioned(
+          const Positioned(
             right: 17,
             top: 40,
             child: HideFromProfileDeleteRefereneceSubmenu(),

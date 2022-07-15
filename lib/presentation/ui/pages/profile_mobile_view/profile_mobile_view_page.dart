@@ -158,11 +158,7 @@ class _ProfileMobileViewPageState extends ConsumerState<ProfileMobileViewPage> {
                                         ),
                                         Text(
                                           widget.userProfileData.area ??
-                                              "" +
-                                                  (PresentationData.countries[
-                                                          widget.userProfileData
-                                                              .countryId] ??
-                                                      ""),
+                                              "${PresentationData.countries[widget.userProfileData.countryId] ?? ""}",
                                           // " Cape Town, South Africa",
                                           textAlign: TextAlign.center,
                                           style: bodyLarge.copyWith(
@@ -363,7 +359,7 @@ class _ProfileMobileViewPageState extends ConsumerState<ProfileMobileViewPage> {
                                           ),
                                         Di.SBHES,
                                         isMine
-                                            ? EditProfileButton(
+                                            ? const EditProfileButton(
                                                 width: double.infinity)
                                             : Di.ESB,
                                       ],

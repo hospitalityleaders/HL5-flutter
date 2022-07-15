@@ -408,10 +408,10 @@ class __SocialProfileFieldState extends State<_SocialProfileField> {
             Material(
               child: InkWell(
                 onTap: widget.onCloseTap,
-                child: SizedBox(
+                child: const SizedBox(
                   height: 30,
                   width: 30,
-                  child: const Icon(
+                  child: Icon(
                     Icons.close,
                     color: Cr.accentBlue1,
                     size: 14,
@@ -475,10 +475,10 @@ class __TextFieldWithPrivacyState extends State<_TextFieldWithPrivacy> {
             Material(
               child: InkWell(
                 onTap: widget.onCloseTap,
-                child: SizedBox(
+                child: const SizedBox(
                   height: 30,
                   width: 30,
-                  child: const Icon(
+                  child: Icon(
                     Icons.close,
                     color: Cr.accentBlue1,
                     size: 14,
@@ -538,10 +538,10 @@ class __ContactNumberFieldState extends State<_ContactNumberField> {
             Material(
               child: InkWell(
                 onTap: widget.onCloseTap,
-                child: SizedBox(
+                child: const SizedBox(
                   height: 30,
                   width: 30,
-                  child: const Icon(
+                  child: Icon(
                     Icons.close,
                     color: Cr.accentBlue1,
                     size: 14,

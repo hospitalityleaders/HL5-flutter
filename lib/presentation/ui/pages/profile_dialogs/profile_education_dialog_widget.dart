@@ -312,7 +312,7 @@ class __SingleEducationState extends State<_SingleEducation> {
                   width: 575,
                 ),
                 Di.SBCH(18),
-                DialogLabelTextFormField(
+                const DialogLabelTextFormField(
                   customLabel: "Course outline",
                   isImportant: false,
                 ),
@@ -467,10 +467,10 @@ class __QualificationFieldState extends State<_QualificationField> {
             Material(
               child: InkWell(
                 onTap: widget.onCloseTap,
-                child: SizedBox(
+                child: const SizedBox(
                   height: 30,
                   width: 30,
-                  child: const Icon(
+                  child: Icon(
                     Icons.close,
                     color: Cr.accentBlue1,
                     size: 14,

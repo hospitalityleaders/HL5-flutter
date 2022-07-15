@@ -45,7 +45,7 @@ class _EducationComponentState extends State<EducationComponent> {
       child: Stack(
         children: [
           DecoratedBox(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Cr.whiteColor,
             ),
             child: Column(
@@ -84,7 +84,7 @@ class _EducationComponentState extends State<EducationComponent> {
                                     children: [
                                       Di.SBCH(18),
                                       ListTile(
-                                        leading: SvgWithBackground(
+                                        leading: const SvgWithBackground(
                                           svg: Svgs.school,
                                         ),
                                         title: Text(

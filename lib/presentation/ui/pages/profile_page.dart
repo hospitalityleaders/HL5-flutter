@@ -111,10 +111,13 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage>
                                               "Your profile is only ${Provider.of<ProfileProvider>(context).percentageProfileCompleted}% complete. Complete it now to earn first Hospitality Leader grade.",
                                           onButtonPressed: () {
                                             ref
-                                                .watch(profileNotifierProvider
-                                                    .notifier)
+                                                .watch(
+                                                  profileNotifierProvider
+                                                      .notifier,
+                                                )
                                                 .changeIsProfieEditableState(
-                                                    true);
+                                                  true,
+                                                );
                                           },
                                         ),
                               sucess: (notification) =>
@@ -128,7 +131,7 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage>
                                   ref.watch(profileNotifierProvider.notifier)
                                     ..changeIsProfieEditableState(false)
                                     ..changeAppNotificationState(
-                                      AppNotificationState.showNothing(),
+                                      const AppNotificationState.showNothing(),
                                     );
                                 },
                               ),
@@ -149,10 +152,10 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage>
                               isEditable: isEditable,
                               userProfileData: widget.userProfileData,
                             ),
-                            TimelineSection(),
-                            ArticlesSection(),
-                            ActivitySection(),
-                            ReferenceSection(),
+                            const TimelineSection(),
+                            const ArticlesSection(),
+                            const ActivitySection(),
+                            const ReferenceSection(),
                           ][currentTabIndex],
                         ),
                         Di.SBHOTL,

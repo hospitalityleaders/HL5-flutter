@@ -67,7 +67,7 @@ class MobileProfileOverviewSection extends StatelessWidget {
             userProfileData: userProfileData,
           ),
           Di.SBHS,
-          AchievementComponent(isMobile: true),
+          const AchievementComponent(isMobile: true),
           //TODO:
           // LanguagesComponent(
           //   userProfileData: userProfileData,

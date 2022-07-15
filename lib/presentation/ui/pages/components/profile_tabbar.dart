@@ -131,7 +131,7 @@ class ProfileTabbar extends StatelessWidget {
               ],
             ),
           ),
-          isMine ? EditProfileButton() : Di.ESB,
+          isMine ? const EditProfileButton() : Di.ESB,
         ],
       ),
     );

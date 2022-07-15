@@ -41,12 +41,12 @@ class _TimelineSectionState extends State<TimelineSection> {
             child: SizedBox(
               width: 360,
               child: Column(
-                children: [
-                  const ProfileCompletionComponent(),
+                children: const [
+                  ProfileCompletionComponent(),
                   Di.SBHEL,
-                  const ConnectionsComponent(),
-                  const ProfileAdsComponent(),
-                  const RightsComponent(),
+                  ConnectionsComponent(),
+                  ProfileAdsComponent(),
+                  RightsComponent(),
                 ],
               ),
             ),
@@ -85,27 +85,26 @@ class _TimelineSectionComponentState extends State<TimelineSectionComponent> {
         shrinkWrap: true,
         itemCount: timelineClasslist.length,
         itemBuilder: (context, index) {
-          final TimelineClass _timelineClass = timelineClasslist[index];
-          if (_timelineClass.timelineClassType ==
-              TimelineClassTypes.Education) {
+          final TimelineClass timelineClass = timelineClasslist[index];
+          if (timelineClass.timelineClassType == TimelineClassTypes.Education) {
             // return Di.ESB;
             return EducationTimeLineWidget(
               showComments: index == timelineClasslist.length - 1,
-              education: _timelineClass.timeline as Education,
+              education: timelineClass.timeline as Education,
             );
-          } else if (_timelineClass.timelineClassType ==
+          } else if (timelineClass.timelineClassType ==
               TimelineClassTypes.Achievement) {
             // return Di.ESB;
 
             return AchievementTimeLineWidget(
               showComments: index == timelineClasslist.length - 1,
-              achievement: _timelineClass.timeline as Achievement,
+              achievement: timelineClass.timeline as Achievement,
             );
-          } else if (_timelineClass.timelineClassType ==
+          } else if (timelineClass.timelineClassType ==
               TimelineClassTypes.Experience) {
             return ExperienceTimeLineWidget(
               showComments: index == timelineClasslist.length - 1,
-              experience: _timelineClass.timeline as Experience,
+              experience: timelineClass.timeline as Experience,
             );
           }
           return Di.ESB;
@@ -140,8 +139,8 @@ class _AchievementTimeLineWidgetState extends State<AchievementTimeLineWidget> {
         children: [
           Stack(
             children: [
-              _TimelineFirstWidget(),
-              _TimelineSecondWidget(),
+              const _TimelineFirstWidget(),
+              const _TimelineSecondWidget(),
               _TimelineStartYearText(
                 year: widget.achievement.created!.year.toString(),
               ),
@@ -180,7 +179,7 @@ class _AchievementTimeLineWidgetState extends State<AchievementTimeLineWidget> {
                   },
                 ),
                 widget.showComments
-                    ? _TimelineCommentWidget()
+                    ? const _TimelineCommentWidget()
                     : const SizedBox(),
               ],
             ),
@@ -216,8 +215,8 @@ class _ExperienceTimeLineWidgetState extends State<ExperienceTimeLineWidget> {
         children: [
           Stack(
             children: [
-              _TimelineFirstWidget(),
-              _TimelineSecondWidget(),
+              const _TimelineFirstWidget(),
+              const _TimelineSecondWidget(),
               _TimelineStartYearText(
                 year: widget.experience.fromDate!.year.toString(),
               ),
@@ -230,7 +229,7 @@ class _ExperienceTimeLineWidgetState extends State<ExperienceTimeLineWidget> {
                 _TimelineTitleSubtitleDurationWidget(
                   duration: widget.experience.workDuration ?? "",
                   subtitle:
-                      "${widget.experience.companyName! == null ? '' : widget.experience.companyName! + ' · '}${widget.experience.area}",
+                      "${widget.experience.companyName! == null ? '' : '${widget.experience.companyName!} · '}${widget.experience.area}",
                   title: widget.experience.title ?? "",
                   svgName: Svgs.domain,
                 ),
@@ -257,7 +256,7 @@ class _ExperienceTimeLineWidgetState extends State<ExperienceTimeLineWidget> {
                   },
                 ),
                 widget.showComments
-                    ? _TimelineCommentWidget()
+                    ? const _TimelineCommentWidget()
                     : const SizedBox(),
               ],
             ),
@@ -293,8 +292,8 @@ class _EducationTimeLineWidgetState extends State<EducationTimeLineWidget> {
         children: [
           Stack(
             children: [
-              _TimelineFirstWidget(),
-              _TimelineSecondWidget(),
+              const _TimelineFirstWidget(),
+              const _TimelineSecondWidget(),
               _TimelineStartYearText(
                 year: widget.education.durationFromDate!.year.toString(),
               ),
@@ -332,7 +331,7 @@ class _EducationTimeLineWidgetState extends State<EducationTimeLineWidget> {
                   },
                 ),
                 widget.showComments
-                    ? _TimelineCommentWidget()
+                    ? const _TimelineCommentWidget()
                     : const SizedBox(),
               ],
             ),

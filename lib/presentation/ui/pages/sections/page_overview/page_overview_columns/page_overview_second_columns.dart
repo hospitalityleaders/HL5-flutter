@@ -52,7 +52,6 @@ class _ProfileOverviewSecondColumnState
       // width: 360,
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           FeaturedVideoComponent(
@@ -67,7 +66,7 @@ class _ProfileOverviewSecondColumnState
             userProfileData: widget.userProfileData,
           ),
           Di.SBHL,
-          AchievementComponent(),
+          const AchievementComponent(),
           Di.SBHEL,
           // LanguagesComponent(
           //   onEditPressed: () => buildLanguagePopUp(langIndex),
@@ -87,11 +86,16 @@ class _ProfileOverviewSecondColumnState
   int indexEdu = 1;
 
   Widget buildEduInnerCard(
-      bool isEducationEditable, bool isEducationShowCard, int indexEdu) {
+    bool isEducationEditable,
+    bool isEducationShowCard,
+    int indexEdu,
+  ) {
     return StatefulBuilder(
       builder: (context, setState) {
-        List<Widget> eduTextFieldGenerate = List.generate(indexEdu,
-            (int i) => TextFieldAndFieldName.buildTextField('Course name'));
+        final List<Widget> eduTextFieldGenerate = List.generate(
+          indexEdu,
+          (int i) => TextFieldAndFieldName.buildTextField('Course name'),
+        );
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
           child: Container(
@@ -130,71 +134,72 @@ class _ProfileOverviewSecondColumnState
                           )
                         : null,
                   ),
-                  isEducationShowCard
-                      ? SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              Divider(
-                                  height: SS.sH(context) * 0.01,
-                                  color: ColorPicker.kGreyLight3),
-                              Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                  if (isEducationShowCard)
+                    SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Divider(
+                              height: SS.sH(context) * 0.01,
+                              color: ColorPicker.kGreyLight3),
+                          Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                TextFieldAndFieldName.buildFieldName(
+                                    'Educational institution', '*'),
+                                TextFieldAndFieldName.buildTextField(),
+                                TextFieldAndFieldName.buildFieldName(
+                                    'Course duration'),
+                                TextFieldAndFieldName.buildFieldName(
+                                    'Qualification title'),
+                                TextFieldAndFieldName.buildTextField(),
+                                TextFieldAndFieldName.buildFieldName(
+                                    'Description'),
+                                const TextField(
+                                  autocorrect: true,
+                                  minLines: 4,
+                                  maxLines: 6,
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide(),
+                                    ),
+                                  ),
+                                ),
+                                SS.sB(18),
+                                TextFieldAndFieldName.buildFieldName(
+                                    'Course outline'),
+                                Column(children: eduTextFieldGenerate),
+                                TextButton.icon(
+                                  onPressed: () {
+                                    setState(() {
+                                      indexEdu++;
+                                    });
+                                  },
+                                  icon: const Icon(Icons.add),
+                                  label: const Text('Add another'),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
-                                    TextFieldAndFieldName.buildFieldName(
-                                        'Educational institution', '*'),
-                                    TextFieldAndFieldName.buildTextField(),
-                                    TextFieldAndFieldName.buildFieldName(
-                                        'Course duration'),
-                                    TextFieldAndFieldName.buildFieldName(
-                                        'Qualification title'),
-                                    TextFieldAndFieldName.buildTextField(),
-                                    TextFieldAndFieldName.buildFieldName(
-                                        'Description'),
-                                    const TextField(
-                                      autocorrect: true,
-                                      minLines: 4,
-                                      maxLines: 6,
-                                      decoration: InputDecoration(
-                                        border: OutlineInputBorder(
-                                          borderSide: BorderSide(),
-                                        ),
-                                      ),
-                                    ),
-                                    SS.sB(18),
-                                    TextFieldAndFieldName.buildFieldName(
-                                        'Course outline'),
-                                    Column(children: eduTextFieldGenerate),
-                                    TextButton.icon(
-                                      onPressed: () {
-                                        setState(() {
-                                          indexEdu++;
-                                        });
-                                      },
-                                      icon: const Icon(Icons.add),
-                                      label: const Text('Add another'),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        OutlinedButton(
-                                            onPressed: () {},
-                                            child: const Text('Cancel')),
-                                        SS.sB(0, 10),
-                                        ElevatedButton(
-                                          onPressed: () {},
-                                          child: const Text('Save'),
-                                        ),
-                                      ],
+                                    OutlinedButton(
+                                        onPressed: () {},
+                                        child: const Text('Cancel')),
+                                    SS.sB(0, 10),
+                                    ElevatedButton(
+                                      onPressed: () {},
+                                      child: const Text('Save'),
                                     ),
                                   ],
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        )
-                      : Container(),
+                        ],
+                      ),
+                    )
+                  else
+                    Container(),
                 ],
               ),
             ),
@@ -355,18 +360,19 @@ class _AchievementComponentState extends State<AchievementComponent> {
                               (singleAchievement) => Container(
                                 width: widget.isMobile ? null : 360,
                                 margin: EdgeInsets.only(
-                                    bottom: achievement
-                                                .indexOf(singleAchievement) ==
-                                            (achievement.length - 1)
-                                        ? 0
-                                        : Di.PSS),
+                                  bottom:
+                                      achievement.indexOf(singleAchievement) ==
+                                              (achievement.length - 1)
+                                          ? 0
+                                          : Di.PSS,
+                                ),
                                 decoration: Styles.boxDecoration
                                     .copyWith(color: Cr.whiteColor),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     ListTile(
-                                      leading: SvgWithBackground(
+                                      leading: const SvgWithBackground(
                                         svg: Svgs.school,
                                       ),
                                       trailing: const SizedBox(),
@@ -398,9 +404,8 @@ class _AchievementComponentState extends State<AchievementComponent> {
                                     if (singleAchievement.description != null)
                                       ExpandedCollapseWidget(
                                         showText: "More info",
-                                        description:
-                                            singleAchievement.description,
-                                        isTablet: false,
+                                        description: singleAchievement
+                                            .description as String,
                                         isMobile: widget.isMobile,
                                       )
                                   ],
@@ -471,7 +476,8 @@ class _FeaturedVideoComponentState extends State<FeaturedVideoComponent> {
   void initState() {
     super.initState();
     _controller = VideoPlayerController.network(
-        widget.userProfileData.profileVideoUrl ?? '')
+      widget.userProfileData.profileVideoUrl ?? '',
+    )
       ..initialize().then((_) {
         setState(() {});
       })
@@ -495,7 +501,7 @@ class _FeaturedVideoComponentState extends State<FeaturedVideoComponent> {
     return Stack(
       children: [
         DecoratedBox(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Cr.whiteColor,
           ),
           child: Column(
@@ -520,17 +526,17 @@ class _FeaturedVideoComponentState extends State<FeaturedVideoComponent> {
                         children: [
                           Stack(
                             children: [
-                              _controller.value.isInitialized
-                                  ? SizedBox(
-                                      height: widget.isMobile ? null : 180,
-                                      width: widget.isMobile ? null : 325,
-                                      child: AspectRatio(
-                                        aspectRatio:
-                                            _controller.value.aspectRatio,
-                                        child: VideoPlayer(_controller),
-                                      ),
-                                    )
-                                  : Di.ESB,
+                              if (_controller.value.isInitialized)
+                                SizedBox(
+                                  height: widget.isMobile ? null : 180,
+                                  width: widget.isMobile ? null : 325,
+                                  child: AspectRatio(
+                                    aspectRatio: _controller.value.aspectRatio,
+                                    child: VideoPlayer(_controller),
+                                  ),
+                                )
+                              else
+                                Di.ESB,
                               Positioned.fill(
                                 child: Center(
                                   child: FloatingActionButton(
@@ -570,7 +576,7 @@ class _FeaturedVideoComponentState extends State<FeaturedVideoComponent> {
                                 ),
                                 children: <TextSpan>[
                                   TextSpan(
-                                    text: (widget
+                                    text: widget
                                                 .userProfileData
                                                 .profileVideoDescription!
                                                 .length <
@@ -580,7 +586,7 @@ class _FeaturedVideoComponentState extends State<FeaturedVideoComponent> {
                                         : (showMore
                                             ? widget.userProfileData
                                                 .profileVideoDescription
-                                            : "${widget.userProfileData.profileVideoDescription!.substring(0, 120)}...")),
+                                            : "${widget.userProfileData.profileVideoDescription!.substring(0, 120)}..."),
                                     // "Noberto's career has revolved around causing corporate transformation projects designed to optimize the use of resources enha...",
                                   ),
                                   if (widget.userProfileData

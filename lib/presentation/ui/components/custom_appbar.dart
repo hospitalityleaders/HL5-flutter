@@ -85,7 +85,7 @@ class _CustomAppbarState extends State<CustomAppbar> {
 
           Row(
             mainAxisSize: MainAxisSize.min,
-            children: [
+            children: const [
               Di.DVZW,
               AppbarEmailButton(),
               Di.DVZW,
@@ -155,10 +155,10 @@ class _ProfileWithSubMenu extends StatelessWidget {
 
     return Row(
       children: [
-        ProfileSideHover(),
+        const ProfileSideHover(),
         Column(
           children: [
-            ProfileSideHover(
+            const ProfileSideHover(
               isInHorizantal: true,
             ),
             InkWell(
@@ -168,8 +168,8 @@ class _ProfileWithSubMenu extends StatelessWidget {
                     .changeSubMenusPopupState(hover);
               },
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: Di.PSS),
-                child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: Di.PSS),
+                child: SizedBox(
                   width: 26,
                   height: 26,
                   child: (appState.isLoggedIn)
@@ -179,7 +179,7 @@ class _ProfileWithSubMenu extends StatelessWidget {
                             DbData.getUserProfileData.avatar!,
                           ),
                         )
-                      : Icon(
+                      : const Icon(
                           CupertinoIcons.profile_circled,
                           size: 26,
                           color: Colors.grey,
@@ -189,7 +189,7 @@ class _ProfileWithSubMenu extends StatelessWidget {
             )
           ],
         ),
-        ProfileSideHover(),
+        const ProfileSideHover(),
       ],
     );
   }
@@ -205,10 +205,10 @@ class AppbarConnectionRequestButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SizedboxWithHover(),
+        const SizedboxWithHover(),
         Column(
           children: [
-            SizedboxWithHover(
+            const SizedboxWithHover(
               isInHorizantal: true,
             ),
             InkWell(
@@ -219,7 +219,7 @@ class AppbarConnectionRequestButton extends StatelessWidget {
               },
               child: Row(
                 mainAxisSize: MainAxisSize.min,
-                children: [
+                children: const [
                   Icon(
                     Icons.person_add,
                     color: Cr.darkBlue9,
@@ -237,7 +237,7 @@ class AppbarConnectionRequestButton extends StatelessWidget {
             ),
           ],
         ),
-        SizedboxWithHover(),
+        const SizedboxWithHover(),
       ],
     );
   }

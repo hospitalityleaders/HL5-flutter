@@ -6,7 +6,7 @@ class OnHover extends StatefulWidget {
   const OnHover({Key? key, required this.builder}) : super(key: key);
 
   @override
-  _OnHoverState createState() => _OnHoverState();
+  State<OnHover> createState() => _OnHoverState();
 }
 
 class _OnHoverState extends State<OnHover> {

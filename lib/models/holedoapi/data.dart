@@ -1,20 +1,19 @@
 import 'dart:convert';
 
+import 'package:holedo/models/holedoapi/article.dart';
+import 'package:holedo/models/holedoapi/article_category.dart';
+import 'package:holedo/models/holedoapi/block.dart';
+import 'package:holedo/models/holedoapi/job.dart';
+import 'package:holedo/models/holedoapi/settings.dart';
+import 'package:holedo/models/models.dart';
+
 export 'package:holedo/models/holedoapi/company.dart';
 export 'package:holedo/models/holedoapi/page.dart';
 export 'package:holedo/models/holedoapi/user.dart';
 
-import 'package:holedo/models/models.dart';
-
-import 'article.dart';
-import 'article_category.dart';
-import 'block.dart';
-import 'job.dart';
-
-import 'settings.dart';
-
 List<DataModel> dataFromJson(Iterable<dynamic> data) => List<DataModel>.from(
-    data.map((x) => DataModel.fromJson(x as Map<String, dynamic>)));
+      data.map((x) => DataModel.fromJson(x as Map<String, dynamic>)),
+    );
 
 String dataToJson(List<DataModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
@@ -36,26 +35,27 @@ class DataModel {
   List<PageContent>? pages;
   List<Company>? companies;
 
-  DataModel(
-      {this.success,
-      this.messages,
-      this.settings,
-      this.block,
-      this.articleCategories,
-      this.count,
-      this.articles,
-      this.article,
-      this.jobs,
-      this.job,
-      this.users,
-      this.user,
-      this.token,
-      this.pages,
-      this.companies});
+  DataModel({
+    this.success,
+    this.messages,
+    this.settings,
+    this.block,
+    this.articleCategories,
+    this.count,
+    this.articles,
+    this.article,
+    this.jobs,
+    this.job,
+    this.users,
+    this.user,
+    this.token,
+    this.pages,
+    this.companies,
+  });
 
   factory DataModel.fromJson(Map<String, dynamic> json) => DataModel(
         success: json['success'] == null ? false : true,
-        messages: json['messages'],
+        messages: json['messages'] as String?,
         settings: json['Settings'] == null
             ? null
             : Settings.fromJson(json['Settings'] as Map<String, dynamic>),

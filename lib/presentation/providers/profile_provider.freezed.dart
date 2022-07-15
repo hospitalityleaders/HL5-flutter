@@ -116,7 +116,7 @@ class _$_ShowNothing extends _ShowNothing with DiagnosticableTreeMixin {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'AppNotificationState.showNothing'));
+        .add(DiagnosticsProperty('type', 'AppNotificationState.showNothing'));
   }
 
   @override
@@ -211,7 +211,7 @@ class _$_Sucess extends _Sucess with DiagnosticableTreeMixin {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties..add(DiagnosticsProperty('type', 'AppNotificationState.sucess'));
+    properties.add(DiagnosticsProperty('type', 'AppNotificationState.sucess'));
   }
 
   @override
@@ -309,9 +309,8 @@ class _$_ProfileCompletion extends _ProfileCompletion
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty(
-          'type', 'AppNotificationState.profileCompletion'));
+    properties.add(
+        DiagnosticsProperty('type', 'AppNotificationState.profileCompletion'));
   }
 
   @override

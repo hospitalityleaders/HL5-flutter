@@ -22,7 +22,7 @@ class CustomListTile extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  ContainerWithIcon(
+                  const ContainerWithIcon(
                     iconData: Icons.add,
                     size: 12,
                     iconSize: 10,
@@ -36,14 +36,14 @@ class CustomListTile extends StatelessWidget {
                   ),
                 ],
               ),
-              TextWithBackground(
+              const TextWithBackground(
                 text: "+20%",
                 backgroundColor: Cr.darkBlue1,
                 textColor: Cr.accentBlue1,
               )
             ],
           ),
-          Divider(
+          const Divider(
             thickness: 2,
           ),
         ],

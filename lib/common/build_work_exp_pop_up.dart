@@ -10,7 +10,7 @@ class BuildWorkExpPopUp {
       bool isExperienceEditable, bool isExperienceShowCard, int indexExp) {
     return StatefulBuilder(builder: (context, setState) {
       return Padding(
-        padding: EdgeInsets.symmetric(vertical: 5, horizontal: 16),
+        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
         child: Container(
           width: Responsive.isDesktop(context)
               ? SS.sW(context) * .50
@@ -27,7 +27,7 @@ class BuildWorkExpPopUp {
                     height: 50,
                     width: 50,
                     color: ColorPicker.kBlueLight1,
-                    child: Icon(
+                    child: const Icon(
                       Icons.apartment_rounded,
                       size: 18,
                       color: ColorPicker.kWhite,
@@ -37,16 +37,17 @@ class BuildWorkExpPopUp {
                     'General Manager',
                     style: FontTextStyle.kBlueDark116W700SSP,
                   ),
-                  subtitle: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'Fairmont Zimbali Resort · Cape Town',
                         style: FontTextStyle.kBlueLight114W400SSP,
-                      ), Text(
+                      ),
+                      Text(
                         'February 2012 – January 2013 (11 months)',
                         style: FontTextStyle.kGreyLight514W400SSP,
                       ),
-
                     ],
                   ),
                   trailing: isExperienceEditable
@@ -56,7 +57,7 @@ class BuildWorkExpPopUp {
                               isExperienceShowCard = !isExperienceShowCard;
                             });
                           },
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.edit,
                             size: 10,
                             color: ColorPicker.kBlueLight1,
@@ -73,7 +74,7 @@ class BuildWorkExpPopUp {
                               color: ColorPicker.kGreyLight3,
                             ),
                             Padding(
-                              padding: EdgeInsets.all(16.0),
+                              padding: const EdgeInsets.all(16.0),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -91,7 +92,7 @@ class BuildWorkExpPopUp {
                                       'www.fairmontzimbali.com'),
                                   TextFieldAndFieldName.buildFieldName(
                                       'Job description'),
-                                  Padding(
+                                  const Padding(
                                     padding: EdgeInsets.all(8.0),
                                     child: TextField(
                                       autocorrect: true,
@@ -109,10 +110,11 @@ class BuildWorkExpPopUp {
                                     children: [
                                       OutlinedButton(
                                           onPressed: () {},
-                                          child: Text('Cancel')),
+                                          child: const Text('Cancel')),
                                       SS.sB(0, 10),
                                       ElevatedButton(
-                                          onPressed: () {}, child: Text('Save'))
+                                          onPressed: () {},
+                                          child: const Text('Save'))
                                     ],
                                   ),
                                 ],

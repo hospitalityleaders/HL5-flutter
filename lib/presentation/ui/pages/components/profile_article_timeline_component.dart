@@ -277,7 +277,7 @@ class ProfileArticleTimelineComponent extends StatelessWidget {
                       backgroundColor: Cr.whiteColor,
                       icon: const Icon(Icons.menu),
                       child: Row(
-                        children: [
+                        children: const [
                           Icon(
                             Icons.person_add,
                             color: Cr.darkBlue1,

@@ -59,39 +59,40 @@ class _ProfileAchievementDialogWidgetState
               title: "Achievement",
             ),
             Di.SBHL,
-            addingToAchievement
-                ? Container(
-                    padding: const EdgeInsets.only(bottom: Di.PSS),
-                    margin: const EdgeInsets.symmetric(horizontal: Di.PSL),
-                    child: const _SingleAchievement(
-                      isExpanded: true,
-                    ),
-                  )
-                : Center(
-                    child: InkWell(
+            if (addingToAchievement)
+              Container(
+                padding: const EdgeInsets.only(bottom: Di.PSS),
+                margin: const EdgeInsets.symmetric(horizontal: Di.PSL),
+                child: const _SingleAchievement(
+                  isExpanded: true,
+                ),
+              )
+            else
+              Center(
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(30),
+                  onTap: () {
+                    setState(() {
+                      addingToAchievement = true;
+                    });
+                  },
+                  child: Container(
+                    width: 60,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      color: Cr.green1,
                       borderRadius: BorderRadius.circular(30),
-                      onTap: () {
-                        setState(() {
-                          addingToAchievement = true;
-                        });
-                      },
-                      child: Container(
-                        width: 60,
-                        height: 60,
-                        decoration: BoxDecoration(
-                          color: Cr.green1,
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        child: Center(
-                          child: SvgPicture.asset(
-                            Svgs.plus,
-                            color: Cr.whiteColor,
-                            width: 30,
-                          ),
-                        ),
+                    ),
+                    child: Center(
+                      child: SvgPicture.asset(
+                        Svgs.plus,
+                        color: Cr.whiteColor,
+                        width: 30,
                       ),
                     ),
                   ),
+                ),
+              ),
             Di.SBHL,
             ListView.builder(
               shrinkWrap: true,
@@ -180,13 +181,16 @@ class __SingleAchievementState extends State<_SingleAchievement> {
         });
       });
 
-    _descriptionController =
-        TextEditingController(text: achievement.description)
-          ..addListener(() {
-            setState(() {
-              achievement.description = _descriptionController.text.toString();
-            });
-          });
+    _descriptionController = TextEditingController(
+      text:
+          (achievement.description != null && achievement.description is String)
+              ? achievement.description as String
+              : "",
+    )..addListener(() {
+        setState(() {
+          achievement.description = _descriptionController.text;
+        });
+      });
 
     super.initState();
 
@@ -264,7 +268,8 @@ class __SingleAchievementState extends State<_SingleAchievement> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const DialogLabelTextFormField(
-                      customLabel: "Achievement type"),
+                    customLabel: "Achievement type",
+                  ),
                   Di.SBHES,
                   DialogDropDownTextField(
                     width: double.infinity,
@@ -323,7 +328,8 @@ class __SingleAchievementState extends State<_SingleAchievement> {
                         achievement.dateReceived =
                             DateTime.parse('${value.toString()}-07-01');
                         print(
-                            'date ${DateTime.parse('${value.toString()}-07-01T19:10:35+02:00')}');
+                          'date ${DateTime.parse('${value.toString()}-07-01T19:10:35+02:00')}',
+                        );
                       });
                     },
                     // iconsList: achievementTypeList
@@ -398,18 +404,20 @@ class __SingleAchievementState extends State<_SingleAchievement> {
                         onPressed: () async {
                           showCircularProgressIndicator(context);
                           // final userProfileData = DbData.getUserProfileData;
-                          List<Achievement> _achievementList =
+                          final List<Achievement> achievementList =
                               DbData.getUserProfileData.achievements ?? [];
                           if (widget.index != null) {
-                            _achievementList[widget.index!] = achievement;
+                            achievementList[widget.index!] = achievement;
                           } else {
-                            _achievementList.add(achievement);
+                            achievementList.add(achievement);
                           }
 
                           await Provider.of<AppState>(context, listen: false)
-                              .saveProfile(User(
-                            achievements: _achievementList,
-                          ));
+                              .saveProfile(
+                            User(
+                              achievements: achievementList,
+                            ),
+                          );
                           Nav.pop(context);
                           // Nav.profile(context);
                           Nav.pop(context);

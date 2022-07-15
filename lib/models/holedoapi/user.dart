@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:holedo/models/holedoapi/received_reference.dart';
-import 'package:routemaster/routemaster.dart';
-
+import 'package:holedo/models/holedoapi/achievement.dart';
+import 'package:holedo/models/holedoapi/company_role.dart';
+import 'package:holedo/models/holedoapi/country.dart';
+import 'package:holedo/models/holedoapi/current_membership_grade.dart';
+import 'package:holedo/models/holedoapi/education.dart';
+import 'package:holedo/models/holedoapi/experience.dart';
 import 'package:holedo/models/holedoapi/expertise.dart';
+import 'package:holedo/models/holedoapi/next_membership_grade.dart';
+import 'package:holedo/models/holedoapi/received_reference.dart';
+import 'package:holedo/models/holedoapi/role.dart';
+import 'package:holedo/models/holedoapi/timeline.dart';
+import 'package:holedo/models/holedoapi/user_tag.dart';
+import 'package:holedo/models/holedoapi/user_title_type.dart';
 import 'package:holedo/models/models.dart';
-
-import 'achievement.dart';
-import 'company_role.dart';
-import 'country.dart';
-import 'current_membership_grade.dart';
-import 'education.dart';
-import 'experience.dart';
-import 'next_membership_grade.dart';
-import 'role.dart';
-import 'timeline.dart';
-import 'user_tag.dart';
-import 'user_title_type.dart';
+import 'package:routemaster/routemaster.dart';
 
 List<User> getUsers(Iterable<dynamic> data) =>
     List<User>.from(data.map((x) => User.fromJson(x as Map<String, dynamic>)));
 List<Timeline> getTimeline(Iterable<dynamic> data) => List<Timeline>.from(
-    data.map((x) => Timeline.fromJson(x as Map<String, dynamic>)));
+      data.map((x) => Timeline.fromJson(x as Map<String, dynamic>)),
+    );
 
 class User {
   int? id;
@@ -326,11 +325,13 @@ class User {
         nextMembershipGrade: json['next_membership_grade'] == null
             ? null
             : NextMembershipGrade.fromJson(
-                json['next_membership_grade'] as Map<String, dynamic>),
+                json['next_membership_grade'] as Map<String, dynamic>,
+              ),
         currentMembershipGrade: json['current_membership_grade'] == null
             ? null
             : CurrentMembershipGrade.fromJson(
-                json['current_membership_grade'] as Map<String, dynamic>),
+                json['current_membership_grade'] as Map<String, dynamic>,
+              ),
         languages: json['languages'] as List<dynamic>?,
         badges: json['badges'] as List<dynamic>?,
         awards: json['awards'] as List<dynamic>?,
@@ -349,8 +350,9 @@ class User {
         receivedReferences: json['received_references'] == null
             ? null
             : (json['received_references'] as List<dynamic>?)
-                ?.map((e) =>
-                    ReceivedReference.fromJson(e as Map<String, dynamic>))
+                ?.map(
+                  (e) => ReceivedReference.fromJson(e as Map<String, dynamic>),
+                )
                 .toList(),
         testimonials: json['testimonials'] as List<dynamic>?,
         recommendations: json['recommendations'] as List<dynamic>?,
@@ -384,11 +386,13 @@ class User {
         userTitleType: json['user_title_type'] == null
             ? null
             : UserTitleType.fromJson(
-                json['user_title_type'] as Map<String, dynamic>),
+                json['user_title_type'] as Map<String, dynamic>,
+              ),
         companyRole: json['company_role'] == null
             ? null
             : CompanyRole.fromJson(
-                json['company_role'] as Map<String, dynamic>),
+                json['company_role'] as Map<String, dynamic>,
+              ),
         experiences: json['experiences'] == null
             ? null
             : (json['experiences'] as List<dynamic>?)
@@ -551,14 +555,14 @@ class User {
     //print('this ${this.toJson()}');
     // this.id = profile.id;
     // this.slug = profile.slug;
-    this.id = profile.id;
-    this.slug = profile.slug;
+    id = profile.id;
+    slug = profile.slug;
     //this.token = profile.token;
     return await Get.put(HoledoDatabase().users).save(this);
   }
 
   void toProfile(BuildContext context) {
-    var redirect = '/profile/${this.slug}';
+    final redirect = '/profile/$slug';
     Routemaster.of(context).push(redirect);
   }
 
@@ -801,14 +805,14 @@ class User {
   }
 
   Map<String, dynamic> toApiJson() {
-    User data = this;
-    var userJson = data.toJson();
-    userJson.removeWhere((k, v) => v == null || v.toString().length == 0);
+    final User data = this;
+    final Map<String, dynamic> userJson = data.toJson();
+    userJson.removeWhere((k, v) => v == null || v.toString().isEmpty);
     print('js: ${userJson.toString()}');
-    var lists = ['achievements', 'educations', 'experiences', 'expertise'];
+    final lists = ['achievements', 'educations', 'experiences', 'expertise'];
     for (final l in lists) {
-      if (userJson[l] != null && userJson[l].length > 0) {
-        for (int i = 0; i < userJson[l].length; i++) {
+      if (userJson[l] != null && (userJson[l] as List).isNotEmpty) {
+        for (int i = 0; i < (userJson[l] as List).length; i++) {
           userJson[l][i].removeWhere((k, v) => v == null);
         }
       }

@@ -74,7 +74,7 @@ class AppbarNotificationWidget extends ConsumerWidget {
               CustomElevatedButton(
                 onPressed: onButtonPressed,
                 text: buttonText,
-                customPadding: EdgeInsets.symmetric(horizontal: Di.PSD),
+                customPadding: const EdgeInsets.symmetric(horizontal: Di.PSD),
                 height: 32,
                 makeWidthNull: true,
                 backgroundColor: textAndButtonColor,
@@ -87,7 +87,7 @@ class AppbarNotificationWidget extends ConsumerWidget {
               ref
                   .read(profileNotifierProvider.notifier)
                   .changeAppNotificationState(
-                    AppNotificationState.showNothing(),
+                    const AppNotificationState.showNothing(),
                   );
             },
             child: Icon(

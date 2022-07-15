@@ -37,12 +37,12 @@ class _ProfileWriteReferenceDialogWidgetState
       child: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          children: [
-            const DialogTitleWidget(
+          children: const [
+            DialogTitleWidget(
               title: "Cover image",
             ),
             Di.SBHL,
-            const ProfileCoverImageDialogExpandedTile(isExpanded: true),
+            ProfileCoverImageDialogExpandedTile(isExpanded: true),
             Di.SBHD,
           ],
         ),
