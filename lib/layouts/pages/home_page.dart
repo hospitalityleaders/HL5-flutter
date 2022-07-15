@@ -6,7 +6,7 @@ import 'package:holedo/layouts/pages/news/update/update_news2.dart';
 import 'package:holedo/main.dart';
 import 'package:holedo/models/holedoapi/article.dart';
 import 'package:holedo/models/models.dart';
-import 'package:holedo/presentation/ui/flutter_slider_drawer/mobile_slide_menu.dart';
+import 'package:holedo/profile/presentation/ui/flutter_slider_drawer/mobile_slide_menu.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

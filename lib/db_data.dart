@@ -1,6 +1,6 @@
-import 'models/models.dart';
+// import 'models/models.dart';
 
-class DbData {
-  static User get getUserProfileData =>
-      Get.put(HoledoDatabase()).getModel().user!;
-}
+// class DbData {
+//   static User get getUserProfileData =>
+//       Get.put(HoledoDatabase()).getModel().user!;
+// }

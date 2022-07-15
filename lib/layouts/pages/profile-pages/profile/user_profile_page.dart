@@ -1,20 +1,20 @@
-// import 'package:holedo/presentation/ui/pages/components/profile_image_banner.dart';
-// import 'package:holedo/presentation/ui/pages/components/profile_tabbar.dart';
-// import 'package:holedo/presentation/ui/pages/profile_mobile_view/profile_mobile_view_page.dart';
-// import 'package:holedo/presentation/ui/pages/sections/activity_section/activity_section.dart';
-// import 'package:holedo/presentation/ui/pages/sections/articles_section/articles_section.dart';
-// import 'package:holedo/presentation/ui/pages/sections/page_overview/page_overview_section.dart';
-// import 'package:holedo/presentation/ui/pages/sections/reference_section/reference_section.dart';
-// import 'package:holedo/presentation/ui/pages/sections/timeline_section/timeline_section.dart';
-// import 'package:holedo/presentation/utill/responsive.dart';
+// import 'package:holedo/profile/presentation/ui/pages/components/profile_image_banner.dart';
+// import 'package:holedo/profile/presentation/ui/pages/components/profile_tabbar.dart';
+// import 'package:holedo/profile/presentation/ui/pages/profile_mobile_view/profile_mobile_view_page.dart';
+// import 'package:holedo/profile/presentation/ui/pages/sections/activity_section/activity_section.dart';
+// import 'package:holedo/profile/presentation/ui/pages/sections/articles_section/articles_section.dart';
+// import 'package:holedo/profile/presentation/ui/pages/sections/page_overview/page_overview_section.dart';
+// import 'package:holedo/profile/presentation/ui/pages/sections/reference_section/reference_section.dart';
+// import 'package:holedo/profile/presentation/ui/pages/sections/timeline_section/timeline_section.dart';
+// import 'package:holedo/profile/presentation/utill/responsive.dart';
 // import 'package:tap_canvas/tap_canvas.dart';
 
 // import 'package:flutter/material.dart';
 // import 'package:holedo/models/models.dart';
-// import 'package:holedo/presentation/ui/components/custom_elevated_button.dart';
-// import 'package:holedo/presentation/utill/color_resources.dart';
-// import 'package:holedo/presentation/utill/dimensions.dart';
-// import 'package:holedo/presentation/utill/styles.dart';
+// import 'package:holedo/profile/presentation/ui/components/custom_elevated_button.dart';
+// import 'package:holedo/profile/presentation/utill/color_resources.dart';
+// import 'package:holedo/profile/presentation/utill/dimensions.dart';
+// import 'package:holedo/profile/presentation/utill/styles.dart';
 
 // class UserProfilePage extends StatefulWidget {
 //   final User userProfileData;

@@ -372,6 +372,50 @@ class UsersController extends GetxController {
     holedoDatabase.setModel(model);
   }
 
+  Future<User> getOtherUserProfile({
+    String? slug,
+    String? id,
+    String? token,
+    required BuildContext context,
+    bool? isLoggined = false,
+  }) async {
+    try {
+      isLoading(true);
+      var user = User();
+      final token = getToken(slug);
+      final headers = <String, dynamic>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Accept': 'application/json',
+        'Device': 'Holedo_Flutter'
+      };
+      if (token != null) {
+        //DB.snackBarMessage(context, 'info', 'User Profile being loaded...');
+        final auth = <String, dynamic>{'AuthApi': 'Bearer $token'};
+        headers.addEntries(auth.entries);
+      }
+      final params = {'id': id, 'slug': slug, 'token': token};
+      debugPrint('params: ${headers.toString()}');
+      params.removeWhere((k, v) => v == null);
+
+      final response = await _api.GET(
+        target: '/users/profile/',
+        data: params,
+        headers: headers,
+      );
+      //debugPrint('log: ${response.data}');
+      return response.data?.user as User;
+      // if (token != null) {
+      //   debugPrint('user: ${user.firstName} token: log: $token');
+      //   user.token = token;
+      //   saveUserToModel(user, user.token);
+      // }
+      //debugPrint('user: ${user.toJson().toString()}');
+
+    } finally {
+      isLoading(false);
+    }
+  }
+
   Future<User> getProfileData({
     String? slug,
     String? id,

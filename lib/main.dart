@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as fr;
-import 'package:holedo/includes/url_strategy.dart';
 import 'package:holedo/layouts/page_scaffold.dart';
 import 'package:holedo/layouts/pages/content_page.dart';
 import 'package:holedo/models/models.dart';
-import 'package:holedo/presentation/providers/profile_provider.dart';
-import 'package:holedo/presentation/theme/light_theme.dart';
+import 'package:holedo/profile/presentation/providers/profile_provider.dart';
+import 'package:holedo/profile/presentation/theme/light_theme.dart';
 import 'package:intercom_flutter/intercom_flutter.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:routemaster/routemaster.dart';
 
 void main() async {
-  usePathUrlStrategy();
+  // usePathUrlStrategy();
   WidgetsFlutterBinding.ensureInitialized();
   await Get.put(HoledoDatabase()).init();
 

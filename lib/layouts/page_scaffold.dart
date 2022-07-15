@@ -1,22 +1,21 @@
 import 'package:holedo/models/models.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:holedo/presentation/popups/profile_connection_request_popup.dart';
-import 'package:holedo/presentation/popups/profile_submenu_popup.dart';
-import 'package:holedo/presentation/providers/profile_provider.dart';
-import 'package:holedo/presentation/ui/components/appbar_textfield.dart';
-import 'package:holedo/presentation/ui/components/custom_appbar.dart';
-import 'package:holedo/presentation/ui/flutter_slider_drawer/slider.dart';
-import 'package:holedo/presentation/utill/color_resources.dart';
-import 'package:holedo/presentation/utill/dimensions.dart';
-import 'package:holedo/presentation/utill/images.dart';
-import 'package:holedo/presentation/utill/responsive.dart';
-import 'package:holedo/presentation/utill/styles.dart';
+import 'package:holedo/profile/presentation/popups/profile_connection_request_popup.dart';
+import 'package:holedo/profile/presentation/popups/profile_submenu_popup.dart';
+import 'package:holedo/profile/presentation/providers/profile_provider.dart';
+import 'package:holedo/profile/presentation/ui/components/appbar_textfield.dart';
+import 'package:holedo/profile/presentation/ui/components/custom_appbar.dart';
+import 'package:holedo/profile/presentation/ui/flutter_slider_drawer/slider.dart';
+import 'package:holedo/profile/presentation/utill/color_resources.dart';
+import 'package:holedo/profile/presentation/utill/dimensions.dart';
+import 'package:holedo/profile/presentation/utill/images.dart';
+import 'package:holedo/profile/presentation/utill/responsive.dart';
+import 'package:holedo/profile/presentation/utill/styles.dart';
 import 'package:holedo/responsive/responsive.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
-import 'package:holedo/constant/sizedbox.dart';
 import 'package:holedo/common/common_widget.dart';
 import 'package:intercom_flutter/intercom_flutter.dart';
 export 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -168,54 +167,42 @@ class _PageScaffoldState extends State<PageScaffold> {
                           ),
                         ),
                       ),
-                body: isTableOrMobile(context)
-                    ? SliderDrawer(
-                        splashColor: Cr.colorPrimary,
-                        child: Container(
-                          decoration: const BoxDecoration(
-                            color: ColorPicker.kBG,
-                          ),
-                          child: widget.body,
-                        ),
-                      )
-                    : Stack(
-                        children: [
-                          Container(
-                            decoration: const BoxDecoration(
-                              color: ColorPicker.kBG,
-                            ),
-                            child: widget.body,
-                          ),
-                          Consumer<ProfileProvider>(
-                            builder: (context, profileProviderValue, child) {
-                              return !profileProviderValue
-                                      .showConectionRequestPopo
-                                  ? Di.ESB
-                                  : Positioned(
-                                      right:
-                                          Di.getScreenSize(context).width < 1301
-                                              ? 65
-                                              : 195,
-                                      child:
-                                          const ProfileConnectionRequestPopup(),
-                                    );
-                            },
-                          ),
-                          Consumer<ProfileProvider>(
-                            builder: (context, profileProviderValue, child) {
-                              return !profileProviderValue.showProfileSubMenus
-                                  ? Di.ESB
-                                  : Positioned(
-                                      right:
-                                          Di.getScreenSize(context).width < 1301
-                                              ? 5
-                                              : 130,
-                                      child: const ProfileSubMenuPopup(),
-                                    );
-                            },
-                          ),
-                        ],
+                body: Stack(
+                  children: [
+                    Container(
+                      decoration: const BoxDecoration(
+                        color: ColorPicker.kBG,
                       ),
+                      child: widget.body,
+                    ),
+                    if (!isTableOrMobile(context)) ...[
+                      Consumer<ProfileProvider>(
+                        builder: (context, profileProviderValue, child) {
+                          return !profileProviderValue.showConectionRequestPopo
+                              ? Di.ESB
+                              : Positioned(
+                                  right: Di.getScreenSize(context).width < 1301
+                                      ? 65
+                                      : 195,
+                                  child: const ProfileConnectionRequestPopup(),
+                                );
+                        },
+                      ),
+                      Consumer<ProfileProvider>(
+                        builder: (context, profileProviderValue, child) {
+                          return !profileProviderValue.showProfileSubMenus
+                              ? Di.ESB
+                              : Positioned(
+                                  right: Di.getScreenSize(context).width < 1301
+                                      ? 5
+                                      : 130,
+                                  child: const ProfileSubMenuPopup(),
+                                );
+                        },
+                      ),
+                    ]
+                  ],
+                ),
               );
             },
           );
