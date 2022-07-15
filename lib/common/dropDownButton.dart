@@ -7,8 +7,11 @@ class DropDownButton extends StatefulWidget {
   final List menuList;
   final hintText;
 
-  DropDownButton({Key? key, this.hintText, required this.menuList})
-      : super(key: key);
+  DropDownButton({
+    Key? key,
+    this.hintText,
+    required this.menuList,
+  }) : super(key: key);
 
   @override
   State<DropDownButton> createState() => _DropDownButtonState();

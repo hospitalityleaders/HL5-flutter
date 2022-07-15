@@ -53,7 +53,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
         "id": id,
         "profile_summary": profileSummaryController
       };
-      print('usser: ${userData}');
+      print('usser: $userData');
       dynamic res = await _apiServices.updateUserProfile();
       if (res?.success as bool) {
         Navigator.pop(context);
@@ -184,7 +184,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
 
   Future<String?> buildProfileCardPopUp(
       {required dynamic id, required String profileSummary}) {
-    TextEditingController _profileCtrl =
+    TextEditingController profileCtrl =
         TextEditingController(text: profileSummary);
     return showDialog<String>(
       context: context,
@@ -218,7 +218,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                           Padding(
                             padding: EdgeInsets.all(8.0),
                             child: TextField(
-                              controller: _profileCtrl,
+                              controller: profileCtrl,
                               autocorrect: true,
                               minLines: 4,
                               maxLines: 6,
@@ -248,7 +248,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                                       ? CircularProgressIndicator()
                                       : ElevatedButton(
                                           onPressed: () {
-                                            updateUsers(id, _profileCtrl.text);
+                                            updateUsers(id, profileCtrl.text);
                                           },
                                           child: Text('Save'),
                                         ),
@@ -273,7 +273,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
 
   ///Area of exper pop up start
 
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
 
   List chipList = ['Business'];
 

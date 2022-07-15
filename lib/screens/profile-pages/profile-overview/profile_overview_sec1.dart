@@ -53,7 +53,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
         "id": id,
         "profile_summary": profileSummaryController
       };
-      print('usser: ${userData}');
+      print('usser: $userData');
       dynamic res = await _apiServices.updateUserProfile();
       // if (res?.success) {
       //   Navigator.pop(context);
@@ -184,7 +184,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
 
   Future<String?> buildProfileCardPopUp(
       {required dynamic id, required String profileSummary}) {
-    TextEditingController _profileCtrl =
+    TextEditingController profileCtrl =
         TextEditingController(text: profileSummary);
     return showDialog<String>(
       context: context,
@@ -193,10 +193,10 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
           child: Container(
             color: ColorPicker.kGreyLight3,
             width: Responsive.isDesktop(context)
-                ? SS.sW(context) * .50 as double
+                ? SS.sW(context) * .50
                 : Responsive.isMobile(context)
-                    ? SS.sW(context) * .90 as double
-                    : SS.sW(context) * .60 as double,
+                    ? SS.sW(context) * .90
+                    : SS.sW(context) * .60,
             child: SingleChildScrollView(
               child: Column(
                 children: [
@@ -218,7 +218,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                           Padding(
                             padding: EdgeInsets.all(8.0),
                             child: TextField(
-                              controller: _profileCtrl,
+                              controller: profileCtrl,
                               autocorrect: true,
                               minLines: 4,
                               maxLines: 6,
@@ -248,7 +248,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                                       ? CircularProgressIndicator()
                                       : ElevatedButton(
                                           onPressed: () {
-                                            updateUsers(id, _profileCtrl.text);
+                                            updateUsers(id, profileCtrl.text);
                                           },
                                           child: Text('Save'),
                                         ),
@@ -273,7 +273,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
 
   ///Area of exper pop up start
 
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
 
   List chipList = ['Business'];
 
@@ -287,17 +287,17 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
               child: Container(
                 color: ColorPicker.kGreyLight8,
                 width: Responsive.isDesktop(context)
-                    ? SS.sW(context) * .50 as double
+                    ? SS.sW(context) * .50
                     : Responsive.isMobile(context)
-                        ? SS.sW(context) * .90 as double
-                        : SS.sW(context) * .60 as double,
+                        ? SS.sW(context) * .90
+                        : SS.sW(context) * .60,
                 // height: 375,
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
                       PopUpHeadMenu.popUpHead('Expertise', context),
                       SizedBox(
-                        height: SS.sH(context) * .05 as double,
+                        height: SS.sH(context) * .05,
                       ),
                       Padding(
                         padding: EdgeInsets.all(16.0),
@@ -390,8 +390,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                                                         color: ColorPicker
                                                             .kBlueLight3)),
                                                 alignment: Alignment.center,
-                                                width: SS.sW(context) * .091
-                                                    as double,
+                                                width: SS.sW(context) * .091,
                                                 height: 36,
                                                 child: Text(
                                                   'Add to list',
@@ -552,7 +551,7 @@ class _ProfileOverviewSec1State extends State<ProfileOverviewSec1> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      width: SS.sW(context) as double,
+                      width: SS.sW(context),
                       color: Colors.white,
                       child: Padding(
                         padding: EdgeInsets.only(

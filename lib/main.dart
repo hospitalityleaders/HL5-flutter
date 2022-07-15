@@ -42,10 +42,10 @@ bool _isValidCompany(String? slug) {
       );
 }
 
-bool _isValidBookId(String? id) {
-  return true;
-  //holedoDatabase.books.any((book) => book.id == id);
-}
+// bool _isValidBookId(String? id) {
+//   return true;
+//   //holedoDatabase.books.any((book) => book.id == id);
+// }
 
 final holedoDatabase = Get.put(HoledoDatabase());
 DataModel dataModel = holedoDatabase.getModel();

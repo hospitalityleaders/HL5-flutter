@@ -229,7 +229,7 @@ class _ExperienceTimeLineWidgetState extends State<ExperienceTimeLineWidget> {
                 _TimelineTitleSubtitleDurationWidget(
                   duration: widget.experience.workDuration ?? "",
                   subtitle:
-                      "${widget.experience.companyName! == null ? '' : '${widget.experience.companyName!} · '}${widget.experience.area}",
+                      "${widget.experience.companyName == null ? '' : '${widget.experience.companyName!} · '}${widget.experience.area}",
                   title: widget.experience.title ?? "",
                   svgName: Svgs.domain,
                 ),

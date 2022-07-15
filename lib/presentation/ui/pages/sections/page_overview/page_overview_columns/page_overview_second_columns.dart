@@ -28,15 +28,9 @@ import 'package:video_player_web/video_player_web.dart';
 class ProfileOverviewSecondColumn extends StatefulWidget {
   const ProfileOverviewSecondColumn({
     Key? key,
-    this.sec2IsEditable,
-    this.pOApiDataSec2,
     required this.userProfileData,
   }) : super(key: key);
   final User userProfileData;
-
-  final sec2IsEditable;
-
-  final pOApiDataSec2;
 
   @override
   State<ProfileOverviewSecondColumn> createState() =>

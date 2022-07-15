@@ -37,7 +37,6 @@ class _EducationComponentState extends State<EducationComponent> {
   Widget build(BuildContext context) {
     final List<Education>? education = DbData.getUserProfileData.educations;
     final bool hasData = education != null ? education.isNotEmpty : false;
-    final bool showMore = false;
     bool showSubMenu = false;
 
     return Container(

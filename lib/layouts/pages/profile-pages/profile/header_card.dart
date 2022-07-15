@@ -129,11 +129,11 @@ class _HeaderCardState extends State<HeaderCard> {
   final ImagePicker picker = ImagePicker();
 
   Future<void> _pickImage(ImageSource source) async {
-    final _pickedFile = await picker.pickImage(source: source);
+    final pickedFile = await picker.pickImage(source: source);
 
-    if (_pickedFile != null) {
+    if (pickedFile != null) {
       setState(() {
-        image = XFile(_pickedFile.path);
+        image = XFile(pickedFile.path);
       });
     }
   }
@@ -144,11 +144,11 @@ class _HeaderCardState extends State<HeaderCard> {
       required String lName,
       required String professionalTitle,
       required String area}) {
-    TextEditingController _fNameController = TextEditingController(text: fName);
-    TextEditingController _lNameController = TextEditingController(text: lName);
-    TextEditingController _professionalTitleController =
+    TextEditingController fNameController = TextEditingController(text: fName);
+    TextEditingController lNameController = TextEditingController(text: lName);
+    TextEditingController professionalTitleController =
         TextEditingController(text: professionalTitle);
-    TextEditingController _areaController = TextEditingController(text: area);
+    TextEditingController areaController = TextEditingController(text: area);
 
     return showDialog<String>(
       context: context,
@@ -530,18 +530,18 @@ class _HeaderCardState extends State<HeaderCard> {
                                                 .buildFieldName('Name', '*'),
                                             TextFieldAndFieldName
                                                 .buildTextField(
-                                                    'Name', _fNameController),
+                                                    'Name', fNameController),
                                             TextFieldAndFieldName
                                                 .buildFieldName('Surname', '*'),
                                             TextFieldAndFieldName
-                                                .buildTextField('Surname',
-                                                    _lNameController),
+                                                .buildTextField(
+                                                    'Surname', lNameController),
                                             TextFieldAndFieldName
                                                 .buildFieldName(
                                                     'Professional title' '?'),
                                             TextFieldAndFieldName.buildTextField(
                                                 'Business development manager, recruiter and hotel specialist',
-                                                _professionalTitleController),
+                                                professionalTitleController),
                                             Row(
                                               children: [
                                                 Expanded(
@@ -556,7 +556,7 @@ class _HeaderCardState extends State<HeaderCard> {
                                                               '*'),
                                                       TextFieldAndFieldName
                                                           .buildTextField('',
-                                                              _areaController)
+                                                              areaController)
                                                     ],
                                                   ),
                                                 ),
@@ -596,13 +596,13 @@ class _HeaderCardState extends State<HeaderCard> {
                                                         onPressed: () {
                                                           updateProfileCard(
                                                               id,
-                                                              _fNameController
+                                                              fNameController
                                                                   .text,
-                                                              _lNameController
+                                                              lNameController
                                                                   .text,
-                                                              _professionalTitleController
+                                                              professionalTitleController
                                                                   .text,
-                                                              _areaController
+                                                              areaController
                                                                   .text);
                                                         },
                                                         child: Text('Save'))
