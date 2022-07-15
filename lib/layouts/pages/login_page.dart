@@ -1,8 +1,5 @@
-import 'package:holedo/main.dart';
-import 'package:holedo/models/holedoapi/data.dart';
 import 'package:holedo/models/models.dart';
 import 'package:holedo/layouts/page_scaffold.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:holedo/utils/validator.dart';
 import 'package:routemaster/routemaster.dart';
@@ -49,33 +46,26 @@ class _LoginPageState extends State<LoginPage> {
       );
       if (_usernameController.text.isNotEmpty) {
         var api = new Holedoapi();
-        api = await api.login(
+        var response = await api.login(
             context: context,
             email: _usernameController.text,
             password: _passwordController.text);
-        print('cjec: ${api.data?.user?.toJson().toString()}');
+        print('cjec: ${usersControler.isLogin.value}');
 
-        if (api.success == true) {
-          Provider.of<AppState>(context, listen: false).username =
-              _usernameController.text;
-          Provider.of<AppState>(context, listen: false).profile =
-              api.data?.user;
-          var redirect = widget.redirectTo;
-          if (redirect == null) redirect = '/profile/${api.data?.user?.slug}';
-          Routemaster.of(context).push(redirect);
-        }
-        if (api.errors != null) {
-          holedoDatabase.snackBarMessage(
-              context, 'error', api.errors.toString());
-        }
-        if (api.messages != null) {
-          holedoDatabase.snackBarMessage(
-              context, 'error', api.messages.toString());
-        }
+        Provider.of<AppState>(context, listen: false).username =
+            _usernameController.text;
+        Provider.of<AppState>(context, listen: false).profile = response;
+        var redirect = widget.redirectTo;
+        if (redirect == null) redirect = '/profile/${response.slug}';
+        Routemaster.of(context).push(redirect);
       }
     } else {
-      holedoDatabase.snackBarMessage(
-          context, 'error', 'Error: ${_formKey.currentState!.validate()}');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error: ${_formKey.currentState!.validate()}'),
+          backgroundColor: Colors.red.shade300,
+        ),
+      );
     }
   }
 

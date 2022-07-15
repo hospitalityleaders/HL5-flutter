@@ -197,9 +197,7 @@ class __SingleAchievementState extends State<_SingleAchievement> {
     if (achievement.achievementTypeId == null) {
       //achievement.achievementTypeId = 1;
     }
-    if (achievement.dateReceived == null) {
-      achievement.dateReceived = DateTime.now();
-    }
+    achievement.dateReceived ??= DateTime.now();
     currentYear = achievement.dateReceived?.year.toString();
     //currentAchivement = '${achievement.achievementTypeId as String}';
   }
@@ -280,14 +278,17 @@ class __SingleAchievementState extends State<_SingleAchievement> {
                   Di.SBHES,
                   DialogDropDownTextField(
                     width: double.infinity,
-                    initialValue: '${currentAchivement}',
+                    initialValue: currentAchivement,
                     alignHintTextStart: true,
                     onChanged: (value) {
                       setState(() {
                         currentAchivement = value ?? currentAchivement;
-                        int selection = int.parse(achievementTypes?.keys
-                            .firstWhere((k) => achievementTypes![k] == value,
-                                orElse: () => '1') as String);
+                        final int selection = int.parse(
+                          achievementTypes?.keys.firstWhere(
+                            (k) => achievementTypes![k] == value,
+                            orElse: () => '1',
+                          ) as String,
+                        );
                         achievement.achievementTypeId = selection;
                       });
                     },
@@ -342,7 +343,6 @@ class __SingleAchievementState extends State<_SingleAchievement> {
                         print(
                           'date ${DateTime.parse('${value.toString()}-07-01T19:10:35+02:00')}',
                         );
-
                       });
                     },
                     // iconsList: achievementTypeList
@@ -433,7 +433,6 @@ class __SingleAchievementState extends State<_SingleAchievement> {
                           );
                           Nav.pop(context);
                           // Nav.profile(context);
-
                           Nav.pop(context);
                         },
                         height: 36,

@@ -60,7 +60,6 @@ dev_dependencies:
     sdk: flutter
   build_runner:
   freezed: ^0.14.2
-  lint: ^1.0.0
   # json_serializable: ^6.1.5
 
 # For information on the generic Dart part of this file, see the

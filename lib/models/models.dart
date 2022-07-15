@@ -1,19 +1,16 @@
-
+export 'package:get/get.dart';
+export 'holedoapi/holedoapi.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:get/get.dart';
 import 'package:holedo/main.dart';
+export 'package:provider/provider.dart';
 import 'package:holedo/models/holedoapi/article.dart';
 import 'package:holedo/models/holedoapi/article_category.dart';
 import 'package:holedo/models/holedoapi/holedoapi.dart';
 import 'package:holedo/models/holedoapi/job.dart';
 import 'package:holedo/models/holedoapi/menu_item.dart';
 import 'package:holedo/services/holedo_api_services.dart';
-
-export 'package:get/get.dart';
-export 'package:provider/provider.dart';
-
-export 'holedoapi/holedoapi.dart';
 
 class AppState extends ChangeNotifier {
   AppState({String? username, User? profile})
@@ -64,14 +61,13 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<DataModel> saveProfile(context, User data) async {
+  Future<DataModel> saveProfile(User data) async {
     data.id = _profile?.id;
     // ignore: unused_local_variable
 
-    data.slug = _profile?.slug;
+    //data.slug = _profile?.slug;
     //this.token = profile.token;
-    final dataModel = await Get.put(HoledoDatabase().users).saveProfile(data);
-
+    var dataModel = await Get.put(HoledoDatabase().users).saveProfile(data);
     _profile = dataModel.user as User;
     return dataModel;
   }
@@ -80,7 +76,7 @@ class AppState extends ChangeNotifier {
 }
 
 class HoledoDatabase extends GetxController {
-  RxBool isLoading = true.obs;
+  var isLoading = true.obs;
   final apiHost = 'api.holedo.com';
   final apiKey = 'Holedo_flutter_tests';
   final token =
@@ -172,7 +168,7 @@ class HoledoDatabase extends GetxController {
     );
   }
 
-  Future<void> getArticleCategories() async {
+  void getArticleCategories() async {
     articleCategories = getModel().articleCategories as List<ArticleCategory>;
   }
 
@@ -185,12 +181,11 @@ class HoledoDatabase extends GetxController {
     //this.resetModel();
     print('starting website... ');
 
-    await fetchSettings();
+    await this.fetchSettings();
     final model = getModel();
     if (model.token != null || model.user?.fullName != null) {
       print(
-        'cached user: ${model.user?.id} ${model.user?.fullName} ${model.user?.token}',
-      );
+          'cached user: ${model.user?.id} ${model.user?.fullName} ${model.user?.token}');
     }
 
     print('finish Init');
@@ -211,15 +206,15 @@ class HoledoDatabase extends GetxController {
 
     return map != null
         ? DataModel.fromJson(map as Map<String, dynamic>)
-        : DataModel();
+        : new DataModel();
   }
 
   Future<PageContent?> getPage({required String slug}) async {
     try {
       isLoading(true);
 
-      final data = getModel();
-      final page = data.pages
+      var data = getModel();
+      var page = data.pages
           ?.firstWhere((e) => e.slug == slug); //, orElse: () => null);
       if (page != null) {
         print('page: ${page.toString()} ');
@@ -234,33 +229,31 @@ class HoledoDatabase extends GetxController {
     try {
       isLoading(true);
 
-      DataModel data = getModel();
+      var data = getModel();
 
       if (data.articleCategories?.length != null) {
         print(
-          'Cache articles cat: ${data.articleCategories?.length}  pages: ${data.pages?.length} companies: ${data.companies?.length} ',
-        );
+            'Cache articles cat: ${data.articleCategories?.length}  pages: ${data.pages?.length} companies: ${data.companies?.length} ');
       }
 
       if (data.articleCategories?.length == null) {
         print('getting new settings: $data');
-        final response = await _api.GET(
+        var response = await _api.GET(
           target: '/site-settings/v2?type=2',
         );
-        data.settings = response.data?.settings;
-        data.articleCategories = response.data?.articleCategories;
-        data.block = response.data?.block;
+
+        data = response.data as DataModel;
       }
 
-      if ((data.pages?.isEmpty ?? true) || data.pages?.length == null) {
+      if (data.pages?.length == 0 || data.pages?.length == null) {
         print('getting pages');
-        final response = await _api.GET(target: '/site-settings/pages?type=2');
+        var response = await _api.GET(target: '/site-settings/pages?type=2');
         data.pages = response.data!.pages;
       }
 
-      if ((data.companies?.isEmpty ?? true) || data.companies?.length == null) {
+      if (data.companies?.length == 0 || data.companies?.length == null) {
         print('getting companies');
-        final response =
+        var response =
             await _api.GET(target: '/site-settings/companies?type=2');
         data.companies = response.data!.companies;
       }
@@ -274,7 +267,7 @@ class HoledoDatabase extends GetxController {
       }
 
       settingsList = data;
-      setModel(data);
+      this.setModel(data);
 
       return data;
     } finally {
@@ -282,74 +275,69 @@ class HoledoDatabase extends GetxController {
     }
   }
 
-  void setAppState(BuildContext context, AppState appState) {
+  void setAppState(context, AppState appState) {
     this.appState = appState;
     this.context = context;
-    snackBarMessage(context, 'info', 'AppState Loaded');
+    this.snackBarMessage(context, 'info', 'AppState Loaded');
     print('test ${appState.username}');
-    if (getModel().user!.token != null) {
-      final user = getModel().user;
-      snackBarMessage(
-        context,
-        'info',
-        'Login: ${user?.fullName} on ${user?.dateOfBirth}',
-      );
-
+    if (this.getModel().user!.token != null) {
+      var user = this.getModel().user;
+      this.snackBarMessage(
+          context, 'info', 'Login: ${user?.fullName} on ${user?.dateOfBirth}');
     }
   }
 }
 
 class UsersController extends GetxController {
-  RxBool isLoading = true.obs;
-  RxBool isLogin = false.obs;
-  RxString token = ''.obs;
-  RxList userList = [].obs;
+  var isLoading = true.obs;
+  var isLogin = false.obs;
+  var token = ''.obs;
+  var userList = [].obs;
   dynamic user = ''.obs;
-  int page = 1;
-  int limit = 10;
+  var page = 1;
+  var limit = 10;
   final ApiServices _api = ApiServices();
   // ignore: non_constant_identifier_names
   late HoledoDatabase DB = holedoDatabase;
+  @override
+  void onInit() {
+    //checkLogin();
+    // DB = holedoDatabase;
+    super.onInit();
+  }
 
-  Future<User> login({
-    required String email,
-    required String password,
-    required BuildContext context,
-  }) async {
+  Future<User> login(
+      {required String email,
+      required String password,
+      required BuildContext context}) async {
     try {
       DB.isLoading(true);
-      var api = Holedoapi();
+      var api = new Holedoapi();
       final model = DB.getModel();
-      var user = User();
+      var user = new User();
 
-      api = await _api.POST(
-        target: '/users/login',
-        data: {'email': email, 'password': password},
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Device': 'Holedo_Flutter'
-        },
-      );
-
+      api = await _api.POST(target: '/users/login', data: {
+        'email': email,
+        'password': password
+      }, headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Device': 'Holedo_Flutter'
+      });
 
       if (api.success == true) {
-        user = api.data?.user as User;
-        print('login1: ${user.email.toString()} ${api.data?.token}');
+        print('login: ${api.data!.user!.email.toString()}');
         isLogin.value = true;
         token.value = api.data?.token as String;
         user = api.data?.user as User;
         model.user?.token = api.data?.token;
-        saveUserToModel(user, api.data?.token);
+        this.saveUserToModel(user, api.data?.token);
       } else {
         //DB.snackBarMessage(context, 'error', api.errors.toString());
-
       }
-
-      print('login: ${user.email.toString()}');
-      return api;
+      return user;
     } finally {
-      this.isLoading(false);
+      DB.isLoading(false);
     }
   }
 
@@ -357,10 +345,7 @@ class UsersController extends GetxController {
     final model = holedoDatabase.getModel();
     print('matchING: $slug USER: ${model.user?.slug}');
     if (model.user?.slug == slug) {
-      if (model.token != null) {
-        print('match: $slug token: ${model.token}');
-        return model.token;
-      }
+      if (model.token != null) return model.token;
       print('match: $slug token: ${model.user?.token}');
       return model.user?.token;
     }
@@ -375,17 +360,13 @@ class UsersController extends GetxController {
     return model;
   }
 
-  void saveUserToModel(User user, String token) {
+  void saveUserToModel(User user, String? token) {
     final model = holedoDatabase.getModel();
     model.token = token;
     model.user = user;
     //print('update user: ${model.user.toString()} token $token');
     //Get.find<HoledoDatabase>().setModel(model);
-    try {
-      holedoDatabase.setModel(model);
-    } finally {
-      print('chec: ${holedoDatabase.getModel().user!.email}');
-    }
+    holedoDatabase.setModel(model);
   }
 
   Future<User> getProfileData({
@@ -397,35 +378,31 @@ class UsersController extends GetxController {
   }) async {
     try {
       isLoading(true);
-      var user = User();
-      final token = getToken(slug);
-      final headers = <String, dynamic>{
-
+      var user = new User();
+      var token = this.getToken(slug);
+      var headers = <String, dynamic>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json',
         'Device': 'Holedo_Flutter'
       };
       if (token != null) {
         //DB.snackBarMessage(context, 'info', 'User Profile being loaded...');
-        final auth = <String, dynamic>{'AuthApi': 'Bearer $token'};
+        var auth = <String, dynamic>{'AuthApi': 'Bearer $token'};
         headers.addEntries(auth.entries);
       }
-      final params = {'id': id, 'slug': slug, 'token': token};
+      var params = {'id': id, 'slug': slug, 'token': token};
       print('params: ${headers.toString()}');
       params.removeWhere((k, v) => v == null);
 
-      final response = await _api.GET(
-        target: '/users/profile/',
-        data: params,
-        headers: headers,
-      );
+      var response = await _api.GET(
+          target: '/users/profile/', data: params, headers: headers);
       //print('log: ${response.data}');
       user = response.data?.user as User;
 
       if (token != null) {
-        print('user: ${user.firstName} token: log: $token');
+        print('user: ${user.firstName} token: log: ${token}');
         user.token = token;
-        saveUserToModel(user, user.token as String);
+        saveUserToModel(user, user.token);
       }
       //print('user: ${user.toJson().toString()}');
       return user;
@@ -450,28 +427,27 @@ class UsersController extends GetxController {
   //   }
   // }
 
-  Future<List<User>?> fetchUsers({
-    String? category,
-    String? type,
-    int? limit,
-    int? page,
-    required BuildContext context,
-    String? keyword,
-  }) async {
+  Future<List<User>?> fetchUsers(
+      {String? category,
+      String? type,
+      int? limit,
+      int? page,
+      required BuildContext context,
+      String? keyword}) async {
     try {
       isLoading(true);
 
-      final params = {
+      var params = {
         'category': category,
         'keyword': keyword,
         'type': type,
-        'limit': limit ?? this.limit,
-        'page': page ?? this.page
+        'limit': limit == null ? this.limit : limit,
+        'page': page == null ? this.page : page
       };
 
       params.removeWhere((k, v) => v == null);
       print('context: $context type: $type cat: $category');
-      final response = await _api.GET(target: '/users/index', data: params);
+      var response = await _api.GET(target: '/users/index', data: params);
 
       userList.value = response.data!.users as List<User>;
 
@@ -481,10 +457,10 @@ class UsersController extends GetxController {
     }
   }
 
-  Future<void> fetchUser({String? slug, String? id}) async {
+  void fetchUser({String? slug, String? id}) async {
     try {
       isLoading(true);
-      final response = await _api.getUserData(id: id, slug: slug);
+      var response = await _api.getUserData(id: id, slug: slug);
       print('log: $response');
       user = response;
     } finally {
@@ -492,28 +468,26 @@ class UsersController extends GetxController {
     }
   }
 
-  Future<DataModel> saveProfile(context, User user) async {
+  Future<DataModel> saveProfile(User user) async {
     try {
       isLoading(true);
-      var dataModel = getModel();
-      final token = dataModel.token;
+      var dataModel = this.getModel();
+      var token = dataModel.token;
 
       if (user.id != null) {
         if (dataModel.user!.id == null) {
           dataModel.messages = 'User Id Not matched';
-          DB.snackBarMessage(context, 'info', dataModel.messages);
           return dataModel;
         }
         user.id = dataModel.user?.id;
       }
       if (token == null) {
         dataModel.messages = 'Token Not matched';
-        DB.snackBarMessage(context, 'info', dataModel.messages);
         return dataModel;
       }
-      final userJson = user.toApiJson();
+      var userJson = user.toApiJson();
 
-      final update = await _api.POST(
+      var update = await _api.POST(
         target: '/users/update/',
         data: userJson,
         token: token,
@@ -522,17 +496,14 @@ class UsersController extends GetxController {
       print('Message: ${update.messages.toString()} ');
       // ignore: unnecessary_null_comparison
       if (update.data != null) {
-        final response = await _api.GET(
-          target: '/users/get/',
-          data: {'slug': user.slug},
-          token: token,
-        );
+        var response = await _api.GET(
+            target: '/users/get/', data: {'slug': user.slug}, token: token);
         //print('log: ${response.data}');
         dataModel = response.data as DataModel;
         print('log: ${dataModel.user?.firstName}');
 
         dataModel.user?.token = token;
-        saveUserToModel(dataModel.user as User, token);
+        this.saveUserToModel(dataModel.user as User, token);
       }
       // isLoading(false);
       return dataModel;
@@ -544,24 +515,24 @@ class UsersController extends GetxController {
   Future<User> save(User user) async {
     try {
       isLoading(true);
-      final token = getToken(user.id);
-      final userJson = user.toJson();
-      userJson.removeWhere((k, v) => v == null || v.toString().isEmpty);
-      final update = await _api.POST(
+      var token = this.getToken(user.id);
+      var userJson = user.toJson();
+      userJson.removeWhere((k, v) => v == null || v.toString().length == 0);
+      var update = await _api.POST(
         target: '/users/update/',
         data: userJson,
         token: token,
       );
       // ignore: unnecessary_null_comparison
       if (update.data != null) {
-        final response =
+        var response =
             await _api.GET(target: '/users/get/', data: {'slug': user.slug});
         //print('log: ${response.data}');
         user = response.data?.user as User;
         print('log: ${user.firstName}');
 
         user.token = token;
-        saveUserToModel(user, token as String);
+        saveUserToModel(user, token);
       }
       // isLoading(false);
       return user;
@@ -572,12 +543,12 @@ class UsersController extends GetxController {
 }
 
 class NewsController extends GetxController {
-  RxBool isLoading = true.obs;
-  RxList dataList = [].obs;
-  Rx<Article> article = Article().obs;
+  var isLoading = true.obs;
+  var dataList = [].obs;
+  var article = Article().obs;
   List<Article> articleList = [];
-  int page = 1;
-  int limit = 10;
+  var page = 1;
+  var limit = 10;
   final ApiServices _api = ApiServices();
 
   Future<Article> getArticle({String? slug, String? id}) async {
@@ -585,7 +556,7 @@ class NewsController extends GetxController {
       isLoading(true);
 
       //var response2 = await _api.getArticle(id: id, slug: slug);
-      final response = await _api
+      var response = await _api
           .GET(target: '/articles/get/', data: {'id': id, 'slug': slug});
       print('res: ${response.data?.article}');
 
@@ -599,30 +570,29 @@ class NewsController extends GetxController {
     }
   }
 
-  Future<List<Article>> fetchArticles({
-    String? category,
-    String? keyword,
-    String? type,
-    int? limit,
-    int? page,
-    required BuildContext context,
-  }) async {
+  Future<List<Article>> fetchArticles(
+      {String? category,
+      String? keyword,
+      String? type,
+      int? limit,
+      int? page,
+      required BuildContext context}) async {
     try {
       isLoading(true);
-      final params = {
+      var params = {
         'category': category,
         'type': type,
         'keyword': keyword,
-        'limit': limit ?? this.limit,
-        'page': page ?? this.page
+        'limit': limit == null ? this.limit : limit,
+        'page': page == null ? this.page : page
       };
       params.removeWhere((k, v) => v == null);
 
       print('context: $context type: $type cat: $category');
-      final response = await _api.GET(target: '/articles/index', data: params);
+      var response = await _api.GET(target: '/articles/index', data: params);
 
       if (response.success == true) {
-        final list = response.data!.articles as List<Article>;
+        var list = response.data!.articles as List<Article>;
         dataList.value = list;
 
         //print('log: ${list}');
@@ -645,18 +615,23 @@ class NewsController extends GetxController {
 }
 
 class JobsController extends GetxController {
-  RxBool isLoading = true.obs;
-  RxList dataList = [].obs;
-  Rx<Job> job = Job().obs;
+  var isLoading = true.obs;
+  var dataList = [].obs;
+  var job = Job().obs;
   List<Job> jobList = [];
-  int page = 1;
-  int limit = 10;
+  var page = 1;
+  var limit = 10;
   final ApiServices _api = ApiServices();
+  @override
+  void onInit() {
+    //fetch();
+    super.onInit();
+  }
 
   Future<Job> getJob({String? slug, String? id}) async {
     try {
       isLoading(true);
-      final response = await _api.getJob(id: id, slug: slug);
+      var response = await _api.getJob(id: id, slug: slug);
       job.value = response.data?.job as Job;
       return job.value;
     } finally {
@@ -664,31 +639,30 @@ class JobsController extends GetxController {
     }
   }
 
-  Future<List<Job>> fetchJobs({
-    int? company,
-    String? keyword,
-    String? type,
-    int? limit,
-    int? page,
-    required BuildContext context,
-  }) async {
+  Future<List<Job>> fetchJobs(
+      {int? company,
+      String? keyword,
+      String? type,
+      int? limit,
+      int? page,
+      required BuildContext context}) async {
     try {
       isLoading(true);
 
-      final params = {
+      var params = {
         'company': company,
         'type': type,
         'keyword': keyword,
-        'limit': limit ?? this.limit,
-        'page': page ?? this.page
+        'limit': limit == null ? this.limit : limit,
+        'page': page == null ? this.page : page
       };
       params.removeWhere((k, v) => v == null);
 
       print('context: $context type: $type company: $company');
-      final response = await _api.GET(target: '/jobs/index', data: params);
+      var response = await _api.GET(target: '/jobs/index', data: params);
 
       if (response.success == true) {
-        final list = response.data!.jobs as List<Job>;
+        var list = response.data!.jobs as List<Job>;
         dataList.value = list;
         for (final data in list) {
           if ((jobList.any((e) => e.id == data.id)) != true) {
