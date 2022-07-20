@@ -123,7 +123,7 @@ class _PageScaffoldState extends State<PageScaffold> {
 
   @override
   Widget build(BuildContext context) {
-    final appState = Provider.of<AppState>(context);
+    final appState = Provider.of<ProfileProvider>(context);
 
     final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -363,7 +363,7 @@ class BuildAppbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appState = Provider.of<AppState>(context);
+    final appState = Provider.of<ProfileProvider>(context);
     final bool isMobile = Responsive.isMobile(context);
     final menuItems = Get.put(HoledoDatabase()).menuItems;
     final bool isDesktop = Responsive.isDesktop(context);

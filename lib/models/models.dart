@@ -11,7 +11,7 @@ import 'package:holedo/services/holedo_api_services.dart';
 
 export 'package:get/get.dart';
 export 'package:provider/provider.dart';
-
+export 'package:holedo/profile/presentation/providers/profile_provider.dart';
 export 'holedoapi/holedoapi.dart';
 
 class AppState extends ChangeNotifier {

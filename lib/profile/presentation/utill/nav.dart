@@ -4,7 +4,7 @@ import 'package:routemaster/routemaster.dart';
 
 class Nav {
   static void goToCurrentUserProfile(BuildContext context) {
-    final appState = Provider.of<AppState>(context);
+    final appState = Provider.of<ProfileProvider>(context);
     final isLoggedIn = appState.isLoggedIn;
     Routemaster.of(context).push(
       isLoggedIn

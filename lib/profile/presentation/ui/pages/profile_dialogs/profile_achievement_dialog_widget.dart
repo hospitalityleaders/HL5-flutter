@@ -426,7 +426,8 @@ class __SingleAchievementState extends ConsumerState<_SingleAchievement> {
                             achievementList.add(achievement);
                           }
 
-                          await Provider.of<AppState>(context, listen: false)
+                          await Provider.of<ProfileProvider>(context,
+                                  listen: false)
                               .saveProfile(
                             User(
                               achievements: achievementList,

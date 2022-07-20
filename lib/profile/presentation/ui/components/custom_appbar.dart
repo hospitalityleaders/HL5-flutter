@@ -151,7 +151,7 @@ class _ProfileWithSubMenu extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    final appState = Provider.of<AppState>(context);
+    final appState = Provider.of<ProfileProvider>(context);
 
     return Row(
       children: [

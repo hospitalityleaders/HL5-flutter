@@ -208,7 +208,7 @@ class _UserProfilePageState extends State<UserProfilePage>
 
   @override
   Widget build(BuildContext context) {
-    final appState = Provider.of<AppState>(context);
+    final appState = Provider.of<ProfileProvider>(context);
     final bool isMine = appState.isLoginnedAndEditable(widget.userProfileData);
     debugPrint('app $isEditable');
     return Responsive.isDesktop(context)

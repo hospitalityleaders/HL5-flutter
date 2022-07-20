@@ -37,7 +37,7 @@ class _MobileSlideMenuState extends ConsumerState<MobileSlideMenu> {
 
   @override
   Widget build(BuildContext context) {
-    final appState = Provider.of<AppState>(context);
+    final appState = Provider.of<ProfileProvider>(context);
     // final menuItems = Get.put(HoledoDatabase()).menuItems;
     final userProfileData = ref.watch(profileNotifierProvider).userProfileData;
     return Container(

@@ -23,7 +23,7 @@ class NewsPage extends StatelessWidget {
     final categories = Get.put(HoledoDatabase())
         .articleCategories
         .where((category) => category.menuItem == true);
-    final appState = Provider.of<AppState>(context, listen: false);
+    final appState = Provider.of<ProfileProvider>(context, listen: false);
     return PageScaffold(
       title: 'Home Page',
       body: !appState.isLoggedIn

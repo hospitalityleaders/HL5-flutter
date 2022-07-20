@@ -47,7 +47,7 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage>
     Future.microtask(() {
       Provider.of<ProfileProvider>(context, listen: false)
           .changeUserProfilePercentage(
-              Provider.of<AppState>(context).isLoggedIn);
+              Provider.of<ProfileProvider>(context).isLoggedIn);
       _updateTabController();
     });
     super.initState();

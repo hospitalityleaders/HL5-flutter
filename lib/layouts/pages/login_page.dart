@@ -53,9 +53,9 @@ class _LoginPageState extends State<LoginPage> {
         );
         debugPrint('cjec: ${usersControler.isLogin.value}');
 
-        Provider.of<AppState>(context, listen: false).username =
+        Provider.of<ProfileProvider>(context, listen: false).username =
             _usernameController.text;
-        Provider.of<AppState>(context, listen: false).profile = response;
+        Provider.of<ProfileProvider>(context, listen: false).profile = response;
         var redirect = widget.redirectTo;
         redirect ??= '/profile/${response.slug}';
         Routemaster.of(context).push(redirect);

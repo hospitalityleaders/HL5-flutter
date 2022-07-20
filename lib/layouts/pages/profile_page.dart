@@ -19,7 +19,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     debugPrint('profie? ${widget.slug},  ${widget.id}');
-    final appstate = Provider.of<AppState>(context);
+    final appstate = Provider.of<ProfileProvider>(context);
     final bool isMyProfile = widget.id != null;
     // appstate.isLoggedIn && appstate.profile!.slug == widget.slug;
     return PageScaffold(

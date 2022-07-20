@@ -43,7 +43,7 @@ class _ProfileMobileViewPageState extends ConsumerState<ProfileMobileViewPage> {
     final User userProfileData =
         ref.watch(profileNotifierProvider).userProfileData!;
     // final isEditable = ref.watch(profileNotifierProvider).isProfileEditable;
-    final appState = Provider.of<AppState>(context);
+    final appState = Provider.of<ProfileProvider>(context);
     final bool isMine = appState.isLoginnedAndEditable(userProfileData);
 
     return Scaffold(

@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as fr;
 import 'package:holedo/layouts/page_scaffold.dart';
 import 'package:holedo/layouts/pages/content_page.dart';
+import 'package:holedo/includes/url_strategy.dart';
 import 'package:holedo/models/models.dart';
-import 'package:holedo/profile/presentation/providers/profile_provider.dart';
+
 import 'package:holedo/profile/presentation/theme/light_theme.dart';
 import 'package:intercom_flutter/intercom_flutter.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:routemaster/routemaster.dart';
 
 void main() async {
-  // usePathUrlStrategy();
+  usePathUrlStrategy();
   WidgetsFlutterBinding.ensureInitialized();
   await Get.put(HoledoDatabase()).init();
 
@@ -87,7 +88,7 @@ RouteMap _buildRouteMap(BuildContext context) {
             ),
           ),
       '/logout': (route) {
-        final appState = Provider.of<AppState>(context, listen: false);
+        final appState = Provider.of<ProfileProvider>(context, listen: false);
         if (appState.isLoggedIn) {
           appState.username = null;
           appState.profile = null;
@@ -186,14 +187,14 @@ RouteMap _buildRouteMap(BuildContext context) {
             ),
           ),
       '/profile': (route) {
-        final appState = Provider.of<AppState>(context, listen: false);
+        final appState = Provider.of<ProfileProvider>(context, listen: false);
         if (appState.isLoggedIn) {
           return Redirect('/profile/${appState.profile?.slug}');
         }
         return Redirect('/login', queryParameters: {'redirectTo': route.path});
       },
       '/profile/:slug': (route) {
-        final appState = Provider.of<AppState>(context, listen: false);
+        final appState = Provider.of<ProfileProvider>(context, listen: false);
         if (appState.isLoggedIn &&
             route.pathParameters['slug'] == appState.profile?.slug) {
           return NoAnimationPage(
@@ -209,7 +210,7 @@ RouteMap _buildRouteMap(BuildContext context) {
       },
       //'/profile/add': (route) => AddProfilePage(),
       '/interactive/:id': (route) {
-        final appState = Provider.of<AppState>(context, listen: false);
+        final appState = Provider.of<ProfileProvider>(context, listen: false);
 
         if (appState.isLoggedIn) {
           return NoAnimationPage(
@@ -256,10 +257,7 @@ class HoledoApp extends StatelessWidget {
       child: MultiProvider(
         providers: [
           ChangeNotifierProvider(
-            create: (context) => ProfileProvider(),
-          ),
-          ChangeNotifierProvider(
-            create: (_) => AppState(
+            create: (context) => ProfileProvider(
               username: Get.put(HoledoDatabase()).getModel().user?.fullName,
               profile: Get.put(HoledoDatabase()).getModel().user,
             ),
@@ -297,8 +295,8 @@ class HoledoApp extends StatelessWidget {
           routeInformationProvider: routeInformationProvider,
           routerDelegate: RoutemasterDelegate(
             routesBuilder: (context) {
-              final state = Provider.of<AppState>(context);
-              // Provider.of<AppState>(context).profile = Get.put(HoledoDatabase()).getModel().user ?? null;
+              final state = Provider.of<ProfileProvider>(context);
+              // Provider.of<ProfileProvider>(context).profile = Get.put(HoledoDatabase()).getModel().user ?? null;
               return siteBlockedWithoutLogin && !state.isLoggedIn
                   ? loggedOutRouteMap
                   : _buildRouteMap(context);

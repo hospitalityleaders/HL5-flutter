@@ -13,7 +13,7 @@ class PersonAvatar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    final isLogin = Provider.of<AppState>(context).isLoggedIn;
+    final isLogin = Provider.of<ProfileProvider>(context).isLoggedIn;
     return Container(
       width: avatarSize ?? 28,
       height: avatarSize ?? 28,

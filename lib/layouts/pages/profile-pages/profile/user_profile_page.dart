@@ -67,7 +67,7 @@
 //   @override
 //   Widget build(BuildContext context) {
 //     debugPrint("userProfileData: is  ${widget.userProfileData.toString()} ");
-//     final appState = Provider.of<AppState>(context);
+//     final appState = Provider.of<ProfileProvider>(context);
 //     final bool isMine = appState.isLoginnedAndEditable(widget.userProfileData);
 //     debugPrint('app $isEditable');
 //     return TapCanvas(
