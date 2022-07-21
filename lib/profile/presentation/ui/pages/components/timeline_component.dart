@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:flutter_svg/svg.dart';
-import 'package:holedo/profile/application//shared/providers.dart';
-import 'package:holedo/db_data.dart';
+import 'package:holedo/profile/presentation/providers/profile_provider.dart';
 import 'package:holedo/profile/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/profile/presentation/utill/color_resources.dart';
 import 'package:holedo/profile/presentation/utill/dimensions.dart';
 import 'package:holedo/profile/presentation/utill/images.dart';
 import 'package:holedo/profile/presentation/utill/styles.dart';
+import 'package:provider/provider.dart';
 
-class TimelineComponent extends ConsumerWidget {
+class TimelineComponent extends StatelessWidget {
   const TimelineComponent({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Container(
       decoration: boxDecoration.copyWith(color: const Color(0xff0D9BDC)),
       // padding: const EdgeInsets.all(Di.PSD),
@@ -108,7 +108,7 @@ class TimelineComponent extends ConsumerWidget {
                   SizedBox(
                     width: 240,
                     child: Text(
-                      "View ${ref.watch(profileNotifierProvider).userProfileData!.fullName}'s career timeline.",
+                      "View ${Provider.of<ProfileProvider>(context).userProfileData!.fullName}'s career timeline.",
                       style: display3.copyWith(
                         color: Cr.accentBlue3,
                       ),
@@ -117,9 +117,12 @@ class TimelineComponent extends ConsumerWidget {
                   Di.SBHS,
                   CustomElevatedButton(
                     onPressed: () {
-                      ref
-                          .read(profileNotifierProvider.notifier)
+                      Provider.of<ProfileProvider>(context, listen: false)
                           .changeCurrentTabIndex(1);
+
+                      // ref
+                      //     .read(profileNotifierProvider.notifier)
+                      //     .changeCurrentTabIndex(1);
                     },
                     width: 200,
                     height: 35,
@@ -134,7 +137,7 @@ class TimelineComponent extends ConsumerWidget {
                         ),
                         Di.SBWETS,
                         Text(
-                          "View ${ref.watch(profileNotifierProvider).userProfileData!.firstName}'s timeline",
+                          "View ${Provider.of<ProfileProvider>(context).userProfileData!.firstName}'s timeline",
                           style: const TextStyle(
                             color: Cr.accentBlue1,
                           ),

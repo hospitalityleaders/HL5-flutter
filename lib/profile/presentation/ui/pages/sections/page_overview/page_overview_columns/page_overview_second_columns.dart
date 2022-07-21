@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:holedo/profile/application//shared/providers.dart';
+
 import 'package:holedo/models/holedoapi/achievement.dart';
 import 'package:holedo/models/holedoapi/holedoapi.dart';
 import 'package:holedo/profile/presentation/ui/components/expanded_collapse_widget.dart';
@@ -21,31 +20,34 @@ import 'package:holedo/profile/presentation/utill/images.dart';
 import 'package:holedo/profile/presentation/utill/styles.dart';
 import 'package:video_player/video_player.dart';
 import 'package:video_player_web/video_player_web.dart';
+import 'package:holedo/profile/presentation/providers/profile_provider.dart';
+import 'package:provider/provider.dart';
 
-class ProfileOverviewSecondColumn extends ConsumerStatefulWidget {
+class ProfileOverviewSecondColumn extends StatefulWidget {
   const ProfileOverviewSecondColumn({
     Key? key,
   }) : super(key: key);
 
   @override
-  ConsumerState<ProfileOverviewSecondColumn> createState() =>
+  State<ProfileOverviewSecondColumn> createState() =>
       _ProfileOverviewSecondColumnState();
 }
 
 class _ProfileOverviewSecondColumnState
-    extends ConsumerState<ProfileOverviewSecondColumn> {
+    extends State<ProfileOverviewSecondColumn> {
   late VideoPlayerPlugin videoPlayerPlugin;
 
   @override
   Widget build(BuildContext context) {
-    final userProfileData = ref.watch(profileNotifierProvider).userProfileData!;
+    final userProfileData =
+        Provider.of<ProfileProvider>(context).userProfileData!;
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // FeaturedVideoComponent(
-        //   userProfileData: userProfileData,
-        // ),
+        FeaturedVideoComponent(
+          userProfileData: userProfileData,
+        ),
         Di.SBHL,
         ProfileWorkExperienceComponent(
           userProfileData: userProfileData,
@@ -79,7 +81,7 @@ class _ProfileOverviewSecondColumnState
 
 //   @override
 //   Widget build(BuildContext context) {
-//     final List<Language>? languages = ref.watch(profileNotifierProvider).userProfileData!.languages;
+//     final List<Language>? languages = Provider.of<ProfileProvider>(context).userProfileData!.languages;
 //     final bool hasData = languages != null ? languages.isNotEmpty : false;
 
 //     return Container(
@@ -170,7 +172,7 @@ class _ProfileOverviewSecondColumnState
 //   }
 // }
 
-class AchievementComponent extends ConsumerStatefulWidget {
+class AchievementComponent extends StatefulWidget {
   const AchievementComponent({
     Key? key,
     this.isMobile = false,
@@ -178,15 +180,14 @@ class AchievementComponent extends ConsumerStatefulWidget {
   final bool isMobile;
 
   @override
-  ConsumerState<AchievementComponent> createState() =>
-      _AchievementComponentState();
+  State<AchievementComponent> createState() => _AchievementComponentState();
 }
 
-class _AchievementComponentState extends ConsumerState<AchievementComponent> {
+class _AchievementComponentState extends State<AchievementComponent> {
   @override
   Widget build(BuildContext context) {
     final List<Achievement>? achievement =
-        ref.watch(profileNotifierProvider).userProfileData!.achievements;
+        Provider.of<ProfileProvider>(context).userProfileData!.achievements;
     final bool hasData = achievement != null ? achievement.isNotEmpty : false;
     bool showSubMenu = false;
 
@@ -313,7 +314,7 @@ class _AchievementComponentState extends ConsumerState<AchievementComponent> {
   }
 }
 
-class FeaturedVideoComponent extends ConsumerStatefulWidget {
+class FeaturedVideoComponent extends StatefulWidget {
   const FeaturedVideoComponent({
     Key? key,
     required this.userProfileData,
@@ -322,47 +323,47 @@ class FeaturedVideoComponent extends ConsumerStatefulWidget {
   final User userProfileData;
   final bool isMobile;
   @override
-  ConsumerState<FeaturedVideoComponent> createState() =>
-      _FeaturedVideoComponentState();
+  State<FeaturedVideoComponent> createState() => _FeaturedVideoComponentState();
 }
 
-class _FeaturedVideoComponentState
-    extends ConsumerState<FeaturedVideoComponent> {
-  late VideoPlayerController _controller;
+class _FeaturedVideoComponentState extends State<FeaturedVideoComponent> {
   bool showMore = false;
   bool showSubMenu = false;
-
-  void setVideoController() {
-    _controller = VideoPlayerController.network(
-      ref.watch(profileNotifierProvider).userProfileData!.profileVideoUrl ?? '',
-    )
-      ..initialize().then((_) {
-        setState(() {});
-      })
-      ..addListener(() {
-        if (_controller.value.position == _controller.value.duration) {
-          setState(() {
-            _controller.pause();
-          });
-        }
-      });
-  }
+  VideoPlayerController? _videoPlayerController;
 
   @override
   void initState() {
-    Future.microtask(() => setVideoController());
+    if (widget.userProfileData.profileVideoUrl != null) {
+      _videoPlayerController =
+          VideoPlayerController.network(widget.userProfileData.profileVideoUrl!)
+            ..addListener(() {
+              if (_videoPlayerController!.value.position ==
+                  _videoPlayerController!.value.duration) {
+                setState(() {
+                  _videoPlayerController!.pause();
+                });
+              }
+            });
+      _videoPlayerController!.initialize().then((value) {
+        setState(() {});
+      });
+    }
+
     super.initState();
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    if (_videoPlayerController != null) {
+      _videoPlayerController!.dispose();
+    }
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final userProfileData = ref.watch(profileNotifierProvider).userProfileData!;
+    final userProfileData =
+        Provider.of<ProfileProvider>(context).userProfileData!;
 
     return Stack(
       children: [
@@ -390,40 +391,76 @@ class _FeaturedVideoComponentState
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Stack(
-                            children: [
-                              if (_controller.value.isInitialized)
-                                SizedBox(
-                                  height: widget.isMobile ? null : 180,
-                                  width: widget.isMobile ? null : 325,
-                                  child: AspectRatio(
-                                    aspectRatio: _controller.value.aspectRatio,
-                                    child: VideoPlayer(_controller),
-                                  ),
-                                )
-                              else
-                                Di.ESB,
-                              Positioned.fill(
-                                child: Center(
-                                  child: FloatingActionButton(
-                                    backgroundColor: Cr.accentBlue1,
-                                    onPressed: () {
-                                      setState(() {
-                                        _controller.value.isPlaying
-                                            ? _controller.pause()
-                                            : _controller.play();
-                                      });
-                                    },
-                                    child: Icon(
-                                      _controller.value.isPlaying
-                                          ? Icons.pause
-                                          : Icons.play_arrow,
+                          // Stack(
+                          //   children: [
+                          //     if (_controller!.value.isInitialized)
+                          //       SizedBox(
+                          //         height: widget.isMobile ? null : 180,
+                          //         width: widget.isMobile ? null : 325,
+                          //         child: AspectRatio(
+                          //           aspectRatio:
+                          //               _controller!.value.aspectRatio,
+                          //           child: VideoPlayer(_controller!),
+                          //         ),
+                          //       )
+                          //     else
+                          //       Di.ESB,
+                          //     Positioned.fill(
+                          //       child: Center(
+                          //         child: FloatingActionButton(
+                          //           backgroundColor: Cr.accentBlue1,
+                          //           onPressed: () {
+                          //             setState(() {
+                          //               _controller!.value.isPlaying
+                          //                   ? _controller!.pause()
+                          //                   : _controller!.play();
+                          //             });
+                          //           },
+                          //           child: Icon(
+                          //             _controller!.value.isPlaying
+                          //                 ? Icons.pause
+                          //                 : Icons.play_arrow,
+                          //           ),
+                          //         ),
+                          //       ),
+                          //     )
+                          //   ],
+                          // ),
+                          if (_videoPlayerController != null)
+                            IntrinsicHeight(
+                              child: Stack(
+                                children: [
+                                  Center(
+                                    child: SizedBox(
+                                      width: 325,
+                                      height: 180,
+                                      child:
+                                          VideoPlayer(_videoPlayerController!),
                                     ),
                                   ),
-                                ),
-                              )
-                            ],
-                          ),
+                                  Center(
+                                    child: FloatingActionButton(
+                                      backgroundColor: Cr.accentBlue1,
+                                      onPressed: () {
+                                        setState(() {
+                                          _videoPlayerController!
+                                                  .value.isPlaying
+                                              ? _videoPlayerController!.pause()
+                                              : _videoPlayerController!.play();
+                                        });
+                                      },
+                                      child: Icon(
+                                        _videoPlayerController!.value.isPlaying
+                                            ? Icons.pause
+                                            : Icons.play_arrow,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+                          else
+                            Di.ESB,
                           if (userProfileData.profileVideoTitle != null) ...[
                             Di.SBHL,
                             Text(

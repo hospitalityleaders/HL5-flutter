@@ -18,7 +18,7 @@ class MobileProfileReferenceSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final userProfileData = ref.watch(profileNotifierProvider).userProfileData!;
+    // final userProfileData = Provider.of<ProfileProvider>(context).userProfileData!;
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: Di.PSS,

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:holedo/profile/application//shared/providers.dart';
+import 'package:holedo/profile/presentation/providers/profile_provider.dart';
 import 'package:holedo/profile/presentation/ui/components/onhover.dart';
 import 'package:holedo/profile/presentation/utill/color_resources.dart';
 import 'package:holedo/profile/presentation/utill/dimensions.dart';
 import 'package:holedo/profile/presentation/utill/images.dart';
 import 'package:holedo/profile/presentation/utill/styles.dart';
+import 'package:provider/provider.dart';
 
-class ViewTimeEditProfileSubmenu extends ConsumerWidget {
+class ViewTimeEditProfileSubmenu extends StatelessWidget {
   const ViewTimeEditProfileSubmenu({
     Key? key,
     required this.hideSubMenuCallback,
@@ -21,15 +22,17 @@ class ViewTimeEditProfileSubmenu extends ConsumerWidget {
   final String editText;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return CustomSubMenu(
       customSubMenuItems: [
         if (!donotShowTimeline)
           CustomSubmenuItem(
             onTap: () {
-              ref
-                  .read(profileNotifierProvider.notifier)
+              Provider.of<ProfileProvider>(context, listen: false)
                   .changeCurrentTabIndex(1);
+              // ref
+              //     .read(profileNotifierProvider.notifier)
+              //     .changeCurrentTabIndex(1);
             },
             width: 245,
             textIconColor: Cr.accentBlue1,
@@ -45,8 +48,9 @@ class ViewTimeEditProfileSubmenu extends ConsumerWidget {
           ),
         CustomSubmenuItem(
           onTap: () {
-            ref
-                .read(profileNotifierProvider.notifier)
+            // ref
+            //     .read(profileNotifierProvider.notifier)
+            Provider.of<ProfileProvider>(context, listen: false)
                 .changeIsProfieEditableState(true);
             hideSubMenuCallback();
           },

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_expanded_tile/flutter_expanded_tile.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:holedo/profile/application//shared/providers.dart';
+
 import 'package:holedo/models/holedoapi/holedoapi.dart';
 import 'package:holedo/profile/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/profile/presentation/ui/pages/profile_dialogs/dialog_widgets.dart';
@@ -10,9 +9,11 @@ import 'package:holedo/profile/presentation/utill/dimensions.dart';
 import 'package:holedo/profile/presentation/utill/nav.dart';
 import 'package:holedo/profile/presentation/utill/styles.dart';
 import 'package:routemaster/routemaster.dart';
+import 'package:holedo/profile/presentation/providers/profile_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
-class ProfileFeaturedVideoDialogWidget extends ConsumerStatefulWidget {
+class ProfileFeaturedVideoDialogWidget extends StatefulWidget {
   const ProfileFeaturedVideoDialogWidget({
     Key? key,
     required this.userProfileData,
@@ -21,15 +22,16 @@ class ProfileFeaturedVideoDialogWidget extends ConsumerStatefulWidget {
   final User userProfileData;
 
   @override
-  ConsumerState<ProfileFeaturedVideoDialogWidget> createState() =>
+  State<ProfileFeaturedVideoDialogWidget> createState() =>
       _ProfileWriteReferenceDialogWidgetState();
 }
 
 class _ProfileWriteReferenceDialogWidgetState
-    extends ConsumerState<ProfileFeaturedVideoDialogWidget> {
+    extends State<ProfileFeaturedVideoDialogWidget> {
   @override
   Widget build(BuildContext context) {
-    final userProfileData = ref.watch(profileNotifierProvider).userProfileData!;
+    final userProfileData =
+        Provider.of<ProfileProvider>(context).userProfileData!;
     return SingleChildScrollView(
       child: Container(
         color: Cr.darkGrey4,
@@ -53,7 +55,7 @@ class _ProfileWriteReferenceDialogWidgetState
   }
 }
 
-class _CoverDialogExpandedTile extends ConsumerStatefulWidget {
+class _CoverDialogExpandedTile extends StatefulWidget {
   final bool isExpanded;
   const _CoverDialogExpandedTile({
     Key? key,
@@ -62,12 +64,11 @@ class _CoverDialogExpandedTile extends ConsumerStatefulWidget {
   }) : super(key: key);
   final User userProfileData;
   @override
-  ConsumerState<_CoverDialogExpandedTile> createState() =>
+  State<_CoverDialogExpandedTile> createState() =>
       __CoverDialogExpandedTileState();
 }
 
-class __CoverDialogExpandedTileState
-    extends ConsumerState<_CoverDialogExpandedTile> {
+class __CoverDialogExpandedTileState extends State<_CoverDialogExpandedTile> {
   late final TextEditingController _videoLinkController;
   late final TextEditingController _videoTitleController;
   late final TextEditingController _videoDescriptionController;
@@ -292,8 +293,10 @@ class __CoverDialogExpandedTileState
                                 profileVideoUrl: _videoLinkController.text,
                                 profileVideoDescription:
                                     _videoDescriptionController.text,
-                              ).save(ref
-                                  .watch(profileNotifierProvider)
+                              ).save(Provider.of<ProfileProvider>(context)
+
+                                  // ref
+                                  //   .watch(profileNotifierProvider)
                                   .userProfileData!);
 
                               Routemaster.of(context).push("/profile");

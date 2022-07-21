@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:holedo/profile/application//shared/providers.dart';
+
 import 'package:holedo/profile/presentation/ui/components/custom_checkbox_with_title.dart';
 import 'package:holedo/profile/presentation/ui/components/expanded_collapse_widget.dart';
 import 'package:holedo/profile/presentation/ui/components/profile_reference_single_compoenet.dart';
@@ -16,6 +15,8 @@ import 'package:holedo/profile/presentation/utill/color_resources.dart';
 import 'package:holedo/profile/presentation/utill/dimensions.dart';
 import 'package:holedo/profile/presentation/utill/responsive.dart';
 import 'package:holedo/profile/presentation/utill/styles.dart';
+import 'package:holedo/profile/presentation/providers/profile_provider.dart';
+import 'package:provider/provider.dart';
 
 class ProfileOverviewFirstColumn extends StatefulWidget {
   const ProfileOverviewFirstColumn({
@@ -48,7 +49,7 @@ class _ProfileOverviewFirstColumnState
   }
 }
 
-class ProfileSummaryComponent extends ConsumerStatefulWidget {
+class ProfileSummaryComponent extends StatefulWidget {
   const ProfileSummaryComponent({
     Key? key,
     this.isMobile = false,
@@ -56,18 +57,17 @@ class ProfileSummaryComponent extends ConsumerStatefulWidget {
 
   final bool isMobile;
   @override
-  ConsumerState<ProfileSummaryComponent> createState() =>
+  State<ProfileSummaryComponent> createState() =>
       _ProfileSummaryComponentState();
 }
 
-class _ProfileSummaryComponentState
-    extends ConsumerState<ProfileSummaryComponent> {
+class _ProfileSummaryComponentState extends State<ProfileSummaryComponent> {
   bool showSubMenu = false;
 
   @override
   Widget build(BuildContext context) {
     final String? profileSummary =
-        ref.watch(profileNotifierProvider).userProfileData!.profileSummary;
+        Provider.of<ProfileProvider>(context).userProfileData!.profileSummary;
     final isMobilePhn = isMobilePhone(context);
 
     return Container(
@@ -145,9 +145,12 @@ class _ProfileSummaryComponentState
                         showCustomDialog(
                           context,
                           ProfileSummaryDialogWidget(
-                            userProfileData: ref
-                                .watch(profileNotifierProvider)
-                                .userProfileData!,
+                            // Provider.of<ProfileProvider>(context)
+                            userProfileData:
+                                //  ref
+                                //     .watch(profileNotifierProvider)
+                                Provider.of<ProfileProvider>(context)
+                                    .userProfileData!,
                           ),
                         );
                       },
@@ -159,9 +162,12 @@ class _ProfileSummaryComponentState
                           showCustomDialog(
                             context,
                             ProfileSummaryDialogWidget(
-                              userProfileData: ref
-                                  .watch(profileNotifierProvider)
-                                  .userProfileData!,
+                              userProfileData:
+                                  Provider.of<ProfileProvider>(context)
+
+                                      // ref
+                                      //     .watch(profileNotifierProvider)
+                                      .userProfileData!,
                             ),
                           );
                         },
@@ -191,7 +197,7 @@ class _ProfileSummaryComponentState
   }
 }
 
-class AreasOfExpertiseComponents extends ConsumerStatefulWidget {
+class AreasOfExpertiseComponents extends StatefulWidget {
   const AreasOfExpertiseComponents({
     Key? key,
     this.isMobile = false,
@@ -199,18 +205,18 @@ class AreasOfExpertiseComponents extends ConsumerStatefulWidget {
   final bool isMobile;
 
   @override
-  ConsumerState<AreasOfExpertiseComponents> createState() =>
+  State<AreasOfExpertiseComponents> createState() =>
       _AreasOfExpertiseComponentsState();
 }
 
 class _AreasOfExpertiseComponentsState
-    extends ConsumerState<AreasOfExpertiseComponents> {
+    extends State<AreasOfExpertiseComponents> {
   bool showSubMenu = false;
 
   @override
   Widget build(BuildContext context) {
     final expertise =
-        ref.watch(profileNotifierProvider).userProfileData!.expertise;
+        Provider.of<ProfileProvider>(context).userProfileData!.expertise;
     return DecoratedBox(
       decoration: boxDecorationWithShadow.copyWith(color: Cr.whiteColor),
       child: Stack(
@@ -238,8 +244,10 @@ class _AreasOfExpertiseComponentsState
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Di.SBHD,
-                          if (ref
-                                  .watch(profileNotifierProvider)
+                          if (Provider.of<ProfileProvider>(context)
+
+                                  // ref
+                                  //       .watch(profileNotifierProvider)
                                   .userProfileData!
                                   .expertise !=
                               null)

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:holedo/profile/application//shared/providers.dart';
+
 import 'package:holedo/models/holedoapi/experience.dart';
 import 'package:holedo/models/holedoapi/holedoapi.dart';
+import 'package:holedo/profile/presentation/providers/profile_provider.dart';
 import 'package:holedo/profile/presentation/ui/components/expanded_collapse_widget.dart';
 import 'package:holedo/profile/presentation/ui/components/svg_with_background.dart';
 import 'package:holedo/profile/presentation/ui/components/view_timeline_edit_profile_submenu.dart';
@@ -15,8 +15,9 @@ import 'package:holedo/profile/presentation/utill/color_resources.dart';
 import 'package:holedo/profile/presentation/utill/dimensions.dart';
 import 'package:holedo/profile/presentation/utill/images.dart';
 import 'package:holedo/profile/presentation/utill/styles.dart';
+import 'package:provider/provider.dart';
 
-class ProfileWorkExperienceComponent extends ConsumerStatefulWidget {
+class ProfileWorkExperienceComponent extends StatefulWidget {
   const ProfileWorkExperienceComponent({
     Key? key,
     this.isMobile = false,
@@ -32,19 +33,19 @@ class ProfileWorkExperienceComponent extends ConsumerStatefulWidget {
   final void Function()? onEditPressed;
 
   @override
-  ConsumerState<ProfileWorkExperienceComponent> createState() =>
+  State<ProfileWorkExperienceComponent> createState() =>
       _ProfileWorkExperienceComponentState();
 }
 
 class _ProfileWorkExperienceComponentState
-    extends ConsumerState<ProfileWorkExperienceComponent> {
+    extends State<ProfileWorkExperienceComponent> {
   bool showMore = false;
   bool showSubMenu = false;
 
   @override
   Widget build(BuildContext context) {
     final List<Experience>? experience =
-        ref.watch(profileNotifierProvider).userProfileData!.experiences;
+        Provider.of<ProfileProvider>(context).userProfileData!.experiences;
     final bool hasData = experience != null ? experience.isNotEmpty : false;
     return Stack(
       children: [

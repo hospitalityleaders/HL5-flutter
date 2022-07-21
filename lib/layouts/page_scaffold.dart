@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:holedo/profile/presentation/popups/profile_connection_request_popup.dart';
 import 'package:holedo/profile/presentation/popups/profile_submenu_popup.dart';
-import 'package:holedo/profile/presentation/providers/profile_provider.dart';
+import 'package:holedo/profile/presentation/providers/app_provider.dart';
 import 'package:holedo/profile/presentation/ui/components/appbar_textfield.dart';
 import 'package:holedo/profile/presentation/ui/components/custom_appbar.dart';
 import 'package:holedo/profile/presentation/ui/flutter_slider_drawer/slider.dart';
@@ -123,7 +123,7 @@ class _PageScaffoldState extends State<PageScaffold> {
 
   @override
   Widget build(BuildContext context) {
-    final appState = Provider.of<ProfileProvider>(context);
+    final appState = Provider.of<AppProvider>(context);
 
     final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -169,6 +169,23 @@ class _PageScaffoldState extends State<PageScaffold> {
                       ),
                 body: Stack(
                   children: [
+                    Center(
+                      child: Container(
+                        child: Column(
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                Provider.of<ProfileProvider>(context,
+                                        listen: false)
+                                    .profileNotifyListeners();
+                              },
+                              child: Text("data"),
+                            ),
+                            Text("Profile page"),
+                          ],
+                        ),
+                      ),
+                    ),
                     Container(
                       decoration: const BoxDecoration(
                         color: ColorPicker.kBG,
@@ -176,31 +193,26 @@ class _PageScaffoldState extends State<PageScaffold> {
                       child: widget.body,
                     ),
                     if (!isTableOrMobile(context)) ...[
-                      Consumer<ProfileProvider>(
-                        builder: (context, profileProviderValue, child) {
-                          return !profileProviderValue.showConectionRequestPopo
-                              ? Di.ESB
-                              : Positioned(
-                                  right: Di.getScreenSize(context).width < 1301
-                                      ? 65
-                                      : 195,
-                                  child: const ProfileConnectionRequestPopup(),
-                                );
-                        },
-                      ),
-                      Consumer<ProfileProvider>(
-                        builder: (context, profileProviderValue, child) {
-                          return !profileProviderValue.showProfileSubMenus
-                              ? Di.ESB
-                              : Positioned(
-                                  right: Di.getScreenSize(context).width < 1301
-                                      ? 5
-                                      : 130,
-                                  child: const ProfileSubMenuPopup(),
-                                );
-                        },
-                      ),
-                    ]
+                      !(Provider.of<ProfileProvider>(context)
+                              .showConectionRequestPopo)
+                          ? Di.ESB
+                          : Positioned(
+                              right: Di.getScreenSize(context).width < 1301
+                                  ? 65
+                                  : 195,
+                              child: const ProfileConnectionRequestPopup(),
+                            ),
+                      // !profileProviderValue.showProfileSubMenus
+                      !(Provider.of<ProfileProvider>(context)
+                              .showProfileSubMenus)
+                          ? Di.ESB
+                          : Positioned(
+                              right: Di.getScreenSize(context).width < 1301
+                                  ? 5
+                                  : 130,
+                              child: const ProfileSubMenuPopup(),
+                            ),
+                    ],
                   ],
                 ),
               );
@@ -363,7 +375,7 @@ class BuildAppbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appState = Provider.of<ProfileProvider>(context);
+    final appState = Provider.of<AppProvider>(context);
     final bool isMobile = Responsive.isMobile(context);
     final menuItems = Get.put(HoledoDatabase()).menuItems;
     final bool isDesktop = Responsive.isDesktop(context);

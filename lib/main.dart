@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart' as fr;
 import 'package:holedo/layouts/page_scaffold.dart';
 import 'package:holedo/layouts/pages/content_page.dart';
 import 'package:holedo/includes/url_strategy.dart';
 import 'package:holedo/models/models.dart';
+import 'package:holedo/profile/presentation/providers/app_provider.dart';
 
 import 'package:holedo/profile/presentation/theme/light_theme.dart';
 import 'package:intercom_flutter/intercom_flutter.dart';
@@ -88,7 +88,7 @@ RouteMap _buildRouteMap(BuildContext context) {
             ),
           ),
       '/logout': (route) {
-        final appState = Provider.of<ProfileProvider>(context, listen: false);
+        final appState = Provider.of<AppProvider>(context, listen: false);
         if (appState.isLoggedIn) {
           appState.username = null;
           appState.profile = null;
@@ -187,14 +187,14 @@ RouteMap _buildRouteMap(BuildContext context) {
             ),
           ),
       '/profile': (route) {
-        final appState = Provider.of<ProfileProvider>(context, listen: false);
+        final appState = Provider.of<AppProvider>(context, listen: false);
         if (appState.isLoggedIn) {
           return Redirect('/profile/${appState.profile?.slug}');
         }
         return Redirect('/login', queryParameters: {'redirectTo': route.path});
       },
       '/profile/:slug': (route) {
-        final appState = Provider.of<ProfileProvider>(context, listen: false);
+        final appState = Provider.of<AppProvider>(context, listen: false);
         if (appState.isLoggedIn &&
             route.pathParameters['slug'] == appState.profile?.slug) {
           return NoAnimationPage(
@@ -210,7 +210,7 @@ RouteMap _buildRouteMap(BuildContext context) {
       },
       //'/profile/add': (route) => AddProfilePage(),
       '/interactive/:id': (route) {
-        final appState = Provider.of<ProfileProvider>(context, listen: false);
+        final appState = Provider.of<AppProvider>(context, listen: false);
 
         if (appState.isLoggedIn) {
           return NoAnimationPage(
@@ -253,55 +253,56 @@ class HoledoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return fr.ProviderScope(
-      child: MultiProvider(
-        providers: [
-          ChangeNotifierProvider(
-            create: (context) => ProfileProvider(
-              username: Get.put(HoledoDatabase()).getModel().user?.fullName,
-              profile: Get.put(HoledoDatabase()).getModel().user,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => AppProvider(
+            username: Get.put(HoledoDatabase()).getModel().user?.fullName,
+            profile: Get.put(HoledoDatabase()).getModel().user,
+          ),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ProfileProvider(),
+        ),
+      ],
+      child: MaterialApp.router(
+        title: 'Holedo',
+        builder: (context, child) => ResponsiveWrapper.builder(
+          ClampingScrollWrapper.builder(context, child!),
+          breakpoints: [
+            const ResponsiveBreakpoint.autoScaleDown(
+              450,
+              name: "SmallMobile",
             ),
-          ),
-        ],
-        child: MaterialApp.router(
-          title: 'Holedo',
-          builder: (context, child) => ResponsiveWrapper.builder(
-            ClampingScrollWrapper.builder(context, child!),
-            breakpoints: [
-              const ResponsiveBreakpoint.autoScaleDown(
-                450,
-                name: "SmallMobile",
-              ),
-              const ResponsiveBreakpoint.resize(460, name: "Mobile"),
-              const ResponsiveBreakpoint.resize(750, name: MOBILE),
-              const ResponsiveBreakpoint.resize(1000, name: TABLET),
-              const ResponsiveBreakpoint.resize(1300, name: DESKTOP),
-              const ResponsiveBreakpoint.autoScale(1301, name: "Desktop"),
-            ],
-          ),
-          debugShowCheckedModeBanner: false,
-          theme: lightTheme,
-          // theme: ThemeData(
-          //   primaryColor: Color(0xFF131921),
-          //   elevatedButtonTheme: ElevatedButtonThemeData(
-          //     style: ElevatedButton.styleFrom(
-          //       primary: Color(0xfffebd68),
-          //       onPrimary: Color(0xff333333),
-          //     ),
-          //   ),
-          //   platform: TargetPlatform.macOS,
-          // ),
-          routeInformationParser: const RoutemasterParser(),
-          routeInformationProvider: routeInformationProvider,
-          routerDelegate: RoutemasterDelegate(
-            routesBuilder: (context) {
-              final state = Provider.of<ProfileProvider>(context);
-              // Provider.of<ProfileProvider>(context).profile = Get.put(HoledoDatabase()).getModel().user ?? null;
-              return siteBlockedWithoutLogin && !state.isLoggedIn
-                  ? loggedOutRouteMap
-                  : _buildRouteMap(context);
-            },
-          ),
+            const ResponsiveBreakpoint.resize(460, name: "Mobile"),
+            const ResponsiveBreakpoint.resize(750, name: MOBILE),
+            const ResponsiveBreakpoint.resize(1000, name: TABLET),
+            const ResponsiveBreakpoint.resize(1300, name: DESKTOP),
+            const ResponsiveBreakpoint.autoScale(1301, name: "Desktop"),
+          ],
+        ),
+        debugShowCheckedModeBanner: false,
+        theme: lightTheme,
+        // theme: ThemeData(
+        //   primaryColor: Color(0xFF131921),
+        //   elevatedButtonTheme: ElevatedButtonThemeData(
+        //     style: ElevatedButton.styleFrom(
+        //       primary: Color(0xfffebd68),
+        //       onPrimary: Color(0xff333333),
+        //     ),
+        //   ),
+        //   platform: TargetPlatform.macOS,
+        // ),
+        routeInformationParser: const RoutemasterParser(),
+        routeInformationProvider: routeInformationProvider,
+        routerDelegate: RoutemasterDelegate(
+          routesBuilder: (context) {
+            final state = Provider.of<AppProvider>(context);
+            // Provider.of<AppProvider>(context).profile = Get.put(HoledoDatabase()).getModel().user ?? null;
+            return siteBlockedWithoutLogin && !state.isLoggedIn
+                ? loggedOutRouteMap
+                : _buildRouteMap(context);
+          },
         ),
       ),
     );

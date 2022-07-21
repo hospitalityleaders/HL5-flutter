@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:holedo/profile/application//shared/providers.dart';
+
 import 'package:holedo/models/holedoapi/achievement.dart';
 import 'package:holedo/models/holedoapi/education.dart';
 import 'package:holedo/models/holedoapi/experience.dart';
@@ -16,6 +15,8 @@ import 'package:holedo/profile/presentation/utill/color_resources.dart';
 import 'package:holedo/profile/presentation/utill/dimensions.dart';
 import 'package:holedo/profile/presentation/utill/images.dart';
 import 'package:holedo/profile/presentation/utill/styles.dart';
+import 'package:holedo/profile/presentation/providers/profile_provider.dart';
+import 'package:provider/provider.dart';
 
 class TimelineSection extends StatefulWidget {
   const TimelineSection({
@@ -41,11 +42,13 @@ class _TimelineSectionState extends State<TimelineSection> {
             child: SizedBox(
               width: 360,
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: const [
                   ProfileCompletionComponent(),
                   Di.SBHEL,
                   ConnectionsComponent(),
                   ProfileAdsComponent(),
+                  Di.SBHL,
                   RightsComponent(),
                 ],
               ),
@@ -58,22 +61,22 @@ class _TimelineSectionState extends State<TimelineSection> {
   }
 }
 
-class TimelineSectionComponent extends ConsumerStatefulWidget {
+class TimelineSectionComponent extends StatefulWidget {
   const TimelineSectionComponent({
     Key? key,
   }) : super(key: key);
 
   @override
-  ConsumerState<TimelineSectionComponent> createState() =>
+  State<TimelineSectionComponent> createState() =>
       _TimelineSectionComponentState();
 }
 
-class _TimelineSectionComponentState
-    extends ConsumerState<TimelineSectionComponent> {
-  late final List<TimelineClass> timelineClasslist;
+class _TimelineSectionComponentState extends State<TimelineSectionComponent> {
+  List<TimelineClass>? timelineClasslist;
 
   List<TimelineClass> getTimelines() {
-    final userProfileData = ref.watch(profileNotifierProvider).userProfileData!;
+    final userProfileData =
+        Provider.of<ProfileProvider>(context).userProfileData!;
     final experiences = userProfileData.experiences;
     final achievements = userProfileData.achievements;
     final educations = userProfileData.educations;
@@ -127,38 +130,40 @@ class _TimelineSectionComponentState
   @override
   Widget build(BuildContext context) {
     timelineClasslist = getTimelines();
-    return SizedBox(
-      width: 620,
-      child: ListView.builder(
-        shrinkWrap: true,
-        itemCount: timelineClasslist.length,
-        itemBuilder: (context, index) {
-          final TimelineClass timelineClass = timelineClasslist[index];
-          if (timelineClass.timelineClassType == TimelineClassTypes.Education) {
-            // return Di.ESB;
-            return EducationTimeLineWidget(
-              showComments: index == timelineClasslist.length - 1,
-              education: timelineClass.timeline as Education,
-            );
-          } else if (timelineClass.timelineClassType ==
-              TimelineClassTypes.Achievement) {
-            // return Di.ESB;
+    return (timelineClasslist != null)
+        ? SizedBox(
+            width: 620,
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: timelineClasslist!.length,
+              itemBuilder: (context, index) {
+                final TimelineClass timelineClass = timelineClasslist![index];
+                if (timelineClass.timelineClassType ==
+                    TimelineClassTypes.Education) {
+                  return EducationTimeLineWidget(
+                    showComments: index == timelineClasslist!.length - 1,
+                    education: timelineClass.timeline as Education,
+                  );
+                } else if (timelineClass.timelineClassType ==
+                    TimelineClassTypes.Achievement) {
+                  // return Di.ESB;
 
-            return AchievementTimeLineWidget(
-              showComments: index == timelineClasslist.length - 1,
-              achievement: timelineClass.timeline as Achievement,
-            );
-          } else if (timelineClass.timelineClassType ==
-              TimelineClassTypes.Experience) {
-            return ExperienceTimeLineWidget(
-              showComments: index == timelineClasslist.length - 1,
-              experience: timelineClass.timeline as Experience,
-            );
-          }
-          return Di.ESB;
-        },
-      ),
-    );
+                  return AchievementTimeLineWidget(
+                    showComments: index == timelineClasslist!.length - 1,
+                    achievement: timelineClass.timeline as Achievement,
+                  );
+                } else if (timelineClass.timelineClassType ==
+                    TimelineClassTypes.Experience) {
+                  return ExperienceTimeLineWidget(
+                    showComments: index == timelineClasslist!.length - 1,
+                    experience: timelineClass.timeline as Experience,
+                  );
+                }
+                return Di.ESB;
+              },
+            ),
+          )
+        : Di.ESB;
   }
 }
 

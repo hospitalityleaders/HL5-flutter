@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:holedo/layouts/pages/news/NewsSingle/jobs_no_jobs.dart';
 import 'package:holedo/layouts/pages/news/NewsSingle/news_single_logged_in.dart';
 import 'package:holedo/layouts/pages/news/NewsSingle/news_single_logged_out.dart';
 import 'package:holedo/main.dart';
 import 'package:holedo/models/holedoapi/article.dart';
 import 'package:holedo/models/models.dart';
 import 'package:holedo/layouts/page_scaffold.dart';
+import 'package:holedo/profile/presentation/providers/app_provider.dart';
 
 class NewsPage extends StatelessWidget {
   final String? id;
@@ -23,7 +23,7 @@ class NewsPage extends StatelessWidget {
     final categories = Get.put(HoledoDatabase())
         .articleCategories
         .where((category) => category.menuItem == true);
-    final appState = Provider.of<ProfileProvider>(context, listen: false);
+    final appState = Provider.of<AppProvider>(context, listen: false);
     return PageScaffold(
       title: 'Home Page',
       body: !appState.isLoggedIn

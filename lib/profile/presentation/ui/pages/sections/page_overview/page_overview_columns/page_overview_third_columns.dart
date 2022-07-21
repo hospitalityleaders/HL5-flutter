@@ -60,6 +60,8 @@ class ProfileAdsComponent extends StatelessWidget {
     });
     debugPrint('set22: ${future.toString()} ${match[1]!.toString()}');
     return Container(
+      width: 365,
+      height: 280,
       decoration: boxDecoration.copyWith(color: Cr.whiteColor),
       padding: const EdgeInsets.all(Di.PSD),
       child: Center(

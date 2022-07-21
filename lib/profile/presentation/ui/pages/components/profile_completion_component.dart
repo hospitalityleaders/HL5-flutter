@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart' hide Provider;
+
 import 'package:flutter_svg/svg.dart';
-import 'package:holedo/profile/application//shared/providers.dart';
-import 'package:holedo/db_data.dart';
 import 'package:holedo/profile/presentation/providers/profile_provider.dart';
 import 'package:holedo/profile/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/profile/presentation/ui/components/text_with_background.dart';
@@ -13,14 +11,16 @@ import 'package:holedo/profile/presentation/utill/styles.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 
-class ProfileCompletionComponent extends ConsumerWidget {
+class ProfileCompletionComponent extends StatelessWidget {
   const ProfileCompletionComponent({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final userProfileData = ref.watch(profileNotifierProvider).userProfileData!;
+  Widget build(BuildContext context) {
+    final userProfileData = Provider.of<ProfileProvider>(context)
+        //  Provider.of<ProfileProvider>(context)
+        .userProfileData!;
     final bool experienceAdded = userProfileData.experiences != null ||
         userProfileData.experiences!.isNotEmpty;
     final bool qualificationAdded = (userProfileData.educations == null ||
@@ -111,8 +111,9 @@ class ProfileCompletionComponent extends ConsumerWidget {
             Di.SBHL,
             CustomElevatedButton(
               onPressed: () {
-                ref
-                    .read(profileNotifierProvider.notifier)
+                // ref
+                //     .read(profileNotifierProvider.notifier)
+                Provider.of<ProfileProvider>(context, listen: false)
                     .changeIsProfieEditableState(true);
               },
               width: 320,

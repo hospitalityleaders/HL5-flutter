@@ -85,7 +85,7 @@ class _MobileTimelineSection extends StatefulWidget {
 class _MobileTimelineSectionState extends State<_MobileTimelineSection> {
   @override
   Widget build(BuildContext context) {
-    // final userProfileData = ref.watch(profileNotifierProvider).userProfileData!;
+    // final userProfileData = Provider.of<ProfileProvider>(context).userProfileData!;
     // return _ProfileMobileTimelineTile(
     //   jobDescriptionInHtml: jobDescriptionInHtml,
     //   showComments: showComments,

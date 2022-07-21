@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_expanded_tile/flutter_expanded_tile.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:holedo/profile/application//shared/providers.dart';
 import 'package:holedo/models/models.dart';
 import 'package:holedo/profile/presentation/data/presentation_data.dart';
 import 'package:holedo/profile/presentation/functions/helper_functions.dart';
-import 'package:holedo/profile/presentation/providers/profile_provider.dart';
 import 'package:holedo/profile/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/profile/presentation/ui/pages/profile_dialogs/dialog_widgets.dart';
 import 'package:holedo/profile/presentation/utill/color_resources.dart';
@@ -15,7 +13,7 @@ import 'package:holedo/profile/presentation/utill/images.dart';
 import 'package:holedo/profile/presentation/utill/nav.dart';
 import 'package:holedo/profile/presentation/utill/styles.dart';
 
-class ProfileDetailsExpandedTile extends ConsumerStatefulWidget {
+class ProfileDetailsExpandedTile extends StatefulWidget {
   final bool isExpanded;
   const ProfileDetailsExpandedTile({
     Key? key,
@@ -25,12 +23,12 @@ class ProfileDetailsExpandedTile extends ConsumerStatefulWidget {
   final User userProfileData;
 
   @override
-  ConsumerState<ProfileDetailsExpandedTile> createState() =>
+  State<ProfileDetailsExpandedTile> createState() =>
       _ProfileDetailsExpandedTileState();
 }
 
 class _ProfileDetailsExpandedTileState
-    extends ConsumerState<ProfileDetailsExpandedTile> {
+    extends State<ProfileDetailsExpandedTile> {
   String? selectedValue;
   bool currentlyWorkHere = false;
 
@@ -72,7 +70,9 @@ class _ProfileDetailsExpandedTileState
 
   @override
   Widget build(BuildContext context) {
-    final userProfileData = ref.watch(profileNotifierProvider).userProfileData!;
+    // final userProfileData = Provider.of<ProfileProvider>(context).userProfileData!;
+    final userProfileData =
+        Provider.of<ProfileProvider>(context).userProfileData;
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: Di.PSL),
       color: Cr.whiteColor,
@@ -247,12 +247,13 @@ class _ProfileDetailsExpandedTileState
                             lastName: _surnameController.text,
                             area: _cityAreaController.text,
                             countryId: countryId,
-                          ).save(userProfileData);
-                          ref
-                              .read(profileNotifierProvider.notifier)
+                          ).save(userProfileData!);
+                          Provider.of<ProfileProvider>(context)
+                              // ref
+                              //     .read(profileNotifierProvider.notifier)
                               .changeAppNotificationState(
-                                const AppNotificationState.sucess(),
-                              );
+                            const AppNotificationState.sucess(),
+                          );
                           Nav.profile(context);
                           Nav.pop(context);
                           Nav.pop(context);

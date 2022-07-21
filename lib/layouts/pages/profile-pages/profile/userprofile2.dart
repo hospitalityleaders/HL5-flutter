@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:holedo/layouts/pages/profile-pages/profile/header_card.dart';
 import 'package:holedo/layouts/pages/profile-pages/timeline/timeline.dart';
 import 'package:holedo/models/models.dart';
+import 'package:holedo/profile/presentation/providers/app_provider.dart';
 import 'package:holedo/responsive/responsive.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
@@ -9,8 +10,6 @@ import 'package:holedo/constant/sizedbox.dart';
 import 'package:holedo/layouts/pages/profile-pages/profile-edit/profile_edit.dart';
 import 'package:holedo/layouts/pages/profile-pages/profile-overview/profile_overview.dart';
 import 'package:holedo/layouts/pages/profile-pages/references/references.dart';
-
-import 'package:holedo/constant/fontStyle/font_style.dart';
 
 class GlobalKeys {
   static final refKey = GlobalKey();
@@ -208,7 +207,7 @@ class _UserProfilePageState extends State<UserProfilePage>
 
   @override
   Widget build(BuildContext context) {
-    final appState = Provider.of<ProfileProvider>(context);
+    final appState = Provider.of<AppProvider>(context);
     final bool isMine = appState.isLoginnedAndEditable(widget.userProfileData);
     debugPrint('app $isEditable');
     return Responsive.isDesktop(context)

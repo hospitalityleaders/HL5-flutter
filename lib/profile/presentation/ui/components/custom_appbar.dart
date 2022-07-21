@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart' hide Provider;
+
 import 'package:flutter_svg/svg.dart';
-import 'package:holedo/profile/application//shared/providers.dart';
 import 'package:holedo/models/models.dart' hide Provider;
-import 'package:holedo/profile/presentation/providers/profile_provider.dart';
+import 'package:holedo/profile/presentation/providers/app_provider.dart';
 import 'package:holedo/profile/presentation/ui/components/appbar_textfield.dart';
 import 'package:holedo/profile/presentation/ui/components/custom_icon_button.dart';
 import 'package:holedo/profile/presentation/ui/components/custom_text_button.dart';
@@ -93,7 +92,7 @@ class _CustomAppbarState extends State<CustomAppbar> {
               Di.DVZW,
               AppbarConnectionRequestButton(),
               Di.DVZW,
-              // _ProfileWithSubMenu(),
+              _ProfileWithSubMenu(),
               Di.DVZW,
             ],
           ),
@@ -144,14 +143,14 @@ class AppbarEmailButton extends StatelessWidget {
   }
 }
 
-class _ProfileWithSubMenu extends ConsumerWidget {
+class _ProfileWithSubMenu extends StatelessWidget {
   const _ProfileWithSubMenu({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context, ref) {
-    final appState = Provider.of<ProfileProvider>(context);
+  Widget build(BuildContext context) {
+    final appState = Provider.of<AppProvider>(context);
 
     return Row(
       children: [
@@ -172,14 +171,13 @@ class _ProfileWithSubMenu extends ConsumerWidget {
                 child: SizedBox(
                   width: 26,
                   height: 26,
-                  child: (appState.isLoggedIn)
+                  child: (appState.isLoggedIn &&
+                          Get.put(HoledoDatabase()).getModel().user!.avatar !=
+                              null)
                       ? CircleAvatar(
                           radius: 26,
                           backgroundImage: NetworkImage(
-                            ref
-                                .watch(profileNotifierProvider)
-                                .userProfileData!
-                                .avatar!,
+                            Get.put(HoledoDatabase()).getModel().user!.avatar!,
                           ),
                         )
                       : const Icon(
@@ -246,7 +244,7 @@ class AppbarConnectionRequestButton extends StatelessWidget {
   }
 }
 
-class SizedboxWithHover extends ConsumerWidget {
+class SizedboxWithHover extends StatelessWidget {
   const SizedboxWithHover({
     Key? key,
     this.isInHorizantal = false,
@@ -254,7 +252,7 @@ class SizedboxWithHover extends ConsumerWidget {
   final bool isInHorizantal;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return InkWell(
       onTap: () {},
       onHover: (hover) {

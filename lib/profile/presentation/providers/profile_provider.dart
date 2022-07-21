@@ -14,105 +14,123 @@ class AppNotificationState with _$AppNotificationState {
 }
 
 class ProfileProvider extends ChangeNotifier {
-  // bool isProfileEditable;
-  // bool showProfileLoading;
+  bool isProfileEditable;
+  bool showProfileLoading;
   bool showConectionRequestPopo;
   bool showProfileSubMenus;
   bool profileSubMenuClicked;
-  // int currentTabIndex;
+  int currentTabIndex;
   int percentageProfileCompleted;
-  // AppNotificationState appNotificationState;
-  ProfileProvider(
-      {this.showConectionRequestPopo = false,
-      this.showProfileSubMenus = false,
-      // this.isProfileEditable = false,
-      // this.showProfileLoading = false,
-      this.profileSubMenuClicked = false,
-      this.percentageProfileCompleted = 20,
-      // this.currentTabIndex = 0,
-      // this.appNotificationState = const AppNotificationState.profileCompletion(),
-      String? username,
-      User? profile})
-      : _username = username,
-        _profile = profile;
+  AppNotificationState appNotificationState;
+  User? userProfileData;
+  bool isMyProfile;
 
-  NewsController get news => Get.put(NewsController());
-  JobsController get jobs => Get.put(JobsController());
+  ProfileProvider({
+    this.showConectionRequestPopo = false,
+    this.showProfileSubMenus = false,
+    this.isProfileEditable = false,
+    this.showProfileLoading = false,
+    this.profileSubMenuClicked = false,
+    this.isMyProfile = false,
+    this.percentageProfileCompleted = 20,
+    this.currentTabIndex = 0,
+    this.userProfileData,
+    this.appNotificationState = const AppNotificationState.profileCompletion(),
+    // String? username,
+    // User? profile,
+  });
+  // : _username = username,
+  //   _profile = profile;
 
-  bool get isLoggedIn => _username != null;
+  // NewsController get news => Get.put(NewsController());
+  // JobsController get jobs => Get.put(JobsController());
 
-  String? _username;
-  String? _token;
-  User? _profile;
-  String? get username => _username;
+  // bool get isLoggedIn => _username != null;
 
-  set username(String? value) {
-    _username = value;
-    notifyListeners();
-  }
+  // String? _username;
+  // String? _token;
+  // User? _profile;
+  // String? get username => _username;
 
-  String? get token => _token;
-  set token(String? value) {
-    _token = value;
-    notifyListeners();
-  }
-
-  bool isLoginnedAndEditable(User data) {
-    debugPrint('p: ${profile?.slug} ${data.slug}');
-    if (profile?.slug != null) {
-      if (data.slug == profile?.slug) {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
-  User? get profile => _profile;
-  set profile(User? data) {
-    _profile = data;
-    _username = data?.fullName;
-    notifyListeners();
-  }
-
-  final List<User> _profiles = [];
-  Iterable<User> get profiles => List.unmodifiable(_profiles);
-
-  void addProfile(User data) {
-    _profiles.add(data);
-    notifyListeners();
-  }
-
-  Future<DataModel> saveProfile(User data) async {
-    data.id = _profile?.id;
-    // ignore: unused_local_variable
-
-    //data.slug = _profile?.slug;
-    //this.token = profile.token;
-    final dataModel = await Get.put(HoledoDatabase().users).saveProfile(data);
-    _profile = dataModel.user as User;
-    return dataModel;
-  }
-
-  // void changeAppNotificationState(AppNotificationState appNotificationState) {
-  //   this.appNotificationState = appNotificationState;
+  // set username(String? value) {
+  //   _username = value;
   //   notifyListeners();
   // }
 
-  void changeUserProfilePercentage(bool isLoggedIn) {
+  // String? get token => _token;
+  // set token(String? value) {
+  //   _token = value;
+  //   notifyListeners();
+  // }
+
+  // bool isLoginnedAndEditable(User data) {
+  //   debugPrint('p: ${profile?.slug} ${data.slug}');
+  //   if (profile?.slug != null) {
+  //     if (data.slug == profile?.slug) {
+  //       return true;
+  //     }
+  //   }
+
+  //   return false;
+  // }
+
+  void initializeProfile({required User user, required bool isMyProfile}) {
+    this.isMyProfile = isMyProfile;
+    if (isMyProfile) {
+      userProfileData = Get.put(HoledoDatabase()).getModel().user!;
+    } else {
+      userProfileData = user;
+    }
+    changeUserProfilePercentage();
+  }
+
+  // User? get profile => _profile;
+  // set profile(User? data) {
+  //   _profile = data;
+  //   _username = data?.fullName;
+  //   notifyListeners();
+  // }
+
+  // final List<User> _profiles = [];
+  // Iterable<User> get profiles => List.unmodifiable(_profiles);
+
+  // void addProfile(User data) {
+  //   _profiles.add(data);
+  //   notifyListeners();
+  // }
+
+  // Future<DataModel> saveProfile(User data) async {
+  //   data.id = _profile?.id;
+  //   // ignore: unused_local_variable
+
+  //   //data.slug = _profile?.slug;
+  //   //this.token = profile.token;
+  //   final dataModel = await Get.put(HoledoDatabase().users).saveProfile(data);
+  //   _profile = dataModel.user as User;
+  //   return dataModel;
+  // }
+
+  void changeAppNotificationState(AppNotificationState appNotificationState) {
+    this.appNotificationState = appNotificationState;
+    notifyListeners();
+  }
+
+  void changeUserProfilePercentage() {
     int percentage = 20;
-    if (isLoggedIn) {
-      final userProfileData = Get.put(HoledoDatabase()).getModel().user!;
-      final bool experienceAdded = userProfileData.experiences != null ||
-          userProfileData.experiences!.isNotEmpty;
-      final bool qualificationAdded = (userProfileData.educations == null ||
-              userProfileData.educations!.isNotEmpty) ||
-          (userProfileData.educations!.first.qualification == null ||
-              userProfileData.educations!.first.qualification != null);
-      final bool expertiseAdded = userProfileData.expertise == null ||
-          userProfileData.expertise!.isNotEmpty;
-      final bool languagesAdded = userProfileData.languages == null ||
-          userProfileData.languages!.isNotEmpty;
+    //TODO
+    // if (isLoggedIn) {
+    if (true) {
+      final _userProfileData = Get.put(HoledoDatabase()).getModel().user!;
+      final bool experienceAdded = _userProfileData.experiences != null ||
+          _userProfileData.experiences!.isNotEmpty;
+      final bool qualificationAdded = (_userProfileData.educations == null ||
+              _userProfileData.educations!.isNotEmpty) ||
+          (_userProfileData.educations!.first.qualification == null ||
+              _userProfileData.educations!.first.qualification != null);
+      final bool expertiseAdded = _userProfileData.expertise == null ||
+          _userProfileData.expertise!.isNotEmpty;
+      final bool languagesAdded = _userProfileData.languages == null ||
+          _userProfileData.languages!.isNotEmpty;
 
       if (experienceAdded) {
         percentage += 20;
@@ -138,11 +156,10 @@ class ProfileProvider extends ChangeNotifier {
   //   notifyListeners();
   // }
 
-  // void changeCurrentTabIndex(int currentTabIndex) {
-  //   this.currentTabIndex = currentTabIndex;
-
-  //   notifyListeners();
-  // }
+  void changeCurrentTabIndex(int currentTabIndex) {
+    this.currentTabIndex = currentTabIndex;
+    notifyListeners();
+  }
 
   void changeConectionRequestPopupState(bool showPopup) {
     if (showPopup == true && showConectionRequestPopo == false) {
@@ -180,8 +197,8 @@ class ProfileProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // void changeIsProfieEditableState(bool isEditable) {
-  //   isProfileEditable = isEditable;
-  //   notifyListeners();
-  // }
+  void changeIsProfieEditableState(bool isEditable) {
+    isProfileEditable = isEditable;
+    notifyListeners();
+  }
 }

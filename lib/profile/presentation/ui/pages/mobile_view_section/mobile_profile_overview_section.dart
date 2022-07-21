@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:holedo/profile/application//shared/providers.dart';
 import 'package:holedo/profile/presentation/ui/components/appbar_textfield.dart';
 import 'package:holedo/profile/presentation/ui/components/custom_appbar.dart';
 import 'package:holedo/profile/presentation/ui/components/custom_icon_button.dart';
@@ -20,8 +19,10 @@ import 'package:holedo/profile/presentation/utill/dimensions.dart';
 import 'package:holedo/profile/presentation/utill/images.dart';
 import 'package:holedo/profile/presentation/utill/responsive.dart';
 import 'package:holedo/profile/presentation/utill/styles.dart';
+import 'package:holedo/profile/presentation/providers/profile_provider.dart';
+import 'package:provider/provider.dart';
 
-class MobileProfileOverviewSection extends ConsumerWidget {
+class MobileProfileOverviewSection extends StatelessWidget {
   const MobileProfileOverviewSection({
     Key? key,
     required this.isMobilePhn,
@@ -32,8 +33,9 @@ class MobileProfileOverviewSection extends ConsumerWidget {
   final bool isTablt;
 
   @override
-  Widget build(BuildContext context, ref) {
-    final userProfileData = ref.watch(profileNotifierProvider).userProfileData!;
+  Widget build(BuildContext context) {
+    final userProfileData =
+        Provider.of<ProfileProvider>(context).userProfileData!;
     return Container(
       color: Cr.backgroundColor,
       padding: const EdgeInsets.symmetric(

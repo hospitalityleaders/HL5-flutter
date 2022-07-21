@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:holedo/profile/application//shared/providers.dart';
+
 import 'package:holedo/models/holedoapi/received_reference.dart';
+import 'package:holedo/profile/presentation/providers/profile_provider.dart';
 import 'package:holedo/profile/presentation/ui/components/custom_text_button.dart';
 import 'package:holedo/profile/presentation/ui/components/person_avatar.dart';
 import 'package:holedo/profile/presentation/ui/components/view_timeline_edit_profile_submenu.dart';
@@ -13,8 +13,9 @@ import 'package:holedo/profile/presentation/ui/pages/sections/page_overview/page
 import 'package:holedo/profile/presentation/utill/color_resources.dart';
 import 'package:holedo/profile/presentation/utill/dimensions.dart';
 import 'package:holedo/profile/presentation/utill/styles.dart';
+import 'package:provider/provider.dart';
 
-class ProfileReferenceComponent extends ConsumerStatefulWidget {
+class ProfileReferenceComponent extends StatefulWidget {
   const ProfileReferenceComponent({
     Key? key,
     this.isMobile = false,
@@ -22,18 +23,20 @@ class ProfileReferenceComponent extends ConsumerStatefulWidget {
   final bool isMobile;
 
   @override
-  ConsumerState<ProfileReferenceComponent> createState() =>
+  State<ProfileReferenceComponent> createState() =>
       _ProfileReferenceComponentState();
 }
 
-class _ProfileReferenceComponentState
-    extends ConsumerState<ProfileReferenceComponent> {
+class _ProfileReferenceComponentState extends State<ProfileReferenceComponent> {
   bool showSubMenu = false;
 
   @override
   Widget build(BuildContext context) {
     final List<ReceivedReference>? receivedReferences =
-        ref.watch(profileNotifierProvider).userProfileData!.receivedReferences;
+        // Provider.of<ProfileProvider>(context).
+        Provider.of<ProfileProvider>(context)
+            .userProfileData!
+            .receivedReferences;
     return DecoratedBox(
       decoration: boxDecoration.copyWith(color: Cr.whiteColor),
       child: Column(
@@ -173,8 +176,11 @@ class _ProfileReferenceComponentState
                           showCustomDialog(
                             context,
                             ProfileMyReferenceDialogWidget(
-                              userProfileData: ref
-                                  .watch(profileNotifierProvider)
+                              userProfileData: Provider.of<ProfileProvider>(
+                                context,
+                              )
+                                  // ref
+                                  //     .watch(profileNotifierProvider)
                                   .userProfileData!,
                             ),
                           );

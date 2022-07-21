@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:holedo/profile/application//shared/providers.dart';
+import 'package:holedo/models/models.dart';
 import 'package:holedo/profile/presentation/ui/components/onhover.dart';
 import 'package:holedo/profile/presentation/ui/components/person_avatar.dart';
 import 'package:holedo/profile/presentation/utill/color_resources.dart';
@@ -11,14 +11,16 @@ import 'package:holedo/profile/presentation/utill/images.dart';
 import 'package:holedo/profile/presentation/utill/nav.dart';
 import 'package:holedo/profile/presentation/utill/styles.dart';
 
-class ContactCardDialogWidget extends ConsumerWidget {
+class ContactCardDialogWidget extends StatelessWidget {
   const ContactCardDialogWidget({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context, ref) {
-    final userProfileData = ref.watch(profileNotifierProvider).userProfileData!;
+  Widget build(BuildContext context) {
+    // final userProfileData = Provider.of<ProfileProvider>(context).userProfileData!;
+    final userProfileData =
+        Provider.of<ProfileProvider>(context).userProfileData!;
     return Container(
       color: Cr.whiteColor,
       width: 560,
@@ -144,15 +146,18 @@ class ContactCardDialogWidget extends ConsumerWidget {
   }
 }
 
-class _ProfessionalTitle extends ConsumerWidget {
+class _ProfessionalTitle extends StatelessWidget {
   const _ProfessionalTitle({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context, ref) {
+  Widget build(BuildContext context) {
     return Text(
-      ref.watch(profileNotifierProvider).userProfileData!.professionalTitle ??
+      Provider.of<ProfileProvider>(context)
+              .userProfileData
+              ?.professionalTitle ??
+          // Provider.of<ProfileProvider>(context).userProfileData!.professionalTitle ??
           "",
       style: bodyLarge.copyWith(
         color: Cr.darkGrey1,
@@ -161,15 +166,17 @@ class _ProfessionalTitle extends ConsumerWidget {
   }
 }
 
-class _FullName extends ConsumerWidget {
+class _FullName extends StatelessWidget {
   const _FullName({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context, ref) {
+  Widget build(BuildContext context) {
     return Text(
-      ref.watch(profileNotifierProvider).userProfileData!.fullName ?? "",
+      // Provider.of<ProfileProvider>(context).userProfileData!.fullName ?? "",
+      Provider.of<ProfileProvider>(context).userProfileData?.fullName ?? "",
+
       style: h2Regular,
     );
   }

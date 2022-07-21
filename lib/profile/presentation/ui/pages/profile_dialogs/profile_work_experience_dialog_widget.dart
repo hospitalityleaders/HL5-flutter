@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:holedo/profile/application//shared/providers.dart';
+
 import 'package:holedo/models/holedoapi/experience.dart';
 import 'package:holedo/models/models.dart';
 import 'package:holedo/profile/presentation/data/presentation_data.dart';
@@ -113,7 +113,7 @@ class _ProfileWorkExperienceDialogWidgetState
   }
 }
 
-class _SingleWorkExperience extends ConsumerStatefulWidget {
+class _SingleWorkExperience extends StatefulWidget {
   const _SingleWorkExperience({
     Key? key,
     this.experience,
@@ -125,11 +125,10 @@ class _SingleWorkExperience extends ConsumerStatefulWidget {
   final int? index;
 
   @override
-  ConsumerState<_SingleWorkExperience> createState() =>
-      __SingleWorkExperienceState();
+  State<_SingleWorkExperience> createState() => __SingleWorkExperienceState();
 }
 
-class __SingleWorkExperienceState extends ConsumerState<_SingleWorkExperience> {
+class __SingleWorkExperienceState extends State<_SingleWorkExperience> {
   late final TextEditingController _titlePositionController;
   late final TextEditingController _companyNameController;
   late final TextEditingController _companyWebsiteController;
@@ -195,7 +194,8 @@ class __SingleWorkExperienceState extends ConsumerState<_SingleWorkExperience> {
 
   @override
   Widget build(BuildContext context) {
-    final userProfileData = ref.watch(profileNotifierProvider).userProfileData!;
+    final userProfileData =
+        Provider.of<ProfileProvider>(context).userProfileData!;
 
     return CustomExpandedTile(
       title: Column(

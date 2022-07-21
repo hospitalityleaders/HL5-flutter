@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_expanded_tile/flutter_expanded_tile.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:holedo/profile/application//shared/providers.dart';
+
 import 'package:holedo/models/models.dart';
 import 'package:holedo/profile/presentation/functions/image_upload_functions.dart';
 import 'package:holedo/profile/presentation/ui/components/custom_elevated_button.dart';
@@ -627,7 +627,7 @@ class PrivacyDropDown extends StatelessWidget {
   }
 }
 
-class _ProfilePictureDialogExpandedTile extends ConsumerStatefulWidget {
+class _ProfilePictureDialogExpandedTile extends StatefulWidget {
   final bool isExpanded;
   const _ProfilePictureDialogExpandedTile({
     Key? key,
@@ -635,12 +635,12 @@ class _ProfilePictureDialogExpandedTile extends ConsumerStatefulWidget {
   }) : super(key: key);
 
   @override
-  ConsumerState<_ProfilePictureDialogExpandedTile> createState() =>
+  State<_ProfilePictureDialogExpandedTile> createState() =>
       __ProfilePictureDialogExpandedTileState();
 }
 
 class __ProfilePictureDialogExpandedTileState
-    extends ConsumerState<_ProfilePictureDialogExpandedTile> {
+    extends State<_ProfilePictureDialogExpandedTile> {
   String? selectedValue;
   bool currentlyWorkHere = false;
   late ExpandedTileController expandedTileController;
@@ -662,7 +662,8 @@ class __ProfilePictureDialogExpandedTileState
 
   @override
   Widget build(BuildContext context) {
-    final userProfileData = ref.watch(profileNotifierProvider).userProfileData!;
+    final userProfileData =
+        Provider.of<ProfileProvider>(context).userProfileData!;
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: Di.PSL),

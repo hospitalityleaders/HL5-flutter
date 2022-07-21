@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart' hide Provider;
-import 'package:holedo/profile/application//shared/providers.dart';
-import 'package:holedo/models/models.dart';
 
-class PersonAvatar extends ConsumerWidget {
+import 'package:holedo/models/models.dart';
+import 'package:holedo/profile/presentation/providers/app_provider.dart';
+
+class PersonAvatar extends StatelessWidget {
   const PersonAvatar({
     Key? key,
     this.avatarSize,
@@ -12,19 +12,22 @@ class PersonAvatar extends ConsumerWidget {
   final double? avatarSize;
 
   @override
-  Widget build(BuildContext context, ref) {
-    final isLogin = Provider.of<ProfileProvider>(context).isLoggedIn;
+  Widget build(BuildContext context) {
+    final isLogin = Provider.of<AppProvider>(context).isLoggedIn;
     return Container(
       width: avatarSize ?? 28,
       height: avatarSize ?? 28,
       decoration: BoxDecoration(
         image: isLogin
             ? DecorationImage(
-                image: NetworkImage(ref
-                        .watch(profileNotifierProvider)
-                        .userProfileData!
-                        .avatar ??
-                    ""),
+                image: NetworkImage(
+                    // ref
+                    //       .watch(profileNotifierProvider)
+                    //       .userProfileData!
+                    Provider.of<ProfileProvider>(context)
+                            .userProfileData
+                            ?.avatar ??
+                        ""),
                 fit: BoxFit.cover,
               )
             : const DecorationImage(

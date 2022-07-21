@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:holedo/profile/application//shared/providers.dart';
 import 'package:holedo/models/models.dart';
 import 'package:holedo/profile/presentation/data/presentation_data.dart';
 import 'package:holedo/profile/presentation/ui/components/contact_card_dialog_widget.dart';
@@ -17,7 +16,7 @@ import 'package:holedo/profile/presentation/utill/dimensions.dart';
 import 'package:holedo/profile/presentation/utill/styles.dart';
 import 'package:tap_canvas/tap_canvas.dart';
 
-class ProfileImageBanner extends ConsumerStatefulWidget {
+class ProfileImageBanner extends StatefulWidget {
   const ProfileImageBanner({
     Key? key,
     this.onEditButtonPressed,
@@ -29,10 +28,10 @@ class ProfileImageBanner extends ConsumerStatefulWidget {
   final User userProfileData;
 
   @override
-  ConsumerState<ProfileImageBanner> createState() => _ProfileImageBannerState();
+  State<ProfileImageBanner> createState() => _ProfileImageBannerState();
 }
 
-class _ProfileImageBannerState extends ConsumerState<ProfileImageBanner> {
+class _ProfileImageBannerState extends State<ProfileImageBanner> {
   bool showProfileSubMenu = false;
   @override
   Widget build(BuildContext context) {
@@ -193,7 +192,11 @@ class _ProfileImageBannerState extends ConsumerState<ProfileImageBanner> {
           ),
         ),
 
-        if (ref.watch(profileNotifierProvider).isProfileEditable)
+        if (
+        // Provider.of<ProfileProvider>(context).
+        Provider.of<ProfileProvider>(
+          context,
+        ).isProfileEditable)
           Positioned(
             bottom: 10,
             right: 10,
@@ -209,7 +212,9 @@ class _ProfileImageBannerState extends ConsumerState<ProfileImageBanner> {
             ),
           ),
 
-        if (ref.watch(profileNotifierProvider).isProfileEditable)
+        if (
+        // Provider.of<ProfileProvider>(context)
+        Provider.of<ProfileProvider>(context).isProfileEditable)
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -227,7 +232,9 @@ class _ProfileImageBannerState extends ConsumerState<ProfileImageBanner> {
         else
           Di.ESB,
 
-        if (ref.watch(profileNotifierProvider).isProfileEditable)
+        if (
+        // Provider.of<ProfileProvider>(context)
+        Provider.of<ProfileProvider>(context).isProfileEditable)
           Positioned.fill(
             child: Align(
               child: RoundeIconButton(
@@ -277,7 +284,7 @@ class _ProfileImageBannerState extends ConsumerState<ProfileImageBanner> {
 //       decoration: boxDecorationRounded.copyWith(
 //         image: DecorationImage(
 //           image:
-//               NetworkImage(ref.watch(profileNotifierProvider).userProfileData!.avatar?.toString() ?? ""),
+//               NetworkImage(Provider.of<ProfileProvider>(context).userProfileData!.avatar?.toString() ?? ""),
 //           fit: BoxFit.cover,
 //         ),
 //       ),

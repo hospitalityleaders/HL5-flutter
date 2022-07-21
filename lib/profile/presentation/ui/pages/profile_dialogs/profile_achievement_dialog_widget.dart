@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart' hide Provider;
+
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:holedo/profile/application//shared/providers.dart';
 import 'package:holedo/main.dart';
 import 'package:holedo/models/holedoapi/achievement.dart';
 import 'package:holedo/models/models.dart';
 import 'package:holedo/profile/presentation/data/presentation_data.dart';
+import 'package:holedo/profile/presentation/providers/app_provider.dart';
 import 'package:holedo/profile/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/profile/presentation/ui/pages/profile_dialogs/custom_expanded_tile.dart';
 import 'package:holedo/profile/presentation/ui/pages/profile_dialogs/dialog_widgets.dart';
@@ -123,7 +123,7 @@ class AchievementType {
   AchievementType(this.title, this.icon);
 }
 
-class _SingleAchievement extends ConsumerStatefulWidget {
+class _SingleAchievement extends StatefulWidget {
   const _SingleAchievement({
     Key? key,
     this.achievement,
@@ -135,10 +135,10 @@ class _SingleAchievement extends ConsumerStatefulWidget {
   final int? index;
 
   @override
-  ConsumerState<_SingleAchievement> createState() => __SingleAchievementState();
+  State<_SingleAchievement> createState() => __SingleAchievementState();
 }
 
-class __SingleAchievementState extends ConsumerState<_SingleAchievement> {
+class __SingleAchievementState extends State<_SingleAchievement> {
   late final TextEditingController _achievementTitleController;
   late final TextEditingController _issuingEntityController;
   late final TextEditingController _awardWebsiteController;
@@ -414,20 +414,22 @@ class __SingleAchievementState extends ConsumerState<_SingleAchievement> {
                         makeWidthNull: true,
                         onPressed: () async {
                           showCircularProgressIndicator(context);
-                          // final userProfileData = ref.watch(profileNotifierProvider).userProfileData!;
-                          final List<Achievement> achievementList = ref
-                                  .watch(profileNotifierProvider)
-                                  .userProfileData!
-                                  .achievements ??
-                              [];
+                          // final userProfileData = Provider.of<ProfileProvider>(context).userProfileData!;
+                          final List<Achievement> achievementList =
+                              Provider.of<ProfileProvider>(context)
+
+                                      // ref
+                                      //         .watch(profileNotifierProvider)
+                                      .userProfileData!
+                                      .achievements ??
+                                  [];
                           if (widget.index != null) {
                             achievementList[widget.index!] = achievement;
                           } else {
                             achievementList.add(achievement);
                           }
 
-                          await Provider.of<ProfileProvider>(context,
-                                  listen: false)
+                          await Provider.of<AppProvider>(context, listen: false)
                               .saveProfile(
                             User(
                               achievements: achievementList,

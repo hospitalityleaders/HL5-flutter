@@ -1,29 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:holedo/profile/application//shared/providers.dart';
+
+import 'package:holedo/profile/presentation/providers/profile_provider.dart';
 import 'package:holedo/profile/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/profile/presentation/ui/components/person_avatar.dart';
 import 'package:holedo/profile/presentation/utill/color_resources.dart';
 import 'package:holedo/profile/presentation/utill/dimensions.dart';
 import 'package:holedo/profile/presentation/utill/responsive.dart';
 import 'package:holedo/profile/presentation/utill/styles.dart';
+import 'package:provider/provider.dart';
 
-class ProfileTabbar extends ConsumerWidget {
+class ProfileTabbar extends StatelessWidget {
   const ProfileTabbar({
     Key? key,
     required this.tabController,
-    this.isMine = false,
     this.onTap,
   }) : super(key: key);
 
   final TabController tabController;
-  final bool isMine;
   final void Function(int)? onTap;
   @override
-  Widget build(BuildContext context, ref) {
-    // final isEditable = Provider.of<ProfileProvider>(context).isProfileEditable;
+  Widget build(BuildContext context) {
     final getUserProfileData =
-        ref.watch(profileNotifierProvider).userProfileData!;
+        Provider.of<ProfileProvider>(context).userProfileData!;
     final bool isTab = isTablet(context);
     final double fontSize = isTab ? 12.5 : 14;
 
@@ -133,14 +131,17 @@ class ProfileTabbar extends ConsumerWidget {
               ],
             ),
           ),
-          if (isMine) const EditProfileButton() else Di.ESB,
+          if (Provider.of<ProfileProvider>(context).isMyProfile)
+            const EditProfileButton()
+          else
+            Di.ESB,
         ],
       ),
     );
   }
 }
 
-class EditProfileButton extends ConsumerWidget {
+class EditProfileButton extends StatelessWidget {
   const EditProfileButton({
     Key? key,
     this.width,
@@ -149,9 +150,10 @@ class EditProfileButton extends ConsumerWidget {
   final double? width;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final isProfileEditable =
-        ref.watch(profileNotifierProvider).isProfileEditable;
+        // Provider.of<ProfileProvider>(context).
+        Provider.of<ProfileProvider>(context).isProfileEditable;
     return CustomElevatedButton(
       width: width,
       text: isProfileEditable ? "Done Editing" : null,
@@ -163,8 +165,9 @@ class EditProfileButton extends ConsumerWidget {
             )
           : null,
       onPressed: () {
-        ref
-            .read(profileNotifierProvider.notifier)
+        Provider.of<ProfileProvider>(context, listen: false)
+            // ref
+            // .read(profileNotifierProvider.notifier)
             .changeIsProfieEditableState(!isProfileEditable);
       },
     );
