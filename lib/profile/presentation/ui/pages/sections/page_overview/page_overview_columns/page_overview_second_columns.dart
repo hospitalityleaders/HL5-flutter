@@ -45,9 +45,9 @@ class _ProfileOverviewSecondColumnState
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // FeaturedVideoComponent(
-        //   userProfileData: userProfileData,
-        // ),
+        FeaturedVideoComponent(
+          userProfileData: userProfileData,
+        ),
         Di.SBHL,
         ProfileWorkExperienceComponent(
           userProfileData: userProfileData,
@@ -327,36 +327,36 @@ class FeaturedVideoComponent extends StatefulWidget {
 }
 
 class _FeaturedVideoComponentState extends State<FeaturedVideoComponent> {
-  late VideoPlayerController _controller;
   bool showMore = false;
   bool showSubMenu = false;
-
-  void setVideoController() {
-    _controller = VideoPlayerController.network(
-      Provider.of<ProfileProvider>(context).userProfileData!.profileVideoUrl ??
-          '',
-    )
-      ..initialize().then((_) {
-        setState(() {});
-      })
-      ..addListener(() {
-        if (_controller.value.position == _controller.value.duration) {
-          setState(() {
-            _controller.pause();
-          });
-        }
-      });
-  }
+  VideoPlayerController? _videoPlayerController;
 
   @override
   void initState() {
-    Future.microtask(() => setVideoController());
+    if (widget.userProfileData.profileVideoUrl != null) {
+      _videoPlayerController =
+          VideoPlayerController.network(widget.userProfileData.profileVideoUrl!)
+            ..addListener(() {
+              if (_videoPlayerController!.value.position ==
+                  _videoPlayerController!.value.duration) {
+                setState(() {
+                  _videoPlayerController!.pause();
+                });
+              }
+            });
+      _videoPlayerController!.initialize().then((value) {
+        setState(() {});
+      });
+    }
+
     super.initState();
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    if (_videoPlayerController != null) {
+      _videoPlayerController!.dispose();
+    }
     super.dispose();
   }
 
@@ -391,40 +391,76 @@ class _FeaturedVideoComponentState extends State<FeaturedVideoComponent> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Stack(
-                            children: [
-                              if (_controller.value.isInitialized)
-                                SizedBox(
-                                  height: widget.isMobile ? null : 180,
-                                  width: widget.isMobile ? null : 325,
-                                  child: AspectRatio(
-                                    aspectRatio: _controller.value.aspectRatio,
-                                    child: VideoPlayer(_controller),
-                                  ),
-                                )
-                              else
-                                Di.ESB,
-                              Positioned.fill(
-                                child: Center(
-                                  child: FloatingActionButton(
-                                    backgroundColor: Cr.accentBlue1,
-                                    onPressed: () {
-                                      setState(() {
-                                        _controller.value.isPlaying
-                                            ? _controller.pause()
-                                            : _controller.play();
-                                      });
-                                    },
-                                    child: Icon(
-                                      _controller.value.isPlaying
-                                          ? Icons.pause
-                                          : Icons.play_arrow,
+                          // Stack(
+                          //   children: [
+                          //     if (_controller!.value.isInitialized)
+                          //       SizedBox(
+                          //         height: widget.isMobile ? null : 180,
+                          //         width: widget.isMobile ? null : 325,
+                          //         child: AspectRatio(
+                          //           aspectRatio:
+                          //               _controller!.value.aspectRatio,
+                          //           child: VideoPlayer(_controller!),
+                          //         ),
+                          //       )
+                          //     else
+                          //       Di.ESB,
+                          //     Positioned.fill(
+                          //       child: Center(
+                          //         child: FloatingActionButton(
+                          //           backgroundColor: Cr.accentBlue1,
+                          //           onPressed: () {
+                          //             setState(() {
+                          //               _controller!.value.isPlaying
+                          //                   ? _controller!.pause()
+                          //                   : _controller!.play();
+                          //             });
+                          //           },
+                          //           child: Icon(
+                          //             _controller!.value.isPlaying
+                          //                 ? Icons.pause
+                          //                 : Icons.play_arrow,
+                          //           ),
+                          //         ),
+                          //       ),
+                          //     )
+                          //   ],
+                          // ),
+                          if (_videoPlayerController != null)
+                            IntrinsicHeight(
+                              child: Stack(
+                                children: [
+                                  Center(
+                                    child: SizedBox(
+                                      width: 325,
+                                      height: 180,
+                                      child:
+                                          VideoPlayer(_videoPlayerController!),
                                     ),
                                   ),
-                                ),
-                              )
-                            ],
-                          ),
+                                  Center(
+                                    child: FloatingActionButton(
+                                      backgroundColor: Cr.accentBlue1,
+                                      onPressed: () {
+                                        setState(() {
+                                          _videoPlayerController!
+                                                  .value.isPlaying
+                                              ? _videoPlayerController!.pause()
+                                              : _videoPlayerController!.play();
+                                        });
+                                      },
+                                      child: Icon(
+                                        _videoPlayerController!.value.isPlaying
+                                            ? Icons.pause
+                                            : Icons.play_arrow,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+                          else
+                            Di.ESB,
                           if (userProfileData.profileVideoTitle != null) ...[
                             Di.SBHL,
                             Text(

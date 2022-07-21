@@ -42,11 +42,13 @@ class _TimelineSectionState extends State<TimelineSection> {
             child: SizedBox(
               width: 360,
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: const [
                   ProfileCompletionComponent(),
                   Di.SBHEL,
                   ConnectionsComponent(),
                   ProfileAdsComponent(),
+                  Di.SBHL,
                   RightsComponent(),
                 ],
               ),

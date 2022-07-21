@@ -161,7 +161,6 @@ class _UserProfilePageState extends State<UserProfilePage>
                     ),
                     ProfileTabbar(
                       onTap: changeCurrentIndex,
-                      isMine: true,
                       tabController: _tabController,
                     ),
                     Di.SBHEL,

@@ -64,7 +64,6 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
           if (isTablt)
             ProfileTabbar(
               onTap: widget.changeCurrentIndex,
-              isMine: isMine,
               tabController: widget.tabController,
             ),
           Container(

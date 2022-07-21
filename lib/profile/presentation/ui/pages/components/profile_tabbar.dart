@@ -13,18 +13,14 @@ class ProfileTabbar extends StatelessWidget {
   const ProfileTabbar({
     Key? key,
     required this.tabController,
-    this.isMine = false,
     this.onTap,
   }) : super(key: key);
 
   final TabController tabController;
-  final bool isMine;
   final void Function(int)? onTap;
   @override
   Widget build(BuildContext context) {
-    // final isEditable = Provider.of<ProfileProvider>(context).isProfileEditable;
     final getUserProfileData =
-        // Provider.of<ProfileProvider>(context)
         Provider.of<ProfileProvider>(context).userProfileData!;
     final bool isTab = isTablet(context);
     final double fontSize = isTab ? 12.5 : 14;
@@ -135,7 +131,10 @@ class ProfileTabbar extends StatelessWidget {
               ],
             ),
           ),
-          if (isMine) const EditProfileButton() else Di.ESB,
+          if (Provider.of<ProfileProvider>(context).isMyProfile)
+            const EditProfileButton()
+          else
+            Di.ESB,
         ],
       ),
     );
