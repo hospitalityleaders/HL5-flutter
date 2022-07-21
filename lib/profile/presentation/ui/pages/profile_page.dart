@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart' hide Provider;
-import 'package:holedo/profile/application//shared/providers.dart';
 import 'package:holedo/models/models.dart';
-import 'package:holedo/profile/presentation/providers/profile_provider.dart';
 import 'package:holedo/profile/presentation/ui/components/appbar_notification_widget.dart';
 import 'package:holedo/profile/presentation/ui/flutter_slider_drawer/slider.dart';
 import 'package:holedo/profile/presentation/ui/pages/components/profile_image_banner.dart';
@@ -17,16 +14,36 @@ import 'package:holedo/profile/presentation/utill/color_resources.dart';
 import 'package:holedo/profile/presentation/utill/dimensions.dart';
 import 'package:tap_canvas/tap_canvas.dart';
 
-class UserProfilePage extends ConsumerStatefulWidget {
+// import 'package:flutter/material.dart';
+// import 'package:holedo/models/models.dart';
+// import 'package:holedo/profile/presentation/ui/components/appbar_notification_widget.dart';
+// import 'package:holedo/profile/presentation/ui/flutter_slider_drawer/slider.dart';
+// import 'package:holedo/profile/presentation/ui/pages/components/profile_image_banner.dart';
+// import 'package:holedo/profile/presentation/ui/pages/components/profile_tabbar.dart';
+// import 'package:holedo/profile/presentation/ui/pages/profile_mobile_view/profile_mobile_view_page.dart';
+// import 'package:holedo/profile/presentation/ui/pages/sections/activity_section/activity_section.dart';
+// import 'package:holedo/profile/presentation/ui/pages/sections/articles_section/articles_section.dart';
+// import 'package:holedo/profile/presentation/ui/pages/sections/page_overview/page_overview_section.dart';
+// import 'package:holedo/profile/presentation/ui/pages/sections/reference_section/reference_section.dart';
+// import 'package:holedo/profile/presentation/ui/pages/sections/timeline_section/timeline_section.dart';
+// import 'package:holedo/profile/presentation/utill/color_resources.dart';
+// import 'package:holedo/profile/presentation/utill/dimensions.dart';
+// import 'package:tap_canvas/tap_canvas.dart';
+
+class UserProfilePage extends StatefulWidget {
   const UserProfilePage({
+    required this.isMyProfile,
+    required this.userData,
     Key? key,
   }) : super(key: key);
+  final bool isMyProfile;
+  final User userData;
 
   @override
-  ConsumerState<UserProfilePage> createState() => _UserProfilePageState();
+  State<UserProfilePage> createState() => _UserProfilePageState();
 }
 
-class _UserProfilePageState extends ConsumerState<UserProfilePage>
+class _UserProfilePageState extends State<UserProfilePage>
     with TickerProviderStateMixin {
   bool isEditable = false;
 
@@ -39,17 +56,17 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage>
         ? _tabController.animateTo(0)
         : _tabController.animateTo(newIndex);
 //todo
-    ref.read(profileNotifierProvider.notifier).changeCurrentTabIndex(newIndex);
+    Provider.of<ProfileProvider>(context, listen: false)
+        .changeCurrentTabIndex(newIndex);
+    // ref.read(profileNotifierProvider.notifier).changeCurrentTabIndex(newIndex);
   }
 
   @override
   void initState() {
     Future.microtask(() {
-      Provider.of<ProfileProvider>(context, listen: false)
-          .changeUserProfilePercentage(
-              Provider.of<ProfileProvider>(context).isLoggedIn);
       _updateTabController();
     });
+
     super.initState();
   }
 
@@ -61,16 +78,25 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage>
 
   void _updateTabController() {
     setState(() {
-      _tabController.index = ref.watch(profileNotifierProvider).currentTabIndex;
+      _tabController.index =
+          Provider.of<ProfileProvider>(context).currentTabIndex;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final currentTabIndex = ref.watch(profileNotifierProvider).currentTabIndex;
+    final profileProvider = Provider.of<ProfileProvider>(context);
+    final userProfileData = profileProvider.userProfileData;
+    final currentTabIndex = profileProvider.currentTabIndex;
 
-    debugPrint('app $isEditable');
-    return TapCanvas(
+    return
+        //  Center(
+        //   child: Container(
+        //     child: Text("Profile page"),
+        //   ),
+        // );
+
+        TapCanvas(
       child: Container(
         color: Cr.backgroundColor,
         child: Di.getScreenSize(context).width < 1000
@@ -91,7 +117,9 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage>
                 child: ListView(
                   shrinkWrap: true,
                   children: [
-                    ref.watch(profileNotifierProvider).appNotificationState.map(
+                    Provider.of<ProfileProvider>(context)
+                        .appNotificationState
+                        .map(
                           showNothing: (_) => Di.ESB,
                           profileCompletion: (notification) =>
                               Provider.of<ProfileProvider>(context)
@@ -102,13 +130,13 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage>
                                       title:
                                           "Your profile is only ${Provider.of<ProfileProvider>(context).percentageProfileCompleted}% complete. Complete it now to earn first Hospitality Leader grade.",
                                       onButtonPressed: () {
-                                        ref
-                                            .watch(
-                                              profileNotifierProvider.notifier,
-                                            )
+                                        // ref
+                                        //     .watch(profileNotifierProvider.notifier)
+                                        Provider.of<ProfileProvider>(context,
+                                                listen: false)
                                             .changeIsProfieEditableState(
-                                              true,
-                                            );
+                                          true,
+                                        );
                                       },
                                     ),
                           sucess: (notification) => AppbarNotificationWidget(
@@ -118,7 +146,9 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage>
                             title:
                                 "Your profile has been successfully updated.",
                             onButtonPressed: () {
-                              ref.watch(profileNotifierProvider.notifier)
+                              // ref.watch(profileNotifierProvider.notifier)
+                              Provider.of<ProfileProvider>(context,
+                                  listen: false)
                                 ..changeIsProfieEditableState(false)
                                 ..changeAppNotificationState(
                                   const AppNotificationState.showNothing(),
@@ -128,22 +158,20 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage>
                         ),
                     ProfileImageBanner(
                       // userProfileData: DbData.getUserProfileData,
-                      userProfileData:
-                          ref.watch(profileNotifierProvider).userProfileData!,
+                      userProfileData: userProfileData!,
+
+                      // Provider.of<ProfileProvider>(context).userProfileData!,
                     ),
                     ProfileTabbar(
                       onTap: changeCurrentIndex,
-                      // isMine: appState.isLoggedIn,
+                      // isMine: appstate.isLoggedIn,
                       isMine: true,
                       tabController: _tabController,
                     ),
                     Di.SBHEL,
                     Center(
                       child: [
-                        PageOverviewSection(
-                          isEditable: isEditable,
-                          // userProfileData: widget.userProfileData,
-                        ),
+                        const PageOverviewSection(),
                         const TimelineSection(),
                         const ArticlesSection(),
                         const ActivitySection(),
@@ -154,10 +182,6 @@ class _UserProfilePageState extends ConsumerState<UserProfilePage>
                   ],
                 ),
               ),
-
-        // userProfileProvider.showProfileLoading
-        //     ? CustomLoading()
-        //     : Di.ESB,
       ),
     );
   }

@@ -47,7 +47,6 @@ dependencies:
   form_field_validator: ^1.1.0
   freezed_annotation: ^0.15.0
   intercom_flutter: ^7.3.0
-  flutter_riverpod: ^1.0.4
   flutter_webview_plugin: ^0.4.0
   webview_flutter: ^3.0.4
 
@@ -60,7 +59,6 @@ dev_dependencies:
     sdk: flutter
   build_runner:
   freezed: ^0.14.2
-  flutter_hooks: ^0.18.5+1
   # json_serializable: ^6.1.5
 
 # For information on the generic Dart part of this file, see the

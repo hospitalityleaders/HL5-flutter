@@ -14,23 +14,29 @@ class AppNotificationState with _$AppNotificationState {
 }
 
 class ProfileProvider extends ChangeNotifier {
-  // bool isProfileEditable;
-  // bool showProfileLoading;
+  bool isProfileEditable;
+  bool showProfileLoading;
   bool showConectionRequestPopo;
   bool showProfileSubMenus;
   bool profileSubMenuClicked;
-  // int currentTabIndex;
+  int currentTabIndex;
   int percentageProfileCompleted;
-  // AppNotificationState appNotificationState;
+  AppNotificationState appNotificationState;
+  User? userProfileData;
+  bool isMyProfile;
+
   ProfileProvider(
       {this.showConectionRequestPopo = false,
       this.showProfileSubMenus = false,
-      // this.isProfileEditable = false,
-      // this.showProfileLoading = false,
+      this.isProfileEditable = false,
+      this.showProfileLoading = false,
       this.profileSubMenuClicked = false,
+      this.isMyProfile = false,
       this.percentageProfileCompleted = 20,
-      // this.currentTabIndex = 0,
-      // this.appNotificationState = const AppNotificationState.profileCompletion(),
+      this.currentTabIndex = 0,
+      this.userProfileData,
+      this.appNotificationState =
+          const AppNotificationState.profileCompletion(),
       String? username,
       User? profile})
       : _username = username,
@@ -68,6 +74,16 @@ class ProfileProvider extends ChangeNotifier {
     return false;
   }
 
+  void initializeProfile({required User user, required bool isMyProfile}) {
+    this.isMyProfile = isMyProfile;
+    if (isMyProfile) {
+      userProfileData = Get.put(HoledoDatabase()).getModel().user!;
+    } else {
+      userProfileData = user;
+    }
+    changeUserProfilePercentage();
+  }
+
   User? get profile => _profile;
   set profile(User? data) {
     _profile = data;
@@ -94,25 +110,25 @@ class ProfileProvider extends ChangeNotifier {
     return dataModel;
   }
 
-  // void changeAppNotificationState(AppNotificationState appNotificationState) {
-  //   this.appNotificationState = appNotificationState;
-  //   notifyListeners();
-  // }
+  void changeAppNotificationState(AppNotificationState appNotificationState) {
+    this.appNotificationState = appNotificationState;
+    notifyListeners();
+  }
 
-  void changeUserProfilePercentage(bool isLoggedIn) {
+  void changeUserProfilePercentage() {
     int percentage = 20;
     if (isLoggedIn) {
-      final userProfileData = Get.put(HoledoDatabase()).getModel().user!;
-      final bool experienceAdded = userProfileData.experiences != null ||
-          userProfileData.experiences!.isNotEmpty;
-      final bool qualificationAdded = (userProfileData.educations == null ||
-              userProfileData.educations!.isNotEmpty) ||
-          (userProfileData.educations!.first.qualification == null ||
-              userProfileData.educations!.first.qualification != null);
-      final bool expertiseAdded = userProfileData.expertise == null ||
-          userProfileData.expertise!.isNotEmpty;
-      final bool languagesAdded = userProfileData.languages == null ||
-          userProfileData.languages!.isNotEmpty;
+      final _userProfileData = Get.put(HoledoDatabase()).getModel().user!;
+      final bool experienceAdded = _userProfileData.experiences != null ||
+          _userProfileData.experiences!.isNotEmpty;
+      final bool qualificationAdded = (_userProfileData.educations == null ||
+              _userProfileData.educations!.isNotEmpty) ||
+          (_userProfileData.educations!.first.qualification == null ||
+              _userProfileData.educations!.first.qualification != null);
+      final bool expertiseAdded = _userProfileData.expertise == null ||
+          _userProfileData.expertise!.isNotEmpty;
+      final bool languagesAdded = _userProfileData.languages == null ||
+          _userProfileData.languages!.isNotEmpty;
 
       if (experienceAdded) {
         percentage += 20;
@@ -138,11 +154,10 @@ class ProfileProvider extends ChangeNotifier {
   //   notifyListeners();
   // }
 
-  // void changeCurrentTabIndex(int currentTabIndex) {
-  //   this.currentTabIndex = currentTabIndex;
-
-  //   notifyListeners();
-  // }
+  void changeCurrentTabIndex(int currentTabIndex) {
+    this.currentTabIndex = currentTabIndex;
+    notifyListeners();
+  }
 
   void changeConectionRequestPopupState(bool showPopup) {
     if (showPopup == true && showConectionRequestPopo == false) {
@@ -180,8 +195,8 @@ class ProfileProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // void changeIsProfieEditableState(bool isEditable) {
-  //   isProfileEditable = isEditable;
-  //   notifyListeners();
-  // }
+  void changeIsProfieEditableState(bool isEditable) {
+    isProfileEditable = isEditable;
+    notifyListeners();
+  }
 }

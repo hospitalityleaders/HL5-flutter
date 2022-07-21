@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:holedo/profile/application//shared/providers.dart';
+
 import 'package:holedo/models/holedoapi/education.dart';
 import 'package:holedo/models/holedoapi/holedoapi.dart';
+import 'package:holedo/profile/presentation/providers/profile_provider.dart';
 import 'package:holedo/profile/presentation/ui/components/expanded_collapse_widget.dart';
 import 'package:holedo/profile/presentation/ui/components/svg_with_background.dart';
 import 'package:holedo/profile/presentation/ui/components/view_timeline_edit_profile_submenu.dart';
@@ -15,8 +15,9 @@ import 'package:holedo/profile/presentation/utill/color_resources.dart';
 import 'package:holedo/profile/presentation/utill/dimensions.dart';
 import 'package:holedo/profile/presentation/utill/images.dart';
 import 'package:holedo/profile/presentation/utill/styles.dart';
+import 'package:provider/provider.dart';
 
-class EducationComponent extends ConsumerStatefulWidget {
+class EducationComponent extends StatefulWidget {
   const EducationComponent({
     Key? key,
     this.onEditPressed,
@@ -30,14 +31,17 @@ class EducationComponent extends ConsumerStatefulWidget {
   final bool isTablet;
 
   @override
-  ConsumerState<EducationComponent> createState() => _EducationComponentState();
+  State<EducationComponent> createState() => _EducationComponentState();
 }
 
-class _EducationComponentState extends ConsumerState<EducationComponent> {
+class _EducationComponentState extends State<EducationComponent> {
   @override
   Widget build(BuildContext context) {
     final List<Education>? education =
-        ref.watch(profileNotifierProvider).userProfileData!.educations;
+        // Provider.of<ProfileProvider>(context).
+        Provider.of<ProfileProvider>(
+      context,
+    ).userProfileData!.educations;
     final bool hasData = education != null ? education.isNotEmpty : false;
     bool showSubMenu = false;
 
@@ -146,11 +150,14 @@ class _EducationComponentState extends ConsumerState<EducationComponent> {
                             showCustomDialog(
                               context,
                               ProfileEducationDialogWidget(
-                                educations: ref
-                                        .watch(profileNotifierProvider)
-                                        .userProfileData!
-                                        .educations ??
-                                    <Education>[],
+                                educations:
+                                    //  ref
+                                    //         .watch(profileNotifierProvider)
+                                    Provider.of<ProfileProvider>(context,
+                                                listen: false)
+                                            .userProfileData!
+                                            .educations ??
+                                        <Education>[],
                               ),
                             );
                           },

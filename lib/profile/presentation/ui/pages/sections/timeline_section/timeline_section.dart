@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:holedo/profile/application//shared/providers.dart';
+
 import 'package:holedo/models/holedoapi/achievement.dart';
 import 'package:holedo/models/holedoapi/education.dart';
 import 'package:holedo/models/holedoapi/experience.dart';
@@ -16,6 +15,8 @@ import 'package:holedo/profile/presentation/utill/color_resources.dart';
 import 'package:holedo/profile/presentation/utill/dimensions.dart';
 import 'package:holedo/profile/presentation/utill/images.dart';
 import 'package:holedo/profile/presentation/utill/styles.dart';
+import 'package:holedo/profile/presentation/providers/profile_provider.dart';
+import 'package:provider/provider.dart';
 
 class TimelineSection extends StatefulWidget {
   const TimelineSection({
@@ -58,22 +59,22 @@ class _TimelineSectionState extends State<TimelineSection> {
   }
 }
 
-class TimelineSectionComponent extends ConsumerStatefulWidget {
+class TimelineSectionComponent extends StatefulWidget {
   const TimelineSectionComponent({
     Key? key,
   }) : super(key: key);
 
   @override
-  ConsumerState<TimelineSectionComponent> createState() =>
+  State<TimelineSectionComponent> createState() =>
       _TimelineSectionComponentState();
 }
 
-class _TimelineSectionComponentState
-    extends ConsumerState<TimelineSectionComponent> {
+class _TimelineSectionComponentState extends State<TimelineSectionComponent> {
   late final List<TimelineClass> timelineClasslist;
 
   List<TimelineClass> getTimelines() {
-    final userProfileData = ref.watch(profileNotifierProvider).userProfileData!;
+    final userProfileData =
+        Provider.of<ProfileProvider>(context).userProfileData!;
     final experiences = userProfileData.experiences;
     final achievements = userProfileData.achievements;
     final educations = userProfileData.educations;

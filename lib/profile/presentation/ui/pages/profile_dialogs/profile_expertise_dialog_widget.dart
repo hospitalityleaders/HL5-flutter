@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:holedo/profile/application//shared/providers.dart';
+
 import 'package:holedo/models/holedoapi/expertise.dart';
 import 'package:holedo/models/holedoapi/holedoapi.dart';
 import 'package:holedo/profile/presentation/ui/components/custom_checkbox_with_title.dart';
@@ -10,24 +9,26 @@ import 'package:holedo/profile/presentation/utill/dimensions.dart';
 import 'package:holedo/profile/presentation/utill/nav.dart';
 import 'package:holedo/profile/presentation/utill/styles.dart';
 import 'package:holedo/profile/presentation/validators/form_validator.dart';
+import 'package:holedo/profile/presentation/providers/profile_provider.dart';
+import 'package:provider/provider.dart';
 
-class ProfileExpertiseDialogWidget extends ConsumerStatefulWidget {
+class ProfileExpertiseDialogWidget extends StatefulWidget {
   const ProfileExpertiseDialogWidget({
     Key? key,
   }) : super(key: key);
 
   @override
-  ConsumerState<ProfileExpertiseDialogWidget> createState() =>
+  State<ProfileExpertiseDialogWidget> createState() =>
       _ProfileExpertiseDialogWidgetState();
 }
 
 class _ProfileExpertiseDialogWidgetState
-    extends ConsumerState<ProfileExpertiseDialogWidget> {
+    extends State<ProfileExpertiseDialogWidget> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _controller = TextEditingController();
 
   List<Expertise> get _getExpertise =>
-      ref.watch(profileNotifierProvider).userProfileData!.expertise ?? [];
+      Provider.of<ProfileProvider>(context).userProfileData!.expertise ?? [];
 
   @override
   Widget build(BuildContext context) {
@@ -204,8 +205,10 @@ class _ProfileExpertiseDialogWidgetState
                               Nav.pop(context);
                               await User(
                                 expertise: expertise,
-                              ).save(ref
-                                  .watch(profileNotifierProvider)
+                              ).save(Provider.of<ProfileProvider>(context)
+
+                                  // ref
+                                  //   .watch(profileNotifierProvider)
                                   .userProfileData!);
                             },
                             height: 36,

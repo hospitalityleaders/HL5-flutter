@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:holedo/profile/application//shared/providers.dart';
+
 import 'package:holedo/models/holedoapi/holedoapi.dart';
 import 'package:holedo/profile/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/profile/presentation/ui/components/person_avatar.dart';
@@ -8,23 +7,25 @@ import 'package:holedo/profile/presentation/ui/pages/profile_dialogs/dialog_widg
 import 'package:holedo/profile/presentation/utill/color_resources.dart';
 import 'package:holedo/profile/presentation/utill/dimensions.dart';
 import 'package:holedo/profile/presentation/utill/styles.dart';
+import 'package:holedo/profile/presentation/providers/profile_provider.dart';
+import 'package:provider/provider.dart';
 
-class ProfileWriteReferenceDialog extends ConsumerStatefulWidget {
+class ProfileWriteReferenceDialog extends StatefulWidget {
   const ProfileWriteReferenceDialog({
     Key? key,
   }) : super(key: key);
 
   @override
-  ConsumerState<ProfileWriteReferenceDialog> createState() =>
+  State<ProfileWriteReferenceDialog> createState() =>
       _ProfileWriteReferenceDialogState();
 }
 
 class _ProfileWriteReferenceDialogState
-    extends ConsumerState<ProfileWriteReferenceDialog> {
+    extends State<ProfileWriteReferenceDialog> {
   @override
   Widget build(BuildContext context) {
     final User userProfileData =
-        ref.watch(profileNotifierProvider).userProfileData!;
+        Provider.of<ProfileProvider>(context).userProfileData!;
     return Container(
       color: Cr.whiteColor,
       width: 950,

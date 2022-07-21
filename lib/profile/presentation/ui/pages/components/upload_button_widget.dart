@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:holedo/profile/application//shared/providers.dart';
+
 import 'package:holedo/profile/presentation/functions/image_upload_functions.dart';
+import 'package:holedo/profile/presentation/providers/profile_provider.dart';
 import 'package:holedo/profile/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/profile/presentation/ui/pages/profile_dialogs/dialog_widgets.dart';
 import 'package:holedo/profile/presentation/utill/color_resources.dart';
@@ -9,9 +9,10 @@ import 'package:holedo/profile/presentation/utill/dimensions.dart';
 import 'package:holedo/profile/presentation/utill/nav.dart';
 import 'package:holedo/profile/presentation/utill/styles.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:routemaster/routemaster.dart';
 
-class UploadButtonWidget extends ConsumerStatefulWidget {
+class UploadButtonWidget extends StatefulWidget {
   const UploadButtonWidget({
     Key? key,
     required this.uploadedImgCallback,
@@ -30,10 +31,10 @@ class UploadButtonWidget extends ConsumerStatefulWidget {
   final String? setErrorMessage;
 
   @override
-  ConsumerState<UploadButtonWidget> createState() => _UploadButtonWidgetState();
+  State<UploadButtonWidget> createState() => _UploadButtonWidgetState();
 }
 
-class _UploadButtonWidgetState extends ConsumerState<UploadButtonWidget> {
+class _UploadButtonWidgetState extends State<UploadButtonWidget> {
   XFile? image;
   String errorMessage = "";
 
@@ -125,7 +126,7 @@ class _UploadButtonWidgetState extends ConsumerState<UploadButtonWidget> {
                   await widget.uploadedImgCallback(imageUrl);
                   Nav.pop(context);
                   Routemaster.of(context).push(
-                      "/profile/${ref.watch(profileNotifierProvider).userProfileData!.slug}");
+                      "/profile/${Provider.of<ProfileProvider>(context).userProfileData!.slug}");
 
                   Nav.pop(context);
                 } else {

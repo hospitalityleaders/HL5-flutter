@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_expanded_tile/flutter_expanded_tile.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:holedo/profile/application//shared/providers.dart';
+
 import 'package:holedo/models/holedoapi/holedoapi.dart';
 import 'package:holedo/profile/presentation/ui/pages/components/upload_button_widget.dart';
 import 'package:holedo/profile/presentation/ui/pages/profile_dialogs/dialog_widgets.dart';
 import 'package:holedo/profile/presentation/utill/color_resources.dart';
 import 'package:holedo/profile/presentation/utill/dimensions.dart';
 import 'package:holedo/profile/presentation/utill/styles.dart';
+import 'package:holedo/profile/presentation/providers/profile_provider.dart';
+import 'package:provider/provider.dart';
 
-class ProfileCoverImageDialogWidget extends ConsumerStatefulWidget {
+class ProfileCoverImageDialogWidget extends StatefulWidget {
   const ProfileCoverImageDialogWidget({
     Key? key,
     // required this.userProfileData,
@@ -18,12 +19,12 @@ class ProfileCoverImageDialogWidget extends ConsumerStatefulWidget {
   // final User userProfileData;
 
   @override
-  ConsumerState<ProfileCoverImageDialogWidget> createState() =>
+  State<ProfileCoverImageDialogWidget> createState() =>
       _ProfileWriteReferenceDialogWidgetState();
 }
 
 class _ProfileWriteReferenceDialogWidgetState
-    extends ConsumerState<ProfileCoverImageDialogWidget> {
+    extends State<ProfileCoverImageDialogWidget> {
   // final _formKey = GlobalKey<FormState>();
 
   @override
@@ -52,7 +53,7 @@ class _ProfileWriteReferenceDialogWidgetState
   }
 }
 
-class ProfileCoverImageDialogExpandedTile extends ConsumerStatefulWidget {
+class ProfileCoverImageDialogExpandedTile extends StatefulWidget {
   final bool isExpanded;
   const ProfileCoverImageDialogExpandedTile({
     Key? key,
@@ -60,12 +61,12 @@ class ProfileCoverImageDialogExpandedTile extends ConsumerStatefulWidget {
   }) : super(key: key);
 
   @override
-  ConsumerState<ProfileCoverImageDialogExpandedTile> createState() =>
+  State<ProfileCoverImageDialogExpandedTile> createState() =>
       _ProfileCoverImageDialogExpandedTileState();
 }
 
 class _ProfileCoverImageDialogExpandedTileState
-    extends ConsumerState<ProfileCoverImageDialogExpandedTile> {
+    extends State<ProfileCoverImageDialogExpandedTile> {
   String? selectedValue;
   bool currentlyWorkHere = false;
   Image? pickedImage;
@@ -87,7 +88,8 @@ class _ProfileCoverImageDialogExpandedTileState
 
   @override
   Widget build(BuildContext context) {
-    final userProfileData = ref.watch(profileNotifierProvider).userProfileData!;
+    final userProfileData =
+        Provider.of<ProfileProvider>(context).userProfileData!;
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: Di.PSL),
       color: Cr.whiteColor,

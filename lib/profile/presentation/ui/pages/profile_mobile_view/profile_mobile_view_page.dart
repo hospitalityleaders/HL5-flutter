@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart' hide Provider;
-import 'package:holedo/profile/application//shared/providers.dart';
+
 import 'package:holedo/models/models.dart';
 import 'package:holedo/profile/presentation/data/presentation_data.dart';
 import 'package:holedo/profile/presentation/ui/components/person_avatar.dart';
@@ -17,7 +16,7 @@ import 'package:holedo/profile/presentation/utill/dimensions.dart';
 import 'package:holedo/profile/presentation/utill/responsive.dart';
 import 'package:holedo/profile/presentation/utill/styles.dart';
 
-class ProfileMobileViewPage extends ConsumerStatefulWidget {
+class ProfileMobileViewPage extends StatefulWidget {
   const ProfileMobileViewPage({
     Key? key,
     required this.currentTabIndex,
@@ -28,11 +27,10 @@ class ProfileMobileViewPage extends ConsumerStatefulWidget {
   final int currentTabIndex;
   final TabController tabController;
   @override
-  ConsumerState<ProfileMobileViewPage> createState() =>
-      _ProfileMobileViewPageState();
+  State<ProfileMobileViewPage> createState() => _ProfileMobileViewPageState();
 }
 
-class _ProfileMobileViewPageState extends ConsumerState<ProfileMobileViewPage> {
+class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
   bool showMenu = false;
   bool showCardSubMenu = false;
 
@@ -41,8 +39,9 @@ class _ProfileMobileViewPageState extends ConsumerState<ProfileMobileViewPage> {
     final bool isMobilePhn = isMobilePhone(context);
     final bool isTablt = isTablet(context);
     final User userProfileData =
-        ref.watch(profileNotifierProvider).userProfileData!;
-    // final isEditable = ref.watch(profileNotifierProvider).isProfileEditable;
+        // Provider.of<ProfileProvider>(context)
+        Provider.of<ProfileProvider>(context).userProfileData!;
+    // final isEditable = Provider.of<ProfileProvider>(context).isProfileEditable;
     final appState = Provider.of<ProfileProvider>(context);
     final bool isMine = appState.isLoginnedAndEditable(userProfileData);
 
@@ -202,9 +201,11 @@ class _ProfileMobileViewPageState extends ConsumerState<ProfileMobileViewPage> {
                                   ),
                                   StatsComman(
                                     isMobile: true,
-                                    userProfileData: ref
-                                        .watch(profileNotifierProvider)
-                                        .userProfileData!,
+                                    userProfileData:
+                                        // ref
+                                        //     .watch(profileNotifierProvider)
+                                        Provider.of<ProfileProvider>(context)
+                                            .userProfileData!,
                                   ),
                                   Di.SBHS,
                                   // Container(

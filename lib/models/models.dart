@@ -424,7 +424,7 @@ class UsersController extends GetxController {
     bool? isLoggined = false,
   }) async {
     try {
-      isLoading(true);
+      // isLoading(true);
       var user = User();
       final token = getToken(slug);
       final headers = <String, dynamic>{
@@ -449,7 +449,7 @@ class UsersController extends GetxController {
       //debugPrint('log: ${response.data}');
       user = response.data?.user as User;
 
-      if (token != null) {
+      if (token != null && id != null) {
         debugPrint('user: ${user.firstName} token: log: $token');
         user.token = token;
         saveUserToModel(user, user.token);
@@ -457,7 +457,7 @@ class UsersController extends GetxController {
       //debugPrint('user: ${user.toJson().toString()}');
       return user;
     } finally {
-      isLoading(false);
+      // isLoading(false);
     }
   }
 

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart' hide Provider;
-import 'package:holedo/profile/application//shared/providers.dart';
+
 import 'package:holedo/models/models.dart';
 import 'package:holedo/profile/presentation/ui/components/custom_appbar.dart';
 import 'package:holedo/profile/presentation/ui/components/custom_icon_button.dart';
@@ -24,22 +23,23 @@ export 'package:holedo/layouts/pages/profile_page.dart';
 export 'package:holedo/layouts/pages/recruitment_page.dart';
 export 'package:holedo/layouts/pages/search_page.dart';
 
-class MobileSlideMenu extends ConsumerStatefulWidget {
+class MobileSlideMenu extends StatefulWidget {
   const MobileSlideMenu({Key? key, this.onCloseTap}) : super(key: key);
 
   final void Function()? onCloseTap;
   @override
-  ConsumerState<MobileSlideMenu> createState() => _MobileSlideMenuState();
+  State<MobileSlideMenu> createState() => _MobileSlideMenuState();
 }
 
-class _MobileSlideMenuState extends ConsumerState<MobileSlideMenu> {
+class _MobileSlideMenuState extends State<MobileSlideMenu> {
   bool inDrawer = true;
 
   @override
   Widget build(BuildContext context) {
     final appState = Provider.of<ProfileProvider>(context);
     // final menuItems = Get.put(HoledoDatabase()).menuItems;
-    final userProfileData = ref.watch(profileNotifierProvider).userProfileData;
+    final userProfileData =
+        Provider.of<ProfileProvider>(context).userProfileData;
     return Container(
       color: Cr.colorPrimary,
       child: SingleChildScrollView(

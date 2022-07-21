@@ -1,30 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:holedo/profile/application//shared/providers.dart';
+
 import 'package:holedo/models/holedoapi/holedoapi.dart';
+import 'package:holedo/profile/presentation/providers/profile_provider.dart';
 import 'package:holedo/profile/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/profile/presentation/ui/components/person_avatar.dart';
 import 'package:holedo/profile/presentation/ui/pages/profile_dialogs/dialog_widgets.dart';
 import 'package:holedo/profile/presentation/utill/color_resources.dart';
 import 'package:holedo/profile/presentation/utill/dimensions.dart';
 import 'package:holedo/profile/presentation/utill/styles.dart';
+import 'package:provider/provider.dart';
 
-class ProfileSendConnectionRequestDialog extends ConsumerStatefulWidget {
+class ProfileSendConnectionRequestDialog extends StatefulWidget {
   const ProfileSendConnectionRequestDialog({
     Key? key,
   }) : super(key: key);
 
   @override
-  ConsumerState<ProfileSendConnectionRequestDialog> createState() =>
+  State<ProfileSendConnectionRequestDialog> createState() =>
       _ProfileSendConnectionRequestDialogState();
 }
 
 class _ProfileSendConnectionRequestDialogState
-    extends ConsumerState<ProfileSendConnectionRequestDialog> {
+    extends State<ProfileSendConnectionRequestDialog> {
   @override
   Widget build(BuildContext context) {
     final User userProfileData =
-        ref.watch(profileNotifierProvider).userProfileData!;
+        Provider.of<ProfileProvider>(context).userProfileData!;
     return Container(
       color: Cr.whiteColor,
       width: 560,

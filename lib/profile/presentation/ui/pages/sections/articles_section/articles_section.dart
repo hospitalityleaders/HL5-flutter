@@ -17,7 +17,7 @@ class ArticlesSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final articles = ref.watch(profileNotifierProvider).userProfileData!.articles;
+    // final articles = Provider.of<ProfileProvider>(context).userProfileData!.articles;
     return SizedBox(
       width: Di.getScreenSize(context).width,
       child: Row(
