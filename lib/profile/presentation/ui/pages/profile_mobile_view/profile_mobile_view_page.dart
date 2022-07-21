@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:holedo/models/models.dart';
 import 'package:holedo/profile/presentation/data/presentation_data.dart';
+import 'package:holedo/profile/presentation/providers/app_provider.dart';
 import 'package:holedo/profile/presentation/ui/components/person_avatar.dart';
 import 'package:holedo/profile/presentation/ui/pages/components/profile_image_banner.dart';
 import 'package:holedo/profile/presentation/ui/pages/components/profile_tabbar.dart';
@@ -42,7 +43,7 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
         // Provider.of<ProfileProvider>(context)
         Provider.of<ProfileProvider>(context).userProfileData!;
     // final isEditable = Provider.of<ProfileProvider>(context).isProfileEditable;
-    final appState = Provider.of<ProfileProvider>(context);
+    final appState = Provider.of<AppProvider>(context);
     final bool isMine = appState.isLoginnedAndEditable(userProfileData);
 
     return Scaffold(

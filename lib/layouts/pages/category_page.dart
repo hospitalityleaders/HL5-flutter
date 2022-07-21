@@ -3,6 +3,7 @@ import 'package:holedo/layouts/page_scaffold.dart';
 import 'package:holedo/models/holedoapi/article.dart';
 import 'package:holedo/models/holedoapi/article_category.dart';
 import 'package:holedo/models/models.dart';
+import 'package:holedo/profile/presentation/providers/app_provider.dart';
 
 class CategoryPage extends StatefulWidget {
   final ArticleCategory category;
@@ -24,7 +25,7 @@ class _CategoryPageState extends State<CategoryPage> {
   void initState() {
     super.initState();
 
-    futurecall = Provider.of<ProfileProvider>(context, listen: false)
+    futurecall = Provider.of<AppProvider>(context, listen: false)
         .news
         .fetchArticles(context: context, category: widget.category.slug);
     debugPrint('init data: $futurecall');

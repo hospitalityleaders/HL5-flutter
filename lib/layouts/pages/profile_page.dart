@@ -80,7 +80,7 @@ class _ProfilePageState extends State<ProfilePage> {
 //   @override
 //   Widget build(BuildContext context) {
 //     debugPrint('profie? ${widget.slug},  ${widget.id}');
-//     final appstate = Provider.of<ProfileProvider>(context);
+//     final appState = Provider\.of<AppProvider>\(context\)
 //     final bool isMyProfile = widget.id != null;
 //     // appstate.isLoggedIn && appstate.profile!.slug == widget.slug;
 //     return PageScaffold(

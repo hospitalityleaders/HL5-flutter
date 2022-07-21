@@ -157,14 +157,10 @@ class _UserProfilePageState extends State<UserProfilePage>
                           ),
                         ),
                     ProfileImageBanner(
-                      // userProfileData: DbData.getUserProfileData,
                       userProfileData: userProfileData!,
-
-                      // Provider.of<ProfileProvider>(context).userProfileData!,
                     ),
                     ProfileTabbar(
                       onTap: changeCurrentIndex,
-                      // isMine: appstate.isLoggedIn,
                       isMine: true,
                       tabController: _tabController,
                     ),

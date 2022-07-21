@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:holedo/models/models.dart';
+import 'package:holedo/profile/presentation/providers/app_provider.dart';
 
 class PersonAvatar extends StatelessWidget {
   const PersonAvatar({
@@ -12,7 +13,7 @@ class PersonAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isLogin = Provider.of<ProfileProvider>(context).isLoggedIn;
+    final isLogin = Provider.of<AppProvider>(context).isLoggedIn;
     return Container(
       width: avatarSize ?? 28,
       height: avatarSize ?? 28,

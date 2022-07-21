@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:holedo/profile/presentation/popups/profile_connection_request_popup.dart';
 import 'package:holedo/profile/presentation/popups/profile_submenu_popup.dart';
+import 'package:holedo/profile/presentation/providers/app_provider.dart';
 import 'package:holedo/profile/presentation/ui/components/appbar_textfield.dart';
 import 'package:holedo/profile/presentation/ui/components/custom_appbar.dart';
 import 'package:holedo/profile/presentation/ui/flutter_slider_drawer/slider.dart';
@@ -122,7 +123,7 @@ class _PageScaffoldState extends State<PageScaffold> {
 
   @override
   Widget build(BuildContext context) {
-    final appState = Provider.of<ProfileProvider>(context);
+    final appState = Provider.of<AppProvider>(context);
 
     final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -374,7 +375,7 @@ class BuildAppbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appState = Provider.of<ProfileProvider>(context);
+    final appState = Provider.of<AppProvider>(context);
     final bool isMobile = Responsive.isMobile(context);
     final menuItems = Get.put(HoledoDatabase()).menuItems;
     final bool isDesktop = Responsive.isDesktop(context);

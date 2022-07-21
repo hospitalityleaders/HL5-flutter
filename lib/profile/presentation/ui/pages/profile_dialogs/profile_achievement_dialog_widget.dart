@@ -5,6 +5,7 @@ import 'package:holedo/main.dart';
 import 'package:holedo/models/holedoapi/achievement.dart';
 import 'package:holedo/models/models.dart';
 import 'package:holedo/profile/presentation/data/presentation_data.dart';
+import 'package:holedo/profile/presentation/providers/app_provider.dart';
 import 'package:holedo/profile/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/profile/presentation/ui/pages/profile_dialogs/custom_expanded_tile.dart';
 import 'package:holedo/profile/presentation/ui/pages/profile_dialogs/dialog_widgets.dart';
@@ -428,8 +429,7 @@ class __SingleAchievementState extends State<_SingleAchievement> {
                             achievementList.add(achievement);
                           }
 
-                          await Provider.of<ProfileProvider>(context,
-                                  listen: false)
+                          await Provider.of<AppProvider>(context, listen: false)
                               .saveProfile(
                             User(
                               achievements: achievementList,

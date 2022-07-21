@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/svg.dart';
 import 'package:holedo/models/models.dart' hide Provider;
+import 'package:holedo/profile/presentation/providers/app_provider.dart';
 import 'package:holedo/profile/presentation/ui/components/appbar_textfield.dart';
 import 'package:holedo/profile/presentation/ui/components/custom_icon_button.dart';
 import 'package:holedo/profile/presentation/ui/components/custom_text_button.dart';
@@ -149,7 +150,7 @@ class _ProfileWithSubMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appState = Provider.of<ProfileProvider>(context);
+    final appState = Provider.of<AppProvider>(context);
 
     return Row(
       children: [

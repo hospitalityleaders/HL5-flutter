@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:holedo/models/models.dart';
+import 'package:holedo/profile/presentation/providers/app_provider.dart';
 import 'package:routemaster/routemaster.dart';
 
 class Nav {
   static void goToCurrentUserProfile(BuildContext context) {
-    final appState = Provider.of<ProfileProvider>(context);
+    final appState = Provider.of<AppProvider>(context);
     final isLoggedIn = appState.isLoggedIn;
     Routemaster.of(context).push(
       isLoggedIn
