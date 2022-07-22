@@ -195,17 +195,19 @@ RouteMap _buildRouteMap(BuildContext context) {
       },
       '/profile/:slug': (route) {
         final appState = Provider.of<AppProvider>(context, listen: false);
-        if (appState.isLoggedIn &&
-            route.pathParameters['slug'] == appState.profile?.slug) {
-          return NoAnimationPage(
-            child: ProfilePage(
-              id: appState.profile?.id.toString(),
-              slug: appState.profile?.slug,
-            ),
-          );
-        }
+        // if (appState.isLoggedIn &&
+        //     route.pathParameters['slug'] == appState.profile?.slug) {
+        //   return NoAnimationPage(
+        //     child: ProfilePage(
+        //       id: appState.profile?.id.toString(),
+        //       slug: appState.profile?.slug,
+        //     ),
+        //   );
+        // }
         return NoAnimationPage(
-          child: ProfilePage(slug: route.pathParameters['slug']),
+          child:
+              // SimpleScreen(),
+              ProfilePage(slug: route.pathParameters['slug']),
         );
       },
       //'/profile/add': (route) => AddProfilePage(),
@@ -309,4 +311,19 @@ class HoledoApp extends StatelessWidget {
   }
 
   //.profile = Get.put(HoledoDatabase()).getModel().user ?? null
+}
+
+class SimpleScreen extends StatelessWidget {
+  const SimpleScreen({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('SimpleScreen'),
+      ),
+      body: Center(
+        child: Text('SimpleScreen'),
+      ),
+    );
+  }
 }

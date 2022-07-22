@@ -78,10 +78,10 @@ class ProfileProvider extends ChangeNotifier {
     this.isMyProfile = isMyProfile;
     if (isMyProfile) {
       userProfileData = Get.put(HoledoDatabase()).getModel().user!;
+      changeUserProfilePercentage();
     } else {
       userProfileData = user;
     }
-    changeUserProfilePercentage();
   }
 
   // User? get profile => _profile;

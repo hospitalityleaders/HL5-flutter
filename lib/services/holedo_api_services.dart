@@ -11,6 +11,7 @@ import 'package:holedo/controller/auth_controller.dart';
 import 'package:holedo/models/holedoapi/article.dart';
 import 'package:holedo/models/holedoapi/job.dart';
 import 'package:holedo/models/models.dart';
+import 'package:holedo/profile/presentation/utill/api_urls.dart';
 
 //import 'package:dio/dio.dart';
 final baseUrl = 'https://${Get.put(HoledoDatabase()).apiHost}/rest';
@@ -68,16 +69,9 @@ class ApiServices {
     String? token,
   }) async {
     try {
-      var model = Holedoapi();
-      token ??= Get.put(HoledoDatabase()).token;
-      final header = headers ??
-          <String, dynamic>{
-            'AuthApi': 'Bearer $token',
-            'Content-Type': 'application/json; charset=UTF-8',
-            'Accept': 'application/json',
-            'Device': 'Holedo_Flutter'
-          };
-
+      Holedoapi model = Holedoapi();
+      token = token ?? AppUrls.token;
+      final header = headers ?? AppUrls.defaultHeadersCustomToken(token);
       final dio.Response response = await _dio.get(
         '$baseUrl$target',
         options: dio.Options(

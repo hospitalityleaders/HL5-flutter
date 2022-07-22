@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:holedo/layouts/page_scaffold.dart';
 import 'package:holedo/models/models.dart';
-import 'package:holedo/profile/presentation/ui/pages/profile_page.dart';
+import 'package:holedo/profile/presentation/ui/pages/user_profile_page.dart';
 
 class ProfilePage extends StatefulWidget {
   final String? id;
@@ -18,6 +18,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     final bool isMyProfile = widget.id != null;
+
     return PageScaffold(
       title: 'Profile',
       body: FutureBuilder<User>(
@@ -32,12 +33,20 @@ class _ProfilePageState extends State<ProfilePage> {
             return const Center(
               child: CircularProgressIndicator(),
             );
+          } else if (snapshot.hasError) {
+            return Center(child: Text("Unexpected error occured"));
           } else {
-            Provider.of<ProfileProvider>(context, listen: false)
-                .initializeProfile(
-              user: snapshot.data!,
-              isMyProfile: isMyProfile,
-            );
+            if (snapshot.data != null) {
+              Provider.of<ProfileProvider>(context, listen: false)
+                  .initializeProfile(
+                user: snapshot.data!,
+                isMyProfile: isMyProfile,
+              );
+            }
+
+            print("printInfo");
+            printInfo(info: snapshot.data.toString());
+            // return Center(child: Text("data"));
             return UserProfilePage(
               isMyProfile: isMyProfile,
               userData: snapshot.data!,
@@ -49,19 +58,9 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
 // import 'package:flutter/material.dart';
-// 
-// 
+//
+//
 // import 'package:holedo/layouts/page_scaffold.dart';
 // import 'package:holedo/models/models.dart';
 // import 'package:holedo/profile/presentation/ui/pages/profile_page.dart';
