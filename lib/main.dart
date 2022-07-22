@@ -194,20 +194,22 @@ RouteMap _buildRouteMap(BuildContext context) {
         return Redirect('/login', queryParameters: {'redirectTo': route.path});
       },
       '/profile/:slug': (route) {
+        Provider.of<ProfileProvider>(context, listen: false)
+            .changeCurrentProfileSlug(route.pathParameters['slug']!);
         final appState = Provider.of<AppProvider>(context, listen: false);
-        // if (appState.isLoggedIn &&
-        //     route.pathParameters['slug'] == appState.profile?.slug) {
-        //   return NoAnimationPage(
-        //     child: ProfilePage(
-        //       id: appState.profile?.id.toString(),
-        //       slug: appState.profile?.slug,
-        //     ),
-        //   );
-        // }
+        if (appState.isLoggedIn &&
+            route.pathParameters['slug'] == appState.profile?.slug) {
+          return NoAnimationPage(
+            child: ProfilePage(
+              id: appState.profile?.id.toString(),
+              slug: appState.profile?.slug,
+            ),
+          );
+        }
         return NoAnimationPage(
-          child:
-              // SimpleScreen(),
-              ProfilePage(slug: route.pathParameters['slug']),
+          child: ProfilePage(
+            slug: route.pathParameters['slug'],
+          ),
         );
       },
       //'/profile/add': (route) => AddProfilePage(),

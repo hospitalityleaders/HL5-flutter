@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:holedo/models/models.dart';
 
-import 'package:holedo/profile/presentation/providers/profile_provider.dart';
 import 'package:holedo/profile/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/profile/presentation/ui/components/person_avatar.dart';
 import 'package:holedo/profile/presentation/utill/color_resources.dart';
 import 'package:holedo/profile/presentation/utill/dimensions.dart';
 import 'package:holedo/profile/presentation/utill/responsive.dart';
 import 'package:holedo/profile/presentation/utill/styles.dart';
-import 'package:provider/provider.dart';
 
 class ProfileTabbar extends StatelessWidget {
   const ProfileTabbar({
@@ -131,7 +130,10 @@ class ProfileTabbar extends StatelessWidget {
               ],
             ),
           ),
-          if (Provider.of<ProfileProvider>(context).isMyProfile)
+          // if (Provider.of<ProfileProvider>(context).isMyProfile)
+          if (Get.put(HoledoDatabase()).getModel().user != null &&
+              (Get.put(HoledoDatabase()).getModel().user!.slug ==
+                  Provider.of<ProfileProvider>(context).currentProfileSlug))
             const EditProfileButton()
           else
             Di.ESB,

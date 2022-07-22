@@ -24,6 +24,7 @@ class ProfileProvider extends ChangeNotifier {
   AppNotificationState appNotificationState;
   User? userProfileData;
   bool isMyProfile;
+  String? currentProfileSlug;
 
   ProfileProvider({
     this.showConectionRequestPopo = false,
@@ -35,6 +36,7 @@ class ProfileProvider extends ChangeNotifier {
     this.percentageProfileCompleted = 20,
     this.currentTabIndex = 0,
     this.userProfileData,
+    this.currentProfileSlug,
     this.appNotificationState = const AppNotificationState.profileCompletion(),
     // String? username,
     // User? profile,
@@ -112,6 +114,11 @@ class ProfileProvider extends ChangeNotifier {
 
   void changeAppNotificationState(AppNotificationState appNotificationState) {
     this.appNotificationState = appNotificationState;
+    notifyListeners();
+  }
+
+  void changeCurrentProfileSlug(String currentProfileSlug) {
+    this.currentProfileSlug = currentProfileSlug;
     notifyListeners();
   }
 

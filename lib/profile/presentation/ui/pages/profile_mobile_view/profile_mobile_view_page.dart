@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:holedo/models/models.dart';
 import 'package:holedo/profile/presentation/data/presentation_data.dart';
 import 'package:holedo/profile/presentation/providers/app_provider.dart';
+import 'package:holedo/profile/presentation/ui/components/appbar_notification.dart';
 import 'package:holedo/profile/presentation/ui/components/person_avatar.dart';
 import 'package:holedo/profile/presentation/ui/pages/components/profile_image_banner.dart';
 import 'package:holedo/profile/presentation/ui/pages/components/profile_tabbar.dart';
@@ -50,12 +51,7 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
       backgroundColor: Cr.backgroundColor,
       body: ListView(
         children: [
-          //TODO:Need to work on app notification
-          // if (notification != null)
-          //   AppbarNotification(
-          //     title: notification.text,
-          //     buttonText: notification.buttonText,
-          //   ),
+          AppbarNotifications(),
           if (isTablt)
             ProfileImageBanner(
               userProfileData: userProfileData,

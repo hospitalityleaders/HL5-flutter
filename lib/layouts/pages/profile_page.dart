@@ -44,9 +44,6 @@ class _ProfilePageState extends State<ProfilePage> {
               );
             }
 
-            print("printInfo");
-            printInfo(info: snapshot.data.toString());
-            // return Center(child: Text("data"));
             return UserProfilePage(
               isMyProfile: isMyProfile,
               userData: snapshot.data!,
