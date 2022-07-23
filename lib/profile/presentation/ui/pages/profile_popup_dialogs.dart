@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:holedo/profile/presentation/ui/pages/components/connection_component.dart';
+import 'package:holedo/profile/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/profile/presentation/utill/color_resources.dart';
+import 'package:holedo/profile/presentation/utill/dimensions.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,27 +12,131 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Flutter',
       debugShowCheckedModeBanner: false,
-      home: TestingScreen(),
+      home: SImpelScreen(),
     );
   }
 }
 
-class TestingScreen extends StatelessWidget {
-  const TestingScreen({Key? key}) : super(key: key);
+class SImpelScreen extends StatelessWidget {
+  const SImpelScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        color: Cr.green1,
-        child: Center(
-          child: SizedBox(
-            width: 364,
-            child: ConnectionsComponent(),
+      body: TestingScreen(
+        screenSize: Di.getScreenSize(context),
+      ),
+    );
+  }
+}
+
+class TestingScreen extends StatefulWidget {
+  const TestingScreen({
+    Key? key,
+    required this.screenSize,
+  }) : super(key: key);
+  final Size screenSize;
+  @override
+  State<TestingScreen> createState() => _TestingScreenState();
+}
+
+class _TestingScreenState extends State<TestingScreen>
+    with TickerProviderStateMixin {
+  final double sliderOpenSize = 265;
+  late final AnimationController _animationDrawerController;
+  late Animation<double> _animation;
+  late Animation<double> _drawerAnimation;
+  bool isDrawerOpened = false;
+  @override
+  void initState() {
+    super.initState();
+
+    _animationDrawerController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 300),
+    );
+
+    _drawerAnimation = Tween<double>(
+      begin: widget.screenSize.width,
+      end: widget.screenSize.width - sliderOpenSize,
+    ).animate(
+      CurvedAnimation(
+        parent: _animationDrawerController,
+        curve: Curves.decelerate,
+        reverseCurve: Curves.decelerate,
+      ),
+    );
+    _animation = Tween<double>(
+      begin: 0,
+      // begin: widget.sliderCloseSize,
+      // end: widget.sliderOpenSize,
+      end: (sliderOpenSize),
+    ).animate(
+      CurvedAnimation(
+        parent: _animationDrawerController,
+        curve: Curves.decelerate,
+        reverseCurve: Curves.decelerate,
+      ),
+    );
+  }
+
+  Future<void> toggle() async {
+    _animationDrawerController.isCompleted
+        ? _animationDrawerController.reverse()
+        : _animationDrawerController.forward();
+    if (isDrawerOpened) await Future.delayed(Duration(milliseconds: 300));
+    setState(() {
+      isDrawerOpened = !isDrawerOpened;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Cr.accentBlue3,
+      body: Column(
+        children: [
+          Stack(
+            children: [
+              AnimatedBuilder(
+                animation: _animationDrawerController,
+                builder: (context, child) {
+                  return Transform.translate(
+                    offset: Offset(_drawerAnimation.value, 0),
+                    child: Container(
+                      width: sliderOpenSize,
+                      height: widget.screenSize.height * .7,
+                      color: Cr.accentBlue1,
+                    ),
+                  );
+                },
+              ),
+              AnimatedBuilder(
+                animation: _animationDrawerController,
+                builder: (context, child) {
+                  return Transform.translate(
+                    offset: Offset(-_animation.value, 0),
+                    child: Container(
+                      width: widget.screenSize.width,
+                      height: widget.screenSize.height * .7,
+                      decoration: BoxDecoration(
+                          gradient:
+                              LinearGradient(colors: [Cr.green1, Cr.red1])),
+                    ),
+                  );
+                },
+              ),
+            ],
           ),
-        ),
+          Di.SBCH(100),
+          CustomElevatedButton(
+            onPressed: () {
+              toggle();
+            },
+          )
+        ],
       ),
     );
   }

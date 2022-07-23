@@ -5,6 +5,7 @@ import 'package:holedo/profile/presentation/ui/flutter_slider_drawer/mobile_slid
 import 'package:holedo/profile/presentation/ui/flutter_slider_drawer/slider_bar.dart';
 import 'package:holedo/profile/presentation/ui/flutter_slider_drawer/slider_direction.dart';
 import 'package:holedo/profile/presentation/ui/pages/mobile_view_section/mobile_profile_overview_section.dart';
+import 'package:holedo/profile/presentation/utill/color_resources.dart';
 
 export 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 export 'package:holedo/layouts/cards/holedo_cards.dart';
@@ -29,6 +30,8 @@ class SliderDrawer extends StatefulWidget {
   final Color splashColor;
   final SliderShadow? sliderShadow;
   final SlideDirection slideDirection;
+  final Size screenSize;
+
   const SliderDrawer({
     Key? key,
     this.slider,
@@ -40,6 +43,7 @@ class SliderDrawer extends StatefulWidget {
     this.slideDirection = SlideDirection.RIGHT_TO_LEFT,
     this.sliderShadow,
     this.appBar,
+    required this.screenSize,
   }) : super(key: key);
 
   @override
@@ -50,20 +54,41 @@ class SliderDrawerState extends State<SliderDrawer>
     with TickerProviderStateMixin {
   final double _percent = 0.0;
 
-  AnimationController? _animationDrawerController;
+  // AnimationController? _animationDrawerController;
+  final double sliderOpenSize = 265;
+  late final AnimationController _animationDrawerController;
   late Animation<double> _animation;
+  late Animation<double> _drawerAnimation;
+  bool _isDrawerOpened = false;
 
-  bool get isDrawerOpen => _animationDrawerController!.isCompleted;
+  bool get isDrawerOpen => _animationDrawerController.isCompleted;
 
   AnimationController? get animationController => _animationDrawerController;
 
-  void toggle() => _animationDrawerController!.isCompleted
-      ? _animationDrawerController!.reverse()
-      : _animationDrawerController!.forward();
+  Future<void> toggle() async {
+    _animationDrawerController.isCompleted
+        ? _animationDrawerController.reverse()
+        : _animationDrawerController.forward();
+    if (_isDrawerOpened) await Future.delayed(Duration(milliseconds: 300));
+    setState(() {
+      _isDrawerOpened = !_isDrawerOpened;
+    });
+  }
 
-  void openSlider() => _animationDrawerController!.forward();
+  void openSlider() {
+    _animationDrawerController.forward();
+    setState(() {
+      _isDrawerOpened = true;
+    });
+  }
 
-  void closeSlider() => _animationDrawerController!.reverse();
+  Future<void> closeSlider() async {
+    _animationDrawerController.reverse();
+    await Future.delayed(Duration(milliseconds: 300));
+    setState(() {
+      _isDrawerOpened = false;
+    });
+  }
 
   @override
   void initState() {
@@ -71,14 +96,27 @@ class SliderDrawerState extends State<SliderDrawer>
 
     _animationDrawerController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: widget.animationDuration),
+      duration: Duration(milliseconds: 300),
     );
 
-    _animation =
-        Tween<double>(begin: widget.sliderCloseSize, end: widget.sliderOpenSize)
-            .animate(
+    _drawerAnimation = Tween<double>(
+      begin: widget.screenSize.width,
+      end: widget.screenSize.width - sliderOpenSize,
+    ).animate(
       CurvedAnimation(
-        parent: _animationDrawerController!,
+        parent: _animationDrawerController,
+        curve: Curves.decelerate,
+        reverseCurve: Curves.decelerate,
+      ),
+    );
+    _animation = Tween<double>(
+      begin: 0,
+      // begin: widget.sliderCloseSize,
+      // end: widget.sliderOpenSize,
+      end: (sliderOpenSize),
+    ).animate(
+      CurvedAnimation(
+        parent: _animationDrawerController,
         curve: Curves.decelerate,
         reverseCurve: Curves.decelerate,
       ),
@@ -87,56 +125,80 @@ class SliderDrawerState extends State<SliderDrawer>
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constrain) {
-        return Stack(
-          children: <Widget>[
-            SliderBar(
-              slideDirection: widget.slideDirection,
-              sliderMenu: MobileSlideMenu(onCloseTap: closeSlider),
-              sliderMenuOpenSize: widget.sliderOpenSize,
-            ),
-            if (widget.sliderShadow != null) ...[
-              _Shadow(
-                animationDrawerController: _animationDrawerController,
-                slideDirection: widget.slideDirection,
-                sliderOpenSize: widget.sliderOpenSize,
-                animation: _animation,
-                sliderShadow: widget.sliderShadow!,
+    return Stack(
+      children: [
+        AnimatedBuilder(
+          animation: _animationDrawerController,
+          builder: (context, child) {
+            return Transform.translate(
+              offset: Offset(_drawerAnimation.value, 0),
+              child: SizedBox(
+                height: widget.screenSize.height,
+                child: SliderBar(
+                  slideDirection: widget.slideDirection,
+                  sliderMenu: MobileSlideMenu(onCloseTap: closeSlider),
+                  sliderMenuOpenSize: widget.sliderOpenSize,
+                ),
               ),
-            ],
-            //Child
-            AnimatedBuilder(
-              animation: _animationDrawerController!,
-              builder: (_, child) {
-                return Transform.translate(
-                  offset: getOffsetValues(
-                    widget.slideDirection,
-                    _animation.value,
-                  ),
-                  child: child,
-                );
-              },
-              child: Column(
-                children: <Widget>[
-                  ProfileMobileAppbar(
-                    onMenuTap: () => toggle(),
-                    onSearch: (onSearch) {},
-                  ),
-                  Expanded(child: widget.child),
+            );
+          },
+        ),
+        AnimatedBuilder(
+          animation: _animationDrawerController,
+          builder: (context, child) {
+            return Transform.translate(
+              offset: Offset(-_animation.value, 0),
+              child: Stack(
+                children: [
+                  child!,
+                  if (_isDrawerOpened)
+                    Container(
+                      color: Cr.darkBlue5.withAlpha(230),
+                    )
                 ],
               ),
-            ),
-          ],
-        );
-      },
+            );
+          },
+          child: Column(
+            children: <Widget>[
+              ProfileMobileAppbar(
+                onMenuTap: () => toggle(),
+                onSearch: (onSearch) {},
+              ),
+              Expanded(child: widget.child),
+            ],
+          ),
+        ),
+      ],
     );
   }
+
+  // AnimatedBuilder(
+  //       animation: _animationDrawerController,
+  //       builder: (_, child) {
+  //         return Transform.translate(
+  //           offset: getOffsetValues(
+  //             widget.slideDirection,
+  //             _animation.value,
+  //           ),
+  //           child: child!,
+  //         );
+  //       },
+  //       child: Column(
+  //         children: <Widget>[
+  //           ProfileMobileAppbar(
+  //             onMenuTap: () => toggle(),
+  //             onSearch: (onSearch) {},
+  //           ),
+  //           Expanded(child: widget.child),
+  //         ],
+  //       ),
+  //     ),
 
   @override
   void dispose() {
     super.dispose();
-    _animationDrawerController!.dispose();
+    _animationDrawerController.dispose();
   }
 
   void openOrClose() {

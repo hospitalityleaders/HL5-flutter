@@ -78,6 +78,7 @@ class _UserProfilePageState extends State<UserProfilePage>
         color: Cr.backgroundColor,
         child: Di.getScreenSize(context).width < 1000
             ? SliderDrawer(
+                screenSize: Di.getScreenSize(context),
                 splashColor: Cr.colorPrimary,
                 child: Container(
                   decoration: const BoxDecoration(

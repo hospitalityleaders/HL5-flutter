@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:holedo/profile/presentation/providers/profile_provider.dart';
 import 'package:holedo/profile/presentation/ui/components/profile_reference_single_compoenet.dart';
 import 'package:holedo/profile/presentation/ui/pages/components/connection_component.dart';
 import 'package:holedo/profile/presentation/ui/pages/components/profile_completion_component.dart';
 import 'package:holedo/profile/presentation/ui/pages/components/rights_component.dart';
 import 'package:holedo/profile/presentation/ui/pages/components/timeline_component.dart';
 import 'package:holedo/profile/presentation/utill/dimensions.dart';
+import 'package:provider/provider.dart';
 
 class MobileProfileReferenceSection extends StatelessWidget {
   const MobileProfileReferenceSection({
@@ -18,14 +20,14 @@ class MobileProfileReferenceSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final userProfileData = Provider.of<ProfileProvider>(context).userProfileData!;
+    final profileProvider = Provider.of<ProfileProvider>(context);
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: Di.PSS,
       ),
       child: Column(
         children: [
-          if (isMobilePhn) ...[
+          if (isMobilePhn && profileProvider.isMyProfile) ...[
             const ProfileCompletionComponent(),
             Di.SBHS,
           ],

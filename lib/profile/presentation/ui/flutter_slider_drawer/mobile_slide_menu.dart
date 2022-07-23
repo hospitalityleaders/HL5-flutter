@@ -175,36 +175,35 @@ class _MobileSlideMenuState extends State<MobileSlideMenu> {
                         ),
                         margin: const EdgeInsets.only(right: Di.PSS),
                         height: 77,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const PersonAvatar(
-                              avatarSize: 50,
-                            ),
-                            Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(
-                                  userProfileData?.fullName ?? "",
-                                  style: bodySmallRegular.copyWith(
-                                    color: Cr.grey1,
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const PersonAvatar(
+                                avatarSize: 50,
+                              ),
+                              Di.SBWS,
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    userProfileData?.fullName ?? "",
+                                    style: bodySmallRegular.copyWith(
+                                      color: Cr.grey1,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  userProfileData?.fullName ?? "",
-                                  style: bodySmallRegular.copyWith(
-                                    color: Cr.grey1,
+                                  Text(
+                                    userProfileData?.professionalTitle ?? "",
+                                    style: bodySmallRegular.copyWith(
+                                      color: Cr.grey1,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  userProfileData?.fullName ?? "",
-                                  style: bodySmallRegular.copyWith(
-                                    color: Cr.grey1,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     Di.DHDT,

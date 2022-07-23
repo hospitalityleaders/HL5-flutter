@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:holedo/models/models.dart';
 import 'package:holedo/profile/presentation/ui/components/container_with_icon.dart';
 import 'package:holedo/profile/presentation/ui/components/custom_text_button.dart';
 import 'package:holedo/profile/presentation/ui/components/person_avatar.dart';
@@ -42,7 +43,9 @@ class _MobileProfileTimelineSectionState
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (widget.isMobilePhn) const ProfileCompletionComponent(),
+          if (widget.isMobilePhn &&
+              Provider.of<ProfileProvider>(context).isMyProfile)
+            const ProfileCompletionComponent(),
           if (widget.isMobilePhn)
             _MobileTimelineSection(
               jobDescriptionInHtml: widget.jobDescriptionInHtml,

@@ -122,7 +122,8 @@ class _ProfileImageBannerState extends State<ProfileImageBanner> {
                       child: SizedBox(
                         width: 450,
                         child: Text(
-                          widget.userProfileData.professionalTitle.toString(),
+                          (widget.userProfileData.professionalTitle ?? "")
+                              .toString(),
                           // ??
                           textAlign: TextAlign.center,
                           style: bodyLarge.copyWith(

@@ -34,8 +34,7 @@ class MobileProfileOverviewSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userProfileData =
-        Provider.of<ProfileProvider>(context).userProfileData!;
+    final profileProvider = Provider.of<ProfileProvider>(context);
     return Container(
       color: Cr.backgroundColor,
       padding: const EdgeInsets.symmetric(
@@ -43,21 +42,22 @@ class MobileProfileOverviewSection extends StatelessWidget {
       ),
       child: Column(
         children: [
-          if (isMobilePhn) const ProfileCompletionComponent(),
+          if (isMobilePhn && profileProvider.isMyProfile)
+            const ProfileCompletionComponent(),
           Di.SBHS,
           const ProfileSummaryComponent(
             isMobile: true,
           ),
 
           ProfileWorkExperienceComponent(
-            userProfileData: userProfileData,
+            userProfileData: profileProvider.userProfileData!,
             isMobile: isMobilePhn,
             isTablet: isTablt,
           ),
           Di.SBHS,
           FeaturedVideoComponent(
             isMobile: true,
-            userProfileData: userProfileData,
+            userProfileData: profileProvider.userProfileData!,
           ),
           Di.SBHS,
           const AreasOfExpertiseComponents(),
@@ -66,13 +66,13 @@ class MobileProfileOverviewSection extends StatelessWidget {
           Di.SBHS,
           EducationComponent(
             isMobile: true,
-            userProfileData: userProfileData,
+            userProfileData: profileProvider.userProfileData!,
           ),
           Di.SBHS,
           const AchievementComponent(isMobile: true),
           //TODO:
           // LanguagesComponent(
-          //   userProfileData: userProfileData,
+          //   userProfileData: profileProvider.userProfileData!,
           // ),
           Di.SBHS,
           const ConnectionsComponent(
