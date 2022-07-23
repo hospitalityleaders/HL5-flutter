@@ -40,10 +40,8 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
   Widget build(BuildContext context) {
     final bool isMobilePhn = isMobilePhone(context);
     final bool isTablt = isTablet(context);
-    final User userProfileData =
-        // Provider.of<ProfileProvider>(context)
-        Provider.of<ProfileProvider>(context).userProfileData!;
-    // final isEditable = Provider.of<ProfileProvider>(context).isProfileEditable;
+    final profileProvider = Provider.of<ProfileProvider>(context);
+    final User userProfileData = profileProvider.userProfileData!;
     final appState = Provider.of<AppProvider>(context);
     final bool isMine = appState.isLoginnedAndEditable(userProfileData);
 
@@ -184,12 +182,14 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                                     width: double.infinity,
                                   ),
                                   Di.SBHES,
-                                  WriteReferenceRecommandButtonComman(
-                                    isMobile: true,
-                                    width:
-                                        Di.getScreenSize(context).width * .43,
-                                    userProfileData: userProfileData,
-                                  ),
+                                  if (!profileProvider.isMyProfile)
+                                    WriteReferenceRecommandButtonComman(
+                                      isMobile: true,
+                                      width:
+                                          Di.getScreenSize(context).width * .43,
+                                      userProfileData: userProfileData,
+                                    ),
+
                                   Di.SBHD,
                                   SizedBox(
                                     child: Image.asset(

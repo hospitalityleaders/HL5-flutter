@@ -35,6 +35,8 @@ class _ProfileImageBannerState extends State<ProfileImageBanner> {
   bool showProfileSubMenu = false;
   @override
   Widget build(BuildContext context) {
+    final profileProvider = Provider.of<ProfileProvider>(context);
+
     return Stack(
       children: [
         Container(
@@ -158,10 +160,12 @@ class _ProfileImageBannerState extends State<ProfileImageBanner> {
                         child: SendConnectionRequestButton(),
                       ),
                     ),
-                    Di.SBHES,
-                    WriteReferenceRecommandButtonComman(
-                      userProfileData: widget.userProfileData,
-                    ),
+                    if (!profileProvider.isMyProfile) ...[
+                      Di.SBHES,
+                      WriteReferenceRecommandButtonComman(
+                        userProfileData: widget.userProfileData,
+                      ),
+                    ],
                     Di.SBHOTL,
                     StatsComman(
                       userProfileData: widget.userProfileData,
