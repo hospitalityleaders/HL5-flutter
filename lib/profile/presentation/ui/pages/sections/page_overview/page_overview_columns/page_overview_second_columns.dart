@@ -1,8 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:holedo/models/holedoapi/achievement.dart';
 import 'package:holedo/models/holedoapi/holedoapi.dart';
+import 'package:holedo/models/holedoapi/language.dart';
+import 'package:holedo/profile/presentation/data/presentation_data.dart';
 import 'package:holedo/profile/presentation/ui/components/expanded_collapse_widget.dart';
 import 'package:holedo/profile/presentation/ui/components/profile_reference_single_compoenet.dart';
 import 'package:holedo/profile/presentation/ui/components/svg_with_background.dart';
@@ -13,6 +16,7 @@ import 'package:holedo/profile/presentation/ui/pages/components/profile_eduction
 import 'package:holedo/profile/presentation/ui/pages/components/profile_workexperience.dart';
 import 'package:holedo/profile/presentation/ui/pages/profile_dialogs/profile_achievement_dialog_widget.dart';
 import 'package:holedo/profile/presentation/ui/pages/profile_dialogs/profile_featured_video_dialog.dart';
+import 'package:holedo/profile/presentation/ui/pages/profile_dialogs/profile_language_dialog_widget.dart';
 import 'package:holedo/profile/presentation/ui/pages/profile_dialogs/show_custom_dialog.dart';
 import 'package:holedo/profile/presentation/utill/color_resources.dart';
 import 'package:holedo/profile/presentation/utill/dimensions.dart';
@@ -75,121 +79,122 @@ class _ProfileOverviewSecondColumnState
           const AchievementComponent(),
           Di.SBHEL,
         ],
-        if (editAbleOrMyProfile ||
-            (userProfileData.languages?.isNotEmpty ?? false)) ...[
-          // LanguagesComponent(
-          //   onEditPressed: () => buildLanguagePopUp(langIndex),
-          //   userProfileData: userProfileData,
-          // ),
-          Di.SBHEL,
-        ],
+        // if (editAbleOrMyProfile ||
+        //     (userProfileData.languages?.isNotEmpty ?? false)) ...[
+        //   LanguagesComponent(
+        //     // onEditPressed: () => buildLanguagePopUp(langIndex),
+        //     userProfileData: userProfileData,
+        //   ),
+        //   Di.SBHEL,
+        // ],
       ],
     );
   }
 }
 
-// class LanguagesComponent extends StatelessWidget {
-//   const LanguagesComponent({
-//     Key? key,
-//     this.onEditPressed,
-//     required this.userProfileData,
-//   }) : super(key: key);
-//   final User userProfileData;
+class LanguagesComponent extends StatelessWidget {
+  const LanguagesComponent({
+    Key? key,
+    this.onEditPressed,
+    required this.userProfileData,
+  }) : super(key: key);
+  final User userProfileData;
+  final void Function()? onEditPressed;
 
-//   final void Function()? onEditPressed;
+  @override
+  Widget build(BuildContext context) {
+    final List<Language>? languages = Provider.of<ProfileProvider>(context)
+        .userProfileData!
+        .languages as List<Language>?;
+    final bool hasData = languages != null ? languages.isNotEmpty : false;
 
-//   @override
-//   Widget build(BuildContext context) {
-//     final List<Language>? languages = Provider.of<ProfileProvider>(context).userProfileData!.languages;
-//     final bool hasData = languages != null ? languages.isNotEmpty : false;
-
-//     return Container(
-//       decoration: boxDecoration.copyWith(color: Cr.whiteColor),
-//       child: Column(
-//         mainAxisSize: MainAxisSize.min,
-//         children: [
-//           Di.SBHETS,
-//           ListTile(
-//             title: Text(
-//               "Languages",
-//               style: h2Regular,
-//             ),
-//           ),
-//           IntrinsicHeight(
-//             child: Stack(
-//               children: [
-//                 if (hasData)
-//                   Column(
-//                     children: languages
-//                         .map(
-//                           (singleLanguage) => Column(
-//                             children: [
-//                               Di.DWZH,
-//                               Di.SBHS,
-//                               Container(
-//                                 width: 360,
-//                                 decoration: boxDecoration
-//                                     .copyWith(color: Cr.whiteColor),
-//                                 child: Column(
-//                                   crossAxisAlignment: CrossAxisAlignment.start,
-//                                   children: [
-//                                     ListTile(
-//                                       leading: SvgPicture.asset(Svgs.earth),
-//                                       trailing: SizedBox(),
-//                                       title: Text(
-//                                         singleLanguage.title ?? "",
-//                                         // "English",
-//                                         style: h4Bold.copyWith(
-//                                           fontSize: Di.FSD,
-//                                         ),
-//                                       ),
-//                                       subtitle: Padding(
-//                                         padding: const EdgeInsets.symmetric(
-//                                           vertical: Di.PSETS + 1,
-//                                         ),
-//                                         child: Text(
-//                                           "Native and bilingual profiency",
-//                                           style: bodySmallRegular.copyWith(
-//                                             color: Cr.accentBlue1,
-//                                             fontSize: Di.FSS,
-//                                           ),
-//                                         ),
-//                                       ),
-//                                     ),
-//                                     Di.SBHD,
-//                                   ],
-//                                 ),
-//                               ),
-//                             ],
-//                           ),
-//                         )
-//                         .toList(),
-//                   ),
-//                 EditBlueCardSheet(
-//                   context,
-//                   dataIsNull: !hasData,
-//                   greenCardText:
-//                       "Show which languages you are fluent and professionally capable of.",
-//                 ),
-//                 if (hasData)
-//                   EditAddButtonOfSheet(
-//                     context,
-//                     onEditPressed: () {
-//                       showCustomDialog(
-//                         context,
-//                         ProfileLanguagesDialogWidget(
-//                             userProfileData: userProfileData),
-//                       );
-//                     },
-//                   ),
-//               ],
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
+    return Container(
+      decoration: boxDecoration.copyWith(color: Cr.whiteColor),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Di.SBHETS,
+          ListTile(
+            title: Text(
+              "Languages",
+              style: h2Regular,
+            ),
+          ),
+          IntrinsicHeight(
+            child: Stack(
+              children: [
+                if (hasData)
+                  Column(
+                    children: languages
+                        .map(
+                          (singleLanguage) => Column(
+                            children: [
+                              Di.DWZH,
+                              Di.SBHS,
+                              Container(
+                                width: 360,
+                                decoration: boxDecoration.copyWith(
+                                    color: Cr.whiteColor),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    ListTile(
+                                      leading: SvgPicture.asset(Svgs.earth),
+                                      trailing: SizedBox(),
+                                      title: Text(
+                                        languagesTypes["8"]!,
+                                        // "English",
+                                        style: h4Bold.copyWith(
+                                          fontSize: Di.FSD,
+                                        ),
+                                      ),
+                                      subtitle: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                          vertical: Di.PSETS + 1,
+                                        ),
+                                        child: Text(
+                                          languagesProficiencies["2"]!,
+                                          style: bodySmallRegular.copyWith(
+                                            color: Cr.accentBlue1,
+                                            fontSize: Di.FSS,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Di.SBHD,
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                        .toList(),
+                  ),
+                EditBlueCardSheet(
+                  context,
+                  dataIsNull: !hasData,
+                  greenCardText:
+                      "Show which languages you are fluent and professionally capable of.",
+                ),
+                if (hasData)
+                  EditAddButtonOfSheet(
+                    context,
+                    onEditPressed: () {
+                      showCustomDialog(
+                        context,
+                        ProfileLanguagesDialogWidget(
+                            userProfileData: userProfileData),
+                      );
+                    },
+                  ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
 
 class AchievementComponent extends StatefulWidget {
   const AchievementComponent({
@@ -203,12 +208,13 @@ class AchievementComponent extends StatefulWidget {
 }
 
 class _AchievementComponentState extends State<AchievementComponent> {
+  bool showSubMenu = false;
+
   @override
   Widget build(BuildContext context) {
     final List<Achievement>? achievement =
         Provider.of<ProfileProvider>(context).userProfileData!.achievements;
     final bool hasData = achievement != null ? achievement.isNotEmpty : false;
-    bool showSubMenu = false;
 
     return Container(
       decoration: boxDecoration,

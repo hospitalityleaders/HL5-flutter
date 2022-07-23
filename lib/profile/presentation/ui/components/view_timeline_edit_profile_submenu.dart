@@ -48,8 +48,6 @@ class ViewTimeEditProfileSubmenu extends StatelessWidget {
           ),
         CustomSubmenuItem(
           onTap: () {
-            // ref
-            //     .read(profileNotifierProvider.notifier)
             Provider.of<ProfileProvider>(context, listen: false)
                 .changeIsProfieEditableState(true);
             hideSubMenuCallback();

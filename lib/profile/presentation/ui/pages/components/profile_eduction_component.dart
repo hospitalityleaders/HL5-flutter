@@ -35,6 +35,8 @@ class EducationComponent extends StatefulWidget {
 }
 
 class _EducationComponentState extends State<EducationComponent> {
+  bool showSubMenu = false;
+
   @override
   Widget build(BuildContext context) {
     final List<Education>? education =
@@ -43,7 +45,6 @@ class _EducationComponentState extends State<EducationComponent> {
       context,
     ).userProfileData!.educations;
     final bool hasData = education != null ? education.isNotEmpty : false;
-    bool showSubMenu = false;
 
     return Container(
       color: Cr.backgroundColor,

@@ -38,7 +38,7 @@ class _ProfileReferenceComponentState extends State<ProfileReferenceComponent> {
             .receivedReferences;
     return DecoratedBox(
       decoration: boxDecoration.copyWith(color: Cr.whiteColor),
-      child: Column(
+      child: Stack(
         children: [
           Column(
             mainAxisSize: MainAxisSize.min,
