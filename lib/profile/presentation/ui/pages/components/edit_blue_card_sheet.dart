@@ -79,9 +79,6 @@ class EditBlueCardSheet extends StatelessWidget {
                 ),
               )
             : Container(
-                // width: 560,
-                // height:
-                //     Provider.of<ProfileProvider>(context).userProfileData!.expertise!.length < 3 ? 100 : null,
                 color: Cr.accentBlue2.withOpacity(.8),
                 padding: const EdgeInsets.all(Di.PSD),
               )

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:holedo/layouts/page_scaffold.dart';
 import 'package:holedo/models/models.dart';
+import 'package:holedo/profile/presentation/providers/app_provider.dart';
 import 'package:holedo/profile/presentation/ui/pages/user_profile_page.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -17,7 +18,10 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    final bool isMyProfile = widget.id != null;
+    final bool isMyProfile = Provider.of<AppProvider>(context).isLoggedIn
+        // ? (widget.id != null)
+        ? (widget.slug! == Get.put(HoledoDatabase()).getModel().user!.slug)
+        : false;
 
     return PageScaffold(
       title: 'Profile',

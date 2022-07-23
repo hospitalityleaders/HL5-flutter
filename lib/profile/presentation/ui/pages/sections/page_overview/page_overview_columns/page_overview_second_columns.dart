@@ -41,29 +41,48 @@ class _ProfileOverviewSecondColumnState
   Widget build(BuildContext context) {
     final userProfileData =
         Provider.of<ProfileProvider>(context).userProfileData!;
+    final profileProvider = (Provider.of<ProfileProvider>(context));
+
+    final bool editAbleOrMyProfile =
+        profileProvider.isMyProfile && profileProvider.isProfileEditable;
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        FeaturedVideoComponent(
-          userProfileData: userProfileData,
-        ),
-        Di.SBHL,
-        ProfileWorkExperienceComponent(
-          userProfileData: userProfileData,
-        ),
-        Di.SBHL,
-        EducationComponent(
-          userProfileData: userProfileData,
-        ),
-        Di.SBHL,
-        const AchievementComponent(),
-        Di.SBHEL,
-        // LanguagesComponent(
-        //   onEditPressed: () => buildLanguagePopUp(langIndex),
-        //   userProfileData: userProfileData,
-        // ),
-        Di.SBHEL,
+        if (editAbleOrMyProfile ||
+            (userProfileData.profileVideoUrl?.isNotEmpty ?? false)) ...[
+          FeaturedVideoComponent(
+            userProfileData: userProfileData,
+          ),
+          Di.SBHL,
+        ],
+        if (editAbleOrMyProfile ||
+            (userProfileData.experiences?.isNotEmpty ?? false)) ...[
+          ProfileWorkExperienceComponent(
+            userProfileData: userProfileData,
+          ),
+          Di.SBHL,
+        ],
+        if (editAbleOrMyProfile ||
+            (userProfileData.educations?.isNotEmpty ?? false)) ...[
+          EducationComponent(
+            userProfileData: userProfileData,
+          ),
+          Di.SBHL,
+        ],
+        if (editAbleOrMyProfile ||
+            (userProfileData.achievements?.isNotEmpty ?? false)) ...[
+          const AchievementComponent(),
+          Di.SBHEL,
+        ],
+        if (editAbleOrMyProfile ||
+            (userProfileData.languages?.isNotEmpty ?? false)) ...[
+          // LanguagesComponent(
+          //   onEditPressed: () => buildLanguagePopUp(langIndex),
+          //   userProfileData: userProfileData,
+          // ),
+          Di.SBHEL,
+        ],
       ],
     );
   }

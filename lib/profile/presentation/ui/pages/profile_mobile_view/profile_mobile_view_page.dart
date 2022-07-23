@@ -51,7 +51,9 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
       backgroundColor: Cr.backgroundColor,
       body: ListView(
         children: [
-          AppbarNotifications(),
+          if (Provider.of<ProfileProvider>(context).isMyProfile) ...[
+            AppbarNotifications(),
+          ],
           if (isTablt)
             ProfileImageBanner(
               userProfileData: userProfileData,

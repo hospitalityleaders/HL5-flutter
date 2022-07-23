@@ -94,7 +94,9 @@ class _UserProfilePageState extends State<UserProfilePage>
                 child: ListView(
                   shrinkWrap: true,
                   children: [
-                    AppbarNotifications(),
+                    if (Provider.of<ProfileProvider>(context).isMyProfile) ...[
+                      AppbarNotifications(),
+                    ],
                     ProfileImageBanner(
                       userProfileData: userProfileData!,
                     ),

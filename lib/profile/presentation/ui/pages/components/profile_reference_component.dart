@@ -33,7 +33,6 @@ class _ProfileReferenceComponentState extends State<ProfileReferenceComponent> {
   @override
   Widget build(BuildContext context) {
     final List<ReceivedReference>? receivedReferences =
-        // Provider.of<ProfileProvider>(context).
         Provider.of<ProfileProvider>(context)
             .userProfileData!
             .receivedReferences;

@@ -43,9 +43,11 @@ class _TimelineSectionState extends State<TimelineSection> {
               width: 360,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                children: const [
-                  ProfileCompletionComponent(),
-                  Di.SBHEL,
+                children: [
+                  if (Provider.of<ProfileProvider>(context).isMyProfile) ...[
+                    ProfileCompletionComponent(),
+                    Di.SBHEL,
+                  ],
                   ConnectionsComponent(),
                   ProfileAdsComponent(),
                   Di.SBHL,

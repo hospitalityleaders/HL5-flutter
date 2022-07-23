@@ -32,17 +32,29 @@ class _ProfileOverviewFirstColumnState
     extends State<ProfileOverviewFirstColumn> {
   @override
   Widget build(BuildContext context) {
+    final profileProvider = Provider.of<ProfileProvider>(context);
+    final userProfileData = profileProvider.userProfileData!;
+    final bool editAbleOrMyProfile =
+        profileProvider.isMyProfile && profileProvider.isProfileEditable;
     return SizedBox(
       width: 360,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          ProfileSummaryComponent(),
-          Di.SBHETS,
-          AreasOfExpertiseComponents(),
-          Di.SBHL,
-          ProfileReferenceComponent(),
+        children: [
+          if (editAbleOrMyProfile ||
+              (userProfileData.profileSummary?.isNotEmpty ?? false)) ...[
+            ProfileSummaryComponent(),
+            Di.SBHETS,
+          ],
+          if (editAbleOrMyProfile ||
+              (userProfileData.expertise?.isNotEmpty ?? false)) ...[
+            AreasOfExpertiseComponents(),
+            Di.SBHL,
+          ],
+          if (editAbleOrMyProfile ||
+              (userProfileData.receivedReferences?.isNotEmpty ?? false))
+            ProfileReferenceComponent(),
         ],
       ),
     );
@@ -66,8 +78,8 @@ class _ProfileSummaryComponentState extends State<ProfileSummaryComponent> {
 
   @override
   Widget build(BuildContext context) {
-    final String? profileSummary =
-        Provider.of<ProfileProvider>(context).userProfileData!.profileSummary;
+    final userProfileData =
+        Provider.of<ProfileProvider>(context).userProfileData!;
     final isMobilePhn = isMobilePhone(context);
 
     return Container(
@@ -117,7 +129,7 @@ class _ProfileSummaryComponentState extends State<ProfileSummaryComponent> {
                   children: [
                     if (isMobilePhn)
                       ExpandedCollapseWidget(
-                        description: profileSummary ?? "",
+                        description: userProfileData.profileSummary ?? "",
                         isMobile: widget.isMobile,
                       )
                     else
@@ -129,14 +141,14 @@ class _ProfileSummaryComponentState extends State<ProfileSummaryComponent> {
                           bottom: Di.PSD,
                         ),
                         child: Text(
-                          profileSummary ?? "",
+                          userProfileData.profileSummary ?? "",
                           maxLines: widget.isMobile ? 6 : null,
                           style: bodyLarge.copyWith(color: Cr.darkGrey1),
                         ),
                       ),
                     EditBlueCardSheet(
                       context,
-                      dataIsNull: profileSummary == null,
+                      dataIsNull: userProfileData.profileSummary == null,
                       greenCardText:
                           "Add a written profile summary about your professional career, skills, work experience and achievements. Promote yourself and get recognised by other people.",
                       greenCardTip:
@@ -145,29 +157,19 @@ class _ProfileSummaryComponentState extends State<ProfileSummaryComponent> {
                         showCustomDialog(
                           context,
                           ProfileSummaryDialogWidget(
-                            // Provider.of<ProfileProvider>(context)
-                            userProfileData:
-                                //  ref
-                                //     .watch(profileNotifierProvider)
-                                Provider.of<ProfileProvider>(context)
-                                    .userProfileData!,
+                            userProfileData: userProfileData,
                           ),
                         );
                       },
                     ),
-                    if (profileSummary != null)
+                    if (userProfileData.profileSummary != null)
                       EditAddButtonOfSheet(
                         context,
                         onEditPressed: () {
                           showCustomDialog(
                             context,
                             ProfileSummaryDialogWidget(
-                              userProfileData:
-                                  Provider.of<ProfileProvider>(context)
-
-                                      // ref
-                                      //     .watch(profileNotifierProvider)
-                                      .userProfileData!,
+                              userProfileData: userProfileData,
                             ),
                           );
                         },
@@ -245,9 +247,6 @@ class _AreasOfExpertiseComponentsState
                         children: [
                           Di.SBHD,
                           if (Provider.of<ProfileProvider>(context)
-
-                                  // ref
-                                  //       .watch(profileNotifierProvider)
                                   .userProfileData!
                                   .expertise !=
                               null)

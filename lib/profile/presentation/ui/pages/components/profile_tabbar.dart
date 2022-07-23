@@ -23,7 +23,7 @@ class ProfileTabbar extends StatelessWidget {
         Provider.of<ProfileProvider>(context).userProfileData!;
     final bool isTab = isTablet(context);
     final double fontSize = isTab ? 12.5 : 14;
-
+    final loginUserSlug = Get.put(HoledoDatabase()).getModel().user;
     final EdgeInsets tabPadding = isTab
         ? const EdgeInsets.symmetric(vertical: 10)
         : const EdgeInsets.all(10);
@@ -131,8 +131,8 @@ class ProfileTabbar extends StatelessWidget {
             ),
           ),
           // if (Provider.of<ProfileProvider>(context).isMyProfile)
-          if (Get.put(HoledoDatabase()).getModel().user != null &&
-              (Get.put(HoledoDatabase()).getModel().user!.slug ==
+          if (loginUserSlug != null &&
+              (loginUserSlug.slug ==
                   Provider.of<ProfileProvider>(context).currentProfileSlug))
             const EditProfileButton()
           else

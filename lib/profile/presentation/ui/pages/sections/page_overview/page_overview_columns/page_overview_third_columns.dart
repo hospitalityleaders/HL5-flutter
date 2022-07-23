@@ -25,9 +25,11 @@ class _ProfileOverviewThirdColumnState
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: const [
-        ProfileCompletionComponent(),
-        Di.SBHEL,
+      children: [
+        if (Provider.of<ProfileProvider>(context).isMyProfile) ...[
+          ProfileCompletionComponent(),
+          Di.SBHEL,
+        ],
         ConnectionsComponent(),
         Di.SBHEL,
         TimelineComponent(),

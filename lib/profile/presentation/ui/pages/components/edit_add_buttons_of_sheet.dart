@@ -28,12 +28,13 @@ class EditAddButtonOfSheet extends StatelessWidget {
                     EditIconButton(
                       onPressed: onEditPressed,
                     ),
-                    if (onAddPressed != null) Di.SBWS,
-                    if (onAddPressed != null)
+                    if (onAddPressed != null) ...[
+                      Di.SBWS,
                       EditIconButton(
                         iconData: Icons.add,
                         onPressed: onAddPressed,
                       ),
+                    ]
                   ],
                 ),
               ),

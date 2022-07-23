@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:holedo/profile/presentation/ui/pages/components/connection_component.dart';
 import 'package:holedo/profile/presentation/utill/color_resources.dart';
 
 void main() {
@@ -25,13 +26,12 @@ class TestingScreen extends StatelessWidget {
     return Scaffold(
       body: Container(
         color: Cr.green1,
-        child: const Center(
-            // child: Container(
-            //   width: 299,
-            //   height: 300,
-            //   color: Cr.whiteColor,
-            // ),
-            ),
+        child: Center(
+          child: SizedBox(
+            width: 364,
+            child: ConnectionsComponent(),
+          ),
+        ),
       ),
     );
   }
