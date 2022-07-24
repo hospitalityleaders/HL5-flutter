@@ -6,6 +6,7 @@ import 'package:holedo/profile/presentation/ui/flutter_slider_drawer/slider_bar.
 import 'package:holedo/profile/presentation/ui/flutter_slider_drawer/slider_direction.dart';
 import 'package:holedo/profile/presentation/ui/pages/mobile_view_section/mobile_profile_overview_section.dart';
 import 'package:holedo/profile/presentation/utill/color_resources.dart';
+import 'package:holedo/profile/presentation/utill/dimensions.dart';
 
 export 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 export 'package:holedo/layouts/cards/holedo_cards.dart';
@@ -127,45 +128,54 @@ class SliderDrawerState extends State<SliderDrawer>
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        AnimatedBuilder(
-          animation: _animationDrawerController,
-          builder: (context, child) {
-            return Transform.translate(
-              offset: Offset(_drawerAnimation.value, 0),
-              child: SizedBox(
-                height: widget.screenSize.height,
-                child: SliderBar(
-                  slideDirection: widget.slideDirection,
-                  sliderMenu: MobileSlideMenu(onCloseTap: closeSlider),
-                  sliderMenuOpenSize: widget.sliderOpenSize,
+        SizedBox(
+          width: Di.getScreenSize(context).width,
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: [
+              AnimatedBuilder(
+                animation: _animationDrawerController,
+                builder: (context, child) {
+                  return Transform.translate(
+                    offset: Offset(-_animation.value, 0),
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: Di.getScreenSize(context).width,
+                          child: Stack(
+                            children: [
+                              child!,
+                              if (_isDrawerOpened)
+                                Container(
+                                  color: Cr.darkBlue5.withAlpha(230),
+                                )
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          width: sliderOpenSize,
+                          height: Di.getScreenSize(context).height,
+                          child: SliderBar(
+                            slideDirection: widget.slideDirection,
+                            sliderMenu:
+                                MobileSlideMenu(onCloseTap: closeSlider),
+                            sliderMenuOpenSize: widget.sliderOpenSize,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+                child: Column(
+                  children: <Widget>[
+                    ProfileMobileAppbar(
+                      onMenuTap: () => toggle(),
+                      onSearch: (onSearch) {},
+                    ),
+                    Expanded(child: widget.child),
+                  ],
                 ),
               ),
-            );
-          },
-        ),
-        AnimatedBuilder(
-          animation: _animationDrawerController,
-          builder: (context, child) {
-            return Transform.translate(
-              offset: Offset(-_animation.value, 0),
-              child: Stack(
-                children: [
-                  child!,
-                  if (_isDrawerOpened)
-                    Container(
-                      color: Cr.darkBlue5.withAlpha(230),
-                    )
-                ],
-              ),
-            );
-          },
-          child: Column(
-            children: <Widget>[
-              ProfileMobileAppbar(
-                onMenuTap: () => toggle(),
-                onSearch: (onSearch) {},
-              ),
-              Expanded(child: widget.child),
             ],
           ),
         ),

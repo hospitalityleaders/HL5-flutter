@@ -98,37 +98,36 @@ class _TestingScreenState extends State<TestingScreen>
       backgroundColor: Cr.accentBlue3,
       body: Column(
         children: [
-          Stack(
-            children: [
-              AnimatedBuilder(
-                animation: _animationDrawerController,
-                builder: (context, child) {
-                  return Transform.translate(
-                    offset: Offset(_drawerAnimation.value, 0),
-                    child: Container(
-                      width: sliderOpenSize,
-                      height: widget.screenSize.height * .7,
-                      color: Cr.accentBlue1,
-                    ),
-                  );
-                },
-              ),
-              AnimatedBuilder(
-                animation: _animationDrawerController,
-                builder: (context, child) {
-                  return Transform.translate(
-                    offset: Offset(-_animation.value, 0),
-                    child: Container(
-                      width: widget.screenSize.width,
-                      height: widget.screenSize.height * .7,
-                      decoration: BoxDecoration(
-                          gradient:
-                              LinearGradient(colors: [Cr.green1, Cr.red1])),
-                    ),
-                  );
-                },
-              ),
-            ],
+          SizedBox(
+            width: Di.getScreenSize(context).width,
+            height: Di.getScreenSize(context).height * .7,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                AnimatedBuilder(
+                  animation: _animationDrawerController,
+                  builder: (context, child) {
+                    return Transform.translate(
+                      offset: Offset(-_animation.value, 0),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: widget.screenSize.width,
+                            decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                    colors: [Cr.green1, Cr.red1])),
+                          ),
+                          Container(
+                            width: sliderOpenSize,
+                            color: Cr.accentBlue1,
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
           Di.SBCH(100),
           CustomElevatedButton(
