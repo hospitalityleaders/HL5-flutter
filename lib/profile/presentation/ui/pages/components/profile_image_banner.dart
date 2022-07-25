@@ -7,6 +7,7 @@ import 'package:holedo/profile/presentation/ui/components/contact_card_dialog_wi
 import 'package:holedo/profile/presentation/ui/components/custom_outlined_button.dart';
 import 'package:holedo/profile/presentation/ui/components/person_avatar.dart';
 import 'package:holedo/profile/presentation/ui/components/rounded_icon_button.dart';
+import 'package:holedo/profile/presentation/ui/components/view_timeline_edit_profile_submenu.dart';
 import 'package:holedo/profile/presentation/ui/pages/components/edit_blue_card_sheet.dart';
 import 'package:holedo/profile/presentation/ui/pages/mobile_desktop_comman_components/mobile_desktop_comman_components.dart';
 import 'package:holedo/profile/presentation/ui/pages/profile_dialogs/profile_cover_image_dialog_widget.dart';
@@ -14,6 +15,7 @@ import 'package:holedo/profile/presentation/ui/pages/profile_dialogs/profile_edi
 import 'package:holedo/profile/presentation/ui/pages/profile_dialogs/show_custom_dialog.dart';
 import 'package:holedo/profile/presentation/utill/color_resources.dart';
 import 'package:holedo/profile/presentation/utill/dimensions.dart';
+import 'package:holedo/profile/presentation/utill/images.dart';
 import 'package:holedo/profile/presentation/utill/styles.dart';
 import 'package:tap_canvas/tap_canvas.dart';
 
@@ -57,7 +59,6 @@ class _ProfileImageBannerState extends State<ProfileImageBanner> {
             ),
           ),
         ),
-
         Center(
           child: Container(
             margin: const EdgeInsets.only(top: 12),
@@ -178,12 +179,51 @@ class _ProfileImageBannerState extends State<ProfileImageBanner> {
                       ],
                     ),
                   ),
+                  // if (showProfileSubMenu)
+
                   const Positioned.fill(
                     child: Align(
                       alignment: Alignment.topCenter,
                       child: PersonAvatar(avatarSize: 76),
                     ),
                   ),
+                  if (showProfileSubMenu)
+                    Positioned(
+                      top: 82,
+                      right: 14,
+                      child: CustomSubMenu(
+                        customSubMenuItems: [
+                          CustomSubmenuItem(
+                            onTap: () {},
+                            width: 245,
+                            textIconColor: Cr.accentBlue1,
+                            textStyle: bodySmallRegular.copyWith(
+                              color: Cr.accentBlue1,
+                            ),
+                            icon: SvgPicture.asset(
+                              Svgs.cardAccountPhone,
+                              width: 16,
+                              color: Cr.accentBlue1,
+                            ),
+                            text: "Share profile",
+                          ),
+                          CustomSubmenuItem(
+                            onTap: () {},
+                            width: 245,
+                            textIconColor: Cr.accentBlue1,
+                            textStyle: bodySmallRegular.copyWith(
+                              color: Cr.accentBlue1,
+                            ),
+                            icon: SvgPicture.asset(
+                              Svgs.close,
+                              width: 16,
+                              color: Cr.accentBlue1,
+                            ),
+                            text: "Cancel connecttion",
+                          ),
+                        ],
+                      ),
+                    ),
                   Padding(
                     padding: const EdgeInsets.only(top: 38),
                     child: EditBlueCardSheet(
@@ -196,13 +236,6 @@ class _ProfileImageBannerState extends State<ProfileImageBanner> {
             ),
           ),
         ),
-        // const Positioned.fill(
-        //   top: 10,
-        //   child: Align(
-        //     alignment: Alignment.topCenter,
-        //     child: PersonAvatar(avatarSize: 75),
-        //   ),
-        // ),
         if (Provider.of<ProfileProvider>(
           context,
         ).isProfileEditable)
@@ -220,21 +253,6 @@ class _ProfileImageBannerState extends State<ProfileImageBanner> {
               },
             ),
           ),
-        // if (Provider.of<ProfileProvider>(context).isProfileEditable)
-        //   Center(
-        //     child: Column(
-        //       mainAxisAlignment: MainAxisAlignment.center,
-        //       children: [
-        //         const SizedBox(height: 50),
-        //         Container(
-        //           width: 560,
-        //           // height: 385,
-        //           color: Cr.accentBlue2.withOpacity(.8),
-        //           padding: const EdgeInsets.all(Di.PSD),
-        //         ),
-        //       ],
-        //     ),
-        //   ),
         if (Provider.of<ProfileProvider>(context).isProfileEditable)
           Positioned.fill(
             child: Align(

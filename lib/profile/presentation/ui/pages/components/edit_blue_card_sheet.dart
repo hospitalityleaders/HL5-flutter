@@ -13,12 +13,14 @@ class EditBlueCardSheet extends StatelessWidget {
     required this.greenCardText,
     this.greenCardTip,
     this.onAddPressed,
+    this.blueSheetPadding,
   }) : super(key: key);
   final BuildContext context;
   final bool dataIsNull;
   final String greenCardText;
   final String? greenCardTip;
   final void Function()? onAddPressed;
+  final EdgeInsets? blueSheetPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +82,7 @@ class EditBlueCardSheet extends StatelessWidget {
               )
             : Container(
                 color: Cr.accentBlue2.withOpacity(.8),
-                padding: const EdgeInsets.all(Di.PSD),
+                padding: blueSheetPadding ?? const EdgeInsets.all(Di.PSD),
               )
         : Di.ESB;
   }
