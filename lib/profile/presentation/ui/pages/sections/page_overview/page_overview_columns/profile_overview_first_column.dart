@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:holedo/profile/presentation/ui/components/custom_checkbox_with_title.dart';
 import 'package:holedo/profile/presentation/ui/components/expanded_collapse_widget.dart';
-import 'package:holedo/profile/presentation/ui/components/profile_reference_single_compoenet.dart';
 import 'package:holedo/profile/presentation/ui/components/view_timeline_edit_profile_submenu.dart';
 import 'package:holedo/profile/presentation/ui/pages/components/edit_add_buttons_of_sheet.dart';
 import 'package:holedo/profile/presentation/ui/pages/components/edit_blue_card_sheet.dart';
@@ -83,7 +82,7 @@ class _ProfileSummaryComponentState extends State<ProfileSummaryComponent> {
     final isMobilePhn = isMobilePhone(context);
 
     return Container(
-      margin: const EdgeInsets.only(bottom: Di.PSD),
+      margin: EdgeInsets.only(bottom: widget.isMobile ? Di.PSS : Di.PSD),
       decoration: boxDecoration.copyWith(
         color: Cr.whiteColor,
         boxShadow: defaultBoxShadow,
@@ -93,35 +92,17 @@ class _ProfileSummaryComponentState extends State<ProfileSummaryComponent> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                height: 46,
-                padding: EdgeInsets.only(
-                  left: widget.isMobile ? Di.PSD : Di.PSL,
-                  right: 7,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      "Profile summary",
-                      style: h2Regular,
-                    ),
-                    CustomComponentDropdown(
-                      size: 32,
-                      iconSize: 13,
-                      onTappedInside: () {
-                        setState(() {
-                          showSubMenu = !showSubMenu;
-                        });
-                      },
-                      onTappedOutside: () {
-                        // setState(() {
-                        //   showSubMenu = false;
-                        // });
-                      },
-                    ),
-                  ],
-                ),
+              ProfileComponentTitle(
+                isMobile: widget.isMobile,
+                onIconPressed:
+                    (Provider.of<ProfileProvider>(context).isMyProfile)
+                        ? () {
+                            setState(() {
+                              showSubMenu = !showSubMenu;
+                            });
+                          }
+                        : null,
+                title: "Profile summary",
               ),
               Di.DWZH,
               IntrinsicHeight(
@@ -183,16 +164,18 @@ class _ProfileSummaryComponentState extends State<ProfileSummaryComponent> {
             Positioned(
               right: 8,
               top: 41,
-              child: ViewTimeEditProfileSubmenu(
-                donotShowTimeline: true,
-                hideSubMenuCallback: () {
-                  setState(() {
-                    showSubMenu = false;
-                  });
-                },
-                editText: 'profile summary',
+              child: SizedBox(
+                child: ViewTimeEditProfileSubmenu(
+                  donotShowTimeline: true,
+                  hideSubMenuCallback: () {
+                    setState(() {
+                      showSubMenu = false;
+                    });
+                  },
+                  editText: 'profile summary',
+                ),
               ),
-            ),
+            )
         ],
       ),
     );
@@ -219,6 +202,7 @@ class _AreasOfExpertiseComponentsState
   Widget build(BuildContext context) {
     final expertise =
         Provider.of<ProfileProvider>(context).userProfileData!.expertise;
+
     return DecoratedBox(
       decoration: boxDecorationWithShadow.copyWith(color: Cr.whiteColor),
       child: Stack(
@@ -228,11 +212,14 @@ class _AreasOfExpertiseComponentsState
             children: [
               ProfileComponentTitle(
                 isMobile: widget.isMobile,
-                onIconPressed: () {
-                  setState(() {
-                    showSubMenu = !showSubMenu;
-                  });
-                },
+                onIconPressed:
+                    (Provider.of<ProfileProvider>(context).isMyProfile)
+                        ? () {
+                            setState(() {
+                              showSubMenu = !showSubMenu;
+                            });
+                          }
+                        : null,
                 title: "Areas of expertise",
               ),
 

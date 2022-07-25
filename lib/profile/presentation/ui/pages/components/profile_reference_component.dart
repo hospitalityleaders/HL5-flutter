@@ -46,11 +46,14 @@ class _ProfileReferenceComponentState extends State<ProfileReferenceComponent> {
               Di.SBHETS,
               ProfileComponentTitle(
                 isMobile: widget.isMobile,
-                onIconPressed: () {
-                  setState(() {
-                    showSubMenu = !showSubMenu;
-                  });
-                },
+                onIconPressed:
+                    (Provider.of<ProfileProvider>(context).isMyProfile)
+                        ? () {
+                            setState(() {
+                              showSubMenu = !showSubMenu;
+                            });
+                          }
+                        : null,
                 title: "References",
               ),
               Di.DWZH,

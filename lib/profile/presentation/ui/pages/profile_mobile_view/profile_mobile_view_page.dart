@@ -76,11 +76,11 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                     // decoration: boxDecorationWithShadow.copyWith(),
                     height: showMenu
                         ? showCardSubMenu
-                            ? 1070
-                            : 950
+                            ? 1020
+                            : 900
                         : showCardSubMenu
-                            ? 790
-                            : 680,
+                            ? 760
+                            : 650,
                     child: Stack(
                       children: [
                         Container(
@@ -106,7 +106,6 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                               width: Di.getScreenSize(context).width * .96,
                               decoration: boxDecorationWithShadow,
                               child: Column(
-                                // crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Di.SBCH(50),
                                   Text(
@@ -181,14 +180,16 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                                   const SendConnectionRequestButton(
                                     width: double.infinity,
                                   ),
-                                  Di.SBHES,
-                                  if (!profileProvider.isMyProfile)
+
+                                  if (!profileProvider.isMyProfile) ...[
+                                    Di.SBHS,
                                     WriteReferenceRecommandButtonComman(
                                       isMobile: true,
                                       width:
                                           Di.getScreenSize(context).width * .43,
                                       userProfileData: userProfileData,
                                     ),
+                                  ],
 
                                   Di.SBHD,
                                   SizedBox(
@@ -205,169 +206,117 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                                         Provider.of<ProfileProvider>(context)
                                             .userProfileData!,
                                   ),
-                                  Di.SBHS,
-                                  // Container(
-                                  //   padding: EdgeInsets.only(bottom: Di.PSS),
-                                  //   decoration: BoxDecoration(
-                                  //     color: Cr.whiteColor,
-                                  //     border: Border(
-                                  //       bottom: BorderSide(
-                                  //         width: 0.5,
-                                  //         color: Cr.darkGrey1,
-                                  //       ),
-                                  //     ),
-                                  //   ),
-                                  //   child: StatsComman(isMobile: true),
-                                  // ),
                                   Di.SBHD,
-                                  Container(
-                                    padding: const EdgeInsets.only(
-                                      bottom: Di.PSS,
-                                    ),
-                                    decoration: const BoxDecoration(
-                                      color: Cr.whiteColor,
-                                      // border: Border(
-                                      //   bottom: BorderSide(
-                                      //     width: 2,
-                                      //     color: Cr.grey1,
-                                      //   ),
-                                      // ),
-                                    ),
-                                    height: showMenu ? 365 : 100,
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      // mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Row(
-                                          // crossAxisAlignment:
-                                          //     CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Row(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                const PersonAvatar(),
-                                                Di.SBWD,
-                                                Text(
-                                                  userProfileData.fullName ??
-                                                      '',
-                                                  style: h4Bold,
-                                                  // de
-                                                ),
-                                                Di.SBWS,
-                                                const Text(
-                                                  "MHL",
-                                                  style: dividerTextSmall,
-                                                  // de
-                                                ),
-                                              ],
-                                            ),
-                                            InkWell(
-                                              onTap: () {
-                                                setState(() {
-                                                  showMenu = !showMenu;
-                                                });
-                                              },
-                                              child: showMenu
-                                                  ? const Icon(
-                                                      Icons.close,
-                                                      color: Cr.accentBlue1,
-                                                    )
-                                                  : Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      mainAxisSize:
-                                                          MainAxisSize.min,
-                                                      children: const [
-                                                        Icon(
-                                                          Icons.menu,
-                                                          color: Cr.accentBlue1,
-                                                        ),
-                                                        Text(
-                                                          "Menu",
-                                                          style: TextStyle(
-                                                            fontSize: 9,
-                                                            color:
-                                                                Cr.accentBlue1,
-                                                            fontFamily:
-                                                                'SourceSansPro',
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                            ),
-                                          ],
-                                        ),
-                                        if (showMenu)
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              TabButtonProfileMobile(
-                                                title: "Provile overview",
-                                                isActive:
-                                                    widget.currentTabIndex == 0,
-                                                onTap: () {
-                                                  widget.changeCurrentIndex(0);
-                                                },
-                                              ),
-                                              TabButtonProfileMobile(
-                                                title: "Timeline",
-                                                isActive:
-                                                    widget.currentTabIndex == 1,
-                                                onTap: () {
-                                                  widget.changeCurrentIndex(1);
-                                                },
-                                              ),
-                                              TabButtonProfileMobile(
-                                                title: "Articles",
-                                                isActive:
-                                                    widget.currentTabIndex == 2,
-                                                onTap: () {
-                                                  widget.changeCurrentIndex(2);
-                                                },
-                                              ),
-                                              TabButtonProfileMobile(
-                                                title: "Activity",
-                                                isActive:
-                                                    widget.currentTabIndex == 3,
-                                                onTap: () {
-                                                  widget.changeCurrentIndex(3);
-                                                },
-                                              ),
-                                              TabButtonProfileMobile(
-                                                title: "References",
-                                                isActive:
-                                                    widget.currentTabIndex == 4,
-                                                onTap: () {
-                                                  widget.changeCurrentIndex(4);
-                                                },
-                                              ),
-                                              TabButtonProfileMobile(
-                                                title: "Video",
-                                                isActive:
-                                                    widget.currentTabIndex == 5,
-                                                onTap: () {
-                                                  widget.changeCurrentIndex(5);
-                                                },
-                                              ),
-                                            ],
+                                  // height: showMenu ? 305 : 50,
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          const PersonAvatar(),
+                                          Di.SBWD,
+                                          Text(
+                                            userProfileData.fullName ?? '',
+                                            style: h4Bold,
+                                            // de
                                           ),
-                                        Di.SBHES,
-                                        if (isMine)
-                                          const EditProfileButton(
-                                            width: double.infinity,
-                                          )
-                                        else
-                                          Di.ESB,
-                                      ],
-                                    ),
+                                          Di.SBWS,
+                                          const Text(
+                                            "MHL",
+                                            style: dividerTextSmall,
+                                            // de
+                                          ),
+                                        ],
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          setState(() {
+                                            showMenu = !showMenu;
+                                          });
+                                        },
+                                        child: showMenu
+                                            ? const Icon(
+                                                Icons.close,
+                                                color: Cr.accentBlue1,
+                                              )
+                                            : Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: const [
+                                                  Icon(
+                                                    Icons.menu,
+                                                    color: Cr.accentBlue1,
+                                                  ),
+                                                  Text(
+                                                    "Menu",
+                                                    style: TextStyle(
+                                                      fontSize: 9,
+                                                      color: Cr.accentBlue1,
+                                                      fontFamily:
+                                                          'SourceSansPro',
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                      ),
+                                    ],
                                   ),
+                                  if (showMenu) ...[
+                                    Di.SBHS,
+                                    TabButtonProfileMobile(
+                                      title: "Provile overview",
+                                      isActive: widget.currentTabIndex == 0,
+                                      onTap: () {
+                                        widget.changeCurrentIndex(0);
+                                      },
+                                    ),
+                                    TabButtonProfileMobile(
+                                      title: "Timeline",
+                                      isActive: widget.currentTabIndex == 1,
+                                      onTap: () {
+                                        widget.changeCurrentIndex(1);
+                                      },
+                                    ),
+                                    TabButtonProfileMobile(
+                                      title: "Articles",
+                                      isActive: widget.currentTabIndex == 2,
+                                      onTap: () {
+                                        widget.changeCurrentIndex(2);
+                                      },
+                                    ),
+                                    TabButtonProfileMobile(
+                                      title: "Activity",
+                                      isActive: widget.currentTabIndex == 3,
+                                      onTap: () {
+                                        widget.changeCurrentIndex(3);
+                                      },
+                                    ),
+                                    TabButtonProfileMobile(
+                                      title: "References",
+                                      isActive: widget.currentTabIndex == 4,
+                                      onTap: () {
+                                        widget.changeCurrentIndex(4);
+                                      },
+                                    ),
+                                    TabButtonProfileMobile(
+                                      title: "Video",
+                                      isActive: widget.currentTabIndex == 5,
+                                      onTap: () {
+                                        widget.changeCurrentIndex(5);
+                                      },
+                                    ),
+                                  ],
+                                  if (isMine) ...[
+                                    Di.SBHES,
+                                    const EditProfileButton(
+                                      width: double.infinity,
+                                    ),
+                                  ],
                                 ],
                               ),
                             ),
@@ -376,23 +325,13 @@ class _ProfileMobileViewPageState extends State<ProfileMobileViewPage> {
                         Positioned.fill(
                           top: 10,
                           child: Align(
-                            alignment: Alignment.topCenter,
-                            child: Container(
-                              width: 75,
-                              height: 75,
-                              decoration: boxDecorationRounded.copyWith(
-                                image: const DecorationImage(
-                                  image: AssetImage("assets/images/avatar.png"),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                          ),
+                              alignment: Alignment.topCenter,
+                              child: PersonAvatar(avatarSize: 75)),
                         ),
                       ],
                     ),
                   ),
-                Di.SBHS,
+                Di.SBHES,
                 [
                   MobileProfileOverviewSection(
                     isMobilePhn: isMobilePhn,

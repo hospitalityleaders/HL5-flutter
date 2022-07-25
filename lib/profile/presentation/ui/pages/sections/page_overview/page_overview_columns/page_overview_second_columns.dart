@@ -92,14 +92,23 @@ class _ProfileOverviewSecondColumnState
   }
 }
 
-class LanguagesComponent extends StatelessWidget {
+class LanguagesComponent extends StatefulWidget {
   const LanguagesComponent({
     Key? key,
+    this.isMobile = false,
     this.onEditPressed,
     required this.userProfileData,
   }) : super(key: key);
   final User userProfileData;
   final void Function()? onEditPressed;
+  final bool isMobile;
+
+  @override
+  State<LanguagesComponent> createState() => _LanguagesComponentState();
+}
+
+class _LanguagesComponentState extends State<LanguagesComponent> {
+  bool showSubMenu = false;
 
   @override
   Widget build(BuildContext context) {
@@ -114,11 +123,16 @@ class LanguagesComponent extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Di.SBHETS,
-          ListTile(
-            title: Text(
-              "Languages",
-              style: h2Regular,
-            ),
+          ProfileComponentTitle(
+            isMobile: widget.isMobile,
+            onIconPressed: (Provider.of<ProfileProvider>(context).isMyProfile)
+                ? () {
+                    setState(() {
+                      showSubMenu = !showSubMenu;
+                    });
+                  }
+                : null,
+            title: "Languages",
           ),
           IntrinsicHeight(
             child: Stack(
@@ -183,7 +197,7 @@ class LanguagesComponent extends StatelessWidget {
                       showCustomDialog(
                         context,
                         ProfileLanguagesDialogWidget(
-                            userProfileData: userProfileData),
+                            userProfileData: widget.userProfileData),
                       );
                     },
                   ),
@@ -400,11 +414,14 @@ class _FeaturedVideoComponentState extends State<FeaturedVideoComponent> {
             children: [
               ProfileComponentTitle(
                 isMobile: widget.isMobile,
-                onIconPressed: () {
-                  setState(() {
-                    showSubMenu = !showSubMenu;
-                  });
-                },
+                onIconPressed:
+                    (Provider.of<ProfileProvider>(context).isMyProfile)
+                        ? () {
+                            setState(() {
+                              showSubMenu = !showSubMenu;
+                            });
+                          }
+                        : null,
                 title: "Featured video",
               ),
               Di.DWZH,
@@ -416,41 +433,6 @@ class _FeaturedVideoComponentState extends State<FeaturedVideoComponent> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Stack(
-                          //   children: [
-                          //     if (_controller!.value.isInitialized)
-                          //       SizedBox(
-                          //         height: widget.isMobile ? null : 180,
-                          //         width: widget.isMobile ? null : 325,
-                          //         child: AspectRatio(
-                          //           aspectRatio:
-                          //               _controller!.value.aspectRatio,
-                          //           child: VideoPlayer(_controller!),
-                          //         ),
-                          //       )
-                          //     else
-                          //       Di.ESB,
-                          //     Positioned.fill(
-                          //       child: Center(
-                          //         child: FloatingActionButton(
-                          //           backgroundColor: Cr.accentBlue1,
-                          //           onPressed: () {
-                          //             setState(() {
-                          //               _controller!.value.isPlaying
-                          //                   ? _controller!.pause()
-                          //                   : _controller!.play();
-                          //             });
-                          //           },
-                          //           child: Icon(
-                          //             _controller!.value.isPlaying
-                          //                 ? Icons.pause
-                          //                 : Icons.play_arrow,
-                          //           ),
-                          //         ),
-                          //       ),
-                          //     )
-                          //   ],
-                          // ),
                           if (_videoPlayerController != null)
                             IntrinsicHeight(
                               child: Stack(
@@ -583,11 +565,11 @@ class ProfileComponentTitle extends StatelessWidget {
   const ProfileComponentTitle({
     Key? key,
     required this.isMobile,
-    required this.onIconPressed,
+    this.onIconPressed,
     required this.title,
   }) : super(key: key);
   final bool isMobile;
-  final void Function() onIconPressed;
+  final void Function()? onIconPressed;
   final String title;
   @override
   Widget build(BuildContext context) {
@@ -601,16 +583,17 @@ class ProfileComponentTitle extends StatelessWidget {
             title,
             style: h2Regular,
           ),
-          CustomComponentDropdown(
-            size: 32,
-            iconSize: 13,
-            onTappedInside: onIconPressed,
-            onTappedOutside: () {
-              // setState(() {
-              //   showSubMenu = false;
-              // });
-            },
-          ),
+          if (onIconPressed != null)
+            CustomComponentDropdown(
+              size: 32,
+              iconSize: 13,
+              onTappedInside: onIconPressed!,
+              onTappedOutside: () {
+                // setState(() {
+                //   showSubMenu = false;
+                // });
+              },
+            ),
         ],
       ),
     );

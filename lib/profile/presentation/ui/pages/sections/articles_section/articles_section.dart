@@ -24,11 +24,10 @@ class ArticlesSection extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Di.SBHOTL,
+          Di.SBWOTL,
           Flexible(
             child: SizedBox(
               width: 360,
-              // height: 220,
               child: Column(
                 children: const [
                   ProfileArticleWidget(),
@@ -97,7 +96,7 @@ class ProfileArticleWidget extends StatelessWidget {
       width: isMobile ? null : 360,
       height: showIsMemberOnly ? 332 : 305,
       color: Cr.whiteColor,
-      margin: const EdgeInsets.symmetric(vertical: Di.PSS),
+      margin: const EdgeInsets.only(bottom: Di.PSL),
       child: Padding(
         padding: const EdgeInsets.all(Di.PSD),
         child: Column(

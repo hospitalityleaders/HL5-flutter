@@ -42,13 +42,14 @@ class MobileProfileOverviewSection extends StatelessWidget {
       ),
       child: Column(
         children: [
-          if (isMobilePhn && profileProvider.isMyProfile)
-            const ProfileCompletionComponent(),
           Di.SBHS,
+          if (isMobilePhn && profileProvider.isMyProfile) ...[
+            const ProfileCompletionComponent(),
+            Di.SBHS,
+          ],
           const ProfileSummaryComponent(
             isMobile: true,
           ),
-
           ProfileWorkExperienceComponent(
             userProfileData: profileProvider.userProfileData!,
             isMobile: isMobilePhn,

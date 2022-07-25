@@ -27,8 +27,8 @@ class MobileProfileArticleSection extends StatelessWidget {
         horizontal: Di.PSS,
       ),
       child: Column(
-        children: const [
-          Di.SBHL,
+        children: [
+          if (isTablt) Di.SBHS,
           Padding(
             padding: EdgeInsets.symmetric(
               horizontal: Di.PSD,

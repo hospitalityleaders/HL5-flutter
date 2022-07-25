@@ -43,6 +43,7 @@ class _MobileProfileTimelineSectionState
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          if (widget.isTablt) Di.SBHS,
           if (widget.isMobilePhn &&
               Provider.of<ProfileProvider>(context).isMyProfile)
             const ProfileCompletionComponent(),

@@ -27,6 +27,7 @@ class MobileProfileReferenceSection extends StatelessWidget {
       ),
       child: Column(
         children: [
+          if (isTablt) Di.SBHS,
           if (isMobilePhn && profileProvider.isMyProfile) ...[
             const ProfileCompletionComponent(),
             Di.SBHS,

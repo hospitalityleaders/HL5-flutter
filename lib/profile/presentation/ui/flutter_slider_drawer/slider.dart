@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:holedo/profile/presentation/ui/flutter_slider_drawer/helper/slider_shadow.dart';
 import 'package:holedo/profile/presentation/ui/flutter_slider_drawer/helper/utils.dart';
 import 'package:holedo/profile/presentation/ui/flutter_slider_drawer/mobile_slide_menu.dart';
-import 'package:holedo/profile/presentation/ui/flutter_slider_drawer/slider_bar.dart';
 import 'package:holedo/profile/presentation/ui/flutter_slider_drawer/slider_direction.dart';
 import 'package:holedo/profile/presentation/ui/pages/mobile_view_section/mobile_profile_overview_section.dart';
 import 'package:holedo/profile/presentation/utill/color_resources.dart';
@@ -139,6 +138,7 @@ class SliderDrawerState extends State<SliderDrawer>
                   return Transform.translate(
                     offset: Offset(-_animation.value, 0),
                     child: Row(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         SizedBox(
                           width: Di.getScreenSize(context).width,
@@ -155,13 +155,25 @@ class SliderDrawerState extends State<SliderDrawer>
                         SizedBox(
                           width: sliderOpenSize,
                           height: Di.getScreenSize(context).height,
-                          child: SliderBar(
-                            slideDirection: widget.slideDirection,
-                            sliderMenu:
-                                MobileSlideMenu(onCloseTap: closeSlider),
-                            sliderMenuOpenSize: widget.sliderOpenSize,
-                          ),
+                          child: MobileSlideMenu(onCloseTap: closeSlider),
+
+                          // SliderBar(
+                          //   slideDirection: widget.slideDirection,
+                          //   sliderMenu:
+                          //       //  Container(
+                          //       //   width: sliderOpenSize,
+                          //       //   height: Di.getScreenSize(context).height,
+                          //       //   color: Cr.green1,
+                          //       // ),
+                          //       MobileSlideMenu(onCloseTap: closeSlider),
+                          //   sliderMenuOpenSize: widget.sliderOpenSize,
+                          // ),
                         ),
+                        //          Container(
+                        //       width: sliderOpenSize,
+                        //       height: Di.getScreenSize(context).height,
+                        // color: Cr.accentBlue1,
+                        //     ),
                       ],
                     ),
                   );
