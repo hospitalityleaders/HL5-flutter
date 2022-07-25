@@ -46,12 +46,9 @@ class _UserProfilePageState extends State<UserProfilePage>
   }
 
   @override
-  void initState() {
-    Future.microtask(() {
-      _updateTabController();
-    });
-
-    super.initState();
+  void didChangeDependencies() {
+    _updateTabController();
+    super.didChangeDependencies();
   }
 
   @override
