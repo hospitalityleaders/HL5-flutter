@@ -7,6 +7,7 @@ import 'package:holedo/profile/presentation/ui/components/contact_card_dialog_wi
 import 'package:holedo/profile/presentation/ui/components/custom_outlined_button.dart';
 import 'package:holedo/profile/presentation/ui/components/person_avatar.dart';
 import 'package:holedo/profile/presentation/ui/components/rounded_icon_button.dart';
+import 'package:holedo/profile/presentation/ui/pages/components/edit_blue_card_sheet.dart';
 import 'package:holedo/profile/presentation/ui/pages/mobile_desktop_comman_components/mobile_desktop_comman_components.dart';
 import 'package:holedo/profile/presentation/ui/pages/profile_dialogs/profile_cover_image_dialog_widget.dart';
 import 'package:holedo/profile/presentation/ui/pages/profile_dialogs/profile_edit_dialog_widget.dart';
@@ -56,150 +57,153 @@ class _ProfileImageBannerState extends State<ProfileImageBanner> {
             ),
           ),
         ),
+
         Center(
           child: Container(
+            margin: const EdgeInsets.only(top: 12),
             width: 560,
-            margin: const EdgeInsets.only(top: 50),
-            color: Cr.whiteColor,
-            padding: const EdgeInsets.all(Di.PSD),
-            child: Stack(
-              children: [
-                ListView(
-                  shrinkWrap: true,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child: IntrinsicHeight(
+              child: Stack(
+                children: [
+                  Container(
+                    color: Cr.whiteColor,
+                    margin: const EdgeInsets.only(top: 38),
+                    padding: const EdgeInsets.all(Di.PSD),
+                    child: Column(
                       children: [
-                        CustomOutlinedButton(
-                          onPressed: () {
-                            showCustomDialog(
-                              context,
-                              const ContactCardDialogWidget(),
-                            );
-                          },
-                          text: "Contact card",
-                          icon: SvgPicture.asset(
-                            "assets/svgicons/card-account-phone.svg",
-                            height: 12,
-                            color: Cr.darkGrey1,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            CustomOutlinedButton(
+                              onPressed: () {
+                                showCustomDialog(
+                                  context,
+                                  const ContactCardDialogWidget(),
+                                );
+                              },
+                              text: "Contact card",
+                              icon: SvgPicture.asset(
+                                "assets/svgicons/card-account-phone.svg",
+                                height: 12,
+                                color: Cr.darkGrey1,
+                              ),
+                            ),
+                            Di.ESB,
+                            TapOutsideDetectorWidget(
+                              onTappedInside: () {
+                                setState(() {
+                                  showProfileSubMenu = !showProfileSubMenu;
+                                });
+                              },
+                              onTappedOutside: () {
+                                setState(() {
+                                  showProfileSubMenu = false;
+                                });
+                              },
+                              child: CustomOutlinedButton(
+                                onPressed: () {},
+                                icon: const Icon(
+                                  Icons.menu,
+                                  size: 12,
+                                  color: Cr.darkGrey1,
+                                ),
+                                textWidget: const Icon(
+                                  Icons.arrow_drop_down_outlined,
+                                  size: 12,
+                                  color: Cr.darkGrey1,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Di.SBHD,
+                        Text(
+                          widget.userProfileData.fullName ?? "",
+                          textAlign: TextAlign.center,
+                          style: display2,
+                        ),
+                        Center(
+                          child: SizedBox(
+                            width: 450,
+                            child: Text(
+                              (widget.userProfileData.professionalTitle ?? "")
+                                  .toString(),
+                              // ??
+                              textAlign: TextAlign.center,
+                              style: bodyLarge.copyWith(
+                                color: Cr.darkGrey1,
+                              ),
+                            ),
                           ),
                         ),
-                        Di.ESB,
-                        TapOutsideDetectorWidget(
-                          onTappedInside: () {
-                            setState(() {
-                              showProfileSubMenu = !showProfileSubMenu;
-                            });
-                          },
-                          onTappedOutside: () {
-                            setState(() {
-                              showProfileSubMenu = false;
-                            });
-                          },
-                          child: CustomOutlinedButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.menu,
-                              size: 12,
-                              color: Cr.darkGrey1,
-                            ),
-                            textWidget: const Icon(
-                              Icons.arrow_drop_down_outlined,
-                              size: 12,
-                              color: Cr.darkGrey1,
-                            ),
+                        Di.SBHES,
+                        Center(
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Icon(
+                                Icons.location_on,
+                                color: Cr.darkGrey1,
+                                size: 12,
+                              ),
+                              Di.SBWES,
+                              Text(
+                                (widget.userProfileData.area ?? "") +
+                                    (widget.userProfileData.countryId != null
+                                        ? (", ${countries[widget.userProfileData.countryId!.toString()] ?? ""}")
+                                        : ""),
+                                style: bodySmallRegular.copyWith(
+                                  color: Cr.darkGrey1,
+                                ),
+                              ),
+                            ],
                           ),
+                        ),
+                        Di.SBHL,
+                        const SizedBox(
+                          child: Center(
+                            child: SendConnectionRequestButton(),
+                          ),
+                        ),
+                        if (!profileProvider.isMyProfile) ...[
+                          Di.SBHES,
+                          WriteReferenceRecommandButtonComman(
+                            userProfileData: widget.userProfileData,
+                          ),
+                        ],
+                        Di.SBHOTL,
+                        StatsComman(
+                          userProfileData: widget.userProfileData,
                         ),
                       ],
                     ),
-                    Di.SBHD,
-                    Text(
-                      widget.userProfileData.fullName ?? "",
-                      textAlign: TextAlign.center,
-                      style: display2,
-                    ),
-                    Center(
-                      child: SizedBox(
-                        width: 450,
-                        child: Text(
-                          (widget.userProfileData.professionalTitle ?? "")
-                              .toString(),
-                          // ??
-                          textAlign: TextAlign.center,
-                          style: bodyLarge.copyWith(
-                            color: Cr.darkGrey1,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Di.SBHES,
-                    Center(
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Icon(
-                            Icons.location_on,
-                            color: Cr.darkGrey1,
-                            size: 12,
-                          ),
-                          Di.SBWES,
-                          Text(
-                            (widget.userProfileData.area ?? "") +
-                                (widget.userProfileData.countryId != null
-                                    ? (", ${countries[widget.userProfileData.countryId!.toString()] ?? ""}")
-                                    : ""),
-                            style: bodySmallRegular.copyWith(
-                              color: Cr.darkGrey1,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Di.SBHL,
-                    const SizedBox(
-                      child: Center(
-                        child: SendConnectionRequestButton(),
-                      ),
-                    ),
-                    if (!profileProvider.isMyProfile) ...[
-                      Di.SBHES,
-                      WriteReferenceRecommandButtonComman(
-                        userProfileData: widget.userProfileData,
-                      ),
-                    ],
-                    Di.SBHOTL,
-                    StatsComman(
-                      userProfileData: widget.userProfileData,
-                    ),
-                  ],
-                ),
-                if (showProfileSubMenu)
-                  const Positioned(
-                    top: 30,
-                    right: 0,
-                    child: SizedBox(
-                      width: 245,
-                      child: SizedBox(
-                        width: 245,
-                        child: ProfileCardSubMenu(),
-                      ),
+                  ),
+                  const Positioned.fill(
+                    child: Align(
+                      alignment: Alignment.topCenter,
+                      child: PersonAvatar(avatarSize: 76),
                     ),
                   ),
-              ],
+                  Padding(
+                    padding: const EdgeInsets.only(top: 38),
+                    child: EditBlueCardSheet(
+                      context,
+                      greenCardText: "greenCardText",
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
-        const Positioned.fill(
-          top: 10,
-          child: Align(
-            alignment: Alignment.topCenter,
-            child: PersonAvatar(avatarSize: 75),
-          ),
-        ),
-
-        if (
-        // Provider.of<ProfileProvider>(context).
-        Provider.of<ProfileProvider>(
+        // const Positioned.fill(
+        //   top: 10,
+        //   child: Align(
+        //     alignment: Alignment.topCenter,
+        //     child: PersonAvatar(avatarSize: 75),
+        //   ),
+        // ),
+        if (Provider.of<ProfileProvider>(
           context,
         ).isProfileEditable)
           Positioned(
@@ -216,30 +220,22 @@ class _ProfileImageBannerState extends State<ProfileImageBanner> {
               },
             ),
           ),
-
-        if (
-        // Provider.of<ProfileProvider>(context)
-        Provider.of<ProfileProvider>(context).isProfileEditable)
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(height: 50),
-                Container(
-                  width: 560,
-                  height: 385,
-                  color: Cr.accentBlue2.withOpacity(.8),
-                  padding: const EdgeInsets.all(Di.PSD),
-                ),
-              ],
-            ),
-          )
-        else
-          Di.ESB,
-
-        if (
-        // Provider.of<ProfileProvider>(context)
-        Provider.of<ProfileProvider>(context).isProfileEditable)
+        // if (Provider.of<ProfileProvider>(context).isProfileEditable)
+        //   Center(
+        //     child: Column(
+        //       mainAxisAlignment: MainAxisAlignment.center,
+        //       children: [
+        //         const SizedBox(height: 50),
+        //         Container(
+        //           width: 560,
+        //           // height: 385,
+        //           color: Cr.accentBlue2.withOpacity(.8),
+        //           padding: const EdgeInsets.all(Di.PSD),
+        //         ),
+        //       ],
+        //     ),
+        //   ),
+        if (Provider.of<ProfileProvider>(context).isProfileEditable)
           Positioned.fill(
             child: Align(
               child: RoundeIconButton(
@@ -258,16 +254,7 @@ class _ProfileImageBannerState extends State<ProfileImageBanner> {
                 ),
               ),
             ),
-          )
-        else
-          Di.ESB,
-        //     Positioned.fill(
-        //   top: 10,
-        //   child: Align(
-        //     alignment: Alignment.topCenter,
-        //     child: ,
-        //   ),
-        // ),
+          ),
       ],
     );
   }
