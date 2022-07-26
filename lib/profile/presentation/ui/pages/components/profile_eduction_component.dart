@@ -70,74 +70,145 @@ class _EducationComponentState extends State<EducationComponent> {
                   child: Stack(
                     children: [
                       if (hasData)
-                        Column(
-                          children: education
-                              .map(
-                                (singleEductaion) => Container(
-                                  margin: EdgeInsets.only(
-                                    bottom:
-                                        education.indexOf(singleEductaion) ==
-                                                (education.length - 1)
-                                            ? 0
-                                            : Di.PSS,
-                                  ),
-                                  width: widget.isMobile ? null : 360,
-                                  decoration: boxDecoration.copyWith(
-                                    color: Cr.whiteColor,
-                                    boxShadow: defaultBoxShadow,
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Di.SBCH(18),
-                                      ListTile(
-                                        leading: const SvgWithBackground(
-                                          svg: Svgs.school,
-                                        ),
-                                        title: Text(
-                                          singleEductaion.institution ?? "",
-                                          style: h4Bold.copyWith(
-                                            fontSize: Di.FSD,
-                                          ),
-                                        ),
-                                        subtitle: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              singleEductaion.title ?? "",
-                                              style: bodySmallRegular.copyWith(
-                                                color: Cr.accentBlue1,
-                                                fontSize: Di.FSS,
-                                              ),
-                                            ),
-                                            const SizedBox(height: Di.PSETS),
-                                            Text(
-                                              singleEductaion.studyDuration ??
-                                                  "",
-                                              // "2010 - 2013",
-                                              style: bodySmallRegular.copyWith(
-                                                color: Cr.darkGrey1,
-                                                fontSize: Di.FSS,
-                                              ),
-                                            ),
-                                          ],
+                        SizedBox(
+                          height: 400,
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: education.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              final singleEductaion = education[index];
+                              return Container(
+                                margin: EdgeInsets.only(
+                                  bottom: education.indexOf(singleEductaion) ==
+                                          (education.length - 1)
+                                      ? 0
+                                      : Di.PSS,
+                                ),
+                                width: widget.isMobile ? null : 360,
+                                decoration: boxDecoration.copyWith(
+                                  color: Cr.whiteColor,
+                                  boxShadow: defaultBoxShadow,
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Di.SBCH(18),
+                                    ListTile(
+                                      leading: const SvgWithBackground(
+                                        svg: Svgs.school,
+                                      ),
+                                      title: Text(
+                                        singleEductaion.institution ?? "",
+                                        style: h4Bold.copyWith(
+                                          fontSize: Di.FSD,
                                         ),
                                       ),
-                                      if (singleEductaion.description != null)
-                                        ExpandedCollapseWidget(
-                                          showText: "Course online",
-                                          description:
-                                              singleEductaion.description!,
-                                          isTablet: widget.isTablet,
-                                          isMobile: widget.isMobile,
-                                        ),
-                                    ],
-                                  ),
+                                      subtitle: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            singleEductaion.title ?? "",
+                                            style: bodySmallRegular.copyWith(
+                                              color: Cr.accentBlue1,
+                                              fontSize: Di.FSS,
+                                            ),
+                                          ),
+                                          const SizedBox(height: Di.PSETS),
+                                          Text(
+                                            singleEductaion.studyDuration ?? "",
+                                            // "2010 - 2013",
+                                            style: bodySmallRegular.copyWith(
+                                              color: Cr.darkGrey1,
+                                              fontSize: Di.FSS,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    if (singleEductaion.description != null)
+                                      ExpandedCollapseWidget(
+                                        showText: "Course online",
+                                        description:
+                                            singleEductaion.description!,
+                                        isTablet: widget.isTablet,
+                                        isMobile: widget.isMobile,
+                                      ),
+                                  ],
                                 ),
-                              )
-                              .toList(),
+                              );
+                            },
+                          ),
                         ),
+                      // if (hasData)
+                      //   Column(
+                      //     children: education
+                      //         .map(
+                      //           (singleEductaion) => Container(
+                      //             margin: EdgeInsets.only(
+                      //               bottom:
+                      //                   education.indexOf(singleEductaion) ==
+                      //                           (education.length - 1)
+                      //                       ? 0
+                      //                       : Di.PSS,
+                      //             ),
+                      //             width: widget.isMobile ? null : 360,
+                      //             decoration: boxDecoration.copyWith(
+                      //               color: Cr.whiteColor,
+                      //               boxShadow: defaultBoxShadow,
+                      //             ),
+                      //             child: Column(
+                      //               crossAxisAlignment: CrossAxisAlignment.end,
+                      //               children: [
+                      //                 Di.SBCH(18),
+                      //                 ListTile(
+                      //                   leading: const SvgWithBackground(
+                      //                     svg: Svgs.school,
+                      //                   ),
+                      //                   title: Text(
+                      //                     singleEductaion.institution ?? "",
+                      //                     style: h4Bold.copyWith(
+                      //                       fontSize: Di.FSD,
+                      //                     ),
+                      //                   ),
+                      //                   subtitle: Column(
+                      //                     crossAxisAlignment:
+                      //                         CrossAxisAlignment.start,
+                      //                     children: [
+                      //                       Text(
+                      //                         singleEductaion.title ?? "",
+                      //                         style: bodySmallRegular.copyWith(
+                      //                           color: Cr.accentBlue1,
+                      //                           fontSize: Di.FSS,
+                      //                         ),
+                      //                       ),
+                      //                       const SizedBox(height: Di.PSETS),
+                      //                       Text(
+                      //                         singleEductaion.studyDuration ??
+                      //                             "",
+                      //                         // "2010 - 2013",
+                      //                         style: bodySmallRegular.copyWith(
+                      //                           color: Cr.darkGrey1,
+                      //                           fontSize: Di.FSS,
+                      //                         ),
+                      //                       ),
+                      //                     ],
+                      //                   ),
+                      //                 ),
+                      //                 if (singleEductaion.description != null)
+                      //                   ExpandedCollapseWidget(
+                      //                     showText: "Course online",
+                      //                     description:
+                      //                         singleEductaion.description!,
+                      //                     isTablet: widget.isTablet,
+                      //                     isMobile: widget.isMobile,
+                      //                   ),
+                      //               ],
+                      //             ),
+                      //           ),
+                      //         )
+                      //         .toList(),
+                      //   ),
                       EditBlueCardSheet(
                         context,
                         dataIsNull: !hasData,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:holedo/models/holedoapi/expertise.dart';
 import 'package:holedo/models/holedoapi/holedoapi.dart';
+import 'package:holedo/profile/presentation/providers/app_provider.dart';
 import 'package:holedo/profile/presentation/ui/components/custom_checkbox_with_title.dart';
 import 'package:holedo/profile/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/profile/presentation/utill/color_resources.dart';
@@ -122,13 +123,7 @@ class _ProfileExpertiseDialogWidgetState
                           setState(
                             () {
                               expertise.add(
-                                expertise[0].copyWith(
-                                  id: 2342,
-                                  title: _controller.text,
-                                ),
-                                // Expertise(
-                                //   title: _controller.text.toString(),
-                                // ),
+                                Expertise(title: _controller.text),
                               );
                             },
                           );
@@ -154,10 +149,7 @@ class _ProfileExpertiseDialogWidgetState
                     horizontal: Di.PSL,
                     vertical: 24,
                   ),
-                  child:
-                      //  widget.userProfileData.expertise != null
-                      //     ?
-                      Wrap(
+                  child: Wrap(
                     children: List<Widget>.generate(
                       expertise.length,
                       (int idx) {
@@ -202,14 +194,12 @@ class _ProfileExpertiseDialogWidgetState
                             borderColor: Cr.accentBlue2,
                             makeWidthNull: true,
                             onPressed: () async {
+                              await Provider.of<AppProvider>(context,
+                                      listen: false)
+                                  .saveProfile(
+                                User(expertise: expertise),
+                              );
                               Nav.pop(context);
-                              await User(
-                                expertise: expertise,
-                              ).save(Provider.of<ProfileProvider>(context)
-
-                                  // ref
-                                  //   .watch(profileNotifierProvider)
-                                  .userProfileData!);
                             },
                             height: 36,
                             donotShowIcon: true,

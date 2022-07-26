@@ -520,9 +520,10 @@ class UsersController extends GetxController {
   }
 
   Future<DataModel> saveProfile(User user) async {
+    var dataModel = getModel();
+
     try {
       isLoading(true);
-      var dataModel = getModel();
       final token = dataModel.token;
 
       if (user.id != null) {
@@ -560,6 +561,8 @@ class UsersController extends GetxController {
         saveUserToModel(dataModel.user as User, token);
       }
       // isLoading(false);
+      return dataModel;
+    } catch (e) {
       return dataModel;
     } finally {
       isLoading(false);
