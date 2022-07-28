@@ -5,6 +5,7 @@ import 'package:holedo/main.dart';
 import 'package:holedo/models/holedoapi/article.dart';
 import 'package:holedo/models/holedoapi/article_category.dart';
 import 'package:holedo/models/holedoapi/holedoapi.dart';
+import 'package:holedo/models/holedoapi/identity.dart';
 import 'package:holedo/models/holedoapi/job.dart';
 import 'package:holedo/models/holedoapi/menu_item.dart';
 import 'package:holedo/services/holedo_api_services.dart';
@@ -184,12 +185,15 @@ class HoledoDatabase extends GetxController {
     debugPrint('starting website... ');
 
     await fetchSettings();
+
     final model = getModel();
     if (model.token != null || model.user?.fullName != null) {
       debugPrint(
         'cached user: ${model.user?.id} ${model.user?.fullName} ${model.user?.token}',
       );
     }
+
+    await fetchIdentities();
 
     debugPrint('finish Init');
   }
@@ -273,6 +277,68 @@ class HoledoDatabase extends GetxController {
       settingsList = data;
       setModel(data);
 
+      return data;
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  Future<dynamic> fetchIdentities() async {
+    try {
+      isLoading(true);
+
+      var data = getModel();
+
+      if (data.user == null) {
+        debugPrint(
+          'checking Identity ',
+        );
+        final response = await _api.GET(
+          target: '/users/sso',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Device': 'Holedo_Flutter'
+          },
+        );
+
+        data.identities = response.data?.identities;
+        data.identity = response.data?.identity;
+        //data.token = response.data?.token;
+
+        debugPrint(
+          'token ${data.token} ${response.data?.token}',
+        );
+        debugPrint(
+          'identity ${data.identity}',
+        );
+        var ident = data.identities?.first;
+
+        debugPrint(
+          'idents ${ident?.toJson().toString()}',
+        );
+        if (ident?.sessionToken != null) {
+          data.token = ident?.sessionToken;
+          data.user = ident?.user;
+        }
+        setModel(data);
+      }
+
+      if (data.token != null) {
+        final api = await _api.PUT(
+          target: '/users/token/?token=${data.token}',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Device': 'Holedo_Flutter'
+          },
+        );
+        //data.user = api.data?.user;
+
+        debugPrint(
+          'saving identity ${api.data?.user?.fullName}',
+        );
+      }
       return data;
     } finally {
       isLoading(false);

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:holedo/models/holedoapi/article.dart';
+import 'package:holedo/models/holedoapi/identity.dart';
 import 'package:holedo/models/holedoapi/article_category.dart';
 import 'package:holedo/models/holedoapi/block.dart';
 import 'package:holedo/models/holedoapi/job.dart';
@@ -34,24 +35,27 @@ class DataModel {
   String? token;
   List<PageContent>? pages;
   List<Company>? companies;
+  List<Identity>? identities;
+  Identity? identity;
 
-  DataModel({
-    this.success,
-    this.messages,
-    this.settings,
-    this.block,
-    this.articleCategories,
-    this.count,
-    this.articles,
-    this.article,
-    this.jobs,
-    this.job,
-    this.users,
-    this.user,
-    this.token,
-    this.pages,
-    this.companies,
-  });
+  DataModel(
+      {this.success,
+      this.messages,
+      this.settings,
+      this.block,
+      this.articleCategories,
+      this.count,
+      this.articles,
+      this.article,
+      this.jobs,
+      this.job,
+      this.users,
+      this.user,
+      this.token,
+      this.pages,
+      this.companies,
+      this.identities,
+      this.identity});
 
   factory DataModel.fromJson(Map<String, dynamic> json) => DataModel(
         success: json['success'] == null ? false : true,
@@ -95,6 +99,12 @@ class DataModel {
             : (json['Companies'] as List<dynamic>?)
                 ?.map((e) => Company.fromJson(e as Map<String, dynamic>))
                 .toList(),
+        identities: (json['identities'] as List<dynamic>?)
+            ?.map((e) => Identity.fromJson(e as Map<String, dynamic>))
+            .toList(),
+        identity: json['identity'] == null
+            ? null
+            : Identity.fromJson(json['identity'] as Map<String, dynamic>),
       );
 
   Map<String, dynamic> toJson() => {
@@ -113,5 +123,7 @@ class DataModel {
         'token': token,
         'Pages': pages?.map((e) => e.toJson()).toList(),
         'Companies': companies?.map((e) => e.toJson()).toList(),
+        'identities': identities?.map((e) => e.toJson()).toList(),
+        'identity': identity?.toJson(),
       };
 }

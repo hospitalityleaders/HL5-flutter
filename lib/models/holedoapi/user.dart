@@ -824,28 +824,6 @@ class User {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // import 'package:flutter/material.dart';
 // import 'package:holedo/models/holedoapi/language.dart';
 // import 'package:routemaster/routemaster.dart';

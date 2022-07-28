@@ -24,11 +24,11 @@ class TextFieldAndFieldName {
     );
   }
 
-  static Widget buildTextField([String? hintText,TextEditingController? _controller]) {
+  static Widget buildTextField(
+      [String? hintText, TextEditingController? _controller]) {
     return Column(
       children: [
         Container(
-
           height: 36,
           decoration: BoxDecoration(
               color: ColorPicker.kGreyLight9,
@@ -38,7 +38,7 @@ class TextFieldAndFieldName {
                 width: 0.2,
               )),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4,vertical: 4),
+            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
             child: TextFormField(
               controller: _controller,
               decoration: InputDecoration(

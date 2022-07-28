@@ -30,8 +30,7 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
   bool isExperienceShowCard = false;
   int indexExp = 1;
 
-
-  BuildWorkExpPopUp _buildWorkExpPopUp=BuildWorkExpPopUp();
+  BuildWorkExpPopUp _buildWorkExpPopUp = BuildWorkExpPopUp();
 
   Future<String?> buildAddyourworkexperiencePopUpCard() {
     return showDialog(
@@ -45,14 +44,15 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                 width: Responsive.isDesktop(context)
                     ? SS.sW(context) * .50 as double
                     : Responsive.isMobile(context)
-                    ? SS.sW(context) * .90 as double
-                    : SS.sW(context) * .60 as double,
+                        ? SS.sW(context) * .90 as double
+                        : SS.sW(context) * .60 as double,
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
                       PopUpHeadMenu.popUpHead('Work experience', context),
                       isVisibleExperience
-                          ? _buildWorkExpPopUp.buildExpInnerCard(false, true, indexExp)
+                          ? _buildWorkExpPopUp.buildExpInnerCard(
+                              false, true, indexExp)
                           : Padding(
                               padding: EdgeInsets.all(8.0),
                               child: CircleAvatar(
@@ -72,8 +72,10 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                                 ),
                               ),
                             ),
-                      _buildWorkExpPopUp.buildExpInnerCard(true, isExperienceShowCard, indexExp),
-                      _buildWorkExpPopUp.buildExpInnerCard(true, isExperienceShowCard, indexExp),
+                      _buildWorkExpPopUp.buildExpInnerCard(
+                          true, isExperienceShowCard, indexExp),
+                      _buildWorkExpPopUp.buildExpInnerCard(
+                          true, isExperienceShowCard, indexExp),
                     ],
                   ),
                 ),
@@ -103,8 +105,8 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                 width: Responsive.isDesktop(context)
                     ? SS.sW(context) * .50 as double
                     : Responsive.isMobile(context)
-                    ? SS.sW(context) * .90 as double
-                    : SS.sW(context) * .60 as double,
+                        ? SS.sW(context) * .90 as double
+                        : SS.sW(context) * .60 as double,
                 // height: 375,
                 child: SingleChildScrollView(
                   child: Column(
@@ -122,8 +124,8 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                               width: Responsive.isDesktop(context)
                                   ? SS.sW(context) * .50 as double
                                   : Responsive.isMobile(context)
-                                  ? SS.sW(context) * .90 as double
-                                  : SS.sW(context) * .60 as double,
+                                      ? SS.sW(context) * .90 as double
+                                      : SS.sW(context) * .60 as double,
                               child: Padding(
                                 padding: EdgeInsets.all(20),
                                 child: Column(
@@ -269,11 +271,19 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                                       children: [
                                         OutlinedButton(
                                             onPressed: () {},
-                                            child: Text('Cancel',style: FontTextStyle.kBlueLight114W400SSP,)),
+                                            child: Text(
+                                              'Cancel',
+                                              style: FontTextStyle
+                                                  .kBlueLight114W400SSP,
+                                            )),
                                         SS.sB(0, 10),
                                         ElevatedButton(
                                             onPressed: () {},
-                                            child: Text('Save',style: FontTextStyle.kWhite14W400SSP,))
+                                            child: Text(
+                                              'Save',
+                                              style:
+                                                  FontTextStyle.kWhite14W400SSP,
+                                            ))
                                       ],
                                     ),
                                   ),
@@ -308,8 +318,8 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
         context: context,
         builder: (BuildContext context) {
           return StatefulBuilder(builder: (BuildContext context, setState) {
-            List<Widget> textField = List.generate(langIndex,
-                (int i) => TextFieldAndFieldName.buildTextField());
+            List<Widget> textField = List.generate(
+                langIndex, (int i) => TextFieldAndFieldName.buildTextField());
             List<Widget> menuItem = List.generate(
                 langIndex,
                 (int i) => DropDownButton(
@@ -322,8 +332,8 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                 width: Responsive.isDesktop(context)
                     ? SS.sW(context) * .50 as double
                     : Responsive.isMobile(context)
-                    ? SS.sW(context) * .90 as double
-                    : SS.sW(context) * .60 as double,
+                        ? SS.sW(context) * .90 as double
+                        : SS.sW(context) * .60 as double,
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -335,8 +345,8 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                           width: Responsive.isDesktop(context)
                               ? SS.sW(context) * .50 as double
                               : Responsive.isMobile(context)
-                              ? SS.sW(context) * .90 as double
-                              : SS.sW(context) * .60 as double,
+                                  ? SS.sW(context) * .90 as double
+                                  : SS.sW(context) * .60 as double,
                           color: ColorPicker.kWhite,
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -363,8 +373,16 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                                             langIndex++;
                                           });
                                         },
-                                        icon: Icon(Icons.add,color: ColorPicker.kBlueLight1,size: 8,),
-                                        label: Text('Add another',style: FontTextStyle.kBlueLight114W400SSP,),
+                                        icon: Icon(
+                                          Icons.add,
+                                          color: ColorPicker.kBlueLight1,
+                                          size: 8,
+                                        ),
+                                        label: Text(
+                                          'Add another',
+                                          style: FontTextStyle
+                                              .kBlueLight114W400SSP,
+                                        ),
                                       ),
                                     ],
                                   ),

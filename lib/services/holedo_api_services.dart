@@ -72,6 +72,9 @@ class ApiServices {
       Holedoapi model = Holedoapi();
       token = token ?? AppUrls.token;
       final header = headers ?? AppUrls.defaultHeadersCustomToken(token);
+
+      debugPrint('GET URL: $baseUrl$target');
+      debugPrint('GET headers: ${header.toString()}');
       final dio.Response response = await _dio.get(
         '$baseUrl$target',
         options: dio.Options(
@@ -79,8 +82,7 @@ class ApiServices {
         ),
         queryParameters: data,
       );
-      debugPrint('GET URL: $target');
-      debugPrint('GET headers: ${header.toString()}');
+
       //if (target == '/site-settings/v2?type=2')
       debugPrint('GET data: ${response.statusCode.toString()}');
       if (response.statusCode == 200 && response.data != null) {
@@ -100,6 +102,37 @@ class ApiServices {
         model = Holedoapi.fromJson(response.data as Map<String, dynamic>);
         // debugPrint('model : ${model.toString()}');
       }
+      return model;
+    } catch (e) {
+      debugPrint('e: ${e.toString()}');
+      throw Exception();
+    }
+  }
+
+  Future<Holedoapi> PUT({
+    String? target,
+    Map<String, dynamic>? data,
+    Map<String, dynamic>? headers,
+    String? token,
+  }) async {
+    try {
+      Holedoapi model = Holedoapi();
+      token = token ?? AppUrls.token;
+      final header = headers ?? AppUrls.defaultHeadersCustomToken(token);
+
+      debugPrint('GET URL: $baseUrl$target');
+      debugPrint('GET headers: ${header.toString()}');
+      final dio.Response response = await _dio.put(
+        '$baseUrl$target',
+        options: dio.Options(
+          headers: header,
+        ),
+        queryParameters: data,
+      );
+
+      //if (target == '/site-settings/v2?type=2')
+      debugPrint('GET data: ${response.statusCode.toString()}');
+      if (response.statusCode == 200 && response.data != null) {}
       return model;
     } catch (e) {
       debugPrint('e: ${e.toString()}');

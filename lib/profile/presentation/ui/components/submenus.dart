@@ -156,8 +156,6 @@ class ConnectionRequestAppbarComponent extends StatelessWidget {
   }
 }
 
-
-
 // Future<Object?> showProfileHoverSubmenu(BuildContext context) {
 //   return showPopover(
 //     backgroundColor: Cr.colorPrimary,

@@ -92,6 +92,7 @@ RouteMap _buildRouteMap(BuildContext context) {
         if (appState.isLoggedIn) {
           appState.username = null;
           appState.profile = null;
+          holedoDatabase.resetModel();
         }
         return Redirect('/login', queryParameters: {'redirectTo': route.path});
       },
