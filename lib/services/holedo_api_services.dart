@@ -46,14 +46,19 @@ class ApiServices {
         options: dio.Options(
           headers: header,
         ),
-        queryParameters: {'apikey': token},
+        //queryParameters: {'apikey': token},
       );
 
       debugPrint('POST URL: $target');
       debugPrint('POST headers: ${header.toString()}');
-      debugPrint('POST data:${data.toString()} ');
-      //debugPrint('POST respomse: ${response}');
-      if (response.statusCode == 200 && response.data != null) {
+      //debugPrint('GET data: ${response.toString()}');
+      //debugPrint('POST respomse: ${response.statusMessage}');
+      if (response.statusCode == 200 &&
+          response.data != null &&
+          response.data != '') {
+        if (response.data.runtimeType == 'String') {
+          response.data = jsonDecode(response.data.toString());
+        }
         model = Holedoapi.fromJson(response.data as Map<String, dynamic>);
       }
       return model;
@@ -131,7 +136,7 @@ class ApiServices {
       );
 
       //if (target == '/site-settings/v2?type=2')
-      debugPrint('GET data: ${response.statusCode.toString()}');
+      debugPrint('GET data: ${response.data.toString()}');
       if (response.statusCode == 200 && response.data != null) {}
       return model;
     } catch (e) {

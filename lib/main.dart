@@ -92,9 +92,9 @@ RouteMap _buildRouteMap(BuildContext context) {
         if (appState.isLoggedIn) {
           appState.username = null;
           appState.profile = null;
-          holedoDatabase.resetModel();
+          holedoDatabase.logout();
         }
-        return Redirect('/login', queryParameters: {'redirectTo': route.path});
+        return Redirect('/login');
       },
       '/recruitments': (route) =>
           const NoAnimationPage(child: RecruitmentPage()),

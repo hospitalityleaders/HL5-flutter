@@ -207,6 +207,13 @@ class HoledoDatabase extends GetxController {
     box.remove('model');
   }
 
+  void logout() {
+    final data = getModel();
+    data.user = null;
+    data.token = null;
+    setModel(data);
+  }
+
   DataModel getModel() {
     //debugPrint('model: ${box.read('model')}');
     final map = box.read('model');
