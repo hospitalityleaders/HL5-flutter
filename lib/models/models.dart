@@ -321,24 +321,25 @@ class HoledoDatabase extends GetxController {
           data.token = ident?.sessionToken;
           data.user = ident?.user;
         }
+
+        if (data.token != null) {
+          final api = await _api.PUT(
+            target: '/users/token/?token=${data.token}',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+              'Device': 'Holedo_Flutter'
+            },
+          );
+          //data.user = api.data?.user;
+
+          debugPrint(
+            'saving identity ${api.data?.user?.fullName}',
+          );
+        }
         setModel(data);
       }
 
-      if (data.token != null) {
-        final api = await _api.PUT(
-          target: '/users/token/?token=${data.token}',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'Device': 'Holedo_Flutter'
-          },
-        );
-        //data.user = api.data?.user;
-
-        debugPrint(
-          'saving identity ${api.data?.user?.fullName}',
-        );
-      }
       return data;
     } finally {
       isLoading(false);
