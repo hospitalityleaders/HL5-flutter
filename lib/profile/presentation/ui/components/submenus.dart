@@ -53,7 +53,7 @@ Future<void> showProfileConnectionRequest(BuildContext context) {
                           ),
                           sizedBoxBetweenIconText: Di.SBWES,
                           text: "Invite people to join",
-                          backgroundColor: Cr.whiteColor.withOpacity(.07),
+                          backgroundColor: Cr.whiteColorWithOpacity(.07),
                           textStyle: h5Bold.copyWith(color: Cr.whiteColor),
                         ),
                       ],
@@ -206,7 +206,7 @@ class ConnectionRequestAppbarComponent extends StatelessWidget {
 //     return OnHover(
 //       builder: (bool isHovered) {
 //         return Container(
-//           color: isHovered ? Colors.white.withOpacity(.07) : Cr.colorPrimary,
+//           color: isHovered ? Cr.whiteColorWithOpacity(.07) : Cr.colorPrimary,
 //           child: ListTile(
 //             title: Text(text,
 //                 style: defaultRegular.copyWith(

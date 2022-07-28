@@ -194,6 +194,7 @@ class _ProfileExpertiseDialogWidgetState
                             borderColor: Cr.accentBlue2,
                             makeWidthNull: true,
                             onPressed: () async {
+                              // Todo add feature of removing expertise from a list
                               await Provider.of<AppProvider>(context,
                                       listen: false)
                                   .saveProfile(

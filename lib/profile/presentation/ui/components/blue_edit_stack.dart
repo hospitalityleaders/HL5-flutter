@@ -16,7 +16,7 @@ class BlueEditStack extends StatelessWidget {
         child: Container(
           // width: 560,
           // height: 385,
-          color: Cr.accentBlue2.withOpacity(.8),
+          color: Cr.accentBlue2WithOpacity(.8),
           padding: const EdgeInsets.all(Di.PSD),
         ),
       ),

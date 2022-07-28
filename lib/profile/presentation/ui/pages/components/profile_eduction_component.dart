@@ -50,195 +50,189 @@ class _EducationComponentState extends State<EducationComponent> {
       color: Cr.backgroundColor,
       child: Stack(
         children: [
-          DecoratedBox(
-            decoration: const BoxDecoration(
-              color: Cr.whiteColor,
-            ),
-            child: Column(
-              children: [
-                ProfileComponentTitle(
-                  isMobile: widget.isMobile,
-                  onIconPressed: () {
-                    setState(() {
-                      showSubMenu = !showSubMenu;
-                    });
-                  },
-                  title: "Education",
-                ),
-                Di.DWZH,
-                IntrinsicHeight(
-                  child: Stack(
-                    children: [
-                      if (hasData)
-                        SizedBox(
-                          height: 400,
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: education.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              final singleEductaion = education[index];
-                              return Container(
-                                margin: EdgeInsets.only(
-                                  bottom: education.indexOf(singleEductaion) ==
-                                          (education.length - 1)
-                                      ? 0
-                                      : Di.PSS,
-                                ),
-                                width: widget.isMobile ? null : 360,
-                                decoration: boxDecoration.copyWith(
-                                  color: Cr.whiteColor,
-                                  boxShadow: defaultBoxShadow,
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Di.SBCH(18),
-                                    ListTile(
-                                      leading: const SvgWithBackground(
-                                        svg: Svgs.school,
-                                      ),
-                                      title: Text(
-                                        singleEductaion.institution ?? "",
-                                        style: h4Bold.copyWith(
-                                          fontSize: Di.FSD,
-                                        ),
-                                      ),
-                                      subtitle: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            singleEductaion.title ?? "",
-                                            style: bodySmallRegular.copyWith(
-                                              color: Cr.accentBlue1,
-                                              fontSize: Di.FSS,
-                                            ),
-                                          ),
-                                          const SizedBox(height: Di.PSETS),
-                                          Text(
-                                            singleEductaion.studyDuration ?? "",
-                                            // "2010 - 2013",
-                                            style: bodySmallRegular.copyWith(
-                                              color: Cr.darkGrey1,
-                                              fontSize: Di.FSS,
-                                            ),
-                                          ),
-                                        ],
+          Column(
+            children: [
+              ProfileComponentTitle(
+                isMobile: widget.isMobile,
+                onIconPressed: () {
+                  setState(() {
+                    showSubMenu = !showSubMenu;
+                  });
+                },
+                title: "Education",
+              ),
+              Di.DWZH,
+              IntrinsicHeight(
+                child: Stack(
+                  children: [
+                    if (hasData)
+                      SizedBox(
+                        height: 400,
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: education.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            final singleEductaion = education[index];
+                            return Container(
+                              margin: EdgeInsets.only(
+                                bottom: education.indexOf(singleEductaion) ==
+                                        (education.length - 1)
+                                    ? Di.PSS
+                                    : Di.PSS,
+                              ),
+                              width: widget.isMobile ? null : 360,
+                              decoration: boxDecoration.copyWith(
+                                color: Cr.whiteColor,
+                                boxShadow: defaultBoxShadow,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Di.SBCH(18),
+                                  ListTile(
+                                    leading: const SvgWithBackground(
+                                      svg: Svgs.school,
+                                    ),
+                                    title: Text(
+                                      singleEductaion.institution ?? "",
+                                      style: h4Bold.copyWith(
+                                        fontSize: Di.FSD,
                                       ),
                                     ),
-                                    if (singleEductaion.description != null)
-                                      ExpandedCollapseWidget(
-                                        showText: "Course online",
-                                        description:
-                                            singleEductaion.description!,
-                                        isTablet: widget.isTablet,
-                                        isMobile: widget.isMobile,
-                                      ),
-                                  ],
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                      // if (hasData)
-                      //   Column(
-                      //     children: education
-                      //         .map(
-                      //           (singleEductaion) => Container(
-                      //             margin: EdgeInsets.only(
-                      //               bottom:
-                      //                   education.indexOf(singleEductaion) ==
-                      //                           (education.length - 1)
-                      //                       ? 0
-                      //                       : Di.PSS,
-                      //             ),
-                      //             width: widget.isMobile ? null : 360,
-                      //             decoration: boxDecoration.copyWith(
-                      //               color: Cr.whiteColor,
-                      //               boxShadow: defaultBoxShadow,
-                      //             ),
-                      //             child: Column(
-                      //               crossAxisAlignment: CrossAxisAlignment.end,
-                      //               children: [
-                      //                 Di.SBCH(18),
-                      //                 ListTile(
-                      //                   leading: const SvgWithBackground(
-                      //                     svg: Svgs.school,
-                      //                   ),
-                      //                   title: Text(
-                      //                     singleEductaion.institution ?? "",
-                      //                     style: h4Bold.copyWith(
-                      //                       fontSize: Di.FSD,
-                      //                     ),
-                      //                   ),
-                      //                   subtitle: Column(
-                      //                     crossAxisAlignment:
-                      //                         CrossAxisAlignment.start,
-                      //                     children: [
-                      //                       Text(
-                      //                         singleEductaion.title ?? "",
-                      //                         style: bodySmallRegular.copyWith(
-                      //                           color: Cr.accentBlue1,
-                      //                           fontSize: Di.FSS,
-                      //                         ),
-                      //                       ),
-                      //                       const SizedBox(height: Di.PSETS),
-                      //                       Text(
-                      //                         singleEductaion.studyDuration ??
-                      //                             "",
-                      //                         // "2010 - 2013",
-                      //                         style: bodySmallRegular.copyWith(
-                      //                           color: Cr.darkGrey1,
-                      //                           fontSize: Di.FSS,
-                      //                         ),
-                      //                       ),
-                      //                     ],
-                      //                   ),
-                      //                 ),
-                      //                 if (singleEductaion.description != null)
-                      //                   ExpandedCollapseWidget(
-                      //                     showText: "Course online",
-                      //                     description:
-                      //                         singleEductaion.description!,
-                      //                     isTablet: widget.isTablet,
-                      //                     isMobile: widget.isMobile,
-                      //                   ),
-                      //               ],
-                      //             ),
-                      //           ),
-                      //         )
-                      //         .toList(),
-                      //   ),
-                      EditBlueCardSheet(
-                        context,
-                        dataIsNull: !hasData,
-                        greenCardText:
-                            "Add the educational institutions you attended, the qualifications you achieved and the courses completed. ",
-                      ),
-                      if (hasData)
-                        EditAddButtonOfSheet(
-                          context,
-                          onEditPressed: () {
-                            showCustomDialog(
-                              context,
-                              ProfileEducationDialogWidget(
-                                educations:
-                                    //  ref
-                                    //         .watch(profileNotifierProvider)
-                                    Provider.of<ProfileProvider>(context,
-                                                listen: false)
-                                            .userProfileData!
-                                            .educations ??
-                                        <Education>[],
+                                    subtitle: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          singleEductaion.title ?? "",
+                                          style: bodySmallRegular.copyWith(
+                                            color: Cr.accentBlue1,
+                                            fontSize: Di.FSS,
+                                          ),
+                                        ),
+                                        const SizedBox(height: Di.PSETS),
+                                        Text(
+                                          singleEductaion.studyDuration ?? "",
+                                          // "2010 - 2013",
+                                          style: bodySmallRegular.copyWith(
+                                            color: Cr.darkGrey1,
+                                            fontSize: Di.FSS,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  if (singleEductaion.description != null)
+                                    ExpandedCollapseWidget(
+                                      showText: "Course online",
+                                      description: singleEductaion.description!,
+                                      isTablet: widget.isTablet,
+                                      isMobile: widget.isMobile,
+                                    ),
+                                ],
                               ),
                             );
                           },
                         ),
-                    ],
-                  ),
+                      ),
+                    // if (hasData)
+                    //   Column(
+                    //     children: education
+                    //         .map(
+                    //           (singleEductaion) => Container(
+                    //             margin: EdgeInsets.only(
+                    //               bottom:
+                    //                   education.indexOf(singleEductaion) ==
+                    //                           (education.length - 1)
+                    //                       ? 0
+                    //                       : Di.PSS,
+                    //             ),
+                    //             width: widget.isMobile ? null : 360,
+                    //             decoration: boxDecoration.copyWith(
+                    //               color: Cr.whiteColor,
+                    //               boxShadow: defaultBoxShadow,
+                    //             ),
+                    //             child: Column(
+                    //               crossAxisAlignment: CrossAxisAlignment.end,
+                    //               children: [
+                    //                 Di.SBCH(18),
+                    //                 ListTile(
+                    //                   leading: const SvgWithBackground(
+                    //                     svg: Svgs.school,
+                    //                   ),
+                    //                   title: Text(
+                    //                     singleEductaion.institution ?? "",
+                    //                     style: h4Bold.copyWith(
+                    //                       fontSize: Di.FSD,
+                    //                     ),
+                    //                   ),
+                    //                   subtitle: Column(
+                    //                     crossAxisAlignment:
+                    //                         CrossAxisAlignment.start,
+                    //                     children: [
+                    //                       Text(
+                    //                         singleEductaion.title ?? "",
+                    //                         style: bodySmallRegular.copyWith(
+                    //                           color: Cr.accentBlue1,
+                    //                           fontSize: Di.FSS,
+                    //                         ),
+                    //                       ),
+                    //                       const SizedBox(height: Di.PSETS),
+                    //                       Text(
+                    //                         singleEductaion.studyDuration ??
+                    //                             "",
+                    //                         // "2010 - 2013",
+                    //                         style: bodySmallRegular.copyWith(
+                    //                           color: Cr.darkGrey1,
+                    //                           fontSize: Di.FSS,
+                    //                         ),
+                    //                       ),
+                    //                     ],
+                    //                   ),
+                    //                 ),
+                    //                 if (singleEductaion.description != null)
+                    //                   ExpandedCollapseWidget(
+                    //                     showText: "Course online",
+                    //                     description:
+                    //                         singleEductaion.description!,
+                    //                     isTablet: widget.isTablet,
+                    //                     isMobile: widget.isMobile,
+                    //                   ),
+                    //               ],
+                    //             ),
+                    //           ),
+                    //         )
+                    //         .toList(),
+                    //   ),
+                    EditBlueCardSheet(
+                      context,
+                      dataIsNull: !hasData,
+                      greenCardText:
+                          "Add the educational institutions you attended, the qualifications you achieved and the courses completed. ",
+                    ),
+                    if (hasData)
+                      EditAddButtonOfSheet(
+                        context,
+                        onEditPressed: () {
+                          showCustomDialog(
+                            context,
+                            ProfileEducationDialogWidget(
+                              educations:
+                                  //  ref
+                                  //         .watch(profileNotifierProvider)
+                                  Provider.of<ProfileProvider>(context,
+                                              listen: false)
+                                          .userProfileData!
+                                          .educations ??
+                                      <Education>[],
+                            ),
+                          );
+                        },
+                      ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
           if (showSubMenu)
             Positioned(

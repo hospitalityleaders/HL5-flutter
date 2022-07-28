@@ -24,6 +24,15 @@ class Cr {
   static const Color accentBlue2 = Color(0xff98D1FE);
   static const Color accentBlue3 = Color(0xffCCE8FE);
 
+  static Color whiteColorWithOpacity(double opacity) =>
+      Color.fromRGBO(255, 255, 255, opacity);
+
+  static Color blackColorWithOpacity(double opacity) =>
+      Color.fromRGBO(0, 0, 0, opacity);
+
+  static Color accentBlue2WithOpacity(double opacity) =>
+      Color.fromRGBO(152, 209, 254, opacity);
+
   static const Color green1 = Color(0xff7DC81B);
   static const Color green3 = Color(0xffDEF1C6);
 

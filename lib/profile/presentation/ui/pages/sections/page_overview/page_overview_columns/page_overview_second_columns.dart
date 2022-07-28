@@ -230,125 +230,122 @@ class _AchievementComponentState extends State<AchievementComponent> {
         Provider.of<ProfileProvider>(context).userProfileData!.achievements;
     final bool hasData = achievement != null ? achievement.isNotEmpty : false;
 
-    return Container(
-      decoration: boxDecoration,
-      child: Stack(
-        children: [
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Di.SBHETS,
-              ProfileComponentTitle(
-                isMobile: widget.isMobile,
-                onIconPressed: () {
-                  setState(() {
-                    showSubMenu = !showSubMenu;
-                  });
-                },
-                title: "Achievements",
-              ),
-              Di.DWZH,
-              IntrinsicHeight(
-                child: Stack(
-                  children: [
-                    if (hasData)
-                      Column(
-                        children: achievement
-                            .map(
-                              (singleAchievement) => Container(
-                                width: widget.isMobile ? null : 360,
-                                margin: EdgeInsets.only(
-                                  bottom:
-                                      achievement.indexOf(singleAchievement) ==
-                                              (achievement.length - 1)
-                                          ? 0
-                                          : Di.PSS,
-                                ),
-                                decoration: boxDecoration.copyWith(
-                                    color: Cr.whiteColor),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    ListTile(
-                                      leading: const SvgWithBackground(
-                                        svg: Svgs.school,
-                                      ),
-                                      trailing: const SizedBox(),
-                                      title: Text(
-                                        singleAchievement.title ?? "",
-                                        // "Marriott Hotel and Resorts employee of the year awards",
-                                        style: h4Bold.copyWith(
-                                          fontSize: Di.FSD,
-                                        ),
-                                      ),
-                                      subtitle: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Di.SBHES,
-                                          Text(
-                                            singleAchievement.website ??
-                                                "No website added",
-                                            style: bodySmallRegular.copyWith(
-                                              color: Cr.accentBlue1,
-                                              fontSize: Di.FSS,
-                                            ),
-                                          ),
-                                        ],
+    return Stack(
+      children: [
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Di.SBHETS,
+            ProfileComponentTitle(
+              isMobile: widget.isMobile,
+              onIconPressed: () {
+                setState(() {
+                  showSubMenu = !showSubMenu;
+                });
+              },
+              title: "Achievements",
+            ),
+            Di.DWZH,
+            IntrinsicHeight(
+              child: Stack(
+                children: [
+                  if (hasData)
+                    Column(
+                      children: achievement
+                          .map(
+                            (singleAchievement) => Container(
+                              width: widget.isMobile ? null : 360,
+                              margin: EdgeInsets.only(
+                                bottom:
+                                    achievement.indexOf(singleAchievement) ==
+                                            (achievement.length - 1)
+                                        ? 0
+                                        : Di.PSS,
+                              ),
+                              decoration:
+                                  boxDecoration.copyWith(color: Cr.whiteColor),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ListTile(
+                                    leading: const SvgWithBackground(
+                                      svg: Svgs.school,
+                                    ),
+                                    trailing: const SizedBox(),
+                                    title: Text(
+                                      singleAchievement.title ?? "",
+                                      // "Marriott Hotel and Resorts employee of the year awards",
+                                      style: h4Bold.copyWith(
+                                        fontSize: Di.FSD,
                                       ),
                                     ),
-                                    Di.SBHD,
-                                    Di.DWZH,
-                                    if (singleAchievement.description != null)
-                                      ExpandedCollapseWidget(
-                                        showText: "More info",
-                                        description: singleAchievement
-                                            .description as String,
-                                        isMobile: widget.isMobile,
-                                      )
-                                  ],
-                                ),
+                                    subtitle: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Di.SBHES,
+                                        Text(
+                                          singleAchievement.website ??
+                                              "No website added",
+                                          style: bodySmallRegular.copyWith(
+                                            color: Cr.accentBlue1,
+                                            fontSize: Di.FSS,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Di.SBHD,
+                                  Di.DWZH,
+                                  if (singleAchievement.description != null)
+                                    ExpandedCollapseWidget(
+                                      showText: "More info",
+                                      description: singleAchievement.description
+                                          as String,
+                                      isMobile: widget.isMobile,
+                                    )
+                                ],
                               ),
-                            )
-                            .toList(),
-                      ),
-                    EditBlueCardSheet(
-                      context,
-                      dataIsNull: !hasData,
-                      greenCardText:
-                          "Add the educational institutions you attended, the qualifications you achieved and the courses completed.",
+                            ),
+                          )
+                          .toList(),
                     ),
-                    EditAddButtonOfSheet(
-                      context,
-                      onEditPressed: () {
-                        showCustomDialog(
-                          context,
-                          ProfileAchievementDialogWidget(
-                            achievements: achievement ?? <Achievement>[],
-                          ),
-                        );
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          if (showSubMenu)
-            Positioned(
-              right: 8,
-              top: 41,
-              child: ViewTimeEditProfileSubmenu(
-                hideSubMenuCallback: () {
-                  setState(() {
-                    showSubMenu = false;
-                  });
-                },
-                editText: 'achievements',
+                  EditBlueCardSheet(
+                    context,
+                    dataIsNull: !hasData,
+                    greenCardText:
+                        "Add the educational institutions you attended, the qualifications you achieved and the courses completed.",
+                  ),
+                  EditAddButtonOfSheet(
+                    context,
+                    onEditPressed: () {
+                      showCustomDialog(
+                        context,
+                        ProfileAchievementDialogWidget(
+                          achievements: achievement ?? <Achievement>[],
+                        ),
+                      );
+                    },
+                  ),
+                ],
               ),
             ),
-        ],
-      ),
+          ],
+        ),
+        if (showSubMenu)
+          Positioned(
+            right: 8,
+            top: 41,
+            child: ViewTimeEditProfileSubmenu(
+              hideSubMenuCallback: () {
+                setState(() {
+                  showSubMenu = false;
+                });
+              },
+              editText: 'achievements',
+            ),
+          ),
+      ],
     );
   }
 }
@@ -574,6 +571,7 @@ class ProfileComponentTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Colors.white,
       height: 46,
       padding: EdgeInsets.only(left: isMobile ? Di.PSD : Di.PSL, right: 7),
       child: Row(

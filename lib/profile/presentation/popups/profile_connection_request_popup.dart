@@ -64,7 +64,7 @@ class ProfileConnectionRequestPopup extends StatelessWidget {
                           ),
                           sizedBoxBetweenIconText: Di.SBWES,
                           text: "Invite people to join",
-                          backgroundColor: Cr.whiteColor.withOpacity(.07),
+                          backgroundColor: Cr.whiteColorWithOpacity(.07),
                           textStyle: h5Bold.copyWith(color: Cr.whiteColor),
                         ),
                       ],

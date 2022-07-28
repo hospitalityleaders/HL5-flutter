@@ -53,7 +53,7 @@ class _ProfileImageBannerState extends State<ProfileImageBanner> {
               ),
               fit: BoxFit.cover,
               colorFilter: ColorFilter.mode(
-                Colors.black.withOpacity(0.3),
+                Cr.blackColorWithOpacity(0.3),
                 BlendMode.darken,
               ),
             ),

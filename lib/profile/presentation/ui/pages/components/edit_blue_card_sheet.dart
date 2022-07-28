@@ -81,7 +81,7 @@ class EditBlueCardSheet extends StatelessWidget {
                 ),
               )
             : Container(
-                color: Cr.accentBlue2.withOpacity(.8),
+                color: Cr.accentBlue2WithOpacity(.8),
                 padding: blueSheetPadding ?? const EdgeInsets.all(Di.PSD),
               )
         : Di.ESB;

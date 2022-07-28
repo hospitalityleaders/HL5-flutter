@@ -85,7 +85,7 @@ class ConnectionsComponent extends StatelessWidget {
                           end: Alignment.center,
                           colors: <Color>[
                             Cr.whiteColor,
-                            Cr.whiteColor.withOpacity(0),
+                            Cr.whiteColorWithOpacity(0),
                           ],
                         ),
                       ),
