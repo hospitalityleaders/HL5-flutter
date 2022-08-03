@@ -35,8 +35,8 @@ class _NewsSignalScreenState extends State<NewsCategory>
     with SingleTickerProviderStateMixin {
   CarouselController buttonCarouselController = CarouselController();
   // ScrollController _scrollController = ScrollController();
-  var _scrollController = ScrollController();
-
+  // var _scrollController = ScrollController();
+  ScrollController _scrollController = ScrollController();
   // ScrollController _scrollController = ScrollController();
   MenuController _controller = Get.put(MenuController());
 
@@ -54,6 +54,8 @@ class _NewsSignalScreenState extends State<NewsCategory>
   var page = 1;
   var limit = 10;
   int get count => articleList.length;
+  bool endOFPage = false;
+
   Future<List<Article>> fetchArticles1(
       {String? category,
       String? keyword,
@@ -62,7 +64,7 @@ class _NewsSignalScreenState extends State<NewsCategory>
       required int? page,
       required BuildContext context}) async {
     try {
-      isLoading(true);
+      // isLoading(true);
       var params = {
         'category': category,
         'type': type,
@@ -79,17 +81,17 @@ class _NewsSignalScreenState extends State<NewsCategory>
         var list = response.data!.articles as List<Article>;
         dataList.value = list;
 
-        //print('log: ${list}');
+        print('DATA LIST-----------:${dataList.length}');
         for (final data in list) {
           //articleList.add(data);
           // print('c ${data.id} ${(articleList.any((e) => e.id == data.id))}');
 
           if ((articleList.any((e) => e.id == data.id)) != true) {
-            // print('adding ${data.id}');
+            print('adding ${data.id}');
             articleList.add(data);
           }
         }
-        print('localcache: count: ${articleList.length}');
+        print('localcache111: count: ${articleList.length}');
       }
       return dataList.value as List<Article>;
     } finally {
@@ -97,29 +99,14 @@ class _NewsSignalScreenState extends State<NewsCategory>
     }
   }
 
-  void load() {
-    print("loading------------------");
-    setState(() {
-      Get.put(HoledoDatabase().news)
-          .fetchArticles1(context: context, limit: limit, page: page);
-      limit + 10;
-      page + 1;
-    });
+  Future<List<Article>>? _future;
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
-  Future<bool> _loadMore() async {
-    print("onLoadMore");
-    await Future.delayed(Duration(seconds: 0, milliseconds: 2000));
-    load();
-    return true;
-  }
-
-  Future<void> _refresh() async {
-    print('REFRESH_______');
-    await Future.delayed(Duration(seconds: 0, milliseconds: 2000));
-    load();
-  }
-
+  @override
   void initState() {
     print('news detail page');
     _tabController = TabController(length: 5, vsync: this);
@@ -127,18 +114,63 @@ class _NewsSignalScreenState extends State<NewsCategory>
     // LandingPage(page: 'NewsCategory');
     newsCategoryViewModel.newsCategoryViewModel('1');
     super.initState();
+    print('SUPER INIT STATE-------------');
+
     /* _scrollController.addListener(() {
       if (_scrollController.position.atEdge) {
         if (_scrollController.position.pixels == 0) {
           print('_scrollController');
           setState(() {
-            _future = fetchArticles1(context: context, limit: 10, page: 1);
+            Get.put(HoledoDatabase().news)
+                .fetchArticles1(context: context, limit: limit, page: page);
+            // _future =
+            //     fetchArticles1(context: context, limit: limit, page: page);
           });
         } else {
           print('_scrollController bottom');
+
+          print('LIMIT---${limit}');
+          print('PAGE---${page}');
+          setState(() {
+            Get.put(HoledoDatabase().news)
+                .fetchArticles1(context: context, limit: limit, page: page);
+          });
+          limit = limit += 10;
+          page = page += 1;
+          // _future = fetchArticles1(context: context, limit: limit, page: page);
+
+          // limit + 10;
+          // page + 1;
+          //
+          // Get.put(HoledoDatabase().news)
+          //     .fetchArticles1(context: context, limit: limit, page: page);
         }
       }
     });*/
+    _scrollController.addListener(() {
+      if (_scrollController.position.maxScrollExtent ==
+          _scrollController.position.pixels) {
+        /*if (_scrollController.offset >=
+                _scrollController.position.maxScrollExtent &&
+            !_scrollController.position.outOfRange) {
+          setState(() {
+            print("reach the bottom");
+            endOFPage = true;
+          });
+        }*/
+        setState(() {
+          fetchArticles1(context: context, limit: limit, page: page);
+          limit = limit += 10;
+          // page = page += 1;
+          // _future =
+          //     fetchArticles1(context: context, limit: limit, page: page);
+        });
+        /* if (!isLoading) {
+          isLoading = !isLoading;
+          // Perform event when user reach at the end of list (e.g. do Api call)
+        }*/
+      }
+    });
   }
 
   int pageCount = 0;
