@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:holedo/models/holedoapi/settings.dart';
+import 'package:holedo/models/holedoapi/menu.dart';
 import 'package:holedo/models/holedoapi/settings.dart';
 import 'package:holedo/models/models.dart';
 import 'package:flat/flat.dart';
@@ -70,17 +70,28 @@ class AppProvider extends ChangeNotifier {
     return dataModel;
   }
 
-  DataModel data([String? s]) {
-    var model = Get.put(HoledoDatabase()).getModel();
-    if (s == null) {
-      return model;
-    }
-    final flat = flatten(model!.toJson(), maxDepth: 2);
-    if (flat[s] != null) {
-      return flat[s];
-      //debugPrint('flat $s ${flat[s].toString()}');
+  fetch(dynamic o, String t, String s) {
+    var model = o.runtimeType != 'String' ? data() : o;
+
+    //print('settings: $t $s ${this.toString()}');
+    final flat = flatten(model?.toJson(), maxDepth: 2);
+    if (flat[o] != null) {
+      //return flat[s];
+      //debugPrint('flat $o ${flat[o].toString()}');
+      if (t != null && s != null) {
+        final result =
+            Menu.fromJson(flat[o].firstWhere((e) => e[t] == s)).children;
+
+        //debugPrint('result ${result.toString()}');
+        return result;
+      }
     }
     //debugPrint('flat ${flat.toString()}');
+    //return model;
+  }
+
+  DataModel data() {
+    var model = Get.put(HoledoDatabase()).getModel();
     return model;
   }
 }

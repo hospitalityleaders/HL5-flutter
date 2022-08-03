@@ -32,12 +32,10 @@ class CustomAppbar extends StatefulWidget {
 class _CustomAppbarState extends State<CustomAppbar> {
   @override
   Widget build(BuildContext context) {
-    final menuItems = Get.put(HoledoDatabase()).menuItems;
+    //final menuItems = Get.put(HoledoDatabase()).menuItems;
 
-    final menu = Provider.of<AppProvider>(context)
-        .data()
-        .settings
-        ?.fetch('title', 'Top Menu');
+    final topMenu = Provider.of<AppProvider>(context)
+        .fetch('Settings.Menus', 'title', 'Top Menu');
 
     final isSmallerThanDesltop =
         ResponsiveWrapper.of(context).isSmallerThan(DESKTOP);
@@ -69,17 +67,18 @@ class _CustomAppbarState extends State<CustomAppbar> {
               ListView.builder(
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
-                itemCount: menuItems.length,
+                itemCount: topMenu.length,
                 itemBuilder: (BuildContext context, int index) {
                   final isCurrentPath = RouteData.of(context)
                       .fullPath
-                      .startsWith(menuItems[index].path!);
+                      .startsWith('/' + topMenu[index].slug!);
 
                   return CustomTextButton(
                     onPressed: () {
-                      Routemaster.of(context).push(menuItems[index].path!);
+                      print('cli ${topMenu[index].slug.toString()}');
+                      Routemaster.of(context).push('/' + topMenu[index].slug!);
                     },
-                    text: menuItems[index].title,
+                    text: topMenu[index].title,
                     color: isCurrentPath ? Cr.whiteColor : Cr.darkBlue9,
                   );
                 },
