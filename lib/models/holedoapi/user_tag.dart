@@ -1,6 +1,8 @@
+import 'package:holedo/models/models.dart';
+
 import 'join_data_model.dart';
 
-class UserTag {
+class UserTag extends Model {
   int? id;
   int? companyId;
   String? name;

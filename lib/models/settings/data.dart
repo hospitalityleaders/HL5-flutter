@@ -1,20 +1,17 @@
-import 'user.dart';
+import 'settings.dart';
 
 class Data {
-  User? user;
-  String? token;
+  Settings? settings;
 
-  Data({this.user, this.token});
+  Data({this.settings});
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-        user: json['user'] == null
+        settings: json['Settings'] == null
             ? null
-            : User.fromJson(json['user'] as Map<String, dynamic>),
-        token: json['token'] as String?,
+            : Settings.fromJson(json['Settings'] as Map<String, dynamic>),
       );
 
   Map<String, dynamic> toJson() => {
-        'user': user?.toJson(),
-        'token': token,
+        'Settings': settings?.toJson(),
       };
 }

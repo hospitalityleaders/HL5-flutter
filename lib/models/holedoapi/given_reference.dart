@@ -1,4 +1,6 @@
-class GivenReference {
+import 'package:holedo/models/models.dart';
+
+class GivenReference extends Model {
   int? id;
   int? userId;
   int? authorId;

@@ -1,4 +1,6 @@
-class Timeline {
+import 'package:holedo/models/models.dart';
+
+class Timeline extends Model {
   Timeline({
     this.id,
     this.title,

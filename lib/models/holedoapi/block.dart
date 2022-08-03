@@ -1,3 +1,5 @@
+import 'package:holedo/models/models.dart';
+
 import 'category.dart';
 import 'category_type_a.dart';
 import 'category_type_b.dart';
@@ -9,7 +11,7 @@ import 'widget_type_c.dart';
 import 'widget_type_d.dart';
 import 'widget_type_e.dart';
 
-class Block {
+class Block extends Model {
   Headline? headline;
   CategoryTypeA? categoryTypeA;
   CategoryTypeB? categoryTypeB;

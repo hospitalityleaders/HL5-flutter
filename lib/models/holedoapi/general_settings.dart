@@ -1,4 +1,6 @@
-class GeneralSettings {
+import 'package:holedo/models/models.dart';
+
+class GeneralSettings extends Model {
   String? facebookFollowers;
   String? youtubeSubscribers;
   String? twitterFollowers;

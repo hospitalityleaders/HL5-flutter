@@ -1,3 +1,5 @@
+import 'package:holedo/models/models.dart';
+
 import 'package:flutter/material.dart';
 import 'package:holedo/models/holedoapi/achievement.dart';
 import 'package:holedo/models/holedoapi/company_role.dart';
@@ -21,7 +23,7 @@ List<Timeline> getTimeline(Iterable<dynamic> data) => List<Timeline>.from(
       data.map((x) => Timeline.fromJson(x as Map<String, dynamic>)),
     );
 
-class User {
+class User extends Model {
   int? id;
   int? companyId;
   int? roleId;
@@ -856,7 +858,7 @@ class User {
 // List<Timeline> getTimeline(Iterable<dynamic> data) => List<Timeline>.from(
 //     data.map((x) => Timeline.fromJson(x as Map<String, dynamic>)));
 
-// class User {
+// class User extends Model {
 //   int? id;
 //   int? companyId;
 //   int? roleId;

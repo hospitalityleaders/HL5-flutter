@@ -1,4 +1,6 @@
-class LinkedEmploymentType {
+import 'package:holedo/models/models.dart';
+
+class LinkedEmploymentType extends Model {
   int? id;
   String? title;
 

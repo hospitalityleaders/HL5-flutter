@@ -1,3 +1,5 @@
+import 'package:holedo/models/models.dart';
+
 import 'dart:convert';
 
 import 'article_category.dart';
@@ -9,7 +11,7 @@ List<Article> getArticles(Iterable<dynamic> data) => List<Article>.from(
 String apiModelToJson(List<Article> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class Article {
+class Article extends Model {
   int? id;
   String? title;
   String? slug;

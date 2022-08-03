@@ -1,3 +1,5 @@
+import 'package:holedo/models/models.dart';
+
 import 'client.dart';
 import 'colour.dart';
 import 'company.dart';
@@ -14,7 +16,7 @@ import 'qualification.dart';
 List<Job> getJobs(Iterable<dynamic> data) =>
     List<Job>.from(data.map((x) => Job.fromJson(x as Map<String, dynamic>)));
 
-class Job {
+class Job extends Model {
   int? id;
   int? companyId;
   int? clientId;

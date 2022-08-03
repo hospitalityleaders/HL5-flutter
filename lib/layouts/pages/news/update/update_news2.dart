@@ -11,13 +11,6 @@ import 'package:holedo/data/data.dart';
 import 'package:holedo/layouts/pages/news/update/widget/update_news_widget.dart';
 import 'package:holedo/responsive/responsive.dart';
 
-import 'package:holedo/common/common_widget.dart';
-import 'package:holedo/constant/colorPicker/color_picker.dart';
-import 'package:holedo/constant/sizedbox.dart';
-import 'package:holedo/data/data.dart';
-import 'package:holedo/responsive/responsive.dart';
-import 'package:holedo/layouts/pages/news/update/widget/update_news_widget.dart';
-
 class UpdateNewsSecond extends StatefulWidget {
   const UpdateNewsSecond({Key? key}) : super(key: key);
 

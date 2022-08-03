@@ -1,4 +1,6 @@
-class RequestedConnection {
+import 'package:holedo/models/models.dart';
+
+class RequestedConnection extends Model {
   int? id;
   int? connectorId;
   int? connecteeId;

@@ -1,6 +1,8 @@
+import 'package:holedo/models/models.dart';
+
 import 'join_data_model.dart';
 
-class Expertise {
+class Expertise extends Model {
   int? id;
   String? title;
   int? featured;

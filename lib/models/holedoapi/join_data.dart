@@ -1,4 +1,6 @@
-class JoinDataModel {
+import 'package:holedo/models/models.dart';
+
+class JoinDataModel extends Model {
   int? id;
   int? articleId;
   int? articleCategoryId;

@@ -1,4 +1,6 @@
-class LanguageProficiencyType {
+import 'package:holedo/models/models.dart';
+
+class LanguageProficiencyType extends Model {
   int? id;
   String? title;
 

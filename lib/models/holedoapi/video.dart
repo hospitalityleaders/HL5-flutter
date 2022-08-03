@@ -1,4 +1,6 @@
-class Video {
+import 'package:holedo/models/models.dart';
+
+class Video extends Model {
   String? widgetCenterRight;
   String? widgetCenterLeft;
   String? widgetRight;

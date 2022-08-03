@@ -1,6 +1,8 @@
+import 'package:holedo/models/models.dart';
+
 import 'join_data.dart';
 
-class Qualification {
+class Qualification extends Model {
   int? id;
   String? title;
   JoinDataModel? joinDataModel;

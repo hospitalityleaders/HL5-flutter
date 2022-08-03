@@ -1,7 +1,9 @@
+import 'package:holedo/models/models.dart';
+
 import 'language.dart';
 import 'language_proficiency_type.dart';
 
-class UserLanguagesProficiency {
+class UserLanguagesProficiency extends Model {
   int? id;
   int? userId;
   int? languageId;

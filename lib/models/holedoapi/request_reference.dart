@@ -1,4 +1,6 @@
-class RequestReference {
+import 'package:holedo/models/models.dart';
+
+class RequestReference extends Model {
   int? id;
   int? userId;
   int? authorId;

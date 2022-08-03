@@ -1,4 +1,6 @@
-class ArticleCategory {
+import 'package:holedo/models/models.dart';
+
+class ArticleCategory extends Model {
   int? id;
   dynamic parentId;
   String? slug;

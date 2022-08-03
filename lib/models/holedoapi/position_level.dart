@@ -1,6 +1,8 @@
+import 'package:holedo/models/models.dart';
+
 import 'join_data.dart';
 
-class PositionLevel {
+class PositionLevel extends Model {
   int? id;
   String? title;
   String? description;

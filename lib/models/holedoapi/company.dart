@@ -1,4 +1,6 @@
-class Company {
+import 'package:holedo/models/models.dart';
+
+class Company extends Model {
   int? id;
   dynamic organizationId;
   String? slug;

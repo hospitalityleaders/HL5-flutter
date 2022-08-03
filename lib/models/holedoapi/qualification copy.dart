@@ -1,4 +1,6 @@
-class Qualification {
+import 'package:holedo/models/models.dart';
+
+class Qualification extends Model {
   int? id;
   String? title;
 

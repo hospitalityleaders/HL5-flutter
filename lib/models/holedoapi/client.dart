@@ -1,4 +1,6 @@
-class Client {
+import 'package:holedo/models/models.dart';
+
+class Client extends Model {
   int? id;
   int? companyId;
   int? clientTypeId;

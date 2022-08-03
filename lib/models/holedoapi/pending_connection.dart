@@ -1,4 +1,6 @@
-class PendingConnection {
+import 'package:holedo/models/models.dart';
+
+class PendingConnection extends Model {
   int? id;
   int? connectorId;
   int? connecteeId;

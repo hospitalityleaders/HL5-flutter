@@ -1,5 +1,9 @@
 import 'package:flutter/foundation.dart';
+import 'package:holedo/models/holedoapi/settings.dart';
+import 'package:holedo/models/holedoapi/settings.dart';
 import 'package:holedo/models/models.dart';
+import 'package:flat/flat.dart';
+import 'package:flutter/material.dart';
 
 class AppProvider extends ChangeNotifier {
   String? _username;
@@ -14,8 +18,8 @@ class AppProvider extends ChangeNotifier {
         _profile = profile;
 
   //Getters
-  NewsController get news => Get.put(NewsController());
-  JobsController get jobs => Get.put(JobsController());
+  NewsController get newscontroller => Get.put(NewsController());
+  JobsController get jobscontroller => Get.put(JobsController());
   bool get isLoggedIn => _username != null;
   String? get token => _token;
   String? get username => _username;
@@ -64,5 +68,19 @@ class AppProvider extends ChangeNotifier {
     final dataModel = await Get.put(HoledoDatabase().users).saveProfile(data);
     _profile = dataModel.user as User;
     return dataModel;
+  }
+
+  DataModel data([String? s]) {
+    var model = Get.put(HoledoDatabase()).getModel();
+    if (s == null) {
+      return model;
+    }
+    final flat = flatten(model!.toJson(), maxDepth: 2);
+    if (flat[s] != null) {
+      return flat[s];
+      //debugPrint('flat $s ${flat[s].toString()}');
+    }
+    //debugPrint('flat ${flat.toString()}');
+    return model;
   }
 }

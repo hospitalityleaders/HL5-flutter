@@ -1,4 +1,6 @@
-class Language {
+import 'package:holedo/models/models.dart';
+
+class Language extends Model {
   Language({
     this.id,
     this.title,
@@ -23,7 +25,7 @@ class Language {
       };
 }
 
-class LanguageJoinData {
+class LanguageJoinData extends Model {
   LanguageJoinData({
     this.id,
     this.userId,

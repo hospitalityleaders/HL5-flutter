@@ -1,12 +1,16 @@
-import 'dart:convert';
+import 'package:holedo/models/models.dart';
 
+import 'dart:convert';
+import 'package:holedo/models/holedoapi/company.dart';
+import 'package:holedo/models/holedoapi/page.dart';
+import 'package:holedo/models/holedoapi/user.dart';
+import 'package:holedo/profile/presentation/providers/app_provider.dart';
 import 'package:holedo/models/holedoapi/article.dart';
 import 'package:holedo/models/holedoapi/identity.dart';
 import 'package:holedo/models/holedoapi/article_category.dart';
 import 'package:holedo/models/holedoapi/block.dart';
 import 'package:holedo/models/holedoapi/job.dart';
 import 'package:holedo/models/holedoapi/settings.dart';
-import 'package:holedo/models/models.dart';
 
 export 'package:holedo/models/holedoapi/company.dart';
 export 'package:holedo/models/holedoapi/page.dart';
@@ -19,7 +23,7 @@ List<DataModel> dataFromJson(Iterable<dynamic> data) => List<DataModel>.from(
 String dataToJson(List<DataModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class DataModel {
+class DataModel extends Model {
   bool? success;
   String? messages;
   Settings? settings;

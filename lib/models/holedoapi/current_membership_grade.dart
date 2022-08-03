@@ -1,4 +1,6 @@
-class CurrentMembershipGrade {
+import 'package:holedo/models/models.dart';
+
+class CurrentMembershipGrade extends Model {
   int? id;
   String? name;
   String? title;

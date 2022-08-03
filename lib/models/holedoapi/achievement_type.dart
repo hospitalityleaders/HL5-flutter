@@ -1,4 +1,6 @@
-class AchievementType {
+import 'package:holedo/models/models.dart';
+
+class AchievementType extends Model {
   int? id;
   String? title;
 

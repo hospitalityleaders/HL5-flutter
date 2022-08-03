@@ -1,4 +1,6 @@
-class UserTitleType {
+import 'package:holedo/models/models.dart';
+
+class UserTitleType extends Model {
   int? id;
   String? title;
 

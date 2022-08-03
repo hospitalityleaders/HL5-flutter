@@ -153,7 +153,7 @@ class __SingleAchievementState extends State<_SingleAchievement> {
   String currentAchivement = achievementTypeMap.keys.first;
   String? currentYear;
   final Map<String, dynamic>? achievementTypes =
-      holedoDatabase.getModel().settings?.achievementTypes;
+      holedoDatabase.getModel().settings?.types?.achievementTypes;
 
   @override
   void initState() {

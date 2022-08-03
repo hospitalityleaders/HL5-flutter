@@ -5,9 +5,9 @@ import 'package:holedo/main.dart';
 import 'package:holedo/models/holedoapi/article.dart';
 import 'package:holedo/models/holedoapi/article_category.dart';
 import 'package:holedo/models/holedoapi/holedoapi.dart';
-import 'package:holedo/models/holedoapi/identity.dart';
 import 'package:holedo/models/holedoapi/job.dart';
 import 'package:holedo/models/holedoapi/menu_item.dart';
+import 'package:holedo/profile/presentation/providers/app_provider.dart';
 import 'package:holedo/services/holedo_api_services.dart';
 
 export 'package:get/get.dart';
@@ -15,67 +15,10 @@ export 'package:provider/provider.dart';
 export 'package:holedo/profile/presentation/providers/profile_provider.dart';
 export 'holedoapi/holedoapi.dart';
 
-class AppState extends ChangeNotifier {
-  AppState({String? username, User? profile})
-      : _username = username,
-        _profile = profile;
-
-  bool get isLoggedIn => _username != null;
-
-  String? _username;
-  String? _token;
-  User? _profile;
-  String? get username => _username;
-
-  set username(String? value) {
-    _username = value;
-    notifyListeners();
+class Model {
+  fetch(String t, String s) {
+    print('settings: $t $s ${this.toString()}');
   }
-
-  String? get token => _token;
-  set token(String? value) {
-    _token = value;
-    notifyListeners();
-  }
-
-  bool isLoginnedAndEditable(User data) {
-    debugPrint('p: ${profile?.slug} ${data.slug}');
-    if (profile?.slug != null) {
-      if (data.slug == profile?.slug) {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
-  User? get profile => _profile;
-  set profile(User? data) {
-    _profile = data;
-    _username = data?.fullName;
-    notifyListeners();
-  }
-
-  final List<User> _profiles = [];
-  Iterable<User> get profiles => List.unmodifiable(_profiles);
-
-  void addProfile(User data) {
-    _profiles.add(data);
-    notifyListeners();
-  }
-
-  Future<DataModel> saveProfile(User data) async {
-    data.id = _profile?.id;
-    // ignore: unused_local_variable
-
-    //data.slug = _profile?.slug;
-    //this.token = profile.token;
-    final dataModel = await Get.put(HoledoDatabase().users).saveProfile(data);
-    _profile = dataModel.user as User;
-    return dataModel;
-  }
-
-  NewsController get news => Get.put(NewsController());
 }
 
 class HoledoDatabase extends GetxController {
@@ -92,7 +35,7 @@ class HoledoDatabase extends GetxController {
   List<Company> companies = [];
   final List<String> articlePaths = [];
   final ApiServices _api = ApiServices();
-  late AppState appState;
+  late AppProvider appState;
   late BuildContext context;
   final List<MenuNavItem> menuItems = [
     MenuNavItem(
@@ -245,13 +188,13 @@ class HoledoDatabase extends GetxController {
 
       var data = getModel();
 
-      if (data.articleCategories?.length != null) {
+      if (data.settings?.articleCategories?.length != null) {
         debugPrint(
           'Cache articles cat: ${data.articleCategories?.length}  pages: ${data.pages?.length} companies: ${data.companies?.length} ',
         );
       }
 
-      if (data.articleCategories?.length == null) {
+      if (data.settings?.articleCategories?.length == null) {
         debugPrint('getting new settings: $data');
         final response = await _api.GET(
           target: '/site-settings/v2?type=2',
@@ -274,7 +217,8 @@ class HoledoDatabase extends GetxController {
       }
       pages = data.pages as List<PageContent>;
       companies = data.companies as List<Company>;
-      articleCategories = data.articleCategories as List<ArticleCategory>;
+      articleCategories =
+          data.settings?.articleCategories as List<ArticleCategory>;
 
       for (final category
           in articleCategories.where((category) => category.menuItem == true)) {
@@ -353,7 +297,7 @@ class HoledoDatabase extends GetxController {
     }
   }
 
-  void setAppState(BuildContext context, AppState appState) {
+  void setAppState(BuildContext context, AppProvider appState) {
     this.appState = appState;
     this.context = context;
     snackBarMessage(context, 'info', 'AppState Loaded');

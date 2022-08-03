@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:holedo/models/models.dart';
 import 'package:holedo/profile/presentation/popups/profile_connection_request_popup.dart';
 import 'package:holedo/profile/presentation/providers/app_provider.dart';
-import 'package:holedo/profile/presentation/providers/profile_provider.dart';
 import 'package:holedo/profile/presentation/utill/color_resources.dart';
 import 'package:holedo/profile/presentation/utill/dimensions.dart';
 import 'package:holedo/profile/presentation/utill/styles.dart';

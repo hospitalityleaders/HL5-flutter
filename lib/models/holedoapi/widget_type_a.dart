@@ -1,4 +1,6 @@
-class WidgetTypeA {
+import 'package:holedo/models/models.dart';
+
+class WidgetTypeA extends Model {
   String? widgetCenterRight;
   String? widgetCenterLeft;
   String? widgetRight;

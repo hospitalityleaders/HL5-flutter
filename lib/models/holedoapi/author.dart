@@ -1,7 +1,9 @@
+import 'package:holedo/models/models.dart';
+
 List<Author> getAuthors(Iterable<dynamic> data) => List<Author>.from(
     data.map((x) => Author.fromJson(x as Map<String, dynamic>)));
 
-class Author {
+class Author extends Model {
   int? id;
   String? firstName;
   String? lastName;

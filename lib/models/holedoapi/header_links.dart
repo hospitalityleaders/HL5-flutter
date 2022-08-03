@@ -1,4 +1,6 @@
-class HeaderLinks {
+import 'package:holedo/models/models.dart';
+
+class HeaderLinks extends Model {
   String? holedoHub;
   String? holedoChat;
   String? holedoJobs;

@@ -41,7 +41,7 @@ class _ReferencesState extends State<References> {
           padding: const EdgeInsets.all(8.0),
           child: Container(
             key: referenceCardKey as Key,
-            width: SS.sW(context) * .30 as double,
+            width: SS.sW(context) * .30,
             padding: const EdgeInsets.all(6),
             color: Colors.white,
             child: Column(
@@ -109,7 +109,7 @@ class _ReferencesState extends State<References> {
         ),
         widget.isEditable as bool
             ? ProfileEdit.buildProfileEdit(
-                width: SS.sW(context) * .30 as double,
+                width: SS.sW(context) * .30,
                 height: 177,
                 popUpEdit: () {
                   PopUpHeadMenu.buildReferencesCardPopUp(context);
@@ -223,8 +223,7 @@ class _ReferencesState extends State<References> {
     return Container(
       child: Padding(
         padding: EdgeInsets.symmetric(
-            horizontal: SS.sW(context) * 0.070 as double,
-            vertical: SS.sH(context) * .02 as double),
+            horizontal: SS.sW(context) * 0.070, vertical: SS.sH(context) * .02),
         child: SingleChildScrollView(
           child: Column(
             children: [

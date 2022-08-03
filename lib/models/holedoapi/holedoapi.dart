@@ -1,8 +1,10 @@
+import 'package:holedo/models/models.dart';
+
 export 'data.dart';
 import 'package:flutter/material.dart';
 import 'package:holedo/models/models.dart';
 
-class Holedoapi {
+class Holedoapi extends Model {
   bool? success;
   dynamic errors;
   dynamic messages;

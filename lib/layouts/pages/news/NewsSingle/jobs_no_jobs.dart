@@ -7,10 +7,6 @@ import 'package:holedo/common/common_widget.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/constant/sizedbox.dart';
 import 'package:holedo/responsive/responsive.dart';
-import 'package:holedo/common/common_widget.dart';
-import 'package:holedo/constant/fontStyle/font_style.dart';
-import 'package:holedo/constant/sizedbox.dart';
-import 'package:holedo/responsive/responsive.dart';
 
 class NewsSingleJobs extends StatefulWidget {
   @override

@@ -1,4 +1,6 @@
-class Colour {
+import 'package:holedo/models/models.dart';
+
+class Colour extends Model {
   int? id;
   String? hex;
 

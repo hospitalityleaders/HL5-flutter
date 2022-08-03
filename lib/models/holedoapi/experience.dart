@@ -1,7 +1,9 @@
+import 'package:holedo/models/models.dart';
+
 import 'country.dart';
 import 'position_level.dart';
 
-class Experience {
+class Experience extends Model {
   int? id;
   int? userId;
   int? countryId;

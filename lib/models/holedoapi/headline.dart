@@ -1,4 +1,6 @@
-class Headline {
+import 'package:holedo/models/models.dart';
+
+class Headline extends Model {
   String? widget;
   String? blockType;
   String? centerColumns;

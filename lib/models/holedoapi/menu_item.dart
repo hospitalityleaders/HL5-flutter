@@ -1,4 +1,6 @@
-class MenuNavItem {
+import 'package:holedo/models/models.dart';
+
+class MenuNavItem extends Model {
   String? title;
   String? path;
   bool? inNav;

@@ -33,6 +33,12 @@ class _CustomAppbarState extends State<CustomAppbar> {
   @override
   Widget build(BuildContext context) {
     final menuItems = Get.put(HoledoDatabase()).menuItems;
+
+    final menu = Provider.of<AppProvider>(context)
+        .data()
+        .settings
+        ?.fetch('title', 'Top Menu');
+
     final isSmallerThanDesltop =
         ResponsiveWrapper.of(context).isSmallerThan(DESKTOP);
 

@@ -1,4 +1,6 @@
-class Connectee {
+import 'package:holedo/models/models.dart';
+
+class Connectee extends Model {
   int? id;
   int? connectorId;
   int? connecteeId;

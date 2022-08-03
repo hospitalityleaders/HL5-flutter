@@ -1,4 +1,6 @@
-class PageContent {
+import 'package:holedo/models/models.dart';
+
+class PageContent extends Model {
   int? id;
   int? pageStatusTypeId;
   String? title;

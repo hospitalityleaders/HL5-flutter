@@ -1,4 +1,6 @@
-class JobImage {
+import 'package:holedo/models/models.dart';
+
+class JobImage extends Model {
   int? id;
   int? jobId;
   String? url;

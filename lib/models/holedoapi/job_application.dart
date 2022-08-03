@@ -1,4 +1,6 @@
-class JobApplication {
+import 'package:holedo/models/models.dart';
+
+class JobApplication extends Model {
   int? id;
   int? userId;
   int? jobId;

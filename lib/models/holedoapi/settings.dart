@@ -1,77 +1,64 @@
+import 'package:holedo/models/models.dart';
+
+import 'article_category.dart';
+import 'block.dart';
 import 'general_settings.dart';
 import 'header_links.dart';
+import 'menu.dart';
+import 'types.dart';
 
-import 'membership_grade.dart';
-
-class Settings {
+class Settings extends Model {
+  Types? types;
+  List<ArticleCategory>? articleCategories;
+  List<Menu>? menus;
   HeaderLinks? headerLinks;
+  Block? block;
   GeneralSettings? generalSettings;
-  List<MembershipGrade>? membershipGrades;
-  Map<String, dynamic>? achievementTypes;
-  Map<String, dynamic>? countries;
-  Map<String, dynamic>? languagesTypes;
-  Map<String, dynamic>? languagesProficiencies;
-  Map<String, dynamic>? userTitleTypes;
-  Map<String, dynamic>? expertiseList;
   Map<String, dynamic>? ads;
 
   Settings({
+    this.types,
+    this.articleCategories,
+    this.menus,
     this.headerLinks,
+    this.block,
     this.generalSettings,
-    this.membershipGrades,
-    this.achievementTypes,
-    this.countries,
-    this.languagesTypes,
-    this.languagesProficiencies,
-    this.userTitleTypes,
-    this.expertiseList,
     this.ads,
   });
 
   factory Settings.fromJson(Map<String, dynamic> json) => Settings(
+        types: json['Types'] == null
+            ? null
+            : Types.fromJson(json['Types'] as Map<String, dynamic>),
+        articleCategories: json['ArticleCategories'] == null
+            ? null
+            : (json['ArticleCategories'] as List<dynamic>?)
+                ?.map(
+                    (e) => ArticleCategory.fromJson(e as Map<String, dynamic>))
+                .toList(),
+        menus: (json['Menus'] as List<dynamic>?)
+            ?.map((e) => Menu.fromJson(e as Map<String, dynamic>))
+            .toList(),
         headerLinks: json['HeaderLinks'] == null
             ? null
             : HeaderLinks.fromJson(json['HeaderLinks'] as Map<String, dynamic>),
+        block: json['Block'] == null
+            ? null
+            : Block.fromJson(json['Block'] as Map<String, dynamic>),
         generalSettings: json['GeneralSettings'] == null
             ? null
             : GeneralSettings.fromJson(
                 json['GeneralSettings'] as Map<String, dynamic>),
-        membershipGrades: (json['membership_grades'] as List<dynamic>?)
-            ?.map((e) => MembershipGrade.fromJson(e as Map<String, dynamic>))
-            .toList(),
-        achievementTypes: json['achievement_types'] == null
-            ? null
-            : json['achievement_types'] as Map<String, dynamic>,
-        countries: json['countries'] == null
-            ? null
-            : json['countries'] as Map<String, dynamic>,
-        languagesTypes: json['languages_types'] == null
-            ? null
-            : json['languages_types'] as Map<String, dynamic>,
-        languagesProficiencies: json['languages_proficiencies'] == null
-            ? null
-            : json['languages_proficiencies'] as Map<String, dynamic>,
-        userTitleTypes: json['user_title_types'] == null
-            ? null
-            : json['user_title_types'] as Map<String, dynamic>,
-        expertiseList: json['expertise_list'] == null
-            ? null
-            : json['expertise_list'] as Map<String, dynamic>,
         ads: json['ads'] == null ? null : json['ads'] as Map<String, dynamic>,
       );
 
-  get length => null;
-
   Map<String, dynamic> toJson() => {
+        'Types': types?.toJson(),
+        'ArticleCategories': articleCategories?.map((e) => e.toJson()).toList(),
+        'Menus': menus?.map((e) => e.toJson()).toList(),
         'HeaderLinks': headerLinks?.toJson(),
+        'Block': block?.toJson(),
         'GeneralSettings': generalSettings?.toJson(),
-        'membership_grades': membershipGrades?.map((e) => e.toJson()).toList(),
-        'achievement_types': achievementTypes,
-        'countries': countries,
-        'languages_types': languagesTypes,
-        'languages_proficiencies': languagesProficiencies,
-        'user_title_types': userTitleTypes,
-        'expertise_list': expertiseList,
         'ads': ads,
       };
 }

@@ -1,4 +1,6 @@
-class Country {
+import 'package:holedo/models/models.dart';
+
+class Country extends Model {
   int? id;
   String? title;
   String? officialTitle;

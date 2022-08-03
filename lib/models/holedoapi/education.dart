@@ -1,7 +1,9 @@
+import 'package:holedo/models/models.dart';
+
 import 'country.dart';
 import 'qualification.dart';
 
-class Education {
+class Education extends Model {
   int? id;
   int? userId;
   int? countryId;

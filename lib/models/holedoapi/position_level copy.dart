@@ -1,4 +1,6 @@
-class PositionLevel {
+import 'package:holedo/models/models.dart';
+
+class PositionLevel extends Model {
   int? id;
   String? title;
   String? description;

@@ -1,4 +1,6 @@
-class Role {
+import 'package:holedo/models/models.dart';
+
+class Role extends Model {
   int? id;
   String? title;
 

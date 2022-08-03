@@ -34,15 +34,15 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
       return Padding(
         padding: EdgeInsets.all(16.0),
         child: Container(
-          width: SS.sW(context) * .50 as double,
+          width: SS.sW(context) * .50,
           color: ColorPicker.kWhite,
           child: SingleChildScrollView(
             child: Column(
               children: [
                 ListTile(
                   leading: Container(
-                    height: SS.sH(context) * .08 as double,
-                    width: SS.sW(context) * .03 as double,
+                    height: SS.sH(context) * .08,
+                    width: SS.sW(context) * .03,
                     color: ColorPicker.kBlueLight1,
                   ),
                   title: Text(''),
@@ -63,7 +63,7 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                         child: Column(
                           children: [
                             Divider(
-                              height: SS.sH(context) * 0.01 as double,
+                              height: SS.sH(context) * 0.01,
                               color: ColorPicker.kGreyLight3,
                             ),
                             Padding(
@@ -72,19 +72,19 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   TextFieldAndFieldName.buildFieldName(
-                                      'Title / position', '*') as Widget,
+                                      'Title / position', '*'),
                                   TextFieldAndFieldName.buildTextField(
-                                      'General manager') as Widget,
+                                      'General manager'),
                                   TextFieldAndFieldName.buildFieldName(
-                                      'Company name', '*') as Widget,
+                                      'Company name', '*'),
                                   TextFieldAndFieldName.buildTextField(
-                                      'Fairmont Zimbali Resort') as Widget,
+                                      'Fairmont Zimbali Resort'),
                                   TextFieldAndFieldName.buildFieldName(
-                                      'Company website') as Widget,
+                                      'Company website'),
                                   TextFieldAndFieldName.buildTextField(
-                                      'www.fairmontzimbali.com') as Widget,
+                                      'www.fairmontzimbali.com'),
                                   TextFieldAndFieldName.buildFieldName(
-                                      'Job description') as Widget,
+                                      'Job description'),
                                   Padding(
                                     padding: EdgeInsets.all(8.0),
                                     child: TextField(
@@ -133,7 +133,7 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
             return Dialog(
               child: Container(
                 color: ColorPicker.kGreyLight3,
-                width: SS.sW(context) * .50 as double,
+                width: SS.sW(context) * .50,
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
@@ -187,14 +187,14 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
             return Dialog(
               child: Container(
                 color: ColorPicker.kGreyLight8,
-                width: SS.sW(context) * .50 as double,
+                width: SS.sW(context) * .50,
                 // height: 375,
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
                       PopUpHeadMenu.popUpHead('Expertise', context),
                       SizedBox(
-                        height: SS.sH(context) * .05 as double,
+                        height: SS.sH(context) * .05,
                       ),
                       Padding(
                         padding: EdgeInsets.all(16.0),
@@ -285,8 +285,7 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                                                         color: ColorPicker
                                                             .kBlueLight3)),
                                                 alignment: Alignment.center,
-                                                width: SS.sW(context) * .091
-                                                    as double,
+                                                width: SS.sW(context) * .091,
                                                 height: 36,
                                                 child: Text(
                                                   'Add to list',
@@ -387,8 +386,8 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
         context: context,
         builder: (BuildContext context) {
           return StatefulBuilder(builder: (BuildContext context, setState) {
-            List<Widget> textField = List.generate(langIndex,
-                (int i) => TextFieldAndFieldName.buildTextField() as Widget);
+            List<Widget> textField = List.generate(
+                langIndex, (int i) => TextFieldAndFieldName.buildTextField());
             List<Widget> menuItem = List.generate(
                 langIndex,
                 (int i) => DropDownButton(
@@ -398,7 +397,7 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
             return Dialog(
               child: Container(
                 color: ColorPicker.kGreyLight3,
-                width: SS.sW(context) * .50 as double,
+                width: SS.sW(context) * .50,
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -407,7 +406,7 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                       Padding(
                         padding: EdgeInsets.all(16.0),
                         child: Container(
-                          width: SS.sW(context) * .50 as double,
+                          width: SS.sW(context) * .50,
                           color: ColorPicker.kWhite,
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -423,7 +422,7 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       TextFieldAndFieldName.buildFieldName(
-                                          'Language', '*') as Widget,
+                                          'Language', '*'),
                                       SS.sB(10, 0),
                                       Column(
                                         children: textField,
@@ -451,7 +450,7 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       TextFieldAndFieldName.buildFieldName(
-                                          'Proficiency', '*') as Widget,
+                                          'Proficiency', '*'),
                                       SS.sB(10, 0),
                                       Column(
                                         children: menuItem,
@@ -694,7 +693,7 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                     onPressed: () {},
                     child: Padding(
                       padding: EdgeInsets.symmetric(
-                        vertical: SS.sH(context) * 0.010 as double,
+                        vertical: SS.sH(context) * 0.010,
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -705,7 +704,7 @@ class _ProfileOverviewSec3State extends State<ProfileOverviewSec3> {
                             size: 12,
                           ),
                           SizedBox(
-                            width: SS.sW(context) * .01 as double,
+                            width: SS.sW(context) * .01,
                           ),
                           AutoSizeText(
                             'Grow your network',

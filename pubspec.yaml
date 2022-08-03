@@ -49,6 +49,7 @@ dependencies:
   intercom_flutter: ^7.3.0
   flutter_webview_plugin: ^0.4.0
   webview_flutter: ^3.0.4
+  flat: ^0.4.1
 
 dev_dependencies:
   integration_test:

@@ -1,4 +1,6 @@
-class ReceivedReference {
+import 'package:holedo/models/models.dart';
+
+class ReceivedReference extends Model {
   ReceivedReference({
     this.id,
     this.userId,

@@ -1,6 +1,8 @@
+import 'package:holedo/models/models.dart';
+
 // import 'achievement_type.dart';
 
-// class Expertise {
+// class Expertise extends Model {
 //   Expertise({
 //     this.id,
 //     this.title,
@@ -38,7 +40,7 @@
 //       };
 // }
 
-class ExpertiseJoinData {
+class ExpertiseJoinData extends Model {
   ExpertiseJoinData({
     this.id,
     this.userId,
@@ -63,7 +65,7 @@ class ExpertiseJoinData {
       };
 }
 
-class Achievement {
+class Achievement extends Model {
   int? id;
   int? userId;
   int? achievementTypeId;
