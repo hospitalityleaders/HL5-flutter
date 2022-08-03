@@ -342,6 +342,8 @@ class NewsSliderCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
         onTap: () {
+          print("path builder is " + pathBuilder.toString());
+
           Routemaster.of(context).push(pathBuilder != null
               ? pathBuilder!(data.slug as String)
               : '/article/${data.articleCategories!.first.slug}/${data.slug}');

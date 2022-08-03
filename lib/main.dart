@@ -253,13 +253,13 @@ class BookStoreApp extends StatelessWidget {
         title: 'Holedo',
         builder: (context, child) => ResponsiveWrapper.builder(
           child,
-          // breakpoints: [
-          //   // ResponsiveBreakpoint.autoScaleDown(320, name: MOBILE),
-          //   // ResponsiveBreakpoint.autoScale(450, name: MOBILE),
-          //
-          //   ResponsiveBreakpoint.autoScaleDown(450, name: MOBILE),
-          //   ResponsiveBreakpoint.autoScaleDown(1200, name: DESKTOP),
-          // ],
+          minWidth: 420,
+          breakpoints: [
+            ResponsiveBreakpoint.resize(420, name: PHONE),
+            ResponsiveBreakpoint.autoScaleDown(600, name: MOBILE),
+            ResponsiveBreakpoint.autoScaleDown(800, name: TABLET),
+            ResponsiveBreakpoint.autoScaleDown(1200, name: DESKTOP),
+          ],
         ),
         debugShowCheckedModeBanner: false,
         theme: lightTheme,

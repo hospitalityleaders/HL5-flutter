@@ -6,7 +6,7 @@ import '../colorPicker/color_picker.dart';
 class FontTextStyle {
   static TextStyle kWhite16W600PR = TextStyle(
     color: Colors.white,
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: FontWeight.w600,
     fontFamily: 'ProximaNova-Regular',
   );
@@ -45,7 +45,7 @@ class FontTextStyle {
 
   static TextStyle kBlueLight14W600PR = TextStyle(
     color: ColorPicker.kBlueLight,
-    fontSize: 14,
+    fontSize: 10,
     fontWeight: FontWeight.w600,
     fontFamily: 'ProximaNova-Regular',
   );
@@ -107,7 +107,7 @@ class FontTextStyle {
 
   static TextStyle kWhite18W600PR = TextStyle(
     color: Colors.white,
-    fontSize: 18,
+    fontSize: 14,
     fontWeight: FontWeight.w600,
     fontFamily: 'ProximaNova-Regular',
   );
@@ -115,6 +115,12 @@ class FontTextStyle {
   static TextStyle kWhite20W600PR = TextStyle(
     color: Colors.white,
     fontSize: 20,
+    fontWeight: FontWeight.w600,
+    fontFamily: 'ProximaNova-Regular',
+  );
+  static TextStyle kWhite24W600PR = TextStyle(
+    color: Colors.white,
+    fontSize: 23,
     fontWeight: FontWeight.w600,
     fontFamily: 'ProximaNova-Regular',
   );
@@ -133,7 +139,7 @@ class FontTextStyle {
 
   static TextStyle kBlueDark20W600PR = TextStyle(
     color: ColorPicker.kBlueDark,
-    fontSize: 20,
+    fontSize: 14,
     fontWeight: FontWeight.w600,
     fontFamily: 'ProximaNova-Regular',
   );
@@ -154,14 +160,14 @@ class FontTextStyle {
 
   static TextStyle kBlueDark28W600PR = TextStyle(
     color: ColorPicker.kBlueDark,
-    fontSize: 28,
+    fontSize: 18,
     fontWeight: FontWeight.w600,
     fontFamily: 'ProximaNova-Regular',
   );
 
   static TextStyle kWhite33W600PR = TextStyle(
-    color: Colors.white,
-    fontSize: 33,
+    color: Color(0xFFFFFFFF),
+    fontSize: 25,
     fontWeight: FontWeight.w600,
     fontFamily: 'ProximaNova-Regular',
   );
@@ -182,7 +188,7 @@ class FontTextStyle {
 
   static TextStyle kGreyDark20W600PR = TextStyle(
     color: ColorPicker.kGreyDark,
-    fontSize: 20,
+    fontSize: 14,
     fontWeight: FontWeight.w600,
     fontFamily: 'ProximaNova-Regular',
   );
@@ -196,7 +202,7 @@ class FontTextStyle {
 
   static TextStyle kBlueLight20W600PR = TextStyle(
     color: ColorPicker.kBlueLight,
-    fontSize: 20,
+    fontSize: 14,
     fontWeight: FontWeight.w600,
     fontFamily: 'ProximaNova-Regular',
   );
@@ -224,21 +230,21 @@ class FontTextStyle {
 
   static TextStyle kPrimaryLight32W600PR = TextStyle(
     color: ColorPicker.kPrimaryLight,
-    fontSize: 32,
+    fontSize: 28,
     fontWeight: FontWeight.w600,
     fontFamily: 'ProximaNova-Regular',
   );
 
   static TextStyle kPrimaryLight40W600PR = TextStyle(
     color: ColorPicker.kPrimaryLight,
-    fontSize: 40,
+    fontSize: 35,
     fontWeight: FontWeight.w600,
     fontFamily: 'ProximaNova-Regular',
   );
 
   static TextStyle kPrimaryLight16W600PR = TextStyle(
     color: ColorPicker.kPrimaryLight,
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: FontWeight.w600,
     fontFamily: 'ProximaNova-Regular',
   );
@@ -273,7 +279,7 @@ class FontTextStyle {
 
   static TextStyle kRed18W600PR = TextStyle(
     color: ColorPicker.kRed,
-    fontSize: 18,
+    fontSize: 14,
     fontWeight: FontWeight.w600,
     fontFamily: 'ProximaNova-Regular',
   );
@@ -356,7 +362,7 @@ class FontTextStyle {
 
   static TextStyle kBlueDark32W600PR = TextStyle(
     color: ColorPicker.kBlueDark,
-    fontSize: 32,
+    fontSize: 28,
     fontWeight: FontWeight.w600,
     fontFamily: 'ProximaNova-Regular',
   );
@@ -464,7 +470,7 @@ class FontTextStyle {
   );
   static TextStyle kGreyDark18W600PR = TextStyle(
     color: ColorPicker.kGreyDark,
-    fontSize: 18,
+    fontSize: 14,
     fontWeight: FontWeight.w600,
     fontFamily: 'ProximaNova-Regular',
   );
@@ -576,6 +582,12 @@ class FontTextStyle {
     fontSize: 36,
     color: ColorPicker.kGreyLight5,
     fontWeight: FontWeight.w400,
+    fontFamily: 'SourceSansPro',
+  );
+  static TextStyle kGreyLight14W400SSP = TextStyle(
+    fontSize: 12,
+    color: ColorPicker.kGreyLight6,
+    fontWeight: FontWeight.w600,
     fontFamily: 'SourceSansPro',
   );
 

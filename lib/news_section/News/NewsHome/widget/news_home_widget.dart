@@ -1,15 +1,28 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_notifier.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:holedo/news_section/News/NewsHome/widget/common_news_portal.dart';
+import 'package:holedo/news_section/News/news_components/experience_completion_widget.dart';
+import 'package:holedo/news_section/News/news_components/public_content_widget.dart';
 import 'package:holedo/news_section/colorPicker/color_picker.dart';
 import 'package:holedo/news_section/fontStyle/font_style.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 import '../../../../common/common_widget.dart';
 import '../../../../data/data.dart';
 
 class HomeWidget {
+  // CommonNewsPortalWidget headlineContent() {
+  //   return CommonNewsPortalWidget(
+  //     Heading: 'Headline',
+  //     centerWidget: ResponsiveRowColumnItem(child: PublicContentWidget()),
+  //     tralingWidget: ExperienceCompletionWidget(),
+  //   );
+  // }
+
   Container headlineBlock() {
     return Container(
         height: 744,

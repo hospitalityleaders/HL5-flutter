@@ -20,6 +20,7 @@ class NewsHomeLoggedOut extends StatefulWidget {
 class _NewsHomeLoggedOutState extends State<NewsHomeLoggedOut> {
   @override
   Widget build(BuildContext context) {
+    print('NewsHomeLoggedOut');
     print('${Get.width * 0.04}');
     return Scaffold(
       backgroundColor:

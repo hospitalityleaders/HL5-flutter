@@ -424,7 +424,7 @@ class NewsController extends GetxController {
   var article = Article().obs;
   List<Article> articleList = [];
   var page = 1;
-  var limit = 10;
+  var limit = 15;
   final ApiServices _api = ApiServices();
 
   //@override

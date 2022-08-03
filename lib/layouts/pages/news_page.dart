@@ -11,6 +11,7 @@ class NewsPage extends StatelessWidget {
   const NewsPage({Key? key, this.id, this.slug}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    print('class name News page');  
     return PageScaffold(
       title: 'News Article',
       body: FutureBuilder(
