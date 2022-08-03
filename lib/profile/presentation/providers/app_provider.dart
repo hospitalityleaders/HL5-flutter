@@ -9,13 +9,16 @@ class AppProvider extends ChangeNotifier {
   String? _username;
   String? _token;
   User? _profile;
+  DataModel _model;
   final List<User> _profiles = [];
 
   AppProvider({
     String? username,
     User? profile,
+    required DataModel model,
   })  : _username = username,
-        _profile = profile;
+        _profile = profile,
+        _model = model;
 
   //Getters
   NewsController get newscontroller => Get.put(NewsController());
@@ -70,28 +73,15 @@ class AppProvider extends ChangeNotifier {
     return dataModel;
   }
 
-  fetch(dynamic o, String t, String s) {
-    var model = o.runtimeType != 'String' ? data() : o;
+  DataModel get model => _model;
+  set model(DataModel data) {
+    _model = data;
 
-    //print('settings: $t $s ${this.toString()}');
-    final flat = flatten(model?.toJson(), maxDepth: 2);
-    if (flat[o] != null) {
-      //return flat[s];
-      //debugPrint('flat $o ${flat[o].toString()}');
-      if (t != null && s != null) {
-        final result =
-            Menu.fromJson(flat[o].firstWhere((e) => e[t] == s)).children;
-
-        //debugPrint('result ${result.toString()}');
-        return result;
-      }
-    }
-    //debugPrint('flat ${flat.toString()}');
-    //return model;
+    notifyListeners();
   }
 
-  DataModel data() {
-    var model = Get.put(HoledoDatabase()).getModel();
-    return model;
-  }
+  DataModel Function() get myModel => () {
+        var model = Get.put(HoledoDatabase()).getModel();
+        return model;
+      };
 }

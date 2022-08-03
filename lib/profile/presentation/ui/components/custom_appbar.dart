@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/svg.dart';
+import 'package:holedo/models/holedoapi/article.dart';
 import 'package:holedo/models/models.dart' hide Provider;
 import 'package:holedo/profile/presentation/providers/app_provider.dart';
 import 'package:holedo/profile/presentation/ui/components/appbar_textfield.dart';
@@ -35,7 +36,9 @@ class _CustomAppbarState extends State<CustomAppbar> {
     //final menuItems = Get.put(HoledoDatabase()).menuItems;
 
     final topMenu = Provider.of<AppProvider>(context)
-        .fetch('Settings.Menus', 'title', 'Top Menu');
+        .model
+        .settings
+        ?.fetch('Menus', 'title', 'Top Menu');
 
     final isSmallerThanDesltop =
         ResponsiveWrapper.of(context).isSmallerThan(DESKTOP);

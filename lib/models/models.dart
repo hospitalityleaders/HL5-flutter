@@ -14,10 +14,39 @@ export 'package:get/get.dart';
 export 'package:provider/provider.dart';
 export 'package:holedo/profile/presentation/providers/profile_provider.dart';
 export 'holedoapi/holedoapi.dart';
+import 'package:holedo/models/holedoapi/menu.dart';
+import 'package:holedo/models/holedoapi/settings.dart';
+import 'package:holedo/models/models.dart';
+import 'package:flat/flat.dart';
 
 class Model {
-  fetch(String t, String s) {
-    print('settings: $t $s ${this.toString()}');
+  fetch(dynamic o, [String? t, String? s]) {
+    var model = o.runtimeType != 'String' ? this : o;
+
+    final splitted = o.split('.');
+    final flat = flatten(model?.toJson(), maxDepth: splitted.length);
+    if (o != 'Menus') {
+      print('settings: $t $s ${flat[o].toString()}');
+      debugPrint('flat $o ${splitted.length}');
+    }
+    if (flat[o] != null) {
+      //return flat[s];
+
+      if (t != null && s != null) {
+        var result;
+        switch (splitted[splitted.length - 1]) {
+          case 'Menus':
+            result =
+                Menu.fromJson(flat[o].firstWhere((e) => e[t] == s)).children;
+            break;
+        }
+
+        debugPrint('result ${result.toString()}');
+        return result;
+      }
+    }
+    //debugPrint('flat ${flat.toString()}');
+    //return model;
   }
 }
 

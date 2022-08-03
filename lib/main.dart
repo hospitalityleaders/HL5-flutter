@@ -264,6 +264,7 @@ class HoledoApp extends StatelessWidget {
           create: (context) => AppProvider(
             username: Get.put(HoledoDatabase()).getModel().user?.fullName,
             profile: Get.put(HoledoDatabase()).getModel().user,
+            model: Get.put(HoledoDatabase()).getModel(),
           ),
         ),
         ChangeNotifierProvider(

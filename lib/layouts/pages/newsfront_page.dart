@@ -139,10 +139,8 @@ class NewsfrontPage extends StatelessWidget {
                         bottom:
                             BorderSide(color: Color(0xFFBDC4C7), width: 2))),
                 child: TabBar(
-                  padding: !isMobile
-                      ? EdgeInsets.symmetric(
-                          horizontal: Get.width * (isDesktop ? 0.28 : .2))
-                      : EdgeInsets.all(2),
+                  padding: EdgeInsets.all(
+                      0.02), // fromWindowPadding(Get.window.padding, .2),
                   unselectedLabelColor: ColorPicker.kGreyLight7,
                   labelColor: ColorPicker.kBlueLight1,
                   indicatorWeight: 6,
