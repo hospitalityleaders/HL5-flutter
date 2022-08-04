@@ -2,7 +2,7 @@ import 'dart:convert';
 
 //import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart' as dio;
-import 'package:dio_http_cache/dio_http_cache.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' as Store;
 import 'package:holedo/controller/auth_controller.dart';
@@ -252,7 +252,7 @@ class ApiServices {
       return Response(request: res, statusCode: 200);
     }
     return Response(request: null, statusCode: 404);
-  }*/
+  }
   Future<Holedoapi> login({
     required String email,
     required String password,
@@ -439,12 +439,5 @@ class ApiServices {
     } else {
       throw Exception();
     }
-  }
-}
-
-class LoginApiResponse {
-  final String? token;
-  final String? error;
-
-  LoginApiResponse({required this.token, required this.error});
+  }*/
 }

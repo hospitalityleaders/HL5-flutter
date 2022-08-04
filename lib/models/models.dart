@@ -555,17 +555,6 @@ class UsersController extends GetxController {
     }
   }
 
-  Future<void> fetchUser({String? slug, String? id}) async {
-    try {
-      isLoading(true);
-      final response = await _api.getUserData(id: id, slug: slug);
-      debugPrint('log: $response');
-      user = response;
-    } finally {
-      isLoading(false);
-    }
-  }
-
   Future<DataModel> saveProfile(User user) async {
     var dataModel = getModel();
 
@@ -731,7 +720,13 @@ class JobsController extends GetxController {
   Future<Job> getJob({String? slug, String? id}) async {
     try {
       isLoading(true);
-      final response = await _api.getJob(id: id, slug: slug);
+
+      final params = {'id': id, 'slug': slug};
+      params.removeWhere((k, v) => v == null);
+
+      debugPrint('context: ${params.toString()}');
+      final response = await _api.GET(target: '/jobs/get', data: params);
+
       job.value = response.data?.job as Job;
       return job.value;
     } finally {

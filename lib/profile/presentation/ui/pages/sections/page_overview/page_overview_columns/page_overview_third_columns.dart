@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+
 import 'package:holedo/models/models.dart';
 import 'package:holedo/profile/presentation/ui/pages/components/connection_component.dart';
 import 'package:holedo/profile/presentation/ui/pages/components/profile_completion_component.dart';
@@ -52,15 +52,15 @@ class ProfileAdsComponent extends StatelessWidget {
     debugPrint('set2: ${settings.ads.toString()}');
     final profileAd = settings.ads!['profile_right_side'];
 
-    final match = script.firstMatch(profileAd as String);
-    final future = FlutterWebviewPlugin().evalJavascript(match![1]!);
-    future.then((String? result) {
-      debugPrint('eval $result');
-      // setState(() {
-      //_history.add('eval: $result');
-      //});
-    });
-    debugPrint('set22: ${future.toString()} ${match[1]!.toString()}');
+    // final match = script.firstMatch(profileAd as String);
+    //final future = FlutterWebviewPlugin().evalJavascript(match![1]!);
+    // future.then((String? result) {
+    //  debugPrint('eval $result');
+    // setState(() {
+    //_history.add('eval: $result');
+    //});
+    //  });
+    //debugPrint('set22: ${future.toString()} ${match[1]!.toString()}');
     return Container(
       width: 365,
       height: 280,

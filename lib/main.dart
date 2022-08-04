@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:holedo/layouts/page_scaffold.dart';
+import 'package:holedo/layouts/pages/chat_page.dart';
 import 'package:holedo/layouts/pages/content_page.dart';
 import 'package:holedo/includes/url_strategy.dart';
 import 'package:holedo/models/models.dart';
@@ -10,6 +12,11 @@ import 'package:intercom_flutter/intercom_flutter.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:routemaster/routemaster.dart';
 
+import 'package:matrix/matrix.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:provider/provider.dart';
+
+late Client client;
 void main() async {
   usePathUrlStrategy();
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,6 +28,19 @@ void main() async {
     iosApiKey: 'ios_sdk-3a9bbf8f38e388199f2031358d7f8c350c2a4e39',
     androidApiKey: 'android_sdk-3c65cc36ee07675515866bac0090c30e84d03da6',
   );
+  client = Client(
+    "HoledoChat",
+    /*databaseBuilder: (Client client) async {
+      await Hive.initFlutter();
+      final db = FamedlySdkHiveDatabase(client.clientName);
+      await db.open();
+      return db;
+    },*/
+  );
+
+  await client.init(newHomeserver: Uri(scheme: 'https', host: 'holedo.com'));
+  await client.checkHomeserver(Uri(scheme: 'https', host: 'holedo.com'));
+
   runApp(const HoledoApp());
 }
 
@@ -48,6 +68,7 @@ bool _isValidCompany(String? slug) {
 // }
 
 final holedoDatabase = Get.put(HoledoDatabase());
+
 DataModel dataModel = holedoDatabase.getModel();
 
 // ignore: prefer_expression_function_bodies
@@ -82,6 +103,9 @@ RouteMap _buildRouteMap(BuildContext context) {
               child: ContentPage(slug: route.pathParameters['slug']!),
             )
           : const Redirect('/'),
+      '/chat': (route) => NoAnimationPage(
+            child: ChatPage(client: client),
+          ),
       '/login': (route) => NoAnimationPage(
             child: LoginPage(
               redirectTo: route.queryParameters['redirectTo'],
