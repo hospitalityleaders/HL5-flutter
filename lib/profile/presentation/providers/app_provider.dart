@@ -4,30 +4,36 @@ import 'package:holedo/models/holedoapi/settings.dart';
 import 'package:holedo/models/models.dart';
 import 'package:flat/flat.dart';
 import 'package:flutter/material.dart';
+import 'package:matrix/src/client.dart';
 
 class AppProvider extends ChangeNotifier {
   String? _username;
   String? _token;
   User? _profile;
   DataModel _model;
+  Client _matrix;
   final List<User> _profiles = [];
 
   AppProvider({
     String? username,
     User? profile,
     required DataModel model,
+    required Client matrix,
   })  : _username = username,
         _profile = profile,
-        _model = model;
+        _model = model,
+        _matrix = matrix;
 
   //Getters
   NewsController get newscontroller => Get.put(NewsController());
   JobsController get jobscontroller => Get.put(JobsController());
+
+  Client get matrix => _matrix;
+
+  Iterable<User> get profiles => List.unmodifiable(_profiles);
   bool get isLoggedIn => _username != null;
   String? get token => _token;
   String? get username => _username;
-  Iterable<User> get profiles => List.unmodifiable(_profiles);
-
   User? get profile => _profile;
   set profile(User? data) {
     _profile = data;

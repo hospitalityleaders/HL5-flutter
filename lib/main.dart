@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:holedo/layouts/page_scaffold.dart';
 import 'package:holedo/layouts/pages/chat_page.dart';
-import 'package:holedo/layouts/pages/content_page.dart';
+//import 'package:holedo/layouts/pages/content_page.dart';
 import 'package:holedo/includes/url_strategy.dart';
 import 'package:holedo/models/models.dart';
 import 'package:holedo/profile/presentation/providers/app_provider.dart';
@@ -16,32 +16,30 @@ import 'package:matrix/matrix.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
-late Client client;
 void main() async {
   usePathUrlStrategy();
   WidgetsFlutterBinding.ensureInitialized();
   await Get.put(HoledoDatabase()).init();
 
   // await testingMain();
-  await Intercom.instance.initialize(
-    'c6v4qg56',
-    iosApiKey: 'ios_sdk-3a9bbf8f38e388199f2031358d7f8c350c2a4e39',
-    androidApiKey: 'android_sdk-3c65cc36ee07675515866bac0090c30e84d03da6',
-  );
-  client = Client(
+  //await Intercom.instance.initialize(
+  //  'c6v4qg56',
+  //  iosApiKey: 'ios_sdk-3a9bbf8f38e388199f2031358d7f8c350c2a4e39',
+  //  androidApiKey: 'android_sdk-3c65cc36ee07675515866bac0090c30e84d03da6',
+  //);
+  final Client client = Client(
     "HoledoChat",
-    /*databaseBuilder: (Client client) async {
-      await Hive.initFlutter();
-      final db = FamedlySdkHiveDatabase(client.clientName);
+    databaseBuilder: (Client client) async {
+      await Hive.initFlutter('matrix/chat');
+      final db = HiveCollectionsDatabase(client.clientName, 'matrix/chat');
       await db.open();
       return db;
-    },*/
+    },
   );
 
   await client.init(newHomeserver: Uri(scheme: 'https', host: 'holedo.com'));
-  await client.checkHomeserver(Uri(scheme: 'https', host: 'holedo.com'));
 
-  runApp(const HoledoApp());
+  runApp(HoledoApp(client: client));
 }
 
 bool _isValidCategory(String? category) {
@@ -92,20 +90,51 @@ RouteMap _buildRouteMap(BuildContext context) {
       '/': (route) => const NoAnimationPage(child: HomePage()),
       '/home': (route) => const NoAnimationPage(child: HomePage()),
       '/help': (route) => const NoAnimationPage(child: HomePage()),
-      '/pages/:slug': (route) => _isValidPage(route.pathParameters['slug'])
+
+      '/chat2': (route) {
+        final appState = Provider.of<AppProvider>(context, listen: false);
+        if (appState.matrix.isLogged()) {
+          return Redirect('/profile/${appState.profile?.slug}');
+        }
+        return Redirect('/login', queryParameters: {'redirectTo': route.path});
+      },
+
+      '/chat': (route) => StackPage(
+            child: const ChatPage(),
+            defaultPath: 'login',
+            pageBuilder: (child) => NoAnimationPage(child: child),
+          ),
+      '/chat/rooms': (route) => const NoAnimationPage(
+            child: const RoomsChatPage(),
+          ),
+      '/chat/login': (route) => const NoAnimationPage(
+            child: const ChatLoginPage(),
+          ),
+      '/chat/room/:slug': (route) {
+        final appState = Provider.of<AppProvider>(context, listen: false);
+        if (appState.matrix.isLogged()) {
+          final room = appState.matrix
+              .getRoomById(route.pathParameters['slug'] as String) as Room;
+
+          return NoAnimationPage(
+            child: (room != null) ? RoomPage(room: room) : Text('Error'),
+          );
+        }
+        return Redirect('chat/login',
+            queryParameters: {'redirectTo': route.path});
+      }, //=> const NoAnimationPage(
+      //   child: RoomPage(room: route.pathParameters!['slug']),
+      //test. ),*/
+      '/chat2/users/:slug': (route) => const NoAnimationPage(
+            child: JobsfrontListPage(mode: 'all'),
+          ),
+      /* '/pages/:slug': (route) => _isValidPage(route.pathParameters['slug'])
           ? NoAnimationPage(
               child: ContentPage(slug: route.pathParameters['slug']!),
             )
           : const NotFound(),
+*/
 
-      '/:slug': (route) => _isValidPage(route.pathParameters['slug'])
-          ? NoAnimationPage(
-              child: ContentPage(slug: route.pathParameters['slug']!),
-            )
-          : const Redirect('/'),
-      '/chat': (route) => NoAnimationPage(
-            child: ChatPage(client: client),
-          ),
       '/login': (route) => NoAnimationPage(
             child: LoginPage(
               redirectTo: route.queryParameters['redirectTo'],
@@ -249,6 +278,12 @@ RouteMap _buildRouteMap(BuildContext context) {
 
         return Redirect('/login', queryParameters: {'redirectTo': route.path});
       },
+      '/:slug': (route) => _isValidPage(route.pathParameters['slug'])
+          ? NoAnimationPage(
+              child: Text(
+                  'testing page...'), //ContentPage(slug: route.pathParameters['slug']!),
+            )
+          : const Redirect('/'),
     },
   );
 }
@@ -272,12 +307,14 @@ class HoledoApp extends StatelessWidget {
   final String? username;
   final bool siteBlockedWithoutLogin;
   final RouteInformationProvider? routeInformationProvider;
+  final Client client;
 
   const HoledoApp({
     Key? key,
     this.username,
     this.siteBlockedWithoutLogin = false,
     this.routeInformationProvider,
+    required this.client,
   }) : super(key: key);
 
   @override
@@ -289,6 +326,7 @@ class HoledoApp extends StatelessWidget {
             username: Get.put(HoledoDatabase()).getModel().user?.fullName,
             profile: Get.put(HoledoDatabase()).getModel().user,
             model: Get.put(HoledoDatabase()).getModel(),
+            matrix: client,
           ),
         ),
         ChangeNotifierProvider(

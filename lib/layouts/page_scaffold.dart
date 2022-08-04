@@ -135,7 +135,7 @@ class _PageScaffoldState extends State<PageScaffold> {
               return Scaffold(
                 backgroundColor: Cr.backgroundColor,
                 key: _scaffoldKey,
-                floatingActionButton: FloatingActionButton(
+                /*floatingActionButton: FloatingActionButton(
                   child: const Text('Chat'),
                   onPressed: () async {
                     if (appState.isLoggedIn) {
@@ -153,7 +153,7 @@ class _PageScaffoldState extends State<PageScaffold> {
                     }
                     await Intercom.instance.displayMessenger();
                   },
-                ),
+                ),*/
                 appBar: (isTableOrMobile(context))
                     ? null
                     : AppBar(

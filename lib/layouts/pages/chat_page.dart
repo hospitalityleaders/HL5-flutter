@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/layouts/page_scaffold.dart';
 import 'package:holedo/models/models.dart';
 import 'package:holedo/profile/presentation/providers/app_provider.dart';
@@ -11,21 +12,66 @@ import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
 class ChatPage extends StatelessWidget {
-  final Client client;
-  const ChatPage({required this.client, Key? key}) : super(key: key);
+  const ChatPage({Key? key}) : super(key: key);
+  final double breakpoint = 800;
+  final int paneProportion = 78;
+  @override
+  Widget build(BuildContext context) {
+    final stackState = StackPage.of(context).stack;
+    final appState = Provider.of<AppProvider>(context, listen: false);
+
+    appState.matrix.onLoginStateChanged.stream.listen((loginState) {
+      print("LoginState: ${loginState.toString()}");
+    });
+
+    //appState.matrix.onEvent.stream.listen((EventUpdate eventUpdate) {
+    //  print("New event update!");
+    // });
+
+    //appState.matrix.onRoomUpdate.stream.listen((RoomUpdate eventUpdate) {
+    // print("New room update!");
+    // });
+    return PageScaffold(
+      title: 'Holedo Chat',
+      body: Flex(
+        direction: Axis.horizontal,
+        children: [
+          appState.matrix.isLogged()
+              ? Flexible(
+                  flex: 100 - paneProportion,
+                  child: const RoomListPage(),
+                )
+              : Container(),
+          Flexible(
+            flex: paneProportion,
+            child: PageStackNavigator(stack: StackPage.of(context).stack),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class LoginChatPage extends StatelessWidget {
+  const LoginChatPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return PageScaffold(
-      title: 'Log in',
-      body: MaterialApp(
-        title: 'Holedo Chat',
-        builder: (context, child) => Provider<Client>(
-          create: (context) => client,
-          child: child,
-        ),
-        home: client.isLogged() ? const RoomListPage() : const ChatLoginPage(),
-      ),
+    return Scaffold(
+      body: Text('LoginChatPage'),
+    );
+  }
+}
+
+class RoomsChatPage extends StatelessWidget {
+  const RoomsChatPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final client = Provider.of<AppProvider>(context, listen: false).matrix;
+
+    return Scaffold(
+      body: Text('RoomsChatPage'),
     );
   }
 }
@@ -52,7 +98,7 @@ class _ChatLoginPageState extends State<ChatLoginPage> {
     });
 
     try {
-      final client = Provider.of<Client>(context, listen: false);
+      final client = Provider.of<AppProvider>(context, listen: false).matrix;
       await client
           .checkHomeserver(Uri.https(_homeserverTextField.text.trim(), ''));
       await client.login(
@@ -60,10 +106,11 @@ class _ChatLoginPageState extends State<ChatLoginPage> {
         password: _passwordTextField.text,
         identifier: AuthenticationUserIdentifier(user: _usernameTextField.text),
       );
-      Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (_) => const RoomListPage()),
-        (route) => false,
-      );
+      Routemaster.of(context).push('/chat/rooms/');
+      //Navigator.of(context).pushAndRemoveUntil(
+      //    MaterialPageRoute(builder: (_) => const RoomListPage()),
+      //  (route) => false,
+      //);
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -141,28 +188,35 @@ class RoomListPage extends StatefulWidget {
 
 class _RoomListPageState extends State<RoomListPage> {
   void _logout() async {
-    final client = Provider.of<Client>(context, listen: false);
+    final client = Provider.of<AppProvider>(context, listen: false).matrix;
     await client.logout();
-    Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(builder: (_) => const ChatLoginPage()),
-      (route) => false,
-    );
+    //Navigator.of(context).pushAndRemoveUntil(
+    //  MaterialPageRoute(builder: (_) => const ChatLoginPage()),
+    // (route) => false,
+    //);
+    Routemaster.of(context).push('/chat/login/');
   }
 
   void _join(Room room) async {
+    print('Room: ${room.id.toString()} ${room.toJson().toString()}');
+    if (room == null) {
+      return;
+    }
     if (room.membership != Membership.join) {
       await room.join();
     }
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (_) => RoomPage(room: room),
-      ),
-    );
+
+    Routemaster.of(context).push('/chat/room/${room.id}');
+    //Navigator.of(context).push(
+    //  MaterialPageRoute(
+    //    builder: (_) => RoomPage(room: room),
+    //   ),
+    //;
   }
 
   @override
   Widget build(BuildContext context) {
-    final client = Provider.of<Client>(context, listen: false);
+    final client = Provider.of<AppProvider>(context, listen: false).matrix;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Chats'),
