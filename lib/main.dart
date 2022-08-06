@@ -13,9 +13,10 @@ import 'includes/url_strategy.dart';
 import 'news_section/News/NewsCategory/news_category.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   usePathUrlStrategy();
   await Get.put(HoledoDatabase()).init();
-  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(BookStoreApp());
 }
 

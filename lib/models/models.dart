@@ -238,7 +238,10 @@ class HoledoDatabase extends GetxController {
       }
       pages = data.pages as List<PageContent>;
       companies = data.companies as List<Company>;
-      articleCategories = data.articleCategories as List<ArticleCategory>;
+      print("catagory articles ${data.articleCategories}");
+      if (data.articleCategories != null) {
+        articleCategories = data.articleCategories as List<ArticleCategory>;
+      }
 
       for (final category
           in articleCategories.where((category) => category.menuItem == true)) {
