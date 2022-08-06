@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/layouts/page_scaffold.dart';
 import 'package:holedo/models/models.dart';
 import 'package:holedo/profile/presentation/providers/app_provider.dart';
-import 'package:holedo/utils/validator.dart';
 import 'package:routemaster/routemaster.dart';
 
-import 'package:flutter/material.dart';
 import 'package:matrix/matrix.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
 class ChatPage extends StatelessWidget {
@@ -238,8 +234,8 @@ class _RoomListPageState extends State<RoomListPage> {
                   : NetworkImage(client.rooms[i].avatar!
                       .getThumbnail(
                         client,
-                        width: 56,
-                        height: 56,
+                        width: 32,
+                        height: 32,
                       )
                       .toString()),
             ),
@@ -251,7 +247,7 @@ class _RoomListPageState extends State<RoomListPage> {
                       borderRadius: BorderRadius.circular(99),
                       color: Colors.red,
                       child: Padding(
-                        padding: const EdgeInsets.all(2.0),
+                        padding: const EdgeInsets.all(1.0),
                         child:
                             Text(client.rooms[i].notificationCount.toString()),
                       ))

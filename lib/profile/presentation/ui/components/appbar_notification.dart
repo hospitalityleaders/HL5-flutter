@@ -1,17 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/src/foundation/diagnostics.dart';
 import 'package:holedo/models/models.dart';
+import 'package:holedo/profile/presentation/providers/app_provider.dart';
 
 import 'package:holedo/profile/presentation/ui/components/custom_elevated_button.dart';
 import 'package:holedo/profile/presentation/utill/color_resources.dart';
 import 'package:holedo/profile/presentation/utill/dimensions.dart';
 import 'package:holedo/profile/presentation/utill/styles.dart';
+import 'package:routemaster/routemaster.dart';
 
-enum _AppbarNotificationColor {
+enum AppbarNotificationColor {
   red,
   green,
   blue,
   orange,
   // dark,
+}
+
+class AppNotify extends Model {
+  String? title;
+  String? buttonText;
+  Function()? onButtonPressed;
+  AppbarNotificationColor appbarNotificationColor;
+
+  AppNotify(
+      {this.title,
+      this.buttonText,
+      this.onButtonPressed,
+      this.appbarNotificationColor = AppbarNotificationColor.red});
+
+  dynamic notify(BuildContext context) {
+    return _AppbarSingleNotification(
+      appbarNotificationColor: this.appbarNotificationColor,
+      buttonText: this.buttonText,
+      title: this.title as String,
+      onButtonPressed: this.onButtonPressed,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        'title': title,
+        'buttonText': buttonText,
+        'onButtonPressed': onButtonPressed,
+        'appbarNotificationColor': appbarNotificationColor,
+      };
 }
 
 class AppbarNotifications extends StatelessWidget {
@@ -41,7 +73,7 @@ class AppbarNotifications extends StatelessWidget {
                       },
                     ),
           sucess: (notification) => _AppbarSingleNotification(
-            appbarNotificationColor: _AppbarNotificationColor.green,
+            appbarNotificationColor: AppbarNotificationColor.green,
             buttonText: "View profile",
             title: "Your profile has been successfully updated.",
             onButtonPressed: () {
@@ -57,37 +89,99 @@ class AppbarNotifications extends StatelessWidget {
   }
 }
 
+class AppbarNotification extends StatefulWidget implements PreferredSizeWidget {
+  AppbarNotification({
+    Key? key,
+  })  : preferredSize = Size.fromHeight(kToolbarHeight),
+        super(key: key);
+
+  @override
+  final Size preferredSize; // default is 56.0
+
+  @override
+  _CustomAppBarState createState() => _CustomAppBarState();
+}
+
+class _CustomAppBarState extends State<AppbarNotification> {
+  @override
+  Widget build(BuildContext context) {
+    final appState = Provider.of<AppProvider>(context, listen: true);
+    if (appState.notify != null)
+      print('msg ${appState.notify?.notify(context).toString()}');
+    return Provider.of<ProfileProvider>(context).appNotificationState.map(
+          showNothing: (_) => Di.ESB,
+          profileCompletion: (notification) => appState.isLoggedIn
+              ? Provider.of<ProfileProvider>(context)
+                          .percentageProfileCompleted ==
+                      100
+                  ? Di.ESB
+                  : _AppbarSingleNotification(
+                      title:
+                          "Your profile is only ${Provider.of<ProfileProvider>(context).percentageProfileCompleted}% complete. Complete it now to earn first Hospitality Leader grade.",
+                      onButtonPressed: () {
+                        // ref
+                        //     .watch(profileNotifierProvider.notifier)
+                        Provider.of<ProfileProvider>(context, listen: false)
+                            .changeIsProfieEditableState(
+                          true,
+                        );
+                      },
+                    )
+              : appState.notify != null
+                  ? appState.notify?.notify(context)
+                  : Container(),
+          sucess: (notification) => appState.isLoggedIn
+              ? _AppbarSingleNotification(
+                  appbarNotificationColor: AppbarNotificationColor.green,
+                  buttonText: "View profile",
+                  title: "Your profile has been successfully updated.",
+                  onButtonPressed: () {
+                    // ref.watch(profileNotifierProvider.notifier)
+                    Provider.of<ProfileProvider>(context, listen: false)
+                      ..changeIsProfieEditableState(false)
+                      ..changeAppNotificationState(
+                        const AppNotificationState.showNothing(),
+                      );
+                  },
+                )
+              : appState.notify != null
+                  ? appState.notify?.notify(context)
+                  : Container(),
+        );
+  }
+}
+
 class _AppbarSingleNotification extends StatelessWidget {
   const _AppbarSingleNotification({
     Key? key,
     required this.title,
     this.buttonText,
     this.onButtonPressed,
-    this.appbarNotificationColor = _AppbarNotificationColor.red,
+    this.appbarNotificationColor = AppbarNotificationColor.red,
   }) : super(key: key);
 
   final void Function()? onButtonPressed;
   final String title;
   final String? buttonText;
-  final _AppbarNotificationColor appbarNotificationColor;
+  final AppbarNotificationColor appbarNotificationColor;
   @override
   Widget build(BuildContext context) {
     late final Color bgColor;
     late final Color textAndButtonColor;
     switch (appbarNotificationColor) {
-      case _AppbarNotificationColor.green:
+      case AppbarNotificationColor.green:
         bgColor = Cr.green3;
         textAndButtonColor = Cr.green1;
         break;
-      case _AppbarNotificationColor.blue:
+      case AppbarNotificationColor.blue:
         bgColor = Cr.accentBlue3;
         textAndButtonColor = Cr.accentBlue1;
         break;
-      case _AppbarNotificationColor.orange:
+      case AppbarNotificationColor.orange:
         bgColor = Cr.orange3;
         textAndButtonColor = Cr.orange1;
         break;
-      case _AppbarNotificationColor.red:
+      case AppbarNotificationColor.red:
         bgColor = Cr.red3;
         textAndButtonColor = Cr.red1;
         break;

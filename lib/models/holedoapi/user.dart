@@ -14,7 +14,6 @@ import 'package:holedo/models/holedoapi/role.dart';
 import 'package:holedo/models/holedoapi/timeline.dart';
 import 'package:holedo/models/holedoapi/user_tag.dart';
 import 'package:holedo/models/holedoapi/user_title_type.dart';
-import 'package:holedo/models/models.dart';
 import 'package:routemaster/routemaster.dart';
 
 List<User> getUsers(Iterable<dynamic> data) =>

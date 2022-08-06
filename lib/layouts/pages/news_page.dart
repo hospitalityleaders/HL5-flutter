@@ -17,12 +17,12 @@ class NewsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final newsController = holedoDatabase.news;
-    final featuredNews =
-        newsController.fetchArticles(context: context, type: 'featured');
+    //final featuredNews =
+    //    newsController.fetchArticles(context: context, type: 'featured');
 
-    final categories = Get.put(HoledoDatabase())
-        .articleCategories
-        .where((category) => category.menuItem == true);
+    //final categories = Get.put(HoledoDatabase())
+    //    .articleCategories
+    //     .where((category) => category.menuItem == true);
     final appState = Provider.of<AppProvider>(context, listen: false);
     return PageScaffold(
       title: 'Home Page',

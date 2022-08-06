@@ -31,7 +31,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                 children: [
                   Container(
                     height: 872,
-                    padding: EdgeInsets.symmetric(horizontal: Get.width * 0.1),
+                    padding: EdgeInsets.symmetric(horizontal: Get.width * 0.0),
                     child: Row(
                       children: [
                         Expanded(
@@ -48,7 +48,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                         Expanded(
                           child: Container(
                             height: 872,
-                            padding: const EdgeInsets.all(25),
+                            padding: const EdgeInsets.all(0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -135,7 +135,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                       ///FIRST ROW TWO CONTAINER
                       Padding(
                         padding:
-                            EdgeInsets.symmetric(horizontal: Get.width * 0.1),
+                            EdgeInsets.symmetric(horizontal: Get.width * 0.0),
                         child: Row(
                           children: [
                             Expanded(

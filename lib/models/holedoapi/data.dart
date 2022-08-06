@@ -1,10 +1,6 @@
 import 'package:holedo/models/models.dart';
 
 import 'dart:convert';
-import 'package:holedo/models/holedoapi/company.dart';
-import 'package:holedo/models/holedoapi/page.dart';
-import 'package:holedo/models/holedoapi/user.dart';
-import 'package:holedo/profile/presentation/providers/app_provider.dart';
 import 'package:holedo/models/holedoapi/article.dart';
 import 'package:holedo/models/holedoapi/identity.dart';
 import 'package:holedo/models/holedoapi/article_category.dart';

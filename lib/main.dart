@@ -2,19 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:holedo/layouts/page_scaffold.dart';
 import 'package:holedo/layouts/pages/chat_page.dart';
-//import 'package:holedo/layouts/pages/content_page.dart';
+import 'package:holedo/layouts/pages/content_page.dart';
 import 'package:holedo/includes/url_strategy.dart';
 import 'package:holedo/models/models.dart';
 import 'package:holedo/profile/presentation/providers/app_provider.dart';
 
 import 'package:holedo/profile/presentation/theme/light_theme.dart';
-import 'package:intercom_flutter/intercom_flutter.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:routemaster/routemaster.dart';
 
 import 'package:matrix/matrix.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:provider/provider.dart';
 
 void main() async {
   usePathUrlStrategy();
@@ -42,6 +39,9 @@ void main() async {
   runApp(HoledoApp(client: client));
 }
 
+final holedoDatabase = Get.put(HoledoDatabase());
+DataModel dataModel = holedoDatabase.getModel();
+
 bool _isValidCategory(String? category) {
   return Get.put(HoledoDatabase()).articleCategories.any(
         (e) => e.slug == category,
@@ -59,15 +59,6 @@ bool _isValidCompany(String? slug) {
         (e) => e.slug == slug,
       );
 }
-
-// bool _isValidBookId(String? id) {
-//   return true;
-//   //holedoDatabase.books.any((book) => book.id == id);
-// }
-
-final holedoDatabase = Get.put(HoledoDatabase());
-
-DataModel dataModel = holedoDatabase.getModel();
 
 // ignore: prefer_expression_function_bodies
 RouteMap _buildRouteMap(BuildContext context) {
@@ -128,12 +119,6 @@ RouteMap _buildRouteMap(BuildContext context) {
       '/chat2/users/:slug': (route) => const NoAnimationPage(
             child: JobsfrontListPage(mode: 'all'),
           ),
-      /* '/pages/:slug': (route) => _isValidPage(route.pathParameters['slug'])
-          ? NoAnimationPage(
-              child: ContentPage(slug: route.pathParameters['slug']!),
-            )
-          : const NotFound(),
-*/
 
       '/login': (route) => NoAnimationPage(
             child: LoginPage(
@@ -266,22 +251,14 @@ RouteMap _buildRouteMap(BuildContext context) {
           ),
         );
       },
-      //'/profile/add': (route) => AddProfilePage(),
-      '/interactive/:id': (route) {
-        final appState = Provider.of<AppProvider>(context, listen: false);
-
-        if (appState.isLoggedIn) {
-          return NoAnimationPage(
-            child: ProfilePage(id: route.pathParameters['id']),
-          );
-        }
-
-        return Redirect('/login', queryParameters: {'redirectTo': route.path});
-      },
+      '/pages/:slug': (route) => _isValidPage(route.pathParameters['slug'])
+          ? NoAnimationPage(
+              child: ContentPage(slug: route.pathParameters['slug']!),
+            )
+          : const NotFound(),
       '/:slug': (route) => _isValidPage(route.pathParameters['slug'])
           ? NoAnimationPage(
-              child: Text(
-                  'testing page...'), //ContentPage(slug: route.pathParameters['slug']!),
+              child: ContentPage(slug: route.pathParameters['slug']!),
             )
           : const Redirect('/'),
     },

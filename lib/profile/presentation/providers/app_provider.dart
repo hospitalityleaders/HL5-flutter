@@ -1,9 +1,7 @@
 import 'package:flutter/foundation.dart';
-import 'package:holedo/models/holedoapi/menu.dart';
-import 'package:holedo/models/holedoapi/settings.dart';
 import 'package:holedo/models/models.dart';
-import 'package:flat/flat.dart';
 import 'package:flutter/material.dart';
+import 'package:holedo/profile/presentation/ui/components/appbar_notification.dart';
 import 'package:matrix/src/client.dart';
 
 class AppProvider extends ChangeNotifier {
@@ -12,17 +10,20 @@ class AppProvider extends ChangeNotifier {
   User? _profile;
   DataModel _model;
   Client _matrix;
+  AppNotify? _notify;
   final List<User> _profiles = [];
 
   AppProvider({
     String? username,
     User? profile,
+    AppNotify? notify,
     required DataModel model,
     required Client matrix,
   })  : _username = username,
         _profile = profile,
         _model = model,
-        _matrix = matrix;
+        _matrix = matrix,
+        _notify = notify;
 
   //Getters
   NewsController get newscontroller => Get.put(NewsController());
@@ -35,6 +36,13 @@ class AppProvider extends ChangeNotifier {
   String? get token => _token;
   String? get username => _username;
   User? get profile => _profile;
+
+  AppNotify? get notify => _notify;
+  set notify(AppNotify? notify) {
+    _notify = notify;
+    notifyListeners();
+  }
+
   set profile(User? data) {
     _profile = data;
     _username = data?.fullName;

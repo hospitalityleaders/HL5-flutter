@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/svg.dart';
-import 'package:holedo/models/holedoapi/article.dart';
 import 'package:holedo/models/models.dart' hide Provider;
 import 'package:holedo/profile/presentation/providers/app_provider.dart';
 import 'package:holedo/profile/presentation/ui/components/appbar_textfield.dart';
@@ -38,7 +37,10 @@ class _CustomAppbarState extends State<CustomAppbar> {
     final topMenu = Provider.of<AppProvider>(context)
         .model
         .settings
-        ?.fetch('Menus', 'title', 'Top Menu');
+        ?.menus
+        ?.firstWhere((e) => e.title == 'Top Menu')
+        .children;
+    //?.fetch('Menus', 'title', 'Top Menu');
 
     final isSmallerThanDesltop =
         ResponsiveWrapper.of(context).isSmallerThan(DESKTOP);
@@ -70,16 +72,17 @@ class _CustomAppbarState extends State<CustomAppbar> {
               ListView.builder(
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
-                itemCount: topMenu.length,
+                itemCount: topMenu?.length,
                 itemBuilder: (BuildContext context, int index) {
                   final isCurrentPath = RouteData.of(context)
                       .fullPath
-                      .startsWith('/' + topMenu[index].slug!);
+                      .startsWith('/' + topMenu![index].slug.toString());
 
                   return CustomTextButton(
                     onPressed: () {
                       print('cli ${topMenu[index].slug.toString()}');
-                      Routemaster.of(context).push('/' + topMenu[index].slug!);
+                      Routemaster.of(context)
+                          .push('/' + topMenu[index].slug!.toString());
                     },
                     text: topMenu[index].title,
                     color: isCurrentPath ? Cr.whiteColor : Cr.darkBlue9,

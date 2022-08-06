@@ -1,6 +1,5 @@
 import 'package:holedo/models/models.dart';
 
-import 'user.dart';
 
 class Identity extends Model {
   int? userId;

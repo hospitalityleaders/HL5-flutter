@@ -2,7 +2,6 @@ import 'package:holedo/models/models.dart';
 
 import 'client.dart';
 import 'colour.dart';
-import 'company.dart';
 import 'employment_duration.dart';
 import 'job_application.dart';
 import 'job_image.dart';

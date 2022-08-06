@@ -8,8 +8,6 @@ import 'package:get/get.dart' as Store;
 import 'package:holedo/controller/auth_controller.dart';
 //import 'package:get_storage/get_storage.dart';
 //import 'package:holedo/controller/auth_controller.dart';
-import 'package:holedo/models/holedoapi/article.dart';
-import 'package:holedo/models/holedoapi/job.dart';
 import 'package:holedo/models/models.dart';
 import 'package:holedo/profile/presentation/utill/api_urls.dart';
 

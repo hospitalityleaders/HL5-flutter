@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:holedo/main.dart';
 import 'package:holedo/models/holedoapi/article.dart';
 import 'package:holedo/models/holedoapi/article_category.dart';
-import 'package:holedo/models/holedoapi/holedoapi.dart';
 import 'package:holedo/models/holedoapi/job.dart';
-import 'package:holedo/models/holedoapi/menu_item.dart';
 import 'package:holedo/profile/presentation/providers/app_provider.dart';
 import 'package:holedo/services/holedo_api_services.dart';
 
@@ -15,7 +12,6 @@ export 'package:provider/provider.dart';
 export 'package:holedo/profile/presentation/providers/profile_provider.dart';
 export 'holedoapi/holedoapi.dart';
 import 'package:holedo/models/holedoapi/menu.dart';
-import 'package:holedo/models/holedoapi/settings.dart';
 import 'package:holedo/models/models.dart';
 import 'package:flat/flat.dart';
 
@@ -36,8 +32,8 @@ class Model {
         var result;
         switch (splitted[splitted.length - 1]) {
           case 'Menus':
-            result =
-                Menu.fromJson(flat[o].firstWhere((e) => e[t] == s)).children;
+            result = Menu.fromJson(flat[o].firstWhere((e) => e[t] == s))
+                .children as List<Menu>;
             break;
         }
 
@@ -66,59 +62,6 @@ class HoledoDatabase extends GetxController {
   final ApiServices _api = ApiServices();
   late AppProvider appState;
   late BuildContext context;
-  final List<MenuNavItem> menuItems = [
-    MenuNavItem(
-      title: 'Home',
-      path: '/home',
-      inNav: true,
-      inDrawer: true,
-    ),
-
-    MenuNavItem(
-      title: 'Profile',
-      path: '/profile',
-      inNav: true,
-      inDrawer: true,
-    ),
-    MenuNavItem(
-      title: 'News',
-      path: '/news',
-      inNav: true,
-      inDrawer: true,
-    ),
-    MenuNavItem(
-      title: 'Jobs',
-      path: '/jobs',
-      inNav: true,
-      inDrawer: true,
-    ),
-    MenuNavItem(
-      title: 'Recruitments',
-      path: '/recruitments',
-      inNav: true,
-      inDrawer: true,
-    ),
-    MenuNavItem(
-      title: 'Help',
-      path: '/help',
-      inNav: true,
-      inDrawer: true,
-    ),
-    // MenuNavItem(
-    //   title: 'Logout',
-    //   path: '/logout',
-    //   inNav: false,
-    //   inDrawer: true,
-    //   loginOnly: true,
-    // ),
-    // MenuNavItem(
-    //   title: 'Login',
-    //   path: '/login',
-    //   inNav: false,
-    //   inDrawer: true,
-    //   loginOnly: false,
-    // ),
-  ];
 
   void snackBarMessage(BuildContext context, type, message) {
     var label = 'Info';
@@ -201,9 +144,9 @@ class HoledoDatabase extends GetxController {
 
       final data = getModel();
       final page = data.pages
-          ?.firstWhere((e) => e.slug == slug); //, orElse: () => null);
+          ?.firstWhere((e) => e.slug == slug, orElse: () => new PageContent());
       if (page != null) {
-        debugPrint('page: ${page.toString()} ');
+        debugPrint('page: ${page.toJson().toString()} ');
       }
       return page;
     } finally {
@@ -244,8 +187,8 @@ class HoledoDatabase extends GetxController {
             await _api.GET(target: '/site-settings/companies?type=2');
         data.companies = response.data!.companies;
       }
-      pages = data.pages as List<PageContent>;
-      companies = data.companies as List<Company>;
+      this.pages = data.pages as List<PageContent>;
+      this.companies = data.companies as List<Company>;
       articleCategories =
           data.settings?.articleCategories as List<ArticleCategory>;
 

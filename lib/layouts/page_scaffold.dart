@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:holedo/profile/presentation/popups/profile_connection_request_popup.dart';
 import 'package:holedo/profile/presentation/popups/profile_submenu_popup.dart';
 import 'package:holedo/profile/presentation/providers/app_provider.dart';
+import 'package:holedo/profile/presentation/ui/components/appbar_notification.dart';
+
 import 'package:holedo/profile/presentation/ui/components/appbar_textfield.dart';
 import 'package:holedo/profile/presentation/ui/components/custom_appbar.dart';
 import 'package:holedo/profile/presentation/ui/flutter_slider_drawer/slider.dart';
@@ -19,6 +21,7 @@ import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/common/common_widget.dart';
 import 'package:intercom_flutter/intercom_flutter.dart';
 export 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+
 export 'package:holedo/layouts/cards/holedo_cards.dart';
 export 'package:holedo/layouts/pages/home_page.dart';
 export 'package:holedo/layouts/pages/recruitment_page.dart';
@@ -64,6 +67,25 @@ class _PageScaffoldState extends State<PageScaffold> {
   void initState() {
     super.initState();
     _updateSearchQuery();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final appState = Provider.of<AppProvider>(context, listen: false);
+
+      if (appState.notify == null) {
+        if (!appState.isLoggedIn)
+          appState.notify = AppNotify(
+            appbarNotificationColor: AppbarNotificationColor.green,
+            buttonText: "Create Account",
+            title:
+                "New to Hospitality Leaders? Sign up now to join our membership",
+            onButtonPressed: () {
+              Routemaster.of(context).push('/login');
+            },
+          );
+        else
+          appState.notify?.title = "Welcome to Hospitality Leaders";
+      }
+    });
   }
 
   @override
@@ -85,6 +107,26 @@ class _PageScaffoldState extends State<PageScaffold> {
         queryParameters: {'query': _searchController.text},
       );
     }
+  }
+
+  void showMessageBar(BuildContext context, String text) {
+    ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
+      content: Text(text, style: FontTextStyle.kBlueLight114W400PR),
+      behavior: SnackBarBehavior.floating,
+      backgroundColor: const Color(0xffCCE8FE),
+      shape: RoundedRectangleBorder(
+          side: BorderSide.none, borderRadius: BorderRadius.zero),
+      duration: Duration(minutes: 5),
+      action: SnackBarAction(
+        label: 'X',
+        textColor: Colors.black,
+        onPressed: () {
+          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+        },
+      ),
+      margin: EdgeInsets.only(
+          bottom: MediaQuery.of(context).size.height - 85, right: 0, left: 0),
+    ));
   }
 
   void showSnackBar(BuildContext context, String text) {
@@ -186,11 +228,16 @@ class _PageScaffoldState extends State<PageScaffold> {
                         ),
                       ),
                     ),
-                    Container(
-                      decoration: const BoxDecoration(
-                        color: ColorPicker.kBG,
+                    Scaffold(
+                      appBar: AppbarNotification(),
+                      extendBodyBehindAppBar: true,
+                      body: Container(
+                        decoration: const BoxDecoration(
+                          color: ColorPicker.kBG,
+                        ),
+                        child: widget.body,
                       ),
-                      child: widget.body,
+                      //_buildFooter(isTableOrMobile(context))
                     ),
                     if (!isTableOrMobile(context)) ...[
                       !(Provider.of<ProfileProvider>(context)
@@ -377,7 +424,10 @@ class BuildAppbar extends StatelessWidget {
   Widget build(BuildContext context) {
     final appState = Provider.of<AppProvider>(context);
     final bool isMobile = Responsive.isMobile(context);
-    final menuItems = Get.put(HoledoDatabase()).menuItems;
+    final menuItems = Provider.of<AppProvider>(context)
+        .model
+        .settings
+        ?.fetch('Menus', 'title', 'Top Menu');
     final bool isDesktop = Responsive.isDesktop(context);
     const bool inDrawer = false;
 
@@ -417,23 +467,13 @@ class BuildAppbar extends StatelessWidget {
             Row(
               children: menuItems.map((item) {
                 if (item.loginOnly == null ||
-                    (item.loginOnly == appState.isLoggedIn)) if (inDrawer ==
-                        true &&
-                    item.inDrawer == true) {
+                    (item.loginOnly == appState.isLoggedIn))
                   return NavigationLink(
                     title: item.title!,
-                    path: item.path!,
+                    path: item.slug!,
                     inDrawer: inDrawer,
                   );
-                } else {
-                  if (inDrawer == false && item.inNav == true) {
-                    return NavigationLink(
-                      title: item.title!,
-                      path: item.path!,
-                      inDrawer: inDrawer,
-                    );
-                  }
-                }
+
                 return const SizedBox();
               }).toList(),
             ),

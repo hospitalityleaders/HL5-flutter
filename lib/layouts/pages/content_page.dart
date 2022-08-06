@@ -31,12 +31,12 @@ class ContentPage extends StatelessWidget {
                         padding: const EdgeInsets.all(20),
                         child: Column(
                           children: [
-                            if (snapshot.data?.bannerImage!.length != 0)
+                            if (snapshot.data?.bannerImage != null)
                               Container(
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
                                     image: NetworkImage(
-                                        snapshot.data!.bannerImage.toString()),
+                                        snapshot.data?.bannerImage as String),
                                     fit: BoxFit.cover,
                                     repeat: ImageRepeat.noRepeat,
                                   ),
@@ -66,7 +66,7 @@ class ContentPage extends StatelessWidget {
                             SizedBox(height: 20),
                             SingleChildScrollView(
                                 child: Html(
-                              data: snapshot.data!.content,
+                              data: snapshot.data?.content,
                             )),
                           ],
                         ),
