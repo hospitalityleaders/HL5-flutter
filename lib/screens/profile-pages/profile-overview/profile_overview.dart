@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:holedo/constant/IconPicker/icon_picker.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
-import 'package:holedo/layouts/pages/profile-pages/profile-overview/profile_overview_sec1.dart';
-import 'package:holedo/layouts/pages/profile-pages/profile-overview/profile_overview_sec2.dart';
-import 'package:holedo/layouts/pages/profile-pages/profile-overview/profile_overview_sec3.dart';
+import 'package:holedo/screens/profile-pages/profile-overview/profile_overview_sec1.dart';
+import 'package:holedo/screens/profile-pages/profile-overview/profile_overview_sec2.dart';
+import 'package:holedo/screens/profile-pages/profile-overview/profile_overview_sec3.dart';
 import '../../../../constant/colorPicker/color_picker.dart';
 import '../../../../constant/sizedbox.dart';
 import '../../../../responsive/responsive.dart';

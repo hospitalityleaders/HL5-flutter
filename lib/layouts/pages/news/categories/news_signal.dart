@@ -6,7 +6,7 @@ import 'package:holedo/common/common_widget.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/constant/sizedbox.dart';
-import 'package:holedo/layouts/pages/profile-pages/profile/header.dart';
+// import 'package:holedo/layouts/pages/profile-pages/profile/header.dart';
 import 'package:holedo/responsive/responsive.dart';
 
 import 'package:holedo/layouts/pages/news/NewsSingle/news_single_logged_in.dart';
@@ -139,8 +139,8 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                 headerSliverBuilder: (context, innerBoxIsScrolled) {
                   return [
                     const SliverToBoxAdapter(
-                      child: Header(),
-                    ),
+                        // child: Header(),
+                        ),
                     SliverToBoxAdapter(
                       child: SizedBox(
                         height: Get.height * 0.50,

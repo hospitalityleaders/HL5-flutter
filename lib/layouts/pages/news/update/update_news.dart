@@ -3282,8 +3282,6 @@ import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/constant/sizedbox.dart';
 import 'package:holedo/data/data.dart';
 import 'package:holedo/responsive/responsive.dart';
-
-import 'package:holedo/layouts/pages/profile-pages/profile/header.dart';
 import 'package:holedo/layouts/pages/news/categories/news_signal.dart';
 
 class UpdateNews extends StatefulWidget {
@@ -3331,7 +3329,7 @@ class _UpdateNewsState extends State<UpdateNews>
               return SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
-                    const Header(),
+                    // const Header(),
                     if (_menuController.menuIndex.value == 0)
                       Column(
                         children: [
