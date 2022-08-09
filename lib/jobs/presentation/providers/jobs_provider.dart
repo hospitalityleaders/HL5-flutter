@@ -1,25 +1,14 @@
 import 'package:flutter/foundation.dart';
-// This file is "main.dart"
-
-// part 'profile_provider.freezed.dart';
-
-// @freezed
-// class AppNotificationState with _$AppNotificationState {
-//   const AppNotificationState._();
-//   const factory AppNotificationState.showNothing() = _ShowNothing;
-//   const factory AppNotificationState.sucess() = _Sucess;
-//   const factory AppNotificationState.profileCompletion() = _ProfileCompletion;
-// }
 
 class JobsProvider extends ChangeNotifier {
-  bool isProfileEditable;
+  int currentTabIndex;
 
   JobsProvider({
-    this.isProfileEditable = false,
+    this.currentTabIndex = 0,
   });
 
-  void changeIsProfieEditableState(bool isEditable) {
-    isProfileEditable = isEditable;
+  void changeCurrentTabIndex(int currentTabIndex) {
+    this.currentTabIndex = currentTabIndex;
     notifyListeners();
   }
 }

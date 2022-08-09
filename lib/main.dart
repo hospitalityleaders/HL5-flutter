@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:holedo/jobs/presentation/providers/jobs_provider.dart';
+import 'package:holedo/jobs/presentation/ui/pages/company_jobs/company_jobs_page.dart';
 import 'package:holedo/layouts/page_scaffold.dart';
 import 'package:holedo/layouts/pages/chat_page.dart';
-import 'package:holedo/layouts/pages/content_page.dart';
 import 'package:holedo/includes/url_strategy.dart';
+import 'package:holedo/layouts/pages/content_page.dart';
 import 'package:holedo/models/models.dart';
 import 'package:holedo/profile/presentation/providers/app_provider.dart';
 
@@ -116,10 +118,10 @@ RouteMap _buildRouteMap(BuildContext context) {
       }, //=> const NoAnimationPage(
       //   child: RoomPage(room: route.pathParameters!['slug']),
       //test. ),*/
-      '/chat2/users/:slug': (route) => const NoAnimationPage(
-            child: JobsfrontListPage(mode: 'all'),
-          ),
-
+      //TODO:
+      // '/chat2/users/:slug': (route) => const NoAnimationPage(
+      //       child: JobsfrontListPage(mode: 'all'),
+      //     ),
       '/login': (route) => NoAnimationPage(
             child: LoginPage(
               redirectTo: route.queryParameters['redirectTo'],
@@ -181,41 +183,38 @@ RouteMap _buildRouteMap(BuildContext context) {
                   child: NewsPage(id: route.pathParameters['id']!),
                 )
               : const NotFound(),
-      '/jobs': (route) => TabPage(
-            child: const JobsfrontPage(),
-            paths: const ['all', 'premium'],
-            pageBuilder: (child) => NoAnimationPage(child: child),
+      '/jobs': (route) => NoAnimationPage(child: JobsPage()),
+      '/jobs/all': (route) => NoAnimationPage(
+            // child: JobsfrontListPage(mode: 'all'),
+            child: JobsPage(),
           ),
-      '/jobs/all': (route) => const NoAnimationPage(
-            child: JobsfrontListPage(mode: 'all'),
-          ),
-      '/jobs/premium': (route) => const NoAnimationPage(
-            child: JobsfrontListPage(mode: 'premium'),
-          ),
-      '/jobs/all/:slug': (route) =>
-          _isValidCompany(route.pathParameters['slug'])
-              ? NoAnimationPage(
-                  child: JobsfrontListPage(
-                    mode: 'all',
-                    company: Get.put(HoledoDatabase()).companies.firstWhere(
-                          (e) => e.slug == route.pathParameters['slug'],
-                        ),
-                  ),
-                )
-              : const NotFound(),
-      '/jobs/premium/:slug': (route) =>
-          _isValidCompany(route.pathParameters['slug'])
-              ? NoAnimationPage(
-                  child: JobsfrontListPage(
-                    mode: 'premium',
-                    company: Get.put(HoledoDatabase()).companies.firstWhere(
-                          (e) => e.slug == route.pathParameters['slug'],
-                        ),
-                  ),
-                )
-              : const NotFound(),
-      '/job/:id': (route) =>
-          NoAnimationPage(child: JobsPage(slug: route.pathParameters['id'])),
+      // '/jobs/premium': (route) => const NoAnimationPage(
+      //       child: JobsfrontListPage(mode: 'premium'),
+      //     ),
+      // '/jobs/all/:slug': (route) =>
+      //     _isValidCompany(route.pathParameters['slug'])
+      //         ? NoAnimationPage(
+      //             child: JobsfrontListPage(
+      //               mode: 'all',
+      //               company: Get.put(HoledoDatabase()).companies.firstWhere(
+      //                     (e) => e.slug == route.pathParameters['slug'],
+      //                   ),
+      //             ),
+      //           )
+      //         : const NotFound(),
+      // '/jobs/premium/:slug': (route) =>
+      //     _isValidCompany(route.pathParameters['slug'])
+      //         ? NoAnimationPage(
+      //             child: JobsfrontListPage(
+      //               mode: 'premium',
+      //               company: Get.put(HoledoDatabase()).companies.firstWhere(
+      //                     (e) => e.slug == route.pathParameters['slug'],
+      //                   ),
+      //             ),
+      //           )
+      //         : const NotFound(),
+      // '/job/:id': (route) =>
+      //     NoAnimationPage(child: JobsPage(slug: route.pathParameters['id'])),
       '/search': (route) => NoAnimationPage(
             child: SearchPage(
               query: route.queryParameters['query'] ?? '',
@@ -308,6 +307,9 @@ class HoledoApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => ProfileProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => JobsProvider(),
         ),
       ],
       child: MaterialApp.router(

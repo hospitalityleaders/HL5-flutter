@@ -687,7 +687,6 @@ class JobsController extends GetxController {
   }) async {
     try {
       isLoading(true);
-
       final params = {
         'company': company,
         'type': type,
