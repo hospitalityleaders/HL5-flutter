@@ -21,7 +21,7 @@ class ColorPicker {
   static const Color kPrimaryLight3 = Color(0xff546088);
   static const Color kPrimaryLight2 = Color(0xff6C779E);
   static const Color kPrimaryLightBlue = Color(0xff7A85A6);
-
+  static const Color kPrimaryLightGreen = Color(0xff7DC81B);
   static const Color kGreyLight2 = Color(0xffF7F7F7);
   static const Color kBorder = Color(0xffDCDCDC);
   static const Color kBorder1 = Color(0xffCACACA);
@@ -52,4 +52,6 @@ class ColorPicker {
   static const Color kGreen1 = Color(0xff7DC81B);
 
   static const Color kGreenX = Color(0xff04595B);
+  static const Color kShadow1 = Color(0xff191B4E);
+  static const Color kBorder2 = Color(0xffDCE0E3);
 }

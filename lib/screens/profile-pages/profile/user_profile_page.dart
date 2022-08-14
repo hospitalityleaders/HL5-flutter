@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:holedo/layouts/pages/profile-pages/profile/header_card.dart';
-import 'package:holedo/layouts/pages/profile-pages/timeline/timeline.dart';
 import 'package:holedo/models/holedoapi/user.dart';
+
 import '../../../../constant/colorPicker/color_picker.dart';
 import '../../../../constant/fontStyle/font_style.dart';
 import '../../../../constant/sizedbox.dart';
@@ -9,6 +8,8 @@ import '../../../../responsive/responsive.dart';
 import '../profile-edit/profile_edit.dart';
 import '../profile-overview/profile_overview.dart';
 import '../references/references.dart';
+import '../timeline/timeline.dart';
+import 'header_card.dart';
 
 class GlobalKeys {
   static final refKey = GlobalKey();
@@ -38,15 +39,13 @@ List<Item> generateItems(int numberOfItems) {
 class UserProfilePage extends StatefulWidget {
   final User userProfileData;
 
-  const UserProfilePage({Key? key, required this.userProfileData})
-      : super(key: key);
+  const UserProfilePage({Key? key, required this.userProfileData}) : super(key: key);
 
   @override
   State<UserProfilePage> createState() => _UserProfilePageState();
 }
 
-class _UserProfilePageState extends State<UserProfilePage>
-    with TickerProviderStateMixin {
+class _UserProfilePageState extends State<UserProfilePage> with TickerProviderStateMixin {
   bool isEditable = false;
 
   ///Common widgets
@@ -95,8 +94,7 @@ class _UserProfilePageState extends State<UserProfilePage>
   }
 
   /// References card edit functionality
-  final List<GlobalObjectKey<FormState>> referenceCardKey =
-      List.generate(10, (index) => GlobalObjectKey<FormState>(index));
+  final List<GlobalObjectKey<FormState>> referenceCardKey = List.generate(10, (index) => GlobalObjectKey<FormState>(index));
 
   // final referenceCardKey = List<GlobalKey>.generate(10, (index) => GlobalKeys.refKey);
   // final referenceCardKey = GlobalKey();
@@ -123,8 +121,7 @@ class _UserProfilePageState extends State<UserProfilePage>
   var profileOverviewSec1References_H;
   var profileOverviewSec1References_W;
 
-  callBackButtonSec1(profileOverviewSec1Key, profileOverviewSec1AreaOfExpKey,
-      profileOverviewSec1ReferencesKey) {
+  callBackButtonSec1(profileOverviewSec1Key, profileOverviewSec1AreaOfExpKey, profileOverviewSec1ReferencesKey) {
     setState(() {
       profileOverviewSec1ProSumm_H = profileOverviewSec1Key.height;
       profileOverviewSec1ProSumm_W = profileOverviewSec1Key.width;
@@ -153,10 +150,7 @@ class _UserProfilePageState extends State<UserProfilePage>
   var profileOverviewSec2Languages_W;
 
   callBackButtonSec2(
-      profileOverviewSec2WorkExpKey,
-      profileOverviewSec2EducationKey,
-      profileOverviewSec2AchievementKey,
-      profileOverviewSec2LanguagesKey) {
+      profileOverviewSec2WorkExpKey, profileOverviewSec2EducationKey, profileOverviewSec2AchievementKey, profileOverviewSec2LanguagesKey) {
     setState(() {
       profileOverviewSec2WorkExp_H = profileOverviewSec2WorkExpKey.height;
       profileOverviewSec2WorkExp_W = profileOverviewSec2WorkExpKey.width;
@@ -164,10 +158,8 @@ class _UserProfilePageState extends State<UserProfilePage>
       profileOverviewSec2Education_H = profileOverviewSec2EducationKey.height;
       profileOverviewSec2Education_W = profileOverviewSec2EducationKey.width;
 
-      profileOverviewSec2Achievement_H =
-          profileOverviewSec2AchievementKey.height;
-      profileOverviewSec2Achievement_W =
-          profileOverviewSec2AchievementKey.width;
+      profileOverviewSec2Achievement_H = profileOverviewSec2AchievementKey.height;
+      profileOverviewSec2Achievement_W = profileOverviewSec2AchievementKey.width;
 
       profileOverviewSec2Languages_H = profileOverviewSec2LanguagesKey.height;
       profileOverviewSec2Languages_W = profileOverviewSec2LanguagesKey.width;
@@ -225,8 +217,7 @@ class _UserProfilePageState extends State<UserProfilePage>
                       ),
                     ),
                     child: Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: SS.sW(context) * .080),
+                      padding: EdgeInsets.symmetric(horizontal: SS.sW(context) * .080),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -245,14 +236,9 @@ class _UserProfilePageState extends State<UserProfilePage>
                               ),
                               Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 8.0),
-                                child: Text(
-                                    widget.userProfileData.fullName.toString(),
-                                    style: FontTextStyle.kBlueDark116W700SSP),
+                                child: Text(widget.userProfileData.fullName.toString(), style: FontTextStyle.kBlueDark116W700SSP),
                               ),
-                              Text(
-                                  widget.userProfileData.userTitleTypesId
-                                      .toString(),
-                                  style: FontTextStyle.kBlueDark112W700SSP),
+                              Text(widget.userProfileData.userTitleTypesId.toString(), style: FontTextStyle.kBlueDark112W700SSP),
                             ],
                           ),
                           Row(
@@ -261,8 +247,7 @@ class _UserProfilePageState extends State<UserProfilePage>
                                 labelColor: ColorPicker.kBlueLight1,
                                 unselectedLabelColor: ColorPicker.kGreyLight7,
                                 indicatorColor: ColorPicker.kBlueLight1,
-                                indicatorPadding:
-                                    EdgeInsets.symmetric(horizontal: 10),
+                                indicatorPadding: EdgeInsets.symmetric(horizontal: 10),
                                 controller: _tabController,
                                 physics: NeverScrollableScrollPhysics(),
                                 isScrollable: true,
@@ -272,10 +257,7 @@ class _UserProfilePageState extends State<UserProfilePage>
                                     padding: EdgeInsets.all(10.0),
                                     child: Text(
                                       'Profile overview',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w600,
-                                          fontFamily: 'SourceSansPro',
-                                          fontSize: 14),
+                                      style: TextStyle(fontWeight: FontWeight.w600, fontFamily: 'SourceSansPro', fontSize: 14),
                                     ),
                                   ),
                                   Padding(
@@ -292,30 +274,21 @@ class _UserProfilePageState extends State<UserProfilePage>
                                     padding: EdgeInsets.all(10.0),
                                     child: Text(
                                       'Articles',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w600,
-                                          fontFamily: 'SourceSansPro',
-                                          fontSize: 14),
+                                      style: TextStyle(fontWeight: FontWeight.w600, fontFamily: 'SourceSansPro', fontSize: 14),
                                     ),
                                   ),
                                   Padding(
                                     padding: EdgeInsets.all(10.0),
                                     child: Text(
                                       'Activity',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w600,
-                                          fontFamily: 'SourceSansPro',
-                                          fontSize: 14),
+                                      style: TextStyle(fontWeight: FontWeight.w600, fontFamily: 'SourceSansPro', fontSize: 14),
                                     ),
                                   ),
                                   Padding(
                                     padding: EdgeInsets.all(10.0),
                                     child: Text(
                                       'References',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w600,
-                                          fontFamily: 'SourceSansPro',
-                                          fontSize: 14),
+                                      style: TextStyle(fontWeight: FontWeight.w600, fontFamily: 'SourceSansPro', fontSize: 14),
                                     ),
                                   ),
                                 ],
@@ -329,70 +302,47 @@ class _UserProfilePageState extends State<UserProfilePage>
                   ),
                   SizedBox(
                     height: SS.sH(context) * 1.9,
-                    child: TabBarView(
-                        controller: _tabController,
-                        children: <Widget>[
-                          ProfileOverview(
-                              isEditable: isEditable,
+                    child: TabBarView(controller: _tabController, children: <Widget>[
+                      ProfileOverview(
+                          isEditable: isEditable,
 
-                              //section1 edit functionality
-                              profileOverviewSec1ProSummKey:
-                                  profileOverviewSec1ProSummKey,
-                              profileOverviewSec1ProSumm_H:
-                                  profileOverviewSec1ProSumm_H,
-                              profileOverviewSec1ProSumm_W:
-                                  profileOverviewSec1ProSumm_W,
-                              profileOverviewSec1AreaOfExpKey:
-                                  profileOverviewSec1AreaOfExpKey,
-                              profileOverviewSec1AreaOfExp_H:
-                                  profileOverviewSec1AreaOfExp_H,
-                              profileOverviewSec1AreaOfExp_W:
-                                  profileOverviewSec1AreaOfExp_W,
-                              profileOverviewSec1ReferencesKey:
-                                  profileOverviewSec1ReferencesKey,
-                              profileOverviewSec1References_H:
-                                  profileOverviewSec1References_H,
-                              profileOverviewSec1References_W:
-                                  profileOverviewSec1References_W,
+                          //section1 edit functionality
+                          profileOverviewSec1ProSummKey: profileOverviewSec1ProSummKey,
+                          profileOverviewSec1ProSumm_H: profileOverviewSec1ProSumm_H,
+                          profileOverviewSec1ProSumm_W: profileOverviewSec1ProSumm_W,
+                          profileOverviewSec1AreaOfExpKey: profileOverviewSec1AreaOfExpKey,
+                          profileOverviewSec1AreaOfExp_H: profileOverviewSec1AreaOfExp_H,
+                          profileOverviewSec1AreaOfExp_W: profileOverviewSec1AreaOfExp_W,
+                          profileOverviewSec1ReferencesKey: profileOverviewSec1ReferencesKey,
+                          profileOverviewSec1References_H: profileOverviewSec1References_H,
+                          profileOverviewSec1References_W: profileOverviewSec1References_W,
 
-                              //section2 edit functionality
+                          //section2 edit functionality
 
-                              profileOverviewSec2WorkExpKey:
-                                  profileOverviewSec2WorkExpKey,
-                              profileOverviewSec2WorkExp_H:
-                                  profileOverviewSec2WorkExp_H,
-                              profileOverviewSec2WorkExp_W:
-                                  profileOverviewSec2WorkExp_W,
-                              profileOverviewSec2EducationKey:
-                                  profileOverviewSec2EducationKey,
-                              profileOverviewSec2Education_H:
-                                  profileOverviewSec2Education_H,
-                              profileOverviewSec2Education_W:
-                                  profileOverviewSec2Education_W,
-                              profileOverviewSec2AchievementKey:
-                                  profileOverviewSec2AchievementKey,
-                              profileOverviewSec2Achievement_H:
-                                  profileOverviewSec2Achievement_H,
-                              profileOverviewSec2Achievement_W:
-                                  profileOverviewSec2Achievement_W,
-                              profileOverviewSec2LanguagesKey:
-                                  profileOverviewSec2LanguagesKey,
-                              profileOverviewSec2Languages_H:
-                                  profileOverviewSec2Languages_H,
-                              profileOverviewSec2Languages_W:
-                                  profileOverviewSec2Languages_W,
-                              pOApiData: widget.userProfileData,
-                              editProfileBtn: buildEditButton),
-                          TimeLine(),
-                          TimeLine(),
-                          TimeLine(),
-                          References(
-                            isEditable: isEditable,
-                            referenceCard_H: referenceCard_H,
-                            referenceCard_W: referenceCard_W,
-                            referenceCardKey: referenceCardKey,
-                          )
-                        ]),
+                          profileOverviewSec2WorkExpKey: profileOverviewSec2WorkExpKey,
+                          profileOverviewSec2WorkExp_H: profileOverviewSec2WorkExp_H,
+                          profileOverviewSec2WorkExp_W: profileOverviewSec2WorkExp_W,
+                          profileOverviewSec2EducationKey: profileOverviewSec2EducationKey,
+                          profileOverviewSec2Education_H: profileOverviewSec2Education_H,
+                          profileOverviewSec2Education_W: profileOverviewSec2Education_W,
+                          profileOverviewSec2AchievementKey: profileOverviewSec2AchievementKey,
+                          profileOverviewSec2Achievement_H: profileOverviewSec2Achievement_H,
+                          profileOverviewSec2Achievement_W: profileOverviewSec2Achievement_W,
+                          profileOverviewSec2LanguagesKey: profileOverviewSec2LanguagesKey,
+                          profileOverviewSec2Languages_H: profileOverviewSec2Languages_H,
+                          profileOverviewSec2Languages_W: profileOverviewSec2Languages_W,
+                          pOApiData: widget.userProfileData,
+                          editProfileBtn: buildEditButton),
+                      TimeLine(),
+                      TimeLine(),
+                      TimeLine(),
+                      References(
+                        isEditable: isEditable,
+                        referenceCard_H: referenceCard_H,
+                        referenceCard_W: referenceCard_W,
+                        referenceCardKey: referenceCardKey,
+                      )
+                    ]),
                   )
                 ],
               ),
@@ -427,8 +377,7 @@ class _UserProfilePageState extends State<UserProfilePage>
                                   decoration: BoxDecoration(
                                     image: DecorationImage(
                                       image: NetworkImage(
-                                        widget.userProfileData.avatar
-                                            .toString(),
+                                        widget.userProfileData.avatar.toString(),
                                       ),
                                     ),
                                   ),
@@ -436,15 +385,13 @@ class _UserProfilePageState extends State<UserProfilePage>
                                 title: Row(
                                   children: [
                                     Text(
-                                      widget.userProfileData.fullName
-                                          .toString(),
+                                      widget.userProfileData.fullName.toString(),
                                       textAlign: TextAlign.center,
                                       style: FontTextStyle.kBlueDark116W700SSP,
                                     ),
                                     SS.sB(0, 2),
                                     Text(
-                                      widget.userProfileData.userTitleTypesId
-                                          .toString(),
+                                      widget.userProfileData.userTitleTypesId.toString(),
                                       textAlign: TextAlign.center,
                                       style: FontTextStyle.kBlueDark112W700SSP,
                                     ),
@@ -463,8 +410,7 @@ class _UserProfilePageState extends State<UserProfilePage>
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  buildMobileMenuDropDownButton(
-                                      'Profile Overview'),
+                                  buildMobileMenuDropDownButton('Profile Overview'),
                                   buildMobileMenuDropDownButton('Timeline'),
                                   buildMobileMenuDropDownButton('Articles'),
                                   buildMobileMenuDropDownButton('Activity'),
@@ -484,47 +430,30 @@ class _UserProfilePageState extends State<UserProfilePage>
                     isEditable: isEditable,
 
                     //section1 edit functionality
-                    profileOverviewSec1ProSummKey:
-                        profileOverviewSec1ProSummKey,
+                    profileOverviewSec1ProSummKey: profileOverviewSec1ProSummKey,
                     profileOverviewSec1ProSumm_H: profileOverviewSec1ProSumm_H,
                     profileOverviewSec1ProSumm_W: profileOverviewSec1ProSumm_W,
-                    profileOverviewSec1AreaOfExpKey:
-                        profileOverviewSec1AreaOfExpKey,
-                    profileOverviewSec1AreaOfExp_H:
-                        profileOverviewSec1AreaOfExp_H,
-                    profileOverviewSec1AreaOfExp_W:
-                        profileOverviewSec1AreaOfExp_W,
-                    profileOverviewSec1ReferencesKey:
-                        profileOverviewSec1ReferencesKey,
-                    profileOverviewSec1References_H:
-                        profileOverviewSec1References_H,
-                    profileOverviewSec1References_W:
-                        profileOverviewSec1References_W,
+                    profileOverviewSec1AreaOfExpKey: profileOverviewSec1AreaOfExpKey,
+                    profileOverviewSec1AreaOfExp_H: profileOverviewSec1AreaOfExp_H,
+                    profileOverviewSec1AreaOfExp_W: profileOverviewSec1AreaOfExp_W,
+                    profileOverviewSec1ReferencesKey: profileOverviewSec1ReferencesKey,
+                    profileOverviewSec1References_H: profileOverviewSec1References_H,
+                    profileOverviewSec1References_W: profileOverviewSec1References_W,
 
                     //section2 edit functionality
 
-                    profileOverviewSec2WorkExpKey:
-                        profileOverviewSec2WorkExpKey,
+                    profileOverviewSec2WorkExpKey: profileOverviewSec2WorkExpKey,
                     profileOverviewSec2WorkExp_H: profileOverviewSec2WorkExp_H,
                     profileOverviewSec2WorkExp_W: profileOverviewSec2WorkExp_W,
-                    profileOverviewSec2EducationKey:
-                        profileOverviewSec2EducationKey,
-                    profileOverviewSec2Education_H:
-                        profileOverviewSec2Education_H,
-                    profileOverviewSec2Education_W:
-                        profileOverviewSec2Education_W,
-                    profileOverviewSec2AchievementKey:
-                        profileOverviewSec2AchievementKey,
-                    profileOverviewSec2Achievement_H:
-                        profileOverviewSec2Achievement_H,
-                    profileOverviewSec2Achievement_W:
-                        profileOverviewSec2Achievement_W,
-                    profileOverviewSec2LanguagesKey:
-                        profileOverviewSec2LanguagesKey,
-                    profileOverviewSec2Languages_H:
-                        profileOverviewSec2Languages_H,
-                    profileOverviewSec2Languages_W:
-                        profileOverviewSec2Languages_W,
+                    profileOverviewSec2EducationKey: profileOverviewSec2EducationKey,
+                    profileOverviewSec2Education_H: profileOverviewSec2Education_H,
+                    profileOverviewSec2Education_W: profileOverviewSec2Education_W,
+                    profileOverviewSec2AchievementKey: profileOverviewSec2AchievementKey,
+                    profileOverviewSec2Achievement_H: profileOverviewSec2Achievement_H,
+                    profileOverviewSec2Achievement_W: profileOverviewSec2Achievement_W,
+                    profileOverviewSec2LanguagesKey: profileOverviewSec2LanguagesKey,
+                    profileOverviewSec2Languages_H: profileOverviewSec2Languages_H,
+                    profileOverviewSec2Languages_W: profileOverviewSec2Languages_W,
                     pOApiData: widget.userProfileData,
                     editProfileBtn: buildEditButton),
               ],

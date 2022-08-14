@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:holedo/common/common_widget.dart';
+import 'package:holedo/components/common_widgets/job_tile.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/data/data.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 import '../../../../../common/common_widget.dart';
+import '../../../../../components/common_widgets/news_tile.dart';
 import '../../../../../constant/colorPicker/color_picker.dart';
 import '../../../../../constant/fontStyle/font_style.dart';
+import '../../../../../constant/sizedbox.dart';
 import '../../../../../data/data.dart';
+import '../../../../../responsive/common_responsive_value.dart';
 
 class HomeWidget {
   Container headlineBlock() {
@@ -88,8 +93,7 @@ class HomeWidget {
                           children: List.generate(
                             Data.bedecketItem.length,
                             (index) => Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: Get.width * 0.008, vertical: 12),
+                              padding: EdgeInsets.symmetric(horizontal: Get.width * 0.008, vertical: 12),
                               child: CommonWidget.text(
                                 '${Data.bedecketItem[index]}:',
                                 style: FontTextStyle.kPrimaryLight18W600PR,
@@ -102,8 +106,7 @@ class HomeWidget {
                           children: List.generate(
                             Data.bedecketValue.length,
                             (index) => Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: Get.width * 0.01, vertical: 12),
+                              padding: EdgeInsets.symmetric(horizontal: Get.width * 0.01, vertical: 12),
                               child: CommonWidget.text(
                                 '${Data.bedecketValue[index]}',
                                 style: FontTextStyle.kPrimaryLight18W600PR,
@@ -165,8 +168,7 @@ class HomeWidget {
                                   CommonWidget.text(
                                     "Hong Kong expected to confirm 614 coronavirus cases",
                                     textAlign: TextAlign.start,
-                                    style: FontTextStyle.kPrimaryLight18W600PR
-                                        .copyWith(height: Get.width * 0.0008),
+                                    style: FontTextStyle.kPrimaryLight18W600PR.copyWith(height: Get.width * 0.0008),
                                   ),
                                   SizedBox(height: Get.width * 0.005),
                                   CommonWidget.text(
@@ -174,8 +176,7 @@ class HomeWidget {
                                     textAlign: TextAlign.justify,
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 8,
-                                    style: FontTextStyle.kGreyLight16W600PR
-                                        .copyWith(
+                                    style: FontTextStyle.kGreyLight16W600PR.copyWith(
                                       height: Get.width * 0.0008,
                                     ),
                                   ),
@@ -190,10 +191,7 @@ class HomeWidget {
                               child: Container(
                                 height: 413,
                                 decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: AssetImage(
-                                          'assets/images/public.png')),
+                                  image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/images/public.png')),
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                               ),
@@ -226,15 +224,13 @@ class HomeWidget {
                   borderRadius: BorderRadius.circular(5),
                 ),
                 margin: EdgeInsets.only(right: Get.width * 0.015),
-                padding: EdgeInsets.symmetric(
-                    vertical: Get.width * 0.02, horizontal: Get.width * 0.01),
+                padding: EdgeInsets.symmetric(vertical: Get.width * 0.02, horizontal: Get.width * 0.01),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     CommonWidget.text(
                       '25%',
-                      style: FontTextStyle.kWhite83W600PR
-                          .copyWith(fontSize: Get.width * 0.045),
+                      style: FontTextStyle.kWhite83W600PR.copyWith(fontSize: Get.width * 0.045),
                     ),
                     LinearPercentIndicator(
                       lineHeight: 8.0,
@@ -276,15 +272,13 @@ class HomeWidget {
                               Expanded(
                                 child: CommonWidget.text(
                                   "Add your work experience",
-                                  style: FontTextStyle.kBlueLight20W600PR
-                                      .copyWith(fontSize: Get.height * 0.018),
+                                  style: FontTextStyle.kBlueLight20W600PR.copyWith(fontSize: Get.height * 0.018),
                                 ),
                               ),
                               Container(
                                 color: Colors.black.withOpacity(0.2),
                                 height: 25,
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: Get.width * 0.006),
+                                padding: EdgeInsets.symmetric(horizontal: Get.width * 0.006),
                                 child: Center(
                                     child: CommonWidget.text(
                                   '+20%',
@@ -309,15 +303,11 @@ class HomeWidget {
                     ),
                     Container(
                       height: Get.height * 0.06,
-                      decoration: BoxDecoration(
-                          color: ColorPicker.kBlueLight,
-                          borderRadius:
-                              BorderRadius.circular(Get.height * 0.01)),
+                      decoration: BoxDecoration(color: ColorPicker.kBlueLight, borderRadius: BorderRadius.circular(Get.height * 0.01)),
                       child: Center(
                         child: CommonWidget.text(
                           "Edit my profile",
-                          style: TextStyle(
-                              color: Colors.white, fontSize: Get.height * 0.02),
+                          style: TextStyle(color: Colors.white, fontSize: Get.height * 0.02),
                         ),
                       ),
                     ),
@@ -333,9 +323,7 @@ class HomeWidget {
     return Container(
       margin: EdgeInsets.only(right: Get.width * 0.1, left: Get.width * 0.07),
       height: 743,
-      decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: ColorPicker.kBorder, width: 2)),
+      decoration: BoxDecoration(color: Colors.white, border: Border.all(color: ColorPicker.kBorder, width: 2)),
       child: Row(
         children: [
           Expanded(
@@ -348,62 +336,52 @@ class HomeWidget {
                   children: [
                     Expanded(
                       flex: 3,
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CommonWidget.text(
-                              'Video',
-                              style: FontTextStyle.kPrimaryLight20W600PR,
-                            ),
-                            Divider(
-                              color: ColorPicker.kBorder,
-                              thickness: 1,
-                            ),
-                            Expanded(
-                              child: Container(
-                                  margin: EdgeInsets.symmetric(
-                                      vertical: Get.width * 0.01),
-                                  alignment: Alignment.center,
-                                  // width: Get.width,
-                                  decoration: BoxDecoration(
-                                      color: ColorPicker.kBlueLight,
-                                      borderRadius: BorderRadius.circular(4)),
-                                  child: CommonWidget.text(
-                                    'Widget Area',
-                                    style: FontTextStyle.kBlueDark32W600PR,
-                                  )),
-                            ),
-                          ]),
+                      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                        CommonWidget.text(
+                          'Video',
+                          style: FontTextStyle.kPrimaryLight20W600PR,
+                        ),
+                        Divider(
+                          color: ColorPicker.kBorder,
+                          thickness: 1,
+                        ),
+                        Expanded(
+                          child: Container(
+                              margin: EdgeInsets.symmetric(vertical: Get.width * 0.01),
+                              alignment: Alignment.center,
+                              // width: Get.width,
+                              decoration: BoxDecoration(color: ColorPicker.kBlueLight, borderRadius: BorderRadius.circular(4)),
+                              child: CommonWidget.text(
+                                'Widget Area',
+                                style: FontTextStyle.kBlueDark32W600PR,
+                              )),
+                        ),
+                      ]),
                     ),
                     SizedBox(height: 50),
                     Expanded(
                       flex: 2,
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CommonWidget.text(
-                              'Widget block type X',
-                              style: FontTextStyle.kPrimaryLight20W600PR,
-                            ),
-                            Divider(
-                              color: ColorPicker.kBorder,
-                              thickness: 1,
-                            ),
-                            Expanded(
-                              child: Container(
-                                  margin: EdgeInsets.symmetric(
-                                      vertical: Get.width * 0.01),
-                                  alignment: Alignment.center,
-                                  // width: Get.width,
-                                  decoration: BoxDecoration(
-                                      color: ColorPicker.kBlueLight,
-                                      borderRadius: BorderRadius.circular(4)),
-                                  child: CommonWidget.text(
-                                    'Widget Area',
-                                    style: FontTextStyle.kBlueDark32W600PR,
-                                  )),
-                            ),
-                          ]),
+                      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                        CommonWidget.text(
+                          'Widget block type X',
+                          style: FontTextStyle.kPrimaryLight20W600PR,
+                        ),
+                        Divider(
+                          color: ColorPicker.kBorder,
+                          thickness: 1,
+                        ),
+                        Expanded(
+                          child: Container(
+                              margin: EdgeInsets.symmetric(vertical: Get.width * 0.01),
+                              alignment: Alignment.center,
+                              // width: Get.width,
+                              decoration: BoxDecoration(color: ColorPicker.kBlueLight, borderRadius: BorderRadius.circular(4)),
+                              child: CommonWidget.text(
+                                'Widget Area',
+                                style: FontTextStyle.kBlueDark32W600PR,
+                              )),
+                        ),
+                      ]),
                     ),
                   ],
                 ),
@@ -439,9 +417,7 @@ class HomeWidget {
                                 padding: EdgeInsets.all(Get.height * 0.03),
                                 height: Get.height * 0.1,
                                 width: Get.height * 0.1,
-                                decoration: BoxDecoration(
-                                    color: ColorPicker.kBlueLight,
-                                    borderRadius: BorderRadius.circular(4)),
+                                decoration: BoxDecoration(color: ColorPicker.kBlueLight, borderRadius: BorderRadius.circular(4)),
                                 child: SvgPicture.asset(
                                   'assets/icons/play_arrow.svg',
                                   color: Colors.white,
@@ -476,42 +452,34 @@ class HomeWidget {
                   children: [
                     Expanded(
                       flex: 3,
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: Container(
-                                  alignment: Alignment.center,
-                                  // width: Get.width,
-                                  decoration: BoxDecoration(
-                                      color: ColorPicker.kBlueLight,
-                                      borderRadius: BorderRadius.circular(4)),
-                                  child: CommonWidget.text(
-                                    'Widget Area',
-                                    style: FontTextStyle.kBlueLight33W600PR,
-                                  )),
-                            ),
-                          ]),
+                      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                        Expanded(
+                          child: Container(
+                              alignment: Alignment.center,
+                              // width: Get.width,
+                              decoration: BoxDecoration(color: ColorPicker.kBlueLight, borderRadius: BorderRadius.circular(4)),
+                              child: CommonWidget.text(
+                                'Widget Area',
+                                style: FontTextStyle.kBlueLight33W600PR,
+                              )),
+                        ),
+                      ]),
                     ),
                     SizedBox(height: 50),
                     Expanded(
                       flex: 2,
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: Container(
-                                  alignment: Alignment.center,
-                                  // width: Get.width,
-                                  decoration: BoxDecoration(
-                                      color: ColorPicker.kBlueLight,
-                                      borderRadius: BorderRadius.circular(4)),
-                                  child: CommonWidget.text(
-                                    'Widget Area',
-                                    style: FontTextStyle.kBlueLight33W600PR,
-                                  )),
-                            ),
-                          ]),
+                      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                        Expanded(
+                          child: Container(
+                              alignment: Alignment.center,
+                              // width: Get.width,
+                              decoration: BoxDecoration(color: ColorPicker.kBlueLight, borderRadius: BorderRadius.circular(4)),
+                              child: CommonWidget.text(
+                                'Widget Area',
+                                style: FontTextStyle.kBlueLight33W600PR,
+                              )),
+                        ),
+                      ]),
                     ),
                   ],
                 ),
@@ -575,10 +543,7 @@ class HomeWidget {
                                   Container(
                                     height: Get.width * 0.14,
                                     decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image: AssetImage(
-                                              'assets/images/alone_girl.png')),
+                                      image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/images/alone_girl.png')),
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                   ),
@@ -587,20 +552,12 @@ class HomeWidget {
                                   ),
                                   RichText(
                                     text: TextSpan(
-                                      text:
-                                          "‘I’ve had letters from klansmen’: ",
-                                      style: FontTextStyle.kRed28W600PR
-                                          .copyWith(
-                                              fontSize: Get.width * 0.015),
+                                      text: "‘I’ve had letters from klansmen’: ",
+                                      style: FontTextStyle.kRed28W600PR.copyWith(fontSize: Get.width * 0.015),
                                       children: <TextSpan>[
                                         TextSpan(
-                                            text:
-                                                'Jennifer Beals on Flashdance',
-                                            style: FontTextStyle
-                                                .kPrimaryLight28W600PR
-                                                .copyWith(
-                                                    fontSize:
-                                                        Get.width * 0.015)),
+                                            text: 'Jennifer Beals on Flashdance',
+                                            style: FontTextStyle.kPrimaryLight28W600PR.copyWith(fontSize: Get.width * 0.015)),
                                       ],
                                     ),
                                   ),
@@ -619,9 +576,7 @@ class HomeWidget {
                                     width: Get.width * 0.15,
                                     child: CommonWidget.text(
                                       'How buddhism has changed the west for better',
-                                      style: FontTextStyle.kPrimaryLight28W600PR
-                                          .copyWith(
-                                              fontSize: Get.width * 0.015),
+                                      style: FontTextStyle.kPrimaryLight28W600PR.copyWith(fontSize: Get.width * 0.015),
                                     ),
                                   ),
                                   SizedBox(
@@ -629,8 +584,7 @@ class HomeWidget {
                                   ),
                                   CommonWidget.text(
                                     'Rebecca Sonlit',
-                                    style: FontTextStyle.kRed28W600PR
-                                        .copyWith(fontSize: Get.width * 0.015),
+                                    style: FontTextStyle.kRed28W600PR.copyWith(fontSize: Get.width * 0.015),
                                   ),
                                   Spacer(),
                                   Row(
@@ -639,8 +593,7 @@ class HomeWidget {
                                       CircleAvatar(
                                         radius: Get.width * 0.04,
                                         backgroundColor: Colors.white,
-                                        backgroundImage: AssetImage(
-                                            'assets/images/profile2.png'),
+                                        backgroundImage: AssetImage('assets/images/profile2.png'),
                                       ),
                                     ],
                                   )
@@ -732,8 +685,7 @@ class HomeWidget {
                                   CommonWidget.text(
                                     "Hong Kong expected to confirm 614 coronavirus cases",
                                     textAlign: TextAlign.start,
-                                    style: FontTextStyle.kPrimaryLight18W600PR
-                                        .copyWith(height: Get.width * 0.0008),
+                                    style: FontTextStyle.kPrimaryLight18W600PR.copyWith(height: Get.width * 0.0008),
                                   ),
                                   SizedBox(height: Get.width * 0.005),
                                   CommonWidget.text(
@@ -741,8 +693,7 @@ class HomeWidget {
                                     textAlign: TextAlign.justify,
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 8,
-                                    style: FontTextStyle.kGreyLight16W600PR
-                                        .copyWith(
+                                    style: FontTextStyle.kGreyLight16W600PR.copyWith(
                                       height: Get.width * 0.0008,
                                     ),
                                   ),
@@ -757,10 +708,7 @@ class HomeWidget {
                               child: Container(
                                 height: 413,
                                 decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: AssetImage(
-                                          'assets/images/public.png')),
+                                  image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/images/public.png')),
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                               ),
@@ -860,8 +808,7 @@ class HomeWidget {
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
                                     fit: BoxFit.cover,
-                                    image:
-                                        AssetImage('assets/images/twitter.png'),
+                                    image: AssetImage('assets/images/twitter.png'),
                                   ),
                                 ),
                               ),
@@ -888,13 +835,11 @@ class HomeWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Expanded(
                                         child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             CommonWidget.text(
                                               "Winter Olympics/",
@@ -904,11 +849,7 @@ class HomeWidget {
                                             CommonWidget.text(
                                               "snowboarder Su Yiming claims silver in slopestyle final",
                                               textAlign: TextAlign.start,
-                                              style: FontTextStyle
-                                                  .kPrimaryLight18W600PR
-                                                  .copyWith(
-                                                      height:
-                                                          Get.width * 0.0008),
+                                              style: FontTextStyle.kPrimaryLight18W600PR.copyWith(height: Get.width * 0.0008),
                                             ),
                                           ],
                                         ),
@@ -918,11 +859,8 @@ class HomeWidget {
                                         width: Get.width * 0.03,
                                         decoration: BoxDecoration(
                                             color: ColorPicker.kRed,
-                                            image: DecorationImage(
-                                                image: AssetImage(
-                                                    'assets/images/profile.png')),
-                                            borderRadius:
-                                                BorderRadius.circular(5)),
+                                            image: DecorationImage(image: AssetImage('assets/images/profile.png')),
+                                            borderRadius: BorderRadius.circular(5)),
                                       ),
                                     ],
                                   ),
@@ -930,8 +868,7 @@ class HomeWidget {
                                   CommonWidget.text(
                                     "Chinese and Russian leaders call on west to abandon cold war tactics in talks ahead of Beijing Olympics",
                                     textAlign: TextAlign.start,
-                                    style: FontTextStyle.kGreyLight16W600PR
-                                        .copyWith(
+                                    style: FontTextStyle.kGreyLight16W600PR.copyWith(
                                       height: Get.width * 0.0008,
                                     ),
                                   ),
@@ -953,15 +890,13 @@ class HomeWidget {
                                   CommonWidget.text(
                                     "snowboarder Su Yiming claims silver in slopestyle final",
                                     textAlign: TextAlign.start,
-                                    style: FontTextStyle.kPrimaryLight18W600PR
-                                        .copyWith(height: Get.width * 0.0008),
+                                    style: FontTextStyle.kPrimaryLight18W600PR.copyWith(height: Get.width * 0.0008),
                                   ),
                                   SizedBox(height: Get.width * 0.005),
                                   CommonWidget.text(
                                     "Chinese and Russian leaders call on west to abandon cold war tactics in talks ahead of Beijing Olympics",
                                     textAlign: TextAlign.start,
-                                    style: FontTextStyle.kGreyLight16W600PR
-                                        .copyWith(
+                                    style: FontTextStyle.kGreyLight16W600PR.copyWith(
                                       height: Get.width * 0.0008,
                                     ),
                                   ),
@@ -983,15 +918,13 @@ class HomeWidget {
                                   CommonWidget.text(
                                     "snowboarder Su Yiming claims silver in slopestyle final",
                                     textAlign: TextAlign.start,
-                                    style: FontTextStyle.kPrimaryLight18W600PR
-                                        .copyWith(height: Get.width * 0.0008),
+                                    style: FontTextStyle.kPrimaryLight18W600PR.copyWith(height: Get.width * 0.0008),
                                   ),
                                   SizedBox(height: Get.width * 0.005),
                                   CommonWidget.text(
                                     "Chinese and Russian leaders call on west to abandon cold war tactics in talks ahead of Beijing Olympics",
                                     textAlign: TextAlign.start,
-                                    style: FontTextStyle.kGreyLight16W600PR
-                                        .copyWith(
+                                    style: FontTextStyle.kGreyLight16W600PR.copyWith(
                                       height: Get.width * 0.0008,
                                     ),
                                   ),
@@ -1095,8 +1028,7 @@ class HomeWidget {
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
                                     fit: BoxFit.cover,
-                                    image:
-                                        AssetImage('assets/images/twitter.png'),
+                                    image: AssetImage('assets/images/twitter.png'),
                                   ),
                                 ),
                               ),
@@ -1130,15 +1062,13 @@ class HomeWidget {
                                   CommonWidget.text(
                                     "snowboarder Su Yiming claims silver in slopestyle final",
                                     textAlign: TextAlign.start,
-                                    style: FontTextStyle.kPrimaryLight18W600PR
-                                        .copyWith(height: Get.width * 0.0008),
+                                    style: FontTextStyle.kPrimaryLight18W600PR.copyWith(height: Get.width * 0.0008),
                                   ),
                                   SizedBox(height: Get.width * 0.005),
                                   CommonWidget.text(
                                     "Chinese and Russian leaders call on west to abandon cold war tactics in talks ahead of Beijing Olympics",
                                     textAlign: TextAlign.start,
-                                    style: FontTextStyle.kGreyLight16W600PR
-                                        .copyWith(
+                                    style: FontTextStyle.kGreyLight16W600PR.copyWith(
                                       height: Get.width * 0.0008,
                                     ),
                                   ),
@@ -1153,13 +1083,11 @@ class HomeWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Expanded(
                                         child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             CommonWidget.text(
                                               "Winter Olympics/",
@@ -1169,11 +1097,7 @@ class HomeWidget {
                                             CommonWidget.text(
                                               "snowboarder Su Yiming claims silver in slopestyle final",
                                               textAlign: TextAlign.start,
-                                              style: FontTextStyle
-                                                  .kPrimaryLight18W600PR
-                                                  .copyWith(
-                                                      height:
-                                                          Get.width * 0.0008),
+                                              style: FontTextStyle.kPrimaryLight18W600PR.copyWith(height: Get.width * 0.0008),
                                             ),
                                           ],
                                         ),
@@ -1183,11 +1107,8 @@ class HomeWidget {
                                         width: Get.width * 0.03,
                                         decoration: BoxDecoration(
                                             color: ColorPicker.kRed,
-                                            image: DecorationImage(
-                                                image: AssetImage(
-                                                    'assets/images/profile.png')),
-                                            borderRadius:
-                                                BorderRadius.circular(5)),
+                                            image: DecorationImage(image: AssetImage('assets/images/profile.png')),
+                                            borderRadius: BorderRadius.circular(5)),
                                       ),
                                     ],
                                   ),
@@ -1195,8 +1116,7 @@ class HomeWidget {
                                   CommonWidget.text(
                                     "Chinese and Russian leaders call on west to abandon cold war tactics in talks ahead of Beijing Olympics",
                                     textAlign: TextAlign.start,
-                                    style: FontTextStyle.kGreyLight16W600PR
-                                        .copyWith(
+                                    style: FontTextStyle.kGreyLight16W600PR.copyWith(
                                       height: Get.width * 0.0008,
                                     ),
                                   ),
@@ -1218,15 +1138,13 @@ class HomeWidget {
                                   CommonWidget.text(
                                     "snowboarder Su Yiming claims silver in slopestyle final",
                                     textAlign: TextAlign.start,
-                                    style: FontTextStyle.kPrimaryLight18W600PR
-                                        .copyWith(height: Get.width * 0.0008),
+                                    style: FontTextStyle.kPrimaryLight18W600PR.copyWith(height: Get.width * 0.0008),
                                   ),
                                   SizedBox(height: Get.width * 0.005),
                                   CommonWidget.text(
                                     "Chinese and Russian leaders call on west to abandon cold war tactics in talks ahead of Beijing Olympics",
                                     textAlign: TextAlign.start,
-                                    style: FontTextStyle.kGreyLight16W600PR
-                                        .copyWith(
+                                    style: FontTextStyle.kGreyLight16W600PR.copyWith(
                                       height: Get.width * 0.0008,
                                     ),
                                   ),
@@ -1350,15 +1268,13 @@ class HomeWidget {
                                   CommonWidget.text(
                                     "snowboarder Su Yiming claims silver in slopestyle final",
                                     textAlign: TextAlign.start,
-                                    style: FontTextStyle.kPrimaryLight18W600PR
-                                        .copyWith(height: Get.width * 0.0008),
+                                    style: FontTextStyle.kPrimaryLight18W600PR.copyWith(height: Get.width * 0.0008),
                                   ),
                                   SizedBox(height: Get.width * 0.005),
                                   CommonWidget.text(
                                     "Chinese and Russian leaders call on west to abandon cold war tactics in talks ahead of Beijing Olympics",
                                     textAlign: TextAlign.start,
-                                    style: FontTextStyle.kGreyLight16W600PR
-                                        .copyWith(
+                                    style: FontTextStyle.kGreyLight16W600PR.copyWith(
                                       height: Get.width * 0.0008,
                                     ),
                                   ),
@@ -1380,15 +1296,13 @@ class HomeWidget {
                                   CommonWidget.text(
                                     "snowboarder Su Yiming claims silver in slopestyle final",
                                     textAlign: TextAlign.start,
-                                    style: FontTextStyle.kPrimaryLight18W600PR
-                                        .copyWith(height: Get.width * 0.0008),
+                                    style: FontTextStyle.kPrimaryLight18W600PR.copyWith(height: Get.width * 0.0008),
                                   ),
                                   SizedBox(height: Get.width * 0.005),
                                   CommonWidget.text(
                                     "Chinese and Russian leaders call on west to abandon cold war tactics in talks ahead of Beijing Olympics",
                                     textAlign: TextAlign.start,
-                                    style: FontTextStyle.kGreyLight16W600PR
-                                        .copyWith(
+                                    style: FontTextStyle.kGreyLight16W600PR.copyWith(
                                       height: Get.width * 0.0008,
                                     ),
                                   ),
@@ -1410,15 +1324,13 @@ class HomeWidget {
                                   CommonWidget.text(
                                     "snowboarder Su Yiming claims silver in slopestyle final",
                                     textAlign: TextAlign.start,
-                                    style: FontTextStyle.kPrimaryLight18W600PR
-                                        .copyWith(height: Get.width * 0.0008),
+                                    style: FontTextStyle.kPrimaryLight18W600PR.copyWith(height: Get.width * 0.0008),
                                   ),
                                   SizedBox(height: Get.width * 0.005),
                                   CommonWidget.text(
                                     "Chinese and Russian leaders call on west to abandon cold war tactics in talks ahead of Beijing Olympics",
                                     textAlign: TextAlign.start,
-                                    style: FontTextStyle.kGreyLight16W600PR
-                                        .copyWith(
+                                    style: FontTextStyle.kGreyLight16W600PR.copyWith(
                                       height: Get.width * 0.0008,
                                     ),
                                   ),
@@ -1516,8 +1428,7 @@ class HomeWidget {
                                       image: DecorationImage(
                                         fit: BoxFit.cover,
                                         alignment: Alignment.topCenter,
-                                        image:
-                                            AssetImage('assets/images/E2.png'),
+                                        image: AssetImage('assets/images/E2.png'),
                                       ),
                                     ),
                                   ),
@@ -1532,17 +1443,13 @@ class HomeWidget {
                                   CommonWidget.text(
                                     "snowboarder Su Yiming claims silver in slopestyle final",
                                     textAlign: TextAlign.start,
-                                    style: FontTextStyle.kPrimaryLight18W600PR
-                                        .copyWith(
-                                            fontSize: Get.width * 0.008,
-                                            height: Get.width * 0.0008),
+                                    style: FontTextStyle.kPrimaryLight18W600PR.copyWith(fontSize: Get.width * 0.008, height: Get.width * 0.0008),
                                   ),
                                   SizedBox(height: Get.width * 0.005),
                                   CommonWidget.text(
                                     "Chinese and Russian leaders call on west to abandon cold war tactics in talks ahead of Beijing Olympics",
                                     textAlign: TextAlign.start,
-                                    style: FontTextStyle.kGreyLight16W600PR
-                                        .copyWith(
+                                    style: FontTextStyle.kGreyLight16W600PR.copyWith(
                                       fontSize: Get.width * 0.008,
                                       height: Get.width * 0.0008,
                                     ),
@@ -1562,8 +1469,7 @@ class HomeWidget {
                                       image: DecorationImage(
                                         fit: BoxFit.cover,
                                         alignment: Alignment.topCenter,
-                                        image:
-                                            AssetImage('assets/images/E1.png'),
+                                        image: AssetImage('assets/images/E1.png'),
                                       ),
                                     ),
                                   ),
@@ -1576,10 +1482,8 @@ class HomeWidget {
                                       style: FontTextStyle.kRed8W600PR,
                                       children: <TextSpan>[
                                         TextSpan(
-                                            text:
-                                                ' snowboarder Su Yiming claims silver in slopestyle final',
-                                            style: FontTextStyle
-                                                .kPrimaryLight18W600PR),
+                                            text: ' snowboarder Su Yiming claims silver in slopestyle final',
+                                            style: FontTextStyle.kPrimaryLight18W600PR),
                                       ],
                                     ),
                                   ),
@@ -1590,8 +1494,7 @@ class HomeWidget {
                                     'The expected number of new cases is nearly twice the amount recorded on Sunday, with one expert warning the daily count could hit 1,000 soon.',
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 3,
-                                    style: FontTextStyle.kGreyLight16W600PR
-                                        .copyWith(fontSize: Get.width * 0.01),
+                                    style: FontTextStyle.kGreyLight16W600PR.copyWith(fontSize: Get.width * 0.01),
                                   ),
                                 ],
                               ),
@@ -1625,15 +1528,13 @@ class HomeWidget {
                                   CommonWidget.text(
                                     "snowboarder Su Yiming claims silver in slopestyle final",
                                     textAlign: TextAlign.start,
-                                    style: FontTextStyle.kPrimaryLight18W600PR
-                                        .copyWith(height: Get.width * 0.0008),
+                                    style: FontTextStyle.kPrimaryLight18W600PR.copyWith(height: Get.width * 0.0008),
                                   ),
                                   SizedBox(height: Get.width * 0.005),
                                   CommonWidget.text(
                                     "Chinese and Russian leaders call on west to abandon cold war tactics in talks ahead of Beijing Olympics",
                                     textAlign: TextAlign.start,
-                                    style: FontTextStyle.kGreyLight16W600PR
-                                        .copyWith(
+                                    style: FontTextStyle.kGreyLight16W600PR.copyWith(
                                       height: Get.width * 0.0008,
                                     ),
                                   ),
@@ -1655,15 +1556,13 @@ class HomeWidget {
                                   CommonWidget.text(
                                     "snowboarder Su Yiming claims silver in slopestyle final",
                                     textAlign: TextAlign.start,
-                                    style: FontTextStyle.kPrimaryLight18W600PR
-                                        .copyWith(height: Get.width * 0.0008),
+                                    style: FontTextStyle.kPrimaryLight18W600PR.copyWith(height: Get.width * 0.0008),
                                   ),
                                   SizedBox(height: Get.width * 0.005),
                                   CommonWidget.text(
                                     "Chinese and Russian leaders call on west to abandon cold war tactics in talks ahead of Beijing Olympics",
                                     textAlign: TextAlign.start,
-                                    style: FontTextStyle.kGreyLight16W600PR
-                                        .copyWith(
+                                    style: FontTextStyle.kGreyLight16W600PR.copyWith(
                                       height: Get.width * 0.0008,
                                     ),
                                   ),
@@ -1685,15 +1584,13 @@ class HomeWidget {
                                   CommonWidget.text(
                                     "snowboarder Su Yiming claims silver in slopestyle final",
                                     textAlign: TextAlign.start,
-                                    style: FontTextStyle.kPrimaryLight18W600PR
-                                        .copyWith(height: Get.width * 0.0008),
+                                    style: FontTextStyle.kPrimaryLight18W600PR.copyWith(height: Get.width * 0.0008),
                                   ),
                                   SizedBox(height: Get.width * 0.005),
                                   CommonWidget.text(
                                     "Chinese and Russian leaders call on west to abandon cold war tactics in talks ahead of Beijing Olympics",
                                     textAlign: TextAlign.start,
-                                    style: FontTextStyle.kGreyLight16W600PR
-                                        .copyWith(
+                                    style: FontTextStyle.kGreyLight16W600PR.copyWith(
                                       height: Get.width * 0.0008,
                                     ),
                                   ),
@@ -1716,66 +1613,29 @@ class HomeWidget {
         ));
   }
 
-  Padding latestNewsBlock() {
+  Padding latestNewsBlock(String title, BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(left: Get.width * 0.07),
-      child: Container(
-        height: 168,
-        child: ListView.builder(
-          itemCount: Data.imageList.length,
-          shrinkWrap: true,
-          physics: AlwaysScrollableScrollPhysics(),
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) => Container(
-            height: 168,
-            margin: EdgeInsets.only(right: Get.width * 0.01),
-            width: 494,
-            decoration: BoxDecoration(
-              color: Colors.white,
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: AssetImage(Data.imageList[index])),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.only(left: 25, top: 20, bottom: 20),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(5),
-                        bottomRight: Radius.circular(5),
-                      ),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CommonWidget.text(
-                          'Sarah Lee MHL',
-                          style: FontTextStyle.kBlueDark22W600PR,
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        CommonWidget.text(
-                          'Nasa has expressed concern about SpaceX’s proposed second-generation',
-                          style: FontTextStyle.kGreyLight16W600PR,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
+      padding: EdgeInsets.only(left: CommonResponsiveValue.genericDouble(context, Get.width * 0.07, Get.width * 0.07)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CommonWidget.text(
+            title,
+            style: FontTextStyle.kBlueDark28W600PR,
           ),
-        ),
+          Container(
+            height: 350,
+            child: ListView.builder(
+                itemCount: Data.imageList.length,
+                shrinkWrap: true,
+                physics: AlwaysScrollableScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) => NewsTile(
+                      height: CommonResponsiveValue.genericDouble(context, 332, 300),
+                      width: CommonResponsiveValue.genericDouble(context, 364, 364),
+                    )),
+          ),
+        ],
       ),
     );
   }
@@ -1802,9 +1662,7 @@ class HomeWidget {
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
-                      image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: AssetImage(Data.imageList[index])),
+                      image: DecorationImage(fit: BoxFit.cover, image: AssetImage(Data.imageList[index])),
                     ),
                   ),
                 ),
@@ -1832,9 +1690,7 @@ class HomeWidget {
                         Container(
                           height: 36,
                           width: 110,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(3),
-                              color: ColorPicker.kBlueLight),
+                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(3), color: ColorPicker.kBlueLight),
                           child: Center(
                               child: CommonWidget.text(
                             'Connect',
@@ -1863,9 +1719,7 @@ class HomeWidget {
             (index) => Padding(
               padding: const EdgeInsets.all(4.0),
               child: CircleAvatar(
-                backgroundColor: index == 0
-                    ? ColorPicker.kBlueLight
-                    : ColorPicker.kBlueLight.withOpacity(0.3),
+                backgroundColor: index == 0 ? ColorPicker.kBlueLight : ColorPicker.kBlueLight.withOpacity(0.3),
                 radius: 8,
               ),
             ),
@@ -1875,82 +1729,40 @@ class HomeWidget {
     );
   }
 
-  Padding jobsBlock() {
-    return Padding(
-      padding: EdgeInsets.only(left: Get.width * 0.07),
-      child: Container(
-        height: 339,
-        child: ListView.builder(
-          itemCount: 10,
-          shrinkWrap: true,
-          physics: AlwaysScrollableScrollPhysics(),
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) => Container(
-            height: 339,
-            margin: EdgeInsets.only(right: Get.width * 0.01),
-            width: 303,
-            decoration: BoxDecoration(
-                border: Border.all(width: 2, color: ColorPicker.kBorder1),
-                borderRadius: BorderRadius.circular(5),
-                color: Colors.white),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Align(
-                  alignment: Alignment.topRight,
-                  child: Container(
-                    height: 30,
-                    width: 153,
-                    margin: EdgeInsets.only(top: 16, right: 16),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(3),
-                        color: ColorPicker.kGreen),
-                    child: Center(
-                        child: CommonWidget.text(
-                      'Premium Listing',
-                      style: FontTextStyle.kWhite116W600PR,
-                    )),
-                  ),
-                ),
-                index.isOdd
-                    ? SizedBox(
-                        height: 32,
-                      )
-                    : SizedBox(),
-                index.isOdd
-                    ? Image.asset('assets/images/fairmont_logo.png')
-                    : Image.asset('assets/images/hilton_logo.png'),
-                SizedBox(
-                  height: 35,
-                ),
-                Divider(
-                  color: ColorPicker.kBorder,
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: CommonWidget.text(
-                      'Cluster Sales Manager - Leisure & MICE',
-                      style: FontTextStyle.kBlueDark22W600PR),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: CommonWidget.text('Hilton, Capetown',
-                        style: FontTextStyle.kGreyDark16W600PR),
-                  ),
-                ),
-              ],
-            ),
+  ResponsiveRowColumn jobsBlock(BuildContext context) {
+    return ResponsiveRowColumn(
+      layout: ResponsiveRowColumnType.COLUMN,
+      columnPadding: EdgeInsets.only(left: Get.width * 0.08),
+      children: [
+        ResponsiveRowColumnItem(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CommonWidget.text(
+                'Jobs you might be interested in',
+                style: FontTextStyle.kBlueDark28W600PR,
+              ),
+              SB.SH30(),
+              Container(
+                height: 339,
+                child: ListView.builder(
+                    itemCount: 10,
+                    shrinkWrap: true,
+                    physics: AlwaysScrollableScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) => Row(
+                          children: [
+                            JobTile(
+                              height: CommonResponsiveValue.genericDouble(context, 290, 300),
+                              width: CommonResponsiveValue.genericDouble(context, 300, 280),
+                            ),
+                          ],
+                        )),
+              ),
+            ],
           ),
-        ),
-      ),
+        )
+      ],
     );
   }
 
@@ -1972,8 +1784,7 @@ class HomeWidget {
           color: ColorPicker.kPrimaryLight,
           borderRadius: BorderRadius.circular(5),
         ),
-        padding: EdgeInsets.symmetric(
-            vertical: Get.width * 0.02, horizontal: Get.width * 0.01),
+        padding: EdgeInsets.symmetric(vertical: Get.width * 0.02, horizontal: Get.width * 0.01),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -2019,8 +1830,7 @@ class HomeWidget {
                   children: List.generate(
                     Data.bedecketItem.length,
                     (index) => Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: Get.width * 0.008, vertical: 12),
+                      padding: EdgeInsets.symmetric(horizontal: Get.width * 0.008, vertical: 12),
                       child: CommonWidget.text(
                         '${Data.bedecketItem[index]}:',
                         style: FontTextStyle.kWhite18W600PR,
@@ -2033,8 +1843,7 @@ class HomeWidget {
                   children: List.generate(
                     Data.bedecketValue.length,
                     (index) => Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: Get.width * 0.01, vertical: 12),
+                      padding: EdgeInsets.symmetric(horizontal: Get.width * 0.01, vertical: 12),
                       child: CommonWidget.text(
                         '${Data.bedecketValue[index]}',
                         style: FontTextStyle.kWhite18W600PR,
@@ -2087,8 +1896,7 @@ class HomeWidget {
                 CommonWidget.text(
                   "snowboarder Su Yiming claims silver in slopestyle final",
                   textAlign: TextAlign.start,
-                  style: FontTextStyle.kPrimaryLight18W600PR
-                      .copyWith(height: Get.width * 0.0008),
+                  style: FontTextStyle.kPrimaryLight18W600PR.copyWith(height: Get.width * 0.0008),
                 ),
                 SizedBox(height: 20),
                 CommonWidget.text(
@@ -2116,8 +1924,7 @@ class HomeWidget {
                 CommonWidget.text(
                   "snowboarder Su Yiming claims silver in slopestyle final",
                   textAlign: TextAlign.start,
-                  style: FontTextStyle.kPrimaryLight18W600PR
-                      .copyWith(height: Get.width * 0.0008),
+                  style: FontTextStyle.kPrimaryLight18W600PR.copyWith(height: Get.width * 0.0008),
                 ),
                 SizedBox(height: 20),
                 CommonWidget.text(
@@ -2145,8 +1952,7 @@ class HomeWidget {
                 CommonWidget.text(
                   "snowboarder Su Yiming claims silver in slopestyle final",
                   textAlign: TextAlign.start,
-                  style: FontTextStyle.kPrimaryLight18W600PR
-                      .copyWith(height: Get.width * 0.0008),
+                  style: FontTextStyle.kPrimaryLight18W600PR.copyWith(height: Get.width * 0.0008),
                 ),
                 SizedBox(height: 20),
                 CommonWidget.text(

@@ -1,30 +1,28 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/material.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/layouts/page_scaffold.dart';
-import 'package:flutter/material.dart';
 import 'package:holedo/main.dart';
 import 'package:holedo/models/holedoapi/article.dart';
 import 'package:holedo/models/holedoapi/article_category.dart';
+import 'package:holedo/models/models.dart';
 import 'package:holedo/responsive/responsive.dart';
 import 'package:routemaster/routemaster.dart';
-import 'package:holedo/models/models.dart';
 
 class NewsfrontPage extends StatelessWidget {
   const NewsfrontPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('Hellow news page');
     CarouselController buttonCarouselController = CarouselController();
     final tabState = TabPage.of(context);
     final newsController = holedoDatabase.news;
     final bool isMobile = Responsive.isMobile(context);
     final bool isDesktop = Responsive.isDesktop(context);
-    final featuredNews =
-        newsController.fetchArticles(context: context, type: 'featured');
-    final tabs = Get.put(HoledoDatabase())
-        .articleCategories
-        .where((category) => category.menuItem == true);
+    final featuredNews = newsController.fetchArticles(context: context, type: 'featured');
+    final tabs = Get.put(HoledoDatabase()).articleCategories.where((category) => category.menuItem == true);
     return PageScaffold(
       title: 'Home Page',
       body: NestedScrollView(
@@ -57,18 +55,14 @@ class NewsfrontPage extends StatelessWidget {
                                 reverse: false,
                                 autoPlay: false,
                                 autoPlayInterval: Duration(seconds: 3),
-                                autoPlayAnimationDuration:
-                                    Duration(milliseconds: 800),
+                                autoPlayAnimationDuration: Duration(milliseconds: 800),
                                 autoPlayCurve: Curves.fastOutSlowIn,
                                 enlargeCenterPage: true,
                                 scrollDirection: Axis.horizontal,
                               ),
                               carouselController: buttonCarouselController,
-                              itemBuilder: (BuildContext context, int i,
-                                      int pageViewIndex) =>
-                                  NewsSliderCard(
-                                      data: newsController.dataList[i]
-                                          as Article));
+                              itemBuilder: (BuildContext context, int i, int pageViewIndex) =>
+                                  NewsSliderCard(data: newsController.dataList[i] as Article));
                       }
                     }),
                     Positioned(
@@ -133,14 +127,9 @@ class NewsfrontPage extends StatelessWidget {
               child: Container(
                 height: 46,
                 width: Get.width,
-                decoration: BoxDecoration(
-                    color: ColorPicker.kWhite,
-                    border: Border(
-                        bottom:
-                            BorderSide(color: Color(0xFFBDC4C7), width: 2))),
+                decoration: BoxDecoration(color: ColorPicker.kWhite, border: Border(bottom: BorderSide(color: Color(0xFFBDC4C7), width: 2))),
                 child: TabBar(
-                  padding: EdgeInsets.all(
-                      0.02), // fromWindowPadding(Get.window.padding, .2),
+                  padding: EdgeInsets.all(0.02), // fromWindowPadding(Get.window.padding, .2),
                   unselectedLabelColor: ColorPicker.kGreyLight7,
                   labelColor: ColorPicker.kBlueLight1,
                   indicatorWeight: 6,
@@ -175,8 +164,7 @@ class NewsfrontPage extends StatelessWidget {
                             child: TabBarView(
                               controller: tabState.controller,
                               children: <Widget>[
-                                for (var i = 0; i < tabs.length; i++)
-                                  PageStackNavigator(stack: tabState.stacks[i]),
+                                for (var i = 0; i < tabs.length; i++) PageStackNavigator(stack: tabState.stacks[i]),
                               ],
                             ),
                           ),
@@ -219,8 +207,7 @@ class NewsfrontListPage extends StatelessWidget {
     final bool isMobile = Responsive.isMobile(context);
 
     return FutureBuilder(
-      future: Get.put(HoledoDatabase().news).fetchArticles(
-          context: context, type: mode, category: category?.slug),
+      future: Get.put(HoledoDatabase().news).fetchArticles(context: context, type: mode, category: category?.slug),
       builder: (context, AsyncSnapshot<List<Article>> snapshot) {
         if (!snapshot.hasData) {
           return Center(
@@ -235,8 +222,7 @@ class NewsfrontListPage extends StatelessWidget {
                 mainAxisSpacing: 16,
                 itemCount: snapshot.data!.length,
                 itemBuilder: (context, index) {
-                  return NewsSingleCard(
-                      article: snapshot.data![index], showReleaseDate: true);
+                  return NewsSingleCard(article: snapshot.data![index], showReleaseDate: true);
                 },
               ),
             ],
@@ -268,12 +254,8 @@ class NewsfrontListPage extends StatelessWidget {
                   CustomScrollView(
                     slivers: [
                       FutureBuilder(
-                        future: Get.put(HoledoDatabase().news).fetchArticles(
-                            context: context,
-                            type: mode,
-                            category: category?.slug),
-                        builder:
-                            (context, AsyncSnapshot<List<Article>> snapshot) {
+                        future: Get.put(HoledoDatabase().news).fetchArticles(context: context, type: mode, category: category?.slug),
+                        builder: (context, AsyncSnapshot<List<Article>> snapshot) {
                           if (!snapshot.hasData) {
                             return Center(
                               child: CircularProgressIndicator(),
@@ -285,9 +267,7 @@ class NewsfrontListPage extends StatelessWidget {
                               crossAxisSpacing: 16,
                               mainAxisSpacing: 16,
                               itemBuilder: (context, index) {
-                                return NewsSingleCard(
-                                    article: snapshot.data![index],
-                                    showReleaseDate: true);
+                                return NewsSingleCard(article: snapshot.data![index], showReleaseDate: true);
                               },
                             );
                         },

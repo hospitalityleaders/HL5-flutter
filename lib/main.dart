@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:holedo/includes/url_strategy.dart';
 import 'package:holedo/layouts/page_scaffold.dart';
 import 'package:holedo/layouts/pages/chat_page.dart';
 import 'package:holedo/layouts/pages/content_page.dart';
-import 'package:holedo/includes/url_strategy.dart';
+import 'package:holedo/layouts/pages/news/news_portal_screen/news_portal_screen.dart';
 import 'package:holedo/models/models.dart';
 import 'package:holedo/profile/presentation/providers/app_provider.dart';
-
 import 'package:holedo/profile/presentation/theme/light_theme.dart';
+import 'package:matrix/matrix.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:routemaster/routemaster.dart';
-
-import 'package:matrix/matrix.dart';
 
 void main() async {
   usePathUrlStrategy();
@@ -104,15 +103,13 @@ RouteMap _buildRouteMap(BuildContext context) {
       '/chat/room/:slug': (route) {
         final appState = Provider.of<AppProvider>(context, listen: false);
         if (appState.matrix.isLogged()) {
-          final room = appState.matrix
-              .getRoomById(route.pathParameters['slug'] as String) as Room;
+          final room = appState.matrix.getRoomById(route.pathParameters['slug'] as String) as Room;
 
           return NoAnimationPage(
             child: (room != null) ? RoomPage(room: room) : Text('Error'),
           );
         }
-        return Redirect('chat/login',
-            queryParameters: {'redirectTo': route.path});
+        return Redirect('chat/login', queryParameters: {'redirectTo': route.path});
       }, //=> const NoAnimationPage(
       //   child: RoomPage(room: route.pathParameters!['slug']),
       //test. ),*/
@@ -134,12 +131,10 @@ RouteMap _buildRouteMap(BuildContext context) {
         }
         return Redirect('/login');
       },
-      '/recruitments': (route) =>
-          const NoAnimationPage(child: RecruitmentPage()),
-      '/recruitments/:id': (route) =>
-          NoAnimationPage(child: ProfilePage(id: route.pathParameters['id']!)),
+      '/recruitments': (route) => const NoAnimationPage(child: RecruitmentPage()),
+      '/recruitments/:id': (route) => NoAnimationPage(child: ProfilePage(id: route.pathParameters['id']!)),
       '/news': (route) => TabPage(
-            child: const NewsfrontPage(),
+            child: NewsPortalScreen(),
             paths: Get.put(HoledoDatabase()).articlePaths,
             pageBuilder: (child) => NoAnimationPage(child: child),
           ),
@@ -149,31 +144,26 @@ RouteMap _buildRouteMap(BuildContext context) {
       '/news/featured': (route) => NoAnimationPage(
             child: NewsfrontListPage(mode: 'featured'),
           ),*/
-      '/news/:category': (route) =>
-          _isValidCategory(route.pathParameters['category'])
-              ? NoAnimationPage(
-                  child: NewsfrontListPage(
-                    mode: route.pathParameters['category'] as String,
-                    category:
-                        Get.put(HoledoDatabase()).articleCategories.firstWhere(
-                              (e) => e.slug == route.pathParameters['category'],
-                            ),
-                  ),
-                )
-              : const NotFound(),
-      '/category/:category': (route) =>
-          _isValidCategory(route.pathParameters['category'])
-              ? NoAnimationPage(
-                  child: CategoryPage(
-                    category:
-                        Get.put(HoledoDatabase()).articleCategories.firstWhere(
-                              (e) => e.slug == route.pathParameters['category'],
-                            ),
-                  ),
-                )
-              : const NotFound(),
-      '/article/:category/:slug': (route) =>
-          NoAnimationPage(child: NewsPage(slug: route.pathParameters['slug'])),
+      '/news/:category': (route) => _isValidCategory(route.pathParameters['category'])
+          ? NoAnimationPage(
+              child: NewsfrontListPage(
+                mode: route.pathParameters['category'] as String,
+                category: Get.put(HoledoDatabase()).articleCategories.firstWhere(
+                      (e) => e.slug == route.pathParameters['category'],
+                    ),
+              ),
+            )
+          : const NotFound(),
+      '/category/:category': (route) => _isValidCategory(route.pathParameters['category'])
+          ? NoAnimationPage(
+              child: CategoryPage(
+                category: Get.put(HoledoDatabase()).articleCategories.firstWhere(
+                      (e) => e.slug == route.pathParameters['category'],
+                    ),
+              ),
+            )
+          : const NotFound(),
+      '/article/:category/:slug': (route) => NoAnimationPage(child: NewsPage(slug: route.pathParameters['slug'])),
       '/news2/:category/:id': (route) => _isValidCategory(
             route.pathParameters['category'],
           )
@@ -192,30 +182,27 @@ RouteMap _buildRouteMap(BuildContext context) {
       '/jobs/premium': (route) => const NoAnimationPage(
             child: JobsfrontListPage(mode: 'premium'),
           ),
-      '/jobs/all/:slug': (route) =>
-          _isValidCompany(route.pathParameters['slug'])
-              ? NoAnimationPage(
-                  child: JobsfrontListPage(
-                    mode: 'all',
-                    company: Get.put(HoledoDatabase()).companies.firstWhere(
-                          (e) => e.slug == route.pathParameters['slug'],
-                        ),
-                  ),
-                )
-              : const NotFound(),
-      '/jobs/premium/:slug': (route) =>
-          _isValidCompany(route.pathParameters['slug'])
-              ? NoAnimationPage(
-                  child: JobsfrontListPage(
-                    mode: 'premium',
-                    company: Get.put(HoledoDatabase()).companies.firstWhere(
-                          (e) => e.slug == route.pathParameters['slug'],
-                        ),
-                  ),
-                )
-              : const NotFound(),
-      '/job/:id': (route) =>
-          NoAnimationPage(child: JobsPage(slug: route.pathParameters['id'])),
+      '/jobs/all/:slug': (route) => _isValidCompany(route.pathParameters['slug'])
+          ? NoAnimationPage(
+              child: JobsfrontListPage(
+                mode: 'all',
+                company: Get.put(HoledoDatabase()).companies.firstWhere(
+                      (e) => e.slug == route.pathParameters['slug'],
+                    ),
+              ),
+            )
+          : const NotFound(),
+      '/jobs/premium/:slug': (route) => _isValidCompany(route.pathParameters['slug'])
+          ? NoAnimationPage(
+              child: JobsfrontListPage(
+                mode: 'premium',
+                company: Get.put(HoledoDatabase()).companies.firstWhere(
+                      (e) => e.slug == route.pathParameters['slug'],
+                    ),
+              ),
+            )
+          : const NotFound(),
+      '/job/:id': (route) => NoAnimationPage(child: JobsPage(slug: route.pathParameters['id'])),
       '/search': (route) => NoAnimationPage(
             child: SearchPage(
               query: route.queryParameters['query'] ?? '',
@@ -233,11 +220,9 @@ RouteMap _buildRouteMap(BuildContext context) {
         return Redirect('/login', queryParameters: {'redirectTo': route.path});
       },
       '/profile/:slug': (route) {
-        Provider.of<ProfileProvider>(context, listen: false)
-            .changeCurrentProfileSlug(route.pathParameters['slug']!);
+        Provider.of<ProfileProvider>(context, listen: false).changeCurrentProfileSlug(route.pathParameters['slug']!);
         final appState = Provider.of<AppProvider>(context, listen: false);
-        if (appState.isLoggedIn &&
-            route.pathParameters['slug'] == appState.profile?.slug) {
+        if (appState.isLoggedIn && route.pathParameters['slug'] == appState.profile?.slug) {
           return NoAnimationPage(
             child: ProfilePage(
               id: appState.profile?.id.toString(),
@@ -312,20 +297,19 @@ class HoledoApp extends StatelessWidget {
       ],
       child: MaterialApp.router(
         title: 'Holedo',
-        builder: (context, child) => ResponsiveWrapper.builder(
-          ClampingScrollWrapper.builder(context, child!),
-          breakpoints: [
-            const ResponsiveBreakpoint.autoScaleDown(
-              450,
-              name: "SmallMobile",
-            ),
-            const ResponsiveBreakpoint.resize(460, name: "Mobile"),
-            const ResponsiveBreakpoint.resize(750, name: MOBILE),
-            const ResponsiveBreakpoint.resize(1000, name: TABLET),
-            const ResponsiveBreakpoint.resize(1300, name: DESKTOP),
-            const ResponsiveBreakpoint.autoScale(1301, name: "Desktop"),
-          ],
-        ),
+        builder: (context, child) => ResponsiveWrapper.builder(BouncingScrollWrapper.builder(context, child!),
+            breakpoints: [
+              const ResponsiveBreakpoint.autoScaleDown(
+                450,
+                name: "SmallMobile",
+              ),
+              const ResponsiveBreakpoint.resize(460, name: "Mobile"),
+              const ResponsiveBreakpoint.resize(750, name: MOBILE),
+              const ResponsiveBreakpoint.resize(1000, name: TABLET),
+              const ResponsiveBreakpoint.resize(1300, name: DESKTOP),
+              const ResponsiveBreakpoint.autoScale(1301, name: "Desktop"),
+            ],
+            defaultScale: true),
         debugShowCheckedModeBanner: false,
         theme: lightTheme,
         // theme: ThemeData(
@@ -344,9 +328,7 @@ class HoledoApp extends StatelessWidget {
           routesBuilder: (context) {
             final state = Provider.of<AppProvider>(context);
             // Provider.of<AppProvider>(context).profile = Get.put(HoledoDatabase()).getModel().user ?? null;
-            return siteBlockedWithoutLogin && !state.isLoggedIn
-                ? loggedOutRouteMap
-                : _buildRouteMap(context);
+            return siteBlockedWithoutLogin && !state.isLoggedIn ? loggedOutRouteMap : _buildRouteMap(context);
           },
         ),
       ),

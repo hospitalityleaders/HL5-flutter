@@ -24,10 +24,8 @@ class _CategoryPageState extends State<CategoryPage> {
   @override
   void initState() {
     super.initState();
-
-    futurecall = Provider.of<AppProvider>(context, listen: false)
-        .newscontroller
-        .fetchArticles(context: context, category: widget.category.slug);
+    debugPrint('news frontPage');
+    futurecall = Provider.of<AppProvider>(context, listen: false).newscontroller.fetchArticles(context: context, category: widget.category.slug);
     debugPrint('init data: $futurecall');
   }
 

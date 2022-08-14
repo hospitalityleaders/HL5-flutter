@@ -6,10 +6,9 @@ import 'package:holedo/common/common_widget.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
 import 'package:holedo/constant/sizedbox.dart';
-import 'package:holedo/layouts/pages/profile-pages/profile/header.dart';
-import 'package:holedo/responsive/responsive.dart';
-
 import 'package:holedo/layouts/pages/news/NewsSingle/news_single_logged_in.dart';
+// import 'package:holedo/layouts/pages/profile-pages/profile/header.dart';
+import 'package:holedo/responsive/responsive.dart';
 
 class NewsSingleScreen extends StatefulWidget {
   static const String route = '/category';
@@ -17,8 +16,7 @@ class NewsSingleScreen extends StatefulWidget {
   _NewsSignalScreenState createState() => _NewsSignalScreenState();
 }
 
-class _NewsSignalScreenState extends State<NewsSingleScreen>
-    with SingleTickerProviderStateMixin {
+class _NewsSignalScreenState extends State<NewsSingleScreen> with SingleTickerProviderStateMixin {
   CarouselController buttonCarouselController = CarouselController();
   TabController? _tabController;
   final int _current = 0;
@@ -26,6 +24,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
   int indexCircle = 0;
   @override
   void initState() {
+    print('news catagory Page');
     _tabController = TabController(length: 5, vsync: this);
     super.initState();
   }
@@ -33,16 +32,14 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
   List data = [
     {
       'img': 'assets/images/t1.png',
-      'text1':
-          'Mantra Group Reports Total Revenue Increase of 9.7% for Year Ending June 2015',
+      'text1': 'Mantra Group Reports Total Revenue Increase of 9.7% for Year Ending June 2015',
       'text2': '',
       'text3': 'Pam Carrol',
       'text4': '26 August 2015 • 10:40',
     },
     {
       'img': 'assets/images/t2.png',
-      'text1':
-          'How Technology Can Deliver a Seamless Travel Experience - Information Age',
+      'text1': 'How Technology Can Deliver a Seamless Travel Experience - Information Age',
       'text2': 'MEMBERS ONLY',
       'text3': 'Pam Carrol',
       'text4': '26 August 2015 • 10:40',
@@ -63,24 +60,21 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
     },
     {
       'img': 'assets/images/t5.png',
-      'text1':
-          'Welk Resorts Reports Increased Revenue and Plans for Two New Properties',
+      'text1': 'Welk Resorts Reports Increased Revenue and Plans for Two New Properties',
       'text2': '',
       'text3': 'Pam Carrol',
       'text4': '26 August 2015 • 10:40',
     },
     {
       'img': 'assets/images/t5.png',
-      'text1':
-          'Welk Resorts Reports Increased Revenue and Plans for Two New Properties',
+      'text1': 'Welk Resorts Reports Increased Revenue and Plans for Two New Properties',
       'text2': '',
       'text3': 'Pam Carrol',
       'text4': '26 August 2015 • 10:40',
     },
     {
       'img': 'assets/images/t6.png',
-      'text1':
-          'Hotel Price Index Reveals Midwest, Southwest and Western Cities Are Surging Domestically',
+      'text1': 'Hotel Price Index Reveals Midwest, Southwest and Western Cities Are Surging Domestically',
       'text2': '',
       'text3': 'Pam Carrol',
       'text4': '26 August 2015 • 10:40',
@@ -139,8 +133,8 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                 headerSliverBuilder: (context, innerBoxIsScrolled) {
                   return [
                     const SliverToBoxAdapter(
-                      child: Header(),
-                    ),
+                        // child: Header(),
+                        ),
                     SliverToBoxAdapter(
                       child: SizedBox(
                         height: Get.height * 0.50,
@@ -154,8 +148,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                 viewportFraction: 1.0,
                                 initialPage: 3,
                                 autoPlayInterval: const Duration(seconds: 3),
-                                autoPlayAnimationDuration:
-                                    const Duration(milliseconds: 800),
+                                autoPlayAnimationDuration: const Duration(milliseconds: 800),
                                 enlargeCenterPage: true,
                               ),
                               carouselController: buttonCarouselController,
@@ -165,8 +158,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                   width: Get.width,
                                   child: const Image(
                                     fit: BoxFit.cover,
-                                    image:
-                                        AssetImage('assets/images/slider1.png'),
+                                    image: AssetImage('assets/images/slider1.png'),
                                   ),
                                 ),
                                 // RaisedButton(
@@ -267,8 +259,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                           ),
                         ),
                         child: TabBar(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: Get.width * 0.3),
+                          padding: EdgeInsets.symmetric(horizontal: Get.width * 0.3),
                           unselectedLabelColor: ColorPicker.kGreyLight7,
                           labelColor: ColorPicker.kBlueLight1,
                           controller: _tabController,
@@ -320,13 +311,11 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                     decoration: const BoxDecoration(
                                       color: Colors.white,
                                       border: Border.symmetric(
-                                        vertical:
-                                            BorderSide(color: Colors.white),
+                                        vertical: BorderSide(color: Colors.white),
                                       ),
                                     ),
                                     child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         SizedBox(
                                           height: Get.height * 0.01,
@@ -346,13 +335,11 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                         ),
                                         Text(
                                           'RESOURCES',
-                                          style: FontTextStyle
-                                              .kGreyLight712W700SSP,
+                                          style: FontTextStyle.kGreyLight712W700SSP,
                                         ),
                                         Text(
                                           'Moxy Hotels Makes Some Movies, Well Youtube Ones',
-                                          style:
-                                              FontTextStyle.kBlueDark136W400SSP,
+                                          style: FontTextStyle.kBlueDark136W400SSP,
                                         ),
                                         const SizedBox(
                                           height: 10,
@@ -363,24 +350,19 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                               RichText(
                                                 text: TextSpan(
                                                   text: "by",
-                                                  style: FontTextStyle
-                                                      .kGreyLight5146W400SSP,
+                                                  style: FontTextStyle.kGreyLight5146W400SSP,
                                                   children: [
                                                     TextSpan(
                                                       text: "  Pam Carrol •",
-                                                      style: FontTextStyle
-                                                          .kGreyLight5146W400SSP,
+                                                      style: FontTextStyle.kGreyLight5146W400SSP,
                                                     ),
                                                     TextSpan(
-                                                      text:
-                                                          "  26 August 2015 •",
-                                                      style: FontTextStyle
-                                                          .kGreyLight5146W400SSP,
+                                                      text: "  26 August 2015 •",
+                                                      style: FontTextStyle.kGreyLight5146W400SSP,
                                                     ),
                                                     TextSpan(
                                                       text: "  10:40",
-                                                      style: FontTextStyle
-                                                          .kGreyLight5146W400SSP,
+                                                      style: FontTextStyle.kGreyLight5146W400SSP,
                                                     ),
                                                   ],
                                                 ),
@@ -402,8 +384,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                     ),
                                                     Text(
                                                       '  • 112',
-                                                      style: FontTextStyle
-                                                          .kGreyLight5146W400SSP,
+                                                      style: FontTextStyle.kGreyLight5146W400SSP,
                                                     ),
                                                     SizedBox(
                                                       width: Get.width * 0.01,
@@ -413,8 +394,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                     ),
                                                     Text(
                                                       '  • 56',
-                                                      style: FontTextStyle
-                                                          .kGreyLight5146W400SSP,
+                                                      style: FontTextStyle.kGreyLight5146W400SSP,
                                                     ),
                                                     SizedBox(
                                                       width: Get.width * 0.01,
@@ -424,8 +404,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                     ),
                                                     Text(
                                                       '  • 321',
-                                                      style: FontTextStyle
-                                                          .kGreyLight5146W400SSP,
+                                                      style: FontTextStyle.kGreyLight5146W400SSP,
                                                     ),
                                                     SizedBox(
                                                       width: Get.width * 0.01,
@@ -436,8 +415,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                     ),
                                                     Text(
                                                       '  • 22',
-                                                      style: FontTextStyle
-                                                          .kGreyLight5146W400SSP,
+                                                      style: FontTextStyle.kGreyLight5146W400SSP,
                                                     ),
                                                     SizedBox(
                                                       width: Get.width * 0.01,
@@ -447,8 +425,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                     ),
                                                     Text(
                                                       '  • 13',
-                                                      style: FontTextStyle
-                                                          .kGreyLight5146W400SSP,
+                                                      style: FontTextStyle.kGreyLight5146W400SSP,
                                                     ),
                                                   ],
                                                 ),
@@ -470,13 +447,11 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                     decoration: const BoxDecoration(
                                       color: Colors.white,
                                       border: Border.symmetric(
-                                        vertical:
-                                            BorderSide(color: Colors.white),
+                                        vertical: BorderSide(color: Colors.white),
                                       ),
                                     ),
                                     child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         SizedBox(
                                           height: Get.height * 0.01,
@@ -496,13 +471,11 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                         ),
                                         Text(
                                           'RESOURCES',
-                                          style: FontTextStyle
-                                              .kGreyLight513W700SSP,
+                                          style: FontTextStyle.kGreyLight513W700SSP,
                                         ),
                                         Text(
                                           'Hotel on North opens in Pittsfield,\nMassachusetts',
-                                          style: FontTextStyle
-                                              .kGreyLight536W400SSP,
+                                          style: FontTextStyle.kGreyLight536W400SSP,
                                         ),
                                         const SizedBox(
                                           height: 10,
@@ -513,24 +486,19 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                               RichText(
                                                 text: TextSpan(
                                                   text: "by",
-                                                  style: FontTextStyle
-                                                      .kGreyLight5146W400SSP,
+                                                  style: FontTextStyle.kGreyLight5146W400SSP,
                                                   children: [
                                                     TextSpan(
                                                       text: "  Pam Carrol •",
-                                                      style: FontTextStyle
-                                                          .kGreyLight5146W400SSP,
+                                                      style: FontTextStyle.kGreyLight5146W400SSP,
                                                     ),
                                                     TextSpan(
-                                                      text:
-                                                          "  26 August 2015 •",
-                                                      style: FontTextStyle
-                                                          .kGreyLight5146W400SSP,
+                                                      text: "  26 August 2015 •",
+                                                      style: FontTextStyle.kGreyLight5146W400SSP,
                                                     ),
                                                     TextSpan(
                                                       text: "  10:40",
-                                                      style: FontTextStyle
-                                                          .kGreyLight5146W400SSP,
+                                                      style: FontTextStyle.kGreyLight5146W400SSP,
                                                     ),
                                                   ],
                                                 ),
@@ -552,8 +520,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                     ),
                                                     Text(
                                                       '  • 112',
-                                                      style: FontTextStyle
-                                                          .kGreyLight5146W400SSP,
+                                                      style: FontTextStyle.kGreyLight5146W400SSP,
                                                     ),
                                                     SizedBox(
                                                       width: Get.width * 0.01,
@@ -563,8 +530,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                     ),
                                                     Text(
                                                       '  • 56',
-                                                      style: FontTextStyle
-                                                          .kGreyLight5146W400SSP,
+                                                      style: FontTextStyle.kGreyLight5146W400SSP,
                                                     ),
                                                     SizedBox(
                                                       width: Get.width * 0.01,
@@ -574,8 +540,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                     ),
                                                     Text(
                                                       '  • 321',
-                                                      style: FontTextStyle
-                                                          .kGreyLight5146W400SSP,
+                                                      style: FontTextStyle.kGreyLight5146W400SSP,
                                                     ),
                                                     SizedBox(
                                                       width: Get.width * 0.01,
@@ -586,8 +551,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                     ),
                                                     Text(
                                                       '  • 22',
-                                                      style: FontTextStyle
-                                                          .kGreyLight5146W400SSP,
+                                                      style: FontTextStyle.kGreyLight5146W400SSP,
                                                     ),
                                                     SizedBox(
                                                       width: Get.width * 0.01,
@@ -597,8 +561,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                     ),
                                                     Text(
                                                       '  • 13',
-                                                      style: FontTextStyle
-                                                          .kGreyLight5146W400SSP,
+                                                      style: FontTextStyle.kGreyLight5146W400SSP,
                                                     ),
                                                   ],
                                                 ),
@@ -619,12 +582,9 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                     padding: const EdgeInsets.all(10),
                                     child: GridView.builder(
                                       shrinkWrap: true,
-                                      physics:
-                                          const NeverScrollableScrollPhysics(),
-                                      gridDelegate:
-                                          SliverGridDelegateWithFixedCrossAxisCount(
-                                        childAspectRatio:
-                                            Get.width / (Get.height / 0.75),
+                                      physics: const NeverScrollableScrollPhysics(),
+                                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                        childAspectRatio: Get.width / (Get.height / 0.75),
                                         crossAxisCount: 2,
                                         mainAxisSpacing: 10,
                                         crossAxisSpacing: 10,
@@ -650,8 +610,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                               ),
                                             ),
                                             child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 SizedBox(
                                                   height: Get.height * 0.20,
@@ -669,8 +628,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                 Flexible(
                                                   child: Text(
                                                     '${data[index]['text1']}',
-                                                    style: FontTextStyle
-                                                        .kBlueDark118W700SSP,
+                                                    style: FontTextStyle.kBlueDark118W700SSP,
                                                   ),
                                                 ),
                                                 const SizedBox(
@@ -679,24 +637,19 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                 RichText(
                                                   text: TextSpan(
                                                     text: "by",
-                                                    style: FontTextStyle
-                                                        .kGreyLight514W600PR,
+                                                    style: FontTextStyle.kGreyLight514W600PR,
                                                     children: [
                                                       TextSpan(
                                                         text: "  Pam Carrol •",
-                                                        style: FontTextStyle
-                                                            .kGreyLight514W600PR,
+                                                        style: FontTextStyle.kGreyLight514W600PR,
                                                       ),
                                                       TextSpan(
-                                                        text:
-                                                            "  26 August 2015 •",
-                                                        style: FontTextStyle
-                                                            .kGreyLight514W600PR,
+                                                        text: "  26 August 2015 •",
+                                                        style: FontTextStyle.kGreyLight514W600PR,
                                                       ),
                                                       TextSpan(
                                                         text: "  10:40",
-                                                        style: FontTextStyle
-                                                            .kGreyLight514W600PR,
+                                                        style: FontTextStyle.kGreyLight514W600PR,
                                                       ),
                                                     ],
                                                   ),
@@ -704,9 +657,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                 const SizedBox(
                                                   height: 12,
                                                 ),
-                                                if (data[index]['text2']
-                                                    .toString()
-                                                    .isEmpty)
+                                                if (data[index]['text2'].toString().isEmpty)
                                                   SizedBox()
                                                 else
                                                   Container(
@@ -716,8 +667,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                     child: Center(
                                                       child: Text(
                                                         '${data[index]['text2']}',
-                                                        style: FontTextStyle
-                                                            .kRed210W700SSP,
+                                                        style: FontTextStyle.kRed210W700SSP,
                                                       ),
                                                     ),
                                                   )
@@ -792,8 +742,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                         child: Column(
                                           children: [
                                             Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 IntrinsicWidth(
                                                   child: Column(
@@ -802,29 +751,25 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                     children: [
                                                       const Icon(
                                                         Icons.apartment_rounded,
-                                                        color:
-                                                            Color(0xFF546088),
+                                                        color: Color(0xFF546088),
                                                       ),
                                                       Container(
                                                         width: 2,
                                                         height: 150,
-                                                        color: const Color(
-                                                            0xFF546088),
+                                                        color: const Color(0xFF546088),
                                                       ),
                                                     ],
                                                   ),
                                                 ),
                                                 const SizedBox(width: 20),
                                                 Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     // SizedBox(height: 30),
                                                     const Text(
                                                       'SIGN UP TO JOIN',
                                                       style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w700,
+                                                        fontWeight: FontWeight.w700,
                                                         fontSize: 12,
                                                         color: Colors.white,
                                                       ),
@@ -834,8 +779,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                       child: const Text(
                                                         'Get priority news access',
                                                         style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w400,
+                                                          fontWeight: FontWeight.w400,
                                                           fontSize: 36,
                                                           color: Colors.white,
                                                         ),
@@ -846,8 +790,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                               ],
                                             ),
                                             Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 Column(
                                                   // mainAxisAlignment:
@@ -859,23 +802,19 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                     ),
                                                     Container(
                                                       width: 2,
-                                                      height:
-                                                          Get.height * 0.078,
-                                                      color: const Color(
-                                                          0xFF546088),
+                                                      height: Get.height * 0.078,
+                                                      color: const Color(0xFF546088),
                                                     ),
                                                   ],
                                                 ),
                                                 const SizedBox(width: 20),
                                                 Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     const Text(
                                                       'All the latest news',
                                                       style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w700,
+                                                        fontWeight: FontWeight.w700,
                                                         fontSize: 16,
                                                         color: Colors.white,
                                                       ),
@@ -885,8 +824,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                       child: const Text(
                                                         'Stay up to date with news from the tourism and hospitality industry.',
                                                         style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w400,
+                                                          fontWeight: FontWeight.w400,
                                                           fontSize: 14,
                                                           color: Colors.white,
                                                         ),
@@ -898,8 +836,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                             ),
                                             const SizedBox(height: 10),
                                             Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 Column(
                                                   // mainAxisAlignment:
@@ -911,23 +848,19 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                     ),
                                                     Container(
                                                       width: 2,
-                                                      height:
-                                                          Get.height * 0.078,
-                                                      color: const Color(
-                                                          0xFF546088),
+                                                      height: Get.height * 0.078,
+                                                      color: const Color(0xFF546088),
                                                     ),
                                                   ],
                                                 ),
                                                 const SizedBox(width: 20),
                                                 Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     const Text(
                                                       'Credible sources',
                                                       style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w700,
+                                                        fontWeight: FontWeight.w700,
                                                         fontSize: 16,
                                                         color: Colors.white,
                                                       ),
@@ -937,8 +870,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                       child: const Text(
                                                         'I’ts gathered from hundreds of trusted sources and updates in real time.',
                                                         style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w400,
+                                                          fontWeight: FontWeight.w400,
                                                           fontSize: 14,
                                                           color: Colors.white,
                                                         ),
@@ -950,8 +882,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                             ),
                                             const SizedBox(height: 10),
                                             Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 Column(
                                                   // mainAxisAlignment:
@@ -963,23 +894,19 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                     ),
                                                     Container(
                                                       width: 2,
-                                                      height:
-                                                          Get.height * 0.078,
-                                                      color: const Color(
-                                                          0xFF546088),
+                                                      height: Get.height * 0.078,
+                                                      color: const Color(0xFF546088),
                                                     ),
                                                   ],
                                                 ),
                                                 const SizedBox(width: 20),
                                                 Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     const Text(
                                                       'Wide scope of research',
                                                       style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w700,
+                                                        fontWeight: FontWeight.w700,
                                                         fontSize: 16,
                                                         color: Colors.white,
                                                       ),
@@ -989,8 +916,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                       child: const Text(
                                                         'We cover all aspects of the tourism and hospitality sectors including airlines, tour operators, hotels, education, research and more.',
                                                         style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w400,
+                                                          fontWeight: FontWeight.w400,
                                                           fontSize: 14,
                                                           color: Colors.white,
                                                         ),
@@ -1001,8 +927,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                               ],
                                             ),
                                             Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 Column(
                                                   // mainAxisAlignment:
@@ -1011,10 +936,8 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                     const SizedBox(width: 24),
                                                     Container(
                                                       width: 2,
-                                                      height:
-                                                          Get.height * 0.078,
-                                                      color: const Color(
-                                                          0xFF546088),
+                                                      height: Get.height * 0.078,
+                                                      color: const Color(0xFF546088),
                                                     ),
                                                   ],
                                                 ),
@@ -1024,16 +947,13 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                   width: 248,
                                                   decoration: BoxDecoration(
                                                     color: Colors.white,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
+                                                    borderRadius: BorderRadius.circular(
                                                       2,
                                                     ),
                                                   ),
                                                   child: Center(
                                                     child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
+                                                      mainAxisAlignment: MainAxisAlignment.center,
                                                       children: const [
                                                         Icon(
                                                           Icons.person_add,
@@ -1046,8 +966,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                               0xFF272E41,
                                                             ),
                                                             fontSize: 14,
-                                                            fontWeight:
-                                                                FontWeight.w600,
+                                                            fontWeight: FontWeight.w600,
                                                           ),
                                                         ),
                                                       ],
@@ -1058,8 +977,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                             ),
                                             const SizedBox(height: 10),
                                             Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 Column(
                                                   // mainAxisAlignment:
@@ -1078,16 +996,14 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                 ),
                                                 const SizedBox(width: 20),
                                                 Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     SizedBox(
                                                       width: Get.width * 0.15,
                                                       child: const Text(
                                                         'OR IMPORT YOUR DETAILS FROM',
                                                         style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w700,
+                                                          fontWeight: FontWeight.w700,
                                                           fontSize: 16,
                                                           color: Colors.white,
                                                         ),
@@ -1099,8 +1015,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                             ),
                                             const SizedBox(height: 10),
                                             Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 Column(
                                                   // mainAxisAlignment:
@@ -1109,10 +1024,8 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                     const SizedBox(width: 24),
                                                     Container(
                                                       width: 2,
-                                                      height:
-                                                          Get.height * 0.078,
-                                                      color: const Color(
-                                                          0xFF546088),
+                                                      height: Get.height * 0.078,
+                                                      color: const Color(0xFF546088),
                                                     ),
                                                   ],
                                                 ),
@@ -1125,14 +1038,9 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                         child: Container(
                                                           height: 36,
                                                           width: 80,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color: const Color(
-                                                                0xFF344F8D),
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        2),
+                                                          decoration: BoxDecoration(
+                                                            color: const Color(0xFF344F8D),
+                                                            borderRadius: BorderRadius.circular(2),
                                                           ),
                                                           child: const Center(
                                                             child: Image(
@@ -1148,14 +1056,9 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                         child: Container(
                                                           height: 36,
                                                           width: 80,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color: const Color(
-                                                                0xFFD63B30),
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        2),
+                                                          decoration: BoxDecoration(
+                                                            color: const Color(0xFFD63B30),
+                                                            borderRadius: BorderRadius.circular(2),
                                                           ),
                                                           child: const Center(
                                                             child: Image(
@@ -1171,14 +1074,9 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                                         child: Container(
                                                           height: 36,
                                                           width: 80,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color: const Color(
-                                                                0xFF04595B),
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        2),
+                                                          decoration: BoxDecoration(
+                                                            color: const Color(0xFF04595B),
+                                                            borderRadius: BorderRadius.circular(2),
                                                           ),
                                                           child: const Center(
                                                             child: Image(
@@ -1265,18 +1163,15 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                               hintText: "Search",
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
-                                borderSide:
-                                    const BorderSide(color: Colors.transparent),
+                                borderSide: const BorderSide(color: Colors.transparent),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
-                                borderSide:
-                                    const BorderSide(color: Colors.transparent),
+                                borderSide: const BorderSide(color: Colors.transparent),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
-                                borderSide:
-                                    const BorderSide(color: Colors.transparent),
+                                borderSide: const BorderSide(color: Colors.transparent),
                               ),
                               prefixIcon: const Icon(
                                 Icons.search,
@@ -1400,9 +1295,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                         itemBuilder: (context, index) {
                           return CircleAvatar(
                             // foregroundColor: Colors.red,
-                            backgroundColor: index == indexCircle
-                                ? const Color(0xFF33A3FE)
-                                : const Color(0xFFB5BDC2),
+                            backgroundColor: index == indexCircle ? const Color(0xFF33A3FE) : const Color(0xFFB5BDC2),
                           );
                         },
                       ),
@@ -1574,8 +1467,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                     ),
                                     SizedBox(width: Get.width * 0.03),
                                     Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         CommonWidget.text(
                                           'SIGN UP TO JOIN',
@@ -1585,8 +1477,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                           width: Get.width * 0.7,
                                           child: CommonWidget.text(
                                             'Get priority news access',
-                                            style:
-                                                FontTextStyle.kWhite36W400SSP,
+                                            style: FontTextStyle.kWhite36W400SSP,
                                           ),
                                         ),
                                       ],
@@ -1614,8 +1505,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                     ),
                                     SizedBox(width: Get.width * 0.03),
                                     Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         CommonWidget.text(
                                           'All the latest news',
@@ -1625,8 +1515,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                           width: Get.width * 0.7,
                                           child: CommonWidget.text(
                                             'Stay up to date with news from the tourism and hospitality industry.',
-                                            style:
-                                                FontTextStyle.kWhite14W400SSP,
+                                            style: FontTextStyle.kWhite14W400SSP,
                                           ),
                                         ),
                                       ],
@@ -1654,8 +1543,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                     ),
                                     SizedBox(width: Get.width * 0.03),
                                     Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         CommonWidget.text(
                                           'Credible sources',
@@ -1665,8 +1553,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                           width: Get.width * 0.7,
                                           child: CommonWidget.text(
                                             'I’ts gathered from hundreds of trusted sources and updates in real time.',
-                                            style:
-                                                FontTextStyle.kWhite14W400SSP,
+                                            style: FontTextStyle.kWhite14W400SSP,
                                           ),
                                         ),
                                       ],
@@ -1694,8 +1581,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                     ),
                                     SizedBox(width: Get.width * 0.03),
                                     Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         CommonWidget.text(
                                           'Wide scope of research',
@@ -1705,8 +1591,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                           width: Get.width * 0.7,
                                           child: CommonWidget.text(
                                             'We cover all aspects of the tourism and hospitality sectors including airlines, tour operators, hotels, education, research and more.',
-                                            style:
-                                                FontTextStyle.kWhite14W400SSP,
+                                            style: FontTextStyle.kWhite14W400SSP,
                                           ),
                                         ),
                                       ],
@@ -1738,8 +1623,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                       ),
                                       child: Center(
                                         child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
                                             const Icon(
                                               Icons.person_add,
@@ -1749,8 +1633,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                             SB.SW5(),
                                             CommonWidget.text(
                                               'Sign up now. It’s free',
-                                              style: FontTextStyle
-                                                  .kBlueDark114W600SSP,
+                                              style: FontTextStyle.kBlueDark114W600SSP,
                                             ),
                                           ],
                                         ),
@@ -1774,15 +1657,13 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                     ),
                                     SizedBox(width: Get.width * 0.03),
                                     Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         SizedBox(
                                           width: Get.width * 0.7,
                                           child: CommonWidget.text(
                                             'OR IMPORT YOUR\nDETAILS FROM',
-                                            style:
-                                                FontTextStyle.kWhite13W700SSP,
+                                            style: FontTextStyle.kWhite13W700SSP,
                                           ),
                                         ),
                                       ],
@@ -1815,8 +1696,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                               height: Get.height * 0.05,
                                               decoration: BoxDecoration(
                                                 color: ColorPicker.kSocial,
-                                                borderRadius:
-                                                    BorderRadius.circular(2),
+                                                borderRadius: BorderRadius.circular(2),
                                               ),
                                               child: Center(
                                                 child: Image.asset(
@@ -1831,8 +1711,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                               height: Get.height * 0.05,
                                               decoration: BoxDecoration(
                                                 color: ColorPicker.kRedGoogle,
-                                                borderRadius:
-                                                    BorderRadius.circular(2),
+                                                borderRadius: BorderRadius.circular(2),
                                               ),
                                               child: Center(
                                                 child: Image.asset(
@@ -1847,8 +1726,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                               height: Get.height * 0.05,
                                               decoration: BoxDecoration(
                                                 color: const Color(0xFF04595B),
-                                                borderRadius:
-                                                    BorderRadius.circular(2),
+                                                borderRadius: BorderRadius.circular(2),
                                               ),
                                               child: Center(
                                                 child: Image.asset(
@@ -1877,8 +1755,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                         return InkWell(
                           onTap: () {
                             debugPrint('hello');
-                            Navigator.of(context)
-                                .pushNamed(NewsSingleLoggedInScreen.route);
+                            Navigator.of(context).pushNamed(NewsSingleLoggedInScreen.route);
                           },
                           child: Container(
                             padding: const EdgeInsets.all(10),
@@ -1896,8 +1773,7 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                 SB.SH20(),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                                   children: [
                                     CommonWidget.text(
                                       '${data[index]['text1']}',
@@ -1907,19 +1783,15 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                     RichText(
                                       text: TextSpan(
                                         text: "By: ",
-                                        style: FontTextStyle
-                                            .kGreyLight514W400SSP
-                                            .copyWith(height: 1.5),
+                                        style: FontTextStyle.kGreyLight514W400SSP.copyWith(height: 1.5),
                                         children: [
                                           TextSpan(
                                             text: '${data[index]['text3']}',
-                                            style: FontTextStyle
-                                                .kGreyLight514W600SSP,
+                                            style: FontTextStyle.kGreyLight514W600SSP,
                                           ),
                                           TextSpan(
                                             text: ' • ${data[index]['text4']}',
-                                            style: FontTextStyle
-                                                .kGreyLight514W400SSP,
+                                            style: FontTextStyle.kGreyLight514W400SSP,
                                           ),
                                         ],
                                       ),
@@ -1930,13 +1802,10 @@ class _NewsSignalScreenState extends State<NewsSingleScreen>
                                     else
                                       Container(
                                         padding: EdgeInsets.all(5),
-                                        child: CommonWidget.text('MEMBERS ONLY',
-                                            style:
-                                                FontTextStyle.kRed210W700SSP),
+                                        child: CommonWidget.text('MEMBERS ONLY', style: FontTextStyle.kRed210W700SSP),
                                         decoration: BoxDecoration(
                                           color: ColorPicker.kRedlight,
-                                          borderRadius:
-                                              BorderRadius.circular(2),
+                                          borderRadius: BorderRadius.circular(2),
                                         ),
                                       ),
                                   ],

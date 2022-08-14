@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:holedo/common/common_widget.dart';
 import 'package:holedo/constant/colorPicker/color_picker.dart';
 import 'package:holedo/constant/fontStyle/font_style.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
-
-import 'package:holedo/common/common_widget.dart';
 import 'package:holedo/constant/sizedbox.dart';
 import 'package:holedo/data/data.dart';
 import 'package:holedo/layouts/pages/news/update/widget/update_news_widget.dart';
 import 'package:holedo/responsive/responsive.dart';
+import 'package:holedo/utils/strings.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class UpdateNewsSecond extends StatefulWidget {
   const UpdateNewsSecond({Key? key}) : super(key: key);
@@ -23,8 +23,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
   Widget build(BuildContext context) {
     debugPrint('${Get.width * 0.04}');
     return Scaffold(
-      backgroundColor:
-          Responsive.isDesktop(context) ? ColorPicker.kBG : Colors.white,
+      backgroundColor: Responsive.isDesktop(context) ? ColorPicker.kBG : Colors.white,
       body: SingleChildScrollView(
         child: Responsive.isDesktop(context)
             ? Column(
@@ -82,8 +81,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                         ),
                                         CommonWidget.text(
                                           Data.benifites[index],
-                                          style:
-                                              FontTextStyle.kGreyLight420W600PR,
+                                          style: FontTextStyle.kGreyLight420W600PR,
                                         )
                                       ],
                                     ),
@@ -134,8 +132,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                     children: [
                       ///FIRST ROW TWO CONTAINER
                       Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: Get.width * 0.0),
+                        padding: EdgeInsets.symmetric(horizontal: Get.width * 0.0),
                         child: Row(
                           children: [
                             Expanded(
@@ -156,21 +153,18 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                           width: Get.width * 0.14,
                                         ),
                                         Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             CommonWidget.text(
                                               'Hello Noberto',
-                                              style: FontTextStyle
-                                                  .kPrimary32W600PR,
+                                              style: FontTextStyle.kPrimary32W600PR,
                                             ),
                                             SB.SH25(),
                                             SizedBox(
                                               width: Get.width * 0.21,
                                               child: CommonWidget.text(
                                                 'What’s news today? Share an update, link or news article with your connections. Get out there!',
-                                                style: FontTextStyle
-                                                    .kGreyLight18W600PR,
+                                                style: FontTextStyle.kGreyLight18W600PR,
                                               ),
                                             ),
                                           ],
@@ -193,18 +187,15 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                                 'assets/images/profile.png',
                                               ),
                                             ),
-                                            borderRadius:
-                                                BorderRadius.circular(5),
+                                            borderRadius: BorderRadius.circular(5),
                                           ),
                                         ),
                                         Expanded(
                                           child: Container(
                                             height: 70,
-                                            margin: const EdgeInsets.only(
-                                                right: 45),
+                                            margin: const EdgeInsets.only(right: 45),
                                             decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
+                                              borderRadius: BorderRadius.circular(5),
                                               border: Border.all(
                                                 color: ColorPicker.kBorder,
                                               ),
@@ -213,18 +204,14 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                             child: TextField(
                                               decoration: InputDecoration(
                                                 border: InputBorder.none,
-                                                hintStyle: FontTextStyle
-                                                    .kGreyLight318W600PR,
-                                                contentPadding:
-                                                    const EdgeInsets.only(
+                                                hintStyle: FontTextStyle.kGreyLight318W600PR,
+                                                contentPadding: const EdgeInsets.only(
                                                   top: 18,
                                                   left: 10,
                                                 ),
-                                                hintText:
-                                                    'Share an update or link.....',
+                                                hintText: 'Share an update or link.....',
                                               ),
-                                              style: FontTextStyle
-                                                  .kGreyLight318W600PR,
+                                              style: FontTextStyle.kGreyLight318W600PR,
                                             ),
                                           ),
                                         )
@@ -235,20 +222,17 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
                                         Container(
-                                          margin:
-                                              const EdgeInsets.only(right: 45),
+                                          margin: const EdgeInsets.only(right: 45),
                                           height: 47,
                                           width: Get.width * 0.08,
                                           decoration: BoxDecoration(
                                             color: ColorPicker.kBlueLight,
-                                            borderRadius:
-                                                BorderRadius.circular(10),
+                                            borderRadius: BorderRadius.circular(10),
                                           ),
                                           child: Center(
                                             child: CommonWidget.text(
                                               'Post Update',
-                                              style:
-                                                  FontTextStyle.kWhite16W600PR,
+                                              style: FontTextStyle.kWhite16W600PR,
                                             ),
                                           ),
                                         )
@@ -273,14 +257,11 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                       child: Container(
                                         color: ColorPicker.kPrimary,
                                         child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
                                             CommonWidget.text(
                                               '25%',
-                                              style: FontTextStyle
-                                                  .kWhite83W600PR
-                                                  .copyWith(
+                                              style: FontTextStyle.kWhite83W600PR.copyWith(
                                                 fontSize: Get.width * 0.05,
                                               ),
                                             ),
@@ -290,14 +271,12 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                               percent: 0.9,
                                               backgroundColor: Colors.black,
                                               progressColor: ColorPicker.kRed,
-                                              barRadius:
-                                                  const Radius.circular(20),
+                                              barRadius: const Radius.circular(20),
                                             ),
                                             SB.SH25(),
                                             CommonWidget.text(
                                               'Your Profile is only\n25% complete',
-                                              style:
-                                                  FontTextStyle.kWhite18W600PR,
+                                              style: FontTextStyle.kWhite18W600PR,
                                               textAlign: TextAlign.center,
                                             )
                                           ],
@@ -307,25 +286,21 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                     Expanded(
                                       flex: 3,
                                       child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Container(
                                             margin: EdgeInsets.symmetric(
                                               horizontal: Get.width * 0.02,
                                             ),
                                             child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 SizedBox(
                                                   width: Get.width * 0.21,
                                                   child: CommonWidget.text(
                                                     'Where did you work before your current job?',
-                                                    style: FontTextStyle
-                                                        .kBlueDark20W600PR,
+                                                    style: FontTextStyle.kBlueDark20W600PR,
                                                   ),
                                                 ),
                                                 SB.SH25(),
@@ -333,8 +308,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                                   width: Get.width * 0.21,
                                                   child: CommonWidget.text(
                                                     'your work history shows your career path and experience in the industry.',
-                                                    style: FontTextStyle
-                                                        .kBlueDark20W600PR,
+                                                    style: FontTextStyle.kBlueDark20W600PR,
                                                   ),
                                                 ),
                                                 SB.SH25(),
@@ -344,22 +318,18 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                                   ),
                                                   height: 47,
                                                   padding: EdgeInsets.symmetric(
-                                                    horizontal:
-                                                        Get.width * 0.01,
+                                                    horizontal: Get.width * 0.01,
                                                   ),
                                                   decoration: BoxDecoration(
-                                                    color:
-                                                        ColorPicker.kBlueLight,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
+                                                    color: ColorPicker.kBlueLight,
+                                                    borderRadius: BorderRadius.circular(
                                                       10,
                                                     ),
                                                   ),
                                                   child: Center(
                                                     child: CommonWidget.text(
                                                       'Add work experience',
-                                                      style: FontTextStyle
-                                                          .kWhite16W600PR,
+                                                      style: FontTextStyle.kWhite16W600PR,
                                                     ),
                                                   ),
                                                 ),
@@ -374,25 +344,17 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                                 horizontal: Get.width * 0.02,
                                               ),
                                               child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                 children: [
                                                   Row(
                                                     children: List.generate(
                                                       4,
                                                       (index) => Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(4.0),
+                                                        padding: const EdgeInsets.all(4.0),
                                                         child: CircleAvatar(
-                                                          backgroundColor: index ==
-                                                                  0
-                                                              ? ColorPicker
-                                                                  .kBlueLight
-                                                              : ColorPicker
-                                                                  .kBlueLight
-                                                                  .withOpacity(
+                                                          backgroundColor: index == 0
+                                                              ? ColorPicker.kBlueLight
+                                                              : ColorPicker.kBlueLight.withOpacity(
                                                                   0.3,
                                                                 ),
                                                           radius: 8,
@@ -405,9 +367,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                                       Icon(
                                                         Icons.arrow_back_ios,
                                                         size: 35,
-                                                        color: ColorPicker
-                                                            .kBlueLight
-                                                            .withOpacity(
+                                                        color: ColorPicker.kBlueLight.withOpacity(
                                                           0.5,
                                                         ),
                                                       ),
@@ -416,8 +376,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                                       ),
                                                       const Icon(
                                                         Icons.arrow_forward_ios,
-                                                        color: ColorPicker
-                                                            .kBlueLight,
+                                                        color: ColorPicker.kBlueLight,
                                                         size: 35,
                                                       )
                                                     ],
@@ -446,12 +405,11 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                       ///WHITE BIG
                       HomeWidget().videoBlock(),
                       SB.SH50(),
-                      HomeWidget()
-                          .blockTitle('Jobs you might be interested in'),
+                      HomeWidget().blockTitle('Jobs you might be interested in'),
                       SB.SH30(),
 
                       ///Jobs you might be interested in
-                      HomeWidget().jobsBlock(),
+                      HomeWidget().jobsBlock(context),
                       SB.SH50(),
                       HomeWidget().widgetIndicator(),
                       SB.SH30(),
@@ -465,8 +423,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                       SB.SH50(),
 
                       ///People in your area or industry
-                      HomeWidget()
-                          .blockTitle('People in your area or industry'),
+                      HomeWidget().blockTitle('People in your area or industry'),
                       SB.SH30(),
                       HomeWidget().peopleBlock(),
                       SB.SH50(),
@@ -480,7 +437,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                       SB.SH50(),
                       HomeWidget().blockTitle('Latest News'),
                       SB.SH50(),
-                      HomeWidget().latestNewsBlock(),
+                      HomeWidget().latestNewsBlock(Strings.latestNews, context),
                       SB.SH50(),
                       HomeWidget().widgetIndicator(),
                       SB.SH50(),
@@ -492,7 +449,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                       ///Latest Topic
                       HomeWidget().blockTitle('Latest Topic'),
                       SB.SH50(),
-                      HomeWidget().latestNewsBlock(),
+                      HomeWidget().latestNewsBlock(Strings.latestTopic, context),
                       SB.SH50(),
                       HomeWidget().widgetIndicator(),
                       SB.SH50(),
@@ -654,8 +611,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                             style: FontTextStyle.kRed20W600PR,
                             children: <TextSpan>[
                               TextSpan(
-                                text:
-                                    'Hong Kong expected to confirm 614 coronavirus cases',
+                                text: 'Hong Kong expected to confirm 614 coronavirus cases',
                                 style: FontTextStyle.kPrimaryLight20W600PR,
                               ),
                             ],
@@ -691,8 +647,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                       ),
                                       boxShadow: [
                                         BoxShadow(
-                                          color: ColorPicker.kGreyDark
-                                              .withOpacity(0.5),
+                                          color: ColorPicker.kGreyDark.withOpacity(0.5),
                                           spreadRadius: 1,
                                           blurRadius: 20,
                                         )
@@ -708,10 +663,8 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                       style: FontTextStyle.kRed20W600PR,
                                       children: <TextSpan>[
                                         TextSpan(
-                                          text:
-                                              'snowboarder Su Yiming claims silver in slopestyle final',
-                                          style: FontTextStyle
-                                              .kPrimaryLight20W600PR,
+                                          text: 'snowboarder Su Yiming claims silver in slopestyle final',
+                                          style: FontTextStyle.kPrimaryLight20W600PR,
                                         ),
                                       ],
                                     ),
@@ -742,8 +695,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                       ),
                                       boxShadow: [
                                         BoxShadow(
-                                          color: ColorPicker.kGreyDark
-                                              .withOpacity(0.5),
+                                          color: ColorPicker.kGreyDark.withOpacity(0.5),
                                           spreadRadius: 1,
                                           blurRadius: 20,
                                         )
@@ -759,10 +711,8 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                       style: FontTextStyle.kRed20W600PR,
                                       children: <TextSpan>[
                                         TextSpan(
-                                          text:
-                                              'snowboarder Su Yiming claims silver in slopestyle final',
-                                          style: FontTextStyle
-                                              .kPrimaryLight20W600PR,
+                                          text: 'snowboarder Su Yiming claims silver in slopestyle final',
+                                          style: FontTextStyle.kPrimaryLight20W600PR,
                                         ),
                                       ],
                                     ),
@@ -786,14 +736,11 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                         RichText(
                           text: TextSpan(
                             text: "Winter Olympics/ ",
-                            style: FontTextStyle.kRed20W600PR
-                                .copyWith(height: 1.4),
+                            style: FontTextStyle.kRed20W600PR.copyWith(height: 1.4),
                             children: <TextSpan>[
                               TextSpan(
-                                text:
-                                    'snowboarder Su Yiming claims silver in slopestyle final',
-                                style: FontTextStyle.kPrimaryLight20W600PR
-                                    .copyWith(height: 1.4),
+                                text: 'snowboarder Su Yiming claims silver in slopestyle final',
+                                style: FontTextStyle.kPrimaryLight20W600PR.copyWith(height: 1.4),
                               ),
                             ],
                           ),
@@ -882,8 +829,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                   borderRadius: BorderRadius.circular(5),
                                 ),
                                 child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     CommonWidget.text(
                                       '25%',
@@ -909,8 +855,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                       itemBuilder: (context, index) => Column(
                                         children: [
                                           Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
                                               Container(
                                                 height: 18,
@@ -931,16 +876,13 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                                 child: CommonWidget.text(
                                                   "Add your work experience",
                                                   style: TextStyle(
-                                                    color:
-                                                        const Color(0xff33A3FE),
-                                                    fontSize:
-                                                        Get.height * 0.018,
+                                                    color: const Color(0xff33A3FE),
+                                                    fontSize: Get.height * 0.018,
                                                   ),
                                                 ),
                                               ),
                                               Container(
-                                                color: Colors.black
-                                                    .withOpacity(0.2),
+                                                color: Colors.black.withOpacity(0.2),
                                                 height: 25,
                                                 padding: EdgeInsets.symmetric(
                                                   horizontal: Get.width * 0.006,
@@ -1043,14 +985,12 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                           margin: EdgeInsets.only(
                                             left: Get.width * 0.03,
                                           ),
-                                          padding:
-                                              EdgeInsets.all(Get.width * 0.025),
+                                          padding: EdgeInsets.all(Get.width * 0.025),
                                           height: Get.width * 0.08,
                                           width: Get.width * 0.08,
                                           decoration: BoxDecoration(
                                             color: Colors.blue,
-                                            borderRadius:
-                                                BorderRadius.circular(1),
+                                            borderRadius: BorderRadius.circular(1),
                                           ),
                                           // child: Icon(Icons.play_arrow_rounded,
                                           //     color: Colors.white, size: 50),
@@ -1099,8 +1039,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                         ),
                                       ),
                                       TextSpan(
-                                        text:
-                                            'snowboarder Su Yiming claims silver in slopestyle final ',
+                                        text: 'snowboarder Su Yiming claims silver in slopestyle final ',
                                         style: TextStyle(
                                           color: Color(0xFF101E4A),
                                           fontWeight: FontWeight.w600,
@@ -1144,8 +1083,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                         ),
                                       ),
                                       TextSpan(
-                                        text:
-                                            'snowboarder Su Yiming claims silver in slopestyle final ',
+                                        text: 'snowboarder Su Yiming claims silver in slopestyle final ',
                                         style: TextStyle(
                                           color: Color(0xFF101E4A),
                                           fontWeight: FontWeight.w600,
@@ -1189,8 +1127,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                         ),
                                       ),
                                       TextSpan(
-                                        text:
-                                            'snowboarder Su Yiming claims silver in slopestyle final ',
+                                        text: 'snowboarder Su Yiming claims silver in slopestyle final ',
                                         style: TextStyle(
                                           color: Color(0xFF101E4A),
                                           fontWeight: FontWeight.w600,
@@ -1266,8 +1203,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                         ),
                         CommonWidget.text(
                           'Jobs you might be\ninterested in',
-                          style: FontTextStyle.kBlueDark24W600PR
-                              .copyWith(height: 1.2),
+                          style: FontTextStyle.kBlueDark24W600PR.copyWith(height: 1.2),
                         ),
                         const SizedBox(
                           height: 20,
@@ -1297,8 +1233,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                     child: Container(
                                       height: 30,
                                       width: 153,
-                                      margin: const EdgeInsets.only(
-                                          top: 16, right: 16),
+                                      margin: const EdgeInsets.only(top: 16, right: 16),
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(3),
                                         color: ColorPicker.kGreen,
@@ -1317,12 +1252,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                     )
                                   else
                                     SizedBox(),
-                                  if (index.isOdd)
-                                    Image.asset(
-                                        'assets/images/fairmont_logo.png')
-                                  else
-                                    Image.asset(
-                                        'assets/images/hilton_logo.png'),
+                                  if (index.isOdd) Image.asset('assets/images/fairmont_logo.png') else Image.asset('assets/images/hilton_logo.png'),
                                   const SizedBox(
                                     height: 35,
                                   ),
@@ -1404,8 +1334,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                             style: FontTextStyle.kRed20W600PR,
                             children: <TextSpan>[
                               TextSpan(
-                                text:
-                                    'Hong Kong expected to confirm 614 coronavirus cases',
+                                text: 'Hong Kong expected to confirm 614 coronavirus cases',
                                 style: FontTextStyle.kPrimaryLight20W600PR,
                               ),
                             ],
@@ -1440,8 +1369,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                 ),
                               ),
                               TextSpan(
-                                text:
-                                    'snowboarder Su Yiming claims silver in slopestyle final ',
+                                text: 'snowboarder Su Yiming claims silver in slopestyle final ',
                                 style: TextStyle(
                                   color: Color(0xFF101E4A),
                                   fontWeight: FontWeight.w600,
@@ -1486,8 +1414,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                       ),
                                       boxShadow: [
                                         BoxShadow(
-                                          color: ColorPicker.kGreyDark
-                                              .withOpacity(0.5),
+                                          color: ColorPicker.kGreyDark.withOpacity(0.5),
                                           spreadRadius: 1,
                                           blurRadius: 20,
                                         )
@@ -1505,10 +1432,8 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                       style: FontTextStyle.kRed20W600PR,
                                       children: <TextSpan>[
                                         TextSpan(
-                                          text:
-                                              'Hong Kong expected to confirm 614 coronavirus cases',
-                                          style: FontTextStyle
-                                              .kPrimaryLight20W600PR,
+                                          text: 'Hong Kong expected to confirm 614 coronavirus cases',
+                                          style: FontTextStyle.kPrimaryLight20W600PR,
                                         ),
                                       ],
                                     ),
@@ -1543,8 +1468,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                       ),
                                       boxShadow: [
                                         BoxShadow(
-                                          color: ColorPicker.kGreyDark
-                                              .withOpacity(0.5),
+                                          color: ColorPicker.kGreyDark.withOpacity(0.5),
                                           spreadRadius: 1,
                                           blurRadius: 20,
                                         )
@@ -1562,10 +1486,8 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                       style: FontTextStyle.kRed20W600PR,
                                       children: <TextSpan>[
                                         TextSpan(
-                                          text:
-                                              'Hong Kong expected to confirm 614 coronavirus cases',
-                                          style: FontTextStyle
-                                              .kPrimaryLight20W600PR,
+                                          text: 'Hong Kong expected to confirm 614 coronavirus cases',
+                                          style: FontTextStyle.kPrimaryLight20W600PR,
                                         ),
                                       ],
                                     ),
@@ -1603,8 +1525,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                       children: [
                         CommonWidget.text(
                           'Category Type A',
-                          style: FontTextStyle.kBlueDark24W600PR
-                              .copyWith(height: 1.2),
+                          style: FontTextStyle.kBlueDark24W600PR.copyWith(height: 1.2),
                         ),
                         const SizedBox(
                           height: 20,
@@ -1652,8 +1573,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                         Align(
                           child: CircleAvatar(
                             radius: Get.width * 0.2,
-                            backgroundImage:
-                                const AssetImage('assets/images/profile2.png'),
+                            backgroundImage: const AssetImage('assets/images/profile2.png'),
                           ),
                         ),
                         const SizedBox(
@@ -1702,8 +1622,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                       ),
                                       boxShadow: [
                                         BoxShadow(
-                                          color: ColorPicker.kGreyDark
-                                              .withOpacity(0.5),
+                                          color: ColorPicker.kGreyDark.withOpacity(0.5),
                                           spreadRadius: 1,
                                           blurRadius: 20,
                                         )
@@ -1721,10 +1640,8 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                       style: FontTextStyle.kRed20W600PR,
                                       children: <TextSpan>[
                                         TextSpan(
-                                          text:
-                                              'Hong Kong expected to confirm 614 coronavirus cases',
-                                          style: FontTextStyle
-                                              .kPrimaryLight20W600PR,
+                                          text: 'Hong Kong expected to confirm 614 coronavirus cases',
+                                          style: FontTextStyle.kPrimaryLight20W600PR,
                                         ),
                                       ],
                                     ),
@@ -1759,8 +1676,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                       ),
                                       boxShadow: [
                                         BoxShadow(
-                                          color: ColorPicker.kGreyDark
-                                              .withOpacity(0.5),
+                                          color: ColorPicker.kGreyDark.withOpacity(0.5),
                                           spreadRadius: 1,
                                           blurRadius: 20,
                                         )
@@ -1778,10 +1694,8 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                       style: FontTextStyle.kRed20W600PR,
                                       children: <TextSpan>[
                                         TextSpan(
-                                          text:
-                                              'Hong Kong expected to confirm 614 coronavirus cases',
-                                          style: FontTextStyle
-                                              .kPrimaryLight20W600PR,
+                                          text: 'Hong Kong expected to confirm 614 coronavirus cases',
+                                          style: FontTextStyle.kPrimaryLight20W600PR,
                                         ),
                                       ],
                                     ),
@@ -1819,8 +1733,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                 ),
                               ),
                               TextSpan(
-                                text:
-                                    'snowboarder Su Yiming claims silver in slopestyle final ',
+                                text: 'snowboarder Su Yiming claims silver in slopestyle final ',
                                 style: TextStyle(
                                   color: Color(0xFF101E4A),
                                   fontWeight: FontWeight.w600,
@@ -1871,8 +1784,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                       children: [
                         CommonWidget.text(
                           'People in your area or industry',
-                          style: FontTextStyle.kBlueDark24W600PR
-                              .copyWith(height: 1.2),
+                          style: FontTextStyle.kBlueDark24W600PR.copyWith(height: 1.2),
                         ),
                         const SizedBox(height: 20),
                         SizedBox(
@@ -1894,8 +1806,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                 color: Colors.white,
                               ),
                               child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Container(
                                     child: ClipRRect(
@@ -1920,8 +1831,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                     height: 170,
                                     padding: const EdgeInsets.all(8.0),
                                     child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                       children: [
                                         if (index.isEven)
                                           CommonWidget.text(
@@ -1944,8 +1854,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                             ),
                                           ),
                                         if (index.isEven)
-                                          CommonWidget.text(
-                                              'Nasa has expressed concern about SpaceX’s proposed second-generation',
+                                          CommonWidget.text('Nasa has expressed concern about SpaceX’s proposed second-generation',
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w600,
@@ -1974,8 +1883,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                           child: Center(
                                             child: CommonWidget.text(
                                               'Connect',
-                                              style:
-                                                  FontTextStyle.kWhite14W600PR,
+                                              style: FontTextStyle.kWhite14W600PR,
                                             ),
                                           ),
                                         ),
@@ -2048,8 +1956,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                         ),
                                       ),
                                       TextSpan(
-                                        text:
-                                            'snowboarder Su Yiming claims silver in slopestyle final ',
+                                        text: 'snowboarder Su Yiming claims silver in slopestyle final ',
                                         style: TextStyle(
                                           color: Color(0xFF101E4A),
                                           fontWeight: FontWeight.w600,
@@ -2094,8 +2001,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                         ),
                                       ),
                                       TextSpan(
-                                        text:
-                                            'snowboarder Su Yiming claims silver in slopestyle final ',
+                                        text: 'snowboarder Su Yiming claims silver in slopestyle final ',
                                         style: TextStyle(
                                           color: Color(0xFF101E4A),
                                           fontWeight: FontWeight.w600,
@@ -2140,8 +2046,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                         ),
                                       ),
                                       TextSpan(
-                                        text:
-                                            'snowboarder Su Yiming claims silver in slopestyle final ',
+                                        text: 'snowboarder Su Yiming claims silver in slopestyle final ',
                                         style: TextStyle(
                                           color: Color(0xFF101E4A),
                                           fontWeight: FontWeight.w600,
@@ -2204,8 +2109,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                 color: Colors.white,
                               ),
                               child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Container(
                                     child: ClipRRect(
@@ -2230,8 +2134,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                     height: 140,
                                     padding: const EdgeInsets.all(8.0),
                                     child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                       children: [
                                         if (index.isEven)
                                           CommonWidget.text(
@@ -2254,8 +2157,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                             ),
                                           ),
                                         if (index.isEven)
-                                          CommonWidget.text(
-                                              'Nasa has expressed concern about SpaceX’s proposed second-generation',
+                                          CommonWidget.text('Nasa has expressed concern about SpaceX’s proposed second-generation',
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w600,
@@ -2296,9 +2198,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                             itemBuilder: (context, index) {
                               return CircleAvatar(
                                 // foregroundColor: Colors.red,
-                                backgroundColor: index == 0
-                                    ? const Color(0xFF33A3FE)
-                                    : const Color(0xFF33A3FE).withOpacity(0.19),
+                                backgroundColor: index == 0 ? const Color(0xFF33A3FE) : const Color(0xFF33A3FE).withOpacity(0.19),
                               );
                             },
                           ),
@@ -2377,8 +2277,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                         ),
                                       ),
                                       TextSpan(
-                                        text:
-                                            'snowboarder Su Yiming claims silver in slopestyle final ',
+                                        text: 'snowboarder Su Yiming claims silver in slopestyle final ',
                                         style: TextStyle(
                                           color: Color(0xFF101E4A),
                                           fontWeight: FontWeight.w600,
@@ -2422,8 +2321,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                         ),
                                       ),
                                       TextSpan(
-                                        text:
-                                            'snowboarder Su Yiming claims silver in slopestyle final ',
+                                        text: 'snowboarder Su Yiming claims silver in slopestyle final ',
                                         style: TextStyle(
                                           color: Color(0xFF101E4A),
                                           fontWeight: FontWeight.w600,
@@ -2467,8 +2365,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                         ),
                                       ),
                                       TextSpan(
-                                        text:
-                                            'snowboarder Su Yiming claims silver in slopestyle final ',
+                                        text: 'snowboarder Su Yiming claims silver in slopestyle final ',
                                         style: TextStyle(
                                           color: Color(0xFF101E4A),
                                           fontWeight: FontWeight.w600,
@@ -2560,8 +2457,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                         ),
                                       ),
                                       TextSpan(
-                                        text:
-                                            'Hong Kong expected to confirm 614 coronavirus cases',
+                                        text: 'Hong Kong expected to confirm 614 coronavirus cases',
                                         style: TextStyle(
                                           color: Color(0xFF101E4A),
                                           fontWeight: FontWeight.w600,
@@ -2614,8 +2510,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                         ),
                                       ),
                                       TextSpan(
-                                        text:
-                                            'Hong Kong expected to confirm 614 coronavirus cases',
+                                        text: 'Hong Kong expected to confirm 614 coronavirus cases',
                                         style: TextStyle(
                                           color: Color(0xFF101E4A),
                                           fontWeight: FontWeight.w600,
@@ -2660,8 +2555,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                         ),
                                       ),
                                       TextSpan(
-                                        text:
-                                            'snowboarder Su Yiming claims silver in slopestyle final ',
+                                        text: 'snowboarder Su Yiming claims silver in slopestyle final ',
                                         style: TextStyle(
                                           color: Color(0xFF101E4A),
                                           fontWeight: FontWeight.w600,
@@ -2705,8 +2599,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                         ),
                                       ),
                                       TextSpan(
-                                        text:
-                                            'snowboarder Su Yiming claims silver in slopestyle final ',
+                                        text: 'snowboarder Su Yiming claims silver in slopestyle final ',
                                         style: TextStyle(
                                           color: Color(0xFF101E4A),
                                           fontWeight: FontWeight.w600,
@@ -2750,8 +2643,7 @@ class _UpdateNewsSecondState extends State<UpdateNewsSecond> {
                                         ),
                                       ),
                                       TextSpan(
-                                        text:
-                                            'snowboarder Su Yiming claims silver in slopestyle final ',
+                                        text: 'snowboarder Su Yiming claims silver in slopestyle final ',
                                         style: TextStyle(
                                           color: Color(0xFF101E4A),
                                           fontWeight: FontWeight.w600,

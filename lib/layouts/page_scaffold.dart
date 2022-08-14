@@ -1,11 +1,13 @@
-import 'package:holedo/models/models.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:holedo/common/common_widget.dart';
+import 'package:holedo/constant/colorPicker/color_picker.dart';
+import 'package:holedo/constant/fontStyle/font_style.dart';
+import 'package:holedo/models/models.dart';
 import 'package:holedo/profile/presentation/popups/profile_connection_request_popup.dart';
 import 'package:holedo/profile/presentation/popups/profile_submenu_popup.dart';
 import 'package:holedo/profile/presentation/providers/app_provider.dart';
 import 'package:holedo/profile/presentation/ui/components/appbar_notification.dart';
-
 import 'package:holedo/profile/presentation/ui/components/appbar_textfield.dart';
 import 'package:holedo/profile/presentation/ui/components/custom_appbar.dart';
 import 'package:holedo/profile/presentation/ui/flutter_slider_drawer/slider.dart';
@@ -16,23 +18,19 @@ import 'package:holedo/profile/presentation/utill/responsive.dart';
 import 'package:holedo/profile/presentation/utill/styles.dart';
 import 'package:holedo/responsive/responsive.dart';
 import 'package:routemaster/routemaster.dart';
-import 'package:holedo/constant/colorPicker/color_picker.dart';
-import 'package:holedo/constant/fontStyle/font_style.dart';
-import 'package:holedo/common/common_widget.dart';
-import 'package:intercom_flutter/intercom_flutter.dart';
-export 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
+export 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 export 'package:holedo/layouts/cards/holedo_cards.dart';
-export 'package:holedo/layouts/pages/home_page.dart';
-export 'package:holedo/layouts/pages/recruitment_page.dart';
-export 'package:holedo/layouts/pages/profile_page.dart';
 export 'package:holedo/layouts/pages/category_page.dart';
-export 'package:holedo/layouts/pages/search_page.dart';
-export 'package:holedo/layouts/pages/login_page.dart';
-export 'package:holedo/layouts/pages/newsfront_page.dart';
-export 'package:holedo/layouts/pages/news_page.dart';
-export 'package:holedo/layouts/pages/jobsfront_page.dart';
+export 'package:holedo/layouts/pages/home_page.dart';
 export 'package:holedo/layouts/pages/jobs_page.dart';
+export 'package:holedo/layouts/pages/jobsfront_page.dart';
+export 'package:holedo/layouts/pages/login_page.dart';
+export 'package:holedo/layouts/pages/news_page.dart';
+export 'package:holedo/layouts/pages/newsfront_page.dart';
+export 'package:holedo/layouts/pages/profile_page.dart';
+export 'package:holedo/layouts/pages/recruitment_page.dart';
+export 'package:holedo/layouts/pages/search_page.dart';
 
 class PageScaffold extends StatefulWidget {
   final String title;
@@ -76,8 +74,7 @@ class _PageScaffoldState extends State<PageScaffold> {
           appState.notify = AppNotify(
             appbarNotificationColor: AppbarNotificationColor.green,
             buttonText: "Create Account",
-            title:
-                "New to Hospitality Leaders? Sign up now to join our membership",
+            title: "New to Hospitality Leaders? Sign up now to join our membership",
             onButtonPressed: () {
               Routemaster.of(context).push('/login');
             },
@@ -114,8 +111,7 @@ class _PageScaffoldState extends State<PageScaffold> {
       content: Text(text, style: FontTextStyle.kBlueLight114W400PR),
       behavior: SnackBarBehavior.floating,
       backgroundColor: const Color(0xffCCE8FE),
-      shape: RoundedRectangleBorder(
-          side: BorderSide.none, borderRadius: BorderRadius.zero),
+      shape: RoundedRectangleBorder(side: BorderSide.none, borderRadius: BorderRadius.zero),
       duration: Duration(minutes: 5),
       action: SnackBarAction(
         label: 'X',
@@ -124,8 +120,7 @@ class _PageScaffoldState extends State<PageScaffold> {
           ScaffoldMessenger.of(context).hideCurrentSnackBar();
         },
       ),
-      margin: EdgeInsets.only(
-          bottom: MediaQuery.of(context).size.height - 85, right: 0, left: 0),
+      margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height - 85, right: 0, left: 0),
     ));
   }
 
@@ -141,8 +136,7 @@ class _PageScaffoldState extends State<PageScaffold> {
   void showPurchaseDialog(BuildContext context) {
     showDialog(
       context: context,
-      barrierDismissible:
-          false, // disables popup to close if tapped outside popup (need a button to close)
+      barrierDismissible: false, // disables popup to close if tapped outside popup (need a button to close)
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text(
@@ -217,9 +211,7 @@ class _PageScaffoldState extends State<PageScaffold> {
                           children: [
                             ElevatedButton(
                               onPressed: () {
-                                Provider.of<ProfileProvider>(context,
-                                        listen: false)
-                                    .profileNotifyListeners();
+                                Provider.of<ProfileProvider>(context, listen: false).profileNotifyListeners();
                               },
                               child: Text("data"),
                             ),
@@ -240,23 +232,17 @@ class _PageScaffoldState extends State<PageScaffold> {
                       //_buildFooter(isTableOrMobile(context))
                     ),
                     if (!isTableOrMobile(context)) ...[
-                      !(Provider.of<ProfileProvider>(context)
-                              .showConectionRequestPopo)
+                      !(Provider.of<ProfileProvider>(context).showConectionRequestPopo)
                           ? Di.ESB
                           : Positioned(
-                              right: Di.getScreenSize(context).width < 1301
-                                  ? 65
-                                  : 195,
+                              right: Di.getScreenSize(context).width < 1301 ? 65 : 195,
                               child: const ProfileConnectionRequestPopup(),
                             ),
                       // !profileProviderValue.showProfileSubMenus
-                      !(Provider.of<ProfileProvider>(context)
-                              .showProfileSubMenus)
+                      !(Provider.of<ProfileProvider>(context).showProfileSubMenus)
                           ? Di.ESB
                           : Positioned(
-                              right: Di.getScreenSize(context).width < 1301
-                                  ? 5
-                                  : 130,
+                              right: Di.getScreenSize(context).width < 1301 ? 5 : 130,
                               child: const ProfileSubMenuPopup(),
                             ),
                     ],
@@ -424,10 +410,7 @@ class BuildAppbar extends StatelessWidget {
   Widget build(BuildContext context) {
     final appState = Provider.of<AppProvider>(context);
     final bool isMobile = Responsive.isMobile(context);
-    final menuItems = Provider.of<AppProvider>(context)
-        .model
-        .settings
-        ?.fetch('Menus', 'title', 'Top Menu');
+    final menuItems = Provider.of<AppProvider>(context).model.settings?.fetch('Menus', 'title', 'Top Menu');
     final bool isDesktop = Responsive.isDesktop(context);
     const bool inDrawer = false;
 
@@ -466,8 +449,7 @@ class BuildAppbar extends StatelessWidget {
           if (!isMobilePhone(context)) // navigation
             Row(
               children: menuItems.map((item) {
-                if (item.loginOnly == null ||
-                    (item.loginOnly == appState.isLoggedIn))
+                if (item.loginOnly == null || (item.loginOnly == appState.isLoggedIn))
                   return NavigationLink(
                     title: item.title!,
                     path: item.slug!,
@@ -620,9 +602,7 @@ class BuildAppbar extends StatelessWidget {
                   ),
                 NavigationBox(
                   title: appState.isLoggedIn ? '' : 'Login',
-                  path: appState.isLoggedIn
-                      ? '/profile/${appState.profile!.slug}'
-                      : '/login',
+                  path: appState.isLoggedIn ? '/profile/${appState.profile!.slug}' : '/login',
                   inDrawer: false,
                   body: Container(
                     padding: const EdgeInsets.all(2),
@@ -631,8 +611,7 @@ class BuildAppbar extends StatelessWidget {
                       child: SizedBox(
                         height: 30,
                         width: 30,
-                        child: (appState.isLoggedIn &&
-                                appState.profile?.avatarCdn != null)
+                        child: (appState.isLoggedIn && appState.profile?.avatarCdn != null)
                             ? CircleAvatar(
                                 radius: 30,
                                 backgroundImage: NetworkImage(
@@ -687,13 +666,11 @@ class _NavigationBox extends State<NavigationBox> {
   @override
   Widget build(BuildContext context) {
     final currentPath = RouteData.of(context).fullPath;
-    final isCurrent =
-        widget.path != null ? currentPath.startsWith(widget.path!) : false;
+    final isCurrent = widget.path != null ? currentPath.startsWith(widget.path!) : false;
 
     return Container(
       padding: const EdgeInsets.all(5),
-      color:
-          isCurrent || isHover ? const Color(0xff068597) : Colors.transparent,
+      color: isCurrent || isHover ? const Color(0xff068597) : Colors.transparent,
       child: InkWell(
         onTap: () {
           if (widget.path != null) {
