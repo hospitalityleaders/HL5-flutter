@@ -99,9 +99,11 @@ class DataModel extends Model {
             : (json['Companies'] as List<dynamic>?)
                 ?.map((e) => Company.fromJson(e as Map<String, dynamic>))
                 .toList(),
-        identities: (json['identities'] as List<dynamic>?)
-            ?.map((e) => Identity.fromJson(e as Map<String, dynamic>))
-            .toList(),
+        identities: json['identities'] == null
+            ? null
+            : (json['identities'] as List<dynamic>?)
+                ?.map((e) => Identity.fromJson(e as Map<String, dynamic>))
+                .toList(),
         identity: json['identity'] == null
             ? null
             : Identity.fromJson(json['identity'] as Map<String, dynamic>),
