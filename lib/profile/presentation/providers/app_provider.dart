@@ -11,18 +11,21 @@ class AppProvider extends ChangeNotifier {
   DataModel _model;
   Client _matrix;
   AppNotify? _notify;
+  bool _slider;
   final List<User> _profiles = [];
 
   AppProvider({
     String? username,
     User? profile,
     AppNotify? notify,
+    bool slider = false,
     required DataModel model,
     required Client matrix,
   })  : _username = username,
         _profile = profile,
         _model = model,
         _matrix = matrix,
+        _slider = slider,
         _notify = notify;
 
   //Getters
@@ -37,15 +40,27 @@ class AppProvider extends ChangeNotifier {
   String? get username => _username;
   User? get profile => _profile;
 
-  AppNotify? get notify => _notify;
-  set notify(AppNotify? notify) {
-    _notify = notify;
-    notifyListeners();
-  }
-
   set profile(User? data) {
     _profile = data;
     _username = data?.fullName;
+    notifyListeners();
+  }
+
+  bool get slider => _slider;
+  set slider(bool slider) {
+    _slider = slider;
+    notifyListeners();
+  }
+
+  sliderToggle() {
+    _slider = !_slider;
+    notifyListeners();
+    print('slider: ${slider}');
+  }
+
+  AppNotify? get notify => _notify;
+  set notify(AppNotify? notify) {
+    _notify = notify;
     notifyListeners();
   }
 

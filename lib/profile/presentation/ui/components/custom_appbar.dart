@@ -8,6 +8,7 @@ import 'package:holedo/profile/presentation/ui/components/appbar_textfield.dart'
 import 'package:holedo/profile/presentation/ui/components/custom_icon_button.dart';
 import 'package:holedo/profile/presentation/ui/components/custom_text_button.dart';
 import 'package:holedo/profile/presentation/ui/components/text_with_background.dart';
+import 'package:holedo/profile/presentation/ui/pages/mobile_view_section/mobile_profile_overview_section.dart';
 import 'package:holedo/profile/presentation/utill/color_resources.dart';
 import 'package:holedo/profile/presentation/utill/dimensions.dart';
 import 'package:holedo/profile/presentation/utill/images.dart';
@@ -33,11 +34,8 @@ class _CustomAppbarState extends State<CustomAppbar> {
   @override
   Widget build(BuildContext context) {
     //final menuItems = Get.put(HoledoDatabase()).menuItems;
-
-    final topMenu = Provider.of<AppProvider>(context)
-        .model
-        .settings
-        ?.menus
+    final appState = Provider.of<AppProvider>(context);
+    final topMenu = appState.model.settings?.menus
         ?.firstWhere((e) => e.title == 'Top Menu')
         .children;
     //?.fetch('Menus', 'title', 'Top Menu');
@@ -45,73 +43,85 @@ class _CustomAppbarState extends State<CustomAppbar> {
     final isSmallerThanDesltop =
         ResponsiveWrapper.of(context).isSmallerThan(DESKTOP);
 
-    return Container(
-      color: Cr.colorPrimary,
-      height: 45,
-      width: Di.getScreenSize(context).width,
-      child: Row(
-        mainAxisAlignment: isSmallerThanDesltop
-            ? MainAxisAlignment.spaceBetween
-            : MainAxisAlignment.center,
-        children: [
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              if (isSmallerThanDesltop) Di.SBWES else Di.SBWD,
-              Image.asset(
-                Images.logo1,
-                width: 40,
-              ),
-              if (isSmallerThanDesltop) Di.SBWES else Di.SBWD,
-              AppbarTextField(
-                width: isSmallerThanDesltop ? 300 : null,
-                onSearchChange: widget.onSearch,
-                searchController: widget.searchController,
-              ),
-              if (isSmallerThanDesltop) Di.ESB else Di.SBWD,
-              ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: topMenu?.length,
-                itemBuilder: (BuildContext context, int index) {
-                  final isCurrentPath = RouteData.of(context)
-                      .fullPath
-                      .startsWith('/' + topMenu![index].slug.toString());
+    return isSmallerThanDesltop
+        ? ProfileMobileAppbar(
+            onMenuTap: () async {
+              if (appState.slider)
+                await Future.delayed(Duration(milliseconds: 300));
 
-                  return CustomTextButton(
-                    onPressed: () {
-                      print('cli ${topMenu[index].slug.toString()}');
-                      Routemaster.of(context)
-                          .push('/' + topMenu[index].slug!.toString());
-                    },
-                    text: topMenu[index].title,
-                    color: isCurrentPath ? Cr.whiteColor : Cr.darkBlue9,
-                  );
-                },
-              ),
-              if (isSmallerThanDesltop) Di.ESB else Di.SBWL,
-            ],
-          ),
+              appState.sliderToggle();
+              //Navigator.pop(context);
+            },
+            onSearch: widget.onSearch,
+            searchController: widget.searchController,
+          )
+        : Container(
+            color: Cr.colorPrimary,
+            height: 45,
+            width: Di.getScreenSize(context).width,
+            child: Row(
+              mainAxisAlignment: isSmallerThanDesltop
+                  ? MainAxisAlignment.spaceBetween
+                  : MainAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (isSmallerThanDesltop) Di.SBWES else Di.SBWD,
+                    Image.asset(
+                      Images.logo1,
+                      width: 40,
+                    ),
+                    if (isSmallerThanDesltop) Di.SBWES else Di.SBWD,
+                    AppbarTextField(
+                      width: isSmallerThanDesltop ? 300 : null,
+                      onSearchChange: widget.onSearch,
+                      searchController: widget.searchController,
+                    ),
+                    if (isSmallerThanDesltop) Di.ESB else Di.SBWD,
+                    ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: topMenu?.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        final isCurrentPath = RouteData.of(context)
+                            .fullPath
+                            .startsWith('/' + topMenu![index].slug.toString());
 
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: const [
-              Di.DVZW,
-              AppbarEmailButton(),
-              Di.DVZW,
-              AppbarNotificationsButton(),
-              Di.DVZW,
-              AppbarConnectionRequestButton(),
-              Di.DVZW,
-              _ProfileWithSubMenu(),
-              Di.DVZW,
-            ],
-          ),
+                        return CustomTextButton(
+                          onPressed: () {
+                            print('cli ${topMenu[index].slug.toString()}');
+                            Routemaster.of(context)
+                                .push('/' + topMenu[index].slug!.toString());
+                          },
+                          text: topMenu[index].title,
+                          color: isCurrentPath ? Cr.whiteColor : Cr.darkBlue9,
+                        );
+                      },
+                    ),
+                    if (isSmallerThanDesltop) Di.ESB else Di.SBWL,
+                  ],
+                ),
 
-          // Recruitment
-        ],
-      ),
-    );
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: const [
+                    Di.DVZW,
+                    AppbarEmailButton(),
+                    Di.DVZW,
+                    AppbarNotificationsButton(),
+                    Di.DVZW,
+                    AppbarConnectionRequestButton(),
+                    Di.DVZW,
+                    _ProfileWithSubMenu(),
+                    Di.DVZW,
+                  ],
+                ),
+
+                // Recruitment
+              ],
+            ),
+          );
   }
 }
 
@@ -238,7 +248,7 @@ class AppbarConnectionRequestButton extends StatelessWidget {
                   ),
                   Di.SBWES,
                   TextWithBackground(
-                    text: "352",
+                    text: "353",
                     textColor: Cr.darkBlue9,
                     padding: 0,
                     paddingHorizantal: 4,

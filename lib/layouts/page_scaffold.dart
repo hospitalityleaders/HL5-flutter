@@ -11,6 +11,7 @@ import 'package:holedo/profile/presentation/ui/components/appbar_notification.da
 import 'package:holedo/profile/presentation/ui/components/appbar_textfield.dart';
 import 'package:holedo/profile/presentation/ui/components/custom_appbar.dart';
 import 'package:holedo/profile/presentation/ui/flutter_slider_drawer/slider.dart';
+import 'package:holedo/profile/presentation/ui/pages/profile_mobile_view/profile_mobile_view_page.dart';
 import 'package:holedo/profile/presentation/utill/color_resources.dart';
 import 'package:holedo/profile/presentation/utill/dimensions.dart';
 import 'package:holedo/profile/presentation/utill/images.dart';
@@ -74,7 +75,8 @@ class _PageScaffoldState extends State<PageScaffold> {
           appState.notify = AppNotify(
             appbarNotificationColor: AppbarNotificationColor.green,
             buttonText: "Create Account",
-            title: "New to Hospitality Leaders? Sign up now to join our membership",
+            title:
+                "New to Hospitality Leaders? Sign up now to join our membership",
             onButtonPressed: () {
               Routemaster.of(context).push('/login');
             },
@@ -111,7 +113,8 @@ class _PageScaffoldState extends State<PageScaffold> {
       content: Text(text, style: FontTextStyle.kBlueLight114W400PR),
       behavior: SnackBarBehavior.floating,
       backgroundColor: const Color(0xffCCE8FE),
-      shape: RoundedRectangleBorder(side: BorderSide.none, borderRadius: BorderRadius.zero),
+      shape: RoundedRectangleBorder(
+          side: BorderSide.none, borderRadius: BorderRadius.zero),
       duration: Duration(minutes: 5),
       action: SnackBarAction(
         label: 'X',
@@ -120,7 +123,8 @@ class _PageScaffoldState extends State<PageScaffold> {
           ScaffoldMessenger.of(context).hideCurrentSnackBar();
         },
       ),
-      margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height - 85, right: 0, left: 0),
+      margin: EdgeInsets.only(
+          bottom: MediaQuery.of(context).size.height - 85, right: 0, left: 0),
     ));
   }
 
@@ -136,7 +140,8 @@ class _PageScaffoldState extends State<PageScaffold> {
   void showPurchaseDialog(BuildContext context) {
     showDialog(
       context: context,
-      barrierDismissible: false, // disables popup to close if tapped outside popup (need a button to close)
+      barrierDismissible:
+          false, // disables popup to close if tapped outside popup (need a button to close)
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text(
@@ -190,19 +195,17 @@ class _PageScaffoldState extends State<PageScaffold> {
                     await Intercom.instance.displayMessenger();
                   },
                 ),*/
-                appBar: (isTableOrMobile(context))
-                    ? null
-                    : AppBar(
-                        toolbarHeight: 45,
-                        flexibleSpace: SizedBox(
-                          child: CustomAppbar(
-                            searchController: _searchController,
-                            onSearch: (searchText) {
-                              _search();
-                            },
-                          ),
-                        ),
-                      ),
+                appBar: AppBar(
+                  toolbarHeight: 45,
+                  flexibleSpace: SizedBox(
+                    child: CustomAppbar(
+                      searchController: _searchController,
+                      onSearch: (searchText) {
+                        _search();
+                      },
+                    ),
+                  ),
+                ),
                 body: Stack(
                   children: [
                     Center(
@@ -211,7 +214,9 @@ class _PageScaffoldState extends State<PageScaffold> {
                           children: [
                             ElevatedButton(
                               onPressed: () {
-                                Provider.of<ProfileProvider>(context, listen: false).profileNotifyListeners();
+                                Provider.of<ProfileProvider>(context,
+                                        listen: false)
+                                    .profileNotifyListeners();
                               },
                               child: Text("data"),
                             ),
@@ -223,26 +228,43 @@ class _PageScaffoldState extends State<PageScaffold> {
                     Scaffold(
                       appBar: AppbarNotification(),
                       extendBodyBehindAppBar: true,
-                      body: Container(
-                        decoration: const BoxDecoration(
-                          color: ColorPicker.kBG,
-                        ),
-                        child: widget.body,
-                      ),
+                      body: Di.getScreenSize(context).width < 1000
+                          ? SliderDrawer(
+                              screenSize: Di.getScreenSize(context),
+                              splashColor: Color.fromARGB(255, 119, 56, 59),
+                              child: Container(
+                                decoration: const BoxDecoration(
+                                  color: Cr.backgroundColor,
+                                ),
+                                child: widget.body,
+                              ),
+                            )
+                          : Container(
+                              decoration: const BoxDecoration(
+                                color: ColorPicker.kBG,
+                              ),
+                              child: widget.body,
+                            ),
                       //_buildFooter(isTableOrMobile(context))
                     ),
                     if (!isTableOrMobile(context)) ...[
-                      !(Provider.of<ProfileProvider>(context).showConectionRequestPopo)
+                      !(Provider.of<ProfileProvider>(context)
+                              .showConectionRequestPopo)
                           ? Di.ESB
                           : Positioned(
-                              right: Di.getScreenSize(context).width < 1301 ? 65 : 195,
+                              right: Di.getScreenSize(context).width < 1301
+                                  ? 65
+                                  : 195,
                               child: const ProfileConnectionRequestPopup(),
                             ),
                       // !profileProviderValue.showProfileSubMenus
-                      !(Provider.of<ProfileProvider>(context).showProfileSubMenus)
+                      !(Provider.of<ProfileProvider>(context)
+                              .showProfileSubMenus)
                           ? Di.ESB
                           : Positioned(
-                              right: Di.getScreenSize(context).width < 1301 ? 5 : 130,
+                              right: Di.getScreenSize(context).width < 1301
+                                  ? 5
+                                  : 130,
                               child: const ProfileSubMenuPopup(),
                             ),
                     ],
@@ -410,7 +432,10 @@ class BuildAppbar extends StatelessWidget {
   Widget build(BuildContext context) {
     final appState = Provider.of<AppProvider>(context);
     final bool isMobile = Responsive.isMobile(context);
-    final menuItems = Provider.of<AppProvider>(context).model.settings?.fetch('Menus', 'title', 'Top Menu');
+    final menuItems = Provider.of<AppProvider>(context)
+        .model
+        .settings
+        ?.fetch('Menus', 'title', 'Top Menu');
     final bool isDesktop = Responsive.isDesktop(context);
     const bool inDrawer = false;
 
@@ -449,7 +474,8 @@ class BuildAppbar extends StatelessWidget {
           if (!isMobilePhone(context)) // navigation
             Row(
               children: menuItems.map((item) {
-                if (item.loginOnly == null || (item.loginOnly == appState.isLoggedIn))
+                if (item.loginOnly == null ||
+                    (item.loginOnly == appState.isLoggedIn))
                   return NavigationLink(
                     title: item.title!,
                     path: item.slug!,
@@ -602,7 +628,9 @@ class BuildAppbar extends StatelessWidget {
                   ),
                 NavigationBox(
                   title: appState.isLoggedIn ? '' : 'Login',
-                  path: appState.isLoggedIn ? '/profile/${appState.profile!.slug}' : '/login',
+                  path: appState.isLoggedIn
+                      ? '/profile/${appState.profile!.slug}'
+                      : '/login',
                   inDrawer: false,
                   body: Container(
                     padding: const EdgeInsets.all(2),
@@ -611,7 +639,8 @@ class BuildAppbar extends StatelessWidget {
                       child: SizedBox(
                         height: 30,
                         width: 30,
-                        child: (appState.isLoggedIn && appState.profile?.avatarCdn != null)
+                        child: (appState.isLoggedIn &&
+                                appState.profile?.avatarCdn != null)
                             ? CircleAvatar(
                                 radius: 30,
                                 backgroundImage: NetworkImage(
@@ -666,11 +695,13 @@ class _NavigationBox extends State<NavigationBox> {
   @override
   Widget build(BuildContext context) {
     final currentPath = RouteData.of(context).fullPath;
-    final isCurrent = widget.path != null ? currentPath.startsWith(widget.path!) : false;
+    final isCurrent =
+        widget.path != null ? currentPath.startsWith(widget.path!) : false;
 
     return Container(
       padding: const EdgeInsets.all(5),
-      color: isCurrent || isHover ? const Color(0xff068597) : Colors.transparent,
+      color:
+          isCurrent || isHover ? const Color(0xff068597) : Colors.transparent,
       child: InkWell(
         onTap: () {
           if (widget.path != null) {

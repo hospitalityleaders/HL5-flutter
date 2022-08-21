@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:holedo/profile/presentation/providers/app_provider.dart';
 import 'package:holedo/profile/presentation/ui/flutter_slider_drawer/helper/slider_shadow.dart';
 import 'package:holedo/profile/presentation/ui/flutter_slider_drawer/helper/utils.dart';
 import 'package:holedo/profile/presentation/ui/flutter_slider_drawer/mobile_slide_menu.dart';
@@ -6,6 +7,7 @@ import 'package:holedo/profile/presentation/ui/flutter_slider_drawer/slider_dire
 import 'package:holedo/profile/presentation/ui/pages/mobile_view_section/mobile_profile_overview_section.dart';
 import 'package:holedo/profile/presentation/utill/color_resources.dart';
 import 'package:holedo/profile/presentation/utill/dimensions.dart';
+import 'package:provider/provider.dart';
 
 export 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 export 'package:holedo/layouts/cards/holedo_cards.dart';
@@ -90,6 +92,18 @@ class SliderDrawerState extends State<SliderDrawer>
     });
   }
 
+  Future<bool> getCurrentSliderState() async {
+    final appState = Provider.of<AppProvider>(context, listen: true);
+    return appState.slider;
+  }
+
+  _todayState() {
+    getCurrentSliderState().then((slider) => setState(() {
+          _isDrawerOpened = slider;
+          print('init ${_isDrawerOpened} ${slider}');
+        }));
+  }
+
   @override
   void initState() {
     super.initState();
@@ -155,9 +169,17 @@ class SliderDrawerState extends State<SliderDrawer>
                         SizedBox(
                           width: sliderOpenSize,
                           height: Di.getScreenSize(context).height,
-                          child: MobileSlideMenu(onCloseTap: closeSlider),
-
-                          // SliderBar(
+                          child: Consumer<AppProvider>(
+                            builder: (context, app, child) {
+                              //
+                              if (app.slider != _isDrawerOpened) {
+                                toggle();
+                                print('cost ${app.slider}');
+                              }
+                              return MobileSlideMenu(onCloseTap: closeSlider);
+                            },
+                          ),
+                          // SliderBar(MobileSlideMenu(onCloseTap: closeSlider),
                           //   slideDirection: widget.slideDirection,
                           //   sliderMenu:
                           //       //  Container(
@@ -180,10 +202,10 @@ class SliderDrawerState extends State<SliderDrawer>
                 },
                 child: Column(
                   children: <Widget>[
-                    ProfileMobileAppbar(
-                      onMenuTap: () => toggle(),
-                      onSearch: (onSearch) {},
-                    ),
+                    //ProfileMobileAppbar(
+                    //  onMenuTap: () => toggle(),
+                    //  onSearch: (onSearch) {},
+                    //),
                     Expanded(child: widget.child),
                   ],
                 ),

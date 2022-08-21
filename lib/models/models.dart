@@ -108,7 +108,7 @@ class HoledoDatabase extends GetxController {
       );
     }
 
-    await fetchIdentities();
+    //await fetchIdentities();
 
     debugPrint('finish Init');
   }
