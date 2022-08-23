@@ -20,6 +20,7 @@ import 'package:holedo/profile/presentation/utill/images.dart';
 import 'package:holedo/profile/presentation/utill/responsive.dart';
 import 'package:holedo/profile/presentation/utill/styles.dart';
 import 'package:holedo/responsive/responsive.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 import 'package:routemaster/routemaster.dart';
 
 export 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -169,7 +170,8 @@ class _PageScaffoldState extends State<PageScaffold> {
     final appState = Provider.of<AppProvider>(context);
 
     final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
+    final isSmallerThanDesktop =
+        ResponsiveWrapper.of(context).isSmallerThan(DESKTOP);
     return LayoutBuilder(
       builder: (context, constraints) {
         maxWidth = constraints.maxWidth;
@@ -196,9 +198,42 @@ class _PageScaffoldState extends State<PageScaffold> {
                   },
                 ),*/
           appBar: AppBar(
-            automaticallyImplyLeading: false,
             toolbarHeight: 45,
-            leading: null,
+            actions: <Widget>[
+              if (isSmallerThanDesktop)
+                IconButton(
+                  icon: const Icon(Icons.add_alert),
+                  tooltip: 'Show Snackbar',
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('This is a snackbar')));
+                  },
+                ),
+              if (isSmallerThanDesktop)
+                IconButton(
+                  icon: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: const [
+                      Icon(
+                        Icons.menu,
+                        color: Cr.darkBlue9,
+                      ),
+                      Text(
+                        "MENU",
+                        style: TextStyle(
+                          fontSize: 9,
+                          fontFamily: "SourceSansPro",
+                          fontWeight: FontWeight.bold,
+                          color: Cr.darkBlue9,
+                        ),
+                      )
+                    ],
+                  ),
+                  tooltip: 'Show Navigation Menu',
+                  onPressed: () => _scaffoldKey.currentState?.openEndDrawer(),
+                ),
+            ],
             flexibleSpace: SizedBox(
               child: CustomAppbar(
                 searchController: _searchController,
@@ -208,7 +243,7 @@ class _PageScaffoldState extends State<PageScaffold> {
               ),
             ),
           ),
-          endDrawer: Di.getScreenSize(context).width < 1000
+          endDrawer: isSmallerThanDesktop
               ? Drawer(
                   elevation: 16.0,
                   child: Container(
@@ -249,16 +284,14 @@ class _PageScaffoldState extends State<PageScaffold> {
                           .showConectionRequestPopo)
                       ? Di.ESB
                       : Positioned(
-                          right:
-                              Di.getScreenSize(context).width < 1301 ? 65 : 195,
+                          right: isSmallerThanDesktop ? 65 : 195,
                           child: const ProfileConnectionRequestPopup(),
                         ),
                   // !profileProviderValue.showProfileSubMenus
                   !(Provider.of<ProfileProvider>(context).showProfileSubMenus)
                       ? Di.ESB
                       : Positioned(
-                          right:
-                              Di.getScreenSize(context).width < 1301 ? 5 : 130,
+                          right: isSmallerThanDesktop ? 5 : 130,
                           child: const ProfileSubMenuPopup(),
                         ),
                 ],

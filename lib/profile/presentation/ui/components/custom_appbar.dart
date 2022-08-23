@@ -58,6 +58,7 @@ class _CustomAppbarState extends State<CustomAppbar> {
     return Container(
       color: Cr.colorPrimary,
       height: 45,
+      padding: EdgeInsets.only(left: 5, right: isSmallerThanDesltop ? 75 : 5),
       width: Di.getScreenSize(context).width,
       child: Row(
         mainAxisAlignment: isSmallerThanDesltop
