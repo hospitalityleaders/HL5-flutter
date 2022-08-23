@@ -40,9 +40,10 @@ class _CustomAppbarState extends State<CustomAppbar> {
         .children;
     //?.fetch('Menus', 'title', 'Top Menu');
 
-    final isSmallerThanDesltop =
-        ResponsiveWrapper.of(context).isSmallerThan(DESKTOP);
-/*isSmallerThanDesltop
+    final isSmallerThanTablet =
+        ResponsiveWrapper.of(context).isSmallerThan(TABLET);
+    final isMobile = ResponsiveWrapper.of(context).isSmallerThan(MOBILE);
+/*isSmallerThanTablet
         ? ProfileMobileAppbar(
             onMenuTap: () async {
               if (appState.slider)
@@ -57,30 +58,30 @@ class _CustomAppbarState extends State<CustomAppbar> {
         : */
     return Container(
       color: Cr.colorPrimary,
-      height: 45,
-      padding: EdgeInsets.only(left: 5, right: isSmallerThanDesltop ? 75 : 5),
+      height: 46,
+      padding: EdgeInsets.only(left: 5, right: isSmallerThanTablet ? 75 : 5),
       width: Di.getScreenSize(context).width,
       child: Row(
-        mainAxisAlignment: isSmallerThanDesltop
+        mainAxisAlignment: isSmallerThanTablet
             ? MainAxisAlignment.spaceBetween
             : MainAxisAlignment.center,
         children: [
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              if (isSmallerThanDesltop) Di.SBWES else Di.SBWD,
+              if (isSmallerThanTablet) Di.SBWES else Di.SBWD,
               Image.asset(
                 Images.logo1,
                 width: 40,
               ),
-              if (isSmallerThanDesltop) Di.SBWES else Di.SBWD,
+              if (isSmallerThanTablet) Di.SBWES else Di.SBWD,
               AppbarTextField(
-                width: isSmallerThanDesltop ? 300 : null,
+                width: isSmallerThanTablet ? 300 : null,
                 onSearchChange: widget.onSearch,
                 searchController: widget.searchController,
               ),
-              if (isSmallerThanDesltop) Di.ESB else Di.SBWD,
-              isSmallerThanDesltop
+              if (isSmallerThanTablet) Di.ESB else Di.SBWD,
+              isSmallerThanTablet
                   ? Container()
                   : ListView.builder(
                       shrinkWrap: true,
@@ -102,25 +103,25 @@ class _CustomAppbarState extends State<CustomAppbar> {
                         );
                       },
                     ),
-              if (isSmallerThanDesltop) Di.ESB else Di.SBWL,
+              if (isSmallerThanTablet) Di.ESB else Di.SBWL,
             ],
           ),
-
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: const [
-              Di.DVZW,
-              AppbarEmailButton(),
-              Di.DVZW,
-              AppbarNotificationsButton(),
-              Di.DVZW,
-              AppbarConnectionRequestButton(),
-              Di.DVZW,
-              _ProfileWithSubMenu(),
-              Di.DVZW,
-              Di.SBWD,
-            ],
-          ),
+          if (isMobile == false)
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: const [
+                Di.DVZW,
+                AppbarEmailButton(),
+                Di.DVZW,
+                AppbarNotificationsButton(),
+                Di.DVZW,
+                AppbarConnectionRequestButton(),
+                Di.DVZW,
+                _ProfileWithSubMenu(),
+                Di.DVZW,
+                Di.SBWD,
+              ],
+            ),
 
           // Recruitment
         ],

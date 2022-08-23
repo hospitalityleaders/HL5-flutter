@@ -170,8 +170,9 @@ class _PageScaffoldState extends State<PageScaffold> {
     final appState = Provider.of<AppProvider>(context);
 
     final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-    final isSmallerThanDesktop =
-        ResponsiveWrapper.of(context).isSmallerThan(DESKTOP);
+    final isSmallerThanTablet =
+        ResponsiveWrapper.of(context).isSmallerThan(TABLET);
+    final isMobile = ResponsiveWrapper.of(context).isSmallerThan(MOBILE);
     return LayoutBuilder(
       builder: (context, constraints) {
         maxWidth = constraints.maxWidth;
@@ -200,7 +201,7 @@ class _PageScaffoldState extends State<PageScaffold> {
           appBar: AppBar(
             toolbarHeight: 45,
             actions: <Widget>[
-              if (isSmallerThanDesktop)
+              if (isSmallerThanTablet)
                 IconButton(
                   icon: const Icon(Icons.add_alert),
                   tooltip: 'Show Snackbar',
@@ -209,7 +210,7 @@ class _PageScaffoldState extends State<PageScaffold> {
                         const SnackBar(content: Text('This is a snackbar')));
                   },
                 ),
-              if (isSmallerThanDesktop)
+              if (isSmallerThanTablet)
                 IconButton(
                   icon: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -243,12 +244,14 @@ class _PageScaffoldState extends State<PageScaffold> {
               ),
             ),
           ),
-          endDrawer: isSmallerThanDesktop
+          endDrawer: isSmallerThanTablet
               ? Drawer(
                   elevation: 16.0,
                   child: Container(
                     color: Color(0xFF232f3e),
-                    child: MobileSlideMenu(onCloseTap: () => {}),
+                    child: MobileSlideMenu(
+                        onCloseTap: () =>
+                            _scaffoldKey.currentState?.closeEndDrawer()),
                   ),
                 )
               : null,
@@ -284,14 +287,14 @@ class _PageScaffoldState extends State<PageScaffold> {
                           .showConectionRequestPopo)
                       ? Di.ESB
                       : Positioned(
-                          right: isSmallerThanDesktop ? 65 : 195,
+                          right: isSmallerThanTablet ? 65 : 195,
                           child: const ProfileConnectionRequestPopup(),
                         ),
                   // !profileProviderValue.showProfileSubMenus
                   !(Provider.of<ProfileProvider>(context).showProfileSubMenus)
                       ? Di.ESB
                       : Positioned(
-                          right: isSmallerThanDesktop ? 5 : 130,
+                          right: isSmallerThanTablet ? 5 : 130,
                           child: const ProfileSubMenuPopup(),
                         ),
                 ],
