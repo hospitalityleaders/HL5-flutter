@@ -42,8 +42,7 @@ class _CustomAppbarState extends State<CustomAppbar> {
 
     final isSmallerThanDesltop =
         ResponsiveWrapper.of(context).isSmallerThan(DESKTOP);
-
-    return isSmallerThanDesltop
+/*isSmallerThanDesltop
         ? ProfileMobileAppbar(
             onMenuTap: () async {
               if (appState.slider)
@@ -55,31 +54,34 @@ class _CustomAppbarState extends State<CustomAppbar> {
             onSearch: widget.onSearch,
             searchController: widget.searchController,
           )
-        : Container(
-            color: Cr.colorPrimary,
-            height: 45,
-            width: Di.getScreenSize(context).width,
-            child: Row(
-              mainAxisAlignment: isSmallerThanDesltop
-                  ? MainAxisAlignment.spaceBetween
-                  : MainAxisAlignment.center,
-              children: [
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    if (isSmallerThanDesltop) Di.SBWES else Di.SBWD,
-                    Image.asset(
-                      Images.logo1,
-                      width: 40,
-                    ),
-                    if (isSmallerThanDesltop) Di.SBWES else Di.SBWD,
-                    AppbarTextField(
-                      width: isSmallerThanDesltop ? 300 : null,
-                      onSearchChange: widget.onSearch,
-                      searchController: widget.searchController,
-                    ),
-                    if (isSmallerThanDesltop) Di.ESB else Di.SBWD,
-                    ListView.builder(
+        : */
+    return Container(
+      color: Cr.colorPrimary,
+      height: 45,
+      width: Di.getScreenSize(context).width,
+      child: Row(
+        mainAxisAlignment: isSmallerThanDesltop
+            ? MainAxisAlignment.spaceBetween
+            : MainAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (isSmallerThanDesltop) Di.SBWES else Di.SBWD,
+              Image.asset(
+                Images.logo1,
+                width: 40,
+              ),
+              if (isSmallerThanDesltop) Di.SBWES else Di.SBWD,
+              AppbarTextField(
+                width: isSmallerThanDesltop ? 300 : null,
+                onSearchChange: widget.onSearch,
+                searchController: widget.searchController,
+              ),
+              if (isSmallerThanDesltop) Di.ESB else Di.SBWD,
+              isSmallerThanDesltop
+                  ? Container()
+                  : ListView.builder(
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
                       itemCount: topMenu?.length,
@@ -99,29 +101,30 @@ class _CustomAppbarState extends State<CustomAppbar> {
                         );
                       },
                     ),
-                    if (isSmallerThanDesltop) Di.ESB else Di.SBWL,
-                  ],
-                ),
+              if (isSmallerThanDesltop) Di.ESB else Di.SBWL,
+            ],
+          ),
 
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: const [
-                    Di.DVZW,
-                    AppbarEmailButton(),
-                    Di.DVZW,
-                    AppbarNotificationsButton(),
-                    Di.DVZW,
-                    AppbarConnectionRequestButton(),
-                    Di.DVZW,
-                    _ProfileWithSubMenu(),
-                    Di.DVZW,
-                  ],
-                ),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: const [
+              Di.DVZW,
+              AppbarEmailButton(),
+              Di.DVZW,
+              AppbarNotificationsButton(),
+              Di.DVZW,
+              AppbarConnectionRequestButton(),
+              Di.DVZW,
+              _ProfileWithSubMenu(),
+              Di.DVZW,
+              Di.SBWD,
+            ],
+          ),
 
-                // Recruitment
-              ],
-            ),
-          );
+          // Recruitment
+        ],
+      ),
+    );
   }
 }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:holedo/layouts/page_scaffold.dart';
 import 'package:holedo/responsive/common_responsive_value.dart';
 import 'package:holedo/utils/strings.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -28,7 +29,8 @@ class NewsPortalScreen extends StatefulWidget {
   State<NewsPortalScreen> createState() => _NewsPortalScreenState();
 }
 
-class _NewsPortalScreenState extends State<NewsPortalScreen> with SingleTickerProviderStateMixin {
+class _NewsPortalScreenState extends State<NewsPortalScreen>
+    with SingleTickerProviderStateMixin {
   TabController? _tabController;
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   MenuController _menuController = Get.put(MenuController());
@@ -41,7 +43,8 @@ class _NewsPortalScreenState extends State<NewsPortalScreen> with SingleTickerPr
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return PageScaffold(
+      title: 'NewsPortal',
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -60,7 +63,8 @@ class _NewsPortalScreenState extends State<NewsPortalScreen> with SingleTickerPr
                     _menuController.setTabIndex(value);
                   },
                   padding: EdgeInsets.symmetric(
-                    horizontal: CommonResponsiveValue.tabBarPaddingRValue(context),
+                    horizontal:
+                        CommonResponsiveValue.tabBarPaddingRValue(context),
                   ),
                   indicatorColor: ColorPicker.kBlueLight,
                   labelPadding: EdgeInsets.only(bottom: 15),
@@ -69,8 +73,10 @@ class _NewsPortalScreenState extends State<NewsPortalScreen> with SingleTickerPr
                     (index) => CommonWidget.text(
                       Data.tabItem[index],
                       style: _menuController.tabIndex.value == index
-                          ? CommonResponsiveValue.selectedTabBarTextValue(context)
-                          : CommonResponsiveValue.unselectedTabBarTextValue(context),
+                          ? CommonResponsiveValue.selectedTabBarTextValue(
+                              context)
+                          : CommonResponsiveValue.unselectedTabBarTextValue(
+                              context),
                     ),
                   ),
                 ),
@@ -148,9 +154,13 @@ class _NewsPortalScreenState extends State<NewsPortalScreen> with SingleTickerPr
           customLastWidgetWhenTabView: ExperienceCompletionWidget(),
           leadingWidget: WeatherWidget(
             isBlueColorEnable: false,
-            height: CommonResponsiveValue.genericDouble(context, 480, 450, [RF.Condition.smallerThan(name: TABLET, value: 250)]),
-            width: ResponsiveValue<double>(context, defaultValue: 230, valueWhen: [RF.Condition.smallerThan(name: TABLET, value: double.infinity)])
-                .value!,
+            height: CommonResponsiveValue.genericDouble(context, 480, 450,
+                [RF.Condition.smallerThan(name: TABLET, value: 250)]),
+            width: ResponsiveValue<double>(context,
+                defaultValue: 230,
+                valueWhen: [
+                  RF.Condition.smallerThan(name: TABLET, value: double.infinity)
+                ]).value!,
           )),
       SB.SH50(),
 
@@ -165,7 +175,9 @@ class _NewsPortalScreenState extends State<NewsPortalScreen> with SingleTickerPr
           centerWidget: ResponsiveRowColumnItem(
             child: Container(
               height: 400,
-              width: CommonResponsiveValue.genericDouble(context, 530, 430, [RF.Condition.smallerThan(name: TABLET, value: double.infinity)]),
+              width: CommonResponsiveValue.genericDouble(context, 530, 430, [
+                RF.Condition.smallerThan(name: TABLET, value: double.infinity)
+              ]),
               // color: Colors.red,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
@@ -192,7 +204,9 @@ class _NewsPortalScreenState extends State<NewsPortalScreen> with SingleTickerPr
                             padding: EdgeInsets.all(10),
                             height: 50,
                             width: 50,
-                            decoration: BoxDecoration(color: ColorPicker.kBlueLight, borderRadius: BorderRadius.circular(4)),
+                            decoration: BoxDecoration(
+                                color: ColorPicker.kBlueLight,
+                                borderRadius: BorderRadius.circular(4)),
                             child: SvgPicture.asset(
                               'assets/icons/play_arrow.svg',
                               color: Colors.white,
@@ -218,7 +232,8 @@ class _NewsPortalScreenState extends State<NewsPortalScreen> with SingleTickerPr
             children: [
               ResponsiveRowColumnItem(
                 child: Container(
-                  height: CommonResponsiveValue.genericDouble(context, 300, 300),
+                  height:
+                      CommonResponsiveValue.genericDouble(context, 300, 300),
                   width: CommonResponsiveValue.genericDouble(context, 230, 250),
                   color: Colors.blue,
                 ),
@@ -228,7 +243,8 @@ class _NewsPortalScreenState extends State<NewsPortalScreen> with SingleTickerPr
               ),
               ResponsiveRowColumnItem(
                 child: Container(
-                  height: CommonResponsiveValue.genericDouble(context, 300, 300),
+                  height:
+                      CommonResponsiveValue.genericDouble(context, 300, 300),
                   width: CommonResponsiveValue.genericDouble(context, 230, 250),
                   color: Colors.blue,
                 ),
@@ -241,7 +257,8 @@ class _NewsPortalScreenState extends State<NewsPortalScreen> with SingleTickerPr
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Visibility(
-                visible: !RF.ResponsiveWrapper.of(context).isSmallerThan(TABLET),
+                visible:
+                    !RF.ResponsiveWrapper.of(context).isSmallerThan(TABLET),
                 child: Container(
                   height: 320,
                   width: 230,
@@ -273,9 +290,12 @@ class _NewsPortalScreenState extends State<NewsPortalScreen> with SingleTickerPr
                 SizedBox(width: 230, child: Divider()),
                 Container(
                   height: 200,
-                  width:
-                      ResponsiveValue<double>(context, defaultValue: 230, valueWhen: [RF.Condition.smallerThan(name: TABLET, value: double.infinity)])
-                          .value,
+                  width: ResponsiveValue<double>(context,
+                      defaultValue: 230,
+                      valueWhen: [
+                        RF.Condition.smallerThan(
+                            name: TABLET, value: double.infinity)
+                      ]).value,
                   color: Colors.blue,
                 ),
               ],
@@ -306,9 +326,13 @@ class _NewsPortalScreenState extends State<NewsPortalScreen> with SingleTickerPr
           centerWidget: ResponsiveRowColumnItem(child: PublicContentWidget()),
           tralingWidget: WeatherWidget(
             isBlueColorEnable: true,
-            height: CommonResponsiveValue.genericDouble(context, 520, 530, [RF.Condition.smallerThan(name: TABLET, value: 200)]),
-            width: ResponsiveValue<double>(context, defaultValue: 250, valueWhen: [RF.Condition.smallerThan(name: TABLET, value: double.infinity)])
-                .value!,
+            height: CommonResponsiveValue.genericDouble(context, 520, 530,
+                [RF.Condition.smallerThan(name: TABLET, value: 200)]),
+            width: ResponsiveValue<double>(context,
+                defaultValue: 250,
+                valueWhen: [
+                  RF.Condition.smallerThan(name: TABLET, value: double.infinity)
+                ]).value!,
           ),
           leadingWidget: Container(
             height: 520,
@@ -335,7 +359,9 @@ class _NewsPortalScreenState extends State<NewsPortalScreen> with SingleTickerPr
             columnMainAxisAlignment: MainAxisAlignment.start,
             rowMainAxisAlignment: MainAxisAlignment.spaceBetween,
             // rowPadding: EdgeInsets.only(right: 20),
-            layout: RF.ResponsiveWrapper.of(context).isSmallerThan(TABLET) ? RF.ResponsiveRowColumnType.COLUMN : RF.ResponsiveRowColumnType.ROW,
+            layout: RF.ResponsiveWrapper.of(context).isSmallerThan(TABLET)
+                ? RF.ResponsiveRowColumnType.COLUMN
+                : RF.ResponsiveRowColumnType.ROW,
             children: [
               ResponsiveRowColumnItem(
                   child: RF.ResponsiveRowColumn(
@@ -351,13 +377,16 @@ class _NewsPortalScreenState extends State<NewsPortalScreen> with SingleTickerPr
                       width: RF.ResponsiveValue<double>(
                         context,
                         valueWhen: [
-                          RF.Condition.smallerThan(name: RF.TABLET, value: double.infinity),
+                          RF.Condition.smallerThan(
+                              name: RF.TABLET, value: double.infinity),
                           RF.Condition.smallerThan(name: RF.DESKTOP, value: 280)
                         ],
                         defaultValue: 320,
                       ).value!,
                       decoration: BoxDecoration(
-                        image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/images/alone_girl.png')),
+                        image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: AssetImage('assets/images/alone_girl.png')),
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
@@ -370,20 +399,35 @@ class _NewsPortalScreenState extends State<NewsPortalScreen> with SingleTickerPr
                     child: SizedBox(
                       width: RF.ResponsiveValue<double>(
                         context,
-                        valueWhen: [RF.Condition.smallerThan(name: RF.TABLET, value: double.infinity)],
+                        valueWhen: [
+                          RF.Condition.smallerThan(
+                              name: RF.TABLET, value: double.infinity)
+                        ],
                         defaultValue: 250,
                       ).value!,
                       child: RichText(
                         textAlign: TextAlign.left,
                         text: TextSpan(
                           text: "‘I’ve had letters from klansmen’:",
-                          style: CommonResponsiveValue.genericTextStyleResponsive(context, FontTextStyle.kRed18W600PR, FontTextStyle.kRed14W600PR),
+                          style:
+                              CommonResponsiveValue.genericTextStyleResponsive(
+                                  context,
+                                  FontTextStyle.kRed18W600PR,
+                                  FontTextStyle.kRed14W600PR),
                           children: <TextSpan>[
-                            if (RF.ResponsiveWrapper.of(context).isSmallerThan(RF.TABLET)) ...{TextSpan(text: '\n')},
+                            if (RF.ResponsiveWrapper.of(context)
+                                .isSmallerThan(RF.TABLET)) ...{
+                              TextSpan(text: '\n')
+                            },
                             TextSpan(
                                 text: 'Jennifer Beals on Flashdance',
-                                style: CommonResponsiveValue.genericTextStyleResponsive(
-                                    context, FontTextStyle.kPrimaryLight18W600PRSPACEHEI, FontTextStyle.kPrimaryLight14W600PRSPACEHEI)),
+                                style: CommonResponsiveValue
+                                    .genericTextStyleResponsive(
+                                        context,
+                                        FontTextStyle
+                                            .kPrimaryLight18W600PRSPACEHEI,
+                                        FontTextStyle
+                                            .kPrimaryLight14W600PRSPACEHEI)),
                           ],
                         ),
                       ),
@@ -402,22 +446,36 @@ class _NewsPortalScreenState extends State<NewsPortalScreen> with SingleTickerPr
                 layout: RF.ResponsiveRowColumnType.COLUMN,
                 children: [
                   RF.ResponsiveRowColumnItem(
-                    columnOrder:
-                        RF.ResponsiveValue<int>(context, defaultValue: 1, valueWhen: [RF.Condition.smallerThan(name: TABLET, value: 3)]).value!,
+                    columnOrder: RF.ResponsiveValue<int>(context,
+                        defaultValue: 1,
+                        valueWhen: [
+                          RF.Condition.smallerThan(name: TABLET, value: 3)
+                        ]).value!,
                     child: SizedBox(
-                      width: CommonResponsiveValue.genericDouble(context, 200, 150),
+                      width: CommonResponsiveValue.genericDouble(
+                          context, 200, 150),
                       child: RichText(
                         textAlign: RF.ResponsiveValue<TextAlign>(context,
-                            defaultValue: TextAlign.left, valueWhen: [RF.Condition.smallerThan(name: TABLET, value: TextAlign.center)]).value!,
+                            defaultValue: TextAlign.left,
+                            valueWhen: [
+                              RF.Condition.smallerThan(
+                                  name: TABLET, value: TextAlign.center)
+                            ]).value!,
                         text: TextSpan(
                           text: "How buddhism has changed the west for better",
-                          style: CommonResponsiveValue.genericTextStyleResponsive(
-                              context, FontTextStyle.kPrimaryLight18W600PRSPACEHEI, FontTextStyle.kPrimaryLight14W600PRSPACEHEI),
+                          style:
+                              CommonResponsiveValue.genericTextStyleResponsive(
+                                  context,
+                                  FontTextStyle.kPrimaryLight18W600PRSPACEHEI,
+                                  FontTextStyle.kPrimaryLight14W600PRSPACEHEI),
                           children: <TextSpan>[
                             TextSpan(
                                 text: '\nRebecca Sonlit',
-                                style: CommonResponsiveValue.genericTextStyleResponsive(
-                                    context, FontTextStyle.kRed18W600PR, FontTextStyle.kRed14W600PR)),
+                                style: CommonResponsiveValue
+                                    .genericTextStyleResponsive(
+                                        context,
+                                        FontTextStyle.kRed18W600PR,
+                                        FontTextStyle.kRed14W600PR)),
                           ],
                         ),
                       ),
@@ -426,14 +484,18 @@ class _NewsPortalScreenState extends State<NewsPortalScreen> with SingleTickerPr
                   RF.ResponsiveRowColumnItem(
                       columnOrder: 2,
                       child: Visibility(
-                        visible: !RF.ResponsiveWrapper.of(context).isSmallerThan(TABLET),
+                        visible: !RF.ResponsiveWrapper.of(context)
+                            .isSmallerThan(TABLET),
                         child: SizedBox(
                           height: 80,
                         ),
                       )),
                   RF.ResponsiveRowColumnItem(
-                    columnOrder:
-                        RF.ResponsiveValue<int>(context, defaultValue: 3, valueWhen: [RF.Condition.smallerThan(name: TABLET, value: 1)]).value!,
+                    columnOrder: RF.ResponsiveValue<int>(context,
+                        defaultValue: 3,
+                        valueWhen: [
+                          RF.Condition.smallerThan(name: TABLET, value: 1)
+                        ]).value!,
                     child: CircleAvatar(
                       radius: 70,
                       backgroundColor: Colors.white,
@@ -446,9 +508,13 @@ class _NewsPortalScreenState extends State<NewsPortalScreen> with SingleTickerPr
           )),
           tralingWidget: WeatherWidget(
             isBlueColorEnable: true,
-            height: CommonResponsiveValue.genericDouble(context, 460, 550, [RF.Condition.smallerThan(name: TABLET, value: 300)]),
-            width: ResponsiveValue<double>(context, defaultValue: 250, valueWhen: [RF.Condition.smallerThan(name: TABLET, value: double.infinity)])
-                .value!,
+            height: CommonResponsiveValue.genericDouble(context, 460, 550,
+                [RF.Condition.smallerThan(name: TABLET, value: 300)]),
+            width: ResponsiveValue<double>(context,
+                defaultValue: 250,
+                valueWhen: [
+                  RF.Condition.smallerThan(name: TABLET, value: double.infinity)
+                ]).value!,
           ),
           leadingWidget: Container(
             height: 520,
@@ -487,7 +553,8 @@ class _NewsPortalScreenState extends State<NewsPortalScreen> with SingleTickerPr
           tralingDefaultWidth: 230,
           tralingPadding: EdgeInsets.zero,
           tralingDefaultColor: Colors.blue,
-          trailingDefaultHeight: CommonResponsiveValue.genericDouble(context, 550, 500, [RF.Condition.smallerThan(name: TABLET, value: 200)]),
+          trailingDefaultHeight: CommonResponsiveValue.genericDouble(context,
+              550, 500, [RF.Condition.smallerThan(name: TABLET, value: 200)]),
           tralingWidget: Container(
             height: CommonResponsiveValue.genericDouble(context, 580, 530),
             width: CommonResponsiveValue.genericDouble(context, 230, 250),
@@ -502,8 +569,11 @@ class _NewsPortalScreenState extends State<NewsPortalScreen> with SingleTickerPr
           leadingWidget: WeatherWidget(
             isBlueColorEnable: true,
             height: CommonResponsiveValue.genericDouble(context, 460, 550),
-            width: ResponsiveValue<double>(context, defaultValue: 250, valueWhen: [RF.Condition.smallerThan(name: TABLET, value: double.infinity)])
-                .value!,
+            width: ResponsiveValue<double>(context,
+                defaultValue: 250,
+                valueWhen: [
+                  RF.Condition.smallerThan(name: TABLET, value: double.infinity)
+                ]).value!,
           ),
           isWhiteTile: false,
         ),
@@ -531,9 +601,13 @@ class _NewsPortalScreenState extends State<NewsPortalScreen> with SingleTickerPr
           )),
           tralingWidget: WeatherWidget(
             isBlueColorEnable: true,
-            height: CommonResponsiveValue.genericDouble(context, 600, 550, [RF.Condition.smallerThan(name: TABLET, value: 300)]),
-            width: ResponsiveValue<double>(context, defaultValue: 250, valueWhen: [RF.Condition.smallerThan(name: TABLET, value: double.infinity)])
-                .value!,
+            height: CommonResponsiveValue.genericDouble(context, 600, 550,
+                [RF.Condition.smallerThan(name: TABLET, value: 300)]),
+            width: ResponsiveValue<double>(context,
+                defaultValue: 250,
+                valueWhen: [
+                  RF.Condition.smallerThan(name: TABLET, value: double.infinity)
+                ]).value!,
           ),
           leadingWidget: Container(
             height: 520,
@@ -570,7 +644,8 @@ class _NewsPortalScreenState extends State<NewsPortalScreen> with SingleTickerPr
               children: [
                 ResponsiveRowColumnItem(
                   child: Visibility(
-                      visible: RF.ResponsiveWrapper.of(context).isSmallerThan(RF.TABLET),
+                      visible: RF.ResponsiveWrapper.of(context)
+                          .isSmallerThan(RF.TABLET),
                       child: SizedBox(
                         height: 20,
                       )),
@@ -579,7 +654,8 @@ class _NewsPortalScreenState extends State<NewsPortalScreen> with SingleTickerPr
                     child: Container(
                   alignment: Alignment.topCenter,
                   height: 350,
-                  width: CommonResponsiveValue.genericDouble(context, 245, 200, [RF.Condition.smallerThan(name: TABLET, value: 194)]),
+                  width: CommonResponsiveValue.genericDouble(context, 245, 200,
+                      [RF.Condition.smallerThan(name: TABLET, value: 194)]),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(3),
                     color: Colors.red,
@@ -592,7 +668,11 @@ class _NewsPortalScreenState extends State<NewsPortalScreen> with SingleTickerPr
                 RF.ResponsiveRowColumnItem(
                   child: Container(
                     height: 350,
-                    width: CommonResponsiveValue.genericDouble(context, 245, 200, [RF.Condition.smallerThan(name: TABLET, value: 194)]),
+                    width: CommonResponsiveValue.genericDouble(
+                        context,
+                        245,
+                        200,
+                        [RF.Condition.smallerThan(name: TABLET, value: 194)]),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(3),
                       image: DecorationImage(
@@ -622,8 +702,11 @@ class _NewsPortalScreenState extends State<NewsPortalScreen> with SingleTickerPr
           leadingWidget: WeatherWidget(
             isBlueColorEnable: true,
             height: CommonResponsiveValue.genericDouble(context, 550, 480),
-            width: ResponsiveValue<double>(context, defaultValue: 250, valueWhen: [RF.Condition.smallerThan(name: TABLET, value: double.infinity)])
-                .value!,
+            width: ResponsiveValue<double>(context,
+                defaultValue: 250,
+                valueWhen: [
+                  RF.Condition.smallerThan(name: TABLET, value: double.infinity)
+                ]).value!,
           ),
         ),
       ),
@@ -644,11 +727,14 @@ class _NewsPortalScreenState extends State<NewsPortalScreen> with SingleTickerPr
               rowMainAxisAlignment: MainAxisAlignment.center,
               rowPadding: EdgeInsets.only(top: 10, right: 10),
               rowSpacing: 10,
-              layout: RF.ResponsiveWrapper.of(context).isSmallerThan(TABLET) ? RF.ResponsiveRowColumnType.COLUMN : RF.ResponsiveRowColumnType.ROW,
+              layout: RF.ResponsiveWrapper.of(context).isSmallerThan(TABLET)
+                  ? RF.ResponsiveRowColumnType.COLUMN
+                  : RF.ResponsiveRowColumnType.ROW,
               children: [
                 ResponsiveRowColumnItem(
                   child: Visibility(
-                      visible: RF.ResponsiveWrapper.of(context).isSmallerThan(RF.TABLET),
+                      visible: RF.ResponsiveWrapper.of(context)
+                          .isSmallerThan(RF.TABLET),
                       child: SizedBox(
                         height: 20,
                       )),
@@ -662,8 +748,11 @@ class _NewsPortalScreenState extends State<NewsPortalScreen> with SingleTickerPr
                       child: Container(
                         alignment: Alignment.topCenter,
                         height: 150,
-                        width:
-                            CommonResponsiveValue.genericDouble(context, 190, 185, [RF.Condition.smallerThan(name: TABLET, value: double.infinity)]),
+                        width: CommonResponsiveValue.genericDouble(
+                            context, 190, 185, [
+                          RF.Condition.smallerThan(
+                              name: TABLET, value: double.infinity)
+                        ]),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(3),
                           color: Colors.red,
@@ -676,18 +765,29 @@ class _NewsPortalScreenState extends State<NewsPortalScreen> with SingleTickerPr
                     ),
                     ResponsiveRowColumnItem(
                       child: SizedBox(
-                        width:
-                            CommonResponsiveValue.genericDouble(context, 200, 190, [RF.Condition.smallerThan(name: TABLET, value: double.infinity)]),
+                        width: CommonResponsiveValue.genericDouble(
+                            context, 200, 190, [
+                          RF.Condition.smallerThan(
+                              name: TABLET, value: double.infinity)
+                        ]),
                         child: RichText(
                           text: TextSpan(
                             text: "Winter Olympics/",
-                            style:
-                                CommonResponsiveValue.genericTextStyleResponsive(context, FontTextStyle.kRed18W600PRH, FontTextStyle.kRed12W600PRH),
+                            style: CommonResponsiveValue
+                                .genericTextStyleResponsive(
+                                    context,
+                                    FontTextStyle.kRed18W600PRH,
+                                    FontTextStyle.kRed12W600PRH),
                             children: <TextSpan>[
                               TextSpan(
-                                  text: 'snowboarder Su Yiming claims silver in slopestyle final',
-                                  style: CommonResponsiveValue.genericTextStyleResponsive(
-                                      context, FontTextStyle.kPrimaryLight16W600PRH, FontTextStyle.kPrimaryLight12W600PRH)),
+                                  text:
+                                      'snowboarder Su Yiming claims silver in slopestyle final',
+                                  style: CommonResponsiveValue
+                                      .genericTextStyleResponsive(
+                                          context,
+                                          FontTextStyle.kPrimaryLight16W600PRH,
+                                          FontTextStyle
+                                              .kPrimaryLight12W600PRH)),
                             ],
                           ),
                         ),
@@ -701,11 +801,17 @@ class _NewsPortalScreenState extends State<NewsPortalScreen> with SingleTickerPr
                     ResponsiveRowColumnItem(
                       child: SizedBox(
                           width: CommonResponsiveValue.genericDouble(
-                              context, 200, 190, [RF.Condition.smallerThan(name: TABLET, value: double.infinity)]),
+                              context, 200, 190, [
+                            RF.Condition.smallerThan(
+                                name: TABLET, value: double.infinity)
+                          ]),
                           child: Text(
                             'Chinese and Russian leaders call on west Chinese and Russian leaders call on west to abandon cold war tactics in talks ahead of Beijing Olympics',
-                            style: CommonResponsiveValue.genericTextStyleResponsive(
-                                context, FontTextStyle.kGreyLight14W400SSPH, FontTextStyle.kGreyLight10W400SSPH),
+                            style: CommonResponsiveValue
+                                .genericTextStyleResponsive(
+                                    context,
+                                    FontTextStyle.kGreyLight14W400SSPH,
+                                    FontTextStyle.kGreyLight10W400SSPH),
                           )),
                     )
                   ],
@@ -718,8 +824,11 @@ class _NewsPortalScreenState extends State<NewsPortalScreen> with SingleTickerPr
                     ResponsiveRowColumnItem(
                       child: Container(
                         height: 200,
-                        width:
-                            CommonResponsiveValue.genericDouble(context, 300, 250, [RF.Condition.smallerThan(name: TABLET, value: double.infinity)]),
+                        width: CommonResponsiveValue.genericDouble(
+                            context, 300, 250, [
+                          RF.Condition.smallerThan(
+                              name: TABLET, value: double.infinity)
+                        ]),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(3),
                           image: DecorationImage(
@@ -731,16 +840,22 @@ class _NewsPortalScreenState extends State<NewsPortalScreen> with SingleTickerPr
                     ),
                     ResponsiveRowColumnItem(
                       child: SizedBox(
-                        width:
-                            CommonResponsiveValue.genericDouble(context, 280, 250, [RF.Condition.smallerThan(name: TABLET, value: double.infinity)]),
+                        width: CommonResponsiveValue.genericDouble(
+                            context, 280, 250, [
+                          RF.Condition.smallerThan(
+                              name: TABLET, value: double.infinity)
+                        ]),
                         child: RichText(
                           text: TextSpan(
                             text: "Winter Olympics/",
-                            style: FontTextStyle.kRed14W600PR.copyWith(height: 1.5),
+                            style: FontTextStyle.kRed14W600PR
+                                .copyWith(height: 1.5),
                             children: <TextSpan>[
                               TextSpan(
-                                  text: 'snowboarder Su Yiming claims silver in slopestyle final',
-                                  style: FontTextStyle.kPrimaryLight16W600PR.copyWith(height: 1.5)),
+                                  text:
+                                      'snowboarder Su Yiming claims silver in slopestyle final',
+                                  style: FontTextStyle.kPrimaryLight16W600PR
+                                      .copyWith(height: 1.5)),
                             ],
                           ),
                         ),
@@ -754,10 +869,14 @@ class _NewsPortalScreenState extends State<NewsPortalScreen> with SingleTickerPr
                     ResponsiveRowColumnItem(
                       child: SizedBox(
                           width: CommonResponsiveValue.genericDouble(
-                              context, 280, 250, [RF.Condition.smallerThan(name: TABLET, value: double.infinity)]),
+                              context, 280, 250, [
+                            RF.Condition.smallerThan(
+                                name: TABLET, value: double.infinity)
+                          ]),
                           child: Text(
                             'Chinese and Russian leaders call on west Chinese and Russian leaders call on west to abandon cold war tactics in talks ahead of Beijing Olympics',
-                            style: FontTextStyle.kGreyLight12W400SSP.copyWith(height: 1.5),
+                            style: FontTextStyle.kGreyLight12W400SSP
+                                .copyWith(height: 1.5),
                           )),
                     )
                   ],
@@ -768,8 +887,11 @@ class _NewsPortalScreenState extends State<NewsPortalScreen> with SingleTickerPr
           tralingWidget: WeatherWidget(
             isBlueColorEnable: true,
             height: CommonResponsiveValue.genericDouble(context, 600, 550),
-            width: ResponsiveValue<double>(context, defaultValue: 250, valueWhen: [RF.Condition.smallerThan(name: TABLET, value: double.infinity)])
-                .value!,
+            width: ResponsiveValue<double>(context,
+                defaultValue: 250,
+                valueWhen: [
+                  RF.Condition.smallerThan(name: TABLET, value: double.infinity)
+                ]).value!,
           ),
           leadingWidget: Container(
             height: 520,
@@ -831,7 +953,8 @@ class BlueHeaderSingleWidget extends StatelessWidget {
   final String title;
   final String subTitle;
   final String icon;
-  const BlueHeaderSingleWidget({required this.title, required this.icon, required this.subTitle});
+  const BlueHeaderSingleWidget(
+      {required this.title, required this.icon, required this.subTitle});
 
   @override
   Widget build(BuildContext context) {
@@ -856,7 +979,8 @@ class BlueHeaderSingleWidget extends StatelessWidget {
                 ),
                 Text(
                   title,
-                  style: CommonResponsiveValue.blueHeaderResponsiveValue(context),
+                  style:
+                      CommonResponsiveValue.blueHeaderResponsiveValue(context),
                 )
               ],
             ),

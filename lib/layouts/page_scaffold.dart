@@ -10,6 +10,8 @@ import 'package:holedo/profile/presentation/providers/app_provider.dart';
 import 'package:holedo/profile/presentation/ui/components/appbar_notification.dart';
 import 'package:holedo/profile/presentation/ui/components/appbar_textfield.dart';
 import 'package:holedo/profile/presentation/ui/components/custom_appbar.dart';
+import 'package:holedo/profile/presentation/ui/components/custom_icon_button.dart';
+import 'package:holedo/profile/presentation/ui/flutter_slider_drawer/mobile_slide_menu.dart';
 import 'package:holedo/profile/presentation/ui/flutter_slider_drawer/slider.dart';
 import 'package:holedo/profile/presentation/ui/pages/profile_mobile_view/profile_mobile_view_page.dart';
 import 'package:holedo/profile/presentation/utill/color_resources.dart';
@@ -168,15 +170,13 @@ class _PageScaffoldState extends State<PageScaffold> {
 
     final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-    return widget.isNewDesign
-        ? widget.body
-        : LayoutBuilder(
-            builder: (context, constraints) {
-              maxWidth = constraints.maxWidth;
-              return Scaffold(
-                backgroundColor: Cr.backgroundColor,
-                key: _scaffoldKey,
-                /*floatingActionButton: FloatingActionButton(
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        maxWidth = constraints.maxWidth;
+        return Scaffold(
+          backgroundColor: Cr.backgroundColor,
+          key: _scaffoldKey,
+          /*floatingActionButton: FloatingActionButton(
                   child: const Text('Chat'),
                   onPressed: () async {
                     if (appState.isLoggedIn) {
@@ -195,87 +195,83 @@ class _PageScaffoldState extends State<PageScaffold> {
                     await Intercom.instance.displayMessenger();
                   },
                 ),*/
-                appBar: AppBar(
-                  toolbarHeight: 45,
-                  flexibleSpace: SizedBox(
-                    child: CustomAppbar(
-                      searchController: _searchController,
-                      onSearch: (searchText) {
-                        _search();
-                      },
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            toolbarHeight: 45,
+            leading: null,
+            flexibleSpace: SizedBox(
+              child: CustomAppbar(
+                searchController: _searchController,
+                onSearch: (searchText) {
+                  _search();
+                },
+              ),
+            ),
+          ),
+          endDrawer: Di.getScreenSize(context).width < 1000
+              ? Drawer(
+                  elevation: 16.0,
+                  child: Container(
+                    color: Color(0xFF232f3e),
+                    child: MobileSlideMenu(onCloseTap: () => {}),
+                  ),
+                )
+              : null,
+          body: Scaffold(
+            appBar: AppbarNotification(),
+            extendBodyBehindAppBar: true,
+            body: Stack(
+              children: [
+                Center(
+                  child: Container(
+                    child: Column(
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            Provider.of<ProfileProvider>(context, listen: false)
+                                .profileNotifyListeners();
+                          },
+                          child: Text("data"),
+                        ),
+                        Text("Profile page"),
+                      ],
                     ),
                   ),
                 ),
-                body: Stack(
-                  children: [
-                    Center(
-                      child: Container(
-                        child: Column(
-                          children: [
-                            ElevatedButton(
-                              onPressed: () {
-                                Provider.of<ProfileProvider>(context,
-                                        listen: false)
-                                    .profileNotifyListeners();
-                              },
-                              child: Text("data"),
-                            ),
-                            Text("Profile page"),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Scaffold(
-                      appBar: AppbarNotification(),
-                      extendBodyBehindAppBar: true,
-                      body: Di.getScreenSize(context).width < 1000
-                          ? SliderDrawer(
-                              screenSize: Di.getScreenSize(context),
-                              splashColor: Color.fromARGB(255, 119, 56, 59),
-                              child: Container(
-                                decoration: const BoxDecoration(
-                                  color: Cr.backgroundColor,
-                                ),
-                                child: widget.body,
-                              ),
-                            )
-                          : Container(
-                              decoration: const BoxDecoration(
-                                color: ColorPicker.kBG,
-                              ),
-                              child: widget.body,
-                            ),
-                      //_buildFooter(isTableOrMobile(context))
-                    ),
-                    if (!isTableOrMobile(context)) ...[
-                      !(Provider.of<ProfileProvider>(context)
-                              .showConectionRequestPopo)
-                          ? Di.ESB
-                          : Positioned(
-                              right: Di.getScreenSize(context).width < 1301
-                                  ? 65
-                                  : 195,
-                              child: const ProfileConnectionRequestPopup(),
-                            ),
-                      // !profileProviderValue.showProfileSubMenus
-                      !(Provider.of<ProfileProvider>(context)
-                              .showProfileSubMenus)
-                          ? Di.ESB
-                          : Positioned(
-                              right: Di.getScreenSize(context).width < 1301
-                                  ? 5
-                                  : 130,
-                              child: const ProfileSubMenuPopup(),
-                            ),
-                    ],
-                  ],
+                Container(
+                  decoration: const BoxDecoration(
+                    color: ColorPicker.kBG,
+                  ),
+                  child: widget.body,
                 ),
-              );
-            },
-          );
+                if (!isTableOrMobile(context)) ...[
+                  !(Provider.of<ProfileProvider>(context)
+                          .showConectionRequestPopo)
+                      ? Di.ESB
+                      : Positioned(
+                          right:
+                              Di.getScreenSize(context).width < 1301 ? 65 : 195,
+                          child: const ProfileConnectionRequestPopup(),
+                        ),
+                  // !profileProviderValue.showProfileSubMenus
+                  !(Provider.of<ProfileProvider>(context).showProfileSubMenus)
+                      ? Di.ESB
+                      : Positioned(
+                          right:
+                              Di.getScreenSize(context).width < 1301 ? 5 : 130,
+                          child: const ProfileSubMenuPopup(),
+                        ),
+                ],
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 
-  Widget _buildFooter(bool isMobile) {
+  Widget _buildFooter() {
+    final bool isMobile = Di.getScreenSize(context).width < 1000;
     return Container(
       height: isMobile ? 400 : 650,
       decoration: const BoxDecoration(

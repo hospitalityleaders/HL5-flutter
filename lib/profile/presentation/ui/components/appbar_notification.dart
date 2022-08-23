@@ -106,8 +106,8 @@ class _CustomAppBarState extends State<AppbarNotification> {
   @override
   Widget build(BuildContext context) {
     final appState = Provider.of<AppProvider>(context, listen: true);
-    if (appState.notify != null)
-      print('msg ${appState.notify?.notify(context).toString()}');
+    //if (appState.notify != null)
+    //print('msg ${appState.notify?.notify(context).toString()}');
     return Provider.of<ProfileProvider>(context).appNotificationState.map(
           showNothing: (_) => Di.ESB,
           profileCompletion: (notification) => appState.isLoggedIn
