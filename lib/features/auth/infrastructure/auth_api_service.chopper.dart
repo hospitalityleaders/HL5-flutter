@@ -28,4 +28,17 @@ class _$AuthAPIService extends AuthAPIService {
     );
     return client.send<dynamic, dynamic>($request);
   }
+
+  @override
+  Future<Response<dynamic>> registerUser(Map<String, dynamic> body) {
+    final String $url = '/users/register';
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+    );
+    return client.send<dynamic, dynamic>($request);
+  }
 }
