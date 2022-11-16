@@ -1,6 +1,6 @@
 {
-    "name": "holedo",
-    "short_name": "holedo",
+    "name": "holedo_flutter",
+    "short_name": "holedo_flutter",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
